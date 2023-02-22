@@ -42,7 +42,10 @@ class _SplashScreenState extends State<SplashScreen>
                 opacity: _animation,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [Image.asset('assets/msgmee_logo.png',height: 114,width:114)],
+                  children: [
+                    Image.asset('assets/msgmee_logo.png',
+                        height: 114, width: 114)
+                  ],
                 ),
               ),
             ),
@@ -52,8 +55,8 @@ class _SplashScreenState extends State<SplashScreen>
 }
 
 void startTimer(BuildContext context) {
-  Timer(const Duration(seconds: 5), () async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+  Timer(const Duration(seconds: 3), () async {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return const LoginScreen();
     }));
     //It will redirect  after 3 seconds

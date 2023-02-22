@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/presentation/authentication/cubit/cubit/number_validation_cubit.dart';
 import 'package:msgmee/presentation/onboarding/splash_screen.dart';
+import 'presentation/authentication/cubit/number_validation/number_validation_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => NumberValidationCubit())
+            BlocProvider(create: (context) => NumberValidationCubit()),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',

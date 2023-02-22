@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/presentation/authentication/cubit/cubit/number_validation_cubit.dart';
+import 'package:msgmee/presentation/authentication/widget/number_confirmation_dialog.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/custom_theme.dart';
+import 'cubit/number_validation/number_validation_cubit.dart';
 import 'widget/language_change_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,6 +32,17 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(6.0),
+          child: LinearProgressIndicator(
+            backgroundColor: CustomTheme.white,
+            valueColor: AlwaysStoppedAnimation<Color>(
+                context.watch<NumberValidationCubit>().state.isvalid
+                    ? CustomTheme.primaryColor
+                    : CustomTheme.white),
+            value: 0.25,
+          ),
+        ),
         backgroundColor: CustomTheme.white,
         elevation: 0,
         centerTitle: true,
@@ -53,21 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     const SizedBox(width: 50),
-            //     const Center(child: LanguageChangeOptionWidget()),
-            //     Text(
-            //       'CONTINUE',
-            //       style: TextStyle(
-            //           color:
-            //               context.watch<NumberValidationCubit>().state.isvalid
-            //                   ? CustomTheme.primaryColor
-            //                   : CustomTheme.grey),
-            //     )
-            //   ],
-            // ),
             const SizedBox(height: 100),
             const Center(
                 child: Text('Welcome', style: TextStyle(fontSize: 33))),
@@ -75,8 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(children: [
               Container(
                 height: 40,
-                width: 110,
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                width: 90,
+                padding: const EdgeInsets.symmetric(horizontal: 3),
                 decoration: BoxDecoration(
                     border: Border.all(color: CustomTheme.grey),
                     borderRadius: BorderRadius.circular(5)),
@@ -86,13 +83,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text(
                         textScaleFactor: 1.0,
                         '+91',
-                        style: TextStyle(color: Colors.grey, fontSize: 17)),
-                    const SizedBox(width: 10),
+                        style: TextStyle(color: Colors.grey, fontSize: 14)),
+                    const SizedBox(width: 6),
                     Image.network(
                       'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
-                      height: 20,
+                      height: 15,
                     ),
-                    const SizedBox(width: 5),
+                    // const SizedBox(width: 5),
                     const Icon(Icons.keyboard_arrow_down)
                   ],
                 ),
@@ -121,13 +118,26 @@ class _LoginScreenState extends State<LoginScreen> {
             ]),
             const SizedBox(height: 30),
             const Text(
-              'When you click on continue,  you will receive a verification\n code on the mobile number that you have entered.',
+              'When you click on continue,you will receive a verification\n code on the mobile number that you have entered.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),
             ),
             const Spacer(),
             CustomButtonWidget(
-                title: 'continue',
+                borderColor:
+                    context.watch<NumberValidationCubit>().state.isvalid
+                        ? CustomTheme.primaryColor
+                        : CustomTheme.seconderyColor,
+                ontap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return NumberConfirmationDialog(
+                          inputNumber: numberController.text,
+                        );
+                      });
+                },
+                title: 'CONTINUE',
                 color: context.watch<NumberValidationCubit>().state.isvalid
                     ? CustomTheme.primaryColor
                     : CustomTheme.seconderyColor),
