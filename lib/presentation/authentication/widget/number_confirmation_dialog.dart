@@ -58,11 +58,13 @@ class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
               const SizedBox(height: 55),
               CustomButtonWidget(
                   ontap: () {
+                    try {
+                      Navigator.pop(context);
+                    } catch (e) {
+                      print(e);
+                    }
                     screenNavigator(
-                        context,
-                        OtpScreen(
-                          number: widget.inputNumber,
-                        ));
+                        context, OtpScreen(number: widget.inputNumber));
                   },
                   title: 'OK',
                   color: CustomTheme.primaryColor),

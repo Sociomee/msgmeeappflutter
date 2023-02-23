@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/helper/nth_character_function.dart';
+import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../theme/custom_theme.dart';
 import '../widgets/custom_button_widget.dart';
@@ -73,7 +75,9 @@ class _OtpScreenState extends State<OtpScreen> {
         backgroundColor: CustomTheme.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back_ios,
               color: CustomTheme.black,
@@ -164,7 +168,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 borderColor: isValid
                     ? CustomTheme.primaryColor
                     : CustomTheme.seconderyColor,
-                ontap: () {},
+                ontap: () {
+                  screenNavigator(context, const SetupProfileScreen());
+                },
                 title: 'CONTINUE',
                 color: isValid
                     ? CustomTheme.primaryColor

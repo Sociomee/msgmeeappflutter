@@ -7,8 +7,10 @@ class CustomTheme {
   static const Color seconderyColor = Color(0XFFACDAD6);
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
+  static const Color lightgrey = Color(0XFFC2C2C2);
   static const Color black = Colors.black;
   static const Color blue = Color(0xFF2850B7);
+  static const Color darkgreen = Color(0XFF368C4E);
 
 //otp pin theme
   static final defaultpintheme = PinTheme(
