@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController numberController;
-
+  bool textFieldclick = false;
   @override
   void initState() {
     numberController = TextEditingController();
@@ -105,8 +105,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding:
                           EdgeInsets.only(top: 5, bottom: 5, left: 5),
                       border: OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: CustomTheme.primaryColor)),
                       hintText: 'Enter your mobile number',
                     ),
+                    onTap: () {
+                      setState(() {
+                        textFieldclick = true;
+                      });
+                    },
                     onChanged: (e) {
                       context
                           .read<NumberValidationCubit>()
@@ -129,47 +137,51 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? CustomTheme.primaryColor
                         : CustomTheme.seconderyColor,
                 ontap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return NumberConfirmationDialog(
-                          inputNumber: numberController.text,
-                        );
-                      });
+                  context.read<NumberValidationCubit>().state.isvalid
+                      ? showDialog(
+                          context: context,
+                          builder: (context) {
+                            return NumberConfirmationDialog(
+                              inputNumber: numberController.text,
+                            );
+                          })
+                      : null;
                 },
                 title: 'CONTINUE',
                 color: context.watch<NumberValidationCubit>().state.isvalid
                     ? CustomTheme.primaryColor
                     : CustomTheme.seconderyColor),
-            const SizedBox(
-              height: 10,
-            ),
-            RichText(
-                text: const TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'By Signing-up, you agree to our ',
-                    style: TextStyle(color: CustomTheme.grey)),
-                TextSpan(
-                    text: 'Terms & Conditions.',
-                    style: TextStyle(
-                      color: CustomTheme.black,
-                    )),
-              ],
-            )),
-            RichText(
-                text: const TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'By Signing-up, you agree to our ',
-                    style: TextStyle(color: CustomTheme.grey)),
-                TextSpan(
-                    text: 'Privacy Policy ',
+            const SizedBox(height: 10),
+            textFieldclick
+                ? Container()
+                : RichText(
+                    text: const TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'By Signing-up, you agree to our ',
+                          style: TextStyle(color: CustomTheme.grey)),
+                      TextSpan(
+                          text: 'Terms & Conditions.',
+                          style: TextStyle(color: CustomTheme.black)),
+                    ],
+                  )),
+            textFieldclick
+                ? Container()
+                : RichText(
+                    text: const TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'By Signing-up, you agree to our ',
+                          style: TextStyle(color: CustomTheme.grey)),
+                      TextSpan(
+                          text: 'Privacy Policy ',
+                          style: TextStyle(color: CustomTheme.black)),
+                    ],
+                  )),
+            textFieldclick
+                ? Container()
+                : const Text('and Cookies Policy',
                     style: TextStyle(color: CustomTheme.black)),
-              ],
-            )),
-            const Text('and Cookies Policy',
-                style: TextStyle(color: CustomTheme.black)),
             const SizedBox(height: 20)
           ],
         ),

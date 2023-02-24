@@ -26,6 +26,8 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   File? imageFile;
   bool isvalid = false;
   bool isTyping = false;
+  int remainchar = 64;
+  int remainchar1 = 64;
   void pickGprofilePic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -164,11 +166,18 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                     ),
                     const SizedBox(height: 42),
                     TextFieldWidget(
-                        title: 'What’s your name?',
-                        hintText: 'Write your full name here',
-                        controller: nameController,
-                        onChanged: (e) {}),
+                      title: 'What’s your name?',
+                      hintText: 'Write your full name here',
+                      controller: nameController,
+                      onChanged: (e) {
+                        setState(() {
+                          remainchar = 64 - nameController.text.length;
+                        });
+                      },
+                      remainChar: remainchar.toString(),
+                    ),
                     TextFieldWidget(
+                        remainChar: remainchar1.toString(),
                         title: 'Pick a username*',
                         hintText: 'Write your user name here',
                         controller: userNameController,
@@ -186,6 +195,9 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                               isTyping = false;
                             });
                           }
+                          setState(() {
+                            remainchar1 = 64 - userNameController.text.length;
+                          });
                         }),
                     isTyping ? SuggestionWidget() : Container(),
                     const SizedBox(height: 20),

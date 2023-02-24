@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widget/social_chat_widget.dart';
 import 'widget/social_stoty_widget.dart';
 
 class SocialTabScreen extends StatelessWidget {
@@ -8,7 +9,10 @@ class SocialTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [SocialStoryWidget()],
+      children: [
+        SocialStoryWidget(),
+        SocialchatWidget(),
+      ],
     );
   }
 }

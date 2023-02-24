@@ -40,7 +40,7 @@ class SmallProfileWidget extends StatelessWidget {
                   width: 19,
                   decoration: BoxDecoration(
                       border: Border.all(color: CustomTheme.white, width: 2),
-                      color: CustomTheme.darkgreen,
+                      color: CustomTheme.primaryColor,
                       borderRadius: BorderRadius.circular(100)),
                 )
               : isMe

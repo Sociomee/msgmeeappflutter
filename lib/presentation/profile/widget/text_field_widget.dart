@@ -7,11 +7,13 @@ class TextFieldWidget extends StatelessWidget {
       required this.title,
       required this.hintText,
       required this.controller,
-      required this.onChanged});
+      required this.onChanged,
+      required this.remainChar});
   final String title;
   final String hintText;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
+  final String remainChar;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,10 +36,10 @@ class TextFieldWidget extends StatelessWidget {
               hintText: hintText,
               hintStyle: const TextStyle(color: CustomTheme.lightgrey)),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(left: 230.0, top: 5),
           child: Text(
-            'Max 64 Characters',
+            'Max $remainChar Characters',
             textAlign: TextAlign.center,
             style: TextStyle(color: CustomTheme.black, fontSize: 12),
           ),
