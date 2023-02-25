@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/data/model/dummy_chat_model.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/custom_theme.dart';
+import '../../chat_screen/chat_screen.dart';
 import '../../widget/chat_profile_widget.dart';
 
 class SocialchatWidget extends StatelessWidget {
@@ -16,7 +18,16 @@ class SocialchatWidget extends StatelessWidget {
           return Column(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  screenNavigator(
+                      context,
+                      ChatScreen(
+                        name: dummyData[index].name,
+                        imageUrl: dummyData[index].imageUrl,
+                        isOnline: dummyData[index].isOnline,
+                        hasStory: dummyData[index].hasStory,
+                      ));
+                },
                 splashColor: CustomTheme.seconderyColor,
                 child: Padding(
                   padding:

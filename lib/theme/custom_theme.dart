@@ -12,7 +12,9 @@ class CustomTheme {
   static const Color blue = Color(0xFF2850B7);
   static const Color darkgreen = Color(0XFF368C4E);
   static const Color errorRedColor = Color(0XFFEB5757);
-
+  static const Color seconderyColor1 = Color(0XFFE3F4EA);
+  static const Color lightgrey1 = Color(0XFFF5F5F5);
+  static const Color iconColor = Color(0XFF4F4F4F);
 //otp pin theme
   static final defaultpintheme = PinTheme(
     width: 50,
