@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../theme/custom_theme.dart';
 
 class ChatProfileWidget extends StatelessWidget {
@@ -25,18 +24,18 @@ class ChatProfileWidget extends StatelessWidget {
                 : null,
           ),
           child: CircleAvatar(
-            radius: 30,
+            radius: 28,
             backgroundColor: CustomTheme.grey,
             backgroundImage: NetworkImage(imageUrl),
           ),
         ),
         Positioned(
-          top: 46,
-          right: 2,
+          top: 42,
+          right: 0,
           child: isOnline
               ? Container(
-                  height: 13,
-                  width: 13,
+                  height: 14,
+                  width: 14,
                   decoration: BoxDecoration(
                       border: Border.all(color: CustomTheme.white, width: 2),
                       color: CustomTheme.primaryColor,

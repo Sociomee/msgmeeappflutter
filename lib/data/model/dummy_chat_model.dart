@@ -57,7 +57,7 @@ List<ChatModel> dummyData = <ChatModel>[
       isOnline: true,
       time: '3m ago',
       message: 'Cool I will see you there',
-      unseenMessage: 1),
+      unseenMessage: 1564),
   ChatModel(
       imageUrl:
           'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600',

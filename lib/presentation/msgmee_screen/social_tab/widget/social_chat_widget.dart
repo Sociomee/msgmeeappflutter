@@ -4,9 +4,7 @@ import 'package:msgmee/theme/custom_theme.dart';
 import '../../widget/chat_profile_widget.dart';
 
 class SocialchatWidget extends StatelessWidget {
-  const SocialchatWidget({
-    super.key,
-  });
+  const SocialchatWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +13,14 @@ class SocialchatWidget extends StatelessWidget {
         shrinkWrap: true,
         itemCount: dummyData.length,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {},
-            splashColor: CustomTheme.seconderyColor,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+          return Column(
+            children: [
+              InkWell(
+                onTap: () {},
+                splashColor: CustomTheme.seconderyColor,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -37,7 +36,7 @@ class SocialchatWidget extends StatelessWidget {
                           Text(dummyData[index].name,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w500)),
-                          SizedBox(height: 11),
+                          SizedBox(height: 8),
                           Text(dummyData[index].message,
                               style: TextStyle(
                                   fontSize: 13, color: CustomTheme.grey)),
@@ -51,11 +50,13 @@ class SocialchatWidget extends StatelessWidget {
                           Text(dummyData[index].time,
                               style: TextStyle(
                                   fontSize: 13, color: CustomTheme.grey)),
-                          SizedBox(height: 11),
+                          SizedBox(height: 8),
                           dummyData[index].unseenMessage != 0
                               ? Container(
                                   height: 20,
-                                  width: 20,
+                                  // width: 20,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 3, horizontal: 6),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       color: CustomTheme.primaryColor,
@@ -64,7 +65,8 @@ class SocialchatWidget extends StatelessWidget {
                                       dummyData[index].unseenMessage.toString(),
                                       style: TextStyle(
                                           color: CustomTheme.white,
-                                          fontSize: 12)),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold)),
                                 )
                               : Container()
                         ],
@@ -72,11 +74,13 @@ class SocialchatWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Divider(
-                  color: CustomTheme.grey,
-                )
-              ],
-            ),
+              ),
+              Divider(
+                height: 0,
+                color: CustomTheme.grey,
+              ),
+              // SizedBox(height: 5)
+            ],
           );
         });
   }

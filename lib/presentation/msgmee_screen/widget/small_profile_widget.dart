@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../theme/custom_theme.dart';
 
 class SmallProfileWidget extends StatelessWidget {
@@ -16,7 +15,6 @@ class SmallProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(isMe);
     return Stack(
       children: [
         Container(

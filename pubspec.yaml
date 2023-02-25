@@ -75,7 +75,12 @@ flutter:
   assets:
     - assets/msgmee_logo.png
     - assets/profile_icon.png
-    - assets/camera.png
+    - assets/camera.png 
+    - assets/call_incoming.png
+    - assets/call_outgoing.png
+    - assets/call_missed.png
+    - assets/call.png
+    - assets/video.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

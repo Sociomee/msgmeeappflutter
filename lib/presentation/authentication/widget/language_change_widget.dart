@@ -136,7 +136,10 @@ class LanguageChangeOptionWidget extends StatelessWidget {
           Text(
             textScaleFactor: 1.0,
             'English',
-            style: TextStyle(color: CustomTheme.black, fontSize: 17),
+            style: TextStyle(
+              color: CustomTheme.black,
+              fontSize: 17,
+            ),
           ),
           SizedBox(
             width: 5,
