@@ -53,6 +53,122 @@ List<ChatModel> dummyData = <ChatModel>[
       imageUrl:
           'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1600',
       name: 'Razdar Hasan',
+      hasStory: true,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: 'yesterday',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+    imageUrl:
+        'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    name: 'Anika George',
+    hasStory: false,
+    isOnline: true,
+    time: '4h ago',
+    message: 'You missed a voice call',
+    unseenMessage: 1,
+    isMuted: true,
+  ),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: true,
+      isOnline: true,
+      time: 'yesterday',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+    imageUrl:
+        'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    name: 'Anika George',
+    hasStory: false,
+    isOnline: true,
+    time: '4h ago',
+    message: 'You missed a voice call',
+    unseenMessage: 1,
+    isMuted: true,
+  ),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+    imageUrl:
+        'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    name: 'Anika George',
+    hasStory: false,
+    isOnline: true,
+    time: '4h ago',
+    message: 'You missed a voice call',
+    unseenMessage: 1,
+    isMuted: true,
+  ),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
+      hasStory: false,
+      isOnline: true,
+      time: '3m ago',
+      message: 'Cool I will see you there',
+      unseenMessage: 1),
+  ChatModel(
+    imageUrl:
+        'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    name: 'Anika George',
+    hasStory: false,
+    isOnline: true,
+    time: '4h ago',
+    message: 'You missed a voice call',
+    unseenMessage: 1,
+    isMuted: true,
+  ),
+  ChatModel(
+      imageUrl:
+          'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      name: 'Razdar Hasan',
       hasStory: false,
       isOnline: true,
       time: '3m ago',

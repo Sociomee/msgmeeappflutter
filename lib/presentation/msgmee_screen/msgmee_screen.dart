@@ -40,43 +40,45 @@ class MsgmeeScreen extends StatelessWidget {
       backgroundColor: CustomTheme.white,
       body: DefaultTabController(
         length: 2,
-        child: Column(
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.0),
-                border: const Border(
-                    bottom: BorderSide(color: Colors.grey, width: 0.8)),
-              ),
-              child: const TabBar(
-                indicatorWeight: 3,
-                indicatorColor: CustomTheme.primaryColor,
-                labelColor: CustomTheme.primaryColor,
-                unselectedLabelColor: CustomTheme.grey,
-                tabs: [
-                  Tab(
-                    icon: Text(
-                      'Social',
-                      style: TextStyle(fontSize: 17),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.0),
+                  border: const Border(
+                      bottom: BorderSide(color: Colors.grey, width: 0.8)),
+                ),
+                child: const TabBar(
+                  indicatorWeight: 3,
+                  indicatorColor: CustomTheme.primaryColor,
+                  labelColor: CustomTheme.primaryColor,
+                  unselectedLabelColor: CustomTheme.grey,
+                  tabs: [
+                    Tab(
+                      icon: Text(
+                        'Social',
+                        style: TextStyle(fontSize: 17),
+                      ),
                     ),
-                  ),
-                  Tab(
-                    icon: Text(
-                      'Calls',
-                      style: TextStyle(fontSize: 17),
+                    Tab(
+                      icon: Text(
+                        'Calls',
+                        style: TextStyle(fontSize: 17),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 550.h,
-              child: const TabBarView(children: [
-                SocialTabScreen(),
-                CallTabScreen(),
-              ]),
-            )
-          ],
+              SizedBox(
+                height: 570.h,
+                child: const TabBarView(children: [
+                  SocialTabScreen(),
+                  CallTabScreen(),
+                ]),
+              )
+            ],
+          ),
         ),
       ),
     );

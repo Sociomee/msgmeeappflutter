@@ -2,29 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/custom_theme.dart';
 
-class SmallProfileWidget extends StatelessWidget {
-  const SmallProfileWidget(
+class ChatProfileWidget extends StatelessWidget {
+  const ChatProfileWidget(
       {super.key,
       required this.imageUrl,
       required this.isOnline,
-      required this.isMe,
       required this.hasStory});
   final String imageUrl;
   final bool isOnline;
-  final bool isMe;
+
   final bool hasStory;
 
   @override
   Widget build(BuildContext context) {
-    print(isMe);
     return Stack(
       children: [
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              border: isMe
-                  ? null
-                  : Border.all(color: CustomTheme.primaryColor, width: 2)),
+            borderRadius: BorderRadius.circular(100),
+            border: hasStory
+                ? Border.all(color: CustomTheme.primaryColor, width: 3)
+                : null,
+          ),
           child: CircleAvatar(
             radius: 30,
             backgroundColor: CustomTheme.grey,
@@ -32,8 +31,8 @@ class SmallProfileWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 40,
-          right: 0,
+          top: 46,
+          right: 2,
           child: isOnline
               ? Container(
                   height: 13,
@@ -43,21 +42,7 @@ class SmallProfileWidget extends StatelessWidget {
                       color: CustomTheme.primaryColor,
                       borderRadius: BorderRadius.circular(100)),
                 )
-              : isMe
-                  ? Container(
-                      height: 19,
-                      width: 19,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: CustomTheme.primaryColor,
-                          borderRadius: BorderRadius.circular(100)),
-                      child: const Icon(
-                        Icons.add,
-                        color: CustomTheme.white,
-                        size: 17,
-                      ),
-                    )
-                  : Container(),
+              : Container(),
         )
       ],
     );

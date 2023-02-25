@@ -8,11 +8,13 @@ class SocialTabScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SocialStoryWidget(),
-        SocialchatWidget(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SocialStoryWidget(),
+          SocialchatWidget(),
+        ],
+      ),
     );
   }
 }
