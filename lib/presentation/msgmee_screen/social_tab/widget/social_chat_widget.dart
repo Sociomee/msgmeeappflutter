@@ -4,6 +4,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/custom_theme.dart';
 import '../../chat_screen/chat_screen.dart';
 import '../../widget/chat_profile_widget.dart';
+import '../../widget/profile_image_view_dialog.dart';
 
 class SocialchatWidget extends StatelessWidget {
   const SocialchatWidget({super.key});
@@ -35,10 +36,20 @@ class SocialchatWidget extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ChatProfileWidget(
-                          imageUrl: dummyData[index].imageUrl,
-                          isOnline: dummyData[index].isOnline,
-                          hasStory: dummyData[index].hasStory),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => ProfileViewDialog(
+                                    profilename: dummyData[index].name,
+                                    imageUrl: dummyData[index].imageUrl,
+                                  ));
+                        },
+                        child: ChatProfileWidget(
+                            imageUrl: dummyData[index].imageUrl,
+                            isOnline: dummyData[index].isOnline,
+                            hasStory: dummyData[index].hasStory),
+                      ),
                       SizedBox(width: 13),
                       Column(
                         mainAxisSize: MainAxisSize.min,

@@ -19,15 +19,11 @@ class MessageTextFieldWidget extends StatelessWidget {
             EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: CustomTheme.primaryColor)),
+            borderSide: BorderSide(width: 2, color: CustomTheme.lightgrey1)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(width: 2, color: CustomTheme.lightgrey1)),
-        suffixIcon: Image.asset(
-          'assets/smiley.png',
-          width: 18,
-          height: 18,
-        ),
+        suffixIcon: Image.asset('assets/smiley.png', width: 18, height: 18),
       ),
       onChanged: onChanged,
     );
