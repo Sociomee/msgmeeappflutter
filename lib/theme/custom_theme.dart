@@ -15,6 +15,9 @@ class CustomTheme {
   static const Color seconderyColor1 = Color(0XFFE3F4EA);
   static const Color lightgrey1 = Color(0XFFF5F5F5);
   static const Color iconColor = Color(0XFF4F4F4F);
+  static const Color audioiconColor = Color(0XFF56CCF2);
+  static const Color mediaiconColor = Color(0XFFFF822E);
+  static const Color dociconColor = Color(0XFF2CB9B0);
 //otp pin theme
   static final defaultpintheme = PinTheme(
     width: 50,

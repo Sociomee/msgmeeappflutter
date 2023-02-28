@@ -43,6 +43,9 @@ dependencies:
   equatable: ^2.0.5
   pinput: ^2.2.21
   image_picker: ^0.8.6+3
+  swipe_to: ^1.0.2
+  emoji_picker_flutter: ^1.5.2
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
@@ -94,6 +97,10 @@ flutter:
     - assets/audio.png
     - assets/contact.png
     - assets/gallery.png
+    - assets/file1.png
+    - assets/audio1.png
+    - assets/contact1.png
+    - assets/media1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

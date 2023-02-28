@@ -4,6 +4,7 @@ import '../../../../helper/navigator_function.dart';
 import '../../../../theme/custom_theme.dart';
 import '../../../connect_webpanel/linked_devices_screen.dart';
 import '../../../new_message/new_message_screen.dart';
+import '../../media_doc_screen/media_and_doc_screen.dart';
 
 class ChatOptionsModel {
   final String option;
@@ -15,15 +16,16 @@ class ChatOptionsModel {
 }
 
 class ChatScreenBottomModelSheet extends StatelessWidget {
-  const ChatScreenBottomModelSheet({super.key});
-
+  const ChatScreenBottomModelSheet({super.key, required this.profilename});
+  final String profilename;
   @override
   Widget build(BuildContext context) {
     List<ChatOptionsModel> options = [
       ChatOptionsModel(
           option: 'Media, links and docs',
           clickAction: () {
-            // screenNavigator(context, NewMessageScreen());
+            screenNavigator(
+                context, MediaAndDocScreen(profilename: profilename));
           }),
       ChatOptionsModel(option: 'Search', clickAction: () {}),
       ChatOptionsModel(option: 'Mute Messages', clickAction: () {}),

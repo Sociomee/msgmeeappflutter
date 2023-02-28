@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/message_status_widget.dart';
-
 import '../../../../theme/custom_theme.dart';
 import 'custom_shape.dart';
 
-class SentMessageWidget extends StatelessWidget {
+class SentMessageWidget extends StatefulWidget {
   final String message;
   final String msgStatus;
   final String time;
@@ -15,6 +14,13 @@ class SentMessageWidget extends StatelessWidget {
     required this.time,
   }) : super(key: key);
 
+  @override
+  State<SentMessageWidget> createState() => _SentMessageWidgetState();
+}
+
+class _SentMessageWidgetState extends State<SentMessageWidget> {
+  bool leftSelected = false;
+  bool rightSelected = false;
   @override
   Widget build(BuildContext context) {
     final messageTextGroup = Flexible(
@@ -41,24 +47,24 @@ class SentMessageWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(message,
+                          Text(widget.message,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)),
                           SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(time,
+                              Text(widget.time,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
+                                width: widget.message.trim().length <= 15
                                     ? 40
-                                    : message.trim().length <= 21
+                                    : widget.message.trim().length <= 21
                                         ? 80
                                         : 200,
                               ),
-                              Text(msgStatus,
+                              Text(widget.msgStatus,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],
@@ -68,9 +74,9 @@ class SentMessageWidget extends StatelessWidget {
                   Positioned(
                     bottom: -2,
                     right: 0,
-                    child: msgStatus == 'read'
+                    child: widget.msgStatus == 'read'
                         ? MessageStatus.read
-                        : msgStatus == 'send'
+                        : widget.msgStatus == 'send'
                             ? MessageStatus.sent
                             : MessageStatus.delivered,
                   ),

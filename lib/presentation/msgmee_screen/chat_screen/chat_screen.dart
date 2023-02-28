@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/attached_icons.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/sender_widget.dart';
+import 'package:swipe_to/swipe_to.dart';
 import '../../../data/model/chat_model.dart';
 import '../../../theme/custom_theme.dart';
 import '../widget/chat_profile_widget.dart';
@@ -28,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   bool istyping = false;
-
+  bool tap = false;
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -96,7 +98,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return ChatScreenBottomModelSheet();
+                    return ChatScreenBottomModelSheet(
+                      profilename: widget.name,
+                    );
                   });
             },
             icon: const Icon(
@@ -123,10 +127,15 @@ class _ChatScreenState extends State<ChatScreen> {
                       ? Alignment.topLeft
                       : Alignment.topRight),
                   child: messages[index].messageType == "receiver"
-                      ? ReceivedMessageWidget(
-                          message: messages[index].messageContent,
-                          msgStatus: messages[index].msgStatus,
-                          time: messages[index].time)
+                      ? SwipeTo(
+                          onRightSwipe: () {
+                            print('ekjne');
+                          },
+                          child: ReceivedMessageWidget(
+                              message: messages[index].messageContent,
+                              msgStatus: messages[index].msgStatus,
+                              time: messages[index].time),
+                        )
                       : SentMessageWidget(
                           message: messages[index].messageContent,
                           msgStatus: messages[index].msgStatus,
@@ -135,113 +144,127 @@ class _ChatScreenState extends State<ChatScreen> {
               );
             },
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(
-                  height: 0,
-                  color: CustomTheme.grey,
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: 10,
-                    bottom: 10,
-                    top: 10,
-                    right: 10,
-                  ),
-                  height: 60,
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: Row(
-                    children: <Widget>[
-                      // SizedBox(width: 30, child: FlowAnimationWidget()),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            color: CustomTheme.lightgrey1,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Image.asset('assets/paper_clip.png'),
-                        ),
+          Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Divider(
+                      height: 0,
+                      color: CustomTheme.grey,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        bottom: 10,
+                        top: 10,
+                        right: 10,
                       ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            color: CustomTheme.lightgrey1,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Icon(Icons.photo_camera_outlined,
-                              size: 20, color: CustomTheme.iconColor),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                          child: MessageTextFieldWidget(
-                        messageController: messageController,
-                        onChanged: (e) {
-                          if (e.isNotEmpty) {
-                            setState(() {
-                              istyping = true;
-                            });
-                          } else {
-                            setState(() {
-                              istyping = false;
-                            });
-                          }
-                        },
-                      )),
-                      SizedBox(width: 10),
-                      istyping
-                          ? GestureDetector(
-                              onTap: () {
-                                _scrollToBottom();
-                                messages.add(ChatMessage(
-                                    messageContent: messageController.text,
-                                    messageType: 'sender',
-                                    msgStatus: 'send',
-                                    time: '4:28 pm'));
-                                setState(() {});
-                                messageController.clear();
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Image.asset('assets/attach.png'),
+                      height: 60,
+                      width: double.infinity,
+                      color: Colors.white,
+                      child: Row(
+                        children: <Widget>[
+                          // SizedBox(width: 30, child: FlowAnimationWidget()),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                tap = !tap;
+                              });
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: CustomTheme.lightgrey1,
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                            )
-                          : GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Icon(Icons.mic_none,
-                                    size: 20, color: CustomTheme.iconColor),
-                              ),
+                              child: Image.asset('assets/paper_clip.png'),
                             ),
-                    ],
-                  ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: CustomTheme.lightgrey1,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Icon(Icons.photo_camera_outlined,
+                                  size: 20, color: CustomTheme.iconColor),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Expanded(
+                              child: MessageTextFieldWidget(
+                            messageController: messageController,
+                            onChanged: (e) {
+                              if (e.isNotEmpty) {
+                                setState(() {
+                                  istyping = true;
+                                });
+                              } else {
+                                setState(() {
+                                  istyping = false;
+                                });
+                              }
+                            },
+                          )),
+                          SizedBox(width: 10),
+                          istyping
+                              ? GestureDetector(
+                                  onTap: () {
+                                    _scrollToBottom();
+                                    messages.add(ChatMessage(
+                                        messageContent: messageController.text,
+                                        messageType: 'sender',
+                                        msgStatus: 'send',
+                                        time: '4:28 pm'));
+                                    setState(() {});
+                                    messageController.clear();
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      color: CustomTheme.lightgrey1,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Image.asset('assets/attach.png'),
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      color: CustomTheme.lightgrey1,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Icon(Icons.mic_none,
+                                        size: 20, color: CustomTheme.iconColor),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              tap
+                  ? Positioned(
+                      bottom: 60,
+                      child: SizedBox(
+                          height: 200, width: 150, child: AttachedIcon()))
+                  : Container()
+            ],
           ),
         ],
       ),
