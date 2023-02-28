@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/sender_widget.dart';
 import '../../../data/model/chat_model.dart';
 import '../../../theme/custom_theme.dart';
 import '../widget/chat_profile_widget.dart';
+import 'widgets/animated_attachment_icons.dart';
 import 'widgets/message_textField.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -84,7 +86,19 @@ class _ChatScreenState extends State<ChatScreen> {
             width: 16,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25.0),
+                    ),
+                  ),
+                  context: context,
+                  builder: (context) {
+                    return ChatScreenBottomModelSheet();
+                  });
+            },
             icon: const Icon(
               Icons.more_vert,
               color: CustomTheme.black,
@@ -110,9 +124,13 @@ class _ChatScreenState extends State<ChatScreen> {
                       : Alignment.topRight),
                   child: messages[index].messageType == "receiver"
                       ? ReceivedMessageWidget(
-                          message: messages[index].messageContent)
+                          message: messages[index].messageContent,
+                          msgStatus: messages[index].msgStatus,
+                          time: messages[index].time)
                       : SentMessageWidget(
-                          message: messages[index].messageContent),
+                          message: messages[index].messageContent,
+                          msgStatus: messages[index].msgStatus,
+                          time: messages[index].time),
                 ),
               );
             },
@@ -138,6 +156,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: Colors.white,
                   child: Row(
                     children: <Widget>[
+                      // SizedBox(width: 30, child: FlowAnimationWidget()),
                       GestureDetector(
                         onTap: () {},
                         child: Container(
@@ -189,7 +208,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                 _scrollToBottom();
                                 messages.add(ChatMessage(
                                     messageContent: messageController.text,
-                                    messageType: 'sender'));
+                                    messageType: 'sender',
+                                    msgStatus: 'send',
+                                    time: '4:28 pm'));
                                 setState(() {});
                                 messageController.clear();
                               },

@@ -5,9 +5,13 @@ import 'custom_shape.dart';
 
 class ReceivedMessageWidget extends StatelessWidget {
   final String message;
+  final String msgStatus;
+  final String time;
   const ReceivedMessageWidget({
     Key? key,
     required this.message,
+    required this.msgStatus,
+    required this.time,
   }) : super(key: key);
 
   @override
@@ -27,7 +31,8 @@ class ReceivedMessageWidget extends StatelessWidget {
             ),
             Flexible(
               child: Container(
-                padding: const EdgeInsets.all(14),
+                padding: const EdgeInsets.only(
+                    top: 10, left: 14, right: 18, bottom: 5),
                 decoration: BoxDecoration(
                   color: CustomTheme.seconderyColor1,
                   borderRadius: const BorderRadius.only(
@@ -36,9 +41,28 @@ class ReceivedMessageWidget extends StatelessWidget {
                     bottomRight: Radius.circular(18),
                   ),
                 ),
-                child: Text(
-                  message,
-                  style: TextStyle(color: Colors.black, fontSize: 14),
+                child: Column(
+                  children: [
+                    Text(message,
+                        style:
+                            TextStyle(color: CustomTheme.black, fontSize: 14)),
+                    SizedBox(height: 2),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: message.trim().length <= 15
+                              ? 40
+                              : message.trim().length <= 21
+                                  ? 80
+                                  : 200,
+                        ),
+                        Text(time,
+                            style: const TextStyle(
+                                color: CustomTheme.black, fontSize: 10)),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),

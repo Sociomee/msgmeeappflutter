@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import 'package:msgmee/presentation/connect_webpanel/linked_devices_screen.dart';
 import 'package:msgmee/presentation/new_message/new_message_screen.dart';
 
 import '../../../theme/custom_theme.dart';
 
-class SocialOptionsModel {
+class ChatOptionsModel {
   final String option;
   final VoidCallback clickAction;
-  SocialOptionsModel({
+  ChatOptionsModel({
     required this.option,
     required this.clickAction,
   });
@@ -19,23 +20,25 @@ class SocialBottomModelSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<SocialOptionsModel> options = [
-      SocialOptionsModel(
+    List<ChatOptionsModel> options = [
+      ChatOptionsModel(
           option: 'New Message',
           clickAction: () {
-            print('erkjbfniernfeif');
             screenNavigator(context, NewMessageScreen());
           }),
-      SocialOptionsModel(option: 'Make a Call', clickAction: () {}),
-      SocialOptionsModel(option: 'Create New Group', clickAction: () {}),
-      SocialOptionsModel(option: 'Create a Broadcast', clickAction: () {}),
-      SocialOptionsModel(
-          option: 'Sync your account to web panel', clickAction: () {}),
-      SocialOptionsModel(option: 'Archived Chats List', clickAction: () {}),
-      SocialOptionsModel(
+      ChatOptionsModel(option: 'Make a Call', clickAction: () {}),
+      ChatOptionsModel(option: 'Create New Group', clickAction: () {}),
+      ChatOptionsModel(option: 'Create a Broadcast', clickAction: () {}),
+      ChatOptionsModel(
+          option: 'Sync your account to web panel',
+          clickAction: () {
+            screenNavigator(context, LinkedDevicesScreen());
+          }),
+      ChatOptionsModel(option: 'Archived Chats List', clickAction: () {}),
+      ChatOptionsModel(
           option: 'Sync your SocioMee connections', clickAction: () {}),
-      SocialOptionsModel(option: 'Settings', clickAction: () {}),
-      SocialOptionsModel(option: 'Logout', clickAction: () {}),
+      ChatOptionsModel(option: 'Settings', clickAction: () {}),
+      ChatOptionsModel(option: 'Logout', clickAction: () {}),
     ];
     return ClipRRect(
       borderRadius: const BorderRadius.only(
