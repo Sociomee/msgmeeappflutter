@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import '../../../theme/custom_theme.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget(
-      {super.key,
-      required this.title,
-      required this.hintText,
-      required this.controller,
-      required this.onChanged,
-      required this.remainChar});
+  TextFieldWidget({
+    super.key,
+    required this.title,
+    required this.hintText,
+    required this.controller,
+    required this.onChanged,
+    required this.remainChar,
+    this.showchar = true,
+  });
   final String title;
   final String hintText;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
   final String remainChar;
+  bool? showchar;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,14 +39,16 @@ class TextFieldWidget extends StatelessWidget {
               hintText: hintText,
               hintStyle: const TextStyle(color: CustomTheme.lightgrey)),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 230.0, top: 5),
-          child: Text(
-            'Max $remainChar Characters',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: CustomTheme.black, fontSize: 12),
-          ),
-        ),
+        showchar!
+            ? Padding(
+                padding: EdgeInsets.only(left: 230.0, top: 5),
+                child: Text(
+                  'Max $remainChar Characters',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: CustomTheme.black, fontSize: 12),
+                ),
+              )
+            : Container(),
         const SizedBox(height: 15),
       ],
     );

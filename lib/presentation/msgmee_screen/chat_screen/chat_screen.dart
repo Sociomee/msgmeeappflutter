@@ -31,6 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final _listViewController = ScrollController();
   bool istyping = false;
   bool tap = false;
+  List chattileIndex = [];
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -120,8 +121,7 @@ class _ChatScreenState extends State<ChatScreen> {
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                padding:
-                    EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: Align(
                   alignment: (messages[index].messageType == "receiver"
                       ? Alignment.topLeft
@@ -131,15 +131,75 @@ class _ChatScreenState extends State<ChatScreen> {
                           onRightSwipe: () {
                             print('ekjne');
                           },
-                          child: ReceivedMessageWidget(
+                          child: ListTile(
+                            // tileColor: chattileIndex.contains(index)
+                            //     ? Colors.transparent
+                            //     : CustomTheme.seconderyColor,
+                            onTap: () {
+                              setState(() {
+                                chattileIndex
+                                    .remove(messages[index].messageContent);
+                              });
+                            },
+                            onLongPress: () {
+                              setState(() {
+                                chattileIndex
+                                    .add(messages[index].messageContent);
+                              });
+                            },
+                            contentPadding: EdgeInsets.zero,
+                            title: ReceivedMessageWidget(
+                                message: messages[index].messageContent,
+                                msgStatus: messages[index].msgStatus,
+                                time: messages[index].time),
+                          ),
+                        )
+                      : ListTile(
+                          // tileColor: chattileIndex.contains(index)
+                          //     ? CustomTheme.seconderyColor
+                          //     : Colors.transparent,
+                          onTap: () {
+                            setState(() {
+                              chattileIndex
+                                  .remove(messages[index].messageContent);
+                            });
+                          },
+                          onLongPress: () async {
+                            setState(() {
+                              chattileIndex.add(messages[index].messageContent);
+                            });
+                            final selectedOption = await showMenu(
+                              context: context,
+                              position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                              items: [
+                                PopupMenuItem(
+                                  child: Text('Option 1'),
+                                  value: 'Option 1',
+                                ),
+                                PopupMenuItem(
+                                  child: Text('Option 2'),
+                                  value: 'Option 2',
+                                ),
+                                PopupMenuItem(
+                                  child: Text('Option 3'),
+                                  value: 'Option 3',
+                                ),
+                              ],
+                            );
+                            if (selectedOption == 'Option 1') {
+                              // Handle Option 1
+                            } else if (selectedOption == 'Option 2') {
+                              // Handle Option 2
+                            } else if (selectedOption == 'Option 3') {
+                              // Handle Option 3
+                            }
+                          },
+                          contentPadding: EdgeInsets.zero,
+                          title: SentMessageWidget(
                               message: messages[index].messageContent,
                               msgStatus: messages[index].msgStatus,
                               time: messages[index].time),
-                        )
-                      : SentMessageWidget(
-                          message: messages[index].messageContent,
-                          msgStatus: messages[index].msgStatus,
-                          time: messages[index].time),
+                        ),
                 ),
               );
             },
@@ -201,6 +261,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                           ),
                           SizedBox(width: 10),
+
                           Expanded(
                               child: MessageTextFieldWidget(
                             messageController: messageController,

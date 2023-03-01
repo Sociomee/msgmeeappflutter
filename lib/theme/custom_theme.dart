@@ -45,4 +45,11 @@ class CustomTheme {
       borderRadius: BorderRadius.circular(10),
     ),
   );
+
+  static const linkstyle = TextStyle(
+    color: Colors.red,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.375,
+  );
 }

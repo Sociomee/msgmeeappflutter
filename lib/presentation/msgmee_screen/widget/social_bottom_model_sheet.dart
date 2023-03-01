@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/connect_webpanel/linked_devices_screen.dart';
 import 'package:msgmee/presentation/new_message/new_message_screen.dart';
+import 'package:msgmee/presentation/settings/settings_screen.dart';
 
 import '../../../theme/custom_theme.dart';
 
@@ -37,7 +38,11 @@ class SocialBottomModelSheet extends StatelessWidget {
       ChatOptionsModel(option: 'Archived Chats List', clickAction: () {}),
       ChatOptionsModel(
           option: 'Sync your SocioMee connections', clickAction: () {}),
-      ChatOptionsModel(option: 'Settings', clickAction: () {}),
+      ChatOptionsModel(
+          option: 'Settings',
+          clickAction: () {
+            screenNavigator(context, SettingScreen());
+          }),
       ChatOptionsModel(option: 'Logout', clickAction: () {}),
     ];
     return ClipRRect(
