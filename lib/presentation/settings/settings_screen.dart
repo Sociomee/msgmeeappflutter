@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
 import '../../theme/custom_theme.dart';
-import '../chat_setting/chat_settings_screen.dart';
+import '../blocked_screen/blocked_screen.dart';
+import '../chat_settings/chat_settings_screen.dart';
+import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
 import '../profile/profile_settings_screen.dart';
+import '../storage_settings/storage_settings_screen.dart';
 
 class SettingsOption {
   final String optionName;
@@ -36,13 +39,41 @@ class SettingScreen extends StatelessWidget {
           ontap: () {
             screenNavigator(context, PrivacySettingScreen());
           }),
-      SettingsOption(optionName: 'Notification Settings', ontap: () {}),
-      SettingsOption(optionName: 'Storage and Data Settings', ontap: () {}),
-      SettingsOption(optionName: 'Blocked Users', ontap: () {}),
-      SettingsOption(optionName: 'Syncing and Invite', ontap: () {}),
-      SettingsOption(optionName: 'Help & Support', ontap: () {}),
-      SettingsOption(optionName: 'Log Out', ontap: () {}),
-      SettingsOption(optionName: 'Delete Account', ontap: () {}),
+      SettingsOption(
+          optionName: 'Notification Settings',
+          ontap: () {
+            screenNavigator(context, NotificationSettingsScreen());
+          }),
+      SettingsOption(
+          optionName: 'Storage and Data Settings',
+          ontap: () {
+            screenNavigator(context, StorageSettingsScreen());
+          }),
+      SettingsOption(
+          optionName: 'Blocked Users',
+          ontap: () {
+            screenNavigator(context, BlockedPeopleScreen());
+          }),
+      SettingsOption(
+          optionName: 'Syncing and Invite',
+          ontap: () {
+            screenNavigator(context, StorageSettingsScreen());
+          }),
+      SettingsOption(
+          optionName: 'Help & Support',
+          ontap: () {
+            screenNavigator(context, StorageSettingsScreen());
+          }),
+      SettingsOption(
+          optionName: 'Log Out',
+          ontap: () {
+            screenNavigator(context, StorageSettingsScreen());
+          }),
+      SettingsOption(
+          optionName: 'Delete Account',
+          ontap: () {
+            screenNavigator(context, StorageSettingsScreen());
+          }),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -67,6 +98,7 @@ class SettingScreen extends StatelessWidget {
             itemCount: options.length,
             itemBuilder: (context, index) {
               return InkWell(
+                splashColor: CustomTheme.seconderyColor1,
                 onTap: options[index].ontap,
                 child: Container(
                   child: Column(

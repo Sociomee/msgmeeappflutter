@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import '../../theme/custom_theme.dart';
-import 'widget/bottom_sheet_options.dart';
+import '../privacy_settings/widget/bottom_sheet_options.dart';
+import 'widgets/notification_bottom_sheet.dart';
+import 'widgets/stories_notification_widget.dart';
 
-class PrivacySettingScreen extends StatefulWidget {
-  const PrivacySettingScreen({super.key});
+class NotificationSettingsScreen extends StatefulWidget {
+  const NotificationSettingsScreen({super.key});
 
   @override
-  State<PrivacySettingScreen> createState() => _PrivacySettingScreenState();
+  State<NotificationSettingsScreen> createState() =>
+      _NotificationSettingsScreenState();
 }
 
-class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
+class _NotificationSettingsScreenState
+    extends State<NotificationSettingsScreen> {
   bool readReceipt = false;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
               },
               icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
           title: Text(
-            'Privacy Setting',
+            'Notification & Sound Settings',
             style: TextStyle(color: CustomTheme.black),
           )),
       body: SingleChildScrollView(
@@ -41,17 +45,19 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Last Seen',
-                      subtitle: 'Who can view me in group',
+                    return NotificationBottomSheet(
+                      title: 'Chat Notification Sound',
                     );
                   });
             },
-            title: Text('Last Seen'),
-            subtitle: Text('Everyone'),
+            title: Text('Chat Notification'),
+            subtitle: Text(
+              'You will hear the system default sound when a\nmessage is sent or received',
+              style: TextStyle(fontSize: 11),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -63,17 +69,19 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Profile Photo',
-                      subtitle: 'Who can view me in group',
+                    return StoriesNotificationBottomSheet(
+                      title: 'Stories Notification',
                     );
                   });
             },
-            title: Text('Profile Photo'),
-            subtitle: Text('Everyone'),
+            title: Text('Stories Notification'),
+            subtitle: Text(
+              'You will hear the system default sound when your\nfriend added their stories',
+              style: TextStyle(fontSize: 11),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -85,17 +93,19 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Online Status',
-                      subtitle: 'Who can view me in group',
+                    return NotificationBottomSheet(
+                      title: 'Message Reminders sound',
                     );
                   });
             },
-            title: Text('Online Status'),
-            subtitle: Text('My contacts except'),
+            title: Text('Message Reminders'),
+            subtitle: Text(
+              'You will hear the system default sound when a\nmessage is sent or received',
+              style: TextStyle(fontSize: 11),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -107,42 +117,30 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Group Privacy',
-                      subtitle: 'Who can view me in group',
-                    );
+                    return NotificationBottomSheet(
+                        title: 'Message Reminders sound');
                   });
             },
-            title: Text('Group Privacy'),
-            subtitle: Text('Everyone'),
+            title: Text('Mentions'),
+            subtitle: Text(
+              'You will hear the system default sound when anyone\nmentioned you on story, chats, etc',
+              style: TextStyle(fontSize: 11),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
-            onTap: () {
-              showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(25.0),
-                    ),
-                  ),
-                  context: context,
-                  builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Group Privacy',
-                      subtitle: 'Who can view me in group',
-                    );
-                  });
-            },
-            title: Text('Groups'),
-            subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            title: Text('Wake Up Notification'),
+            trailing: Checkbox(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3)),
+                activeColor: CustomTheme.primaryColor,
+                value: true,
+                onChanged: (w) {}),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
-          SizedBox(height: 15),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
-            title: Text('Read receipts'),
+            title: Text('Message preview'),
             subtitle: Text(
                 'If turned off, you want send or receive read receipt. read receipts are always sent for\ngroup chats and direct chats '),
             trailing: SizedBox(
@@ -170,7 +168,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             ),
           ),
           SizedBox(height: 15),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -182,17 +180,17 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Live Location',
-                      subtitle: 'Who can view my live location',
+                    return NotificationBottomSheet(
+                      title: 'Group notification',
                     );
                   });
             },
-            title: Text('Live Location'),
-            subtitle: Text('Everyone'),
+            title: Text('Group notification'),
+            subtitle: Text(
+                'You will hear the system default sound when a\nmessage is sent or received'),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: CustomTheme.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -204,17 +202,14 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   ),
                   context: context,
                   builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Blocked Contacts',
-                      subtitle: '',
-                    );
+                    return NotificationBottomSheet(title: 'Call notification');
                   });
             },
-            title: Text('Blocked Contacts'),
-            subtitle: Text('56 People'),
+            title: Text('Call notification'),
+            subtitle: Text(
+                'You will hear the system default sound when a\nmessage is sent or received'),
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
         ],
       )),
     );

@@ -5,6 +5,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../theme/custom_theme.dart';
 import 'widget/chatbackup_bottomsheet.dart';
+import 'widget/choose_account_sheet.dart';
 
 class ChatSettingScreen extends StatefulWidget {
   const ChatSettingScreen({super.key});
@@ -152,6 +153,19 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
             ),
             Divider(color: CustomTheme.lightgrey, thickness: 1),
             ListTile(
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(25.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return ChooseAccountBottomSheet();
+                    });
+              },
               title: Text('Choose Google Account'),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -231,10 +245,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
             ),
             Divider(color: CustomTheme.lightgrey, thickness: 1),
             ListTile(
-              title: Text('Clear chats'),
-              subtitle: Text(
-                  'All chat will be cleared. It can be recovered later if you have backup'),
-            ),
+                title: Text('Clear chats'),
+                subtitle: Text(
+                    'All chat will be cleared. It can be recovered later if you have backup')),
             Divider(color: CustomTheme.lightgrey, thickness: 1),
             ListTile(
               title: Text('Delete all chats'),
