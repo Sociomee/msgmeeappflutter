@@ -4,6 +4,7 @@ import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
 import '../../theme/custom_theme.dart';
 import '../blocked_screen/blocked_screen.dart';
 import '../chat_settings/chat_settings_screen.dart';
+import '../delete_account/delete_account_screen.dart';
 import '../help_screen/help_screen.dart';
 import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
@@ -81,7 +82,7 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Delete Account',
           ontap: () {
-            screenNavigator(context, StorageSettingsScreen());
+            screenNavigator(context, DeleterAccountScreen());
           }),
     ];
     return Scaffold(
