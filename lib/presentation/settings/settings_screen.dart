@@ -10,6 +10,7 @@ import '../privacy_settings/privacy_settings_screen.dart';
 import '../profile/profile_settings_screen.dart';
 import '../storage_settings/storage_settings_screen.dart';
 import '../sync_invite_screen/sync_invite_screen.dart';
+import 'widgets/logout_bottomsheet.dart';
 
 class SettingsOption {
   final String optionName;
@@ -69,7 +70,13 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Log Out',
           ontap: () {
-            screenNavigator(context, StorageSettingsScreen());
+            showModalBottomSheet(
+                context: context,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                builder: (context) {
+                  return LogOutBottomSheet();
+                });
           }),
       SettingsOption(
           optionName: 'Delete Account',
