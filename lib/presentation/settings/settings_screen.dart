@@ -8,6 +8,7 @@ import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
 import '../profile/profile_settings_screen.dart';
 import '../storage_settings/storage_settings_screen.dart';
+import '../sync_invite_screen/sync_invite_screen.dart';
 
 class SettingsOption {
   final String optionName;
@@ -57,7 +58,7 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Syncing and Invite',
           ontap: () {
-            screenNavigator(context, StorageSettingsScreen());
+            screenNavigator(context, SyncInviteScreen());
           }),
       SettingsOption(
           optionName: 'Help & Support',

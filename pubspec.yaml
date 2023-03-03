@@ -105,6 +105,9 @@ flutter:
     - assets/audio1.png
     - assets/contact1.png
     - assets/media1.png
+    - assets/email.png
+    - assets/msg1.png
+    - assets/sociomee.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
