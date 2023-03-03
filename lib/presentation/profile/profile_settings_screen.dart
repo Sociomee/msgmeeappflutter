@@ -7,10 +7,8 @@ import 'package:msgmee/helper/navigator_function.dart';
 import '../../theme/custom_theme.dart';
 import '../authentication/cubit/number_validation/number_validation_cubit.dart';
 import '../msgmee_screen/msgmee_screen.dart';
-import '../widgets/custom_bottom_model_sheet.dart';
 import '../widgets/custom_button_widget.dart';
 import 'widget/bottom_sheet_widget.dart';
-import 'widget/suggestion_widget.dart';
 import 'widget/text_field_widget.dart';
 
 class ProfileSettingScreen extends StatefulWidget {

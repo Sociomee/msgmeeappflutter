@@ -4,6 +4,7 @@ import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
 import '../../theme/custom_theme.dart';
 import '../blocked_screen/blocked_screen.dart';
 import '../chat_settings/chat_settings_screen.dart';
+import '../help_screen/help_screen.dart';
 import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
 import '../profile/profile_settings_screen.dart';
@@ -63,7 +64,7 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Help & Support',
           ontap: () {
-            screenNavigator(context, StorageSettingsScreen());
+            screenNavigator(context, HelpScreen());
           }),
       SettingsOption(
           optionName: 'Log Out',
