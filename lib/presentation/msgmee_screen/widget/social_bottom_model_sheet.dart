@@ -6,6 +6,7 @@ import 'package:msgmee/presentation/new_message/new_message_screen.dart';
 import 'package:msgmee/presentation/settings/settings_screen.dart';
 
 import '../../../theme/custom_theme.dart';
+import '../../broadcast_screen/add_participant_screen.dart';
 
 class ChatOptionsModel {
   final String option;
@@ -29,7 +30,11 @@ class SocialBottomModelSheet extends StatelessWidget {
           }),
       ChatOptionsModel(option: 'Make a Call', clickAction: () {}),
       ChatOptionsModel(option: 'Create New Group', clickAction: () {}),
-      ChatOptionsModel(option: 'Create a Broadcast', clickAction: () {}),
+      ChatOptionsModel(
+          option: 'Create a Broadcast',
+          clickAction: () {
+            animatedScreenNavigator(context, AddParticipantsScreen());
+          }),
       ChatOptionsModel(
           option: 'Sync your account to web panel',
           clickAction: () {
@@ -84,7 +89,8 @@ class SocialBottomModelSheet extends StatelessWidget {
                                     top: 15, bottom: 15, left: 24),
                                 child: Text(
                                   options[index].option,
-                                  style: TextStyle(color: CustomTheme.grey),
+                                  style: TextStyle(
+                                      color: CustomTheme.bottomSheettextColor),
                                 ),
                               ),
                               Divider(height: 0, color: CustomTheme.grey)

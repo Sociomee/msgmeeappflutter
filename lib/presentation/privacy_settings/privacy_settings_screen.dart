@@ -215,6 +215,28 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
           ),
           Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          ListTile(
+            onTap: () {
+              showModalBottomSheet(
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25.0),
+                    ),
+                  ),
+                  context: context,
+                  builder: (context) {
+                    return OptionsBottomSheet(
+                      title: 'Blocked Contacts',
+                      subtitle: '',
+                    );
+                  });
+            },
+            title: Text('Fingerprint'),
+            subtitle: Text('none'),
+            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+          ),
+          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
         ],
       )),
     );

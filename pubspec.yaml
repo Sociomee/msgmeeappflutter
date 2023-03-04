@@ -50,6 +50,7 @@ dependencies:
   flutter_windowmanager: ^0.2.0
   flutter_switch: ^0.3.2
   dio: ^5.0.1 
+  smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
@@ -109,6 +110,13 @@ flutter:
     - assets/msg1.png
     - assets/sociomee.png
     - assets/error.png
+    - assets/bg1.png
+    - assets/bg2.png
+    - assets/mobile.png
+    - assets/overlay.png
+    - assets/onboarding1.png
+    - assets/onboarding2.png
+    - assets/onboarding3.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -32,7 +32,12 @@ class TextFieldWidget extends StatelessWidget {
           controller: controller,
           cursorColor: CustomTheme.primaryColor,
           decoration: InputDecoration(
-              border: const OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 1, color: CustomTheme.borderColor)),
+              border: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 2, color: CustomTheme.borderColor)),
               focusedBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 2, color: CustomTheme.primaryColor)),

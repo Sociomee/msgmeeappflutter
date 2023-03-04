@@ -159,10 +159,12 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'This will be your display picture, this picture will be visible\n to your connections or contacts.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                    Center(
+                      child: const Text(
+                        'This will be your display picture, this picture will be visible\n to your connections or contacts.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                      ),
                     ),
                     const SizedBox(height: 42),
                     TextFieldWidget(
@@ -215,7 +217,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                             : CustomTheme.seconderyColor,
                         ontap: () {
                           isvalid
-                              ? screenNavigator(context, MsgmeeScreen())
+                              ? animatedScreenNavigator(context, MsgmeeScreen())
                               : null;
                         },
                         title: 'CONTINUE',
