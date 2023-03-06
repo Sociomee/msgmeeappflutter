@@ -89,10 +89,8 @@ List<Participants> blockedUserlist = [
 ];
 
 class BroadcastInfo extends StatefulWidget {
-  const BroadcastInfo({
-    super.key,
-  });
-
+  const BroadcastInfo({super.key, required this.editscreen});
+  final bool editscreen;
   @override
   State<BroadcastInfo> createState() => _BroadcastInfoState();
 }
@@ -136,14 +134,24 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
             style: TextStyle(color: CustomTheme.black),
           ),
           actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'SAVE',
-                  style: TextStyle(color: CustomTheme.primaryColor),
-                ))
+            widget.editscreen
+                ? TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'SAVE',
+                      style: TextStyle(color: CustomTheme.primaryColor),
+                    ))
+                : TextButton(
+                    onPressed: () {
+                      animatedScreenReplaceNavigator(
+                          context, BroadCastChatScreen());
+                    },
+                    child: Text(
+                      'SAVE',
+                      style: TextStyle(color: CustomTheme.primaryColor),
+                    ))
           ],
         ),
         body: SingleChildScrollView(

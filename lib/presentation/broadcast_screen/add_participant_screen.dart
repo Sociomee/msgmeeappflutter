@@ -116,7 +116,8 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
             actions: [
               TextButton(
                   onPressed: () {
-                    animatedScreenReplaceNavigator(context, BroadcastInfo());
+                    animatedScreenReplaceNavigator(
+                        context, BroadcastInfo(editscreen: false));
                   },
                   child: Text(
                     'DONE',

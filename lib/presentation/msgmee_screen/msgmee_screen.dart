@@ -33,11 +33,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-      child: DefaultTabController(
-        length: 2,
-        initialIndex: 0,
+    return DefaultTabController(
+      length: 2,
+      initialIndex: 0,
+      child: MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 70,

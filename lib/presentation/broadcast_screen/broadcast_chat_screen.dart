@@ -113,7 +113,8 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
             )
           ],
         ),
-        body: Stack(
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
@@ -127,6 +128,23 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     color: CustomTheme.seconderyColor1,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text('Today'),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 42,
+              alignment: Alignment.center,
+              child: Container(
+                height: 32,
+                margin: EdgeInsets.symmetric(horizontal: 50),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: CustomTheme.seconderyColor1,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  'You created a broadcast list with 10 recipients',
+                  style: TextStyle(fontSize: 10),
+                ),
               ),
             ),
             ListView.builder(
@@ -162,6 +180,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     ));
               },
             ),
+            Spacer(),
             Stack(
               children: [
                 Align(

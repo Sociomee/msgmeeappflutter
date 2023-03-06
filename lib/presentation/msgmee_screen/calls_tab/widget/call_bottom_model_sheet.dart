@@ -27,55 +27,49 @@ class CallBottomModelSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20.0),
-        topRight: Radius.circular(20.0),
-      ),
-      child: Container(
-        height: 280.h,
-        decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
-        child: Column(
-          children: [
-            // Container(
-            //   height: 4,
-            //   width: 80,
-            //   margin: EdgeInsets.only(top: 15),
-            //   decoration: BoxDecoration(
-            //       color: CustomTheme.grey,
-            //       borderRadius: BorderRadius.circular(10)),
-            // ),
-            SizedBox(
-              height: 10,
-            ),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: options.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    splashColor: CustomTheme.seconderyColor,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15, bottom: 15, left: 24),
-                          child: Text(
-                            options[index].option,
-                            style: TextStyle(color: CustomTheme.grey),
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        child: Container(
+          height: 280.h,
+          decoration: BoxDecoration(
+              color: CustomTheme.white,
+              borderRadius: BorderRadius.circular(25)),
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: options.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      splashColor: CustomTheme.seconderyColor,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 15, bottom: 15, left: 24),
+                            child: Text(
+                              options[index].option,
+                              style: TextStyle(color: CustomTheme.grey),
+                            ),
                           ),
-                        ),
-                        index == options.length - 1
-                            ? Container()
-                            : Divider(height: 0, color: CustomTheme.grey)
-                      ],
-                    ),
-                  );
-                }),
-          ],
+                          index == options.length - 1
+                              ? Container()
+                              : Divider(height: 0, color: CustomTheme.grey)
+                        ],
+                      ),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );

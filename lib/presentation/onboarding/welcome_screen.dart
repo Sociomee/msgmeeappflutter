@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/authentication/login_screen.dart';
+import 'package:msgmee/presentation/msgmee_screen/msgmee_screen.dart';
 import 'package:msgmee/presentation/onboarding/widgets/account_dialog.dart';
 import 'package:msgmee/theme/custom_theme.dart';
 
@@ -46,7 +47,8 @@ class WelcomeScreen extends StatelessWidget {
             SizedBox(height: 80),
             InkWell(
               onTap: () {
-                animatedScreenNavigator(context, LoginScreen());
+                animatedScreenNavigator(context, MsgmeeScreen());
+                // animatedScreenNavigator(context, LoginScreen());
               },
               child: Center(
                 child: Container(

@@ -29,11 +29,6 @@ class BroadcastBottomModelSheet extends StatelessWidget {
                 context, MediaAndDocScreen(profilename: profilename));
           }),
       BroadcastOptionsModel(option: 'Change Wallpaper', clickAction: () {}),
-      BroadcastOptionsModel(
-          option: 'Delete Broadcast',
-          clickAction: () {
-            animatedScreenNavigator(context, BroadcastMemberScreen());
-          }),
     ];
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -43,7 +38,7 @@ class BroadcastBottomModelSheet extends StatelessWidget {
             topRight: Radius.circular(20.0),
           ),
           child: Container(
-            height: 212.h,
+            height: 180.h,
             decoration: BoxDecoration(
                 color: CustomTheme.white,
                 borderRadius: BorderRadius.circular(25)),
