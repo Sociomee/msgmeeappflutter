@@ -56,6 +56,13 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   }
 
   @override
+  void dispose() {
+    nameController.dispose();
+    userNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -94,7 +101,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
           children: [
             SizedBox(
               height: isTyping
-                  ? MediaQuery.of(context).size.height + 100
+                  ? MediaQuery.of(context).size.height + 193
                   : MediaQuery.of(context).size.height,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),

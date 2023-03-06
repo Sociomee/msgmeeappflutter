@@ -7,7 +7,6 @@ import 'package:swipe_to/swipe_to.dart';
 import '../../../data/model/chat_model.dart';
 import '../../../theme/custom_theme.dart';
 import '../widget/chat_profile_widget.dart';
-import 'widgets/animated_attachment_icons.dart';
 import 'widgets/message_textField.dart';
 
 class ChatScreen extends StatefulWidget {

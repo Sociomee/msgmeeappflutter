@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/helper/navigator_function.dart';
+import 'package:msgmee/presentation/broadcast_screen/broadcast_info.dart';
 import 'package:msgmee/presentation/msgmee_screen/widget/chat_profile_widget.dart';
-import 'package:msgmee/presentation/msgmee_screen/widget/small_profile_widget.dart';
 import 'package:msgmee/theme/custom_theme.dart';
-
-import '../msgmee_screen/calls_tab/widget/delete_calls_bottomsheet.dart';
+import 'widget/filter_dropdown.dart';
 
 class Participants {
   final String username;
@@ -98,131 +97,134 @@ class AddParticipantsScreen extends StatefulWidget {
 class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: CustomTheme.black,
-              )),
-          title: Text(
-            'Add Participants',
-            style: TextStyle(color: CustomTheme.black),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {},
-                child: Text(
-                  'DONE',
-                  style: TextStyle(color: CustomTheme.primaryColor),
-                ))
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: EdgeInsets.symmetric(vertical: 5),
-                // height: 100,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: CustomTheme.grey,
-                        blurRadius: 15.0,
-                        offset: Offset(0.0, 0.75))
-                  ],
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: CustomTheme.white),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: CustomTheme.white),
-                          ),
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: CustomTheme.white),
-                          ),
-                          prefixIcon: Icon(Icons.search),
-                          hintText: 'Search....',
-                          hintStyle:
-                              TextStyle(color: CustomTheme.grey, fontSize: 17),
-                          focusColor: CustomTheme.primaryColor,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(25.0),
-                                    ),
-                                  ),
-                                  context: context,
-                                  builder: (context) {
-                                    return DeleteCallBottomSheet();
-                                  });
-                            },
-                            icon: Icon(
-                              Icons.tune_outlined,
-                              color: CustomTheme.black,
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: blockedUserlist.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: ListTile(
-                        leading: ChatProfileWidget(
-                            imageUrl: blockedUserlist[index].imageUrl,
-                            isOnline: true,
-                            hasStory: false),
-                        title: Text(blockedUserlist[index].username),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              blockedUserlist[index].usertype,
-                              style: TextStyle(color: CustomTheme.grey),
-                            ),
-                            Checkbox(
-                                side: MaterialStateBorderSide.resolveWith(
-                                  (states) => BorderSide(
-                                      width: 1.0,
-                                      color: CustomTheme.primaryColor),
-                                ),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(3)),
-                                activeColor: CustomTheme.primaryColor,
-                                value: blockedUserlist[index].isSelected,
-                                onChanged: (w) {
-                                  setState(() {
-                                    blockedUserlist[index].isSelected =
-                                        !blockedUserlist[index].isSelected;
-                                  });
-                                })
-                          ],
-                        ),
-                      ),
-                    );
-                  })
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: CustomTheme.black,
+                )),
+            title: Text(
+              'Add Participants',
+              style: TextStyle(color: CustomTheme.black),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    animatedScreenReplaceNavigator(context, BroadcastInfo());
+                  },
+                  child: Text(
+                    'DONE',
+                    style: TextStyle(color: CustomTheme.primaryColor),
+                  ))
             ],
           ),
-        ));
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  // height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: CustomTheme.grey,
+                          blurRadius: 15.0,
+                          offset: Offset(0.0, 0.75))
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: CustomTheme.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: CustomTheme.white),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: CustomTheme.white),
+                            ),
+                            prefixIcon: Icon(Icons.search),
+                            hintText: 'Search....',
+                            hintStyle: TextStyle(
+                                color: CustomTheme.grey, fontSize: 17),
+                            focusColor: CustomTheme.primaryColor,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(25.0),
+                                      ),
+                                    ),
+                                    context: context,
+                                    builder: (context) {
+                                      return FilterBottomSheet();
+                                    });
+                              },
+                              icon: Icon(
+                                Icons.tune_outlined,
+                                color: CustomTheme.black,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: blockedUserlist.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: ListTile(
+                          leading: ChatProfileWidget(
+                              imageUrl: blockedUserlist[index].imageUrl,
+                              isOnline: true,
+                              hasStory: false),
+                          title: Text(blockedUserlist[index].username),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(blockedUserlist[index].usertype,
+                                  style: TextStyle(color: CustomTheme.grey)),
+                              Checkbox(
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (states) => BorderSide(
+                                        width: 1.0,
+                                        color: CustomTheme.primaryColor),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3)),
+                                  activeColor: CustomTheme.primaryColor,
+                                  value: blockedUserlist[index].isSelected,
+                                  onChanged: (w) {
+                                    setState(() {
+                                      blockedUserlist[index].isSelected =
+                                          !blockedUserlist[index].isSelected;
+                                    });
+                                  })
+                            ],
+                          ),
+                        ),
+                      );
+                    })
+              ],
+            ),
+          )),
+    );
   }
 }

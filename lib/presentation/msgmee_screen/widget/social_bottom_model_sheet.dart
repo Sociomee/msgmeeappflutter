@@ -4,7 +4,6 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/connect_webpanel/linked_devices_screen.dart';
 import 'package:msgmee/presentation/new_message/new_message_screen.dart';
 import 'package:msgmee/presentation/settings/settings_screen.dart';
-
 import '../../../theme/custom_theme.dart';
 import '../../broadcast_screen/add_participant_screen.dart';
 
@@ -56,7 +55,7 @@ class SocialBottomModelSheet extends StatelessWidget {
         topRight: Radius.circular(20.0),
       ),
       child: Container(
-        height: 356.h,
+        height: 381.h,
         decoration: BoxDecoration(
             color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
