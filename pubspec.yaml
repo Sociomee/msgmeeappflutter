@@ -118,6 +118,8 @@ flutter:
     - assets/onboarding2.png
     - assets/onboarding3.png
     - assets/broadcast.png
+    - assets/comment.png
+    - assets/mic.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

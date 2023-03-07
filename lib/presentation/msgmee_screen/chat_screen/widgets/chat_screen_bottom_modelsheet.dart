@@ -37,57 +37,60 @@ class ChatScreenBottomModelSheet extends StatelessWidget {
           }),
       ChatOptionsModel(option: 'Settings', clickAction: () {}),
     ];
-    return ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        child: Container(
-          height: 256.h,
-          decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: options.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: options[index].clickAction,
-                      splashColor: CustomTheme.seconderyColor,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 15, bottom: 15, left: 24),
-                                  child: Text(
-                                    options[index].option,
-                                    style: TextStyle(color: CustomTheme.grey),
-                                  ),
-                                ),
-                                index == options.length - 1
-                                    ? Container()
-                                    : Divider(
-                                        height: 0, color: CustomTheme.grey)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ],
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
           ),
-        ));
+          child: Container(
+            height: 256.h,
+            decoration: BoxDecoration(
+                color: CustomTheme.white,
+                borderRadius: BorderRadius.circular(25)),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: options.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: options[index].clickAction,
+                        splashColor: CustomTheme.seconderyColor,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, bottom: 15, left: 24),
+                                    child: Text(
+                                      options[index].option,
+                                      style: TextStyle(color: CustomTheme.grey),
+                                    ),
+                                  ),
+                                  index == options.length - 1
+                                      ? Container()
+                                      : Divider(
+                                          height: 0, color: CustomTheme.grey)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              ],
+            ),
+          )),
+    );
   }
 }

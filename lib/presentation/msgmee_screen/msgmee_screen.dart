@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/helper/navigator_function.dart';
+import 'package:msgmee/presentation/profile/profile_desc/personal_profile_description.dart';
 import 'package:msgmee/theme/custom_theme.dart';
-
 import 'calls_tab/call_tab_screen.dart';
 import 'calls_tab/widget/call_bottom_model_sheet.dart';
 import 'social_tab/social_tab_screen.dart';
@@ -47,7 +48,12 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
               children: [
                 Padding(
                     padding: EdgeInsets.only(right: 14.0),
-                    child: ProfilePicWidget()),
+                    child: GestureDetector(
+                        onTap: () {
+                          animatedScreenNavigator(
+                              context, PersonalPeofileDesc());
+                        },
+                        child: ProfilePicWidget())),
                 _selectedIndex == 0
                     ? Text(
                         "MsgMee",

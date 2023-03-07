@@ -10,6 +10,7 @@ class TextFieldWidget extends StatelessWidget {
     required this.onChanged,
     required this.remainChar,
     this.showchar = true,
+    this.textWeight = FontWeight.w400,
   });
   final String title;
   final String hintText;
@@ -17,6 +18,7 @@ class TextFieldWidget extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final String remainChar;
   bool? showchar;
+  FontWeight? textWeight;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +26,8 @@ class TextFieldWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(color: CustomTheme.black, fontSize: 14),
+          style: TextStyle(
+              color: CustomTheme.black, fontSize: 14, fontWeight: textWeight),
         ),
         const SizedBox(height: 12),
         TextFormField(

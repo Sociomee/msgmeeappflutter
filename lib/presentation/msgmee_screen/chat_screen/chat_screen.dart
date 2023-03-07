@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/attached_icons.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/sender_widget.dart';
+import 'package:msgmee/presentation/profile/profile_desc/other_person_profile_description.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../data/model/chat_model.dart';
 import '../../../theme/custom_theme.dart';
@@ -54,41 +56,46 @@ class _ChatScreenState extends State<ChatScreen> {
                 Icons.arrow_back_ios,
                 color: CustomTheme.black,
               )),
-          title: Row(
-            children: [
-              ChatProfileWidget(
-                  imageUrl: widget.imageUrl,
-                  isOnline: widget.isOnline,
-                  hasStory: widget.hasStory),
-              SizedBox(width: 13),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.name,
-                      style: TextStyle(
+          title: GestureDetector(
+            onTap: () {
+              animatedScreenNavigator(
+                  context,
+                  OtherPersonProfileDescription(
+                    imageUrl: widget.imageUrl,
+                    name: widget.name,
+                    isOnline: widget.isOnline,
+                  ));
+            },
+            child: Row(
+              children: [
+                ChatProfileWidget(
+                    imageUrl: widget.imageUrl,
+                    isOnline: widget.isOnline,
+                    hasStory: widget.hasStory),
+                SizedBox(width: 13),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.name,
+                        style: TextStyle(
                           fontSize: 16,
                           color: CustomTheme.black,
-                          fontWeight: FontWeight.w500)),
-                  SizedBox(height: 8),
-                  Text(widget.isOnline ? 'Active Now' : '',
-                      style: TextStyle(fontSize: 13, color: CustomTheme.grey)),
-                ],
-              ),
-            ],
+                          fontWeight: FontWeight.w500,
+                        )),
+                    SizedBox(height: 8),
+                    Text(widget.isOnline ? 'Active Now' : '',
+                        style:
+                            TextStyle(fontSize: 13, color: CustomTheme.grey)),
+                  ],
+                ),
+              ],
+            ),
           ),
           actions: [
-            Image.asset(
-              'assets/video.png',
-              width: 16,
-            ),
-            SizedBox(
-              width: 28,
-            ),
-            Image.asset(
-              'assets/call.png',
-              width: 16,
-            ),
+            Image.asset('assets/video.png', width: 16),
+            SizedBox(width: 28),
+            Image.asset('assets/call.png', width: 16),
             IconButton(
               onPressed: () {
                 showModalBottomSheet(
@@ -156,9 +163,6 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                           )
                         : ListTile(
-                            // tileColor: chattileIndex.contains(index)
-                            //     ? CustomTheme.seconderyColor
-                            //     : Colors.transparent,
                             onTap: () {
                               setState(() {
                                 chattileIndex

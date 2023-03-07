@@ -47,139 +47,143 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
-              child: Text('RECENT'),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: urls.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      child: Container(
-                        child: Column(
-                          children: [
-                            AnyLinkPreview(
-                              link: urls[index],
-                              displayDirection:
-                                  UIDirection.uiDirectionHorizontal,
-                              cache: Duration(hours: 1),
-                              backgroundColor: CustomTheme.lightgrey1,
-                              errorWidget: Container(
-                                color: CustomTheme.lightgrey1,
-                                // child: Text('Oops!'),
-                              ),
-                              placeholderWidget: Center(
-                                child: CircularProgressIndicator(
-                                  color: CustomTheme.primaryColor,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      child: Scaffold(
+        body: SafeArea(
+            child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                child: Text('RECENT'),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: urls.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              AnyLinkPreview(
+                                link: urls[index],
+                                displayDirection:
+                                    UIDirection.uiDirectionHorizontal,
+                                cache: Duration(hours: 1),
+                                backgroundColor: CustomTheme.lightgrey1,
+                                errorWidget: Container(
+                                  color: CustomTheme.lightgrey1,
+                                  // child: Text('Oops!'),
                                 ),
+                                placeholderWidget: Center(
+                                  child: CircularProgressIndicator(
+                                    color: CustomTheme.primaryColor,
+                                  ),
+                                ),
+                                errorImage: errorImage,
+                                errorBody: 'Show my custom error body',
+                                errorTitle:
+                                    'Next one is youtube link, error title',
                               ),
-                              errorImage: errorImage,
-                              errorBody: 'Show my custom error body',
-                              errorTitle:
-                                  'Next one is youtube link, error title',
-                            ),
-                            // Row(
-                            //   children: [
-                            //     SizedBox(
-                            //       width: 300,
-                            //       child: Text(
-                            //         urls[index].substring(0, 30),
-                            //         softWrap: true,
-                            //       ),
-                            //     ),
-                            //     Icon(
-                            //       Icons.arrow_forward_ios,
-                            //       color: CustomTheme.iconColor,
-                            //     )
-                            //   ],
-                            // )
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ),
-            SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
-              child: Text('LAST WEEK'),
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: urls.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: AnyLinkPreview(
-                          link: urls[index],
-                          displayDirection: UIDirection.uiDirectionHorizontal,
-                          cache: Duration(hours: 1),
-                          backgroundColor: CustomTheme.lightgrey1,
-                          errorWidget: Container(
-                            color: CustomTheme.lightgrey1,
-                            // child: Text('Oops!'),
+                              // Row(
+                              //   children: [
+                              //     SizedBox(
+                              //       width: 300,
+                              //       child: Text(
+                              //         urls[index].substring(0, 30),
+                              //         softWrap: true,
+                              //       ),
+                              //     ),
+                              //     Icon(
+                              //       Icons.arrow_forward_ios,
+                              //       color: CustomTheme.iconColor,
+                              //     )
+                              //   ],
+                              // )
+                            ],
                           ),
-                          placeholderWidget: Center(
-                            child: CircularProgressIndicator(
-                              color: CustomTheme.primaryColor,
-                            ),
-                          ),
-                          errorImage: errorImage,
-                          errorBody: 'Show my custom error body',
-                          errorTitle: 'Next one is youtube link, error title',
                         ),
                       );
-                    })),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
-              child: Text('LAST MONTH'),
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: urls.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: AnyLinkPreview(
-                          link: urls[index],
-                          displayDirection: UIDirection.uiDirectionHorizontal,
-                          cache: Duration(hours: 1),
-                          backgroundColor: CustomTheme.lightgrey1,
-                          errorWidget: Container(
-                            color: CustomTheme.lightgrey1,
-                            // child: Text('Oops!'),
-                          ),
-                          placeholderWidget: Center(
-                            child: CircularProgressIndicator(
-                              color: CustomTheme.primaryColor,
+                    }),
+              ),
+              SizedBox(height: 25),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                child: Text('LAST WEEK'),
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: urls.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: AnyLinkPreview(
+                            link: urls[index],
+                            displayDirection: UIDirection.uiDirectionHorizontal,
+                            cache: Duration(hours: 1),
+                            backgroundColor: CustomTheme.lightgrey1,
+                            errorWidget: Container(
+                              color: CustomTheme.lightgrey1,
+                              // child: Text('Oops!'),
                             ),
+                            placeholderWidget: Center(
+                              child: CircularProgressIndicator(
+                                color: CustomTheme.primaryColor,
+                              ),
+                            ),
+                            errorImage: errorImage,
+                            errorBody: 'Show my custom error body',
+                            errorTitle: 'Next one is youtube link, error title',
                           ),
-                          errorImage: errorImage,
-                          errorBody: 'Show my custom error body',
-                          errorTitle: 'Next one is youtube link, error title',
-                        ),
-                      );
-                    })),
-          ],
-        ),
-      )),
+                        );
+                      })),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                child: Text('LAST MONTH'),
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: urls.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: AnyLinkPreview(
+                            link: urls[index],
+                            displayDirection: UIDirection.uiDirectionHorizontal,
+                            cache: Duration(hours: 1),
+                            backgroundColor: CustomTheme.lightgrey1,
+                            errorWidget: Container(
+                              color: CustomTheme.lightgrey1,
+                              // child: Text('Oops!'),
+                            ),
+                            placeholderWidget: Center(
+                              child: CircularProgressIndicator(
+                                color: CustomTheme.primaryColor,
+                              ),
+                            ),
+                            errorImage: errorImage,
+                            errorBody: 'Show my custom error body',
+                            errorTitle: 'Next one is youtube link, error title',
+                          ),
+                        );
+                      })),
+            ],
+          ),
+        )),
+      ),
     );
   }
 }
