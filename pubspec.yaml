@@ -52,6 +52,9 @@ dependencies:
   dio: ^5.0.1 
   smooth_page_indicator: ^1.0.1
   flutter_staggered_grid_view: ^0.6.2
+  flutter_instagram_stories: ^1.0.3
+  cached_network_image: ^3.2.3
+  video_player: ^2.5.3
   
 
 dev_dependencies:

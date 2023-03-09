@@ -6,9 +6,14 @@ import '../../../theme/custom_theme.dart';
 import 'widget/social_chat_widget.dart';
 import 'widget/social_stoty_widget.dart';
 
-class SocialTabScreen extends StatelessWidget {
+class SocialTabScreen extends StatefulWidget {
   const SocialTabScreen({super.key});
 
+  @override
+  State<SocialTabScreen> createState() => _SocialTabScreenState();
+}
+
+class _SocialTabScreenState extends State<SocialTabScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

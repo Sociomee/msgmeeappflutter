@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/msgmee_screen/widget/small_profile_widget.dart';
 import 'package:msgmee/theme/custom_theme.dart';
+
+import '../../../story_screen/story_screen.dart';
 
 class Story {
   final String imageUrl;
@@ -68,11 +71,16 @@ class SocialStoryWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     children: [
-                      SmallProfileWidget(
-                          imageUrl: dummyStory[index].imageUrl,
-                          isOnline: false,
-                          isMe: dummyStory[index].isme,
-                          hasStory: true),
+                      InkWell(
+                        onTap: () {
+                          animatedScreenNavigator(context, StoryScreen());
+                        },
+                        child: SmallProfileWidget(
+                            imageUrl: dummyStory[index].imageUrl,
+                            isOnline: false,
+                            isMe: dummyStory[index].isme,
+                            hasStory: true),
+                      ),
                       Title(
                           color: CustomTheme.primaryColor,
                           child: Text(dummyStory[index].title,
