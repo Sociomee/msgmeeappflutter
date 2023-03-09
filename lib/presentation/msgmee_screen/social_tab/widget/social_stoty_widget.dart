@@ -62,22 +62,26 @@ class SocialStoryWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: dummyStory.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  SmallProfileWidget(
-                      imageUrl: dummyStory[index].imageUrl,
-                      isOnline: false,
-                      isMe: dummyStory[index].isme,
-                      hasStory: true),
-                  Title(
-                      color: CustomTheme.primaryColor,
-                      child: Text(dummyStory[index].title,
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold)))
-                ],
-              ),
+            return Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      SmallProfileWidget(
+                          imageUrl: dummyStory[index].imageUrl,
+                          isOnline: false,
+                          isMe: dummyStory[index].isme,
+                          hasStory: true),
+                      Title(
+                          color: CustomTheme.primaryColor,
+                          child: Text(dummyStory[index].title,
+                              style: const TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold)))
+                    ],
+                  ),
+                ),
+              ],
             );
           }),
     );

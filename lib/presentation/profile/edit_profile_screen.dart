@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 import '../../theme/custom_theme.dart';
+import 'profile_desc/widgets/choose_date_of_birth.dart';
+import 'profile_desc/widgets/choose_gender_bottomsheet.dart';
+import 'profile_desc/widgets/choose_interest_bottomsheet.dart';
 import 'widget/text_field_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -31,6 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(6.0),
@@ -124,6 +129,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   textWeight: FontWeight.bold,
                 ),
                 TextFieldWidget(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        builder: (context) {
+                          return ChooseDateOfBirthBottomSheet();
+                        });
+                  },
                   title: 'Date of Birth',
                   hintText: 'Write your date of Birth',
                   controller: dateofbirthController,
@@ -137,6 +151,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   textWeight: FontWeight.bold,
                 ),
                 TextFieldWidget(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        builder: (context) {
+                          return ChooseGenderBottomSheet();
+                        });
+                  },
                   title: 'Gender',
                   hintText: 'Write your gender',
                   controller: dateofbirthController,
@@ -149,12 +172,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   showchar: false,
                   textWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Interest',
-                  style: TextStyle(
-                    color: CustomTheme.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        builder: (context) {
+                          return ChooseInterestBottomSheet();
+                        });
+                  },
+                  child: Text(
+                    'Interest',
+                    style: TextStyle(
+                      color: CustomTheme.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Row(
@@ -203,6 +237,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: CustomButtonWidget(
+                      title: 'SAVE',
+                      color: CustomTheme.primaryColor,
+                      ontap: () {}),
+                )
               ],
             ),
           ),

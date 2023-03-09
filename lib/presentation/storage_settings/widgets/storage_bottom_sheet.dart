@@ -69,6 +69,11 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                           },
                           leading: Text(options[index].option),
                           trailing: Checkbox(
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                    width: 2.0,
+                                    color: CustomTheme.primaryColor),
+                              ),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(3)),
                               activeColor: CustomTheme.primaryColor,

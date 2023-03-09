@@ -11,12 +11,14 @@ class TextFieldWidget extends StatelessWidget {
     required this.remainChar,
     this.showchar = true,
     this.textWeight = FontWeight.w400,
+    this.onTap,
   });
   final String title;
   final String hintText;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
   final String remainChar;
+  final VoidCallback? onTap;
   bool? showchar;
   FontWeight? textWeight;
   @override
@@ -31,6 +33,7 @@ class TextFieldWidget extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         TextFormField(
+          onTap: onTap,
           onChanged: onChanged,
           controller: controller,
           cursorColor: CustomTheme.primaryColor,
