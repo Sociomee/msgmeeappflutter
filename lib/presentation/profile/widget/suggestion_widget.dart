@@ -42,9 +42,10 @@ class SuggestionWidget extends StatelessWidget {
                   width: 136,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      border: Border.all(color: CustomTheme.grey),
+                      border: Border.all(color: CustomTheme.borderColor),
                       borderRadius: BorderRadius.circular(5)),
-                  child: Text(suggestion[index]),
+                  child: Text(suggestion[index],
+                      style: TextStyle(color: Color(0XFF333333))),
                 );
               })
         ],

@@ -9,7 +9,9 @@ class CallTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: [CallWidget()],
+        children: [
+          CallWidget(),
+        ],
       ),
     );
   }

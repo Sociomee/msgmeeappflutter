@@ -4,6 +4,7 @@ import 'package:msgmee/presentation/authentication/widget/number_confirmation_di
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/custom_theme.dart';
 import 'cubit/number_validation/number_validation_cubit.dart';
+import 'widget/country_code_bottomsheet.dart';
 import 'widget/language_change_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -70,30 +71,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text('Welcome', style: TextStyle(fontSize: 33))),
             const SizedBox(height: 50),
             Row(children: [
-              Container(
-                height: 40,
-                width: 90,
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                decoration: BoxDecoration(
-                    border: Border.all(color: CustomTheme.grey),
-                    borderRadius: BorderRadius.circular(5)),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                        textScaleFactor: 1.0,
-                        '+91',
-                        style: TextStyle(color: Colors.grey, fontSize: 14)),
-                    const SizedBox(width: 6),
-                    Image.network(
-                      'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
-                      height: 15,
-                    ),
-                    // const SizedBox(width: 5),
-                    const Icon(Icons.keyboard_arrow_down)
-                  ],
-                ),
-              ),
+              // Container(
+              //   height: 40,
+              //   width: 90,
+              //   padding: const EdgeInsets.symmetric(horizontal: 3),
+              //   decoration: BoxDecoration(
+              //       border: Border.all(color: CustomTheme.grey),
+              //       borderRadius: BorderRadius.circular(5)),
+              //   child: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: [
+              //       const Text(
+              //           textScaleFactor: 1.0,
+              //           '+91',
+              //           style: TextStyle(color: Colors.grey, fontSize: 14)),
+              //       const SizedBox(width: 6),
+              //       Image.network(
+              //         'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+              //         height: 15,
+              //       ),
+              //       // const SizedBox(width: 5),
+              //       const Icon(Icons.keyboard_arrow_down)
+              //     ],
+              //   ),
+              // ),
+              CountryCodeWidget(),
               const SizedBox(width: 5),
               Expanded(
                 child: SizedBox(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/helper/navigator_function.dart';
+import 'package:msgmee/presentation/msgmee_screen/calls_tab/widget/delete_calls_bottomsheet.dart';
 import '../../../../data/model/dummy_phone_model.dart';
 import '../../../../theme/custom_theme.dart';
+import '../../../call_screens/single_call_screen.dart';
 import '../../widget/chat_profile_widget.dart';
 
 class CallWidget extends StatelessWidget {
@@ -17,6 +20,19 @@ class CallWidget extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {},
+                onLongPress: () {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(25.0),
+                        ),
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return DeleteCallBottomSheet();
+                      });
+                },
                 splashColor: CustomTheme.seconderyColor,
                 child: Padding(
                   padding:
@@ -67,7 +83,16 @@ class CallWidget extends StatelessWidget {
                             children: [
                               Image.asset('assets/video.png'),
                               SizedBox(width: 30),
-                              Image.asset('assets/call.png'),
+                              InkWell(
+                                  splashColor: CustomTheme.seconderyColor,
+                                  onTap: () {
+                                    animatedScreenNavigator(
+                                        context,
+                                        SingleCallScreen(
+                                            imageUrl: dummyPhoneData[index]
+                                                .imageUrl));
+                                  },
+                                  child: Image.asset('assets/call.png')),
                             ],
                           )
                         ],

@@ -22,15 +22,21 @@ class ConncetWenPanelScreen extends StatelessWidget {
             style: TextStyle(color: CustomTheme.black),
           ),
         ),
-        body: Column(children: [
-          Image.asset('assets/qr.png'),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 47, left: 47, right: 47),
-            child: Text(
-              'Open web.sociomee.com, desktop app, or other devices.',
-              style: TextStyle(fontSize: 18, color: CustomTheme.white),
-            ),
-          )
-        ]));
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(color: CustomTheme.black.withOpacity(0.6)),
+          child: Column(children: [
+            Image.asset('assets/qr.png'),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 47, left: 47, right: 47),
+              child: Text(
+                'Open web.sociomee.com, desktop app, or other devices.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: CustomTheme.white),
+              ),
+            )
+          ]),
+        ));
   }
 }

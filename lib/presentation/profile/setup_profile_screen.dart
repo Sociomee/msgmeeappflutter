@@ -56,6 +56,13 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   }
 
   @override
+  void dispose() {
+    nameController.dispose();
+    userNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -94,7 +101,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
           children: [
             SizedBox(
               height: isTyping
-                  ? MediaQuery.of(context).size.height + 100
+                  ? MediaQuery.of(context).size.height + 193
                   : MediaQuery.of(context).size.height,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -159,10 +166,12 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'This will be your display picture, this picture will be visible\n to your connections or contacts.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                    Center(
+                      child: const Text(
+                        'This will be your display picture, this picture will be visible\n to your connections or contacts.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                      ),
                     ),
                     const SizedBox(height: 42),
                     TextFieldWidget(
@@ -215,7 +224,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                             : CustomTheme.seconderyColor,
                         ontap: () {
                           isvalid
-                              ? screenNavigator(context, MsgmeeScreen())
+                              ? animatedScreenNavigator(context, MsgmeeScreen())
                               : null;
                         },
                         title: 'CONTINUE',

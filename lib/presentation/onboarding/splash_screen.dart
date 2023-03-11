@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/authentication/login_screen.dart';
 
+import 'onboarding_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -57,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
 void startTimer(BuildContext context) {
   Timer(const Duration(seconds: 3), () async {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return const LoginScreen();
+      return const OnboardingScreen();
     }));
     //It will redirect  after 3 seconds
   });
