@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../../../b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import '../../../../theme/colors.dart';
 import '../../../../presentation/widgets/custom_bottom_model_sheet.dart';
@@ -25,7 +26,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   bool isValid = false;
   bool isTyping = false;
   int remainchar = 64;
-  int remainchar1 = 64;
+  // int remainchar1 = 64;
   void pickGprofilePic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -197,7 +198,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                         ? AppColors.primaryColor
                         : AppColors.primaryColor.withOpacity(.5),
                     ontap: () {
-                      screenNavigator(context, const SetupProfileScreen());
+                      screenNavigator(context, const MsgmeeScreen());
                     },
                     title: 'CONTINUE',
                     color: isValid

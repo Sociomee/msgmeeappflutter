@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/broadcast_screen/broadcast_info.dart';
-import 'package:msgmee/presentation/msgmee_screen/widget/chat_profile_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'widget/filter_dropdown.dart';
 

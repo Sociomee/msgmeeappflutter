@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/presentation/msgmee_screen/widget/chat_profile_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import '../../../data/model/all_connections_model.dart';
 import '../../../theme/colors.dart';
 

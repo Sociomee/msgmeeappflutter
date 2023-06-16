@@ -1,34 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../helper/navigator_function.dart';
-import '../../../theme/colors.dart';
-import '../../../feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
+import '../../../../../../helper/navigator_function.dart';
+import '../../../../../../theme/colors.dart';
+import '../../media_doc_screen/media_and_doc_screen.dart';
 
-
-class BroadcastOptionsModel {
+class ChatOptionsModel {
   final String option;
   final VoidCallback clickAction;
-  BroadcastOptionsModel({
+  ChatOptionsModel({
     required this.option,
     required this.clickAction,
   });
 }
 
-class BroadcastBottomModelSheet extends StatelessWidget {
-  const BroadcastBottomModelSheet({super.key, required this.profilename});
+class ChatScreenBottomModelSheet extends StatelessWidget {
+  const ChatScreenBottomModelSheet({super.key, required this.profilename});
   final String profilename;
   @override
   Widget build(BuildContext context) {
-    List<BroadcastOptionsModel> options = [
-      BroadcastOptionsModel(option: 'Search', clickAction: () {}),
-      BroadcastOptionsModel(option: 'Clear Chat', clickAction: () {}),
-      BroadcastOptionsModel(
+    List<ChatOptionsModel> options = [
+      ChatOptionsModel(
           option: 'Media, links and docs',
           clickAction: () {
             screenNavigator(
                 context, MediaAndDocScreen(profilename: profilename));
           }),
-      BroadcastOptionsModel(option: 'Change Wallpaper', clickAction: () {}),
+      ChatOptionsModel(option: 'Search', clickAction: () {}),
+      ChatOptionsModel(option: 'Mute Messages', clickAction: () {}),
+      ChatOptionsModel(option: 'Clear Chat', clickAction: () {}),
+      ChatOptionsModel(
+          option: 'Block',
+          clickAction: () {
+            // screenNavigator(context, LinkedDevicesScreen());
+          }),
+      ChatOptionsModel(option: 'Settings', clickAction: () {}),
     ];
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -38,7 +43,7 @@ class BroadcastBottomModelSheet extends StatelessWidget {
             topRight: Radius.circular(20.0),
           ),
           child: Container(
-            height: 180.h,
+            height: 256.h,
             decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(25)),

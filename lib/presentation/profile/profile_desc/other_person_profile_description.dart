@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../theme/colors.dart';
-import '../../msgmee_screen/media_doc_screen/widget/doc_tab.dart';
-import '../../msgmee_screen/media_doc_screen/widget/links_tab.dart';
+import '../../../feature/c_social_chat/presentation/pages/media_doc_screen/widget/doc_tab.dart';
+import '../../../feature/c_social_chat/presentation/pages/media_doc_screen/widget/links_tab.dart';
 import 'media_tab/media_tab.dart';
 import 'widgets/options_button_widget.dart';
 import 'widgets/profile_bottom_sheet.dart';

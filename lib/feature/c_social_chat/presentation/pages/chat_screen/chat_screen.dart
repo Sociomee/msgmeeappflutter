@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/broadcast_screen/broad_cast_desc_screen.dart';
-import '../../data/model/chat_model.dart';
-import '../../theme/colors.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
-import 'widget/broadcast_bottomsheet.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
+import 'package:msgmee/presentation/profile/profile_desc/other_person_profile_description.dart';
+import 'package:swipe_to/swipe_to.dart';
+import '../../../../../data/model/chat_model.dart';
+import '../../../../../theme/colors.dart';
+import '../../widgets/chat_profile_widget.dart';
+import 'widgets/message_textField.dart';
 
-class BroadCastChatScreen extends StatefulWidget {
-  const BroadCastChatScreen({super.key});
+class ChatScreen extends StatefulWidget {
+  const ChatScreen(
+      {super.key,
+      required this.name,
+      required this.imageUrl,
+      required this.isOnline,
+      required this.hasStory});
+  final String name;
+  final String imageUrl;
+  final bool isOnline;
+  final bool hasStory;
 
   @override
-  State<BroadCastChatScreen> createState() => _BroadCastChatScreenState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
+class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   bool istyping = false;
@@ -44,39 +56,35 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 Icons.arrow_back_ios,
                 color: AppColors.black,
               )),
-          title: InkWell(
+          title: GestureDetector(
             onTap: () {
-              animatedScreenNavigator(context, BroadCastDescriptionScreen());
+              animatedScreenNavigator(
+                  context,
+                  OtherPersonProfileDescription(
+                    imageUrl: widget.imageUrl,
+                    name: widget.name,
+                    isOnline: widget.isOnline,
+                  ));
             },
             child: Row(
               children: [
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: AppColors.seconderyColor1,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.lightgrey,
-                          offset: Offset(0, 0.5),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
-                    child: Image.asset('assets/broadcast.png', height: 31)),
+                ChatProfileWidget(
+                    imageUrl: widget.imageUrl,
+                    isOnline: widget.isOnline,
+                    hasStory: widget.hasStory),
                 SizedBox(width: 13),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Alia, Abriella, Mariana,',
+                    Text(widget.name,
                         style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w500)),
+                          fontSize: 16,
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w500,
+                        )),
                     SizedBox(height: 8),
-                    Text('Broadcast',
+                    Text(widget.isOnline ? 'Active Now' : '',
                         style: TextStyle(fontSize: 13, color: AppColors.grey)),
                   ],
                 ),
@@ -84,6 +92,9 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
             ),
           ),
           actions: [
+            Image.asset('assets/video.png', width: 16),
+            SizedBox(width: 28),
+            Image.asset('assets/call.png', width: 16),
             IconButton(
               onPressed: () {
                 showModalBottomSheet(
@@ -95,8 +106,8 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     ),
                     context: context,
                     builder: (context) {
-                      return BroadcastBottomModelSheet(
-                        profilename: 'widget.name',
+                      return ChatScreenBottomModelSheet(
+                        profilename: widget.name,
                       );
                     });
               },
@@ -107,74 +118,97 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
             )
           ],
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
+        body: Stack(
           children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 42,
-              alignment: Alignment.center,
-              child: Container(
-                height: 32,
-                width: 69,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: AppColors.seconderyColor1,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text('Today'),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 42,
-              alignment: Alignment.center,
-              child: Container(
-                height: 32,
-                margin: EdgeInsets.symmetric(horizontal: 50),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: AppColors.seconderyColor1,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  'You created a broadcast list with 10 recipients',
-                  style: TextStyle(fontSize: 10),
-                ),
-              ),
-            ),
             ListView.builder(
               controller: _listViewController,
-              itemCount: 1,
+              itemCount: messages.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 50),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      onTap: () {
-                        setState(() {
-                          chattileIndex.remove(messages[index].messageContent);
-                        });
-                      },
-                      onLongPress: () async {},
-                      contentPadding: EdgeInsets.zero,
-                      title: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            flex: 12,
-                            child: SentMessageWidget(
-                                message:
-                                    'This is a broadcast message. Please link your SocioMee account with MsgMee account so that we can be friends in both applications',
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Align(
+                    alignment: (messages[index].messageType == "receiver"
+                        ? Alignment.topLeft
+                        : Alignment.topRight),
+                    child: messages[index].messageType == "receiver"
+                        ? SwipeTo(
+                            onRightSwipe: () {
+                              print('ekjne');
+                            },
+                            child: ListTile(
+                              // tileColor: chattileIndex.contains(index)
+                              //     ? Colors.transparent
+                              //     : CustomTheme.seconderyColor,
+                              onTap: () {
+                                setState(() {
+                                  chattileIndex
+                                      .remove(messages[index].messageContent);
+                                });
+                              },
+                              onLongPress: () {
+                                setState(() {
+                                  chattileIndex
+                                      .add(messages[index].messageContent);
+                                });
+                              },
+                              contentPadding: EdgeInsets.zero,
+                              title: ReceivedMessageWidget(
+                                  message: messages[index].messageContent,
+                                  msgStatus: messages[index].msgStatus,
+                                  time: messages[index].time),
+                            ),
+                          )
+                        : ListTile(
+                            onTap: () {
+                              setState(() {
+                                chattileIndex
+                                    .remove(messages[index].messageContent);
+                              });
+                            },
+                            onLongPress: () async {
+                              setState(() {
+                                chattileIndex
+                                    .add(messages[index].messageContent);
+                              });
+                              final selectedOption = await showMenu(
+                                context: context,
+                                position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                                items: [
+                                  PopupMenuItem(
+                                    child: Text('Option 1'),
+                                    value: 'Option 1',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text('Option 2'),
+                                    value: 'Option 2',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text('Option 3'),
+                                    value: 'Option 3',
+                                  ),
+                                ],
+                              );
+                              if (selectedOption == 'Option 1') {
+                                // Handle Option 1
+                              } else if (selectedOption == 'Option 2') {
+                                // Handle Option 2
+                              } else if (selectedOption == 'Option 3') {
+                                // Handle Option 3
+                              }
+                            },
+                            contentPadding: EdgeInsets.zero,
+                            title: SentMessageWidget(
+                                message: messages[index].messageContent,
                                 msgStatus: messages[index].msgStatus,
                                 time: messages[index].time),
                           ),
-                        ],
-                      ),
-                    ));
+                  ),
+                );
               },
             ),
-            Spacer(),
             Stack(
               children: [
                 Align(

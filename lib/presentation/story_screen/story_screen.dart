@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/story_screen/widget/story_data.dart';
 import 'package:video_player/video_player.dart';
@@ -80,8 +80,7 @@ class _StoryScreenState extends State<StoryScreen>
                       //   fit: BoxFit.cover,
                       // );
                       case MediaType.video:
-                        if (videoController != null &&
-                            videoController.value.isInitialized) {
+                        if (videoController.value.isInitialized) {
                           return FittedBox(
                             fit: BoxFit.cover,
                             child: SizedBox(

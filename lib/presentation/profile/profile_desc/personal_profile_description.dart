@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../theme/colors.dart';
-import '../edit_profile_screen.dart';
+import '../../../feature/c_profile/presentation/pages/edit_profile_screen.dart';
 
 class PersonalPeofileDesc extends StatelessWidget {
   const PersonalPeofileDesc({super.key});

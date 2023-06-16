@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../theme/colors.dart';
-import '../chat_settings/widget/choose_account_sheet.dart';
 import 'widgets/blocked_bottom_sheet.dart';
 
 class BlockContact {

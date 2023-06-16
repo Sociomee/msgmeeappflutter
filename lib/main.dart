@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
-import 'presentation/msgmee_screen/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
+import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,11 +24,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShoweditbtnCubit())
           ],
           child: MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Msgmee App',
             debugShowCheckedModeBanner: false,
-            // theme: ThemeData.light(),
             theme: AppTheme.lightTheme,
-            // darkTheme: AppTheme.darkTheme,
             home: const SplashScreen(),
           ),
         );

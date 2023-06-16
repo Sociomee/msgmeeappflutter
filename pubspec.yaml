@@ -55,6 +55,7 @@ dependencies:
   flutter_instagram_stories: ^1.0.3
   cached_network_image: ^3.2.3
   video_player: ^2.5.3
+  flutter_svg: ^2.0.7
   
 
 dev_dependencies:

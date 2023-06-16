@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../theme/colors.dart';
 
+// ignore: must_be_immutable
 class BroadcastTextFieldWidget extends StatelessWidget {
   BroadcastTextFieldWidget({
     super.key,
