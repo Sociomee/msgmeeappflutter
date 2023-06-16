@@ -124,88 +124,54 @@ class _ChatScreenState extends State<ChatScreen> {
               controller: _listViewController,
               itemCount: messages.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10, bottom: 50),
+              padding: EdgeInsets.only(top: 10, bottom: 60),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Align(
-                    alignment: (messages[index].messageType == "receiver"
-                        ? Alignment.topLeft
-                        : Alignment.topRight),
-                    child: messages[index].messageType == "receiver"
-                        ? SwipeTo(
-                            onRightSwipe: () {
-                              print('ekjne');
-                            },
-                            child: ListTile(
-                              // tileColor: chattileIndex.contains(index)
-                              //     ? Colors.transparent
-                              //     : CustomTheme.seconderyColor,
-                              onTap: () {
-                                setState(() {
-                                  chattileIndex
-                                      .remove(messages[index].messageContent);
-                                });
-                              },
-                              onLongPress: () {
-                                setState(() {
-                                  chattileIndex
-                                      .add(messages[index].messageContent);
-                                });
-                              },
-                              contentPadding: EdgeInsets.zero,
-                              title: ReceivedMessageWidget(
-                                  message: messages[index].messageContent,
-                                  msgStatus: messages[index].msgStatus,
-                                  time: messages[index].time),
-                            ),
-                          )
-                        : ListTile(
+                return Align(
+                  alignment: (messages[index].messageType == "receiver"
+                      ? Alignment.topLeft
+                      : Alignment.topRight),
+                  child: messages[index].messageType == "receiver"
+                      ? SwipeTo(
+                          onRightSwipe: () {
+                            print('ekjne');
+                          },
+                          child: GestureDetector(
                             onTap: () {
                               setState(() {
                                 chattileIndex
                                     .remove(messages[index].messageContent);
                               });
                             },
-                            onLongPress: () async {
+                            onLongPress: () {
                               setState(() {
                                 chattileIndex
                                     .add(messages[index].messageContent);
                               });
-                              final selectedOption = await showMenu(
-                                context: context,
-                                position: RelativeRect.fromLTRB(0, 0, 0, 0),
-                                items: [
-                                  PopupMenuItem(
-                                    child: Text('Option 1'),
-                                    value: 'Option 1',
-                                  ),
-                                  PopupMenuItem(
-                                    child: Text('Option 2'),
-                                    value: 'Option 2',
-                                  ),
-                                  PopupMenuItem(
-                                    child: Text('Option 3'),
-                                    value: 'Option 3',
-                                  ),
-                                ],
-                              );
-                              if (selectedOption == 'Option 1') {
-                                // Handle Option 1
-                              } else if (selectedOption == 'Option 2') {
-                                // Handle Option 2
-                              } else if (selectedOption == 'Option 3') {
-                                // Handle Option 3
-                              }
                             },
-                            contentPadding: EdgeInsets.zero,
-                            title: SentMessageWidget(
+                            child: ReceivedMessageWidget(
                                 message: messages[index].messageContent,
                                 msgStatus: messages[index].msgStatus,
                                 time: messages[index].time),
                           ),
-                  ),
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              chattileIndex
+                                  .remove(messages[index].messageContent);
+                            });
+                          },
+                          onLongPress: () async {
+                            setState(() {
+                              chattileIndex.add(messages[index].messageContent);
+                            });
+                          },
+                          child: SentMessageWidget(
+                              message: messages[index].messageContent,
+                              msgStatus: messages[index].msgStatus,
+                              time: messages[index].time),
+                        ),
                 );
               },
             ),
@@ -325,12 +291,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
-                tap
-                    ? Positioned(
-                        bottom: 60,
-                        child: SizedBox(
-                            height: 200, width: 150, child: AttachedIcon()))
-                    : Container()
+                Positioned(
+                    bottom: 60,
+                    child: AnimatedContainer(
+                        duration: Duration(milliseconds: 200),
+                        height: tap ? 44 * 6 : 0,
+                        width: 150,
+                        child: AttachedIcon()))
               ],
             ),
           ],

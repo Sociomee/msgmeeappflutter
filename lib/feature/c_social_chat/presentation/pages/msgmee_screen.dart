@@ -123,6 +123,14 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(e.option),
+                                  e.id == 7
+                                      ? Text(
+                                          'No syncing processed yet',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: AppColors.grey),
+                                        )
+                                      : Container(),
                                   SizedBox(height: 10),
                                   e.id == 9
                                       ? Container()
