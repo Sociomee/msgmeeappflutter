@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/helper/nth_character_function.dart';
-import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
+import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
 import '../../../../presentation/widgets/custom_button_widget.dart';
@@ -176,9 +176,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 color: isValid
                     ? AppColors.primaryColor
                     : AppColors.primaryColor.withOpacity(.5)),
-            const SizedBox(
-              height: 48,
-            ),
+            const SizedBox(height: 48),
           ],
         ),
       ),

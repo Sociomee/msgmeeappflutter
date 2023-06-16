@@ -6,8 +6,8 @@ import 'package:msgmee/helper/navigator_function.dart';
 import '../../theme/colors.dart';
 import '../msgmee_screen/msgmee_screen.dart';
 import '../widgets/custom_button_widget.dart';
-import 'widget/bottom_sheet_widget.dart';
-import 'widget/text_field_widget.dart';
+import '../../feature/c_profile/presentation/widgets/bottom_sheet_widget.dart';
+import '../../feature/c_profile/presentation/widgets/text_field_widget.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
   const ProfileSettingScreen({super.key});

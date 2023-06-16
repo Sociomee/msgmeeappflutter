@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 import '../../../theme/colors.dart';
-import '../../profile/widget/bottom_sheet_widget.dart';
-import '../../profile/widget/text_field_widget.dart';
+import '../../../feature/c_profile/presentation/widgets/bottom_sheet_widget.dart';
+import '../../../feature/c_profile/presentation/widgets/text_field_widget.dart';
 import '../../widgets/custom_bottom_model_sheet.dart';
 
 class ReportProblemScreen extends StatefulWidget {

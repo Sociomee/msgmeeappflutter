@@ -4,7 +4,7 @@ import '../../theme/colors.dart';
 import 'profile_desc/widgets/choose_date_of_birth.dart';
 import 'profile_desc/widgets/choose_gender_bottomsheet.dart';
 import 'profile_desc/widgets/choose_interest_bottomsheet.dart';
-import 'widget/text_field_widget.dart';
+import '../../feature/c_profile/presentation/widgets/text_field_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

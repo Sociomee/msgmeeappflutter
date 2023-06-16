@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
+import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import '../../theme/colors.dart';
 import '../blocked_screen/blocked_screen.dart';
 import '../chat_settings/chat_settings_screen.dart';
