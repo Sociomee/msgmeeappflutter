@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 class SmallProfileWidget extends StatelessWidget {
@@ -26,10 +26,10 @@ class SmallProfileWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   border: isMe
                       ? null
-                      : Border.all(color: CustomTheme.primaryColor, width: 2)),
+                      : Border.all(color: AppColors.primaryColor, width: 2)),
               child: CircleAvatar(
                 radius: 30,
-                backgroundColor: CustomTheme.grey,
+                backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(imageUrl),
               ),
             ),
@@ -41,9 +41,8 @@ class SmallProfileWidget extends StatelessWidget {
                       height: 13,
                       width: 13,
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(color: CustomTheme.white, width: 2),
-                          color: CustomTheme.primaryColor,
+                          border: Border.all(color: AppColors.white, width: 2),
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(100)),
                     )
                   : isMe
@@ -56,11 +55,11 @@ class SmallProfileWidget extends StatelessWidget {
                             width: 19,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                                color: CustomTheme.primaryColor,
+                                color: AppColors.primaryColor,
                                 borderRadius: BorderRadius.circular(100)),
                             child: const Icon(
                               Icons.add,
-                              color: CustomTheme.white,
+                              color: AppColors.white,
                               size: 17,
                             ),
                           ),

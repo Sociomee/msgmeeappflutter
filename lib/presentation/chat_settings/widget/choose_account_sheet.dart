@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class OptionsModel {
   final String imageUrl;
@@ -62,8 +62,7 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
         child: Container(
           height: 380.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             children: [
               Container(
@@ -71,7 +70,7 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -87,11 +86,11 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                       children: [
                         Container(
                           color: options[index].isSelected
-                              ? CustomTheme.seconderyColor1
+                              ? AppColors.seconderyColor1
                               : Colors.transparent,
                           child: ListTile(
-                            tileColor: CustomTheme.seconderyColor,
-                            selectedTileColor: CustomTheme.seconderyColor,
+                            tileColor: AppColors.seconderyColor,
+                            selectedTileColor: AppColors.seconderyColor,
                             onTap: () {
                               options[index].isSelected =
                                   !options[index].isSelected;
@@ -99,7 +98,7 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                             },
                             leading: CircleAvatar(
                               radius: 28,
-                              backgroundColor: CustomTheme.grey,
+                              backgroundColor: AppColors.grey,
                               backgroundImage:
                                   NetworkImage(options[index].imageUrl),
                             ),
@@ -113,7 +112,7 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                             subtitle: Text(
                               options[index].subtitle,
                               style: TextStyle(
-                                color: CustomTheme.iconColor,
+                                color: AppColors.iconColor,
                                 fontSize: 11,
                               ),
                             ),
@@ -121,20 +120,18 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                               height: 20,
                               width: 20,
                               decoration: BoxDecoration(
-                                  color: CustomTheme.white,
+                                  color: AppColors.white,
                                   border: Border.all(
-                                      color: CustomTheme.primaryColor,
-                                      width: 1),
+                                      color: AppColors.primaryColor, width: 1),
                                   borderRadius: BorderRadius.circular(100)),
                               child: options[index].isSelected
                                   ? Container(
                                       height: 5,
                                       width: 5,
                                       decoration: BoxDecoration(
-                                          color: CustomTheme.primaryColor,
+                                          color: AppColors.primaryColor,
                                           border: Border.all(
-                                              color: CustomTheme.white,
-                                              width: 3),
+                                              color: AppColors.white, width: 3),
                                           borderRadius:
                                               BorderRadius.circular(100)),
                                     )
@@ -143,7 +140,7 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                           ),
                         ),
                         Divider(
-                          color: CustomTheme.primaryColor,
+                          color: AppColors.primaryColor,
                           height: 0,
                         ),
                       ],
@@ -154,8 +151,8 @@ class _ChooseAccountBottomSheetState extends State<ChooseAccountBottomSheet> {
                   onPressed: () {},
                   child: Text(
                     'Add new account',
-                    style: TextStyle(
-                        color: CustomTheme.primaryColor, fontSize: 16),
+                    style:
+                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
                   )),
               SizedBox(height: 24),
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class OptionsModel {
   final String option;
@@ -37,8 +37,7 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
         child: Container(
           height: 400.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             children: [
               Container(
@@ -46,7 +45,7 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -60,8 +59,8 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                     return Column(
                       children: [
                         ListTile(
-                          tileColor: CustomTheme.seconderyColor,
-                          selectedTileColor: CustomTheme.seconderyColor,
+                          tileColor: AppColors.seconderyColor,
+                          selectedTileColor: AppColors.seconderyColor,
                           onTap: () {
                             options[index].isSelected =
                                 !options[index].isSelected;
@@ -71,19 +70,18 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                           trailing: Checkbox(
                               side: MaterialStateBorderSide.resolveWith(
                                 (states) => BorderSide(
-                                    width: 2.0,
-                                    color: CustomTheme.primaryColor),
+                                    width: 2.0, color: AppColors.primaryColor),
                               ),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(3)),
-                              activeColor: CustomTheme.primaryColor,
+                              activeColor: AppColors.primaryColor,
                               value: options[index].isSelected,
                               onChanged: (w) {}),
                         ),
                         index == options.length - 1
                             ? Container()
                             : Divider(
-                                color: CustomTheme.primaryColor,
+                                color: AppColors.primaryColor,
                                 height: 0,
                               )
                       ],
@@ -91,7 +89,7 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                   }),
               SizedBox(height: 30),
               CustomButtonWidget(
-                  title: 'Ok', color: CustomTheme.primaryColor, ontap: () {}),
+                  title: 'Ok', color: AppColors.primaryColor, ontap: () {}),
             ],
           ),
         ));

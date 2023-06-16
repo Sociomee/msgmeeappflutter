@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class SuggestionWidget extends StatelessWidget {
   SuggestionWidget({super.key});
@@ -21,7 +21,7 @@ class SuggestionWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('Suggestions:', style: TextStyle(color: CustomTheme.grey)),
+              Text('Suggestions:', style: TextStyle(color: AppColors.grey)),
               Text('Next suggestions', style: TextStyle(color: Colors.blue)),
             ],
           ),
@@ -42,7 +42,7 @@ class SuggestionWidget extends StatelessWidget {
                   width: 136,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      border: Border.all(color: CustomTheme.borderColor),
+                      border: Border.all(color: AppColors.borderColor),
                       borderRadius: BorderRadius.circular(5)),
                   child: Text(suggestion[index],
                       style: TextStyle(color: Color(0XFF333333))),

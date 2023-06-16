@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/msgmee_screen/widget/chat_profile_widget.dart';
 import '../../../data/model/all_connections_model.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class AllconnectionsWidget extends StatelessWidget {
   const AllconnectionsWidget({super.key});
@@ -36,7 +36,7 @@ class AllconnectionsWidget extends StatelessWidget {
                     dummyconnections[index].connectionType,
                     style: TextStyle(
                         fontSize: 14,
-                        color: CustomTheme.grey,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500),
                   ),
                 )

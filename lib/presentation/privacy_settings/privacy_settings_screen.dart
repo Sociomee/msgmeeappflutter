@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'widget/bottom_sheet_options.dart';
 
 class PrivacySettingScreen extends StatefulWidget {
@@ -22,10 +22,10 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text(
             'Privacy Setting',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           )),
       body: SingleChildScrollView(
           child: Column(
@@ -49,9 +49,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Last Seen'),
             subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -71,9 +71,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Profile Photo'),
             subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -93,9 +93,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Online Status'),
             subtitle: Text('My contacts except'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -115,9 +115,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Group Privacy'),
             subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -137,9 +137,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Groups'),
             subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           SizedBox(height: 15),
           ListTile(
             title: Text('Read receipts'),
@@ -149,12 +149,12 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
               width: 51,
               child: FlutterSwitch(
                 switchBorder: Border.all(
-                  color: CustomTheme.primaryColor,
+                  color: AppColors.primaryColor,
                   width: 2.0.w,
                 ),
-                activeColor: CustomTheme.primaryColor,
-                inactiveColor: CustomTheme.white,
-                inactiveToggleColor: CustomTheme.primaryColor,
+                activeColor: AppColors.primaryColor,
+                inactiveColor: AppColors.white,
+                inactiveToggleColor: AppColors.primaryColor,
                 width: 51.0.w,
                 height: 26.0.h,
                 toggleSize: 23.0.sp,
@@ -170,7 +170,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             ),
           ),
           SizedBox(height: 15),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -190,9 +190,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Live Location'),
             subtitle: Text('Everyone'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -212,9 +212,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Blocked Contacts'),
             subtitle: Text('56 People'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -234,9 +234,9 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             },
             title: Text('Fingerprint'),
             subtitle: Text('none'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, height: 0, thickness: 1),
+          Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
         ],
       )),
     );

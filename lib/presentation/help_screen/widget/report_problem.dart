@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../../profile/widget/bottom_sheet_widget.dart';
 import '../../profile/widget/text_field_widget.dart';
 import '../../widgets/custom_bottom_model_sheet.dart';
@@ -62,9 +62,9 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text('Report a problem',
-              style: TextStyle(color: CustomTheme.black))),
+              style: TextStyle(color: AppColors.black))),
       body: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
         child: Column(
@@ -82,8 +82,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 15),
                   border: OutlineInputBorder(),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 2, color: CustomTheme.primaryColor)),
+                      borderSide:
+                          BorderSide(width: 2, color: AppColors.primaryColor)),
                   hintText: 'Type your reason (optional)...',
                 ),
                 onChanged: (e) {
@@ -96,14 +96,14 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
               child: Text(
                 'Max $remainchar Characters',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: CustomTheme.black, fontSize: 12),
+                style: TextStyle(color: AppColors.black, fontSize: 12),
               ),
             ),
             Center(
                 child: TextButton(
               child: Text('Add Screenshot',
                   style:
-                      TextStyle(color: CustomTheme.primaryColor, fontSize: 16)),
+                      TextStyle(color: AppColors.primaryColor, fontSize: 16)),
               onPressed: () {
                 //showing bottom model sheet to upload image
                 showModalBottomSheet(
@@ -156,11 +156,11 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                               alignment: Alignment.center,
                               padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.mediaiconColor,
+                                  color: AppColors.mediaiconColor,
                                   borderRadius: BorderRadius.circular(100)),
                               child: Icon(
                                 Icons.remove,
-                                color: CustomTheme.white,
+                                color: AppColors.white,
                                 size: 15,
                               ),
                             ),
@@ -172,12 +172,12 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
             ),
             Spacer(),
             Text('Disclaimer: Learn about how your data will be used. Please ',
-                style: TextStyle(color: CustomTheme.black, fontSize: 12)),
+                style: TextStyle(color: AppColors.black, fontSize: 12)),
             RichText(
               text: TextSpan(children: [
                 TextSpan(
                     text: 'check our',
-                    style: TextStyle(color: CustomTheme.black, fontSize: 12)),
+                    style: TextStyle(color: AppColors.black, fontSize: 12)),
                 TextSpan(
                     text: ' Data Policy',
                     style: TextStyle(color: Colors.blue, fontSize: 12)),
@@ -185,7 +185,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
             ),
             SizedBox(height: 30),
             CustomButtonWidget(
-                title: 'Submit', color: CustomTheme.primaryColor, ontap: () {}),
+                title: 'Submit', color: AppColors.primaryColor, ontap: () {}),
             SizedBox(height: 30)
           ],
         ),

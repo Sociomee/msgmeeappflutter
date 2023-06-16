@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class MessageStatus {
   static var waiting = Icon(
@@ -10,7 +10,7 @@ class MessageStatus {
     height: 14,
     width: 14,
     decoration: BoxDecoration(
-      color: CustomTheme.grey,
+      color: AppColors.grey,
       boxShadow: const [
         BoxShadow(
           color: Colors.grey,
@@ -20,7 +20,7 @@ class MessageStatus {
         ),
       ],
       borderRadius: BorderRadius.circular(100),
-      border: Border.all(color: CustomTheme.white, width: 3),
+      border: Border.all(color: AppColors.white, width: 3),
     ),
   );
 
@@ -28,7 +28,7 @@ class MessageStatus {
     height: 14,
     width: 14,
     decoration: BoxDecoration(
-      color: CustomTheme.white,
+      color: AppColors.white,
       boxShadow: const [
         BoxShadow(
           color: Colors.grey,
@@ -38,14 +38,14 @@ class MessageStatus {
         ),
       ],
       borderRadius: BorderRadius.circular(100),
-      border: Border.all(color: CustomTheme.primaryColor, width: 3),
+      border: Border.all(color: AppColors.primaryColor, width: 3),
     ),
   );
   static var read = Container(
     height: 14,
     width: 14,
     decoration: BoxDecoration(
-      color: CustomTheme.primaryColor,
+      color: AppColors.primaryColor,
       boxShadow: const [
         BoxShadow(
           color: Colors.grey,
@@ -55,7 +55,7 @@ class MessageStatus {
         ),
       ],
       borderRadius: BorderRadius.circular(100),
-      border: Border.all(color: CustomTheme.white, width: 3),
+      border: Border.all(color: AppColors.white, width: 3),
     ),
   );
 }

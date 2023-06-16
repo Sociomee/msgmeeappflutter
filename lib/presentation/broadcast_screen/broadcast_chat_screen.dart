@@ -4,7 +4,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/broadcast_screen/broad_cast_desc_screen.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../data/model/chat_model.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/chat_screen/widgets/attached_icons.dart';
 import '../msgmee_screen/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import '../msgmee_screen/chat_screen/widgets/message_textField.dart';
@@ -47,7 +47,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: InkWell(
             onTap: () {
@@ -59,10 +59,10 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: CustomTheme.seconderyColor1,
+                      color: AppColors.seconderyColor1,
                       boxShadow: [
                         BoxShadow(
-                          color: CustomTheme.lightgrey,
+                          color: AppColors.lightgrey,
                           offset: Offset(0, 0.5),
                           blurRadius: 10,
                           spreadRadius: 2,
@@ -78,12 +78,11 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     Text('Alia, Abriella, Mariana,',
                         style: TextStyle(
                             fontSize: 16,
-                            color: CustomTheme.black,
+                            color: AppColors.black,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 8),
                     Text('Broadcast',
-                        style:
-                            TextStyle(fontSize: 13, color: CustomTheme.grey)),
+                        style: TextStyle(fontSize: 13, color: AppColors.grey)),
                   ],
                 ),
               ],
@@ -108,7 +107,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
               },
               icon: const Icon(
                 Icons.more_vert,
-                color: CustomTheme.black,
+                color: AppColors.black,
               ),
             )
           ],
@@ -125,7 +124,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 width: 69,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: CustomTheme.seconderyColor1,
+                    color: AppColors.seconderyColor1,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text('Today'),
               ),
@@ -139,7 +138,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 50),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: CustomTheme.seconderyColor1,
+                    color: AppColors.seconderyColor1,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
                   'You created a broadcast list with 10 recipients',
@@ -190,7 +189,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     children: [
                       Divider(
                         height: 0,
-                        color: CustomTheme.grey,
+                        color: AppColors.grey,
                       ),
                       Container(
                         padding: EdgeInsets.only(
@@ -215,7 +214,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Image.asset('assets/paper_clip.png'),
@@ -230,11 +229,11 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Icon(Icons.photo_camera_outlined,
-                                    size: 20, color: CustomTheme.iconColor),
+                                    size: 20, color: AppColors.iconColor),
                               ),
                             ),
                             SizedBox(width: 10),
@@ -272,7 +271,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
-                                        color: CustomTheme.lightgrey1,
+                                        color: AppColors.lightgrey1,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Image.asset('assets/attach.png'),
@@ -284,12 +283,11 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
-                                        color: CustomTheme.lightgrey1,
+                                        color: AppColors.lightgrey1,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Icon(Icons.mic_none,
-                                          size: 20,
-                                          color: CustomTheme.iconColor),
+                                          size: 20, color: AppColors.iconColor),
                                     ),
                                   ),
                           ],

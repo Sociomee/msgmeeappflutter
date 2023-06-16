@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class CountryCodeModel {
   final String flagUrl;
@@ -73,18 +73,6 @@ class CountryCodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> languages = [
-      'English',
-      'Deutsch',
-      'Spanish',
-      'Language 4 (native)',
-      'Башҡортса',
-      'Українська',
-      'Yorùbá',
-      '中文',
-      'Кыргызча',
-      'Português'
-    ];
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -103,7 +91,7 @@ class CountryCodeWidget extends StatelessWidget {
             child: Container(
               height: 530.h,
               decoration: BoxDecoration(
-                  color: CustomTheme.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 children: [
@@ -114,7 +102,7 @@ class CountryCodeWidget extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: <BoxShadow>[
                         BoxShadow(
-                            color: CustomTheme.lightgrey,
+                            color: AppColors.lightgrey,
                             blurRadius: 15.0,
                             offset: Offset(0.0, 0.75))
                       ],
@@ -125,7 +113,7 @@ class CountryCodeWidget extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 24),
-                          color: CustomTheme.white,
+                          color: AppColors.white,
                           child: Center(
                             child: Text(
                               'Change Country Code',
@@ -140,19 +128,19 @@ class CountryCodeWidget extends StatelessWidget {
                         TextFormField(
                           decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             prefixIcon: Icon(Icons.search),
                             hintText: 'Search country name or telecode...',
                             hintStyle: TextStyle(
-                                color: CustomTheme.hintTextColor, fontSize: 13),
-                            focusColor: CustomTheme.primaryColor,
+                                color: AppColors.hintTextColor, fontSize: 13),
+                            focusColor: AppColors.primaryColor,
                           ),
                         ),
                       ],
@@ -168,7 +156,7 @@ class CountryCodeWidget extends StatelessWidget {
                               border: Border(
                                 bottom: BorderSide(
                                     width: 1.0,
-                                    color: CustomTheme.seconderyColor),
+                                    color: AppColors.seconderyColor),
                               ),
                             ),
                             child: Padding(
@@ -185,14 +173,14 @@ class CountryCodeWidget extends StatelessWidget {
                                     codeList[index].countryName,
                                     textScaleFactor: 1.0,
                                     style: const TextStyle(
-                                        color: CustomTheme.black, fontSize: 14),
+                                        color: AppColors.black, fontSize: 14),
                                   ),
                                   Spacer(),
                                   Text(
                                     codeList[index].countryCode,
                                     textScaleFactor: 1.0,
                                     style: const TextStyle(
-                                        color: CustomTheme.black,
+                                        color: AppColors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -213,7 +201,7 @@ class CountryCodeWidget extends StatelessWidget {
         width: 90,
         padding: const EdgeInsets.symmetric(horizontal: 3),
         decoration: BoxDecoration(
-            border: Border.all(color: CustomTheme.grey),
+            border: Border.all(color: AppColors.grey),
             borderRadius: BorderRadius.circular(5)),
         child: Row(
           mainAxisSize: MainAxisSize.min,

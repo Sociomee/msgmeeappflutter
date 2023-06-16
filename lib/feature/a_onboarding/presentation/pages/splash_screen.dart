@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:msgmee/presentation/authentication/login_screen.dart';
 
 import 'onboarding_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class CallOptionsModel {
   final String option;
@@ -37,8 +37,7 @@ class CallBottomModelSheet extends StatelessWidget {
         child: Container(
           height: 280.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             children: [
               SizedBox(height: 10),
@@ -49,7 +48,7 @@ class CallBottomModelSheet extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
-                      splashColor: CustomTheme.seconderyColor,
+                      splashColor: AppColors.seconderyColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -58,12 +57,12 @@ class CallBottomModelSheet extends StatelessWidget {
                                 top: 15, bottom: 15, left: 24),
                             child: Text(
                               options[index].option,
-                              style: TextStyle(color: CustomTheme.grey),
+                              style: TextStyle(color: AppColors.grey),
                             ),
                           ),
                           index == options.length - 1
                               ? Container()
-                              : Divider(height: 0, color: CustomTheme.grey)
+                              : Divider(height: 0, color: AppColors.grey)
                         ],
                       ),
                     );

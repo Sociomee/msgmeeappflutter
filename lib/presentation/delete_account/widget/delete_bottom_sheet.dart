@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   const DeleteBottomSheet({super.key});
@@ -16,8 +16,7 @@ class DeleteBottomSheet extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -26,7 +25,7 @@ class DeleteBottomSheet extends StatelessWidget {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -36,7 +35,7 @@ class DeleteBottomSheet extends StatelessWidget {
               Text(
                 'Do you want to really delete your account ?',
                 style: TextStyle(
-                  color: CustomTheme.iconColor,
+                  color: AppColors.iconColor,
                   fontSize: 14,
                 ),
               ),
@@ -45,11 +44,11 @@ class DeleteBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CupertinoButton(
-                      color: CustomTheme.primaryColor,
+                      color: AppColors.primaryColor,
                       child: Text('OK'),
                       onPressed: () {}),
                   CupertinoButton(
-                      color: CustomTheme.grey,
+                      color: AppColors.grey,
                       child: Text('Cancel'),
                       onPressed: () {}),
                 ],

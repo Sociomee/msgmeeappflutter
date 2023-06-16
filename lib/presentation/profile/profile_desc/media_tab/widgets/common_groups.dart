@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../theme/custom_theme.dart';
+import '../../../../../theme/colors.dart';
 
 class CommonGroupsWidget extends StatelessWidget {
   const CommonGroupsWidget({super.key});
@@ -21,7 +21,7 @@ class CommonGroupsWidget extends StatelessWidget {
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               leading: CircleAvatar(
                 radius: 28,
-                backgroundColor: CustomTheme.grey,
+                backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(
                     'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1600'),
               ),
@@ -29,14 +29,14 @@ class CommonGroupsWidget extends StatelessWidget {
               subtitle: Text('Harsh, Sagar, David and 5 others'),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               leading: CircleAvatar(
                 radius: 28,
-                backgroundColor: CustomTheme.grey,
+                backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(
                     'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1600'),
               ),
@@ -44,14 +44,14 @@ class CommonGroupsWidget extends StatelessWidget {
               subtitle: Text('Harsh, Sagar, David and 5 others'),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               leading: CircleAvatar(
                 radius: 28,
-                backgroundColor: CustomTheme.grey,
+                backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(
                     'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1600'),
               ),
@@ -59,14 +59,14 @@ class CommonGroupsWidget extends StatelessWidget {
               subtitle: Text('Harsh, Sagar, David and 5 others'),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               leading: CircleAvatar(
                 radius: 28,
-                backgroundColor: CustomTheme.grey,
+                backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(
                     'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1600'),
               ),
@@ -74,7 +74,7 @@ class CommonGroupsWidget extends StatelessWidget {
               subtitle: Text('Harsh, Sagar, David and 5 others'),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
         ],
       ),
     );

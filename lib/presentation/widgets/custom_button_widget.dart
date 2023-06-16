@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 // ignore: must_be_immutable
 class CustomButtonWidget extends StatelessWidget {
@@ -8,8 +8,8 @@ class CustomButtonWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.color,
-      this.textColor = CustomTheme.white,
-      this.borderColor = CustomTheme.primaryColor,
+      this.textColor = AppColors.white,
+      this.borderColor = AppColors.primaryColor,
       required this.ontap});
   final String title;
   final Color color;

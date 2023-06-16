@@ -86,49 +86,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/msgmee_logo.png
-    - assets/profile_icon.png
-    - assets/camera.png 
-    - assets/call_incoming.png
-    - assets/call_outgoing.png
-    - assets/call_missed.png
-    - assets/call.png
-    - assets/video.png
-    - assets/w_call.png
-    - assets/w_video.png
-    - assets/paper_clip.png
-    - assets/smiley.png
-    - assets/attach.png
-    - assets/msg.png
-    - assets/qr.png
-    - assets/linked_device.png
-    - assets/chrome.png
-    - assets/file.png
-    - assets/audio.png
-    - assets/contact.png
-    - assets/gallery.png
-    - assets/file1.png
-    - assets/audio1.png
-    - assets/contact1.png
-    - assets/media1.png
-    - assets/email.png
-    - assets/msg1.png
-    - assets/sociomee.png
-    - assets/error.png
-    - assets/bg1.png
-    - assets/bg2.png
-    - assets/mobile.png
-    - assets/overlay.png
-    - assets/onboarding1.png
-    - assets/onboarding2.png
-    - assets/onboarding3.png
-    - assets/broadcast.png
-    - assets/comment.png
-    - assets/mic.png
-    - assets/fingerprint.png
-    - assets/fingerprint_success.png
-    - assets/camera1.png
-    - assets/edit1.png
+    - assets/
+   
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

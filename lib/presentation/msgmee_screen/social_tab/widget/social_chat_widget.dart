@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/data/model/dummy_chat_model.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 import '../../chat_screen/chat_screen.dart';
 import '../../widget/chat_profile_widget.dart';
 import '../../widget/profile_image_view_dialog.dart';
@@ -29,7 +29,7 @@ class SocialchatWidget extends StatelessWidget {
                         hasStory: dummyData[index].hasStory,
                       ));
                 },
-                splashColor: CustomTheme.seconderyColor,
+                splashColor: AppColors.seconderyColor,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
@@ -61,7 +61,7 @@ class SocialchatWidget extends StatelessWidget {
                           SizedBox(height: 8),
                           Text(dummyData[index].message,
                               style: TextStyle(
-                                  fontSize: 13, color: CustomTheme.grey)),
+                                  fontSize: 13, color: AppColors.grey)),
                         ],
                       ),
                       Spacer(),
@@ -71,7 +71,7 @@ class SocialchatWidget extends StatelessWidget {
                         children: [
                           Text(dummyData[index].time,
                               style: TextStyle(
-                                  fontSize: 13, color: CustomTheme.grey)),
+                                  fontSize: 13, color: AppColors.grey)),
                           SizedBox(height: 8),
                           dummyData[index].unseenMessage != 0
                               ? Container(
@@ -81,12 +81,12 @@ class SocialchatWidget extends StatelessWidget {
                                       vertical: 3, horizontal: 6),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                      color: CustomTheme.primaryColor,
+                                      color: AppColors.primaryColor,
                                       borderRadius: BorderRadius.circular(100)),
                                   child: Text(
                                       dummyData[index].unseenMessage.toString(),
                                       style: TextStyle(
-                                          color: CustomTheme.white,
+                                          color: AppColors.white,
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold)),
                                 )
@@ -99,7 +99,7 @@ class SocialchatWidget extends StatelessWidget {
               ),
               Divider(
                 height: 0,
-                color: CustomTheme.grey,
+                color: AppColors.grey,
               ),
               // SizedBox(height: 5)
             ],

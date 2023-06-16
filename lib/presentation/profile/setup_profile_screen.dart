@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../theme/custom_theme.dart';
-import '../authentication/cubit/number_validation/number_validation_cubit.dart';
+import '../../feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/msgmee_screen.dart';
 import '../widgets/custom_bottom_model_sheet.dart';
 import '../widgets/custom_button_widget.dart';
@@ -69,34 +69,33 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(6.0),
             child: LinearProgressIndicator(
-              backgroundColor: CustomTheme.white,
+              backgroundColor: AppColors.white,
               valueColor: AlwaysStoppedAnimation<Color>(
                   context.watch<NumberValidationCubit>().state.isvalid
-                      ? CustomTheme.primaryColor
-                      : CustomTheme.white),
+                      ? AppColors.primaryColor
+                      : AppColors.white),
               value: 1.0,
             ),
           ),
-          backgroundColor: CustomTheme.white,
+          backgroundColor: AppColors.white,
           elevation: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: const Icon(Icons.arrow_back_ios, color: AppColors.black)),
           actions: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, right: 10),
               child: Text(
                 'CONTINUE',
                 style: TextStyle(
-                    color:
-                        isvalid ? CustomTheme.primaryColor : CustomTheme.grey),
+                    color: isvalid ? AppColors.primaryColor : AppColors.grey),
               ),
             )
           ],
         ),
-        backgroundColor: CustomTheme.white,
+        backgroundColor: AppColors.white,
         body: ListView(
           children: [
             SizedBox(
@@ -120,7 +119,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                           imageFile != null
                               ? CircleAvatar(
                                   radius: 87,
-                                  backgroundColor: CustomTheme.grey,
+                                  backgroundColor: AppColors.grey,
                                   backgroundImage:
                                       FileImage(File(imageFile!.path)),
                                 )
@@ -170,7 +169,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                       child: const Text(
                         'This will be your display picture, this picture will be visible\n to your connections or contacts.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                        style: TextStyle(color: AppColors.grey, fontSize: 12),
                       ),
                     ),
                     const SizedBox(height: 42),
@@ -215,13 +214,13 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                           'Help your friends to find you on SocioMee with a\n unique Username',
                           textAlign: TextAlign.center,
                           style:
-                              TextStyle(color: CustomTheme.grey, fontSize: 12)),
+                              TextStyle(color: AppColors.grey, fontSize: 12)),
                     ),
                     const SizedBox(height: 60),
                     CustomButtonWidget(
                         borderColor: isvalid
-                            ? CustomTheme.primaryColor
-                            : CustomTheme.seconderyColor,
+                            ? AppColors.primaryColor
+                            : AppColors.seconderyColor,
                         ontap: () {
                           isvalid
                               ? animatedScreenNavigator(context, MsgmeeScreen())
@@ -229,8 +228,8 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                         },
                         title: 'CONTINUE',
                         color: isvalid
-                            ? CustomTheme.primaryColor
-                            : CustomTheme.seconderyColor),
+                            ? AppColors.primaryColor
+                            : AppColors.seconderyColor),
                     const SizedBox(height: 30),
                   ],
                 ),

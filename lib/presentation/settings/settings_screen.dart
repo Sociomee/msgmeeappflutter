@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../blocked_screen/blocked_screen.dart';
 import '../chat_settings/chat_settings_screen.dart';
 import '../delete_account/delete_account_screen.dart';
@@ -94,11 +94,11 @@ class SettingScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           'Settings',
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -108,7 +108,7 @@ class SettingScreen extends StatelessWidget {
             itemCount: options.length,
             itemBuilder: (context, index) {
               return InkWell(
-                splashColor: CustomTheme.seconderyColor1,
+                splashColor: AppColors.seconderyColor1,
                 onTap: options[index].ontap,
                 child: Container(
                   child: Column(
@@ -123,12 +123,12 @@ class SettingScreen extends StatelessWidget {
                           style: TextStyle(
                               color: index == options.length - 1
                                   ? Colors.red
-                                  : CustomTheme.grey),
+                                  : AppColors.grey),
                         ),
                       ),
                       index == options.length - 1
                           ? Container()
-                          : Divider(height: 0, color: CustomTheme.iconColor)
+                          : Divider(height: 0, color: AppColors.iconColor)
                     ],
                   ),
                 ),

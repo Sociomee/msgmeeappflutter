@@ -1,6 +1,6 @@
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class LinksTabScreen extends StatefulWidget {
   const LinksTabScreen({super.key});
@@ -77,14 +77,14 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                 displayDirection:
                                     UIDirection.uiDirectionHorizontal,
                                 cache: Duration(hours: 1),
-                                backgroundColor: CustomTheme.lightgrey1,
+                                backgroundColor: AppColors.lightgrey1,
                                 errorWidget: Container(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   // child: Text('Oops!'),
                                 ),
                                 placeholderWidget: Center(
                                   child: CircularProgressIndicator(
-                                    color: CustomTheme.primaryColor,
+                                    color: AppColors.primaryColor,
                                   ),
                                 ),
                                 errorImage: errorImage,
@@ -131,14 +131,14 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                             link: urls[index],
                             displayDirection: UIDirection.uiDirectionHorizontal,
                             cache: Duration(hours: 1),
-                            backgroundColor: CustomTheme.lightgrey1,
+                            backgroundColor: AppColors.lightgrey1,
                             errorWidget: Container(
-                              color: CustomTheme.lightgrey1,
+                              color: AppColors.lightgrey1,
                               // child: Text('Oops!'),
                             ),
                             placeholderWidget: Center(
                               child: CircularProgressIndicator(
-                                color: CustomTheme.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             errorImage: errorImage,
@@ -164,14 +164,14 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                             link: urls[index],
                             displayDirection: UIDirection.uiDirectionHorizontal,
                             cache: Duration(hours: 1),
-                            backgroundColor: CustomTheme.lightgrey1,
+                            backgroundColor: AppColors.lightgrey1,
                             errorWidget: Container(
-                              color: CustomTheme.lightgrey1,
+                              color: AppColors.lightgrey1,
                               // child: Text('Oops!'),
                             ),
                             placeholderWidget: Center(
                               child: CircularProgressIndicator(
-                                color: CustomTheme.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             errorImage: errorImage,

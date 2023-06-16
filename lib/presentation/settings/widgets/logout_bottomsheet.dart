@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class LogoutOptions {
   final String option;
@@ -33,8 +33,7 @@ class LogOutBottomSheet extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -43,7 +42,7 @@ class LogOutBottomSheet extends StatelessWidget {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -53,7 +52,7 @@ class LogOutBottomSheet extends StatelessWidget {
               Text(
                 'Are you sure to logout',
                 style: TextStyle(
-                  color: CustomTheme.grey,
+                  color: AppColors.grey,
                   fontSize: 12,
                 ),
               ),
@@ -69,14 +68,14 @@ class LogOutBottomSheet extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: index == options.length - 1 ? 25 : 15),
                           color: options[index].isSelected
-                              ? CustomTheme.seconderyColor1
-                              : CustomTheme.white,
+                              ? AppColors.seconderyColor1
+                              : AppColors.white,
                           child: Text(
                             options[index].option,
                             style: TextStyle(
                               color: options[index].isSelected
-                                  ? CustomTheme.primaryColor
-                                  : CustomTheme.black,
+                                  ? AppColors.primaryColor
+                                  : AppColors.black,
                               fontSize: 14,
                             ),
                           ),
@@ -85,7 +84,7 @@ class LogOutBottomSheet extends StatelessWidget {
                             ? Container()
                             : Divider(
                                 height: 0,
-                                color: CustomTheme.seconderyColor,
+                                color: AppColors.seconderyColor,
                               )
                       ],
                     );

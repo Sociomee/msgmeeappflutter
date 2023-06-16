@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class CustomBottomModelSheet extends StatelessWidget {
   const CustomBottomModelSheet(
@@ -38,7 +38,7 @@ class CustomBottomModelSheet extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: CustomTheme.lightgrey,
+                        color: AppColors.lightgrey,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -64,7 +64,7 @@ class CustomBottomModelSheet extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: CustomTheme.white,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(

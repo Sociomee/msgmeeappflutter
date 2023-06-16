@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'widget/invite_contact_screen.dart';
 import 'widget/share_link_bottomSheet.dart';
 
@@ -24,10 +24,10 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text(
             'Syncing and Invite',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           )),
       body: Column(
         children: [
@@ -56,10 +56,10 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               'Share Msgmee link to your connections\nand Contacts',
               style: TextStyle(fontSize: 12),
             ),
-            trailing: Icon(Icons.arrow_forward_ios,
-                color: CustomTheme.grey, size: 15),
+            trailing:
+                Icon(Icons.arrow_forward_ios, color: AppColors.grey, size: 15),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           ListTile(
             onTap: () {},
             title: Text(
@@ -74,12 +74,12 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               width: 51,
               child: FlutterSwitch(
                 switchBorder: Border.all(
-                  color: CustomTheme.primaryColor,
+                  color: AppColors.primaryColor,
                   width: 2.0.w,
                 ),
-                activeColor: CustomTheme.primaryColor,
-                inactiveColor: CustomTheme.white,
-                inactiveToggleColor: CustomTheme.primaryColor,
+                activeColor: AppColors.primaryColor,
+                inactiveColor: AppColors.white,
+                inactiveToggleColor: AppColors.primaryColor,
                 width: 51.0.w,
                 height: 26.0.h,
                 toggleSize: 23.0.sp,
@@ -94,7 +94,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               ),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           ListTile(
             onTap: () {
               screenNavigator(context, InviteContactScreen());
@@ -107,10 +107,10 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               'You can sync your Contact',
               style: TextStyle(fontSize: 12),
             ),
-            trailing: Icon(Icons.arrow_forward_ios,
-                color: CustomTheme.grey, size: 15),
+            trailing:
+                Icon(Icons.arrow_forward_ios, color: AppColors.grey, size: 15),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
         ],
       ),
     );

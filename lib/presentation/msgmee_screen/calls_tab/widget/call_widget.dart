@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/msgmee_screen/calls_tab/widget/delete_calls_bottomsheet.dart';
 import '../../../../data/model/dummy_phone_model.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 import '../../../call_screens/single_call_screen.dart';
 import '../../widget/chat_profile_widget.dart';
 
@@ -33,7 +33,7 @@ class CallWidget extends StatelessWidget {
                         return DeleteCallBottomSheet();
                       });
                 },
-                splashColor: CustomTheme.seconderyColor,
+                splashColor: AppColors.seconderyColor,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -64,8 +64,8 @@ class CallWidget extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: dummyPhoneData[index].calltype == 0
-                                          ? CustomTheme.errorRedColor
-                                          : CustomTheme.grey)),
+                                          ? AppColors.errorRedColor
+                                          : AppColors.grey)),
                             ],
                           ),
                         ],
@@ -77,14 +77,14 @@ class CallWidget extends StatelessWidget {
                         children: [
                           Text(dummyPhoneData[index].time,
                               style: TextStyle(
-                                  fontSize: 13, color: CustomTheme.grey)),
+                                  fontSize: 13, color: AppColors.grey)),
                           SizedBox(height: 13),
                           Row(
                             children: [
                               Image.asset('assets/video.png'),
                               SizedBox(width: 30),
                               InkWell(
-                                  splashColor: CustomTheme.seconderyColor,
+                                  splashColor: AppColors.seconderyColor,
                                   onTap: () {
                                     animatedScreenNavigator(
                                         context,
@@ -101,7 +101,7 @@ class CallWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(height: 0, color: CustomTheme.grey),
+              Divider(height: 0, color: AppColors.grey),
             ],
           );
         });

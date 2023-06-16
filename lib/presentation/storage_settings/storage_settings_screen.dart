@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'network_usage_screen.dart';
 import 'widgets/storage_bottom_sheet.dart';
 
@@ -23,10 +23,10 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+                icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
             title: Text(
               'NetworkUsageScreen',
-              style: TextStyle(color: CustomTheme.black),
+              style: TextStyle(color: AppColors.black),
             )),
         body: Column(
           children: [
@@ -39,7 +39,7 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
               ),
               trailing: Text('8 GB'),
             ),
-            Divider(color: CustomTheme.lightgrey, thickness: 1),
+            Divider(color: AppColors.lightgrey, thickness: 1),
             ListTile(
               onTap: () {
                 screenNavigator(context, NetworkUsageScreen());
@@ -51,13 +51,13 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
               ),
               trailing: Text('8 GB'),
             ),
-            Divider(color: CustomTheme.lightgrey, thickness: 1),
+            Divider(color: AppColors.lightgrey, thickness: 1),
             ListTile(
               onTap: () {},
               title: Text('Clear Cache'),
             ),
             Container(
-              color: CustomTheme.lightgrey1,
+              color: AppColors.lightgrey1,
               child: ListTile(
                 onTap: () {},
                 title: Text(
@@ -86,7 +86,7 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                 'Download over mobile data',
                 style: TextStyle(fontSize: 11),
               ),
-              trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+              trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
             ListTile(
               onTap: () {
@@ -107,7 +107,7 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                 'Download over wi-fi',
                 style: TextStyle(fontSize: 11),
               ),
-              trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+              trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
             ListTile(
               onTap: () {
@@ -128,7 +128,7 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                 'Download over roaming',
                 style: TextStyle(fontSize: 11),
               ),
-              trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+              trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
           ],
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class ChooseDateOfBirthBottomSheet extends StatelessWidget {
   const ChooseDateOfBirthBottomSheet({super.key});
@@ -13,7 +13,7 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -22,7 +22,7 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
               width: 80,
               margin: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
-                  color: CustomTheme.lightgrey,
+                  color: AppColors.lightgrey,
                   borderRadius: BorderRadius.circular(10)),
             ),
             SizedBox(height: 20),
@@ -44,11 +44,10 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
                               hintText: '10',
                               border: OutlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: CustomTheme.lightgrey)),
+                                      BorderSide(color: AppColors.lightgrey)),
                             ),
                           ),
-                          Text('date',
-                              style: TextStyle(color: CustomTheme.grey))
+                          Text('date', style: TextStyle(color: AppColors.grey))
                         ],
                       ),
                     ),
@@ -64,10 +63,9 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
                                 hintText: 'Jan',
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: CustomTheme.lightgrey))),
+                                        color: AppColors.lightgrey))),
                           ),
-                          Text('month',
-                              style: TextStyle(color: CustomTheme.grey))
+                          Text('month', style: TextStyle(color: AppColors.grey))
                         ],
                       ),
                     ),
@@ -83,10 +81,9 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
                                 hintText: '2021',
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: CustomTheme.lightgrey))),
+                                        color: AppColors.lightgrey))),
                           ),
-                          Text('year',
-                              style: TextStyle(color: CustomTheme.grey))
+                          Text('year', style: TextStyle(color: AppColors.grey))
                         ],
                       ),
                     ),

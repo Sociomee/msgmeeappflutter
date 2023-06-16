@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'connect_webpanel_screen.dart';
 
 class LinkedDevicesScreen extends StatelessWidget {
@@ -19,11 +19,11 @@ class LinkedDevicesScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           'Linked Device',
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -43,7 +43,7 @@ class LinkedDevicesScreen extends StatelessWidget {
                   SizedBox(height: 28),
                   CustomButtonWidget(
                       title: 'Scan A QR Code',
-                      color: CustomTheme.primaryColor,
+                      color: AppColors.primaryColor,
                       ontap: () {
                         screenNavigator(context, ConncetWenPanelScreen());
                       }),
@@ -53,26 +53,26 @@ class LinkedDevicesScreen extends StatelessWidget {
                     TextSpan(
                         text: 'Your personal messages will',
                         style: TextStyle(
-                            color: CustomTheme.iconColor, fontSize: 13)),
+                            color: AppColors.iconColor, fontSize: 13)),
                     TextSpan(
                         text: ' end to end encrypted',
                         style: TextStyle(
-                            color: CustomTheme.primaryColor, fontSize: 13)),
+                            color: AppColors.primaryColor, fontSize: 13)),
                     TextSpan(
                         text: ' on all',
                         style: TextStyle(
-                            color: CustomTheme.iconColor, fontSize: 13)),
+                            color: AppColors.iconColor, fontSize: 13)),
                   ])),
                   Text('your devices.',
-                      style: TextStyle(
-                          color: CustomTheme.iconColor, fontSize: 13)),
+                      style:
+                          TextStyle(color: AppColors.iconColor, fontSize: 13)),
                   SizedBox(height: 25),
                 ],
               ),
             ),
             Divider(
               height: 0,
-              color: CustomTheme.grey,
+              color: AppColors.grey,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -89,7 +89,7 @@ class LinkedDevicesScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 40),
                     child: Text('Tap a device to log out',
                         style: TextStyle(
-                            fontSize: 15, color: CustomTheme.iconColor)),
+                            fontSize: 15, color: AppColors.iconColor)),
                   ),
                   Row(
                     children: [
@@ -104,14 +104,14 @@ class LinkedDevicesScreen extends StatelessWidget {
                           SizedBox(height: 4),
                           Text('Last active today at 07:06 pm',
                               style: TextStyle(
-                                  fontSize: 15, color: CustomTheme.iconColor)),
+                                  fontSize: 15, color: AppColors.iconColor)),
                         ],
                       ),
                       Spacer(),
                       Text('Log out',
                           style: TextStyle(
                               fontSize: 15,
-                              color: CustomTheme.errorRedColor,
+                              color: AppColors.errorRedColor,
                               fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -122,7 +122,7 @@ class LinkedDevicesScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               child: Divider(
                 height: 0,
-                color: CustomTheme.grey,
+                color: AppColors.grey,
               ),
             ),
           ],

@@ -4,7 +4,7 @@ import 'package:msgmee/presentation/storage_settings/widgets/mobile_network_tab.
 import 'package:msgmee/presentation/storage_settings/widgets/romaing_network_tab.dart';
 import 'package:msgmee/presentation/storage_settings/widgets/wifi_network_tab.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 class NetworkUsageScreen extends StatefulWidget {
   const NetworkUsageScreen({super.key});
@@ -33,11 +33,11 @@ class _NetworkUsageScreenState extends State<NetworkUsageScreen>
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           'Network Usage',
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -51,9 +51,9 @@ class _NetworkUsageScreenState extends State<NetworkUsageScreen>
               ),
               child: TabBar(
                 indicatorWeight: 3,
-                indicatorColor: CustomTheme.primaryColor,
-                labelColor: CustomTheme.primaryColor,
-                unselectedLabelColor: CustomTheme.grey,
+                indicatorColor: AppColors.primaryColor,
+                labelColor: AppColors.primaryColor,
+                unselectedLabelColor: AppColors.grey,
                 controller: _controller,
                 tabs: [
                   Tab(

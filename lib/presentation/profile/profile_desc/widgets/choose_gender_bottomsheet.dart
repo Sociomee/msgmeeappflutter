@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class Gender {
   final String gender;
@@ -42,7 +42,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -51,7 +51,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
               width: 80,
               margin: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
-                  color: CustomTheme.lightgrey,
+                  color: AppColors.lightgrey,
                   borderRadius: BorderRadius.circular(10)),
             ),
             SizedBox(height: 20),
@@ -74,11 +74,11 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                 side: MaterialStateBorderSide.resolveWith(
                                   (states) => BorderSide(
                                       width: 2.0,
-                                      color: CustomTheme.primaryColor),
+                                      color: AppColors.primaryColor),
                                 ),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(100)),
-                                activeColor: CustomTheme.primaryColor,
+                                activeColor: AppColors.primaryColor,
                                 value: genderList[index].isSelected,
                                 onChanged: (w) {
                                   setState(() {
@@ -91,14 +91,14 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                       ),
                       index == genderList.length - 1
                           ? Container()
-                          : Divider(color: CustomTheme.grey)
+                          : Divider(color: AppColors.grey)
                     ],
                   );
                 }),
             genderList[2].isSelected == true
                 ? Column(
                     children: [
-                      Divider(color: CustomTheme.grey),
+                      Divider(color: AppColors.grey),
                       Padding(
                         padding: const EdgeInsets.only(left: 50),
                         child: Column(
@@ -127,7 +127,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                     .resolveWith(
                                                   (states) => BorderSide(
                                                       width: 2.0,
-                                                      color: CustomTheme
+                                                      color: AppColors
                                                           .primaryColor),
                                                 ),
                                                 shape: RoundedRectangleBorder(
@@ -135,7 +135,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                         BorderRadius.circular(
                                                             100)),
                                                 activeColor:
-                                                    CustomTheme.primaryColor,
+                                                    AppColors.primaryColor,
                                                 value: specialCase[index]
                                                     .isSelected,
                                                 onChanged: (w) {
@@ -150,7 +150,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                         ),
                                       ),
                                       Divider(
-                                        color: CustomTheme.grey,
+                                        color: AppColors.grey,
                                         height: 0,
                                       )
                                     ],

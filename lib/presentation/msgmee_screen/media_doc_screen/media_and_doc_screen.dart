@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../calls_tab/call_tab_screen.dart';
 import '../social_tab/social_tab_screen.dart';
 import 'widget/doc_tab.dart';
@@ -23,11 +23,11 @@ class MediaAndDocScreen extends StatelessWidget {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             profilename,
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
         ),
         body: SingleChildScrollView(
@@ -41,9 +41,9 @@ class MediaAndDocScreen extends StatelessWidget {
                 ),
                 child: TabBar(
                   indicatorWeight: 3,
-                  indicatorColor: CustomTheme.primaryColor,
-                  labelColor: CustomTheme.primaryColor,
-                  unselectedLabelColor: CustomTheme.grey,
+                  indicatorColor: AppColors.primaryColor,
+                  labelColor: AppColors.primaryColor,
+                  unselectedLabelColor: AppColors.grey,
                   tabs: [
                     Tab(
                       icon: Text(

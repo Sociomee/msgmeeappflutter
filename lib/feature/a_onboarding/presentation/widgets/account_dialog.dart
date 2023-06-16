@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class AccountDialogWidget extends StatelessWidget {
   const AccountDialogWidget({super.key});
@@ -18,7 +18,7 @@ class AccountDialogWidget extends StatelessWidget {
           ),
           Text('Choose an account', style: TextStyle(fontSize: 16)),
           Text('to continue with SocioMee', style: TextStyle(fontSize: 10)),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           ListTile(
             leading: Image.asset(
               'assets/sociomee.png',
@@ -36,12 +36,12 @@ class AccountDialogWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: CustomTheme.grey)),
+                  border: Border.all(color: AppColors.grey)),
               child: Row(
                 children: [
                   Icon(
                     Icons.add,
-                    color: CustomTheme.grey,
+                    color: AppColors.grey,
                     size: 20,
                   ),
                   Text('Add account')
@@ -49,7 +49,7 @@ class AccountDialogWidget extends StatelessWidget {
               ),
             ),
           ),
-          Divider(color: CustomTheme.grey),
+          Divider(color: AppColors.grey),
           SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),

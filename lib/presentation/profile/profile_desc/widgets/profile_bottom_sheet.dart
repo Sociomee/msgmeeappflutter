@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class ProfileOptionsModel {
   final String option;
@@ -30,8 +30,7 @@ class ProfileBottomModelSheet extends StatelessWidget {
         child: Container(
           // height: 280.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -43,7 +42,7 @@ class ProfileBottomModelSheet extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
-                      splashColor: CustomTheme.seconderyColor,
+                      splashColor: AppColors.seconderyColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -52,12 +51,12 @@ class ProfileBottomModelSheet extends StatelessWidget {
                                 top: 15, bottom: 15, left: 24),
                             child: Text(
                               options[index].option,
-                              style: TextStyle(color: CustomTheme.grey),
+                              style: TextStyle(color: AppColors.grey),
                             ),
                           ),
                           index == options.length - 1
                               ? Container()
-                              : Divider(height: 0, color: CustomTheme.grey)
+                              : Divider(height: 0, color: AppColors.grey)
                         ],
                       ),
                     );

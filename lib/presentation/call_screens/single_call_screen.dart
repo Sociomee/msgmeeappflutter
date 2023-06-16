@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class SingleCallScreen extends StatelessWidget {
   const SingleCallScreen({super.key, required this.imageUrl});
@@ -17,7 +17,8 @@ class SingleCallScreen extends StatelessWidget {
               Image.network(
                 imageUrl,
                 fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height * 0.9675,
+                height: MediaQuery.of(context).size.height * 0.9675 - 8.5.h,
+                // height: MediaQuery.of(context).size.height,
               ),
               Positioned(bottom: 0, child: Image.asset('assets/overlay.png')),
               Positioned(
@@ -26,7 +27,7 @@ class SingleCallScreen extends StatelessWidget {
                   child: Text(
                     'Anurag',
                     style: TextStyle(
-                        color: CustomTheme.white,
+                        color: AppColors.white,
                         fontSize: 26,
                         fontWeight: FontWeight.bold),
                   )),
@@ -40,8 +41,8 @@ class SingleCallScreen extends StatelessWidget {
                     Text(
                       'Ringing...',
                       style: TextStyle(
-                        color: CustomTheme.white,
-                        fontSize: 16,
+                        color: AppColors.white,
+                        fontSize: 16.r,
                       ),
                     )
                   ],
@@ -55,16 +56,13 @@ class SingleCallScreen extends StatelessWidget {
                     splashColor: Colors.red,
                     onTap: () {},
                     child: Container(
-                      height: 60,
-                      width: 60,
+                      height: 60.w,
+                      width: 60.w,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: CustomTheme.errorRedColor,
+                          color: AppColors.errorRedColor,
                           borderRadius: BorderRadius.circular(100)),
-                      child: Icon(
-                        Icons.phone,
-                        color: CustomTheme.white,
-                      ),
+                      child: Icon(Icons.phone, color: AppColors.white),
                     ),
                   ))
             ],

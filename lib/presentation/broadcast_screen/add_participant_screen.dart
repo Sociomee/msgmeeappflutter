@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/broadcast_screen/broadcast_info.dart';
 import 'package:msgmee/presentation/msgmee_screen/widget/chat_profile_widget.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 import 'widget/filter_dropdown.dart';
 
 class Participants {
@@ -107,11 +107,11 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: CustomTheme.black,
+                  color: AppColors.black,
                 )),
             title: Text(
               'Add Participants',
-              style: TextStyle(color: CustomTheme.black),
+              style: TextStyle(color: AppColors.black),
             ),
             actions: [
               TextButton(
@@ -121,7 +121,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                   },
                   child: Text(
                     'DONE',
-                    style: TextStyle(color: CustomTheme.primaryColor),
+                    style: TextStyle(color: AppColors.primaryColor),
                   ))
             ],
           ),
@@ -136,7 +136,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                     color: Colors.white,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: CustomTheme.grey,
+                          color: AppColors.grey,
                           blurRadius: 15.0,
                           offset: Offset(0.0, 0.75))
                     ],
@@ -148,19 +148,19 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.white),
+                              borderSide: BorderSide(color: AppColors.white),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.white),
+                              borderSide: BorderSide(color: AppColors.white),
                             ),
                             border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.white),
+                              borderSide: BorderSide(color: AppColors.white),
                             ),
                             prefixIcon: Icon(Icons.search),
                             hintText: 'Search....',
-                            hintStyle: TextStyle(
-                                color: CustomTheme.grey, fontSize: 17),
-                            focusColor: CustomTheme.primaryColor,
+                            hintStyle:
+                                TextStyle(color: AppColors.grey, fontSize: 17),
+                            focusColor: AppColors.primaryColor,
                             suffixIcon: IconButton(
                               onPressed: () {
                                 showModalBottomSheet(
@@ -177,7 +177,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                               },
                               icon: Icon(
                                 Icons.tune_outlined,
-                                color: CustomTheme.black,
+                                color: AppColors.black,
                               ),
                             )),
                       ),
@@ -201,16 +201,16 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(blockedUserlist[index].usertype,
-                                  style: TextStyle(color: CustomTheme.grey)),
+                                  style: TextStyle(color: AppColors.grey)),
                               Checkbox(
                                   side: MaterialStateBorderSide.resolveWith(
                                     (states) => BorderSide(
                                         width: 1.0,
-                                        color: CustomTheme.primaryColor),
+                                        color: AppColors.primaryColor),
                                   ),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(3)),
-                                  activeColor: CustomTheme.primaryColor,
+                                  activeColor: AppColors.primaryColor,
                                   value: blockedUserlist[index].isSelected,
                                   onChanged: (w) {
                                     setState(() {

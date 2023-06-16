@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class LanguageChangeOptionWidget extends StatelessWidget {
   const LanguageChangeOptionWidget({super.key});
@@ -38,7 +38,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
             child: Container(
               height: 530.h,
               decoration: BoxDecoration(
-                  color: CustomTheme.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 children: [
@@ -49,7 +49,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: <BoxShadow>[
                         BoxShadow(
-                            color: CustomTheme.grey,
+                            color: AppColors.grey,
                             blurRadius: 15.0,
                             offset: Offset(0.0, 0.75))
                       ],
@@ -60,7 +60,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 24),
-                          color: CustomTheme.white,
+                          color: AppColors.white,
                           child: Center(
                             child: Text(
                               'Change Language',
@@ -75,19 +75,19 @@ class LanguageChangeOptionWidget extends StatelessWidget {
                         TextFormField(
                           decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomTheme.grey),
+                              borderSide: BorderSide(color: AppColors.grey),
                             ),
                             prefixIcon: Icon(Icons.search),
                             hintText: 'Search',
-                            hintStyle: TextStyle(
-                                color: CustomTheme.grey, fontSize: 17),
-                            focusColor: CustomTheme.primaryColor,
+                            hintStyle:
+                                TextStyle(color: AppColors.grey, fontSize: 17),
+                            focusColor: AppColors.primaryColor,
                           ),
                         ),
                       ],
@@ -102,7 +102,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
                             decoration: const BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                    width: 2.0, color: CustomTheme.grey),
+                                    width: 2.0, color: AppColors.grey),
                               ),
                             ),
                             child: Center(
@@ -110,7 +110,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
                                 languages[index],
                                 textScaleFactor: 1.0,
                                 style: const TextStyle(
-                                    color: CustomTheme.black, fontSize: 17),
+                                    color: AppColors.black, fontSize: 17),
                               ),
                             ),
                           );
@@ -128,7 +128,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
           Icon(
             Fontisto.world_o,
             size: 17,
-            color: CustomTheme.black,
+            color: AppColors.black,
           ),
           SizedBox(
             width: 10,
@@ -137,7 +137,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
             textScaleFactor: 1.0,
             'English',
             style: TextStyle(
-              color: CustomTheme.black,
+              color: AppColors.black,
               fontSize: 17,
             ),
           ),
@@ -146,7 +146,7 @@ class LanguageChangeOptionWidget extends StatelessWidget {
           ),
           Icon(
             Icons.keyboard_arrow_down,
-            color: CustomTheme.black,
+            color: AppColors.black,
           )
         ],
       ),

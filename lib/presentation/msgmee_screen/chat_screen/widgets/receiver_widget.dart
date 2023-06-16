@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 import 'custom_shape.dart';
 
 class ReceivedMessageWidget extends StatelessWidget {
@@ -26,7 +26,7 @@ class ReceivedMessageWidget extends StatelessWidget {
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
               child: CustomPaint(
-                painter: CustomShape(CustomTheme.seconderyColor1),
+                painter: CustomShape(AppColors.seconderyColor1),
               ),
             ),
             Flexible(
@@ -34,7 +34,7 @@ class ReceivedMessageWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, left: 14, right: 18, bottom: 5),
                 decoration: BoxDecoration(
-                  color: CustomTheme.seconderyColor1,
+                  color: AppColors.seconderyColor1,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(18),
                     bottomLeft: Radius.circular(18),
@@ -44,8 +44,7 @@ class ReceivedMessageWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(message,
-                        style:
-                            TextStyle(color: CustomTheme.black, fontSize: 14)),
+                        style: TextStyle(color: AppColors.black, fontSize: 14)),
                     SizedBox(height: 2),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -59,7 +58,7 @@ class ReceivedMessageWidget extends StatelessWidget {
                         ),
                         Text(time,
                             style: const TextStyle(
-                                color: CustomTheme.black, fontSize: 10)),
+                                color: AppColors.black, fontSize: 10)),
                       ],
                     )
                   ],

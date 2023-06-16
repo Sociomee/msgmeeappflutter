@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/message_status_widget.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 import 'custom_shape.dart';
 
 class SentMessageWidget extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                       padding: const EdgeInsets.only(
                           top: 10, left: 14, right: 18, bottom: 5),
                       decoration: BoxDecoration(
-                        color: CustomTheme.darkgreen,
+                        color: AppColors.darkgreen,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -83,7 +83,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(CustomTheme.darkgreen)),
+            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
           ],
         ),
       ),

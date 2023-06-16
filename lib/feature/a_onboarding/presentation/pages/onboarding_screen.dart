@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.dart';
+import 'package:msgmee/theme/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'welcome_screen.dart';
-import 'widgets/build_page.dart';
+
+import '../../../../helper/navigator_function.dart';
+import '../widgets/build_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -27,11 +29,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(elevation: 0, actions: [
+          isLastPage
+              ? Container()
+              : TextButton(
+                  onPressed: () {},
+                  child: Text('Skip', style: TextStyle(color: Colors.black)))
+        ]),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 520,
+              height: 390.h,
               child: PageView(
                 controller: pagecontroller,
                 onPageChanged: (index) {
@@ -69,55 +78,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   dotWidth: 7,
                   spacing: 5,
                   dotColor: Colors.grey,
-                  activeDotColor: CustomTheme.primaryColor,
+                  activeDotColor: AppColors.primaryDarkColor,
                 ),
               ),
             ),
             SizedBox(height: 45),
-            isLastPage
-                ? InkWell(
-                    onTap: () {
-                      animatedScreenNavigator(context, WelcomeScreen());
-                    },
-                    child: Container(
-                      height: 49,
-                      width: 116,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: CustomTheme.primaryColor, width: 2),
-                          borderRadius: BorderRadius.circular(25)),
-                      child: Text(
-                        'Get Started',
-                        style: TextStyle(
-                            color: CustomTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  )
-                : InkWell(
-                    onTap: () {
-                      pagecontroller.nextPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut);
-                    },
-                    child: Container(
-                      height: 49,
-                      width: 116,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: CustomTheme.primaryColor, width: 2),
-                          borderRadius: BorderRadius.circular(25)),
-                      child: Text(
-                        isLastPage ? 'Get Started' : 'Next',
-                        style: TextStyle(
-                            color: CustomTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    )),
+            InkWell(
+                onTap: isLastPage
+                    ? () {
+                        animatedScreenNavigator(context, WelcomeScreen());
+                      }
+                    : () {
+                        pagecontroller.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut);
+                      },
+                child: Container(
+                  width: 55,
+                  padding: EdgeInsets.all(12),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border:
+                          Border.all(color: AppColors.primaryColor, width: 2),
+                      borderRadius: BorderRadius.circular(15)),
+                  child:
+                      Icon(Icons.arrow_forward, color: AppColors.primaryColor),
+                )),
           ],
         ),
       ),

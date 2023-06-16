@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../helper/navigator_function.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../../msgmee_screen/media_doc_screen/media_and_doc_screen.dart';
 import '../broadcast_member_screen.dart';
 
@@ -40,7 +40,7 @@ class BroadcastBottomModelSheet extends StatelessWidget {
           child: Container(
             height: 180.h,
             decoration: BoxDecoration(
-                color: CustomTheme.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(25)),
             child: Column(
               children: [
@@ -54,7 +54,7 @@ class BroadcastBottomModelSheet extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: options[index].clickAction,
-                        splashColor: CustomTheme.seconderyColor,
+                        splashColor: AppColors.seconderyColor,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -67,13 +67,13 @@ class BroadcastBottomModelSheet extends StatelessWidget {
                                         top: 15, bottom: 15, left: 24),
                                     child: Text(
                                       options[index].option,
-                                      style: TextStyle(color: CustomTheme.grey),
+                                      style: TextStyle(color: AppColors.grey),
                                     ),
                                   ),
                                   index == options.length - 1
                                       ? Container()
                                       : Divider(
-                                          height: 0, color: CustomTheme.grey)
+                                          height: 0, color: AppColors.grey)
                                 ],
                               ),
                             ),

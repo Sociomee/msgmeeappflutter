@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../theme/custom_theme.dart';
-import '../authentication/cubit/number_validation/number_validation_cubit.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/msgmee_screen.dart';
 import '../widgets/custom_button_widget.dart';
 import 'widget/bottom_sheet_widget.dart';
@@ -60,17 +59,17 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomTheme.white,
+          backgroundColor: AppColors.white,
           elevation: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: const Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text('Profile Settings',
-              style: TextStyle(color: CustomTheme.black)),
+              style: TextStyle(color: AppColors.black)),
         ),
-        backgroundColor: CustomTheme.white,
+        backgroundColor: AppColors.white,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -88,7 +87,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                           imageFile != null
                               ? CircleAvatar(
                                   radius: 87,
-                                  backgroundColor: CustomTheme.grey,
+                                  backgroundColor: AppColors.grey,
                                   backgroundImage:
                                       FileImage(File(imageFile!.path)),
                                 )
@@ -136,14 +135,14 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(height: 20),
                     Center(
                       child: Text('Nina Elle',
-                          style: TextStyle(
-                              color: CustomTheme.black, fontSize: 22)),
+                          style:
+                              TextStyle(color: AppColors.black, fontSize: 22)),
                     ),
                     const SizedBox(height: 20),
                     const Text(
                       'This will be your display picture, this picture will be visible\n to your connections or contacts.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: CustomTheme.grey, fontSize: 12),
+                      style: TextStyle(color: AppColors.grey, fontSize: 12),
                     ),
                     const SizedBox(height: 42),
                     TextFieldWidget(
@@ -186,7 +185,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const Text(
                       'Help your friends to find you on SocioMee with a unique Username',
                       style:
-                          TextStyle(color: CustomTheme.iconColor, fontSize: 12),
+                          TextStyle(color: AppColors.iconColor, fontSize: 12),
                     ),
                     const SizedBox(height: 20),
                     TextFieldWidget(
@@ -200,15 +199,15 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(height: 80),
                     CustomButtonWidget(
                         borderColor: isvalid
-                            ? CustomTheme.primaryColor
-                            : CustomTheme.seconderyColor,
+                            ? AppColors.primaryColor
+                            : AppColors.seconderyColor,
                         ontap: () {
                           isvalid
                               ? screenNavigator(context, MsgmeeScreen())
                               : null;
                         },
                         title: 'SAVE CHANGES',
-                        color: CustomTheme.primaryColor),
+                        color: AppColors.primaryColor),
                     const SizedBox(height: 30),
                   ],
                 ),

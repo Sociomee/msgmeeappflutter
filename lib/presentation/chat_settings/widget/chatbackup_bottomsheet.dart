@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class OptionsModel {
   final String option;
@@ -37,8 +37,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
         child: Container(
           height: 480.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             children: [
               Container(
@@ -46,7 +45,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -60,8 +59,8 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                     return Column(
                       children: [
                         ListTile(
-                          tileColor: CustomTheme.seconderyColor,
-                          selectedTileColor: CustomTheme.seconderyColor,
+                          tileColor: AppColors.seconderyColor,
+                          selectedTileColor: AppColors.seconderyColor,
                           onTap: () {
                             options[index].isSelected =
                                 !options[index].isSelected;
@@ -72,31 +71,31 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                             height: 20,
                             width: 20,
                             decoration: BoxDecoration(
-                                color: CustomTheme.white,
+                                color: AppColors.white,
                                 border: Border.all(
-                                    color: CustomTheme.primaryColor, width: 1),
+                                    color: AppColors.primaryColor, width: 1),
                                 borderRadius: BorderRadius.circular(100)),
                             child: options[index].isSelected
                                 ? Container(
                                     height: 5,
                                     width: 5,
                                     decoration: BoxDecoration(
-                                        color: CustomTheme.primaryColor,
+                                        color: AppColors.primaryColor,
                                         border: Border.all(
-                                            color: CustomTheme.white, width: 3),
+                                            color: AppColors.white, width: 3),
                                         borderRadius:
                                             BorderRadius.circular(100)),
                                   )
                                 : Container(),
                           ),
                         ),
-                        Divider(color: CustomTheme.primaryColor)
+                        Divider(color: AppColors.primaryColor)
                       ],
                     );
                   }),
               SizedBox(height: 30),
               CustomButtonWidget(
-                  title: 'Ok', color: CustomTheme.primaryColor, ontap: () {}),
+                  title: 'Ok', color: AppColors.primaryColor, ontap: () {}),
             ],
           ),
         ));

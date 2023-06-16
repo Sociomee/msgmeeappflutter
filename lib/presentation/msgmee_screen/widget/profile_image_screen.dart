@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class ProfileImageViewScreen extends StatelessWidget {
   const ProfileImageViewScreen(
@@ -17,11 +17,11 @@ class ProfileImageViewScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           profilename,
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
       ),
       body: Center(

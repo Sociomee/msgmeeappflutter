@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/help_screen/widget/report_problem.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 class Help {
   final String option;
@@ -40,9 +40,9 @@ class HelpScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
-          title: Text('Help & Support',
-              style: TextStyle(color: CustomTheme.black))),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+          title:
+              Text('Help & Support', style: TextStyle(color: AppColors.black))),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -64,12 +64,12 @@ class HelpScreen extends StatelessWidget {
                                   TextSpan(
                                       text: 'About',
                                       style: TextStyle(
-                                        color: CustomTheme.black,
+                                        color: AppColors.black,
                                       )),
                                   TextSpan(
                                       text: ' MsgMee',
                                       style: TextStyle(
-                                          color: CustomTheme.black,
+                                          color: AppColors.black,
                                           fontWeight: FontWeight.bold)),
                                 ]),
                               ),
@@ -83,7 +83,7 @@ class HelpScreen extends StatelessWidget {
                             ),
                       index == questionsList.length - 1
                           ? Container()
-                          : Divider(color: CustomTheme.grey)
+                          : Divider(color: AppColors.grey)
                     ],
                   );
                 })

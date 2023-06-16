@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class DeleteCallBottomSheet extends StatelessWidget {
   const DeleteCallBottomSheet({super.key});
@@ -22,7 +22,7 @@ class DeleteCallBottomSheet extends StatelessWidget {
                           fontSize: 16, fontWeight: FontWeight.bold))),
               SizedBox(height: 10),
               Container(child: Text('Delete', style: TextStyle(fontSize: 16))),
-              Divider(color: CustomTheme.grey),
+              Divider(color: AppColors.grey),
               Container(child: Text('Cencel', style: TextStyle(fontSize: 16))),
               SizedBox(height: 20)
             ],

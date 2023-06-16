@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class AppTheme {
   //
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: CustomTheme.white,
+    scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
-      color: CustomTheme.white,
+      color: AppColors.white,
       iconTheme: IconThemeData(
         color: Colors.white,
       ),
       toolbarTextStyle:
-          TextTheme(subtitle1: TextStyle(color: CustomTheme.black)).bodyText2,
+          TextTheme(titleMedium: TextStyle(color: AppColors.black)).bodyMedium,
       titleTextStyle:
-          TextTheme(subtitle1: TextStyle(color: CustomTheme.black)).headline6,
+          TextTheme(titleMedium: TextStyle(color: AppColors.black)).titleLarge,
     ),
     // colorScheme: ColorScheme.light(
     //   primary: Colors.white,
@@ -29,11 +29,11 @@ class AppTheme {
     //   color: Colors.white54,
     // ),
     textTheme: TextTheme(
-      subtitle1: TextStyle(
-        color: CustomTheme.black,
+      titleMedium: TextStyle(
+        color: AppColors.black,
       ),
-      subtitle2: TextStyle(
-        color: CustomTheme.black,
+      titleSmall: TextStyle(
+        color: AppColors.black,
         fontSize: 18.0,
       ),
     ),
@@ -47,9 +47,9 @@ class AppTheme {
         color: Colors.white,
       ),
       toolbarTextStyle:
-          TextTheme(subtitle1: TextStyle(color: CustomTheme.white)).bodyText2,
+          TextTheme(titleMedium: TextStyle(color: AppColors.white)).bodyMedium,
       titleTextStyle:
-          TextTheme(subtitle1: TextStyle(color: CustomTheme.white)).headline6,
+          TextTheme(titleMedium: TextStyle(color: AppColors.white)).titleLarge,
     ),
     colorScheme: ColorScheme.light(
       primary: Colors.black,
@@ -63,11 +63,11 @@ class AppTheme {
       color: Colors.white54,
     ),
     textTheme: TextTheme(
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         color: Colors.white,
         // fontSize: 20.0,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         color: Colors.white70,
         // fontSize: 18.0,
       ),

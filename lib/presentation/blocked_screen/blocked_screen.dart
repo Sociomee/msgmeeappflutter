@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../chat_settings/widget/choose_account_sheet.dart';
 import 'widgets/blocked_bottom_sheet.dart';
 
@@ -48,16 +48,16 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             'Blocked People (03)',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
           actions: [
             TextButton(
               child: Text('Add more people',
-                  style: TextStyle(color: CustomTheme.primaryColor)),
+                  style: TextStyle(color: AppColors.primaryColor)),
               onPressed: () {
                 showModalBottomSheet(
                     isScrollControlled: true,
@@ -94,7 +94,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                   return ListTile(
                     leading: CircleAvatar(
                       radius: 28,
-                      backgroundColor: CustomTheme.grey,
+                      backgroundColor: AppColors.grey,
                       backgroundImage:
                           NetworkImage(blockedList[index].imageUrl),
                     ),
@@ -109,8 +109,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                               Text('Unclocked "${blockedList[index].title}"'),
                               Text(
                                 'Undo',
-                                style:
-                                    TextStyle(color: CustomTheme.primaryColor),
+                                style: TextStyle(color: AppColors.primaryColor),
                               ),
                             ],
                           ),
@@ -125,7 +124,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                             borderRadius: BorderRadius.circular(5)),
                         child: Text(
                           'Unblock',
-                          style: TextStyle(color: CustomTheme.white),
+                          style: TextStyle(color: AppColors.white),
                         ),
                       ),
                     ),
@@ -135,13 +134,13 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
             Center(
               child: Text(
                 'Blocked  people cannot see any activity by you',
-                style: TextStyle(color: CustomTheme.grey),
+                style: TextStyle(color: AppColors.grey),
               ),
             ),
             Center(
                 child: TextButton(
               child: Text('Unblock All',
-                  style: TextStyle(color: CustomTheme.primaryColor)),
+                  style: TextStyle(color: AppColors.primaryColor)),
               onPressed: () {},
             ))
           ],

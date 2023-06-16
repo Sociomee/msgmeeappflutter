@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 class FingerPrintScreen extends StatelessWidget {
   const FingerPrintScreen({super.key});
@@ -13,7 +13,7 @@ class FingerPrintScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text('Fingerprint Lock')),
     );
   }

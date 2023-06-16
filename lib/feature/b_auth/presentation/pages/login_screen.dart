@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/presentation/authentication/widget/number_confirmation_dialog.dart';
+import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import 'package:msgmee/theme/custom_theme.dart';
-import 'cubit/number_validation/number_validation_cubit.dart';
-import 'widget/country_code_bottomsheet.dart';
-import 'widget/language_change_widget.dart';
+import 'package:msgmee/theme/colors.dart';
+import '../cubit/number_validation/number_validation_cubit.dart';
+import '../widgets/country_code_bottomsheet.dart';
+import '../widgets/language_change_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,11 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(6.0),
           child: LinearProgressIndicator(
-            backgroundColor: CustomTheme.white,
+            backgroundColor: AppColors.white,
             valueColor: AlwaysStoppedAnimation<Color>(
                 context.watch<NumberValidationCubit>().state.isvalid
-                    ? CustomTheme.primaryColor
-                    : CustomTheme.white),
+                    ? AppColors.primaryColor
+                    : AppColors.white),
             value: 0.25,
           ),
         ),
@@ -55,8 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
               'CONTINUE',
               style: TextStyle(
                   color: context.watch<NumberValidationCubit>().state.isvalid
-                      ? CustomTheme.primaryColor
-                      : CustomTheme.grey),
+                      ? AppColors.primaryColor
+                      : AppColors.grey),
             ),
           )
         ],
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: OutlineInputBorder(),
                       focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: CustomTheme.primaryColor)),
+                              width: 2, color: AppColors.primaryColor)),
                       hintText: 'Enter your mobile number',
                     ),
                     onTap: () {
@@ -136,8 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButtonWidget(
                 borderColor:
                     context.watch<NumberValidationCubit>().state.isvalid
-                        ? CustomTheme.primaryColor
-                        : CustomTheme.seconderyColor,
+                        ? AppColors.primaryColor
+                        : AppColors.seconderyColor,
                 ontap: () {
                   context.read<NumberValidationCubit>().state.isvalid
                       ? showDialog(
@@ -151,8 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 title: 'CONTINUE',
                 color: context.watch<NumberValidationCubit>().state.isvalid
-                    ? CustomTheme.primaryColor
-                    : CustomTheme.seconderyColor),
+                    ? AppColors.primaryColor
+                    : AppColors.seconderyColor),
             const SizedBox(height: 10),
             textFieldclick
                 ? Container()
@@ -161,10 +161,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <TextSpan>[
                       TextSpan(
                           text: 'By Signing-up, you agree to our ',
-                          style: TextStyle(color: CustomTheme.grey)),
+                          style: TextStyle(color: AppColors.grey)),
                       TextSpan(
                           text: 'Terms & Conditions.',
-                          style: TextStyle(color: CustomTheme.black)),
+                          style: TextStyle(color: AppColors.black)),
                     ],
                   )),
             textFieldclick
@@ -174,16 +174,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <TextSpan>[
                       TextSpan(
                           text: 'By Signing-up, you agree to our ',
-                          style: TextStyle(color: CustomTheme.grey)),
+                          style: TextStyle(color: AppColors.grey)),
                       TextSpan(
                           text: 'Privacy Policy ',
-                          style: TextStyle(color: CustomTheme.black)),
+                          style: TextStyle(color: AppColors.black)),
                     ],
                   )),
             textFieldclick
                 ? Container()
                 : const Text('and Cookies Policy',
-                    style: TextStyle(color: CustomTheme.black)),
+                    style: TextStyle(color: AppColors.black)),
             const SizedBox(height: 20)
           ],
         ),

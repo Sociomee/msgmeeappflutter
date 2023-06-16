@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-class CustomTheme {
+class AppColors {
   //color
   static const Color primaryColor = Color(0XFF81C14B);
   static const Color seconderyColor = Color(0XFFACDAD6);
@@ -21,7 +21,7 @@ class CustomTheme {
   static const Color hintTextColor = Color(0XFF333333);
   static const Color borderColor = Color(0XFFE0E0E0);
   static const Color bottomSheettextColor = Color(0XFF4F4F4F);
-  static const Color msgmeeTextColor = Color(0XFF083A3D);
+  static const Color primaryDarkColor = Color(0XFF083A3D);
 
 //otp pin theme
   static final defaultpintheme = PinTheme(
@@ -32,8 +32,8 @@ class CustomTheme {
       color: Colors.black,
     ),
     decoration: BoxDecoration(
-      color: CustomTheme.white,
-      border: Border.all(color: CustomTheme.grey),
+      color: AppColors.white,
+      border: Border.all(color: AppColors.grey),
       borderRadius: BorderRadius.circular(10),
     ),
   );
@@ -45,8 +45,8 @@ class CustomTheme {
       color: Colors.black,
     ),
     decoration: BoxDecoration(
-      color: CustomTheme.white,
-      border: Border.all(color: CustomTheme.primaryColor),
+      color: AppColors.white,
+      border: Border.all(color: AppColors.primaryColor),
       borderRadius: BorderRadius.circular(10),
     ),
   );

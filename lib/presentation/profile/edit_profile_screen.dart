@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'profile_desc/widgets/choose_date_of_birth.dart';
 import 'profile_desc/widgets/choose_gender_bottomsheet.dart';
 import 'profile_desc/widgets/choose_interest_bottomsheet.dart';
@@ -40,19 +40,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(6.0),
             child: LinearProgressIndicator(
-              backgroundColor: CustomTheme.white,
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(CustomTheme.primaryColor),
+              backgroundColor: AppColors.white,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
               value: 0.5,
             ),
           ),
-          backgroundColor: CustomTheme.white,
+          backgroundColor: AppColors.white,
           elevation: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: const Icon(Icons.arrow_back_ios, color: AppColors.black)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -68,10 +67,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: CustomTheme.white,
+                      color: AppColors.white,
                       boxShadow: [
                         BoxShadow(
-                            color: CustomTheme.lightgrey1,
+                            color: AppColors.lightgrey1,
                             offset: Offset(0, 0.5),
                             blurRadius: 10,
                             spreadRadius: 2),
@@ -185,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Text(
                     'Interest',
                     style: TextStyle(
-                      color: CustomTheme.black,
+                      color: AppColors.black,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -200,11 +199,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       height: 36,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: CustomTheme.primaryColor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         'Sleeping',
-                        style: TextStyle(color: CustomTheme.white),
+                        style: TextStyle(color: AppColors.white),
                       ),
                     ),
                     Container(
@@ -214,11 +213,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       height: 36,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: CustomTheme.primaryColor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         'Photography',
-                        style: TextStyle(color: CustomTheme.white),
+                        style: TextStyle(color: AppColors.white),
                       ),
                     ),
                     Container(
@@ -228,11 +227,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       height: 36,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: CustomTheme.primaryColor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         'Astrology',
-                        style: TextStyle(color: CustomTheme.white),
+                        style: TextStyle(color: AppColors.white),
                       ),
                     ),
                   ],
@@ -241,7 +240,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: CustomButtonWidget(
                       title: 'SAVE',
-                      color: CustomTheme.primaryColor,
+                      color: AppColors.primaryColor,
                       ontap: () {}),
                 )
               ],

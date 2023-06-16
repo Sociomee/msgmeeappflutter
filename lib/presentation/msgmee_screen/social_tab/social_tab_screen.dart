@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/presentation/msgmee_screen/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import 'widget/social_chat_widget.dart';
 import 'widget/social_stoty_widget.dart';
 
@@ -31,11 +31,11 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
                     decoration: BoxDecoration(
-                      color: CustomTheme.white,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                            color: CustomTheme.lightgrey,
+                            color: AppColors.lightgrey,
                             offset: Offset(0, 0.5),
                             blurRadius: 10,
                             spreadRadius: 5),
@@ -51,7 +51,7 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              color: CustomTheme.black),
+                              color: AppColors.black),
                           child: Image.asset('assets/camera1.png'),
                         ),
                         Container(
@@ -62,7 +62,7 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              color: CustomTheme.primaryColor),
+                              color: AppColors.primaryColor),
                           child: Image.asset('assets/edit1.png'),
                         ),
                       ],

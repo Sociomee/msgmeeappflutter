@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/widget/chat_profile_widget.dart';
 
 class Participants {
@@ -105,11 +105,11 @@ class _BroadcastMemberScreenState extends State<BroadcastMemberScreen> {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             'Broadcast Member List',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
         ),
         body: SingleChildScrollView(
@@ -125,7 +125,7 @@ class _BroadcastMemberScreenState extends State<BroadcastMemberScreen> {
                     Text(
                       'Add Participants',
                       style: TextStyle(
-                          color: CustomTheme.primaryColor, fontSize: 16),
+                          color: AppColors.primaryColor, fontSize: 16),
                     )
                   ],
                 ),
@@ -154,7 +154,7 @@ class _BroadcastMemberScreenState extends State<BroadcastMemberScreen> {
                                 ? Text(
                                     'Add',
                                     style: TextStyle(
-                                        color: CustomTheme.primaryColor),
+                                        color: AppColors.primaryColor),
                                   )
                                 : Text(
                                     'Remove',

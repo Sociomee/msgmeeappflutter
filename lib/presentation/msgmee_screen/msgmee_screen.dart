@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/profile/profile_desc/personal_profile_description.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 import 'calls_tab/call_tab_screen.dart';
 import 'calls_tab/widget/call_bottom_model_sheet.dart';
 import 'social_tab/social_tab_screen.dart';
@@ -58,14 +58,14 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                     ? Text(
                         "MsgMee",
                         style: TextStyle(
-                          color: CustomTheme.black,
+                          color: AppColors.black,
                           fontSize: 22,
                         ),
                       )
                     : Text(
                         "Social Calls",
                         style: TextStyle(
-                          color: CustomTheme.black,
+                          color: AppColors.black,
                           fontSize: 22,
                         ),
                       ),
@@ -75,13 +75,13 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
               IconButton(
                   icon: const Icon(
                     Icons.search,
-                    color: CustomTheme.black,
+                    color: AppColors.black,
                   ),
                   onPressed: () {}),
               IconButton(
                   icon: const Icon(
                     Icons.more_vert,
-                    color: CustomTheme.black,
+                    color: AppColors.black,
                   ),
                   onPressed: () {
                     showModalBottomSheet(
@@ -112,9 +112,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                   ),
                   child: TabBar(
                     indicatorWeight: 3,
-                    indicatorColor: CustomTheme.primaryColor,
-                    labelColor: CustomTheme.primaryColor,
-                    unselectedLabelColor: CustomTheme.grey,
+                    indicatorColor: AppColors.primaryColor,
+                    labelColor: AppColors.primaryColor,
+                    unselectedLabelColor: AppColors.grey,
                     controller: _controller,
                     tabs: [
                       Tab(

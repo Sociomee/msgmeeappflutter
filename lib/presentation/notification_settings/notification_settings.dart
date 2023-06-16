@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../privacy_settings/widget/bottom_sheet_options.dart';
 import 'widgets/notification_bottom_sheet.dart';
 import 'widgets/stories_notification_widget.dart';
@@ -26,10 +26,10 @@ class _NotificationSettingsScreenState
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text(
             'Notification & Sound Settings',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           )),
       body: SingleChildScrollView(
           child: Column(
@@ -55,9 +55,9 @@ class _NotificationSettingsScreenState
               'You will hear the system default sound when a\nmessage is sent or received',
               style: TextStyle(fontSize: 11),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -79,9 +79,9 @@ class _NotificationSettingsScreenState
               'You will hear the system default sound when your\nfriend added their stories',
               style: TextStyle(fontSize: 11),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -103,9 +103,9 @@ class _NotificationSettingsScreenState
               'You will hear the system default sound when a\nmessage is sent or received',
               style: TextStyle(fontSize: 11),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -126,19 +126,19 @@ class _NotificationSettingsScreenState
               'You will hear the system default sound when anyone\nmentioned you on story, chats, etc',
               style: TextStyle(fontSize: 11),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             title: Text('Wake Up Notification'),
             trailing: Checkbox(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3)),
-                activeColor: CustomTheme.primaryColor,
+                activeColor: AppColors.primaryColor,
                 value: true,
                 onChanged: (w) {}),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             title: Text('Message preview'),
             subtitle: Text(
@@ -147,12 +147,12 @@ class _NotificationSettingsScreenState
               width: 51,
               child: FlutterSwitch(
                 switchBorder: Border.all(
-                  color: CustomTheme.primaryColor,
+                  color: AppColors.primaryColor,
                   width: 2.0.w,
                 ),
-                activeColor: CustomTheme.primaryColor,
-                inactiveColor: CustomTheme.white,
-                inactiveToggleColor: CustomTheme.primaryColor,
+                activeColor: AppColors.primaryColor,
+                inactiveColor: AppColors.white,
+                inactiveToggleColor: AppColors.primaryColor,
                 width: 51.0.w,
                 height: 26.0.h,
                 toggleSize: 23.0.sp,
@@ -168,7 +168,7 @@ class _NotificationSettingsScreenState
             ),
           ),
           SizedBox(height: 15),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -188,9 +188,9 @@ class _NotificationSettingsScreenState
             title: Text('Group notification'),
             subtitle: Text(
                 'You will hear the system default sound when a\nmessage is sent or received'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
-          Divider(color: CustomTheme.lightgrey, thickness: 1),
+          Divider(color: AppColors.lightgrey, thickness: 1),
           ListTile(
             onTap: () {
               showModalBottomSheet(
@@ -208,7 +208,7 @@ class _NotificationSettingsScreenState
             title: Text('Call notification'),
             subtitle: Text(
                 'You will hear the system default sound when a\nmessage is sent or received'),
-            trailing: Icon(Icons.arrow_forward_ios, color: CustomTheme.grey),
+            trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
         ],
       )),

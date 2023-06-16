@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../edit_profile_screen.dart';
 
 class PersonalPeofileDesc extends StatelessWidget {
@@ -17,7 +17,7 @@ class PersonalPeofileDesc extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -43,8 +43,7 @@ class PersonalPeofileDesc extends StatelessWidget {
                           },
                           child: Text('Edit',
                               style: TextStyle(
-                                  fontSize: 16,
-                                  color: CustomTheme.primaryColor)),
+                                  fontSize: 16, color: AppColors.primaryColor)),
                         )
                       ],
                     ),
@@ -59,10 +58,10 @@ class PersonalPeofileDesc extends StatelessWidget {
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: CustomTheme.white,
+                            color: AppColors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: CustomTheme.lightgrey,
+                                color: AppColors.lightgrey,
                                 offset: Offset(0, 0.5),
                                 blurRadius: 10,
                                 spreadRadius: 2,
@@ -71,7 +70,7 @@ class PersonalPeofileDesc extends StatelessWidget {
                           ),
                           child: CircleAvatar(
                             radius: 50,
-                            backgroundColor: CustomTheme.grey,
+                            backgroundColor: AppColors.grey,
                             backgroundImage: NetworkImage(
                                 'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600'),
                           ),
@@ -110,7 +109,7 @@ class PersonalPeofileDesc extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey, thickness: 5),
+              Divider(color: AppColors.lightgrey, thickness: 5),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -125,7 +124,7 @@ class PersonalPeofileDesc extends StatelessWidget {
                                 fontSize: 16, fontWeight: FontWeight.w500)),
                         Text('Edit',
                             style: TextStyle(
-                                fontSize: 16, color: CustomTheme.primaryColor))
+                                fontSize: 16, color: AppColors.primaryColor))
                       ],
                     ),
                     SizedBox(height: 10),
@@ -139,7 +138,7 @@ class PersonalPeofileDesc extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey1, thickness: 2),
+              Divider(color: AppColors.lightgrey1, thickness: 2),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
@@ -161,13 +160,13 @@ class PersonalPeofileDesc extends StatelessWidget {
                                 TextSpan(
                                     text: 'Socio',
                                     style: TextStyle(
-                                        color: CustomTheme.msgmeeTextColor,
+                                        color: AppColors.primaryDarkColor,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
                                     text: 'Mee',
                                     style: TextStyle(
-                                        color: CustomTheme.primaryColor,
+                                        color: AppColors.primaryColor,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold))
                               ]),
@@ -176,69 +175,69 @@ class PersonalPeofileDesc extends StatelessWidget {
                         ),
                         Text('Link',
                             style: TextStyle(
-                                fontSize: 16, color: CustomTheme.primaryColor))
+                                fontSize: 16, color: AppColors.primaryColor))
                       ],
                     ),
                     SizedBox(height: 8),
                     Text(
                       'Link your sociomee account to sync all connections',
-                      style: TextStyle(fontSize: 12, color: CustomTheme.grey),
+                      style: TextStyle(fontSize: 12, color: AppColors.grey),
                     )
                   ],
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Your Connections (128)',
-                  style: TextStyle(color: CustomTheme.bottomSheettextColor),
+                  style: TextStyle(color: AppColors.bottomSheettextColor),
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Privacy Settings',
-                  style: TextStyle(color: CustomTheme.bottomSheettextColor),
+                  style: TextStyle(color: AppColors.bottomSheettextColor),
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Messanger Settings',
-                  style: TextStyle(color: CustomTheme.bottomSheettextColor),
+                  style: TextStyle(color: AppColors.bottomSheettextColor),
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Notification Settings',
-                  style: TextStyle(color: CustomTheme.bottomSheettextColor),
+                  style: TextStyle(color: AppColors.bottomSheettextColor),
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Log Out',
-                  style: TextStyle(color: CustomTheme.bottomSheettextColor),
+                  style: TextStyle(color: AppColors.bottomSheettextColor),
                 ),
               ),
-              Divider(color: CustomTheme.lightgrey),
+              Divider(color: AppColors.lightgrey),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 child: Text(
                   'Delete Account',
-                  style: TextStyle(color: CustomTheme.errorRedColor),
+                  style: TextStyle(color: AppColors.errorRedColor),
                 ),
               ),
             ],

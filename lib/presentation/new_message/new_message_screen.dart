@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'widget/all_connections_widget.dart';
 import 'widget/bottom_options_widget.dart';
 import 'widget/invite_friends_list.dart';
@@ -26,18 +26,18 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           'New message',
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.more_vert,
-              color: CustomTheme.black,
+              color: AppColors.black,
             ),
           )
         ],
@@ -55,7 +55,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                 children: [
                   Icon(
                     Icons.search,
-                    color: CustomTheme.grey,
+                    color: AppColors.grey,
                   ),
                   SizedBox(
                     width: 26,
@@ -88,7 +88,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
             ),
             Divider(
               height: 0,
-              color: CustomTheme.grey,
+              color: AppColors.grey,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),

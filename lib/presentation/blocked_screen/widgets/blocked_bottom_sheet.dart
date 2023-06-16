@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class BlockedUser {
   final String username;
@@ -51,7 +51,7 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
       child: Container(
         // height: 380.h,
         decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -60,7 +60,7 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
               width: 80,
               margin: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
-                  color: CustomTheme.lightgrey,
+                  color: AppColors.lightgrey,
                   borderRadius: BorderRadius.circular(10)),
             ),
             SizedBox(height: 20),
@@ -73,18 +73,18 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                 children: [
                   Text(
                     'Select All',
-                    style: TextStyle(
-                        color: CustomTheme.primaryColor, fontSize: 16),
+                    style:
+                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
                   ),
                   Text(
                     'Block Selected',
-                    style: TextStyle(
-                        color: CustomTheme.primaryColor, fontSize: 16),
+                    style:
+                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
                   ),
                 ],
               ),
             ),
-            Divider(color: CustomTheme.grey),
+            Divider(color: AppColors.grey),
             ListView.builder(
                 shrinkWrap: true,
                 itemCount: blockedUserlist.length,
@@ -96,13 +96,12 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           color: index % 2 == 0
-                              ? CustomTheme.darkgreen
-                              : CustomTheme.blue,
+                              ? AppColors.darkgreen
+                              : AppColors.blue,
                           borderRadius: BorderRadius.circular(100)),
                       child: Text(
                         blockedUserlist[index].username[0],
-                        style:
-                            TextStyle(color: CustomTheme.white, fontSize: 20),
+                        style: TextStyle(color: AppColors.white, fontSize: 20),
                       ),
                     ),
                     title: Text(blockedUserlist[index].username),
@@ -111,12 +110,12 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                       children: [
                         Text(
                           blockedUserlist[index].usertype,
-                          style: TextStyle(color: CustomTheme.grey),
+                          style: TextStyle(color: AppColors.grey),
                         ),
                         Checkbox(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(3)),
-                            activeColor: CustomTheme.primaryColor,
+                            activeColor: AppColors.primaryColor,
                             value: blockedUserlist[index].isSelected,
                             onChanged: (w) {
                               setState(() {

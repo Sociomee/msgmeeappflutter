@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../../msgmee_screen/media_doc_screen/widget/doc_tab.dart';
 import '../../msgmee_screen/media_doc_screen/widget/links_tab.dart';
 import 'media_tab/media_tab.dart';
@@ -29,7 +29,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
+                icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
             actions: [
               IconButton(
                   onPressed: () {
@@ -45,7 +45,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                           return ProfileBottomModelSheet();
                         });
                   },
-                  icon: Icon(Icons.more_vert, color: CustomTheme.black))
+                  icon: Icon(Icons.more_vert, color: AppColors.black))
             ],
           ),
           body: SingleChildScrollView(
@@ -59,7 +59,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                       children: [
                         CircleAvatar(
                             radius: 80,
-                            backgroundColor: CustomTheme.grey,
+                            backgroundColor: AppColors.grey,
                             backgroundImage: NetworkImage(imageUrl)),
                         isOnline
                             ? Row(
@@ -69,14 +69,14 @@ class OtherPersonProfileDescription extends StatelessWidget {
                                     height: 8,
                                     width: 8,
                                     decoration: BoxDecoration(
-                                        color: CustomTheme.primaryColor,
+                                        color: AppColors.primaryColor,
                                         borderRadius:
                                             BorderRadius.circular(100)),
                                   ),
                                   SizedBox(width: 5),
                                   Text('online',
                                       style: TextStyle(
-                                          color: CustomTheme.primaryColor))
+                                          color: AppColors.primaryColor))
                                 ],
                               )
                             : Row(
@@ -86,14 +86,14 @@ class OtherPersonProfileDescription extends StatelessWidget {
                                     height: 8,
                                     width: 8,
                                     decoration: BoxDecoration(
-                                        color: CustomTheme.grey,
+                                        color: AppColors.grey,
                                         borderRadius:
                                             BorderRadius.circular(100)),
                                   ),
                                   SizedBox(width: 5),
                                   Text('offline',
                                       style: TextStyle(
-                                          color: CustomTheme.primaryColor))
+                                          color: AppColors.primaryColor))
                                 ],
                               ),
                         Text('Henna Akhtar', style: TextStyle(fontSize: 18)),
@@ -103,7 +103,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                   ),
                   SizedBox(height: 32),
                   OptionsButtomWidgets(),
-                  Divider(color: CustomTheme.grey),
+                  Divider(color: AppColors.grey),
                   Padding(
                     padding: const EdgeInsets.only(left: 14),
                     child: Text(
@@ -120,9 +120,9 @@ class OtherPersonProfileDescription extends StatelessWidget {
                     ),
                     child: TabBar(
                       indicatorWeight: 3,
-                      indicatorColor: CustomTheme.primaryColor,
-                      labelColor: CustomTheme.primaryColor,
-                      unselectedLabelColor: CustomTheme.grey,
+                      indicatorColor: AppColors.primaryColor,
+                      labelColor: AppColors.primaryColor,
+                      unselectedLabelColor: AppColors.grey,
                       tabs: [
                         Tab(
                           icon: Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class DocTabScreen extends StatelessWidget {
   const DocTabScreen({super.key});
@@ -26,7 +26,7 @@ class DocTabScreen extends StatelessWidget {
                     SizedBox(width: 16),
                     Icon(
                       Icons.insert_drive_file_outlined,
-                      color: CustomTheme.primaryColor,
+                      color: AppColors.primaryColor,
                       size: 40,
                     ),
                     SizedBox(width: 16),
@@ -42,13 +42,13 @@ class DocTabScreen extends StatelessWidget {
                     Spacer(),
                     Text(
                       '4:28 pm',
-                      style: TextStyle(color: CustomTheme.grey),
+                      style: TextStyle(color: AppColors.grey),
                     ),
                     SizedBox(width: 27),
                   ],
                 ),
                 Divider(
-                  color: CustomTheme.grey,
+                  color: AppColors.grey,
                 ),
                 Padding(
                   padding:
@@ -69,7 +69,7 @@ class DocTabScreen extends StatelessWidget {
                                 SizedBox(width: 16),
                                 Icon(
                                   Icons.insert_drive_file_outlined,
-                                  color: CustomTheme.primaryColor,
+                                  color: AppColors.primaryColor,
                                   size: 40,
                                 ),
                                 SizedBox(width: 16),
@@ -86,14 +86,14 @@ class DocTabScreen extends StatelessWidget {
                                 Spacer(),
                                 Text(
                                   '4:28 pm',
-                                  style: TextStyle(color: CustomTheme.grey),
+                                  style: TextStyle(color: AppColors.grey),
                                 ),
                                 SizedBox(width: 27),
                               ],
                             ),
                           ),
                           Divider(
-                            color: CustomTheme.grey,
+                            color: AppColors.grey,
                           ),
                         ],
                       );
@@ -117,7 +117,7 @@ class DocTabScreen extends StatelessWidget {
                                 SizedBox(width: 16),
                                 Icon(
                                   Icons.insert_drive_file_outlined,
-                                  color: CustomTheme.primaryColor,
+                                  color: AppColors.primaryColor,
                                   size: 40,
                                 ),
                                 SizedBox(width: 16),
@@ -134,14 +134,14 @@ class DocTabScreen extends StatelessWidget {
                                 Spacer(),
                                 Text(
                                   '30/12/2021',
-                                  style: TextStyle(color: CustomTheme.grey),
+                                  style: TextStyle(color: AppColors.grey),
                                 ),
                                 SizedBox(width: 27),
                               ],
                             ),
                           ),
                           Divider(
-                            color: CustomTheme.grey,
+                            color: AppColors.grey,
                           ),
                         ],
                       );
@@ -165,7 +165,7 @@ class DocTabScreen extends StatelessWidget {
                                 SizedBox(width: 16),
                                 Icon(
                                   Icons.insert_drive_file_outlined,
-                                  color: CustomTheme.primaryColor,
+                                  color: AppColors.primaryColor,
                                   size: 40,
                                 ),
                                 SizedBox(width: 16),
@@ -182,14 +182,14 @@ class DocTabScreen extends StatelessWidget {
                                 Spacer(),
                                 Text(
                                   '25/11/2021',
-                                  style: TextStyle(color: CustomTheme.grey),
+                                  style: TextStyle(color: AppColors.grey),
                                 ),
                                 SizedBox(width: 27),
                               ],
                             ),
                           ),
                           Divider(
-                            color: CustomTheme.grey,
+                            color: AppColors.grey,
                           ),
                         ],
                       );
@@ -213,7 +213,7 @@ class DocTabScreen extends StatelessWidget {
                                 SizedBox(width: 16),
                                 Icon(
                                   Icons.insert_drive_file_outlined,
-                                  color: CustomTheme.primaryColor,
+                                  color: AppColors.primaryColor,
                                   size: 40,
                                 ),
                                 SizedBox(width: 16),
@@ -230,14 +230,14 @@ class DocTabScreen extends StatelessWidget {
                                 Spacer(),
                                 Text(
                                   '4:28 pm',
-                                  style: TextStyle(color: CustomTheme.grey),
+                                  style: TextStyle(color: AppColors.grey),
                                 ),
                                 SizedBox(width: 27),
                               ],
                             ),
                           ),
                           Divider(
-                            color: CustomTheme.grey,
+                            color: AppColors.grey,
                           ),
                         ],
                       );

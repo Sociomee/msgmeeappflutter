@@ -7,7 +7,7 @@ import 'package:msgmee/presentation/msgmee_screen/chat_screen/widgets/sender_wid
 import 'package:msgmee/presentation/profile/profile_desc/other_person_profile_description.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../data/model/chat_model.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../widget/chat_profile_widget.dart';
 import 'widgets/message_textField.dart';
 
@@ -54,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: GestureDetector(
             onTap: () {
@@ -80,13 +80,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     Text(widget.name,
                         style: TextStyle(
                           fontSize: 16,
-                          color: CustomTheme.black,
+                          color: AppColors.black,
                           fontWeight: FontWeight.w500,
                         )),
                     SizedBox(height: 8),
                     Text(widget.isOnline ? 'Active Now' : '',
-                        style:
-                            TextStyle(fontSize: 13, color: CustomTheme.grey)),
+                        style: TextStyle(fontSize: 13, color: AppColors.grey)),
                   ],
                 ),
               ],
@@ -114,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
               },
               icon: const Icon(
                 Icons.more_vert,
-                color: CustomTheme.black,
+                color: AppColors.black,
               ),
             )
           ],
@@ -219,7 +218,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       Divider(
                         height: 0,
-                        color: CustomTheme.grey,
+                        color: AppColors.grey,
                       ),
                       Container(
                         padding: EdgeInsets.only(
@@ -244,7 +243,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Image.asset('assets/paper_clip.png'),
@@ -259,11 +258,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Icon(Icons.photo_camera_outlined,
-                                    size: 20, color: CustomTheme.iconColor),
+                                    size: 20, color: AppColors.iconColor),
                               ),
                             ),
                             SizedBox(width: 10),
@@ -301,7 +300,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
-                                        color: CustomTheme.lightgrey1,
+                                        color: AppColors.lightgrey1,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Image.asset('assets/attach.png'),
@@ -313,12 +312,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
-                                        color: CustomTheme.lightgrey1,
+                                        color: AppColors.lightgrey1,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Icon(Icons.mic_none,
-                                          size: 20,
-                                          color: CustomTheme.iconColor),
+                                          size: 20, color: AppColors.iconColor),
                                     ),
                                   ),
                           ],

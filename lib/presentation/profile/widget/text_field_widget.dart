@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   TextFieldWidget({
@@ -29,26 +29,26 @@ class TextFieldWidget extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: CustomTheme.black, fontSize: 14, fontWeight: textWeight),
+              color: AppColors.black, fontSize: 14, fontWeight: textWeight),
         ),
         const SizedBox(height: 12),
         TextFormField(
           onTap: onTap,
           onChanged: onChanged,
           controller: controller,
-          cursorColor: CustomTheme.primaryColor,
+          cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 1, color: CustomTheme.borderColor)),
+                      BorderSide(width: 1, color: AppColors.borderColor)),
               border: OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 2, color: CustomTheme.borderColor)),
+                      BorderSide(width: 2, color: AppColors.borderColor)),
               focusedBorder: const OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 2, color: CustomTheme.primaryColor)),
+                      BorderSide(width: 2, color: AppColors.primaryColor)),
               hintText: hintText,
-              hintStyle: const TextStyle(color: CustomTheme.lightgrey)),
+              hintStyle: const TextStyle(color: AppColors.lightgrey)),
         ),
         showchar!
             ? Padding(
@@ -56,7 +56,7 @@ class TextFieldWidget extends StatelessWidget {
                 child: Text(
                   'Max $remainChar Characters',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: CustomTheme.black, fontSize: 12),
+                  style: TextStyle(color: AppColors.black, fontSize: 12),
                 ),
               )
             : Container(),

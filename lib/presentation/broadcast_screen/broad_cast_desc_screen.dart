@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/broadcast_screen/broadcast_info.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/widget/chat_profile_widget.dart';
 
 class Participants {
@@ -109,11 +109,11 @@ class _BroadCastDescriptionScreenState
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             'Broadcast Info',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
           actions: [
             TextButton(
@@ -126,7 +126,7 @@ class _BroadCastDescriptionScreenState
                 },
                 child: Text(
                   'Edit',
-                  style: TextStyle(color: CustomTheme.primaryColor),
+                  style: TextStyle(color: AppColors.primaryColor),
                 ))
           ],
         ),
@@ -151,7 +151,7 @@ class _BroadCastDescriptionScreenState
                     ),
                   ]),
             ),
-            Divider(color: CustomTheme.lightgrey, thickness: 2, height: 50),
+            Divider(color: AppColors.lightgrey, thickness: 2, height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
@@ -161,7 +161,7 @@ class _BroadCastDescriptionScreenState
                       Spacer(),
                       Text(
                         'Add more participants',
-                        style: TextStyle(color: CustomTheme.primaryColor),
+                        style: TextStyle(color: AppColors.primaryColor),
                       )
                     ],
                   ),
@@ -172,18 +172,18 @@ class _BroadCastDescriptionScreenState
                             EdgeInsets.symmetric(vertical: 5, horizontal: 12),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 1, color: CustomTheme.borderColor)),
+                                width: 1, color: AppColors.borderColor)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 2, color: CustomTheme.borderColor)),
+                                width: 2, color: AppColors.borderColor)),
                         focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 2, color: CustomTheme.primaryColor)),
+                                width: 2, color: AppColors.primaryColor)),
                         hintText: 'Search Participants...',
                         hintStyle: TextStyle(fontSize: 12),
                         suffixIcon: Icon(
                           Icons.search,
-                          color: CustomTheme.grey,
+                          color: AppColors.grey,
                         )),
                   ),
                   SizedBox(height: 10),
@@ -208,7 +208,7 @@ class _BroadCastDescriptionScreenState
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(blockedUserlist[index].usertype,
-                                    style: TextStyle(color: CustomTheme.grey))
+                                    style: TextStyle(color: AppColors.grey))
                               ],
                             ),
                           ),
@@ -221,7 +221,7 @@ class _BroadCastDescriptionScreenState
               height: 62,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 20),
-              color: CustomTheme.lightgrey1,
+              color: AppColors.lightgrey1,
               alignment: Alignment.center,
               child: Text(
                 'Delete Broadcast',

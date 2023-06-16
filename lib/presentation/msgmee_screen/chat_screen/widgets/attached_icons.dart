@@ -1,23 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 List<CustomIcons> icons = [
   CustomIcons(
       icons: 'assets/audio.png',
-      color: CustomTheme.audioiconColor,
+      color: AppColors.audioiconColor,
       title: 'Audio'),
   CustomIcons(
       icons: 'assets/contact.png',
-      color: CustomTheme.primaryColor,
+      color: AppColors.primaryColor,
       title: 'Contact'),
   CustomIcons(
       icons: 'assets/gallery.png',
-      color: CustomTheme.mediaiconColor,
+      color: AppColors.mediaiconColor,
       title: 'Media'),
   CustomIcons(
       icons: 'assets/file.png',
-      color: CustomTheme.dociconColor,
+      color: AppColors.dociconColor,
       title: 'Document'),
 ];
 
@@ -60,7 +60,7 @@ class AttachedIcon extends StatelessWidget {
                   ),
                   Text(
                     icons[index].title,
-                    style: TextStyle(color: CustomTheme.black),
+                    style: TextStyle(color: AppColors.black),
                   ),
                 ],
               ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
 
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import 'widget/delete_bottom_sheet.dart';
 
 class DeleterAccountScreen extends StatelessWidget {
@@ -18,11 +18,11 @@ class DeleterAccountScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         title: Text(
           'Delate my account',
-          style: TextStyle(color: CustomTheme.black),
+          style: TextStyle(color: AppColors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -46,7 +46,7 @@ class DeleterAccountScreen extends StatelessWidget {
                         Text(
                           'Deleting your account will:',
                           style: TextStyle(
-                              color: CustomTheme.errorRedColor, fontSize: 18),
+                              color: AppColors.errorRedColor, fontSize: 18),
                         )
                       ],
                     ),
@@ -59,7 +59,7 @@ class DeleterAccountScreen extends StatelessWidget {
                             height: 6,
                             width: 6,
                             decoration: BoxDecoration(
-                                color: CustomTheme.iconColor,
+                                color: AppColors.iconColor,
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
@@ -76,7 +76,7 @@ class DeleterAccountScreen extends StatelessWidget {
                             height: 6,
                             width: 6,
                             decoration: BoxDecoration(
-                                color: CustomTheme.iconColor,
+                                color: AppColors.iconColor,
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
@@ -93,7 +93,7 @@ class DeleterAccountScreen extends StatelessWidget {
                             height: 6,
                             width: 6,
                             decoration: BoxDecoration(
-                                color: CustomTheme.iconColor,
+                                color: AppColors.iconColor,
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
@@ -119,10 +119,10 @@ class DeleterAccountScreen extends StatelessWidget {
               height: 82,
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
-              color: CustomTheme.lightgrey,
+              color: AppColors.lightgrey,
               child: Text(
                 'To deleted your account, confirm your country code\nand enter your phone number ',
-                style: TextStyle(color: CustomTheme.black, fontSize: 14),
+                style: TextStyle(color: AppColors.black, fontSize: 14),
               ),
             ),
             SizedBox(height: 20),
@@ -165,9 +165,9 @@ class DeleterAccountScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: CustomButtonWidget(
-                    borderColor: CustomTheme.errorRedColor,
+                    borderColor: AppColors.errorRedColor,
                     title: 'Delate my account',
-                    color: CustomTheme.errorRedColor,
+                    color: AppColors.errorRedColor,
                     ontap: () {
                       showModalBottomSheet(
                           context: context,

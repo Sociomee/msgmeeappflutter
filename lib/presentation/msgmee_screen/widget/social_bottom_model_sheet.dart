@@ -4,7 +4,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/connect_webpanel/linked_devices_screen.dart';
 import 'package:msgmee/presentation/new_message/new_message_screen.dart';
 import 'package:msgmee/presentation/settings/settings_screen.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import '../../broadcast_screen/add_participant_screen.dart';
 
 class ChatOptionsModel {
@@ -59,8 +59,7 @@ class SocialBottomModelSheet extends StatelessWidget {
         child: Container(
           height: 398.w,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             children: [
               Container(
@@ -68,7 +67,7 @@ class SocialBottomModelSheet extends StatelessWidget {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.grey,
+                    color: AppColors.grey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               ListView.builder(
@@ -78,7 +77,7 @@ class SocialBottomModelSheet extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: options[index].clickAction,
-                      splashColor: CustomTheme.seconderyColor,
+                      splashColor: AppColors.seconderyColor,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -92,11 +91,10 @@ class SocialBottomModelSheet extends StatelessWidget {
                                   child: Text(
                                     options[index].option,
                                     style: TextStyle(
-                                        color:
-                                            CustomTheme.bottomSheettextColor),
+                                        color: AppColors.bottomSheettextColor),
                                   ),
                                 ),
-                                Divider(height: 0, color: CustomTheme.grey)
+                                Divider(height: 0, color: AppColors.grey)
                               ],
                             ),
                           ),

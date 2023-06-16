@@ -6,9 +6,9 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/helper/nth_character_function.dart';
 import 'package:msgmee/presentation/profile/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
-import '../../theme/custom_theme.dart';
-import '../widgets/custom_button_widget.dart';
-import 'cubit/number_validation/number_validation_cubit.dart';
+import '../../../../theme/colors.dart';
+import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../cubit/number_validation/number_validation_cubit.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key, required this.number});
@@ -64,15 +64,15 @@ class _OtpScreenState extends State<OtpScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(6.0),
           child: LinearProgressIndicator(
-            backgroundColor: CustomTheme.white,
+            backgroundColor: AppColors.white,
             valueColor: AlwaysStoppedAnimation<Color>(
                 context.watch<NumberValidationCubit>().state.isvalid
-                    ? CustomTheme.primaryColor
-                    : CustomTheme.white),
+                    ? AppColors.primaryColor
+                    : AppColors.white),
             value: 0.50,
           ),
         ),
-        backgroundColor: CustomTheme.white,
+        backgroundColor: AppColors.white,
         elevation: 0,
         leading: IconButton(
             onPressed: () {
@@ -80,7 +80,7 @@ class _OtpScreenState extends State<OtpScreen> {
             },
             icon: const Icon(
               Icons.arrow_back_ios,
-              color: CustomTheme.black,
+              color: AppColors.black,
             )),
         actions: [
           Padding(
@@ -88,12 +88,12 @@ class _OtpScreenState extends State<OtpScreen> {
             child: Text(
               'CONTINUE',
               style: TextStyle(
-                  color: isValid ? CustomTheme.primaryColor : CustomTheme.grey),
+                  color: isValid ? AppColors.primaryColor : AppColors.grey),
             ),
           )
         ],
       ),
-      backgroundColor: CustomTheme.white,
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 26),
         child: Column(
@@ -117,18 +117,18 @@ class _OtpScreenState extends State<OtpScreen> {
               child: Pinput(
                 controller: _otpController,
                 length: 6,
-                defaultPinTheme: CustomTheme.defaultpintheme,
-                focusedPinTheme: CustomTheme.focuspintheme,
-                submittedPinTheme: CustomTheme.focuspintheme,
+                defaultPinTheme: AppColors.defaultpintheme,
+                focusedPinTheme: AppColors.focuspintheme,
+                submittedPinTheme: AppColors.focuspintheme,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                 ],
-                cursor:
-                    Container(color: CustomTheme.black, height: 2, width: 10),
+                cursor: Container(color: AppColors.black, height: 2, width: 10),
                 validator: (s) {
                   if (s!.isEmpty) {
                     return "invalid Otp!";
                   }
+                  return null;
                 },
                 onTap: () {
                   setState(() {
@@ -155,26 +155,24 @@ class _OtpScreenState extends State<OtpScreen> {
                 text: TextSpan(children: [
               const TextSpan(
                   text: 'Didn’t receive OTP yet? ',
-                  style: TextStyle(color: CustomTheme.black, fontSize: 14)),
+                  style: TextStyle(color: AppColors.black, fontSize: 14)),
               TextSpan(
                   text: 'Resend',
                   style: TextStyle(
-                      color:
-                          seconds == '00' ? CustomTheme.blue : CustomTheme.grey,
+                      color: seconds == '00' ? AppColors.blue : AppColors.grey,
                       fontSize: 14)),
             ])),
             const Spacer(),
             CustomButtonWidget(
-                borderColor: isValid
-                    ? CustomTheme.primaryColor
-                    : CustomTheme.seconderyColor,
+                borderColor:
+                    isValid ? AppColors.primaryColor : AppColors.seconderyColor,
                 ontap: () {
                   screenNavigator(context, const SetupProfileScreen());
                 },
                 title: 'CONTINUE',
                 color: isValid
-                    ? CustomTheme.primaryColor
-                    : CustomTheme.seconderyColor),
+                    ? AppColors.primaryColor
+                    : AppColors.seconderyColor),
             const SizedBox(
               height: 48,
             ),

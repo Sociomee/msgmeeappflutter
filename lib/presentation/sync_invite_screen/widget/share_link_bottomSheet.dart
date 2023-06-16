@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class Share {
   final String icon;
@@ -29,8 +29,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -39,7 +38,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -49,20 +48,19 @@ class ShareLinkBottomSheet extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 padding: EdgeInsets.only(left: 60, top: 2, bottom: 2),
                 decoration: BoxDecoration(
-                    border: Border.all(color: CustomTheme.grey),
+                    border: Border.all(color: AppColors.grey),
                     borderRadius: BorderRadius.circular(6)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(width: 50),
                     Text('http://Msgmee.us',
-                        style:
-                            TextStyle(color: CustomTheme.grey, fontSize: 14)),
+                        style: TextStyle(color: AppColors.grey, fontSize: 14)),
                     SizedBox(width: 80),
                     IconButton(
                         onPressed: () {},
                         icon: Icon(Icons.content_copy_outlined,
-                            color: CustomTheme.primaryColor))
+                            color: AppColors.primaryColor))
                   ],
                 ),
               ),
@@ -76,7 +74,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                               width: 108,
                               padding: EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
@@ -90,7 +88,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                               width: 108,
                               padding: EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
@@ -104,7 +102,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                               width: 108,
                               padding: EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
@@ -122,7 +120,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                               width: 108,
                               padding: EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
@@ -136,7 +134,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
                               width: 108,
                               padding: EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
-                                  color: CustomTheme.lightgrey1,
+                                  color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
@@ -151,7 +149,7 @@ class ShareLinkBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: CustomButtonWidget(
-                    title: 'Ok', color: CustomTheme.primaryColor, ontap: () {}),
+                    title: 'Ok', color: AppColors.primaryColor, ontap: () {}),
               )
             ],
           ),

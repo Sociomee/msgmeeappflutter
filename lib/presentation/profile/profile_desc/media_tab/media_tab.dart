@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/profile/profile_desc/media_tab/widgets/common_groups.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 List<String> images = [
   'https://images.pexels.com/photos/1226721/pexels-photo-1226721.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -82,7 +82,7 @@ class ProfileMediaTab extends StatelessWidget {
                               Container(
                                 height: 36,
                                 width: 36,
-                                color: CustomTheme.lightgrey,
+                                color: AppColors.lightgrey,
                               )
                             ],
                           ),

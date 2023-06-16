@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
-import '../../../helper/navigator_function.dart';
-import '../../../theme/custom_theme.dart';
-import '../otp_screen.dart';
+import '../../../../helper/navigator_function.dart';
+import '../../../../theme/colors.dart';
+import '../pages/otp_screen.dart';
 
 class NumberConfirmationDialog extends StatefulWidget {
   const NumberConfirmationDialog({super.key, required this.inputNumber});
@@ -14,10 +14,8 @@ class NumberConfirmationDialog extends StatefulWidget {
 }
 
 class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
-  late TextEditingController _controller;
   @override
   void initState() {
-    _controller = TextEditingController();
     super.initState();
   }
 
@@ -38,17 +36,16 @@ class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
               TextFormField(
                 controller:
                     TextEditingController(text: "+91${widget.inputNumber}"),
-                // autofocus: context.watch<EditNumberCubit>().state.editNo,
                 decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: CustomTheme.primaryColor),
+                      borderSide: BorderSide(color: AppColors.primaryColor),
                     ),
                     focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: CustomTheme.primaryColor),
+                      borderSide: BorderSide(color: AppColors.primaryColor),
                     ),
                     hintText: "+91${widget.inputNumber}",
                     hintStyle: const TextStyle(
-                        color: CustomTheme.black, fontWeight: FontWeight.bold)),
+                        color: AppColors.black, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 15),
               const Text(
@@ -67,15 +64,15 @@ class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
                         context, OtpScreen(number: widget.inputNumber));
                   },
                   title: 'OK',
-                  color: CustomTheme.primaryColor),
+                  color: AppColors.primaryColor),
               const SizedBox(height: 21),
               CustomButtonWidget(
                 ontap: () {
                   Navigator.pop(context);
                 },
                 title: 'EDIT',
-                color: CustomTheme.white,
-                textColor: CustomTheme.primaryColor,
+                color: AppColors.white,
+                textColor: AppColors.primaryColor,
               )
             ]),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../helper/navigator_function.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import 'profile_image_screen.dart';
 
 class ProfileViewDialog extends StatelessWidget {
@@ -41,10 +41,10 @@ class ProfileViewDialog extends StatelessWidget {
                 bottom: 8,
                 right: 17,
               ),
-              decoration: BoxDecoration(color: CustomTheme.black),
+              decoration: BoxDecoration(color: AppColors.black),
               child: Text(
                 profilename,
-                style: TextStyle(color: CustomTheme.white, fontSize: 18),
+                style: TextStyle(color: AppColors.white, fontSize: 18),
               ),
             ),
           ),
@@ -53,7 +53,7 @@ class ProfileViewDialog extends StatelessWidget {
             child: Container(
               height: 54,
               width: 328,
-              color: CustomTheme.black.withOpacity(0.63),
+              color: AppColors.black.withOpacity(0.63),
             ),
           ),
           Positioned(

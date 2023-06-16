@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/msgmee_screen/msgmee_screen.dart';
-import 'package:msgmee/presentation/onboarding/widgets/account_dialog.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/feature/b_auth/presentation/pages/login_screen.dart';
+import 'package:msgmee/feature/a_onboarding/presentation/widgets/account_dialog.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                       'MsgMee',
                       style: TextStyle(
                           fontSize: 30,
-                          color: CustomTheme.msgmeeTextColor,
+                          color: AppColors.primaryDarkColor,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 12),
@@ -46,8 +46,8 @@ class WelcomeScreen extends StatelessWidget {
             SizedBox(height: 80),
             InkWell(
               onTap: () {
-                animatedScreenNavigator(context, MsgmeeScreen());
-                // animatedScreenNavigator(context, LoginScreen());
+                // animatedScreenNavigator(context, MsgmeeScreen());
+                animatedScreenNavigator(context, LoginScreen());
               },
               child: Center(
                 child: Container(
@@ -55,18 +55,15 @@ class WelcomeScreen extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: CustomTheme.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: CustomTheme.lightgrey.withOpacity(0.5),
-                          offset: Offset(0, 0.5),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                      // border: Border.all(color: CustomTheme.grey),
-                    ),
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.lightgrey.withOpacity(0.5),
+                              offset: Offset(0, 0.5),
+                              blurRadius: 10,
+                              spreadRadius: 2)
+                        ],
+                        borderRadius: BorderRadius.circular(8)),
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Image.asset('assets/mobile.png'),
                       SizedBox(width: 7),
@@ -89,10 +86,10 @@ class WelcomeScreen extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: CustomTheme.white,
+                      color: AppColors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: CustomTheme.lightgrey.withOpacity(0.5),
+                          color: AppColors.lightgrey.withOpacity(0.5),
                           offset: Offset(0, 0.5),
                           blurRadius: 10,
                           spreadRadius: 2,

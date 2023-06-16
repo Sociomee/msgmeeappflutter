@@ -15,17 +15,18 @@ class BuildPages extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            SizedBox(
-              height: 45.h,
+            SizedBox(height: 40.h),
+            Text(
+              'Welcome to MsgMee',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textScaleFactor: 1.0,
             ),
+            SizedBox(height: 20),
             Image.asset(
               imageUrl,
               // fit: BoxFit.cover,
-              height: 270.h,
+              height: 200.h,
               width: double.infinity,
-            ),
-            SizedBox(
-              height: 12.h,
             ),
             Center(
               child: Padding(
@@ -33,7 +34,10 @@ class BuildPages extends StatelessWidget {
                 child: Text(
                   descriptionText,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22, color: Colors.grey),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400),
                   textScaleFactor: 1.0,
                 ),
               ),

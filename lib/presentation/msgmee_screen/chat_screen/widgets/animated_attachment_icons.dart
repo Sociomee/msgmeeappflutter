@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 const bottomSize = 30.0;
 
@@ -46,7 +46,7 @@ class _FlowAnimationWidgetState extends State<FlowAnimationWidget>
         width: bottomSize,
         child: FloatingActionButton(
             elevation: 0,
-            splashColor: CustomTheme.seconderyColor,
+            splashColor: AppColors.seconderyColor,
             onPressed: () {
               controller.status == AnimationStatus.completed
                   ? controller.reverse()

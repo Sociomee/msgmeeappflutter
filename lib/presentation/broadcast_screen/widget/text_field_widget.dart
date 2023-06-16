@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 class BroadcastTextFieldWidget extends StatelessWidget {
   BroadcastTextFieldWidget({
@@ -24,33 +24,33 @@ class BroadcastTextFieldWidget extends StatelessWidget {
       children: [
         Text(title,
             style: const TextStyle(
-                color: CustomTheme.black,
+                color: AppColors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         TextFormField(
           onChanged: onChanged,
           controller: controller,
-          cursorColor: CustomTheme.primaryColor,
+          cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 1, color: CustomTheme.borderColor)),
+                      BorderSide(width: 1, color: AppColors.borderColor)),
               border: OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 2, color: CustomTheme.borderColor)),
+                      BorderSide(width: 2, color: AppColors.borderColor)),
               focusedBorder: const OutlineInputBorder(
                   borderSide:
-                      BorderSide(width: 2, color: CustomTheme.primaryColor)),
+                      BorderSide(width: 2, color: AppColors.primaryColor)),
               hintText: hintText,
-              hintStyle: const TextStyle(color: CustomTheme.lightgrey)),
+              hintStyle: const TextStyle(color: AppColors.lightgrey)),
         ),
         showchar!
             ? Padding(
                 padding: EdgeInsets.only(left: 235.0, top: 5),
                 child: Text('Max $remainChar Characters',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: CustomTheme.grey, fontSize: 12)),
+                    style: TextStyle(color: AppColors.grey, fontSize: 12)),
               )
             : Container(),
         const SizedBox(height: 15),

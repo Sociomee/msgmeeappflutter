@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 class MessageTextFieldWidget extends StatelessWidget {
   const MessageTextFieldWidget(
@@ -9,25 +9,23 @@ class MessageTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: CustomTheme.primaryColor,
+      cursorColor: AppColors.primaryColor,
       controller: messageController,
       decoration: InputDecoration(
-        fillColor: CustomTheme.lightgrey1,
+        fillColor: AppColors.lightgrey1,
         hintText: "Type your message",
         hintStyle: TextStyle(color: Colors.black54),
         contentPadding:
             EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: CustomTheme.lightgrey1)),
+            borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: CustomTheme.lightgrey1)),
+            borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
         suffixIcon: Image.asset('assets/smiley.png', width: 18, height: 18),
       ),
       onChanged: onChanged,
     );
   }
 }
-
-

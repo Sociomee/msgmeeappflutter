@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 class ConncetWenPanelScreen extends StatelessWidget {
   const ConncetWenPanelScreen({super.key});
@@ -15,16 +15,16 @@ class ConncetWenPanelScreen extends StatelessWidget {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             'Scan QR code',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
         ),
         body: Container(
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: CustomTheme.black.withOpacity(0.6)),
+          decoration: BoxDecoration(color: AppColors.black.withOpacity(0.6)),
           child: Column(children: [
             Image.asset('assets/qr.png'),
             Spacer(),
@@ -33,7 +33,7 @@ class ConncetWenPanelScreen extends StatelessWidget {
               child: Text(
                 'Open web.sociomee.com, desktop app, or other devices.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: CustomTheme.white),
+                style: TextStyle(fontSize: 18, color: AppColors.white),
               ),
             )
           ]),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 class Options {
   final String title;
@@ -31,7 +31,7 @@ class BottomOptionsWidget extends StatelessWidget {
       child: Container(
         height: 210.w,
         decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
           children: [
             Container(
@@ -39,7 +39,7 @@ class BottomOptionsWidget extends StatelessWidget {
               width: 80,
               margin: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
-                  color: CustomTheme.grey,
+                  color: AppColors.grey,
                   borderRadius: BorderRadius.circular(10)),
             ),
             ListView.builder(
@@ -55,14 +55,14 @@ class BottomOptionsWidget extends StatelessWidget {
                         child: Text(
                           options[index].title,
                           style: TextStyle(
-                              fontSize: 14, color: CustomTheme.iconColor),
+                              fontSize: 14, color: AppColors.iconColor),
                         ),
                       ),
                       index == options.length - 1
                           ? Container()
                           : Divider(
                               height: 0,
-                              color: CustomTheme.grey,
+                              color: AppColors.grey,
                             )
                     ],
                   );

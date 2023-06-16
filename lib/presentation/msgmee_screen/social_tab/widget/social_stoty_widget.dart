@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/msgmee_screen/widget/small_profile_widget.dart';
-import 'package:msgmee/theme/custom_theme.dart';
+import 'package:msgmee/theme/colors.dart';
 
 import '../../../story_screen/story_screen.dart';
 
@@ -82,7 +82,7 @@ class SocialStoryWidget extends StatelessWidget {
                             hasStory: true),
                       ),
                       Title(
-                          color: CustomTheme.primaryColor,
+                          color: AppColors.primaryColor,
                           child: Text(dummyStory[index].title,
                               style: const TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold)))

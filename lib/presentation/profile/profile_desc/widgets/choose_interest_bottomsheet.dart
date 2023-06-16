@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../theme/custom_theme.dart';
+import '../../../../theme/colors.dart';
 
 List<String> interestList = [
   'Photography',
@@ -37,7 +37,7 @@ class ChooseInterestBottomSheet extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: CustomTheme.white, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -47,7 +47,7 @@ class ChooseInterestBottomSheet extends StatelessWidget {
                 width: 80,
                 margin: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
-                    color: CustomTheme.lightgrey,
+                    color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(height: 20),
@@ -58,14 +58,14 @@ class ChooseInterestBottomSheet extends StatelessWidget {
                   text: TextSpan(children: [
                 TextSpan(
                     text: 'Please select ',
-                    style: TextStyle(fontSize: 16, color: CustomTheme.black)),
+                    style: TextStyle(fontSize: 16, color: AppColors.black)),
                 TextSpan(
                     text: 'at least 3 interests',
-                    style: TextStyle(
-                        fontSize: 16, color: CustomTheme.primaryColor)),
+                    style:
+                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
                 TextSpan(
                     text: ' for a ',
-                    style: TextStyle(fontSize: 16, color: CustomTheme.black)),
+                    style: TextStyle(fontSize: 16, color: AppColors.black)),
               ])),
               Text('better in-app experience', style: TextStyle(fontSize: 14)),
               // SizedBox(height: 37),
@@ -85,7 +85,7 @@ class ChooseInterestBottomSheet extends StatelessWidget {
                         width: 103,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: CustomTheme.lightgrey1,
+                            color: AppColors.lightgrey1,
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(interestList[index]));
                   }),

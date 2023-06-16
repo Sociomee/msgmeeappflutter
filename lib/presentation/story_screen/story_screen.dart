@@ -4,7 +4,7 @@ import 'package:msgmee/presentation/story_screen/widget/story_data.dart';
 import 'package:video_player/video_player.dart';
 import '../../data/model/story_model.dart';
 import '../../data/model/user_model.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 
 class StoryScreen extends StatefulWidget {
   const StoryScreen({super.key});
@@ -252,7 +252,7 @@ class UserInfo extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 20,
-          backgroundColor: CustomTheme.grey,
+          backgroundColor: AppColors.grey,
           backgroundImage: NetworkImage(user.imageUrl),
         ),
         SizedBox(width: 10),

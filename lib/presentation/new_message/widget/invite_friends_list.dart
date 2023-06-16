@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 
 List invitelist = [
   'Guy Hawkins',
@@ -34,14 +34,13 @@ class InviteFriendsList extends StatelessWidget {
                   width: 44,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? CustomTheme.darkgreen
-                          : CustomTheme.blue,
+                      color:
+                          index % 2 == 0 ? AppColors.darkgreen : AppColors.blue,
                       borderRadius: BorderRadius.circular(100)),
                   child: Text(
                     invitelist[index][0],
                     style: TextStyle(
-                        color: CustomTheme.white,
+                        color: AppColors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
@@ -58,7 +57,7 @@ class InviteFriendsList extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.person_add,
-                        color: CustomTheme.primaryColor,
+                        color: AppColors.primaryColor,
                         size: 16,
                       ),
                       SizedBox(
@@ -68,7 +67,7 @@ class InviteFriendsList extends StatelessWidget {
                         'Invite',
                         style: TextStyle(
                             fontSize: 12,
-                            color: CustomTheme.primaryColor,
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.w500),
                       ),
                     ],

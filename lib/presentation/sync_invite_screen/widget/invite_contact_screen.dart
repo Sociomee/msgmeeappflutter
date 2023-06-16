@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import 'share_link_bottomSheet.dart';
 
 List<String> contactList = [
@@ -29,9 +29,9 @@ class InviteContactScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: CustomTheme.black)),
-          title: Text('Invite Contact',
-              style: TextStyle(color: CustomTheme.black))),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+          title:
+              Text('Invite Contact', style: TextStyle(color: AppColors.black))),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 20),
@@ -43,7 +43,7 @@ class InviteContactScreen extends StatelessWidget {
                 child: Text(
                   'Contact list',
                   style: TextStyle(
-                      color: CustomTheme.black,
+                      color: AppColors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
@@ -60,13 +60,13 @@ class InviteContactScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: index % 2 == 0
-                                  ? CustomTheme.darkgreen
-                                  : CustomTheme.blue,
+                                  ? AppColors.darkgreen
+                                  : AppColors.blue,
                               borderRadius: BorderRadius.circular(100)),
                           child: Text(
                             contactList[index][0],
-                            style: TextStyle(
-                                color: CustomTheme.white, fontSize: 20),
+                            style:
+                                TextStyle(color: AppColors.white, fontSize: 20),
                           ),
                         ),
                         title: Text(contactList[index]),
@@ -91,14 +91,13 @@ class InviteContactScreen extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.person_add,
-                                color: CustomTheme.primaryColor,
+                                color: AppColors.primaryColor,
                                 size: 20,
                               ),
                               SizedBox(width: 5),
                               Text(
                                 'Invite',
-                                style:
-                                    TextStyle(color: CustomTheme.primaryColor),
+                                style: TextStyle(color: AppColors.primaryColor),
                               )
                             ],
                           ),

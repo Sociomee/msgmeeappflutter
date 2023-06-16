@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../theme/custom_theme.dart';
+import '../../theme/colors.dart';
 import '../msgmee_screen/widget/chat_profile_widget.dart';
 import 'broadcast_chat_screen.dart';
 import 'widget/text_field_widget.dart';
@@ -127,11 +127,11 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
               },
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: CustomTheme.black,
+                color: AppColors.black,
               )),
           title: Text(
             'Broadcast Info',
-            style: TextStyle(color: CustomTheme.black),
+            style: TextStyle(color: AppColors.black),
           ),
           actions: [
             widget.editscreen
@@ -141,7 +141,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     },
                     child: Text(
                       'SAVE',
-                      style: TextStyle(color: CustomTheme.primaryColor),
+                      style: TextStyle(color: AppColors.primaryColor),
                     ))
                 : TextButton(
                     onPressed: () {
@@ -150,7 +150,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     },
                     child: Text(
                       'SAVE',
-                      style: TextStyle(color: CustomTheme.primaryColor),
+                      style: TextStyle(color: AppColors.primaryColor),
                     ))
           ],
         ),
@@ -187,18 +187,18 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                 ],
               ),
             ),
-            Divider(color: CustomTheme.lightgrey, thickness: 2),
+            Divider(color: AppColors.lightgrey, thickness: 2),
             ListTile(
               leading: Text('Mute Notification',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               trailing: Checkbox(
                   side: MaterialStateBorderSide.resolveWith(
                     (states) =>
-                        BorderSide(width: 1.0, color: CustomTheme.primaryColor),
+                        BorderSide(width: 1.0, color: AppColors.primaryColor),
                   ),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3)),
-                  activeColor: CustomTheme.primaryColor,
+                  activeColor: AppColors.primaryColor,
                   value: isSelected,
                   onChanged: (w) {
                     setState(() {
@@ -206,7 +206,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     });
                   }),
             ),
-            Divider(color: CustomTheme.lightgrey, thickness: 2),
+            Divider(color: AppColors.lightgrey, thickness: 2),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
@@ -216,7 +216,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                       Spacer(),
                       Text('Add more participants',
                           style: TextStyle(
-                              color: CustomTheme.primaryColor,
+                              color: AppColors.primaryColor,
                               fontSize: 16,
                               fontWeight: FontWeight.bold))
                     ],
@@ -228,17 +228,17 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                             EdgeInsets.symmetric(vertical: 3, horizontal: 12),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 1, color: CustomTheme.borderColor)),
+                                width: 1, color: AppColors.borderColor)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 2, color: CustomTheme.borderColor)),
+                                width: 2, color: AppColors.borderColor)),
                         focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 2, color: CustomTheme.primaryColor)),
+                                width: 2, color: AppColors.primaryColor)),
                         hintText: 'Search Participants...',
                         suffixIcon: Icon(
                           Icons.search,
-                          color: CustomTheme.grey,
+                          color: AppColors.grey,
                         )),
                   ),
                   SizedBox(height: 4),
@@ -264,8 +264,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                               children: [
                                 blockedUserlist[index].isSelected
                                     ? Text('You',
-                                        style:
-                                            TextStyle(color: CustomTheme.blue))
+                                        style: TextStyle(color: AppColors.blue))
                                     : Container(),
                               ],
                             ),

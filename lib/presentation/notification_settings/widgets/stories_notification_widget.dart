@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../theme/custom_theme.dart';
+import '../../../theme/colors.dart';
 import 'notification_bottom_sheet.dart';
 
 class StoriesNotificationBottomSheet extends StatefulWidget {
@@ -28,8 +28,7 @@ class _StoriesNotificationBottomSheetState
         child: Container(
           height: 180.h,
           decoration: BoxDecoration(
-              color: CustomTheme.white,
-              borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -39,7 +38,7 @@ class _StoriesNotificationBottomSheetState
                   width: 80,
                   margin: EdgeInsets.only(top: 15),
                   decoration: BoxDecoration(
-                      color: CustomTheme.lightgrey,
+                      color: AppColors.lightgrey,
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -77,7 +76,7 @@ class _StoriesNotificationBottomSheetState
                   ),
                 ),
               ),
-              Divider(color: CustomTheme.seconderyColor, thickness: 1),
+              Divider(color: AppColors.seconderyColor, thickness: 1),
               InkWell(
                 onTap: () {
                   showModalBottomSheet(
