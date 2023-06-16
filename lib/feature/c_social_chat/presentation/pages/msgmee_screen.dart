@@ -5,8 +5,11 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/socia
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/presentation/profile/profile_desc/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
+import '../../../../presentation/broadcast_screen/add_participant_screen.dart';
+import '../../../../presentation/connect_webpanel/linked_devices_screen.dart';
+import '../../../../presentation/new_message/new_message_screen.dart';
+import '../../../../presentation/settings/settings_screen.dart';
 import 'calls_tab/call_tab_screen.dart';
-import 'calls_tab/widget/call_bottom_model_sheet.dart';
 import '../widgets/profile_pic.dart';
 import '../widgets/social_bottom_model_sheet.dart';
 
@@ -35,6 +38,17 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
 
   @override
   Widget build(BuildContext context) {
+    List<ChatOptionsModel> options = [
+      ChatOptionsModel(id: 1, option: 'New Message'),
+      ChatOptionsModel(id: 2, option: 'Make a Call'),
+      ChatOptionsModel(id: 3, option: 'Create New Group'),
+      ChatOptionsModel(id: 4, option: 'Create a Broadcast'),
+      ChatOptionsModel(id: 5, option: 'Sync your account to web panel'),
+      ChatOptionsModel(id: 6, option: 'Archived Chats List'),
+      ChatOptionsModel(id: 7, option: 'Sync your SocioMee connections'),
+      ChatOptionsModel(id: 8, option: 'Settings'),
+      ChatOptionsModel(id: 9, option: 'Logout'),
+    ];
     return DefaultTabController(
       length: 2,
       initialIndex: 0,
@@ -71,7 +85,19 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         ),
                       ),
               ],
-            ),
+            ), // showModalBottomSheet(
+            //     isScrollControlled: true,
+            //     shape: const RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.vertical(
+            //         top: Radius.circular(25.0),
+            //       ),
+            //     ),
+            //     context: context,
+            //     builder: (context) {
+            //       return _selectedIndex == 0
+            //           ? SocialBottomModelSheet()
+            //           : CallBottomModelSheet();
+            //     });
             actions: [
               IconButton(
                   icon: const Icon(
@@ -80,29 +106,57 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                   ),
                   onPressed: () {}),
               SvgPicture.asset('assets/msgmee_icon.svg'),
-              IconButton(
-                  icon: const Icon(
-                    Icons.more_vert,
-                    color: AppColors.black,
-                  ),
-                  onPressed: () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(25.0),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) {
-                          return _selectedIndex == 0
-                              ? SocialBottomModelSheet()
-                              : CallBottomModelSheet();
-                        });
-                  }),
+              PopupMenuButton<int>(
+                icon: Icon(
+                  Icons.more_vert,
+                  color: Colors.black,
+                ),
+                itemBuilder: (context) {
+                  return options
+                      .map(
+                        (e) => PopupMenuItem(
+                            value: e.id,
+                            // onTap: e.clickAction,
+                            child: Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(e.option),
+                                  SizedBox(height: 10),
+                                  e.id == 9
+                                      ? Container()
+                                      : Divider(
+                                          height: 0,
+                                          color: AppColors.grey,
+                                        )
+                                ],
+                              ),
+                            )),
+                      )
+                      .toList();
+                },
+                offset: Offset(0, 100),
+                color: Colors.white,
+                elevation: 2,
+                onSelected: (value) {
+                  if (value == 1) {
+                    screenNavigator(context, NewMessageScreen());
+                  } else if (value == 2) {
+                  } else if (value == 3) {
+                  } else if (value == 4) {
+                    animatedScreenNavigator(context, AddParticipantsScreen());
+                  } else if (value == 5) {
+                    screenNavigator(context, LinkedDevicesScreen());
+                  } else if (value == 6) {
+                  } else if (value == 7) {
+                  } else if (value == 8) {
+                    screenNavigator(context, SettingScreen());
+                  } else if (value == 9) {}
+                },
+              ),
             ],
           ),
-          // backgroundColor: CustomTheme.white,
           body: SingleChildScrollView(
             child: Column(
               children: [

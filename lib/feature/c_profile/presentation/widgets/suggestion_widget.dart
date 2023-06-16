@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../theme/colors.dart';
 
+// ignore: must_be_immutable
 class SuggestionWidget extends StatelessWidget {
   SuggestionWidget({super.key});
 
