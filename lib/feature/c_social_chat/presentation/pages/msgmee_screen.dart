@@ -12,6 +12,7 @@ import '../../../../presentation/settings/settings_screen.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
 import '../widgets/social_bottom_model_sheet.dart';
+import 'create_group_page.dart';
 
 class MsgmeeScreen extends StatefulWidget {
   const MsgmeeScreen({super.key});
@@ -40,14 +41,12 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   Widget build(BuildContext context) {
     List<ChatOptionsModel> options = [
       ChatOptionsModel(id: 1, option: 'New Message'),
-      ChatOptionsModel(id: 2, option: 'Make a Call'),
+      ChatOptionsModel(id: 2, option: 'My Notes'),
       ChatOptionsModel(id: 3, option: 'Create New Group'),
       ChatOptionsModel(id: 4, option: 'Create a Broadcast'),
-      ChatOptionsModel(id: 5, option: 'Sync your account to web panel'),
-      ChatOptionsModel(id: 6, option: 'Archived Chats List'),
-      ChatOptionsModel(id: 7, option: 'Sync your SocioMee connections'),
-      ChatOptionsModel(id: 8, option: 'Settings'),
-      ChatOptionsModel(id: 9, option: 'Logout'),
+      ChatOptionsModel(id: 5, option: 'Archived Chats'),
+      ChatOptionsModel(id: 6, option: 'Sync your Sociomate'),
+      ChatOptionsModel(id: 7, option: 'Settings'),
     ];
     return DefaultTabController(
       length: 2,
@@ -123,7 +122,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(e.option),
-                                  e.id == 7
+                                  e.id == 6
                                       ? Text(
                                           'No syncing processed yet',
                                           style: TextStyle(
@@ -132,7 +131,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         )
                                       : Container(),
                                   SizedBox(height: 10),
-                                  e.id == 9
+                                  e.id == 7
                                       ? Container()
                                       : Divider(
                                           height: 0,
@@ -152,15 +151,15 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                     screenNavigator(context, NewMessageScreen());
                   } else if (value == 2) {
                   } else if (value == 3) {
+                    animatedScreenNavigator(context, CreateGroupPage());
                   } else if (value == 4) {
                     animatedScreenNavigator(context, AddParticipantsScreen());
                   } else if (value == 5) {
                     screenNavigator(context, LinkedDevicesScreen());
                   } else if (value == 6) {
                   } else if (value == 7) {
-                  } else if (value == 8) {
                     screenNavigator(context, SettingScreen());
-                  } else if (value == 9) {}
+                  }
                 },
               ),
             ],

@@ -54,11 +54,16 @@ class TextFieldWidget extends StatelessWidget {
         ),
         showchar!
             ? Padding(
-                padding: EdgeInsets.only(left: 250.0, top: 5),
-                child: Text(
-                  'Max $remainChar Characters',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.black, fontSize: 12),
+                padding: EdgeInsets.only(top: 5),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      'Max $remainChar Characters',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.black, fontSize: 12),
+                    ),
+                  ],
                 ),
               )
             : Container(),
