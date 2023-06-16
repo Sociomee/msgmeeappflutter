@@ -97,7 +97,6 @@ class CountryCodeWidget extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
-                    // height: 100,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       boxShadow: <BoxShadow>[
@@ -116,7 +115,7 @@ class CountryCodeWidget extends StatelessWidget {
                           color: AppColors.white,
                           child: Center(
                             child: Text(
-                              'Change Country Code',
+                              'Choose Country Code',
                               textScaleFactor: 1.0,
                               style: TextStyle(
                                 fontSize: 25.sp,
@@ -172,15 +171,27 @@ class CountryCodeWidget extends StatelessWidget {
                                   Text(
                                     codeList[index].countryName,
                                     textScaleFactor: 1.0,
-                                    style: const TextStyle(
-                                        color: AppColors.black, fontSize: 14),
+                                    style: TextStyle(
+                                        color: index == 0
+                                            ? AppColors.primaryColor
+                                            : AppColors.black,
+                                        fontSize: 14),
                                   ),
+                                  index == 0
+                                      ? Icon(
+                                          Icons.check_circle,
+                                          color: AppColors.primaryColor,
+                                          size: 15,
+                                        )
+                                      : Container(),
                                   Spacer(),
                                   Text(
                                     codeList[index].countryCode,
                                     textScaleFactor: 1.0,
-                                    style: const TextStyle(
-                                        color: AppColors.black,
+                                    style: TextStyle(
+                                        color: index == 0
+                                            ? AppColors.primaryColor
+                                            : AppColors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),

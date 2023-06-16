@@ -159,20 +159,23 @@ class _OtpScreenState extends State<OtpScreen> {
               TextSpan(
                   text: 'Resend',
                   style: TextStyle(
-                      color: seconds == '00' ? AppColors.blue : AppColors.grey,
+                      color: seconds == '00'
+                          ? AppColors.primaryColor
+                          : AppColors.primaryColor.withOpacity(.5),
                       fontSize: 14)),
             ])),
             const Spacer(),
             CustomButtonWidget(
-                borderColor:
-                    isValid ? AppColors.primaryColor : AppColors.seconderyColor,
+                borderColor: isValid
+                    ? AppColors.primaryColor
+                    : AppColors.primaryColor.withOpacity(.5),
                 ontap: () {
                   screenNavigator(context, const SetupProfileScreen());
                 },
                 title: 'CONTINUE',
                 color: isValid
                     ? AppColors.primaryColor
-                    : AppColors.seconderyColor),
+                    : AppColors.primaryColor.withOpacity(.5)),
             const SizedBox(
               height: 48,
             ),

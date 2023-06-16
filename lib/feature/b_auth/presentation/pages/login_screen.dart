@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
@@ -33,6 +34,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.black,
+          ),
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(6.0),
           child: LinearProgressIndicator(
@@ -71,30 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text('Welcome', style: TextStyle(fontSize: 33))),
             const SizedBox(height: 50),
             Row(children: [
-              // Container(
-              //   height: 40,
-              //   width: 90,
-              //   padding: const EdgeInsets.symmetric(horizontal: 3),
-              //   decoration: BoxDecoration(
-              //       border: Border.all(color: CustomTheme.grey),
-              //       borderRadius: BorderRadius.circular(5)),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.min,
-              //     children: [
-              //       const Text(
-              //           textScaleFactor: 1.0,
-              //           '+91',
-              //           style: TextStyle(color: Colors.grey, fontSize: 14)),
-              //       const SizedBox(width: 6),
-              //       Image.network(
-              //         'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
-              //         height: 15,
-              //       ),
-              //       // const SizedBox(width: 5),
-              //       const Icon(Icons.keyboard_arrow_down)
-              //     ],
-              //   ),
-              // ),
               CountryCodeWidget(),
               const SizedBox(width: 5),
               Expanded(
@@ -103,6 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextFormField(
                     controller: numberController,
                     keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$')),
+                      LengthLimitingTextInputFormatter(10),
+                    ],
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.only(top: 5, bottom: 5, left: 15),
@@ -128,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ]),
             const SizedBox(height: 30),
             const Text(
-              'When you click on continue,you will receive a verification\n code on the mobile number that you have entered.',
+              'We at MsgMee want to ensure that you have the best\nexperience possible.\nTo ensure that your mobile number is verified, please enter\nyour country code along with your mobile number.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),
             ),
@@ -137,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderColor:
                     context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.primaryColor
-                        : AppColors.seconderyColor,
+                        : AppColors.primaryColor.withOpacity(.5),
                 ontap: () {
                   context.read<NumberValidationCubit>().state.isvalid
                       ? showDialog(
@@ -152,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'CONTINUE',
                 color: context.watch<NumberValidationCubit>().state.isvalid
                     ? AppColors.primaryColor
-                    : AppColors.seconderyColor),
+                    : AppColors.primaryColor.withOpacity(.5)),
             const SizedBox(height: 10),
             textFieldclick
                 ? Container()

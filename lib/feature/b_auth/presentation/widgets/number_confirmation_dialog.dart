@@ -63,7 +63,7 @@ class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
                     screenNavigator(
                         context, OtpScreen(number: widget.inputNumber));
                   },
-                  title: 'OK',
+                  title: 'Proceed',
                   color: AppColors.primaryColor),
               const SizedBox(height: 21),
               CustomButtonWidget(
