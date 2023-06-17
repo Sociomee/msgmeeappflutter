@@ -209,15 +209,23 @@ class _ChatScreenState extends State<ChatScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
+                                  color: tap
+                                      ? AppColors.primaryDarkColor
+                                      : AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
-                                child: Image.asset('assets/paper_clip.png'),
+                                child: Transform.rotate(
+                                    angle: -15,
+                                    child: Icon(
+                                      Icons.attach_file_outlined,
+                                      size: 19,
+                                      color: tap
+                                          ? AppColors.white
+                                          : AppColors.black,
+                                    )),
                               ),
                             ),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            SizedBox(width: 8),
                             GestureDetector(
                               onTap: () {},
                               child: Container(

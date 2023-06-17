@@ -1,26 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/theme/colors.dart';
-
-List<CustomIcons> icons = [
-  CustomIcons(
-      icons: 'assets/audio.png',
-      color: AppColors.audioiconColor,
-      title: 'Audio'),
-  CustomIcons(
-      icons: 'assets/contact.png',
-      color: AppColors.primaryColor,
-      title: 'Contact'),
-  CustomIcons(
-      icons: 'assets/gallery.png',
-      color: AppColors.mediaiconColor,
-      title: 'Media'),
-  CustomIcons(
-      icons: 'assets/file.png',
-      color: AppColors.dociconColor,
-      title: 'Document'),
-];
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_sending_page.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 List<String> attachments = [
   'assets/attachment6.svg',
@@ -53,12 +35,20 @@ class AttachedIcon extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: attachments.length,
         itemBuilder: (context, index) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(attachments[index]),
-            ],
+          return GestureDetector(
+            onTap: () {
+              if (index == 0) {
+              } else if (index == 4) {
+                animatedScreenNavigator(context, DocSendingPage());
+              }
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SvgPicture.asset(attachments[index]),
+              ],
+            ),
           );
           // return Padding(
           //   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
