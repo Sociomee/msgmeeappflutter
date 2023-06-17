@@ -4,6 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_sending_page.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
+import '../attach_contact_page.dart';
+import '../attach_location_page.dart';
+
 List<String> attachments = [
   'assets/attachment6.svg',
   'assets/attachment5.svg',
@@ -38,8 +41,12 @@ class AttachedIcon extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               if (index == 0) {
+              } else if (index == 2) {
+                animatedScreenNavigator(context, AttachContactPage());
               } else if (index == 4) {
                 animatedScreenNavigator(context, DocSendingPage());
+              } else if (index == 5) {
+                animatedScreenNavigator(context, AttachLocationPage());
               }
             },
             child: Column(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
@@ -188,11 +190,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                       Container(
                         padding: EdgeInsets.only(
-                          left: 10,
-                          bottom: 10,
-                          top: 10,
-                          right: 10,
-                        ),
+                            left: 10, bottom: 10, top: 10, right: 10),
                         height: 60,
                         width: double.infinity,
                         color: Colors.white,
@@ -299,6 +297,26 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
+                context.watch<ShowContactTextField>().state
+                    ? Positioned(
+                        bottom: 10,
+                        left: 84,
+                        child: MessageFieldWidget(
+                          messageController: messageController,
+                          onChanged: (e) {
+                            if (e.isNotEmpty) {
+                              setState(() {
+                                istyping = true;
+                              });
+                            } else {
+                              setState(() {
+                                istyping = false;
+                              });
+                            }
+                          },
+                        ),
+                      )
+                    : Container(),
                 Positioned(
                     bottom: 60,
                     child: AnimatedContainer(
