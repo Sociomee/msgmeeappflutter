@@ -98,26 +98,19 @@ class _ChatScreenState extends State<ChatScreen> {
             SizedBox(width: 28),
             Image.asset('assets/call.png', width: 16),
             IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(25.0),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context) {
-                      return ChatScreenBottomModelSheet(
-                        profilename: widget.name,
-                      );
-                    });
-              },
-              icon: const Icon(
-                Icons.more_vert,
-                color: AppColors.black,
-              ),
-            )
+                onPressed: () {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(25.0))),
+                      context: context,
+                      builder: (context) {
+                        return ChatScreenBottomModelSheet(
+                            profilename: widget.name);
+                      });
+                },
+                icon: const Icon(Icons.more_vert, color: AppColors.black))
           ],
         ),
         body: Stack(
