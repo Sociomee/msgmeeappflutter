@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../theme/colors.dart';
+import '../../../../../theme/colors.dart';
 import 'notification_bottom_sheet.dart';
 
 class StoriesNotificationBottomSheet extends StatefulWidget {

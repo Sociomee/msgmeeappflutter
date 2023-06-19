@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../theme/colors.dart';
-import '../blocked_screen/blocked_screen.dart';
+import '../../../../theme/colors.dart';
+import '../../../../presentation/blocked_screen/blocked_screen.dart';
 import '../chat_settings/chat_settings_screen.dart';
-import '../delete_account/delete_account_screen.dart';
-import '../help_screen/help_screen.dart';
+import '../../../../presentation/delete_account/delete_account_screen.dart';
+import '../../../../presentation/help_screen/help_screen.dart';
 import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
-import '../../feature/c_profile/presentation/pages/profile_settings_screen.dart';
+import '../../../c_profile/presentation/pages/profile_settings_screen.dart';
 import '../storage_settings/storage_settings_screen.dart';
-import '../sync_invite_screen/sync_invite_screen.dart';
+import '../../../../presentation/sync_invite_screen/sync_invite_screen.dart';
 import 'widgets/logout_bottomsheet.dart';
 
 class SettingsOption {

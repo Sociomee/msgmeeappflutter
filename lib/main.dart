@@ -6,6 +6,7 @@ import 'package:msgmee/theme/app_theme.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
+import 'feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => NumberValidationCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
-            BlocProvider(create: (context) => ShowContactTextField())
+            BlocProvider(create: (context) => ShowContactTextField()),
+            BlocProvider(create: (context) => SyncMsgCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

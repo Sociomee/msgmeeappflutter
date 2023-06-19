@@ -10,6 +10,7 @@ class ChatOptionsModel {
   ChatOptionsModel({
     required this.option,
     required this.clickAction,
+    required int id,
   });
 }
 
@@ -20,20 +21,22 @@ class ChatScreenBottomModelSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     List<ChatOptionsModel> options = [
       ChatOptionsModel(
+          id: 0,
           option: 'Media, links and docs',
           clickAction: () {
             screenNavigator(
                 context, MediaAndDocScreen(profilename: profilename));
           }),
-      ChatOptionsModel(option: 'Search', clickAction: () {}),
-      ChatOptionsModel(option: 'Mute Messages', clickAction: () {}),
-      ChatOptionsModel(option: 'Clear Chat', clickAction: () {}),
+      ChatOptionsModel(id: 0, option: 'Search', clickAction: () {}),
+      ChatOptionsModel(id: 0, option: 'Mute Messages', clickAction: () {}),
+      ChatOptionsModel(id: 0, option: 'Clear Chat', clickAction: () {}),
       ChatOptionsModel(
+          id: 0,
           option: 'Block',
           clickAction: () {
             // screenNavigator(context, LinkedDevicesScreen());
           }),
-      ChatOptionsModel(option: 'Settings', clickAction: () {}),
+      ChatOptionsModel(id: 0, option: 'Settings', clickAction: () {}),
     ];
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

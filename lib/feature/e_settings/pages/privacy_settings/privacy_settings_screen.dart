@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import '../../theme/colors.dart';
+import '../../../../theme/colors.dart';
 import 'widget/bottom_sheet_options.dart';
 
 class PrivacySettingScreen extends StatefulWidget {

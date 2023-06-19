@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
             )
           ]),
           Spacer(),
-          InkWell(
+          GestureDetector(
             onTap: () {
               animatedScreenNavigator(context, LoginScreen());
             },

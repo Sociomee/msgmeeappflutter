@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/presentation/storage_settings/widgets/mobile_network_tab.dart';
-import 'package:msgmee/presentation/storage_settings/widgets/romaing_network_tab.dart';
-import 'package:msgmee/presentation/storage_settings/widgets/wifi_network_tab.dart';
+import 'package:msgmee/feature/e_settings/pages/storage_settings/widgets/mobile_network_tab.dart';
+import 'package:msgmee/feature/e_settings/pages/storage_settings/widgets/romaing_network_tab.dart';
+import 'package:msgmee/feature/e_settings/pages/storage_settings/widgets/wifi_network_tab.dart';
 
-import '../../theme/colors.dart';
+import '../../../../theme/colors.dart';
 
 class NetworkUsageScreen extends StatefulWidget {
   const NetworkUsageScreen({super.key});

@@ -7,6 +7,7 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
+
     appBarTheme: AppBarTheme(
       color: AppColors.white,
       iconTheme: IconThemeData(
@@ -36,6 +37,9 @@ class AppTheme {
         color: AppColors.black,
         fontSize: 18.0,
       ),
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: AppColors.primaryColor, //<-- SEE HERE
     ),
   );
 

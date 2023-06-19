@@ -83,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             SizedBox(height: 45),
-            InkWell(
+            GestureDetector(
                 onTap: isLastPage
                     ? () {
                         animatedScreenNavigator(context, WelcomeScreen());
