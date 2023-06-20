@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialog.dart';
 
 import '../../../../helper/navigator_function.dart';
-import '../../../../presentation/broadcast_screen/add_participant_screen.dart';
+import '../pages/broadcast_screen/add_participant_screen.dart';
 import '../../../../presentation/connect_webpanel/linked_devices_screen.dart';
 import '../../../../presentation/new_message/new_message_screen.dart';
 import '../../../../theme/colors.dart';
@@ -141,6 +141,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                 } else if (value == 4) {
                   screenNavigator(context, LinkedDevicesScreen());
                 } else if (value == 5) {
+                  screenNavigator(context, AddParticipantsScreen());
                 } else if (value == 6) {
                   showDialog(
                       context: context,

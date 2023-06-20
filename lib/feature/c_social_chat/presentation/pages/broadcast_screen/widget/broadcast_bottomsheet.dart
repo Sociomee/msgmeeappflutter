@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../helper/navigator_function.dart';
-import '../../../theme/colors.dart';
-import '../../../feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
+import '../../../../../../../helper/navigator_function.dart';
+import '../../../../../../theme/colors.dart';
+import '../../media_doc_screen/media_and_doc_screen.dart';
 
 
 class BroadcastOptionsModel {

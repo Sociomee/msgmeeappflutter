@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/colors.dart';
-import '../../feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
+import '../../../../../theme/colors.dart';
+import '../../widgets/chat_profile_widget.dart';
 
 class Participants {
   final String username;

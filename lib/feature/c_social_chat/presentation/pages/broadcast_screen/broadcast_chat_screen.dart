@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/broadcast_screen/broad_cast_desc_screen.dart';
-import '../../data/model/chat_model.dart';
-import '../../theme/colors.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
-import '../../feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broad_cast_desc_screen.dart';
+import '../../../../../data/model/chat_model.dart';
+import '../../../../../theme/colors.dart';
+import '../chat_screen/widgets/attached_icons.dart';
+import '../chat_screen/widgets/message_textField.dart';
+import '../chat_screen/widgets/sender_widget.dart';
 import 'widget/broadcast_bottomsheet.dart';
 
 class BroadCastChatScreen extends StatefulWidget {

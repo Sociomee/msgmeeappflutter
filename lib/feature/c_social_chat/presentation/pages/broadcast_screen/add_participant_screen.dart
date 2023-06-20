@@ -1,91 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/broadcast_screen/broadcast_info.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broadcast_info.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import 'package:msgmee/theme/colors.dart';
+import '../../../../../data/model/participants_model.dart';
 import 'widget/filter_dropdown.dart';
 
-class Participants {
-  final String username;
-  final String usertype;
-  final String imageUrl;
-  bool isSelected;
-  Participants({
-    required this.username,
-    required this.usertype,
-    required this.isSelected,
-    required this.imageUrl,
-  });
-}
 
-List<Participants> blockedUserlist = [
-  Participants(
-      username: 'Guy Hawkins',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Ralph Edwards',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Cameron Williamson',
-      usertype: 'Group',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Annette Black',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Eleanor Pena',
-      usertype: 'MsgMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Eleanor Pena',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/1559486/pexels-photo-1559486.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Albert Flores',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Arlene McCoy',
-      usertype: 'Group',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Jenny Wilson',
-      usertype: 'SocioMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/2773977/pexels-photo-2773977.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Kathryn Murphy',
-      usertype: 'MsgMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-  Participants(
-      username: 'Guy Hawkins',
-      usertype: 'MsgMee',
-      isSelected: false,
-      imageUrl:
-          'https://images.pexels.com/photos/2918513/pexels-photo-2918513.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-];
 
 class AddParticipantsScreen extends StatefulWidget {
   const AddParticipantsScreen({super.key});
