@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/widget/delete_broadcast_dialog.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broadcast_info.dart';
 import '../../../../../theme/colors.dart';
@@ -217,18 +218,27 @@ class _BroadCastDescriptionScreenState
                 ],
               ),
             ),
-            Container(
-              height: 62,
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(vertical: 20),
-              color: AppColors.lightgrey1,
-              alignment: Alignment.center,
-              child: Text(
-                'Delete Broadcast',
-                style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return DeleteBroadCastDialog();
+                    });
+              },
+              child: Container(
+                height: 62,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 20),
+                color: AppColors.lightgrey1,
+                alignment: Alignment.center,
+                child: Text(
+                  'Delete Broadcast',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             )
           ],
