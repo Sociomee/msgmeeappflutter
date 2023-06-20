@@ -177,10 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Divider(
-                        height: 0,
-                        color: AppColors.grey,
-                      ),
+                      Divider(height: 0, color: AppColors.grey),
                       Container(
                         padding: EdgeInsets.only(
                             left: 10, bottom: 10, top: 10, right: 10),
@@ -191,31 +188,27 @@ class _ChatScreenState extends State<ChatScreen> {
                           children: <Widget>[
                             // SizedBox(width: 30, child: FlowAnimationWidget()),
                             GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  tap = !tap;
-                                });
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: tap
-                                      ? AppColors.primaryDarkColor
-                                      : AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Transform.rotate(
-                                    angle: -15,
-                                    child: Icon(
-                                      Icons.attach_file_outlined,
-                                      size: 19,
-                                      color: tap
-                                          ? AppColors.white
-                                          : AppColors.black,
-                                    )),
-                              ),
-                            ),
+                                onTap: () {
+                                  setState(() {
+                                    tap = !tap;
+                                  });
+                                },
+                                child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                        color: tap
+                                            ? AppColors.primaryDarkColor
+                                            : AppColors.lightgrey1,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Transform.rotate(
+                                        angle: -15,
+                                        child: Icon(Icons.attach_file_outlined,
+                                            size: 19,
+                                            color: tap
+                                                ? AppColors.white
+                                                : AppColors.black)))),
                             SizedBox(width: 8),
                             GestureDetector(
                               onTap: () {},

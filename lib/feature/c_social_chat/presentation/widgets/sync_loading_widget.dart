@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
+
 import 'package:msgmee/theme/colors.dart';
 
 class SyncLoadingWidget extends StatefulWidget {
@@ -13,11 +12,27 @@ class SyncLoadingWidget extends StatefulWidget {
   State<SyncLoadingWidget> createState() => _SyncLoadingWidgetState();
 }
 
-class _SyncLoadingWidgetState extends State<SyncLoadingWidget> {
+class _SyncLoadingWidgetState extends State<SyncLoadingWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _linearAnimation;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   double height = 60.h;
   @override
   void initState() {
-    Timer(Duration(seconds: 1), () {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..repeat();
+
+    _linearAnimation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+    Timer(Duration(seconds: 5), () {
       setState(() {
         height = 0;
       });
@@ -61,21 +76,26 @@ class _SyncLoadingWidgetState extends State<SyncLoadingWidget> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AnimatedContainer(
-                  height: 3,
-                  duration: Duration(seconds: 2),
-                  decoration: BoxDecoration(color: AppColors.primaryColor),
-                  width: context.read<SyncMsgCubit>().state ? 300 : 0,
-                ),
-                Text(
-                  '200/500',
-                  style: TextStyle(color: AppColors.primaryColor),
-                )
-              ],
-            ),
+            child: AnimatedBuilder(
+                animation: _linearAnimation,
+                builder: (context, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 300,
+                        child: LinearProgressIndicator(
+                            backgroundColor: AppColors.grey,
+                            value: _linearAnimation.value,
+                            color: AppColors.primaryColor),
+                      ),
+                      Text(
+                        '${(_linearAnimation.value * 100).toStringAsFixed(0)}/100',
+                        style: TextStyle(color: AppColors.primaryColor),
+                      )
+                    ],
+                  );
+                }),
           )
         ],
       ),
