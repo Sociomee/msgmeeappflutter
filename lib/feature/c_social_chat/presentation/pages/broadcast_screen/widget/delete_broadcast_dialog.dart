@@ -16,21 +16,36 @@ class DeleteBroadCastDialog extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         SizedBox(height: 27),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child:
-              Text('Delete', style: TextStyle(color: AppColors.primaryColor)),
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child:
+                Text('Delete', style: TextStyle(color: AppColors.primaryColor)),
+          ),
         ),
         Divider(color: AppColors.grey, height: 0),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child:
-              Text('Cancel', style: TextStyle(color: AppColors.primaryColor)),
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child:
+                Text('Cancel', style: TextStyle(color: AppColors.primaryColor)),
+          ),
         ),
         Divider(color: AppColors.grey, height: 0),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text('Learn More', style: TextStyle(color: AppColors.blue)),
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Text('Learn More', style: TextStyle(color: AppColors.blue)),
+          ),
         ),
       ]),
     );

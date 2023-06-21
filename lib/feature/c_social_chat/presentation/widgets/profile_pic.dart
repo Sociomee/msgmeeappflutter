@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../theme/colors.dart';
+import '../pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   const ProfilePicWidget({super.key});
@@ -9,21 +11,30 @@ class ProfilePicWidget extends StatelessWidget {
     return Stack(
       children: [
         const CircleAvatar(
-          radius: 30,
-          backgroundColor: AppColors.grey,
-          backgroundImage: NetworkImage(
-              'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-        ),
+            radius: 30,
+            backgroundColor: AppColors.grey,
+            backgroundImage: NetworkImage(
+                'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
         Positioned(
           top: 40,
           right: 0,
-          child: Container(
-            height: 19,
-            width: 19,
-            decoration: BoxDecoration(
-                border: Border.all(color: AppColors.white, width: 2),
-                color: AppColors.darkgreen,
-                borderRadius: BorderRadius.circular(100)),
+          child: GestureDetector(
+            onTap: () {
+              context.read<ShoweditbtnCubit>().showdialog();
+            },
+            child: Container(
+              height: 19,
+              width: 19,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(100)),
+              child: const Icon(
+                Icons.add,
+                color: AppColors.white,
+                size: 17,
+              ),
+            ),
           ),
         )
       ],

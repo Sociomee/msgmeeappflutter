@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../theme/colors.dart';
-import '../pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 class SmallProfileWidget extends StatelessWidget {
   const SmallProfileWidget(
@@ -24,9 +22,7 @@ class SmallProfileWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  border: isMe
-                      ? null
-                      : Border.all(color: AppColors.primaryColor, width: 2)),
+                  border: Border.all(color: AppColors.primaryColor, width: 2)),
               child: CircleAvatar(
                 radius: 30,
                 backgroundColor: AppColors.grey,
@@ -45,26 +41,26 @@ class SmallProfileWidget extends StatelessWidget {
                           color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(100)),
                     )
-                  : isMe
-                      ? InkWell(
-                          onTap: () {
-                            context.read<ShoweditbtnCubit>().showdialog();
-                          },
-                          child: Container(
-                            height: 19,
-                            width: 19,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(100)),
-                            child: const Icon(
-                              Icons.add,
-                              color: AppColors.white,
-                              size: 17,
-                            ),
-                          ),
-                        )
-                      : Container(),
+                  // : isMe
+                  //     ? InkWell(
+                  //         onTap: () {
+                  //           context.read<ShoweditbtnCubit>().showdialog();
+                  //         },
+                  //         child: Container(
+                  //           height: 19,
+                  //           width: 19,
+                  //           alignment: Alignment.center,
+                  //           decoration: BoxDecoration(
+                  //               color: AppColors.primaryColor,
+                  //               borderRadius: BorderRadius.circular(100)),
+                  //           child: const Icon(
+                  //             Icons.add,
+                  //             color: AppColors.white,
+                  //             size: 17,
+                  //           ),
+                  //         ),
+                  //       )
+                  : Container(),
             )
           ],
         ),
