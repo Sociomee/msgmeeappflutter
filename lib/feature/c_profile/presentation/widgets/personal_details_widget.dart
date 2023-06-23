@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../presentation/profile/profile_desc/widgets/choose_date_of_birth.dart';
+import '../../../../presentation/profile/profile_desc/widgets/choose_interest_bottomsheet.dart';
 import '../../../../theme/colors.dart';
+import 'edit_bio_bottomsheet.dart';
 
 class PersonalDetailsWidget extends StatelessWidget {
   const PersonalDetailsWidget({super.key});
@@ -20,8 +23,22 @@ class PersonalDetailsWidget extends StatelessWidget {
               Text('Bio',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
               Spacer(),
-              Text('Edit',
-                  style: TextStyle(fontSize: 16, color: AppColors.primaryColor))
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (context) {
+                        return EditBioBottomSheet();
+                      });
+                },
+                child: Text('Edit',
+                    style:
+                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+              )
             ],
           ),
         ),
@@ -97,8 +114,22 @@ class PersonalDetailsWidget extends StatelessWidget {
               Text('Date Of Birth',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
               Spacer(),
-              Text('Edit',
-                  style: TextStyle(fontSize: 16, color: AppColors.primaryColor))
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (context) {
+                        return ChooseDateOfBirthBottomSheet();
+                      });
+                },
+                child: Text('Edit',
+                    style:
+                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+              )
             ],
           ),
         ),
@@ -125,8 +156,22 @@ class PersonalDetailsWidget extends StatelessWidget {
               Text('Interests',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
               Spacer(),
-              Text('Edit',
-                  style: TextStyle(fontSize: 16, color: AppColors.primaryColor))
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (context) {
+                        return ChooseInterestBottomSheet();
+                      });
+                },
+                child: Text('Edit',
+                    style:
+                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+              )
             ],
           ),
         ),

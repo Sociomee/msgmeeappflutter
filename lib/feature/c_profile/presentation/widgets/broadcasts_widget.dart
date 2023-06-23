@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
+import 'broadcast_list.dart';
 
 class BroadCastsWidget extends StatelessWidget {
   const BroadCastsWidget({super.key});
@@ -27,8 +29,13 @@ class BroadCastsWidget extends StatelessWidget {
                 color: AppColors.grey,
               ),
               Spacer(),
-              Text('See More',
-                  style: TextStyle(fontSize: 16, color: Colors.blue))
+              GestureDetector(
+                onTap: () {
+                  animatedScreenNavigator(context, BroadCastList());
+                },
+                child: Text('See More',
+                    style: TextStyle(fontSize: 16, color: Colors.blue)),
+              )
             ],
           ),
         ),

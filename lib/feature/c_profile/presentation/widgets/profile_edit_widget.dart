@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
+import 'edit_profile_pic_widge.dart';
 
 class ProfileEditWidget extends StatelessWidget {
   const ProfileEditWidget({super.key});
@@ -47,10 +49,15 @@ class ProfileEditWidget extends StatelessWidget {
                   Text('Anna More',
                       style: TextStyle(
                           fontSize: 18.sp, fontWeight: FontWeight.w700)),
-                  SizedBox(width: 75),
-                  Text('Edit',
-                      style: TextStyle(
-                          fontSize: 16, color: AppColors.primaryColor))
+                  SizedBox(width: 100),
+                  GestureDetector(
+                    onTap: () {
+                      animatedScreenNavigator(context, EditProfilePicWidget());
+                    },
+                    child: Text('Edit',
+                        style: TextStyle(
+                            fontSize: 16, color: AppColors.primaryColor)),
+                  )
                 ],
               ),
               SizedBox(height: 10),
