@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OptionsModel {
-  final String imageUrl;
+  final IconData imageUrl;
   final String title;
   final VoidCallback clickAction;
 
@@ -11,11 +11,11 @@ class OptionsModel {
 
 List<OptionsModel> options = [
   OptionsModel(
-      imageUrl: 'assets/video.png', title: 'video', clickAction: () {}),
+      imageUrl: Icons.message_outlined, title: 'Chat', clickAction: () {}),
   OptionsModel(
-      imageUrl: 'assets/comment.png', title: 'msgmee', clickAction: () {}),
-  OptionsModel(imageUrl: 'assets/call.png', title: 'audio', clickAction: () {}),
-  OptionsModel(imageUrl: 'assets/mic.png', title: 'mute', clickAction: () {}),
+      imageUrl: Icons.videocam_outlined, title: 'Video', clickAction: () {}),
+  OptionsModel(
+      imageUrl: Icons.phone_outlined, title: 'Audio', clickAction: () {}),
 ];
 
 class OptionsButtomWidgets extends StatelessWidget {
@@ -37,7 +37,7 @@ class OptionsButtomWidgets extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   children: [
-                    Image.asset(options[index].imageUrl, height: 24),
+                    Icon(options[index].imageUrl),
                     SizedBox(height: 15),
                     Text(options[index].title)
                   ],

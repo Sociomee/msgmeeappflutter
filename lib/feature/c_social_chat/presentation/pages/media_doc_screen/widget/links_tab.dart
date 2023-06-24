@@ -52,7 +52,6 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
       child: Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -6,7 +6,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
-import 'package:msgmee/presentation/profile/profile_desc/other_person_profile_description.dart';
+import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../theme/colors.dart';

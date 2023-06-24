@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/presentation/profile/profile_desc/media_tab/widgets/common_groups.dart';
-import 'package:msgmee/theme/colors.dart';
 
 List<String> images = [
   'https://images.pexels.com/photos/1226721/pexels-photo-1226721.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -61,34 +59,33 @@ class ProfileMediaTab extends StatelessWidget {
                         );
                       }),
                 ),
-                CommonGroupsWidget(),
-                Container(
-                  height: 50 * options.length.toDouble(),
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: options.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                options[index],
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Container(
-                                height: 36,
-                                width: 36,
-                                color: AppColors.lightgrey,
-                              )
-                            ],
-                          ),
-                        );
-                      }),
-                )
+                // Container(
+                //   height: 50 * options.length.toDouble(),
+                //   child: ListView.builder(
+                //       physics: NeverScrollableScrollPhysics(),
+                //       itemCount: options.length,
+                //       itemBuilder: (context, index) {
+                //         return Padding(
+                //           padding: const EdgeInsets.symmetric(
+                //               horizontal: 14, vertical: 5),
+                //           child: Row(
+                //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //             children: [
+                //               Text(
+                //                 options[index],
+                //                 style: TextStyle(
+                //                     fontSize: 16, fontWeight: FontWeight.bold),
+                //               ),
+                //               Container(
+                //                 height: 36,
+                //                 width: 36,
+                //                 color: AppColors.lightgrey,
+                //               )
+                //             ],
+                //           ),
+                //         );
+                //       }),
+                // )
               ],
             ),
           ),
