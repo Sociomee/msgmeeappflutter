@@ -96,6 +96,58 @@ class MyQRTab extends StatefulWidget {
 }
 
 class _MyQRTabState extends State<MyQRTab> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 20),
+        CircleAvatar(
+            radius: 70,
+            backgroundColor: AppColors.grey,
+            backgroundImage: NetworkImage(
+                'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
+        Text('Anna More',
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700)),
+        SizedBox(height: 10),
+        Text('@shreya_singh012',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.black54)),
+        SizedBox(height: 20),
+        Image.asset('assets/my_qr.png'),
+        SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Row(
+            children: [
+              Icon(Icons.share_outlined, color: AppColors.black, size: 18),
+              Text(
+                'Share',
+                style: TextStyle(fontSize: 14),
+              ),
+              Spacer(),
+              Icon(Icons.filter_outlined, color: AppColors.black),
+              Text(
+                'Save to gallery',
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class ScanQRTab extends StatefulWidget {
+  const ScanQRTab({super.key});
+
+  @override
+  State<ScanQRTab> createState() => _ScanQRTabState();
+}
+
+class _ScanQRTabState extends State<ScanQRTab> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
@@ -204,14 +256,5 @@ class _MyQRTabState extends State<MyQRTab> {
   void dispose() {
     controller?.dispose();
     super.dispose();
-  }
-}
-
-class ScanQRTab extends StatelessWidget {
-  const ScanQRTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
