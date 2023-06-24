@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
+import '../pages/profile_scan_page.dart';
 import 'edit_profile_pic_widge.dart';
 
 class ProfileEditWidget extends StatelessWidget {
@@ -67,7 +68,11 @@ class ProfileEditWidget extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: Colors.black54)),
               SizedBox(height: 10),
-              Icon(Icons.qr_code, color: AppColors.primaryColor)
+              GestureDetector(
+                  onTap: () {
+                    animatedScreenNavigator(context, ProfileScanPage());
+                  },
+                  child: Icon(Icons.qr_code, color: AppColors.primaryColor))
             ],
           ),
         ],
