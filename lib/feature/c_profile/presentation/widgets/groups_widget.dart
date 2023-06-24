@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
+import 'group_list.dart';
 
 class GroupsWidget extends StatelessWidget {
   const GroupsWidget({super.key});
@@ -36,8 +38,13 @@ class GroupsWidget extends StatelessWidget {
                 color: AppColors.grey,
               ),
               Spacer(),
-              Text('See More',
-                  style: TextStyle(fontSize: 16, color: Colors.blue))
+              GestureDetector(
+                onTap: () {
+                  animatedScreenNavigator(context, GroupList());
+                },
+                child: Text('See More',
+                    style: TextStyle(fontSize: 16, color: Colors.blue)),
+              )
             ],
           ),
         ),

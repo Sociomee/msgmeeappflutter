@@ -4,14 +4,14 @@ import 'package:msgmee/theme/colors.dart';
 
 import 'delete_dialog.dart';
 
-class BroadCastList extends StatefulWidget {
-  const BroadCastList({super.key});
+class GroupList extends StatefulWidget {
+  const GroupList({super.key});
 
   @override
-  State<BroadCastList> createState() => _BroadCastListState();
+  State<GroupList> createState() => _GroupListState();
 }
 
-class _BroadCastListState extends State<BroadCastList> {
+class _GroupListState extends State<GroupList> {
   bool selectall = false;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _BroadCastListState extends State<BroadCastList> {
                 style: TextStyle(color: AppColors.black),
               )
             : Text(
-                'My Broadcasts',
+                'My Groups',
                 style: TextStyle(color: AppColors.black),
               ),
         actions: [
@@ -93,7 +93,7 @@ class _BroadCastListState extends State<BroadCastList> {
                             horizontal: 12, vertical: 7),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InkWell(
                                 onTap: () {},
@@ -108,33 +108,37 @@ class _BroadCastListState extends State<BroadCastList> {
                                         alignment: Alignment.center,
                                         child: Icon(Icons.check,
                                             color: AppColors.white, size: 30))
-                                    : SvgPicture.asset('assets/broadcast.svg')),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      index == 1
-                                          ? "Eid Broadcast"
-                                          : index == 2
-                                              ? 'Diwali Broadcast'
-                                              : 'Christmas Broadcast',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500)),
-                                  SizedBox(height: 8),
-                                  Text('Alam, Saurabh, Taha Jamal, Anshuman...',
-                                      style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey)),
-                                ],
-                              ),
+                                    : SvgPicture.asset('assets/group.svg')),
+                            SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    index == 1
+                                        ? "Family Group"
+                                        : index == 2
+                                            ? 'Office Group'
+                                            : 'College Group',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(height: 8),
+                                Text('Members:33',
+                                    style: TextStyle(
+                                        fontSize: 13, color: AppColors.black)),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text('2w ago',
-                                  style: TextStyle(
-                                      fontSize: 13, color: AppColors.grey)),
+                            Spacer(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text('Admin',
+                                    style: TextStyle(
+                                        fontSize: 13, color: AppColors.black)),
+                                Text('Since : 27 Dec, 2023',
+                                    style: TextStyle(
+                                        fontSize: 13, color: AppColors.grey)),
+                              ],
                             ),
                           ],
                         ),
