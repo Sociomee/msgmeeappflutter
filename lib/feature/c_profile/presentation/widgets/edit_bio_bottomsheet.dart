@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
 
 class EditBioBottomSheet extends StatefulWidget {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/text_field_widget.dart';
 
-import '../../../../presentation/widgets/custom_bottom_model_sheet.dart';
-import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../../../../common_widgets/custom_bottom_model_sheet.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
 
 class EditProfilePicWidget extends StatefulWidget {

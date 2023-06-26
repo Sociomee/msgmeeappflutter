@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
+import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import '../../../../../theme/colors.dart';
 
 class OptionsModel {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../../../presentation/profile/profile_desc/media_tab/widgets/common_groups.dart';
+import '../widgets/common_groups.dart';
 import '../../../../theme/colors.dart';
-import '../../../../presentation/profile/profile_desc/media_tab/media_tab.dart';
-import '../../../../presentation/profile/profile_desc/widgets/options_button_widget.dart';
-import '../../../../presentation/profile/profile_desc/widgets/profile_bottom_sheet.dart';
+import 'media_tab.dart';
+import '../widgets/options_button_widget.dart';
+import '../widgets/profile_bottom_sheet.dart';
 import '../../../c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 
 class OtherPersonProfileDescription extends StatelessWidget {

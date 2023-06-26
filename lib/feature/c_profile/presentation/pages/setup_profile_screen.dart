@@ -7,8 +7,8 @@ import 'package:msgmee/helper/navigator_function.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../../../b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import '../../../../theme/colors.dart';
-import '../../../../presentation/widgets/custom_bottom_model_sheet.dart';
-import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../../../../common_widgets/custom_bottom_model_sheet.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
 import '../widgets/text_field_widget.dart';
 
 class SetupProfileScreen extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/calls_tab/widget/delete_calls_bottomsheet.dart';
 import '../../../../../../data/model/dummy_phone_model.dart';
 import '../../../../../../theme/colors.dart';
-import '../../../../../../presentation/call_screens/single_call_screen.dart';
+import '../../../../../f_call/presentation/pages/single_call_screen.dart';
 import '../../../widgets/chat_profile_widget.dart';
 
 class CallWidget extends StatelessWidget {

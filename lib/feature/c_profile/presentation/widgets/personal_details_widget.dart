@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../presentation/profile/profile_desc/widgets/choose_date_of_birth.dart';
-import '../../../../presentation/profile/profile_desc/widgets/choose_interest_bottomsheet.dart';
+import 'choose_date_of_birth.dart';
+import 'choose_interest_bottomsheet.dart';
 import '../../../../theme/colors.dart';
 import 'edit_bio_bottomsheet.dart';
 

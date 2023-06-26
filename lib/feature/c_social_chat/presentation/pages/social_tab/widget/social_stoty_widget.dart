@@ -4,7 +4,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/small_profile_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 
-import '../../../../../../presentation/story_screen/story_screen.dart';
+import '../../../../../c_profile/presentation/pages/story_screen.dart';
 
 
 

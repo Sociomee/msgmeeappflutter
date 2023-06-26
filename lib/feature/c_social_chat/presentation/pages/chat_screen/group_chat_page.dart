@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/exit_alert_dialog.dart';
 
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/group_participants_model.dart';
 import '../../../../../helper/navigator_function.dart';
-import '../../../../../presentation/profile/profile_desc/media_tab/media_tab.dart';
-import '../../../../../presentation/profile/profile_desc/widgets/options_button_widget.dart';
+import '../../../../c_profile/presentation/pages/media_tab.dart';
+import '../../../../c_profile/presentation/widgets/options_button_widget.dart';
 import '../media_doc_screen/media_and_doc_screen.dart';
 
 class GroupChatPage extends StatefulWidget {
@@ -45,18 +46,56 @@ class _GroupChatPageState extends State<GroupChatPage> {
           style: TextStyle(color: AppColors.black),
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert, color: AppColors.black))
+          PopupMenuButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(value: 1, child: Text('Edit Group')),
+                PopupMenuItem(value: 2, child: Text('Delete Group')),
+                PopupMenuItem(value: 3, child: Text('Report Group')),
+              ];
+            },
+            onSelected: (value) {
+              if (value == 1) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ExitAlertDialog();
+                    });
+              } else if (value == 2) {
+              } else if (value == 3) {}
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(height: 20),
           Center(
-            child: CircleAvatar(
-                radius: 80,
-                backgroundColor: AppColors.grey,
-                backgroundImage: NetworkImage(widget.imageUrl)),
+            child: Container(
+              height: 120,
+              width: 120,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(0, 0),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      color: AppColors.lightgrey)
+                ],
+                border: Border.all(color: AppColors.white, width: 5),
+                borderRadius: BorderRadius.circular(200),
+              ),
+              child: Center(
+                child: CircleAvatar(
+                    radius: 80, backgroundImage: NetworkImage(widget.imageUrl)),
+              ),
+            ),
           ),
           SizedBox(height: 10),
           Center(child: Text(widget.name, style: TextStyle(fontSize: 18))),

@@ -7,7 +7,7 @@ import 'package:msgmee/helper/nth_character_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
-import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
 
 class OtpScreen extends StatefulWidget {

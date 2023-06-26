@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
+import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
-import '../../../../presentation/profile/profile_desc/widgets/choose_date_of_birth.dart';
-import '../../../../presentation/profile/profile_desc/widgets/choose_gender_bottomsheet.dart';
-import '../../../../presentation/profile/profile_desc/widgets/choose_interest_bottomsheet.dart';
+import '../widgets/choose_date_of_birth.dart';
+import '../widgets/choose_gender_bottomsheet.dart';
+import '../widgets/choose_interest_bottomsheet.dart';
 import '../widgets/text_field_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {

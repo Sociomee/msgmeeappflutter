@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../data/model/group_participants_model.dart';
-import '../../../../presentation/widgets/custom_button_widget.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../c_profile/presentation/widgets/text_field_widget.dart';
 
 class CreateGroupPage extends StatefulWidget {

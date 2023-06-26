@@ -6,7 +6,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_button.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/presentation/profile/profile_desc/personal_profile_description.dart';
+import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';

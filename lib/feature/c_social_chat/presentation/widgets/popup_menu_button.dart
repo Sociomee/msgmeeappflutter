@@ -4,8 +4,8 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialo
 
 import '../../../../helper/navigator_function.dart';
 import '../pages/broadcast_screen/add_participant_screen.dart';
-import '../../../../presentation/connect_webpanel/linked_devices_screen.dart';
-import '../../../../presentation/new_message/new_message_screen.dart';
+import '../../../e_settings/pages/connect_webpanel/linked_devices_screen.dart';
+import '../pages/new_message_screen.dart';
 import '../../../../theme/colors.dart';
 import '../../../e_settings/pages/settings/settings_screen.dart';
 import '../pages/create_group_page.dart';

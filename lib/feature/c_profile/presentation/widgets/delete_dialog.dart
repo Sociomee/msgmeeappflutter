@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/presentation/widgets/custom_button_widget.dart';
+import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class DeleteDialogWidget extends StatelessWidget {
