@@ -40,6 +40,17 @@ List<ChatModel> dummyData = <ChatModel>[
       unseenMessage: 1),
   ChatModel(
     imageUrl:
+        'https://img.freepik.com/free-icon/multiple-users-silhouette_318-49546.jpg?w=2000',
+    name: 'Office Group',
+    hasStory: false,
+    isOnline: false,
+    time: '2w ago',
+    message: 'Emile:How is everyone?',
+    unseenMessage: 0,
+    isMuted: false,
+  ),
+  ChatModel(
+    imageUrl:
         'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1600',
     name: 'Anika George',
     hasStory: false,

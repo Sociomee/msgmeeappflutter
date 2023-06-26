@@ -11,6 +11,7 @@ import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../theme/colors.dart';
 import '../../widgets/chat_profile_widget.dart';
+import 'group_chat_page.dart';
 import 'widgets/message_textField.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -60,13 +61,20 @@ class _ChatScreenState extends State<ChatScreen> {
               )),
           title: GestureDetector(
             onTap: () {
-              animatedScreenNavigator(
-                  context,
-                  OtherPersonProfileDescription(
-                    imageUrl: widget.imageUrl,
-                    name: widget.name,
-                    isOnline: widget.isOnline,
-                  ));
+              widget.name == 'Office Group'
+                  ? animatedScreenNavigator(
+                      context,
+                      GroupChatPage(
+                        imageUrl: widget.imageUrl,
+                        name: widget.name,
+                      ))
+                  : animatedScreenNavigator(
+                      context,
+                      OtherPersonProfileDescription(
+                        imageUrl: widget.imageUrl,
+                        name: widget.name,
+                        isOnline: widget.isOnline,
+                      ));
             },
             child: Row(
               children: [
@@ -244,15 +252,17 @@ class _ChatScreenState extends State<ChatScreen> {
                             istyping
                                 ? GestureDetector(
                                     onTap: () {
-                                      _scrollToBottom();
-                                      messages.add(ChatMessage(
-                                          messageContent:
-                                              messageController.text,
-                                          messageType: 'sender',
-                                          msgStatus: 'send',
-                                          time: '4:28 pm'));
-                                      setState(() {});
-                                      messageController.clear();
+                                      if (messageController.text.isNotEmpty) {
+                                        _scrollToBottom();
+                                        messages.add(ChatMessage(
+                                            messageContent:
+                                                messageController.text,
+                                            messageType: 'sender',
+                                            msgStatus: 'send',
+                                            time: '4:28 pm'));
+                                        setState(() {});
+                                        messageController.clear();
+                                      }
                                     },
                                     child: Container(
                                       height: 30,
