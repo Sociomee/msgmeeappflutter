@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/archieved_chat_bottomsheet.dart';
+import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/clear_chat_bottomsheet.dart';
+import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/delete_bottomsheet.dart';
 
 import '../../../../theme/colors.dart';
+import '../../../b_auth/presentation/widgets/language_change_widget.dart';
 import 'widget/chatbackup_bottomsheet.dart';
 import 'widget/choose_account_sheet.dart';
 
@@ -252,22 +255,67 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
               ),
             ),
             Divider(color: AppColors.lightgrey, thickness: 1),
-            ListTile(
-                title: Text('Clear chats'),
-                subtitle: Text(
-                    'All chat will be cleared. It can be recovered later if you have backup')),
-            Divider(color: AppColors.lightgrey, thickness: 1),
-            ListTile(
-              title: Text('Delete all chats'),
-              subtitle: Text('You can delete all chats anytime at once'),
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(25.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return ClearChatBottomSheet();
+                    });
+              },
+              child: ListTile(
+                  title: Text('Clear chats'),
+                  subtitle: Text(
+                      'All chat will be cleared. It can be recovered later if you have backup')),
             ),
             Divider(color: AppColors.lightgrey, thickness: 1),
-            ListTile(
-              title: Text('Choose Language'),
-              subtitle: Text('English'),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: AppColors.black,
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(25.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return DeleteChatBottomSheet();
+                    });
+              },
+              child: ListTile(
+                title: Text('Delete all chats'),
+                subtitle: Text('You can delete all chats anytime at once'),
+              ),
+            ),
+            Divider(color: AppColors.lightgrey, thickness: 1),
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(25.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return LanguageOptionBottomSheet();
+                    });
+              },
+              child: ListTile(
+                title: Text('Choose Language'),
+                subtitle: Text('English'),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.black,
+                ),
               ),
             ),
             SizedBox(

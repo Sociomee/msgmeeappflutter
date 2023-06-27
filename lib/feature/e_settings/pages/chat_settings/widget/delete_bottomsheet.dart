@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/feature/e_settings/models/archieved_chat_model.dart';
 
 import '../../../../../common_widgets/custom_button_widget.dart';
 import '../../../../../theme/colors.dart';
+import '../../../models/archieved_chat_model.dart';
 
-class ArchievedChatBottomSheet extends StatefulWidget {
-  const ArchievedChatBottomSheet({super.key});
+class DeleteChatBottomSheet extends StatefulWidget {
+  const DeleteChatBottomSheet({super.key});
 
   @override
-  State<ArchievedChatBottomSheet> createState() =>
-      _ArchievedChatBottomSheetState();
+  State<DeleteChatBottomSheet> createState() => _DeleteChatBottomSheetState();
 }
 
-class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
+class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
   bool expand = true;
   @override
   Widget build(BuildContext context) {
@@ -158,7 +157,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                     color: AppColors.grey),
               ),
               SizedBox(height: 20),
-              Text('Archive Chats',
+              Text('Delete Chats',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.black,

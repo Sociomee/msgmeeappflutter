@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/feature/e_settings/models/archieved_chat_model.dart';
 
 import '../../../../../common_widgets/custom_button_widget.dart';
 import '../../../../../theme/colors.dart';
+import '../../../models/archieved_chat_model.dart';
 
-class ArchievedChatBottomSheet extends StatefulWidget {
-  const ArchievedChatBottomSheet({super.key});
+class ClearChatBottomSheet extends StatefulWidget {
+  const ClearChatBottomSheet({super.key});
 
   @override
-  State<ArchievedChatBottomSheet> createState() =>
-      _ArchievedChatBottomSheetState();
+  State<ClearChatBottomSheet> createState() => _ClearChatBottomSheetState();
 }
 
-class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
+class _ClearChatBottomSheetState extends State<ClearChatBottomSheet> {
   bool expand = true;
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text('My Chats',
+                child: Text('Clear Chats',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: AppColors.black,
@@ -43,13 +42,18 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Select All',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Text(
+                        'Select All',
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -59,7 +63,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                         });
                       },
                       child: Text(
-                        'Archives Selected',
+                        'Clear Selected',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: AppColors.primaryColor,
@@ -158,7 +162,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                     color: AppColors.grey),
               ),
               SizedBox(height: 20),
-              Text('Archive Chats',
+              Text('Clear All Chats',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.black,
@@ -167,7 +171,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Text(
-                  'Do you want to realy archive all chats?',
+                  'Are you sure! Do you want to clear all chats?',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,

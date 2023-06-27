@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/b_auth/presentation/widgets/language_change_widget.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
 import '../widgets/country_code_bottomsheet.dart';
-import '../widgets/language_change_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // backgroundColor: CustomTheme.white,
         elevation: 0,
         centerTitle: true,
-        title: const LanguageChangeOptionWidget(),
+        title: ChooseLanguage(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 18.0, right: 10),

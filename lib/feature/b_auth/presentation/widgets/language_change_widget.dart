@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../../../../theme/colors.dart';
 
-class LanguageChangeOptionWidget extends StatelessWidget {
-  const LanguageChangeOptionWidget({super.key});
+class LanguageOptionBottomSheet extends StatelessWidget {
+  const LanguageOptionBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,107 +20,114 @@ class LanguageChangeOptionWidget extends StatelessWidget {
       'Кыргызча',
       'Português'
     ];
-    return InkWell(
-      onTap: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(25.0),
-            ),
-          ),
-          context: context,
-          builder: (context) => ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
-            ),
-            child: Container(
-              height: 530.h,
-              decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(25)),
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
+      child: Container(
+        height: 530.h,
+        decoration: BoxDecoration(
+            color: AppColors.white, borderRadius: BorderRadius.circular(25)),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              // height: 100,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: AppColors.grey,
+                      blurRadius: 15.0,
+                      offset: Offset(0.0, 0.75))
+                ],
+              ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    // height: 100,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            color: AppColors.grey,
-                            blurRadius: 15.0,
-                            offset: Offset(0.0, 0.75))
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 24),
-                          color: AppColors.white,
-                          child: Center(
-                            child: Text(
-                              'Change Language',
-                              textScaleFactor: 1.0,
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
+                    padding: const EdgeInsets.only(top: 24),
+                    color: AppColors.white,
+                    child: Center(
+                      child: Text(
+                        'Change Language',
+                        textScaleFactor: 1.0,
+                        style: TextStyle(
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.w500,
                         ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
-                            ),
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
-                            ),
-                            prefixIcon: Icon(Icons.search),
-                            hintText: 'Search',
-                            hintStyle:
-                                TextStyle(color: AppColors.grey, fontSize: 17),
-                            focusColor: AppColors.primaryColor,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: languages.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                    width: 2.0, color: AppColors.grey),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                languages[index],
-                                textScaleFactor: 1.0,
-                                style: const TextStyle(
-                                    color: AppColors.black, fontSize: 17),
-                              ),
-                            ),
-                          );
-                        }),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.grey),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.grey),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.grey),
+                      ),
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search',
+                      hintStyle: TextStyle(color: AppColors.grey, fontSize: 17),
+                      focusColor: AppColors.primaryColor,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-        );
+            Expanded(
+              child: ListView.builder(
+                  itemCount: languages.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 2.0, color: AppColors.grey),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          languages[index],
+                          textScaleFactor: 1.0,
+                          style: const TextStyle(
+                              color: AppColors.black, fontSize: 17),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ChooseLanguage extends StatelessWidget {
+  const ChooseLanguage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(25.0),
+              ),
+            ),
+            context: context,
+            builder: (context) {
+              return LanguageOptionBottomSheet();
+            });
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,

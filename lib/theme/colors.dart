@@ -22,6 +22,7 @@ class AppColors {
   static const Color borderColor = Color(0XFFE0E0E0);
   static const Color bottomSheettextColor = Color(0XFF4F4F4F);
   static const Color primaryDarkColor = Color(0XFF083A3D);
+  static const Color yellowColor = Color(0xFFF8C756);
 
 //otp pin theme
   static final defaultpintheme = PinTheme(

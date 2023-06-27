@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:msgmee/feature/e_settings/pages/privacy_settings/widget/blocked_contacts_page.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import 'widget/bottom_sheet_options.dart';
 
@@ -195,20 +197,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           ListTile(
             onTap: () {
-              showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(25.0),
-                    ),
-                  ),
-                  context: context,
-                  builder: (context) {
-                    return OptionsBottomSheet(
-                      title: 'Blocked Contacts',
-                      subtitle: '',
-                    );
-                  });
+              animatedScreenNavigator(context, BlockedContactsPage());
             },
             title: Text('Blocked Contacts'),
             subtitle: Text('56 People'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
+import '../privacy_settings/widget/manage_storage_page.dart';
 import 'network_usage_screen.dart';
 import 'widgets/storage_bottom_sheet.dart';
 
@@ -25,13 +26,15 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                 },
                 icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
             title: Text(
-              'NetworkUsageScreen',
+              'Storage and Data Settings',
               style: TextStyle(color: AppColors.black),
             )),
         body: Column(
           children: [
             ListTile(
-              onTap: () {},
+              onTap: () {
+                screenNavigator(context, ManageStoragePage());
+              },
               title: Text('Manage Storage'),
               subtitle: Text(
                 'Used',
