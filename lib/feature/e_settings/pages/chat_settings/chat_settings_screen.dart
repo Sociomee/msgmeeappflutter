@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/archieved_chat_bottomsheet.dart';
 
 import '../../../../theme/colors.dart';
 import 'widget/chatbackup_bottomsheet.dart';
@@ -230,10 +231,25 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
               ),
             ),
             Divider(color: AppColors.lightgrey, thickness: 1),
-            ListTile(
-              title: Text('Archive chats'),
-              subtitle:
-                  Text('All archived chats will be available in archived list'),
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(25.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return ArchievedChatBottomSheet();
+                    });
+              },
+              child: ListTile(
+                title: Text('Archive chats'),
+                subtitle: Text(
+                    'All archived chats will be available in archived list'),
+              ),
             ),
             Divider(color: AppColors.lightgrey, thickness: 1),
             ListTile(

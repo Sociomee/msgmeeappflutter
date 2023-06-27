@@ -298,14 +298,7 @@ class PersonalDetailsWidget extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Divider(
-            color: AppColors.grey.withOpacity(.4),
-            height: 0,
-            thickness: 6,
-          ),
-        ),
+       
       ],
     );
   }

@@ -30,7 +30,7 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Profile Settings',
           ontap: () {
-            screenNavigator(context, ProfilePage());
+            screenNavigator(context, ProfilePage(settings: true));
           }),
       SettingsOption(
           optionName: 'Chat Settings',
@@ -43,7 +43,7 @@ class SettingScreen extends StatelessWidget {
             screenNavigator(context, PrivacySettingScreen());
           }),
       SettingsOption(
-          optionName: 'Notification Settings',
+          optionName: 'Notification & Sound Settings',
           ontap: () {
             screenNavigator(context, NotificationSettingsScreen());
           }),
