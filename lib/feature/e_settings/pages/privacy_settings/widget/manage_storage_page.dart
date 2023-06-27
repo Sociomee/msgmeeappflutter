@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../../theme/colors.dart';
 import '../../../../c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
+import 'forward_msg_page.dart';
 import 'media_preview_widget.dart';
 
 class ManageStoragePage extends StatelessWidget {
@@ -185,35 +187,40 @@ class ManageStoragePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                children: [
-                  Text(
-                    'Forworded media many times',
-                    style: TextStyle(
-                      color: Color(0xFF808080),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
+            GestureDetector(
+              onTap: () {
+                screenNavigator(context, ForwardMsgPage());
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Row(
+                  children: [
+                    Text(
+                      'Forworded media many times',
+                      style: TextStyle(
+                        color: Color(0xFF808080),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Spacer(),
-                  Text(
-                    '9.0 MB',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
+                    Spacer(),
+                    Text(
+                      '9.0 MB',
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.5),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppColors.black,
-                    size: 15,
-                  )
-                ],
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                      size: 15,
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(

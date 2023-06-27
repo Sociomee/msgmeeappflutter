@@ -46,6 +46,10 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
               },
             )
           ]),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add, color: AppColors.white),
+          backgroundColor: AppColors.primaryColor,
+          onPressed: () {}),
       body: SingleChildScrollView(
         child: Column(
           children: [
