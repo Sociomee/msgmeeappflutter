@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/blocked_bottom_sheet.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_dialog.dart';
+import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_one_user_dialog.dart';
 import '../../../../theme/colors.dart';
 import '../../models/blockcontacts_model.dart';
-import 'widgets/blocked_bottom_sheet.dart';
 
 class BlockedPeopleScreen extends StatefulWidget {
   const BlockedPeopleScreen({super.key});
@@ -25,32 +26,44 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                 color: AppColors.black,
               )),
           title: Text(
-            'Blocked People (03)',
-            style: TextStyle(color: AppColors.black),
+            'Blocked People',
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           ),
           actions: [
-            TextButton(
-              child: Text('Add more people',
+            Center(
+                child: TextButton(
+              child: Text('Unblock All',
                   style: TextStyle(color: AppColors.primaryColor)),
               onPressed: () {
-                showModalBottomSheet(
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(25.0),
-                      ),
-                    ),
+                showDialog(
                     context: context,
                     builder: (context) {
-                      return BlockedBottomSheet();
+                      return UnblockUserDialog();
                     });
               },
-            )
+            )),
           ]),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add, color: AppColors.white),
           backgroundColor: AppColors.primaryColor,
-          onPressed: () {}),
+          onPressed: () {
+            showModalBottomSheet(
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25.0),
+                  ),
+                ),
+                context: context,
+                builder: (context) {
+                  return BlockedBottomSheet();
+                });
+          }),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -80,18 +93,13 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                     subtitle: Text(blockedList[index].subtitle),
                     trailing: InkWell(
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Unclocked "${blockedList[index].title}"'),
-                              Text(
-                                'Undo',
-                                style: TextStyle(color: AppColors.primaryColor),
-                              ),
-                            ],
-                          ),
-                        ));
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return UnblockOneUserDialog(
+                                title: blockedList[index].title,
+                              );
+                            });
                       },
                       child: Container(
                         height: 25,
@@ -115,18 +123,6 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                 style: TextStyle(color: AppColors.grey),
               ),
             ),
-            Center(
-                child: TextButton(
-              child: Text('Unblock All',
-                  style: TextStyle(color: AppColors.primaryColor)),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return UnblockUserDialog();
-                    });
-              },
-            ))
           ],
         ),
       ),

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
-import 'widget/invite_contact_screen.dart';
-import 'widget/share_link_bottomSheet.dart';
 
 class SyncInviteScreen extends StatefulWidget {
   const SyncInviteScreen({super.key});
@@ -16,6 +13,7 @@ class SyncInviteScreen extends StatefulWidget {
 
 class _SyncInviteScreenState extends State<SyncInviteScreen> {
   bool readReceipt = false;
+  bool invite = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,40 +29,16 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
           )),
       body: Column(
         children: [
-          SizedBox(height: 26),
-          ListTile(
-            onTap: () {
-              showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(25.0),
-                    ),
-                  ),
-                  context: context,
-                  builder: (context) {
-                    return ShareLinkBottomSheet(
-                      showSociomee: false,
-                    );
-                  });
-            },
-            title: Text(
-              'Share link',
-              style: TextStyle(fontSize: 16),
-            ),
-            subtitle: Text(
-              'Share Msgmee link to your connections\nand Contacts',
-              style: TextStyle(fontSize: 12),
-            ),
-            trailing:
-                Icon(Icons.arrow_forward_ios, color: AppColors.grey, size: 15),
-          ),
-          Divider(color: AppColors.grey),
           ListTile(
             onTap: () {},
             title: Text(
               'Sync to SocioMee',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
             ),
             subtitle: Text(
               'You can sync your SocioMee Connections',
@@ -94,23 +68,81 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               ),
             ),
           ),
-          Divider(color: AppColors.grey),
           ListTile(
-            onTap: () {
-              screenNavigator(context, InviteContactScreen());
-            },
+            onTap: () {},
             title: Text(
-              'Invite Contact',
-              style: TextStyle(fontSize: 16),
+              'Invite',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
             ),
             subtitle: Text(
-              'You can sync your Contact',
+              'You can invite your connections from SocioMee ',
               style: TextStyle(fontSize: 12),
             ),
-            trailing:
-                Icon(Icons.arrow_forward_ios, color: AppColors.grey, size: 15),
+            trailing: SizedBox(
+              width: 51,
+              child: FlutterSwitch(
+                switchBorder: Border.all(
+                  color: AppColors.primaryColor,
+                  width: 2.0.w,
+                ),
+                activeColor: AppColors.primaryColor,
+                inactiveColor: AppColors.white,
+                inactiveToggleColor: AppColors.primaryColor,
+                width: 51.0.w,
+                height: 26.0.h,
+                toggleSize: 23.0.sp,
+                value: invite,
+                borderRadius: 30.0,
+                padding: 2.0,
+                onToggle: (val) {
+                  setState(() {
+                    invite = !invite;
+                  });
+                },
+              ),
+            ),
           ),
-          Divider(color: AppColors.grey),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.grey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppColors.primaryColor, width: 2)),
+                        hintText: 'Search'),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.primaryColor),
+                  child: Text(
+                    'Invite',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
+import 'package:msgmee/feature/e_settings/pages/delete_account/widget/delete_account_dialog.dart';
 
 import '../../../../theme/colors.dart';
-import 'widget/delete_bottom_sheet.dart';
 
 class DeleterAccountScreen extends StatelessWidget {
   const DeleterAccountScreen({super.key});
@@ -37,6 +37,7 @@ class DeleterAccountScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 30),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.asset(
                           'assets/error.png',
@@ -44,15 +45,19 @@ class DeleterAccountScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 20),
                         Text(
-                          'Deleting your account will:',
+                          'By deleting your account, following\nactions will happen ! ',
                           style: TextStyle(
-                              color: AppColors.errorRedColor, fontSize: 18),
-                        )
+                            color: Colors.red,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 20),
+                      padding:
+                          const EdgeInsets.only(top: 5, left: 44, bottom: 5),
                       child: Row(
                         children: [
                           Container(
@@ -63,13 +68,13 @@ class DeleterAccountScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
-                          Text('Erase your message history ')
+                          Text('Message history will be erased.')
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 20),
+                      padding:
+                          const EdgeInsets.only(top: 5, left: 44, bottom: 5),
                       child: Row(
                         children: [
                           Container(
@@ -80,13 +85,14 @@ class DeleterAccountScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
-                          Text('Delete you from all your MsgMee\ngroups')
+                          Text(
+                              'You will be deleted from all your MsgMee\ngroups.')
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 20),
+                      padding:
+                          const EdgeInsets.only(top: 5, left: 44, bottom: 5),
                       child: Row(
                         children: [
                           Container(
@@ -97,14 +103,15 @@ class DeleterAccountScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100)),
                           ),
                           SizedBox(width: 8),
-                          Text('Delete your all Google Drive backup')
+                          Text('All your Google Drive backup will be deleted.')
                         ],
                       ),
                     ),
-                    Text('Type your reasion',
+                    SizedBox(height: 35),
+                    Text('Reason For Deletion(Optional)',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 20),
+                    SizedBox(height: 5),
                     TextFormField(
                       decoration: InputDecoration(
                           contentPadding:
@@ -118,8 +125,9 @@ class DeleterAccountScreen extends StatelessWidget {
             Container(
               height: 82,
               width: MediaQuery.of(context).size.width,
-              alignment: Alignment.center,
-              color: AppColors.lightgrey,
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.centerLeft,
+              color: AppColors.lightgrey.withOpacity(.4),
               child: Text(
                 'To deleted your account, confirm your country code\nand enter your phone number ',
                 style: TextStyle(color: AppColors.black, fontSize: 14),
@@ -160,24 +168,37 @@ class DeleterAccountScreen extends StatelessWidget {
                     hintText: 'Enter password'),
               ),
             ),
-            SizedBox(height: 130.h),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: CustomButtonWidget(
-                    borderColor: AppColors.errorRedColor,
-                    title: 'Delate my account',
-                    color: AppColors.errorRedColor,
-                    ontap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          builder: (context) {
-                            return DeleteBottomSheet();
-                          });
-                    }),
-              ),
+            SizedBox(height: 70.h),
+            // Center(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 24),
+            //     child: CustomButtonWidget(
+            //         borderColor: AppColors.errorRedColor,
+            //         title: 'Delate my account',
+            //         color: AppColors.errorRedColor,
+            //         ontap: () {
+            //           showModalBottomSheet(
+            //               context: context,
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.circular(20)),
+            //               builder: (context) {
+            //                 return DeleteBottomSheet();
+            //               });
+            //         }),
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: CustomButtonWidget(
+                  title: 'Delete my account',
+                  color: AppColors.primaryColor,
+                  ontap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DeleteAccountDialog();
+                        });
+                  }),
             )
           ],
         ),

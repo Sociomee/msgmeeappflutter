@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/e_settings/pages/settings/widgets/logout_dialog.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../blocked_screen/blocked_screen.dart';
@@ -10,7 +11,6 @@ import '../notification_settings/notification_settings.dart';
 import '../privacy_settings/privacy_settings_screen.dart';
 import '../storage_settings/storage_settings_screen.dart';
 import '../sync_invite_screen/sync_invite_screen.dart';
-import 'widgets/logout_bottomsheet.dart';
 
 class SettingsOption {
   final String optionName;
@@ -70,13 +70,18 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Log Out',
           ontap: () {
-            showModalBottomSheet(
+            showDialog(
                 context: context,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
                 builder: (context) {
-                  return LogOutBottomSheet();
+                  return LogoutDialog();
                 });
+            // showModalBottomSheet(
+            // context: context,
+            // shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(20)),
+            // builder: (context) {
+            //   return LogOutBottomSheet();
+            // });
           }),
       SettingsOption(
           optionName: 'Delete Account',
