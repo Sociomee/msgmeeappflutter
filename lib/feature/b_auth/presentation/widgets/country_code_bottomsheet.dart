@@ -99,12 +99,12 @@ class CountryCodeWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 10),
                     decoration: const BoxDecoration(
                       color: Colors.white,
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            color: AppColors.lightgrey,
-                            blurRadius: 15.0,
-                            offset: Offset(0.0, 0.75))
-                      ],
+                      // boxShadow: <BoxShadow>[
+                      //   BoxShadow(
+                      //       color: AppColors.lightgrey,
+                      //       blurRadius: 15.0,
+                      //       offset: Offset(0.0, 0.75))
+                      // ],
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

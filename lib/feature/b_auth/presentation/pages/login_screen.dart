@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const Text(
               'We at MsgMee want to ensure that you have the best\nexperience possible.\nTo ensure that your mobile number is verified, please enter\nyour country code along with your mobile number.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 13),
             ),
             const Spacer(),
             CustomButtonWidget(
