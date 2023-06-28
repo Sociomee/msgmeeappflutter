@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_dialog.dart';
 import '../../../../theme/colors.dart';
 import '../../models/blockcontacts_model.dart';
 import 'widgets/blocked_bottom_sheet.dart';
@@ -118,7 +119,13 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                 child: TextButton(
               child: Text('Unblock All',
                   style: TextStyle(color: AppColors.primaryColor)),
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return UnblockUserDialog();
+                    });
+              },
             ))
           ],
         ),
