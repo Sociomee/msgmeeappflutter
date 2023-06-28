@@ -23,7 +23,34 @@ class AppColors {
   static const Color bottomSheettextColor = Color(0XFF4F4F4F);
   static const Color primaryDarkColor = Color(0XFF083A3D);
   static const Color yellowColor = Color(0xFFF8C756);
-
+  static const Color roseGradientDeep = Color(0XFFE71414);
+  static const Color roseGradientLight = Color(0XFFF58A8A);
+  static const Color lavenderGradientDeep = Color(0XFF9F03FC);
+  static const Color lavenderGradientLight = Color(0XFFCF81FD);
+  static const Color peachGradientDeep = Color(0XFF1BC0E4);
+  static const Color peachGradientLight = Color(0XFF8DDFF1);
+  static const Color oceanGradientDeep = Color(0XFF1550EA);
+  static const Color oceanGradientLight = Color(0XFF8AA8F5);
+  static const List<Color> berryGradientDeep = [
+    Color(0XFF304AD3),
+    Color(0XFF1F32DD),
+    Color(0XFF7114E7),
+    Color(0XFFE71486)
+  ];
+  static const List<Color> berryGradientLight = [
+    Color(0X80304AD3),
+    Color(0X801F32DD),
+    Color(0X807114E7),
+    Color(0X80E71486)
+  ];
+  static const Color candyGradientDeep = Color(0XFFEA15AF);
+  static const Color candyGradientLight = Color(0XFFF58AD7);
+  static const Color tulipGradientDeep = Color(0XFFEA9515);
+  static const Color tulipGradientLight = Color(0XFFF5CA8A);
+  static const Color honeyGradientDeep = Color(0XFF19EA15);
+  static const Color honeyGradientLight = Color(0XFF8CF58A);
+  static const Color kiwiGradientDeep = Color(0XFF4AB585);
+  static const Color kiwiGradientLight = Color(0XFFA4DAC2);
 //otp pin theme
   static final defaultpintheme = PinTheme(
     width: 50,

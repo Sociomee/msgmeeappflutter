@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_screen_bottom_modelsheet.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
@@ -105,20 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Image.asset('assets/video.png', width: 16),
             SizedBox(width: 28),
             Image.asset('assets/call.png', width: 16),
-            IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(25.0))),
-                      context: context,
-                      builder: (context) {
-                        return ChatScreenBottomModelSheet(
-                            profilename: widget.name);
-                      });
-                },
-                icon: const Icon(Icons.more_vert, color: AppColors.black))
+            SinglechatPopupMenu(name: widget.name),
           ],
         ),
         body: Stack(
