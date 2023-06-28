@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/e_settings/pages/storage_settings/widgets/clear_ceche_dialog.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../privacy_settings/widget/manage_storage_page.dart';
@@ -56,7 +57,13 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
             ),
             Divider(color: AppColors.lightgrey, thickness: 1),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ClearCacheDialog();
+                    });
+              },
               title: Text('Clear Cache'),
             ),
             Container(
