@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -12,6 +15,7 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../theme/colors.dart';
 import '../../widgets/chat_profile_widget.dart';
 import 'group_chat_page.dart';
+import 'image_preview_page.dart';
 import 'widgets/message_textField.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -33,12 +37,40 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
+  final ImagePicker _picker = ImagePicker();
+
   bool istyping = false;
   bool tap = false;
   List chattileIndex = [];
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+  }
+
+  void pickGalleryPic() async {
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      animatedScreenNavigator(
+          context,
+          ImagePreViewPage(
+            image: File(image.path),
+            profileImage: widget.imageUrl,
+          ));
+    }
+  }
+
+  void pickCameraPic() async {
+    // Capture a photo
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      animatedScreenNavigator(
+          context,
+          ImagePreViewPage(
+            image: File(photo.path),
+            profileImage: widget.imageUrl,
+          ));
+    }
   }
 
   @override
@@ -206,7 +238,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 : AppColors.black)))),
                             SizedBox(width: 8),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                pickCameraPic();
+                              },
                               child: Container(
                                 height: 30,
                                 width: 30,

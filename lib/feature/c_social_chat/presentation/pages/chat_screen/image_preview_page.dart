@@ -137,56 +137,62 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
             padding: const EdgeInsets.only(left: 20),
             child: SizedBox(
               height: 62,
-              child: Row(
+              child: ListView(
+                scrollDirection: Axis.horizontal,
                 children: [
-                  ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: imagelist.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedImage = index;
-                            });
-                          },
-                          child: Container(
-                            height: 62,
-                            width: 62,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                                border: selectedImage == index
-                                    ? Border.all(
-                                        color: AppColors.darkgreen, width: 3)
-                                    : null,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(
-                                imagelist[index]!,
-                                fit: BoxFit.cover,
+                  Row(
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: imagelist.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedImage = index;
+                                });
+                              },
+                              child: Container(
+                                height: 62,
+                                width: 62,
+                                margin: EdgeInsets.only(right: 10),
+                                decoration: BoxDecoration(
+                                    border: selectedImage == index
+                                        ? Border.all(
+                                            color: AppColors.darkgreen,
+                                            width: 3)
+                                        : null,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    imagelist[index]!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
+                            );
+                          }),
+                      GestureDetector(
+                        onTap: () {
+                          pickCameraPic();
+                        },
+                        child: Container(
+                          height: 62,
+                          width: 62,
+                          decoration: BoxDecoration(
+                              color: AppColors.grey.withOpacity(.6),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Icon(
+                            Icons.add,
+                            size: 40,
+                            color: AppColors.darkgreen,
                           ),
-                        );
-                      }),
-                  GestureDetector(
-                    onTap: () {
-                      pickCameraPic();
-                    },
-                    child: Container(
-                      height: 62,
-                      width: 62,
-                      decoration: BoxDecoration(
-                          color: AppColors.grey.withOpacity(.6),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Icon(
-                        Icons.add,
-                        size: 40,
-                        color: AppColors.darkgreen,
-                      ),
-                    ),
-                  )
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

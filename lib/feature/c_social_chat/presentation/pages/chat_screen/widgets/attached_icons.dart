@@ -40,18 +40,15 @@ class AttachedIcon extends StatefulWidget {
 
 class _AttachedIconState extends State<AttachedIcon> {
   final ImagePicker _picker = ImagePicker();
-  File? imageFile;
+
   void pickGalleryPic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      setState(() {
-        imageFile = File(image.path);
-      });
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: imageFile,
+            image: File(image.path),
             profileImage: widget.profileImage,
           ));
     }
@@ -61,13 +58,10 @@ class _AttachedIconState extends State<AttachedIcon> {
     // Capture a photo
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     if (photo != null) {
-      setState(() {
-        imageFile = File(photo.path);
-      });
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: imageFile,
+            image: File(photo.path),
             profileImage: widget.profileImage,
           ));
     }
