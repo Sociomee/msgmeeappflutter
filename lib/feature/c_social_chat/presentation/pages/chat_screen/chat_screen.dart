@@ -306,7 +306,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         duration: Duration(milliseconds: 200),
                         height: tap ? 44 * 6 : 0,
                         width: 150,
-                        child: AttachedIcon()))
+                        child: AttachedIcon(
+                          profileImage: widget.imageUrl,
+                        )))
               ],
             ),
           ],

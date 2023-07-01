@@ -295,7 +295,11 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     ? Positioned(
                         bottom: 60,
                         child: SizedBox(
-                            height: 200, width: 150, child: AttachedIcon()))
+                            height: 200,
+                            width: 150,
+                            child: AttachedIcon(
+                              profileImage: '',
+                            )))
                     : Container()
               ],
             ),
