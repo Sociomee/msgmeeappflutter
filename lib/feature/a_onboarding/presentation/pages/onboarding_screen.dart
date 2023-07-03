@@ -5,6 +5,7 @@ import 'package:msgmee/theme/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../helper/navigator_function.dart';
+import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../widgets/build_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -33,7 +34,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           isLastPage
               ? Container()
               : TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    screenNavigator(context, const MsgmeeScreen());
+                  },
                   child: Text('Skip', style: TextStyle(color: Colors.black)))
         ]),
         body: Column(

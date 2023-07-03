@@ -40,8 +40,8 @@ class MessageTextFieldWidget extends StatelessWidget {
   }
 }
 
-class MessageFieldWidget extends StatelessWidget {
-  const MessageFieldWidget(
+class ContactMessageFieldWidget extends StatelessWidget {
+  const ContactMessageFieldWidget(
       {super.key, required this.messageController, this.onChanged, this.color});
   final TextEditingController messageController;
   final ValueChanged<String>? onChanged;

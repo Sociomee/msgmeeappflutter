@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/feature/c_social_chat/models/chat_theme_model.dart';
+import 'package:msgmee/domain/models/chat_theme_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_theme_gradient_container.dart';
 
 import '../../../../../theme/colors.dart';

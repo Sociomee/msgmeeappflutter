@@ -1,40 +1,72 @@
+import 'dart:io';
+
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
+
 class ChatMessage {
   final String messageContent;
   final String messageType;
   final String msgStatus;
   final String time;
+  final MessageType type;
+  final File? image_url;
   ChatMessage({
     required this.messageContent,
     required this.messageType,
     required this.msgStatus,
     required this.time,
+    required this.type,
+    this.image_url,
   });
 }
 
 List<ChatMessage> messages = [
   ChatMessage(
-      messageContent: "Hello, Will",
-      messageType: "receiver",
-      msgStatus: 'read',
-      time: '04.25 pm'),
+    messageContent: "Hello, Will",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
   ChatMessage(
-      messageContent: "How have you been?",
-      messageType: "receiver",
-      msgStatus: 'read',
-      time: '04.25 pm'),
+    messageContent: "How have you been?",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
   ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender",
-      msgStatus: 'read',
-      time: '04.25 pm'),
+    messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
   ChatMessage(
-      messageContent: "ehhhh, doing OK.",
-      messageType: "receiver",
-      msgStatus: 'read',
-      time: '04.25 pm'),
+    messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
   ChatMessage(
-      messageContent: "Is there any thing wrong?",
-      messageType: "sender",
-      msgStatus: 'read',
-      time: '04.25 pm'),
+    messageContent: "ehhhh, doing OK.",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "Is there any thing wrong?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "Is there any thing wrong?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
 ];

@@ -48,6 +48,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
             onTap: () {
               if (selected.isNotEmpty) {
                 context.read<ShowContactTextField>().toggleValue();
+
                 Navigator.pop(context);
               }
             },

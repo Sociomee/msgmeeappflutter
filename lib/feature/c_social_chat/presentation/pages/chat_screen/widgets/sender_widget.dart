@@ -1,24 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import '../../../../../../theme/colors.dart';
 import 'custom_shape.dart';
+import 'message_type.dart';
 
-class SentMessageWidget extends StatefulWidget {
+class SentMessageWidget extends StatelessWidget {
   final String message;
   final String msgStatus;
   final String time;
+  final MessageType type;
+  final File? image;
   const SentMessageWidget({
     Key? key,
     required this.message,
     required this.msgStatus,
     required this.time,
+    required this.type,
+    this.image,
   }) : super(key: key);
 
-  @override
-  State<SentMessageWidget> createState() => _SentMessageWidgetState();
-}
-
-class _SentMessageWidgetState extends State<SentMessageWidget> {
   @override
   Widget build(BuildContext context) {
     final messageTextGroup = Flexible(
@@ -45,24 +47,24 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.message,
+                          Text(message,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)),
                           SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(widget.time,
+                              Text(time,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: widget.message.trim().length <= 15
+                                width: message.trim().length <= 15
                                     ? 40
-                                    : widget.message.trim().length <= 21
+                                    : message.trim().length <= 21
                                         ? 80
                                         : 200,
                               ),
-                              Text(widget.msgStatus,
+                              Text(msgStatus,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],
@@ -72,9 +74,9 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                   Positioned(
                     bottom: -2,
                     right: 0,
-                    child: widget.msgStatus == 'read'
+                    child: msgStatus == 'read'
                         ? MessageStatus.read
-                        : widget.msgStatus == 'send'
+                        : msgStatus == 'send'
                             ? MessageStatus.sent
                             : MessageStatus.delivered,
                   ),
@@ -86,39 +88,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
         ),
       ),
     );
-
-    return Padding(
-      padding: EdgeInsets.only(right: 18.0, left: 50, top: 15, bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          SizedBox(height: 30),
-          messageTextGroup,
-        ],
-      ),
-    );
-  }
-}
-
-class SentContactMessageWidget extends StatefulWidget {
-  final String message;
-  final String msgStatus;
-  final String time;
-  const SentContactMessageWidget({
-    Key? key,
-    required this.message,
-    required this.msgStatus,
-    required this.time,
-  }) : super(key: key);
-
-  @override
-  State<SentMessageWidget> createState() => _SentMessageWidgetState();
-}
-
-class _SentContactMessageWidgetState extends State<SentMessageWidget> {
-  @override
-  Widget build(BuildContext context) {
-    final messageTextGroup = Flexible(
+    final contactMessage = Flexible(
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -129,7 +99,7 @@ class _SentContactMessageWidgetState extends State<SentMessageWidget> {
                 children: [
                   Container(
                       padding: const EdgeInsets.only(
-                          top: 10, left: 14, right: 18, bottom: 5),
+                          top: 5, left: 5, right: 5, bottom: 5),
                       decoration: BoxDecoration(
                         color: AppColors.darkgreen,
                         borderRadius: const BorderRadius.only(
@@ -142,24 +112,63 @@ class _SentContactMessageWidgetState extends State<SentMessageWidget> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.message,
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                    'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+                                    height: 44,
+                                    width: 44,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  'Joy Arthur',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF141414),
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(Icons.videocam_outlined),
+                                SizedBox(width: 10),
+                                Icon(
+                                  Icons.phone_outlined,
+                                  size: 19,
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(message,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)),
                           SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(widget.time,
+                              Text(time,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: widget.message.trim().length <= 15
+                                width: message.trim().length <= 15
                                     ? 40
-                                    : widget.message.trim().length <= 21
+                                    : message.trim().length <= 21
                                         ? 80
                                         : 200,
                               ),
-                              Text(widget.msgStatus,
+                              Text(msgStatus,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],
@@ -169,9 +178,90 @@ class _SentContactMessageWidgetState extends State<SentMessageWidget> {
                   Positioned(
                     bottom: -2,
                     right: 0,
-                    child: widget.msgStatus == 'read'
+                    child: msgStatus == 'read'
                         ? MessageStatus.read
-                        : widget.msgStatus == 'send'
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+          ],
+        ),
+      ),
+    );
+    final imageMessage = Flexible(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(
+                          top: 5, left: 5, right: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkgreen,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          bottomLeft: Radius.circular(18),
+                          bottomRight: Radius.circular(18),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 140,
+                            width: 220,
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: image != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.file(
+                                      image!,
+                                      fit: BoxFit.cover,
+                                    ))
+                                : Container(),
+                          ),
+                          SizedBox(height: 5),
+                          Text(message,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                          SizedBox(height: 2),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              SizedBox(
+                                width: message.trim().length <= 15
+                                    ? 40
+                                    : message.trim().length <= 21
+                                        ? 80
+                                        : 200,
+                              ),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -2,
+                    right: 0,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
                             ? MessageStatus.sent
                             : MessageStatus.delivered,
                   ),
@@ -185,54 +275,17 @@ class _SentContactMessageWidgetState extends State<SentMessageWidget> {
     );
 
     return Padding(
-      padding: EdgeInsets.only(right: 18.0, left: 50, top: 15, bottom: 5),
+      padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          SizedBox(height: 30),
-          messageTextGroup,
+          type == MessageType.contact
+              ? contactMessage
+              : type == MessageType.image
+                  ? imageMessage
+                  : messageTextGroup,
         ],
       ),
     );
   }
 }
-
-
-
-// Container(
-//                             margin: EdgeInsets.only(bottom: 5),
-//                             padding: EdgeInsets.all(5),
-//                             decoration: BoxDecoration(
-//                               color: AppColors.white,
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                             child: Row(
-//                               children: [
-//                                 ClipRRect(
-//                                   borderRadius: BorderRadius.circular(10),
-//                                   child: Image.network(
-//                                     'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-//                                     height: 44,
-//                                     width: 44,
-//                                     fit: BoxFit.cover,
-//                                   ),
-//                                 ),
-//                                 SizedBox(width: 5),
-//                                 Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     Text('Abriella Bond'),
-//                                     Row(
-//                                       children: [
-//                                         Icon(
-//                                           Icons.person_2_outlined,
-//                                           size: 18,
-//                                         ),
-//                                         Text('Joy Arthur')
-//                                       ],
-//                                     ),
-//                                   ],
-//                                 )
-//                               ],
-//                             ),
-//                           ),

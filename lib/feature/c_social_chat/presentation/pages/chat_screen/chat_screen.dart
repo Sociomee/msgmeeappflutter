@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
@@ -172,9 +173,11 @@ class _ChatScreenState extends State<ChatScreen> {
                               });
                             },
                             child: ReceivedMessageWidget(
-                                message: messages[index].messageContent,
-                                msgStatus: messages[index].msgStatus,
-                                time: messages[index].time),
+                              message: messages[index].messageContent,
+                              msgStatus: messages[index].msgStatus,
+                              time: messages[index].time,
+                              type: 'text',
+                            ),
                           ),
                         )
                       : GestureDetector(
@@ -190,9 +193,12 @@ class _ChatScreenState extends State<ChatScreen> {
                             });
                           },
                           child: SentMessageWidget(
-                              message: messages[index].messageContent,
-                              msgStatus: messages[index].msgStatus,
-                              time: messages[index].time),
+                            message: messages[index].messageContent,
+                            msgStatus: messages[index].msgStatus,
+                            time: messages[index].time,
+                            type: messages[index].type,
+                            image: messages[index].image_url,
+                          ),
                         ),
                 );
               },
@@ -213,7 +219,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         color: Colors.white,
                         child: Row(
                           children: <Widget>[
-                            // SizedBox(width: 30, child: FlowAnimationWidget()),
                             GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -253,7 +258,6 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             SizedBox(width: 10),
-
                             Expanded(
                                 child: MessageTextFieldWidget(
                               messageController: messageController,
@@ -275,12 +279,26 @@ class _ChatScreenState extends State<ChatScreen> {
                                     onTap: () {
                                       if (messageController.text.isNotEmpty) {
                                         _scrollToBottom();
-                                        messages.add(ChatMessage(
-                                            messageContent:
-                                                messageController.text,
-                                            messageType: 'sender',
-                                            msgStatus: 'send',
-                                            time: '4:28 pm'));
+
+                                        context
+                                                .read<ShowContactTextField>()
+                                                .state
+                                            ? messages.add(ChatMessage(
+                                                messageContent:
+                                                    messageController.text,
+                                                messageType: 'sender',
+                                                msgStatus: 'send',
+                                                time: '4:28 pm',
+                                                type: MessageType.contact,
+                                              ))
+                                            : messages.add(ChatMessage(
+                                                messageContent:
+                                                    messageController.text,
+                                                messageType: 'sender',
+                                                msgStatus: 'send',
+                                                time: '4:28 pm',
+                                                type: MessageType.text,
+                                              ));
                                         setState(() {});
                                         messageController.clear();
                                       }
@@ -318,7 +336,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ? Positioned(
                         bottom: 10,
                         left: 84,
-                        child: MessageFieldWidget(
+                        child: ContactMessageFieldWidget(
                           messageController: messageController,
                           onChanged: (e) {
                             if (e.isNotEmpty) {

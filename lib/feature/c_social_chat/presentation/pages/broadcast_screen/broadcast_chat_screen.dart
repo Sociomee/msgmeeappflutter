@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broad_cast_desc_screen.dart';
 import '../../../../../data/model/chat_model.dart';
@@ -164,10 +165,12 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                           Expanded(
                             flex: 12,
                             child: SentMessageWidget(
-                                message:
-                                    'This is a broadcast message. Please link your SocioMee account with MsgMee account so that we can be friends in both applications',
-                                msgStatus: messages[index].msgStatus,
-                                time: messages[index].time),
+                              message:
+                                  'This is a broadcast message. Please link your SocioMee account with MsgMee account so that we can be friends in both applications',
+                              msgStatus: messages[index].msgStatus,
+                              time: messages[index].time,
+                              type: messages[index].type,
+                            ),
                           ),
                         ],
                       ),
@@ -254,11 +257,12 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                                     onTap: () {
                                       _scrollToBottom();
                                       messages.add(ChatMessage(
-                                          messageContent:
-                                              messageController.text,
-                                          messageType: 'sender',
-                                          msgStatus: 'send',
-                                          time: '4:28 pm'));
+                                        messageContent: messageController.text,
+                                        messageType: 'sender',
+                                        msgStatus: 'send',
+                                        time: '4:28 pm',
+                                        type: MessageType.text,
+                                      ));
                                       setState(() {});
                                       messageController.clear();
                                     },
