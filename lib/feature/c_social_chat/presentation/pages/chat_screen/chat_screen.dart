@@ -1,9 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/cubit/add_message_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -14,6 +16,7 @@ import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../theme/colors.dart';
+import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
 import 'group_chat_page.dart';
 import 'image_preview_page.dart';
@@ -145,16 +148,26 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             ListView.builder(
               controller: _listViewController,
-              itemCount: messages.length,
+              itemCount: context.read<AddMessageCubit>().state.messages.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 60),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Align(
-                  alignment: (messages[index].messageType == "receiver"
+                  alignment: (context
+                              .read<AddMessageCubit>()
+                              .state
+                              .messages[index]
+                              .messageType ==
+                          "receiver"
                       ? Alignment.topLeft
                       : Alignment.topRight),
-                  child: messages[index].messageType == "receiver"
+                  child: context
+                              .read<AddMessageCubit>()
+                              .state
+                              .messages[index]
+                              .messageType ==
+                          "receiver"
                       ? SwipeTo(
                           onRightSwipe: () {
                             print('ekjne');
@@ -173,18 +186,34 @@ class _ChatScreenState extends State<ChatScreen> {
                               });
                             },
                             child: ReceivedMessageWidget(
-                              message: messages[index].messageContent,
-                              msgStatus: messages[index].msgStatus,
-                              time: messages[index].time,
-                              type: 'text',
+                              message: context
+                                  .read<AddMessageCubit>()
+                                  .state
+                                  .messages[index]
+                                  .messageContent,
+                              msgStatus: context
+                                  .read<AddMessageCubit>()
+                                  .state
+                                  .messages[index]
+                                  .msgStatus,
+                              time: context
+                                  .read<AddMessageCubit>()
+                                  .state
+                                  .messages[index]
+                                  .time,
+                              type: context
+                                  .read<AddMessageCubit>()
+                                  .state
+                                  .messages[index]
+                                  .messageType,
                             ),
                           ),
                         )
                       : GestureDetector(
                           onTap: () {
                             setState(() {
-                              chattileIndex
-                                  .remove(messages[index].messageContent);
+                              // chattileIndex
+                              //     .remove(messages[index].messageContent);
                             });
                           },
                           onLongPress: () async {
@@ -193,11 +222,31 @@ class _ChatScreenState extends State<ChatScreen> {
                             });
                           },
                           child: SentMessageWidget(
-                            message: messages[index].messageContent,
-                            msgStatus: messages[index].msgStatus,
-                            time: messages[index].time,
-                            type: messages[index].type,
-                            image: messages[index].image_url,
+                            message: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .messageContent,
+                            msgStatus: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .msgStatus,
+                            time: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .time,
+                            type: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .type,
+                            image: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .image_url,
                           ),
                         ),
                 );
@@ -221,15 +270,15 @@ class _ChatScreenState extends State<ChatScreen> {
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    tap = !tap;
-                                  });
+                                  context.read<ShowAttachment>().toggleValue();
                                 },
                                 child: Container(
                                     height: 30,
                                     width: 30,
                                     decoration: BoxDecoration(
-                                        color: tap
+                                        color: context
+                                                .watch<ShowAttachment>()
+                                                .state
                                             ? AppColors.primaryDarkColor
                                             : AppColors.lightgrey1,
                                         borderRadius:
@@ -238,7 +287,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                         angle: -15,
                                         child: Icon(Icons.attach_file_outlined,
                                             size: 19,
-                                            color: tap
+                                            color: context
+                                                    .watch<ShowAttachment>()
+                                                    .state
                                                 ? AppColors.white
                                                 : AppColors.black)))),
                             SizedBox(width: 8),
@@ -283,24 +334,44 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context
                                                 .read<ShowContactTextField>()
                                                 .state
-                                            ? messages.add(ChatMessage(
-                                                messageContent:
-                                                    messageController.text,
-                                                messageType: 'sender',
-                                                msgStatus: 'send',
-                                                time: '4:28 pm',
-                                                type: MessageType.contact,
-                                              ))
-                                            : messages.add(ChatMessage(
-                                                messageContent:
-                                                    messageController.text,
-                                                messageType: 'sender',
-                                                msgStatus: 'send',
-                                                time: '4:28 pm',
-                                                type: MessageType.text,
-                                              ));
+                                            ? context
+                                                .read<AddMessageCubit>()
+                                                .addMessage(ChatMessage(
+                                                  messageContent:
+                                                      messageController.text,
+                                                  messageType: 'sender',
+                                                  msgStatus: 'send',
+                                                  time: '4:28 pm',
+                                                  type: MessageType.contact,
+                                                ))
+                                            : context
+                                                .read<AddMessageCubit>()
+                                                .addMessage(ChatMessage(
+                                                  messageContent:
+                                                      messageController.text,
+                                                  messageType: 'sender',
+                                                  msgStatus: 'send',
+                                                  time: '4:28 pm',
+                                                  type: MessageType.text,
+                                                ));
                                         setState(() {});
                                         messageController.clear();
+                                      } else if (context
+                                          .read<ShowAudioRecorder>()
+                                          .state) {
+                                        context
+                                            .read<AddMessageCubit>()
+                                            .addMessage(ChatMessage(
+                                              messageContent: '',
+                                              messageType: 'sender',
+                                              msgStatus: 'send',
+                                              time: '4:28 pm',
+                                              type: MessageType.audio,
+                                            ));
+                                        setState(() {});
+                                        context
+                                            .read<ShowAudioRecorder>()
+                                            .toggleValue();
                                       }
                                     },
                                     child: Container(
@@ -332,6 +403,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
+                //showing contack sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,
@@ -352,15 +424,20 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       )
                     : Container(),
+
+                //showing audio recorder widget
+                context.watch<ShowAudioRecorder>().state
+                    ? Positioned(
+                        bottom: 10, left: 86, child: AudioRecordWidget())
+                    : Container(),
                 Positioned(
                     bottom: 60,
                     child: AnimatedContainer(
                         duration: Duration(milliseconds: 200),
-                        height: tap ? 44 * 6 : 0,
+                        height:
+                            context.watch<ShowAttachment>().state ? 44 * 6 : 0,
                         width: 150,
-                        child: AttachedIcon(
-                          profileImage: widget.imageUrl,
-                        )))
+                        child: AttachedIcon(profileImage: widget.imageUrl)))
               ],
             ),
           ],

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import '../../../../../../theme/colors.dart';
 import 'custom_shape.dart';
@@ -273,6 +274,224 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
+    final audioMessage = Flexible(
+      child: Container(
+        width: 230,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkgreen,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          bottomLeft: Radius.circular(18),
+                          bottomRight: Radius.circular(18),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Icon(Icons.headset, color: Colors.blue),
+                                    Image.asset('assets/audio_eq.png'),
+                                    Icon(Icons.play_circle_outlined)
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text('00:30'),
+                                    SizedBox(
+                                      width: 120,
+                                      child: SliderTheme(
+                                        data: SliderTheme.of(context).copyWith(
+                                          activeTrackColor: Colors.white,
+                                          thumbShape: RoundSliderThumbShape(
+                                              enabledThumbRadius: 4.0),
+                                          overlayShape: RoundSliderOverlayShape(
+                                              overlayRadius: 0.0),
+                                        ),
+                                        child: Slider(
+                                            value: 130,
+                                            min: 129.0,
+                                            max: 160.0,
+                                            onChanged: (e) {}),
+                                      ),
+                                    ),
+                                    Text('32 KB')
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Text(message,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                          SizedBox(height: 2),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              SizedBox(
+                                width: message.trim().length <= 15
+                                    ? 40
+                                    : message.trim().length <= 21
+                                        ? 80
+                                        : 200,
+                              ),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -2,
+                    right: 0,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+          ],
+        ),
+      ),
+    );
+
+    final docMessage = Flexible(
+      child: Container(
+        width: 230,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkgreen,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          bottomLeft: Radius.circular(18),
+                          bottomRight: Radius.circular(18),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SvgPicture.asset('assets/docx.svg'),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Document name',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      '105 Kb',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 10,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, bottom: 2, top: 3),
+                            child: Text(message,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14)),
+                          ),
+                          SizedBox(height: 2),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(time,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                                SizedBox(
+                                  width: message.trim().length <= 15
+                                      ? 40
+                                      : message.trim().length <= 21
+                                          ? 80
+                                          : 200,
+                                ),
+                                Text(msgStatus,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -2,
+                    right: 0,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+          ],
+        ),
+      ),
+    );
 
     return Padding(
       padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
@@ -281,9 +500,13 @@ class SentMessageWidget extends StatelessWidget {
         children: <Widget>[
           type == MessageType.contact
               ? contactMessage
-              : type == MessageType.image
-                  ? imageMessage
-                  : messageTextGroup,
+              : type == MessageType.audio
+                  ? audioMessage
+                  : type == MessageType.doc
+                      ? docMessage
+                      : type == MessageType.image
+                          ? imageMessage
+                          : messageTextGroup,
         ],
       ),
     );

@@ -2,11 +2,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_sending_page.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
+import '../../../cubit/show_audio_recorder.dart';
 import '../attach_contact_page.dart';
 import '../attach_location_page.dart';
 import '../image_preview_page.dart';
@@ -78,16 +81,23 @@ class _AttachedIconState extends State<AttachedIcon> {
           return GestureDetector(
             onTap: () {
               if (index == 0) {
+                context.read<ShowAudioRecorder>().toggleValue();
+                context.read<ShowAttachment>().toggleValue();
               } else if (index == 1) {
                 pickCameraPic();
+                context.read<ShowAttachment>().toggleValue();
               } else if (index == 2) {
                 animatedScreenNavigator(context, AttachContactPage());
+                context.read<ShowAttachment>().toggleValue();
               } else if (index == 3) {
                 pickGalleryPic();
+                context.read<ShowAttachment>().toggleValue();
               } else if (index == 4) {
                 animatedScreenNavigator(context, DocSendingPage());
+                context.read<ShowAttachment>().toggleValue();
               } else if (index == 5) {
                 animatedScreenNavigator(context, AttachLocationPage());
+                context.read<ShowAttachment>().toggleValue();
               }
             },
             child: Column(

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
+
+import '../../../../../data/model/chat_model.dart';
+import '../../cubit/cubit/add_message_cubit.dart';
 
 class DocSendingPage extends StatefulWidget {
   const DocSendingPage({super.key});
@@ -79,6 +84,13 @@ class _DocSendingPageState extends State<DocSendingPage> {
                     SizedBox(width: 5),
                     GestureDetector(
                       onTap: () {
+                        context.read<AddMessageCubit>().addMessage(ChatMessage(
+                              messageContent: messageController.text,
+                              messageType: 'sender',
+                              msgStatus: 'send',
+                              time: '4:28 pm',
+                              type: MessageType.doc,
+                            ));
                         Navigator.pop(context);
                       },
                       child: Container(

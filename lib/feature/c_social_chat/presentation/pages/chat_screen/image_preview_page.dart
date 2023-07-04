@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/chat_model.dart';
+import '../../cubit/cubit/add_message_cubit.dart';
 
 class ImagePreViewPage extends StatefulWidget {
   const ImagePreViewPage({super.key, this.image, required this.profileImage});
@@ -218,7 +220,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
             SizedBox(width: 5),
             GestureDetector(
               onTap: () async {
-                messages.add(ChatMessage(
+                context.read<AddMessageCubit>().addMessage(ChatMessage(
                     messageContent: messageController.text,
                     messageType: 'sender',
                     msgStatus: 'send',
