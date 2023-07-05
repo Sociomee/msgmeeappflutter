@@ -57,6 +57,10 @@ dependencies:
   video_player: ^2.5.3
   flutter_svg: ^2.0.7
   qr_code_scanner: ^1.0.1
+  image_editor: ^1.3.0
+  image_editor_plus: ^0.1.8
+  photofilters: ^3.0.1
+  path: ^1.8.3
   
   
 

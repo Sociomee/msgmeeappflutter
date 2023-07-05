@@ -148,14 +148,14 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             ListView.builder(
               controller: _listViewController,
-              itemCount: context.read<AddMessageCubit>().state.messages.length,
+              itemCount: context.watch<AddMessageCubit>().state.messages.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 60),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Align(
                   alignment: (context
-                              .read<AddMessageCubit>()
+                              .watch<AddMessageCubit>()
                               .state
                               .messages[index]
                               .messageType ==
@@ -354,7 +354,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   time: '4:28 pm',
                                                   type: MessageType.text,
                                                 ));
-                                        setState(() {});
+
                                         messageController.clear();
                                       } else if (context
                                           .read<ShowAudioRecorder>()
@@ -368,7 +368,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               time: '4:28 pm',
                                               type: MessageType.audio,
                                             ));
-                                        setState(() {});
+
                                         context
                                             .read<ShowAudioRecorder>()
                                             .toggleValue();

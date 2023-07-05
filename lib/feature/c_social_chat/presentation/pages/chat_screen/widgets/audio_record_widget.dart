@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../data/model/chat_model.dart';
 import '../../../../../../theme/colors.dart';
-import '../../../cubit/cubit/add_message_cubit.dart';
-import 'message_type.dart';
 
 class AudioRecordWidget extends StatefulWidget {
   const AudioRecordWidget({super.key});

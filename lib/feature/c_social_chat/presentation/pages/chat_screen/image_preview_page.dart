@@ -5,10 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
+
 import 'package:msgmee/theme/colors.dart';
+import 'package:path/path.dart';
+import 'package:photofilters/photofilters.dart';
 
 import '../../../../../data/model/chat_model.dart';
 import '../../cubit/cubit/add_message_cubit.dart';
+import 'package:image/image.dart' as imageLib;
 
 class ImagePreViewPage extends StatefulWidget {
   const ImagePreViewPage({super.key, this.image, required this.profileImage});
@@ -23,6 +27,35 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
   final ImagePicker _picker = ImagePicker();
   final List<File?> imagelist = [];
   int selectedImage = 0;
+  String? fileName;
+  List<Filter> filters = presetFiltersList;
+
+  Future getImage(context) async {
+    fileName = basename(imagelist[selectedImage]!.path);
+    var image =
+        imageLib.decodeImage(imagelist[selectedImage]!.readAsBytesSync());
+    image = imageLib.copyResize(image!, width: 600);
+    Map imagefile = await Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new PhotoFilterSelector(
+          title: Text("Photo Filter Example"),
+          image: image!,
+          filters: presetFiltersList,
+          filename: fileName!,
+          loader: Center(child: CircularProgressIndicator()),
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+    if (imagefile.containsKey('image_filtered')) {
+      setState(() {
+        imagelist[selectedImage] = imagefile['image_filtered'];
+      });
+      print(imagelist[selectedImage]!.path);
+    }
+  }
+
   void pickGalleryPic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -114,24 +147,34 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
               Positioned(
                 bottom: 10,
                 right: 10,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.white),
-                  child: Row(
-                    children: [
-                      Icon(Icons.edit, size: 18),
-                      SizedBox(width: 6),
-                      Text(
-                        'Edit',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    getImage(context);
+                    // animatedScreenNavigator(
+                    //     context,
+                    //     ImageEditingPage(
+                    //       image: imagelist[selectedImage],
+                    //     ));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.white),
+                    child: Row(
+                      children: [
+                        Icon(Icons.edit, size: 18),
+                        SizedBox(width: 6),
+                        Text(
+                          'Edit',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -227,7 +270,9 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                     time: '4:28 pm',
                     type: MessageType.image,
                     image_url: imagelist[selectedImage]!));
+
                 Navigator.pop(context);
+                setState(() {});
               },
               child: Container(
                 height: 30,

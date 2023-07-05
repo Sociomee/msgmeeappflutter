@@ -3,9 +3,13 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus
   emoji_picker_flutter
   file_selector_windows
   firebase_core
+  image_compression_flutter
+  nb_utils
+  permission_handler_windows
   smart_auth
   url_launcher_windows
 )
