@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
-
 import 'package:msgmee/theme/colors.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
-
 import '../../../../../data/model/chat_model.dart';
 import '../../cubit/cubit/add_message_cubit.dart';
 import 'package:image/image.dart' as imageLib;
@@ -35,11 +32,13 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
     var image =
         imageLib.decodeImage(imagelist[selectedImage]!.readAsBytesSync());
     image = imageLib.copyResize(image!, width: 600);
+
     Map imagefile = await Navigator.push(
       context,
       new MaterialPageRoute(
-        builder: (context) => new PhotoFilterSelector(
-          title: Text("Photo Filter Example"),
+        builder: (context) => PhotoFilterSelector(
+          appBarColor: AppColors.primaryColor,
+          title: Text('Filters', style: TextStyle(color: AppColors.white)),
           image: image!,
           filters: presetFiltersList,
           filename: fileName!,
@@ -52,7 +51,6 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
       setState(() {
         imagelist[selectedImage] = imagefile['image_filtered'];
       });
-      print(imagelist[selectedImage]!.path);
     }
   }
 

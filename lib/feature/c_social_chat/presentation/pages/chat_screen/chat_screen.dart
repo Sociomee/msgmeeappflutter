@@ -368,7 +368,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               time: '4:28 pm',
                                               type: MessageType.audio,
                                             ));
-
+                                        setState(() {});
                                         context
                                             .read<ShowAudioRecorder>()
                                             .toggleValue();

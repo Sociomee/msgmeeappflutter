@@ -2,33 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class AppTheme {
-  //
-  AppTheme._();
-
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
-
     appBarTheme: AppBarTheme(
       color: AppColors.white,
-      iconTheme: IconThemeData(
-        color: Colors.white,
-      ),
+      iconTheme: IconThemeData(color: Colors.white),
       toolbarTextStyle:
           TextTheme(titleMedium: TextStyle(color: AppColors.black)).bodyMedium,
       titleTextStyle:
           TextTheme(titleMedium: TextStyle(color: AppColors.black)).titleLarge,
     ),
-    // colorScheme: ColorScheme.light(
-    //   primary: Colors.white,
-    //   onPrimary: Colors.white,
-    //   secondary: Colors.red,
-    // ),
-    // cardTheme: CardTheme(
-    //   color: Colors.teal,
-    // ),
-    // iconTheme: IconThemeData(
-    //   color: Colors.white54,
-    // ),
     textTheme: TextTheme(
       titleMedium: TextStyle(
         color: AppColors.black,
