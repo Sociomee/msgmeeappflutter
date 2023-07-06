@@ -18,4 +18,8 @@ class ChatThemeCubit extends Cubit<ChatThemeState> {
         chatDeepColor: AppColors.darkgreen,
         chatLightColor: AppColors.seconderyColor1));
   }
+
+  selectTheme(int index) {
+    emit(state.copyWith(selectedTheme: index));
+  }
 }

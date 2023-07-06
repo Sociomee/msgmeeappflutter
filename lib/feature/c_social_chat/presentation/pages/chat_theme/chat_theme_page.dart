@@ -78,9 +78,9 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                 Spacer(),
                                 GestureDetector(
                                   onTap: () {
-                                    setState(() {
-                                      selectedindex = index;
-                                    });
+                                    context
+                                        .read<ChatThemeCubit>()
+                                        .selectTheme(index);
                                     context
                                         .read<ChatThemeCubit>()
                                         .getInitalTheme();
@@ -92,10 +92,18 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         border: Border.all(
-                                            color: selectedindex == index
+                                            color: context
+                                                        .watch<ChatThemeCubit>()
+                                                        .state
+                                                        .selectedTheme ==
+                                                    index
                                                 ? AppColors.darkgreen
                                                 : AppColors.grey,
-                                            width: selectedindex == index
+                                            width: context
+                                                        .watch<ChatThemeCubit>()
+                                                        .state
+                                                        .selectedTheme ==
+                                                    index
                                                 ? 15
                                                 : 2)),
                                   ),
@@ -131,9 +139,9 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                 Spacer(),
                                 GestureDetector(
                                   onTap: () {
-                                    setState(() {
-                                      selectedindex = index;
-                                    });
+                                    context
+                                        .read<ChatThemeCubit>()
+                                        .selectTheme(index);
                                     context.read<ChatThemeCubit>().changeTheme(
                                           themes[index].rightColor,
                                           themes[index].leftColor,
@@ -146,10 +154,18 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         border: Border.all(
-                                            color: selectedindex == index
+                                            color: context
+                                                        .watch<ChatThemeCubit>()
+                                                        .state
+                                                        .selectedTheme ==
+                                                    index
                                                 ? AppColors.darkgreen
                                                 : AppColors.grey,
-                                            width: selectedindex == index
+                                            width: context
+                                                        .watch<ChatThemeCubit>()
+                                                        .state
+                                                        .selectedTheme ==
+                                                    index
                                                 ? 15
                                                 : 2)),
                                   ),

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShowAttachment()),
             BlocProvider(create: (context) => AddMessageCubit()),
             BlocProvider(create: (context) => SelectedchatCubit()),
-            BlocProvider(create: (context) => ChatThemeCubit())
+            BlocProvider(create: (context) => ChatThemeCubit()),
           ],
           child: MaterialApp(
             title: 'Msgmee App',

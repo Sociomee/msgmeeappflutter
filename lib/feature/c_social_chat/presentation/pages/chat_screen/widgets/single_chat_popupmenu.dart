@@ -4,6 +4,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen
 import '../../../../../../helper/navigator_function.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
 import '../../chat_theme/chat_theme_page.dart';
+import '../../chat_theme/chat_wallpaper_page.dart';
 
 class SinglechatPopupMenu extends StatefulWidget {
   const SinglechatPopupMenu({super.key, required this.name});
@@ -54,6 +55,7 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
           } else if (value == 3) {
             animatedScreenNavigator(context, ChatThemePage());
           } else if (value == 4) {
+            animatedScreenNavigator(context, ChangeWallPaperPage());
             // animatedScreenNavigator(context, AddParticipantsScreen());
           } else if (value == 5) {
             showDialog(
