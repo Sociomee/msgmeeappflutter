@@ -165,6 +165,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                           Expanded(
                             flex: 12,
                             child: SentMessageWidget(
+                              doc: '',
                               message:
                                   'This is a broadcast message. Please link your SocioMee account with MsgMee account so that we can be friends in both applications',
                               msgStatus: messages[index].msgStatus,

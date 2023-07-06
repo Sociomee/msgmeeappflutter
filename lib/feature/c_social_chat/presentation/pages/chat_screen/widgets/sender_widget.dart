@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import '../../../../../../theme/colors.dart';
@@ -13,14 +14,16 @@ class SentMessageWidget extends StatelessWidget {
   final String time;
   final MessageType type;
   final File? image;
-  const SentMessageWidget({
-    Key? key,
-    required this.message,
-    required this.msgStatus,
-    required this.time,
-    required this.type,
-    this.image,
-  }) : super(key: key);
+  final String? doc;
+  const SentMessageWidget(
+      {Key? key,
+      required this.message,
+      required this.msgStatus,
+      required this.time,
+      required this.type,
+      this.image,
+      this.doc})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -384,7 +387,6 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-
     final docMessage = Flexible(
       child: Container(
         width: 230,
@@ -415,31 +417,37 @@ class SentMessageWidget extends StatelessWidget {
                                 color: AppColors.white,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                SvgPicture.asset('assets/docx.svg'),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Document name',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Text(
-                                      '105 Kb',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 10,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    )
-                                  ],
-                                )
+                                SvgPicture.asset('assets/docx.svg', height: 38),
+                                SizedBox(width: 10),
+                                doc != null
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            doc!.split('/').first,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12.sp,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            '${doc!.split('/').last} Kb',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 10.sp,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : Container()
                               ],
                             ),
                           ),

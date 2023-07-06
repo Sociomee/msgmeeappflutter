@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -82,6 +84,17 @@ class SocialchatWidget extends StatelessWidget {
                                       Icons.star,
                                       color: AppColors.primaryColor,
                                       size: 16,
+                                    )
+                                  : Container(),
+                              selectcubit.pinned &&
+                                      selectcubit.selectedchat.contains(index)
+                                  ? Transform.rotate(
+                                      angle: pi / 4,
+                                      child: Icon(
+                                        Icons.push_pin,
+                                        color: AppColors.primaryColor,
+                                        size: 16,
+                                      ),
                                     )
                                   : Container()
                             ],

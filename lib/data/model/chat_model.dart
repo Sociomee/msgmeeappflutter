@@ -9,6 +9,8 @@ class ChatMessage {
   final String time;
   final MessageType type;
   final File? image_url;
+  final String? docName;
+
   ChatMessage({
     required this.messageContent,
     required this.messageType,
@@ -16,6 +18,7 @@ class ChatMessage {
     required this.time,
     required this.type,
     this.image_url,
+    this.docName,
   });
 }
 

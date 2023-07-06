@@ -78,11 +78,14 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                       onTap: () {
                         context.read<SelectedchatCubit>().starClicked();
                       },
-                      child: Icon(
-                        Icons.star_outline,
-                        color: AppColors.black,
-                        size: 18,
-                      ),
+                      child:
+                          context.watch<SelectedchatCubit>().state.starClicked
+                              ? SvgPicture.asset('assets/star_clicked.svg')
+                              : Icon(
+                                  Icons.star_outline,
+                                  color: AppColors.black,
+                                  size: 18,
+                                ),
                     ),
                     SizedBox(width: 19),
                     Icon(
@@ -91,13 +94,20 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                       size: 18,
                     ),
                     SizedBox(width: 19),
-                    Transform.rotate(
-                      angle: pi / 4,
-                      child: Icon(
-                        Icons.push_pin_outlined,
-                        color: AppColors.black,
-                        size: 18,
-                      ),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<SelectedchatCubit>().pinClicked();
+                      },
+                      child: context.watch<SelectedchatCubit>().state.pinned
+                          ? SvgPicture.asset('assets/pin.svg')
+                          : Transform.rotate(
+                              angle: pi / 4,
+                              child: Icon(
+                                Icons.push_pin_outlined,
+                                color: AppColors.black,
+                                size: 18,
+                              ),
+                            ),
                     ),
                     SizedBox(width: 19),
                     GestureDetector(

@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_sending_page.dart';
+import 'package:msgmee/helper/getpdf_size.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../cubit/show_audio_recorder.dart';
@@ -43,7 +45,7 @@ class AttachedIcon extends StatefulWidget {
 
 class _AttachedIconState extends State<AttachedIcon> {
   final ImagePicker _picker = ImagePicker();
-
+  String pdfname = '';
   void pickGalleryPic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -52,6 +54,18 @@ class _AttachedIconState extends State<AttachedIcon> {
           context,
           ImagePreViewPage(
             image: File(image.path),
+            profileImage: widget.profileImage,
+          ));
+    }
+  }
+
+  void pickMultipleGalleryPic() async {
+    final List<XFile> images = await _picker.pickMultiImage();
+    if (images.isNotEmpty) {
+      animatedScreenNavigator(
+          context,
+          ImagePreViewPage(
+            image: File(images[0].path),
             profileImage: widget.profileImage,
           ));
     }
@@ -67,6 +81,28 @@ class _AttachedIconState extends State<AttachedIcon> {
             image: File(photo.path),
             profileImage: widget.profileImage,
           ));
+    }
+  }
+
+  pickdoc() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+      allowMultiple: false,
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      String? path = file.path;
+      String? size = getFileSize(File(result.files.single.path!));
+
+      setState(() {
+        pdfname = path!.split('/').last;
+      });
+      animatedScreenNavigator(
+          context, DocSendingPage(pftname: "${pdfname}/${size}"));
+    } else {
+      // User canceled file picking
+      print('No PDF file selected');
     }
   }
 
@@ -93,7 +129,7 @@ class _AttachedIconState extends State<AttachedIcon> {
                 pickGalleryPic();
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 4) {
-                animatedScreenNavigator(context, DocSendingPage());
+                pickdoc();
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 5) {
                 animatedScreenNavigator(context, AttachLocationPage());

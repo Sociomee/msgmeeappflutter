@@ -21,4 +21,8 @@ class SelectedchatCubit extends Cubit<SelectedchatState> {
   muteClicked() {
     emit(state.copyWith(mute: !state.mute));
   }
+
+  pinClicked() {
+    emit(state.copyWith(pinned: !state.pinned));
+  }
 }

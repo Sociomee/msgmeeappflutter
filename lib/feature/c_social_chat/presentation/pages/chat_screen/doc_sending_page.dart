@@ -7,11 +7,12 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/chat_model.dart';
+import '../../../../../helper/get_currenttime.dart';
 import '../../cubit/cubit/add_message_cubit.dart';
 
 class DocSendingPage extends StatefulWidget {
-  const DocSendingPage({super.key});
-
+  const DocSendingPage({super.key, required this.pftname});
+  final String pftname;
   @override
   State<DocSendingPage> createState() => _DocSendingPageState();
 }
@@ -42,7 +43,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
             },
             child: Icon(Icons.arrow_back_ios, color: AppColors.black)),
         title: Text(
-          'finaldocument.docx',
+          widget.pftname.split('/').first,
           style: TextStyle(color: AppColors.black),
         ),
       ),
@@ -64,7 +65,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
               SvgPicture.asset('assets/docx.svg'),
               SizedBox(height: 5),
               Text(
-                'finaldocument.docx',
+                widget.pftname.split('/').first,
                 style: TextStyle(color: AppColors.black, fontSize: 20),
               ),
               Spacer(),
@@ -88,8 +89,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
                               messageContent: messageController.text,
                               messageType: 'sender',
                               msgStatus: 'send',
-                              time: '4:28 pm',
+                              time: getCurrentTime(),
                               type: MessageType.doc,
+                              docName: widget.pftname,
                             ));
                         Navigator.pop(context);
                       },
@@ -97,9 +99,8 @@ class _DocSendingPageState extends State<DocSendingPage> {
                         height: 30,
                         width: 30,
                         decoration: BoxDecoration(
-                          color: AppColors.lightgrey1,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                            color: AppColors.lightgrey1,
+                            borderRadius: BorderRadius.circular(30)),
                         child: Image.asset('assets/attach.png'),
                       ),
                     )

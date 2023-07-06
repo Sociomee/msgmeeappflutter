@@ -14,6 +14,7 @@ import 'package:image/image.dart' as imageLib;
 class ImagePreViewPage extends StatefulWidget {
   const ImagePreViewPage({super.key, this.image, required this.profileImage});
   final File? image;
+
   final String profileImage;
   @override
   State<ImagePreViewPage> createState() => _ImagePreViewPageState();

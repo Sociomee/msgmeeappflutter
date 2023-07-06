@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 
-import '../../widgets/sync_loading_widget.dart';
 import 'widget/social_chat_widget.dart';
 import 'widget/social_stoty_widget.dart';
 
@@ -30,10 +29,10 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                     SocialchatWidget(),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SyncLoadingWidget(),
-                ),
+                // Align(
+                //   alignment: Alignment.topCenter,
+                //   child: SyncLoadingWidget(),
+                // ),
               ],
             ),
           );

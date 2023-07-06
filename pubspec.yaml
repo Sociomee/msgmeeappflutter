@@ -59,6 +59,8 @@ dependencies:
   photofilters: ^3.0.1
   path: ^1.8.3
   stories_editor: ^0.2.2
+  file_picker: ^5.3.2
+  intl: ^0.18.1
   
   
 

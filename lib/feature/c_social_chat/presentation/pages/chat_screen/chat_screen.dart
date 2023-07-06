@@ -15,6 +15,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
+import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
@@ -222,6 +223,12 @@ class _ChatScreenState extends State<ChatScreen> {
                             });
                           },
                           child: SentMessageWidget(
+                            doc: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .docName,
+                                
                             message: context
                                 .watch<AddMessageCubit>()
                                 .state
@@ -341,7 +348,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                       messageController.text,
                                                   messageType: 'sender',
                                                   msgStatus: 'send',
-                                                  time: '4:28 pm',
+                                                  time: getCurrentTime(),
                                                   type: MessageType.contact,
                                                 ))
                                             : context
@@ -351,7 +358,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                       messageController.text,
                                                   messageType: 'sender',
                                                   msgStatus: 'send',
-                                                  time: '4:28 pm',
+                                                  time: getCurrentTime(),
                                                   type: MessageType.text,
                                                 ));
 
@@ -365,7 +372,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               messageContent: '',
                                               messageType: 'sender',
                                               msgStatus: 'send',
-                                              time: '4:28 pm',
+                                              time: getCurrentTime(),
                                               type: MessageType.audio,
                                             ));
                                         setState(() {});
