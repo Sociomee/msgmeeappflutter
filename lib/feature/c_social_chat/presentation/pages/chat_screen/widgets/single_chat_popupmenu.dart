@@ -3,7 +3,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 import '../../../../../../helper/navigator_function.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
-import '../chat_theme_page.dart';
+import '../../chat_theme/chat_theme_page.dart';
 
 class SinglechatPopupMenu extends StatefulWidget {
   const SinglechatPopupMenu({super.key, required this.name});

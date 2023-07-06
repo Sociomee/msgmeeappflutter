@@ -8,8 +8,9 @@ import 'package:msgmee/theme/colors.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
 import '../../../../../data/model/chat_model.dart';
-import '../../cubit/cubit/add_message_cubit.dart';
 import 'package:image/image.dart' as imageLib;
+
+import '../../cubit/add_message/add_message_cubit.dart';
 
 class ImagePreViewPage extends StatefulWidget {
   const ImagePreViewPage({super.key, this.image, required this.profileImage});

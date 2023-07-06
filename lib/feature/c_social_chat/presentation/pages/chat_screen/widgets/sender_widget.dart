@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import '../../../../../../theme/colors.dart';
+import '../../../cubit/chat_theme/chat_theme_cubit.dart';
 import 'custom_shape.dart';
 import 'message_type.dart';
 
@@ -40,7 +42,8 @@ class SentMessageWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 10, left: 14, right: 18, bottom: 5),
                       decoration: BoxDecoration(
-                        color: AppColors.darkgreen,
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -87,7 +90,9 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+            CustomPaint(
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatDeepColor)),
           ],
         ),
       ),
@@ -105,7 +110,8 @@ class SentMessageWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 5, right: 5, bottom: 5),
                       decoration: BoxDecoration(
-                        color: AppColors.darkgreen,
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -191,7 +197,9 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+            CustomPaint(
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatDeepColor)),
           ],
         ),
       ),
@@ -209,7 +217,8 @@ class SentMessageWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 5, right: 5, bottom: 5),
                       decoration: BoxDecoration(
-                        color: AppColors.darkgreen,
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -272,7 +281,9 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+            CustomPaint(
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatDeepColor)),
           ],
         ),
       ),
@@ -290,7 +301,8 @@ class SentMessageWidget extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: AppColors.darkgreen,
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -382,7 +394,9 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+            CustomPaint(
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatDeepColor)),
           ],
         ),
       ),
@@ -400,7 +414,8 @@ class SentMessageWidget extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: AppColors.darkgreen,
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
@@ -495,7 +510,9 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            CustomPaint(painter: CustomShape(AppColors.darkgreen)),
+            CustomPaint(
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatDeepColor)),
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../data/model/chat_model.dart';
 import '../../../../../../theme/colors.dart';
-import '../../../cubit/cubit/add_message_cubit.dart';
+import '../../../cubit/add_message/add_message_cubit.dart';
 import '../../../cubit/show_audio_recorder.dart';
 import 'message_type.dart';
 

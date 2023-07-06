@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
-import 'feature/c_social_chat/presentation/cubit/cubit/add_message_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShowAudioRecorder()),
             BlocProvider(create: (context) => ShowAttachment()),
             BlocProvider(create: (context) => AddMessageCubit()),
-            BlocProvider(create: (context) => SelectedchatCubit())
+            BlocProvider(create: (context) => SelectedchatCubit()),
+            BlocProvider(create: (context) => ChatThemeCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

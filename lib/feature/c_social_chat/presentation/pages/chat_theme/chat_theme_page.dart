@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/domain/models/chat_theme_model.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/chat_theme_gradient_container.dart';
 
 import '../../../../../theme/colors.dart';
@@ -79,6 +81,9 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                     setState(() {
                                       selectedindex = index;
                                     });
+                                    context
+                                        .read<ChatThemeCubit>()
+                                        .getInitalTheme();
                                   },
                                   child: Container(
                                     height: 22,
@@ -129,6 +134,10 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                     setState(() {
                                       selectedindex = index;
                                     });
+                                    context.read<ChatThemeCubit>().changeTheme(
+                                          themes[index].rightColor,
+                                          themes[index].leftColor,
+                                        );
                                   },
                                   child: Container(
                                     height: 22,

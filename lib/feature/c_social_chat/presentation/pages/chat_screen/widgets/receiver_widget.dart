@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
 import '../../../../../../theme/colors.dart';
+import '../../../cubit/chat_theme/chat_theme_cubit.dart';
 import 'custom_shape.dart';
 
 class ReceivedMessageWidget extends StatelessWidget {
@@ -29,7 +31,8 @@ class ReceivedMessageWidget extends StatelessWidget {
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
               child: CustomPaint(
-                painter: CustomShape(AppColors.seconderyColor1),
+                painter: CustomShape(
+                    context.watch<ChatThemeCubit>().state.chatLightColor),
               ),
             ),
             Flexible(
@@ -37,7 +40,7 @@ class ReceivedMessageWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, left: 14, right: 18, bottom: 15),
                 decoration: BoxDecoration(
-                  color: AppColors.seconderyColor1,
+                  color: context.watch<ChatThemeCubit>().state.chatLightColor,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(18),
                     bottomLeft: Radius.circular(18),
@@ -83,7 +86,7 @@ class ReceivedMessageWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, left: 14, right: 18, bottom: 15),
                 decoration: BoxDecoration(
-                    color: AppColors.seconderyColor1,
+                    color: context.watch<ChatThemeCubit>().state.chatLightColor,
                     borderRadius: BorderRadius.circular(100)),
                 child: Column(
                   children: [

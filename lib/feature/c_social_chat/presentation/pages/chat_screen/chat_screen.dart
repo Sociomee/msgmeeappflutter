@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/cubit/cubit/add_message_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
@@ -17,6 +16,7 @@ import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
+import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
 import 'group_chat_page.dart';
@@ -228,7 +228,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                 .state
                                 .messages[index]
                                 .docName,
-                                
                             message: context
                                 .watch<AddMessageCubit>()
                                 .state

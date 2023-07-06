@@ -8,7 +8,7 @@ import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
-import '../../cubit/cubit/add_message_cubit.dart';
+import '../../cubit/add_message/add_message_cubit.dart';
 
 class DocSendingPage extends StatefulWidget {
   const DocSendingPage({super.key, required this.pftname});
