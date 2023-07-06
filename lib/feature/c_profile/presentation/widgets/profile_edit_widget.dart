@@ -14,8 +14,10 @@ class ProfileEditWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                   height: 125,
@@ -42,25 +44,12 @@ class ProfileEditWidget extends StatelessWidget {
           ),
           SizedBox(width: 20),
           Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Anna More',
-                      style: TextStyle(
-                          fontSize: 18.sp, fontWeight: FontWeight.w700)),
-                  SizedBox(width: 100),
-                  GestureDetector(
-                    onTap: () {
-                      animatedScreenNavigator(context, EditProfilePicWidget());
-                    },
-                    child: Text('Edit',
-                        style: TextStyle(
-                            fontSize: 16, color: AppColors.primaryColor)),
-                  )
-                ],
-              ),
+              Text('Anna More',
+                  style:
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700)),
               SizedBox(height: 10),
               Text('@shreya_singh012',
                   style: TextStyle(
@@ -73,6 +62,21 @@ class ProfileEditWidget extends StatelessWidget {
                     animatedScreenNavigator(context, ProfileScanPage());
                   },
                   child: Icon(Icons.qr_code, color: AppColors.primaryColor))
+            ],
+          ),
+          Spacer(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  animatedScreenNavigator(context, EditProfilePicWidget());
+                },
+                child: Text('Edit',
+                    style:
+                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+              ),
+              SizedBox(height: 66)
             ],
           ),
         ],

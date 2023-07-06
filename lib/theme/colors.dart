@@ -5,6 +5,7 @@ class AppColors {
   //color
   static const Color primaryColor = Color(0XFF81C14B);
   static const Color seconderyColor = Color(0XFFACDAD6);
+  static const Color selectedChatColor = Color(0xFFE3F4EA);
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static const Color lightgrey = Color(0XFFC2C2C2);

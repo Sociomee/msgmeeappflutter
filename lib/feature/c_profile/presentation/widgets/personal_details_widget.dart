@@ -59,7 +59,10 @@ class PersonalDetailsWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Icon(Icons.phone_outlined),
+              Icon(
+                Icons.phone_outlined,
+                size: 20,
+              ),
               SizedBox(width: 5),
               Text('Mobile Number',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -84,7 +87,7 @@ class PersonalDetailsWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Icon(Icons.person_outlined),
+              SvgPicture.asset('assets/account_circle.svg'),
               SizedBox(width: 5),
               Text('Gender',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -109,7 +112,7 @@ class PersonalDetailsWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Icon(Icons.calendar_month_outlined),
+              SvgPicture.asset('assets/event.svg'),
               SizedBox(width: 5),
               Text('Date Of Birth',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -151,7 +154,7 @@ class PersonalDetailsWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Icon(Icons.calendar_month_outlined),
+              SvgPicture.asset('assets/heart_plus.svg'),
               SizedBox(width: 5),
               Text('Interests',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -298,7 +301,6 @@ class PersonalDetailsWidget extends StatelessWidget {
             ],
           ),
         ),
-       
       ],
     );
   }

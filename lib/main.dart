@@ -9,6 +9,7 @@ import 'feature/c_social_chat/presentation/cubit/cubit/add_message_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShowLoaderCubit()),
             BlocProvider(create: (context) => ShowAudioRecorder()),
             BlocProvider(create: (context) => ShowAttachment()),
-            BlocProvider(create: (context) => AddMessageCubit())
+            BlocProvider(create: (context) => AddMessageCubit()),
+            BlocProvider(create: (context) => SelectedchatCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

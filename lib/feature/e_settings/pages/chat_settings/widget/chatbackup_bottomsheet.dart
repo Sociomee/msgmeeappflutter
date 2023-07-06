@@ -27,6 +27,7 @@ class ChatBackUpBottomSheet extends StatefulWidget {
 }
 
 class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
+  int selected = 0;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -62,9 +63,9 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                           tileColor: AppColors.seconderyColor,
                           selectedTileColor: AppColors.seconderyColor,
                           onTap: () {
-                            options[index].isSelected =
-                                !options[index].isSelected;
-                            setState(() {});
+                            setState(() {
+                              selected = index;
+                            });
                           },
                           leading: Text(options[index].option),
                           trailing: Container(
@@ -75,7 +76,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                                 border: Border.all(
                                     color: AppColors.primaryColor, width: 1),
                                 borderRadius: BorderRadius.circular(100)),
-                            child: options[index].isSelected
+                            child: selected == index
                                 ? Container(
                                     height: 5,
                                     width: 5,
@@ -95,7 +96,11 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                   }),
               SizedBox(height: 30),
               CustomButtonWidget(
-                  title: 'Ok', color: AppColors.primaryColor, ontap: () {}),
+                  title: 'Ok',
+                  color: AppColors.primaryColor,
+                  ontap: () {
+                    Navigator.pop(context);
+                  }),
             ],
           ),
         ));
