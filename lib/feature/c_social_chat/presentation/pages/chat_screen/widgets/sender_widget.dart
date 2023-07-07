@@ -452,7 +452,7 @@ class SentMessageWidget extends StatelessWidget {
                                           ),
                                           SizedBox(height: 5),
                                           Text(
-                                            '${doc!.split('/').last} Kb',
+                                            '${doc!.split('/').last}',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 10.sp,

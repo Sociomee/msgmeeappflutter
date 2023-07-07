@@ -24,31 +24,21 @@ class _ChatThemePageState extends State<ChatThemePage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
-            )),
-        title: Text(
-          'Chat Theme',
-          style: TextStyle(color: AppColors.black),
-        ),
+            icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+        title: Text('Chat Theme', style: TextStyle(color: AppColors.black)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Colors & Gradients',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Colors & Gradients',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600))),
           SizedBox(height: 20),
           ListView.builder(
               physics: NeverScrollableScrollPhysics(),
@@ -63,58 +53,53 @@ class _ChatThemePageState extends State<ChatThemePage> {
                             child: Row(
                               children: [
                                 GradientColorContainer(
-                                  leftColor: AppColors.berryGradientLight,
-                                  rightColor: AppColors.berryGradientDeep,
-                                ),
-                                Text(
-                                  themes[index].name,
-                                  style: TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                    leftColor: AppColors.berryGradientLight,
+                                    rightColor: AppColors.berryGradientDeep),
+                                Text(themes[index].name,
+                                    style: TextStyle(
+                                        color: Color(0xFF333333),
+                                        fontSize: 15,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500)),
                                 Spacer(),
                                 GestureDetector(
-                                  onTap: () {
-                                    context
-                                        .read<ChatThemeCubit>()
-                                        .selectTheme(index);
-                                    context
-                                        .read<ChatThemeCubit>()
-                                        .getInitalTheme();
-                                  },
-                                  child: Container(
-                                    height: 22,
-                                    width: 22,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            color: context
-                                                        .watch<ChatThemeCubit>()
-                                                        .state
-                                                        .selectedTheme ==
-                                                    index
-                                                ? AppColors.darkgreen
-                                                : AppColors.grey,
-                                            width: context
-                                                        .watch<ChatThemeCubit>()
-                                                        .state
-                                                        .selectedTheme ==
-                                                    index
-                                                ? 15
-                                                : 2)),
-                                  ),
-                                )
+                                    onTap: () {
+                                      context
+                                          .read<ChatThemeCubit>()
+                                          .selectTheme(index);
+                                      context
+                                          .read<ChatThemeCubit>()
+                                          .getInitalTheme();
+                                    },
+                                    child: Container(
+                                        height: 22,
+                                        width: 22,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            border: Border.all(
+                                                color: context
+                                                            .watch<
+                                                                ChatThemeCubit>()
+                                                            .state
+                                                            .selectedTheme ==
+                                                        index
+                                                    ? AppColors.darkgreen
+                                                    : AppColors.grey,
+                                                width: context
+                                                            .watch<
+                                                                ChatThemeCubit>()
+                                                            .state
+                                                            .selectedTheme ==
+                                                        index
+                                                    ? 15
+                                                    : 2))))
                               ],
                             ),
                           ),
                           Divider(
-                            color: Color.fromARGB(255, 225, 225, 225),
-                            thickness: 1,
-                          )
+                              color: Color.fromARGB(255, 225, 225, 225),
+                              thickness: 1)
                         ],
                       )
                     : Column(
@@ -127,15 +112,12 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                   leftColor: themes[index].leftColor,
                                   rightColor: themes[index].rightColor,
                                 ),
-                                Text(
-                                  themes[index].name,
-                                  style: TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                Text(themes[index].name,
+                                    style: TextStyle(
+                                        color: Color(0xFF333333),
+                                        fontSize: 15,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500)),
                                 Spacer(),
                                 GestureDetector(
                                   onTap: () {
@@ -174,9 +156,8 @@ class _ChatThemePageState extends State<ChatThemePage> {
                             ),
                           ),
                           Divider(
-                            color: Color.fromARGB(255, 225, 225, 225),
-                            thickness: 1,
-                          )
+                              color: Color.fromARGB(255, 225, 225, 225),
+                              thickness: 1)
                         ],
                       );
               })

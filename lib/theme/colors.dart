@@ -52,6 +52,18 @@ class AppColors {
   static const Color honeyGradientLight = Color(0XFF8CF58A);
   static const Color kiwiGradientDeep = Color(0XFF4AB585);
   static const Color kiwiGradientLight = Color(0XFFA4DAC2);
+  static const Color wallpaperColor1 = Color(0XFFFCFF73);
+  static const Color wallpaperColor2 = Color(0XFFFF7A00);
+  static const Color wallpaperColor3 = Color(0XFFFF9900);
+  static const Color wallpaperColor4 = Color(0XFFF00000);
+  static const Color wallpaperColor5 = Color(0XFF0267DD);
+  static const Color wallpaperColor6 = Color(0XFFCA00B6);
+  static const Color wallpaperColor7 = Color(0XFFD2FFAE);
+  static const Color wallpaperColor8 = Color(0XFFFFB0B0);
+  static const Color wallpaperColor9 = Color(0XFFFFDD64);
+  static const Color wallpaperColor10 = Color(0XFF87C228);
+  static const Color wallpaperColor11 = Color(0XFF420B0B);
+  static const Color wallpaperColor12 = Color(0XFFC2A3A3);
 //otp pin theme
   static final defaultpintheme = PinTheme(
     width: 50,
