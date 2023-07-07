@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/export_chat_dialog.dart';
+
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 import '../../../../../../helper/navigator_function.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
@@ -16,11 +16,13 @@ class SinglechatPopupMenu extends StatefulWidget {
 class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
   List<ChatOptionsModel> options = [
     ChatOptionsModel(id: 1, option: 'Search'),
-    ChatOptionsModel(id: 2, option: 'Clear Notes'),
-    ChatOptionsModel(id: 3, option: 'Chat Theme'),
-    ChatOptionsModel(id: 4, option: 'Change Wallpaper'),
-    ChatOptionsModel(id: 5, option: 'Export Chats'),
-    ChatOptionsModel(id: 6, option: 'Media, links and docs'),
+    ChatOptionsModel(id: 2, option: 'Mute Messages'),
+    ChatOptionsModel(id: 3, option: 'Clear Chats'),
+    ChatOptionsModel(id: 4, option: 'Block This User'),
+    ChatOptionsModel(id: 5, option: 'Chat Theme'),
+    ChatOptionsModel(id: 6, option: 'Change Wallpaper'),
+    ChatOptionsModel(id: 7, option: 'Create Groups'),
+    ChatOptionsModel(id: 8, option: 'Media, links and docs'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,17 +55,18 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
           if (value == 1) {
           } else if (value == 2) {
           } else if (value == 3) {
-            animatedScreenNavigator(context, ChatThemePage());
-          } else if (value == 4) {
-            animatedScreenNavigator(context, ChangeWallPaperPage());
-            // animatedScreenNavigator(context, AddParticipantsScreen());
           } else if (value == 5) {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return ExportChatDialog();
-                });
+            animatedScreenNavigator(context, ChatThemePage());
+
+            // animatedScreenNavigator(context, AddParticipantsScreen());
           } else if (value == 6) {
+            animatedScreenNavigator(context, ChangeWallPaperPage());
+            // showDialog(
+            //     context: context,
+            //     builder: (context) {
+            //       return ExportChatDialog();
+            //     });
+          } else if (value == 8) {
             screenNavigator(
                 context, MediaAndDocScreen(profilename: widget.name));
           }
