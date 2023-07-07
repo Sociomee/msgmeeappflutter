@@ -24,6 +24,7 @@ class WallpaperOptionsWidget extends StatefulWidget {
 class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
   final ImagePicker _picker = ImagePicker();
   XFile? imageFile;
+  int click = 0;
   void pickGalleryPic() async {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -41,6 +42,7 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
     var type = context.watch<SetChatbgCubit>().state;
     var networkwallpaper = context.watch<ChooseImageWallpaperCubit>().state;
     var solidColor = context.watch<ChooseSolidColorCubit>().state;
+    print(solidColor);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -51,6 +53,9 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
             children: [
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    click = 0;
+                  });
                   animatedScreenNavigator(context, SolidColorPage());
                 },
                 child: Column(
@@ -78,6 +83,9 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
               ),
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    click = 1;
+                  });
                   animatedScreenNavigator(context, WallPaparImagePage());
                 },
                 child: Column(
@@ -109,6 +117,9 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
           SizedBox(height: 20),
           GestureDetector(
             onTap: () {
+              setState(() {
+                click = 2;
+              });
               pickGalleryPic();
             },
             child:
@@ -144,20 +155,20 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
           GestureDetector(
             onTap: () {
               print(type.bgType);
-              if (imageFile != null) {
+              if (imageFile != null && click == 2) {
                 context
                     .read<SetChatbgCubit>()
                     .getChatBg(imageFile, ChatBgType.fileImage);
                 context.read<ChangeWallPaperView>().changeView();
-              } else if (networkwallpaper.isNotEmpty) {
+              } else if (networkwallpaper.isNotEmpty && click == 1) {
                 context
                     .read<SetChatbgCubit>()
                     .getChatBg(networkwallpaper, ChatBgType.networkImage);
                 context.read<ChangeWallPaperView>().changeView();
-              } else {
+              } else if (click == 0) {
                 context
                     .read<SetChatbgCubit>()
-                    .getChatBg(solidColor, type.bgType);
+                    .getChatBg(solidColor, ChatBgType.solidColor);
                 context.read<ChangeWallPaperView>().changeView();
               }
             },
