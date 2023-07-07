@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_bg_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_wallpaper_option.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'dart:math' as math;
 import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/chat_theme/chat_theme_cubit.dart';
 import '../chat_screen/widgets/custom_shape.dart';
-import '../chat_screen/widgets/message_status_widget.dart';
 
 class ChangeWallPaperPage extends StatefulWidget {
   const ChangeWallPaperPage({super.key});
@@ -16,7 +20,6 @@ class ChangeWallPaperPage extends StatefulWidget {
 }
 
 class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
-  bool showOptions = false;
   @override
   Widget build(BuildContext context) {
     var messagecubit = context.read<AddMessageCubit>().state.messages;
@@ -33,13 +36,13 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
         titleSpacing: 0,
         title: Text('Wallpaper', style: TextStyle(color: AppColors.black)),
       ),
-      body: showOptions
+      body: context.watch<ChangeWallPaperView>().state
           ? WallpaperOptionsWidget()
           : Column(
               children: [
                 SizedBox(height: 30),
                 Container(
-                  height: 533,
+                  height: 515,
                   margin: EdgeInsets.symmetric(horizontal: 70),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7),
@@ -125,231 +128,270 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ],
                         ),
                       ),
-                      Divider(color: AppColors.grey, thickness: 1),
-                      ListView.builder(
-                        itemCount: context
-                            .watch<AddMessageCubit>()
-                            .state
-                            .messages
-                            .length,
-                        shrinkWrap: true,
-                        padding: EdgeInsets.only(top: 10, bottom: 60),
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Align(
-                            alignment: (context
-                                        .watch<AddMessageCubit>()
-                                        .state
-                                        .messages[index]
-                                        .messageType ==
-                                    "receiver"
-                                ? Alignment.topLeft
-                                : Alignment.topRight),
-                            child: context
-                                        .read<AddMessageCubit>()
-                                        .state
-                                        .messages[index]
-                                        .messageType ==
-                                    "receiver"
-                                ? Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Transform(
-                                          alignment: Alignment.center,
-                                          transform: Matrix4.rotationY(math.pi),
-                                          child: CustomPaint(
-                                            painter: CustomShape(context
-                                                .watch<ChatThemeCubit>()
-                                                .state
-                                                .chatLightColor),
-                                          ),
+                      Divider(color: AppColors.grey, thickness: 1, height: 0),
+                      Stack(
+                        children: [
+                          context.watch<SetChatbgCubit>().state.bgType ==
+                                  ChatBgType.solidColor
+                              ? Container(
+                                  height: 400,
+                                  width: 300,
+                                  color: context
+                                      .read<SetChatbgCubit>()
+                                      .state
+                                      .bgContent)
+                              : context.watch<SetChatbgCubit>().state.bgType ==
+                                      ChatBgType.fileImage
+                                  ? Container(
+                                      height: 400,
+                                      width: 300,
+                                      child: Image.file(
+                                        File(
+                                          context
+                                              .read<SetChatbgCubit>()
+                                              .state
+                                              .bgContent!
+                                              .path,
                                         ),
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                              top: 10,
-                                              left: 14,
-                                              right: 18,
-                                              bottom: 5),
-                                          decoration: BoxDecoration(
-                                            color: context
-                                                .watch<ChatThemeCubit>()
-                                                .state
-                                                .chatLightColor,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topRight: Radius.circular(18),
-                                              bottomLeft: Radius.circular(18),
-                                              bottomRight: Radius.circular(18),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 400,
+                                      width: 300,
+                                      child: Image.network(
+                                        context
+                                            .read<SetChatbgCubit>()
+                                            .state
+                                            .bgContent,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                          ListView.builder(
+                            itemCount: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages
+                                .length,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.only(top: 10),
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Align(
+                                alignment: (context
+                                            .watch<AddMessageCubit>()
+                                            .state
+                                            .messages[index]
+                                            .messageType ==
+                                        "receiver"
+                                    ? Alignment.topLeft
+                                    : Alignment.topRight),
+                                child: context
+                                            .read<AddMessageCubit>()
+                                            .state
+                                            .messages[index]
+                                            .messageType ==
+                                        "receiver"
+                                    ? Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 5, left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Transform(
+                                              alignment: Alignment.center,
+                                              transform:
+                                                  Matrix4.rotationY(math.pi),
+                                              child: CustomPaint(
+                                                painter: CustomShape(context
+                                                    .watch<ChatThemeCubit>()
+                                                    .state
+                                                    .chatLightColor),
+                                              ),
                                             ),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  messagecubit[index]
-                                                      .messageContent,
-                                                  style: TextStyle(
-                                                      color: AppColors.black,
-                                                      fontSize: 10)),
-                                              SizedBox(height: 2),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
+                                            Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10,
+                                                  left: 14,
+                                                  right: 18,
+                                                  bottom: 5),
+                                              decoration: BoxDecoration(
+                                                color: context
+                                                    .watch<ChatThemeCubit>()
+                                                    .state
+                                                    .chatLightColor,
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topRight: Radius.circular(18),
+                                                  bottomLeft:
+                                                      Radius.circular(18),
+                                                  bottomRight:
+                                                      Radius.circular(18),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  SizedBox(
-                                                    width: messagecubit[index]
-                                                                .messageContent
-                                                                .trim()
-                                                                .length <=
-                                                            15
-                                                        ? 40
-                                                        : messagecubit[index]
+                                                  Text(
+                                                      messagecubit[index]
+                                                          .messageContent,
+                                                      style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontSize: 10)),
+                                                  SizedBox(height: 2),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: messagecubit[
+                                                                        index]
                                                                     .messageContent
                                                                     .trim()
                                                                     .length <=
-                                                                21
-                                                            ? 60
-                                                            : 100,
-                                                  ),
-                                                  Text(messagecubit[index].time,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              AppColors.black,
-                                                          fontSize: 8)),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 5, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Flexible(
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10,
-                                                          left: 14,
-                                                          right: 18,
-                                                          bottom: 5),
-                                                  decoration: BoxDecoration(
-                                                    color: context
-                                                        .watch<ChatThemeCubit>()
-                                                        .state
-                                                        .chatDeepColor,
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(18),
-                                                      bottomLeft:
-                                                          Radius.circular(18),
-                                                      bottomRight:
-                                                          Radius.circular(18),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
+                                                                15
+                                                            ? 40
+                                                            : messagecubit[index]
+                                                                        .messageContent
+                                                                        .trim()
+                                                                        .length <=
+                                                                    21
+                                                                ? 60
+                                                                : 100,
+                                                      ),
                                                       Text(
                                                           messagecubit[index]
-                                                              .messageContent,
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      10)),
-                                                      SizedBox(height: 2),
-                                                      Row(
+                                                              .time,
+                                                          style: const TextStyle(
+                                                              color: AppColors
+                                                                  .black,
+                                                              fontSize: 8)),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 15, right: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10,
+                                                              left: 14,
+                                                              right: 18,
+                                                              bottom: 5),
+                                                      decoration: BoxDecoration(
+                                                        color: context
+                                                            .watch<
+                                                                ChatThemeCubit>()
+                                                            .state
+                                                            .chatDeepColor,
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  18),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  18),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  18),
+                                                        ),
+                                                      ),
+                                                      child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Text(
                                                               messagecubit[
                                                                       index]
-                                                                  .time,
+                                                                  .messageContent,
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white,
-                                                                  fontSize: 8)),
-                                                          SizedBox(
-                                                            width: messagecubit[
-                                                                            index]
-                                                                        .messageContent
-                                                                        .trim()
-                                                                        .length <=
-                                                                    15
-                                                                ? 40
-                                                                : messagecubit[index]
+                                                                  fontSize:
+                                                                      10)),
+                                                          SizedBox(height: 2),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              Text(
+                                                                  messagecubit[
+                                                                          index]
+                                                                      .time,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          8)),
+                                                              SizedBox(
+                                                                width: messagecubit[index]
                                                                             .messageContent
                                                                             .trim()
                                                                             .length <=
-                                                                        21
-                                                                    ? 60
-                                                                    : 100,
-                                                          ),
-                                                          Text(
-                                                              messagecubit[
-                                                                      index]
-                                                                  .msgStatus,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 8)),
+                                                                        15
+                                                                    ? 40
+                                                                    : messagecubit[index].messageContent.trim().length <=
+                                                                            21
+                                                                        ? 60
+                                                                        : 100,
+                                                              ),
+                                                              Text(
+                                                                  messagecubit[
+                                                                          index]
+                                                                      .msgStatus,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          8)),
+                                                            ],
+                                                          )
                                                         ],
-                                                      )
-                                                    ],
-                                                  )),
-                                              Positioned(
-                                                bottom: -2,
-                                                right: 0,
-                                                child: messagecubit[index]
-                                                            .msgStatus ==
-                                                        'read'
-                                                    ? MessageStatus.read
-                                                    : messagecubit[index]
-                                                                .msgStatus ==
-                                                            'send'
-                                                        ? MessageStatus.sent
-                                                        : MessageStatus
-                                                            .delivered,
+                                                      )),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            CustomPaint(
+                                                painter: CustomShape(context
+                                                    .watch<ChatThemeCubit>()
+                                                    .state
+                                                    .chatDeepColor)),
+                                          ],
                                         ),
-                                        CustomPaint(
-                                            painter: CustomShape(context
-                                                .watch<ChatThemeCubit>()
-                                                .state
-                                                .chatDeepColor)),
-                                      ],
-                                    ),
-                                  ),
-                          );
-                        },
+                                      ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Divider(color: AppColors.grey, thickness: 1),
+                      Divider(color: AppColors.grey, thickness: 1, height: 0),
+                      SizedBox(height: 10),
                       Row(
                         children: [
                           SizedBox(width: 10),
@@ -412,7 +454,6 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10)
                     ],
                   ),
                 ),
@@ -421,9 +462,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                 SizedBox(height: 42),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      showOptions = !showOptions;
-                    });
+                    context.read<ChangeWallPaperView>().changeView();
                   },
                   child: Container(
                       padding:

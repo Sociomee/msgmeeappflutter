@@ -25,8 +25,8 @@ class MessageStatus {
   );
 
   static var delivered = Container(
-    height: 14,
-    width: 14,
+    height: 13,
+    width: 13,
     decoration: BoxDecoration(
       color: AppColors.white,
       boxShadow: const [
@@ -42,8 +42,8 @@ class MessageStatus {
     ),
   );
   static var read = Container(
-    height: 14,
-    width: 14,
+    height: 13,
+    width: 13,
     decoration: BoxDecoration(
       color: AppColors.primaryColor,
       boxShadow: const [

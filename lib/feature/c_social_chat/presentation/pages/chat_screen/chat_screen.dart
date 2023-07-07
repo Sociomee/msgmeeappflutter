@@ -17,8 +17,10 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
+import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
+import '../chat_theme/widget/chat_bg_type.dart';
 import 'group_chat_page.dart';
 import 'image_preview_page.dart';
 import 'widgets/message_textField.dart';
@@ -76,6 +78,12 @@ class _ChatScreenState extends State<ChatScreen> {
             profileImage: widget.imageUrl,
           ));
     }
+  }
+
+  @override
+  void initState() {
+    context.read<SetChatbgCubit>().chooseType(ChatBgType.solidColor);
+    super.initState();
   }
 
   @override
@@ -147,6 +155,39 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         body: Stack(
           children: <Widget>[
+            context.watch<SetChatbgCubit>().state.bgType ==
+                    ChatBgType.solidColor
+                ? Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    color: context.read<SetChatbgCubit>().state.bgContent)
+                : context.watch<SetChatbgCubit>().state.bgType ==
+                        ChatBgType.networkImage
+                    ? Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.network(
+                          context.watch<SetChatbgCubit>().state.bgContent,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : context.watch<SetChatbgCubit>().state.bgType ==
+                            ChatBgType.fileImage
+                        ? Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.file(
+                              File(
+                                context
+                                    .read<SetChatbgCubit>()
+                                    .state
+                                    .bgContent!
+                                    .path,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Container(),
             ListView.builder(
               controller: _listViewController,
               itemCount: context.watch<AddMessageCubit>().state.messages.length,

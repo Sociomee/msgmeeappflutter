@@ -6,7 +6,11 @@ import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dar
 import 'package:msgmee/theme/app_theme.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/choose_image_wallpaper_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/choose_solid_color_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
@@ -48,6 +52,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => AddMessageCubit()),
             BlocProvider(create: (context) => SelectedchatCubit()),
             BlocProvider(create: (context) => ChatThemeCubit()),
+            BlocProvider(create: (context) => ChooseSolidColorCubit()),
+            BlocProvider(create: (context) => ChooseImageWallpaperCubit()),
+            BlocProvider(create: (context) => SetChatbgCubit()),
+            BlocProvider(create: (context) => ChangeWallPaperView())
           ],
           child: MaterialApp(
             title: 'Msgmee App',
