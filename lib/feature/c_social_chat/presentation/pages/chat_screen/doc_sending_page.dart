@@ -35,7 +35,6 @@ class _DocSendingPageState extends State<DocSendingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: GestureDetector(
             onTap: () {
@@ -61,7 +60,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
               color: AppColors.lightgrey),
           child: Column(
             children: [
-              SizedBox(height: 242.h),
+              SizedBox(height: 220.h),
               SvgPicture.asset('assets/docx.svg'),
               SizedBox(height: 5),
               Text(
@@ -70,7 +69,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 0),
                 child: Row(
                   children: [
                     Expanded(
@@ -107,6 +106,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                   ],
                 ),
               ),
+              SizedBox(height: 28)
             ],
           ),
         ),

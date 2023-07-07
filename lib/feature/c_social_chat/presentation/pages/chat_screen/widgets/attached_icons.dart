@@ -88,7 +88,7 @@ class _AttachedIconState extends State<AttachedIcon> {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
-      allowMultiple: false,
+      allowMultiple: true,
     );
     if (result != null) {
       PlatformFile file = result.files.first;

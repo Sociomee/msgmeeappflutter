@@ -7,10 +7,9 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/set_chatbg/set_c
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_bg_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_wallpaper_option.dart';
 import 'package:msgmee/theme/colors.dart';
-import 'dart:math' as math;
+
 import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/chat_theme/chat_theme_cubit.dart';
-import '../chat_screen/widgets/custom_shape.dart';
 
 class ChangeWallPaperPage extends StatefulWidget {
   const ChangeWallPaperPage({super.key});
@@ -201,17 +200,6 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Transform(
-                                              alignment: Alignment.center,
-                                              transform:
-                                                  Matrix4.rotationY(math.pi),
-                                              child: CustomPaint(
-                                                painter: CustomShape(context
-                                                    .watch<ChatThemeCubit>()
-                                                    .state
-                                                    .chatLightColor),
-                                              ),
-                                            ),
                                             Container(
                                               padding: const EdgeInsets.only(
                                                   top: 10,
@@ -377,11 +365,6 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                 ],
                                               ),
                                             ),
-                                            CustomPaint(
-                                                painter: CustomShape(context
-                                                    .watch<ChatThemeCubit>()
-                                                    .state
-                                                    .chatDeepColor)),
                                           ],
                                         ),
                                       ),

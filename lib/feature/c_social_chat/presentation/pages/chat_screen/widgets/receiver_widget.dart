@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:math' as math;
+
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/chat_theme/chat_theme_cubit.dart';
-import 'custom_shape.dart';
 
 class ReceivedMessageWidget extends StatelessWidget {
   final String message;
@@ -27,24 +26,17 @@ class ReceivedMessageWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.rotationY(math.pi),
-              child: CustomPaint(
-                painter: CustomShape(
-                    context.watch<ChatThemeCubit>().state.chatLightColor),
-              ),
-            ),
             Flexible(
               child: Container(
                 padding: const EdgeInsets.only(
-                    top: 10, left: 14, right: 18, bottom: 15),
+                    top: 10, left: 14, right: 18, bottom: 5),
                 decoration: BoxDecoration(
                   color: context.watch<ChatThemeCubit>().state.chatLightColor,
                   borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(18),
-                    bottomLeft: Radius.circular(18),
-                    bottomRight: Radius.circular(18),
+                    topRight: Radius.circular(12),
+                    topLeft: Radius.circular(12),
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
                   ),
                 ),
                 child: Column(
