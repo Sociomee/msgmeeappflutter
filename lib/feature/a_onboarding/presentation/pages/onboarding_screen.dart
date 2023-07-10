@@ -1,12 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.dart';
 import 'package:msgmee/theme/colors.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../helper/navigator_function.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../widgets/build_page.dart';
+
+class OnboardingModel {
+  final String imageUrl;
+  final String desc;
+
+  OnboardingModel({
+    required this.imageUrl,
+    required this.desc,
+  });
+}
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -24,6 +36,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
+  List<OnboardingModel> onboardingData = [
+    OnboardingModel(
+      imageUrl: '',
+      desc: '',
+    ),
+    OnboardingModel(
+      imageUrl: '',
+      desc: '',
+    ),
+    OnboardingModel(
+      imageUrl: '',
+      desc: '',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -51,16 +77,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     isLastPage = index == 2;
                   });
                 },
-                children: const [
+                children: [
                   BuildPages(
+                      index: 1,
                       imageUrl: 'assets/onboarding1.png',
                       descriptionText:
                           'Communicate with your friends\nin a fast, reliable and secure\nway.'),
                   BuildPages(
+                      index: 2,
                       imageUrl: 'assets/onboarding2.png',
                       descriptionText:
                           'Engage with your friends,\nbuild relationships.'),
                   BuildPages(
+                      index: 3,
                       imageUrl: 'assets/onboarding3.png',
                       descriptionText:
                           'Come to MsgMee, and Become\nPart of a Growing Community.'),

@@ -154,7 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(color: AppColors.grey)),
                       TextSpan(
                           text: 'Terms & Conditions.',
-                          style: TextStyle(color: AppColors.black)),
+                          style: TextStyle(
+                              color: AppColors.black,
+                              decoration: TextDecoration.underline)),
                     ],
                   )),
             textFieldclick
@@ -167,13 +169,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(color: AppColors.grey)),
                       TextSpan(
                           text: 'Privacy Policy ',
-                          style: TextStyle(color: AppColors.black)),
+                          style: TextStyle(
+                              color: AppColors.black,
+                              decoration: TextDecoration.underline)),
                     ],
                   )),
             textFieldclick
                 ? Container()
                 : const Text('and Cookies Policy',
-                    style: TextStyle(color: AppColors.black)),
+                    style: TextStyle(
+                        color: AppColors.black,
+                        decoration: TextDecoration.underline)),
             const SizedBox(height: 20)
           ],
         ),

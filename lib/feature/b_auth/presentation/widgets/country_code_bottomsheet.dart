@@ -17,52 +17,52 @@ List<CountryCodeModel> codeList = [
     "+91",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_%28converted%29.svg/255px-Flag_of_Australia_%28converted%29.svg.png',
     "Australia",
     "+61",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/f/f2/Argentina_Flag.png',
     "Argentina",
     "+54",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/2560px-Flag_of_Bangladesh.svg.png',
     "Bangladesh",
     "+880",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Belarus.png',
     "Belarus",
     "+375",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/Flag_of_Canada.svg/2560px-Flag_of_Canada.svg.png',
     "Canada",
     "+1",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/a/ae/Cyprus_flag_300.png',
     "Cyprus",
     "+357",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/2560px-Flag_of_Denmark.svg.png',
     "Denmark",
     "+45",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Flag_of_Dominica.svg/800px-Flag_of_Dominica.svg.png?20221202015146',
     "Dominica",
     "+1-767",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/800px-Flag_of_Estonia.svg.png?20220822211223',
     "Estonia",
     "+372",
   ),
   CountryCodeModel(
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Ethiopia.svg/1280px-Flag_of_Ethiopia.svg.png',
     "Ethiopia",
     "+251",
   ),
@@ -96,16 +96,7 @@ class CountryCodeWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      // boxShadow: <BoxShadow>[
-                      //   BoxShadow(
-                      //       color: AppColors.lightgrey,
-                      //       blurRadius: 15.0,
-                      //       offset: Offset(0.0, 0.75))
-                      // ],
-                    ),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,15 +116,16 @@ class CountryCodeWidget extends StatelessWidget {
                           ),
                         ),
                         TextFormField(
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
+                              borderSide: BorderSide(
+                                  color: AppColors.grey.withOpacity(.3),
+                                  width: 1),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
-                            ),
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.grey),
+                              borderSide: BorderSide(
+                                  color: AppColors.grey.withOpacity(.3),
+                                  width: 1),
                             ),
                             prefixIcon: Icon(Icons.search),
                             hintText: 'Search country name or telecode...',

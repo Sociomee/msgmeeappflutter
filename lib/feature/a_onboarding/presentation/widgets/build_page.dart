@@ -3,9 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BuildPages extends StatelessWidget {
   const BuildPages(
-      {super.key, required this.imageUrl, required this.descriptionText});
+      {super.key,
+      required this.imageUrl,
+      required this.descriptionText,
+      required this.index});
   final String imageUrl;
-
+  final int index;
   final String descriptionText;
 
   @override
@@ -16,11 +19,13 @@ class BuildPages extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 40.h),
-            Text(
-              'Welcome to MsgMee',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              textScaleFactor: 1.0,
-            ),
+            index == 1
+                ? Text(
+                    'Welcome to MsgMee',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.0,
+                  )
+                : Container(),
             SizedBox(height: 20),
             Image.asset(
               imageUrl,

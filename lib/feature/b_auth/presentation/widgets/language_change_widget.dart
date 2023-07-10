@@ -52,7 +52,7 @@ class LanguageOptionBottomSheet extends StatelessWidget {
                     color: AppColors.white,
                     child: Center(
                       child: Text(
-                        'Change Language',
+                        'Choose Language',
                         textScaleFactor: 1.0,
                         style: TextStyle(
                           fontSize: 25.sp,
@@ -73,8 +73,8 @@ class LanguageOptionBottomSheet extends StatelessWidget {
                         borderSide: BorderSide(color: AppColors.grey),
                       ),
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'Search',
-                      hintStyle: TextStyle(color: AppColors.grey, fontSize: 17),
+                      hintText: 'Search..',
+                      hintStyle: TextStyle(color: AppColors.grey, fontSize: 12),
                       focusColor: AppColors.primaryColor,
                     ),
                   ),
@@ -87,9 +87,11 @@ class LanguageOptionBottomSheet extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(width: 2.0, color: AppColors.grey),
+                          bottom: BorderSide(
+                              width: 1.0,
+                              color: AppColors.primaryColor.withOpacity(.2)),
                         ),
                       ),
                       child: Center(
