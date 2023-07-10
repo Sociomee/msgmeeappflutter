@@ -65,6 +65,7 @@ class AppColors {
   static const Color wallpaperColor11 = Color(0XFF420B0B);
   static const Color wallpaperColor12 = Color(0XFFC2A3A3);
   static const Color onboardingTextColor = Color(0xFF5B5B5B);
+  static const Color hinttextColor = Color(0xFFB4B4B4);
 //otp pin theme
   static final defaultpintheme = PinTheme(
     width: 50,

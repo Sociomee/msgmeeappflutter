@@ -173,7 +173,8 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   child: const Text(
                     'This will be your display picture, this picture will be visible\n to your connections or contacts.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.grey, fontSize: 12),
+                    style:
+                        TextStyle(color: AppColors.hinttextColor, fontSize: 12),
                   ),
                 ),
                 const SizedBox(height: 32),

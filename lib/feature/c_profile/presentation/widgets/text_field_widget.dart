@@ -50,7 +50,8 @@ class TextFieldWidget extends StatelessWidget {
                   borderSide:
                       BorderSide(width: 2, color: AppColors.primaryColor)),
               hintText: hintText,
-              hintStyle: const TextStyle(color: AppColors.lightgrey)),
+              hintStyle: const TextStyle(
+                  color: AppColors.hinttextColor, fontSize: 14)),
         ),
         showchar!
             ? Padding(

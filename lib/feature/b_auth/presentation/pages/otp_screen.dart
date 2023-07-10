@@ -25,11 +25,7 @@ class _OtpScreenState extends State<OtpScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
   int _timerDuration = 20;
-
-  final viewInsets = EdgeInsets.fromWindowPadding(
-      WidgetsBinding.instance.window.viewInsets,
-      WidgetsBinding.instance.window.devicePixelRatio);
-
+  String error = '';
   void startTimer() {
     Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (_timerDuration == 1) {
@@ -94,90 +90,125 @@ class _OtpScreenState extends State<OtpScreen> {
         ],
       ),
       backgroundColor: AppColors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 26),
-        child: Column(
-          children: [
-            const SizedBox(height: 100),
-            const Center(
-                child: Text('Enter OTP ', style: TextStyle(fontSize: 33))),
-            const SizedBox(height: 5),
-            Text(
-              'An OTP has been sent to your phone number \nending with ${widget.number.toString().lastChars(4)}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-                left: 10,
-                right: 10,
+      body: Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 26),
+          child: Column(
+            children: [
+              const SizedBox(height: 100),
+              const Center(
+                  child: Text('Enter OTP ', style: TextStyle(fontSize: 33))),
+              const SizedBox(height: 5),
+              Text(
+                'An OTP has been sent to your phone number \nending with ${widget.number.toString().lastChars(4)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12),
               ),
-              child: Pinput(
-                controller: _otpController,
-                length: 6,
-                defaultPinTheme: AppColors.defaultpintheme,
-                focusedPinTheme: AppColors.focuspintheme,
-                submittedPinTheme: AppColors.focuspintheme,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                ],
-                cursor: Container(color: AppColors.black, height: 2, width: 10),
-                validator: (s) {
-                  if (s!.isEmpty) {
-                    return "invalid Otp!";
-                  }
-                  return null;
-                },
-                onTap: () {
-                  setState(() {
-                    isFocused = true;
-                  });
-                },
-                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                showCursor: true,
-                onCompleted: (pin) {
-                  setState(() {
-                    isValid = true;
-                  });
-                },
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  left: 10,
+                  right: 10,
+                ),
+                child: Pinput(
+                  controller: _otpController,
+                  length: 6,
+                  defaultPinTheme: AppColors.defaultpintheme,
+                  focusedPinTheme: AppColors.focuspintheme,
+                  submittedPinTheme: AppColors.focuspintheme,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
+                  cursor:
+                      Container(color: AppColors.black, height: 2, width: 10),
+                  errorTextStyle:
+                      TextStyle(fontSize: 12, color: AppColors.errorRedColor),
+                  validator: (s) {
+                    if (s!.isEmpty) {
+                      setState(() {
+                        error = "Please Enter a Otp!";
+                      });
+                    } else {
+                      setState(() {
+                        error = '';
+                      });
+                    }
+                    return null;
+                  },
+                  onTap: () {
+                    setState(() {
+                      isFocused = true;
+                    });
+                  },
+                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                  showCursor: true,
+                  onCompleted: (pin) {
+                    setState(() {
+                      isValid = true;
+                    });
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 68),
-            Text(
-              "00:$seconds sec",
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 6),
-            RichText(
-                text: TextSpan(children: [
-              const TextSpan(
-                  text: 'Didn’t receive OTP yet? ',
-                  style: TextStyle(color: AppColors.black, fontSize: 14)),
-              TextSpan(
-                  text: 'Resend',
-                  style: TextStyle(
-                      color: seconds == '00'
-                          ? AppColors.primaryColor
-                          : AppColors.primaryColor.withOpacity(.5),
-                      fontSize: 14)),
-            ])),
-            const Spacer(),
-            CustomButtonWidget(
-                borderColor: isValid
-                    ? AppColors.primaryColor
-                    : AppColors.primaryColor.withOpacity(.5),
-                ontap: () {
-                  screenNavigator(context, const SetupProfileScreen());
-                },
-                title: 'CONTINUE',
-                color: isValid
-                    ? AppColors.primaryColor
-                    : AppColors.primaryColor.withOpacity(.5)),
-            const SizedBox(height: 48),
-          ],
+              SizedBox(height: 5),
+              Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    error == ''
+                        ? Container()
+                        : Icon(
+                            Icons.error_outline,
+                            color: AppColors.errorRedColor,
+                            size: 12,
+                          ),
+                    SizedBox(width: 5),
+                    Text(error,
+                        style: TextStyle(
+                          color: AppColors.errorRedColor,
+                          fontSize: 12,
+                        ))
+                  ],
+                ),
+              ),
+              const SizedBox(height: 68),
+              Text(
+                "00:$seconds sec",
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 6),
+              RichText(
+                  text: TextSpan(children: [
+                const TextSpan(
+                    text: 'Didn’t receive OTP yet? ',
+                    style: TextStyle(color: AppColors.black, fontSize: 14)),
+                TextSpan(
+                    text: 'Resend',
+                    style: TextStyle(
+                        color: seconds == '00'
+                            ? AppColors.primaryColor
+                            : AppColors.primaryColor.withOpacity(.5),
+                        fontSize: 14)),
+              ])),
+              const Spacer(),
+              CustomButtonWidget(
+                  borderColor: isValid
+                      ? AppColors.primaryColor
+                      : AppColors.primaryColor.withOpacity(.5),
+                  ontap: () {
+                    if (formKey.currentState!.validate()) {
+                      screenNavigator(context, const SetupProfileScreen());
+                    }
+                  },
+                  title: 'CONTINUE',
+                  color: isValid
+                      ? AppColors.primaryColor
+                      : AppColors.primaryColor.withOpacity(.5)),
+              const SizedBox(height: 48),
+            ],
+          ),
         ),
       ),
     );

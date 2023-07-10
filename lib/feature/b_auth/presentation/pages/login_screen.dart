@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           setState(() {
-                            error = 'Mobile number is not valid.';
+                            error = 'Please Enter a Number';
                           });
                         } else if (value.length < 10) {
                           setState(() {
