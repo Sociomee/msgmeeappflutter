@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../widgets/common_groups.dart';
 import '../../../../theme/colors.dart';
@@ -8,7 +10,7 @@ import '../widgets/options_button_widget.dart';
 import '../widgets/profile_bottom_sheet.dart';
 import '../../../c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 
-class OtherPersonProfileDescription extends StatelessWidget {
+class OtherPersonProfileDescription extends StatefulWidget {
   const OtherPersonProfileDescription(
       {super.key,
       required this.imageUrl,
@@ -17,6 +19,16 @@ class OtherPersonProfileDescription extends StatelessWidget {
   final String imageUrl;
   final String name;
   final bool isOnline;
+
+  @override
+  State<OtherPersonProfileDescription> createState() =>
+      _OtherPersonProfileDescriptionState();
+}
+
+class _OtherPersonProfileDescriptionState
+    extends State<OtherPersonProfileDescription> {
+  bool mute = false;
+  bool notification = false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -34,7 +46,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
             leadingWidth: 40,
             titleSpacing: 5,
             title: Text(
-              name,
+              widget.name,
               style: TextStyle(color: AppColors.black, fontSize: 18),
             ),
             actions: [
@@ -65,9 +77,9 @@ class OtherPersonProfileDescription extends StatelessWidget {
                       CircleAvatar(
                           radius: 80,
                           backgroundColor: AppColors.grey,
-                          backgroundImage: NetworkImage(imageUrl)),
+                          backgroundImage: NetworkImage(widget.imageUrl)),
                       SizedBox(height: 10),
-                      isOnline
+                      widget.isOnline
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -101,7 +113,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                               ],
                             ),
                       SizedBox(height: 10),
-                      Text(name,
+                      Text(widget.name,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                       SizedBox(height: 6),
@@ -155,7 +167,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                           animatedScreenNavigator(
                               context,
                               MediaAndDocScreen(
-                                profilename: name,
+                                profilename: widget.name,
                               ));
                         },
                         child: Text(
@@ -286,7 +298,28 @@ class OtherPersonProfileDescription extends StatelessWidget {
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                         ),
-                      )
+                      ),
+                      SizedBox(width: 10),
+                      FlutterSwitch(
+                        switchBorder: Border.all(
+                          color: AppColors.primaryColor,
+                          width: 2.0.w,
+                        ),
+                        activeColor: AppColors.primaryColor,
+                        inactiveColor: AppColors.white,
+                        inactiveToggleColor: AppColors.primaryColor,
+                        width: 41.0.w,
+                        height: 20.0.h,
+                        toggleSize: 18.0.sp,
+                        value: notification,
+                        borderRadius: 30.0,
+                        padding: 2.0,
+                        onToggle: (val) {
+                          setState(() {
+                            notification = !notification;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -314,7 +347,28 @@ class OtherPersonProfileDescription extends StatelessWidget {
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                         ),
-                      )
+                      ),
+                      SizedBox(width: 10),
+                      FlutterSwitch(
+                        switchBorder: Border.all(
+                          color: AppColors.primaryColor,
+                          width: 2.0.w,
+                        ),
+                        activeColor: AppColors.primaryColor,
+                        inactiveColor: AppColors.white,
+                        inactiveToggleColor: AppColors.primaryColor,
+                        width: 41.0.w,
+                        height: 20.0.h,
+                        toggleSize: 18.0.sp,
+                        value: mute,
+                        borderRadius: 30.0,
+                        padding: 2.0,
+                        onToggle: (val) {
+                          setState(() {
+                            mute = !mute;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 )
