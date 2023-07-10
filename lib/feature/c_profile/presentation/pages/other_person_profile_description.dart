@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../widgets/common_groups.dart';
 import '../../../../theme/colors.dart';
@@ -34,7 +35,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
             titleSpacing: 5,
             title: Text(
               name,
-              style: TextStyle(color: AppColors.black, fontSize: 15),
+              style: TextStyle(color: AppColors.black, fontSize: 18),
             ),
             actions: [
               IconButton(
@@ -100,7 +101,9 @@ class OtherPersonProfileDescription extends StatelessWidget {
                               ],
                             ),
                       SizedBox(height: 10),
-                      Text('Henna Akhtar', style: TextStyle(fontSize: 18)),
+                      Text(name,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       SizedBox(height: 6),
                       Text('+91 819-745-8750', style: TextStyle(fontSize: 14))
                     ],
@@ -112,7 +115,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     children: [
-                      Icon(Icons.description_outlined),
+                      SvgPicture.asset('assets/draft.svg'),
                       SizedBox(width: 5),
                       Text('Bio',
                           style: TextStyle(
@@ -134,7 +137,8 @@ class OtherPersonProfileDescription extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Divider(color: AppColors.grey, thickness: 3),
+                  child: Divider(
+                      color: AppColors.grey.withOpacity(.3), thickness: 5),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -166,7 +170,7 @@ class OtherPersonProfileDescription extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 15.0, top: 10, bottom: 10),
+                      const EdgeInsets.only(left: 15.0, top: 20, bottom: 10),
                   child: Text('Recent media'),
                 ),
                 Padding(
@@ -181,9 +185,12 @@ class OtherPersonProfileDescription extends StatelessWidget {
                             height: 103,
                             width: 103,
                             margin: EdgeInsets.symmetric(horizontal: 5),
-                            child: Image.network(
-                              images[index],
-                              fit: BoxFit.cover,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                images[index],
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           );
                         }),
@@ -191,12 +198,126 @@ class OtherPersonProfileDescription extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Divider(color: AppColors.grey, thickness: 3),
+                  child: Divider(
+                      color: AppColors.grey.withOpacity(.3), thickness: 5),
+                ),
+                CommonGroupsWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Divider(
+                      color: AppColors.grey.withOpacity(.3), thickness: 5),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: CommonGroupsWidget(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Report ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Anna More',
+                          style: TextStyle(
+                            color: Color(0xFF81C14B),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Block ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Anna More',
+                          style: TextStyle(
+                            color: Color(0xFF81C14B),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Mute Notifications',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        'On',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Color(0xFF333333),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Mute Status',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        'On',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Color(0xFF333333),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),

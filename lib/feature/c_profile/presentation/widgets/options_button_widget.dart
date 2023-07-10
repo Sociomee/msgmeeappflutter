@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class OptionsModel {
-  final IconData imageUrl;
+  final String imageUrl;
   final String title;
   final VoidCallback clickAction;
 
@@ -10,12 +11,10 @@ class OptionsModel {
 }
 
 List<OptionsModel> options = [
+  OptionsModel(imageUrl: 'assets/msg.svg', title: 'Chat', clickAction: () {}),
   OptionsModel(
-      imageUrl: Icons.message_outlined, title: 'Chat', clickAction: () {}),
-  OptionsModel(
-      imageUrl: Icons.videocam_outlined, title: 'Video', clickAction: () {}),
-  OptionsModel(
-      imageUrl: Icons.phone_outlined, title: 'Audio', clickAction: () {}),
+      imageUrl: 'assets/video.svg', title: 'Video', clickAction: () {}),
+  OptionsModel(imageUrl: 'assets/call.svg', title: 'Audio', clickAction: () {}),
 ];
 
 class OptionsButtomWidgets extends StatelessWidget {
@@ -37,7 +36,7 @@ class OptionsButtomWidgets extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   children: [
-                    Icon(options[index].imageUrl),
+                    SvgPicture.asset(options[index].imageUrl),
                     SizedBox(height: 15),
                     Text(options[index].title)
                   ],

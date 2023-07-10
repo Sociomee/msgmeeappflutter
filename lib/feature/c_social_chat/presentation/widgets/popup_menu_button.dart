@@ -88,7 +88,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(e.option),
-                              e.id == 6
+                              e.id == 7
                                   ? Text(
                                       'No syncing processed yet',
                                       style: TextStyle(
@@ -96,7 +96,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                     )
                                   : Container(),
                               SizedBox(height: 10),
-                              e.id == 7
+                              e.id == 8
                                   ? Container()
                                   : Divider(
                                       height: 0,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
@@ -147,9 +148,9 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           actions: [
-            Image.asset('assets/video.png', width: 16),
+            SvgPicture.asset('assets/video.svg'),
             SizedBox(width: 28),
-            Image.asset('assets/call.png', width: 16),
+            SvgPicture.asset('assets/calling.svg'),
             SinglechatPopupMenu(name: widget.name),
           ],
         ),

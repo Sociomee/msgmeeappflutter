@@ -127,69 +127,63 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                         ),
                       ),
                       SizedBox(height: 40),
-                      SizedBox(
-                        height: 40,
-                        child: TextFormField(
-                          controller: emailController,
-                          cursorColor: AppColors.primaryColor,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter email';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              hintText: 'Enter Email/Mobile Number',
-                              hintStyle: TextStyle(fontSize: 12),
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10)),
-                        ),
+                      TextFormField(
+                        controller: emailController,
+                        cursorColor: AppColors.primaryColor,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter email';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            hintText: 'Enter Email/Mobile Number',
+                            hintStyle: TextStyle(fontSize: 12),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10)),
                       ),
                       SizedBox(height: 20),
-                      SizedBox(
-                        height: 40,
-                        child: TextFormField(
-                          controller: passwordController,
-                          obscureText: true,
-                          cursorColor: AppColors.primaryColor,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              )),
-                              hintText: 'Enter Password',
-                              suffixIcon: Icon(Icons.visibility_off, size: 18),
-                              hintStyle: TextStyle(fontSize: 12),
-                              suffixIconColor: AppColors.primaryColor,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10)),
-                        ),
+                      TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        cursorColor: AppColors.primaryColor,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: AppColors.primaryColor,
+                            )),
+                            hintText: 'Enter Password',
+                            suffixIcon: Icon(Icons.visibility_off, size: 18),
+                            hintStyle: TextStyle(fontSize: 12),
+                            suffixIconColor: AppColors.primaryColor,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10)),
                       ),
                       SizedBox(height: 20),
                       Padding(

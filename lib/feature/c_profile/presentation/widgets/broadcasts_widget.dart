@@ -50,7 +50,7 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                         });
                       },
                       child: Icon(Icons.error_outline,
-                          size: 15, color: AppColors.grey)),
+                          size: 18, color: AppColors.grey)),
                   Spacer(),
                   GestureDetector(
                     onTap: () {

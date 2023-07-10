@@ -66,7 +66,7 @@ class AttachLocationPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey, thickness: 1),
+            child: Divider(color: AppColors.grey.withOpacity(.4), thickness: 1),
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 10),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/create_group_page.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 import '../../../../../../helper/navigator_function.dart';
@@ -61,11 +62,8 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
             // animatedScreenNavigator(context, AddParticipantsScreen());
           } else if (value == 6) {
             animatedScreenNavigator(context, ChangeWallPaperPage());
-            // showDialog(
-            //     context: context,
-            //     builder: (context) {
-            //       return ExportChatDialog();
-            //     });
+          } else if (value == 7) {
+            animatedScreenNavigator(context, CreateGroupPage());
           } else if (value == 8) {
             screenNavigator(
                 context, MediaAndDocScreen(profilename: widget.name));
