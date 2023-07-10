@@ -7,8 +7,10 @@ import '../widgets/personal_details_widget.dart';
 import '../widgets/profile_edit_widget.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key, required this.settings});
-  final bool settings;
+  const ProfilePage({
+    super.key,
+  });
+  // final bool settings;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,23 +31,21 @@ class ProfilePage extends StatelessWidget {
           children: [
             ProfileEditWidget(),
             PersonalDetailsWidget(),
-            settings
-                ? SizedBox(height: 20)
-                : Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Divider(
-                          color: AppColors.grey.withOpacity(.4),
-                          height: 0,
-                          thickness: 6,
-                        ),
-                      ),
-                      BroadCastsWidget(),
-                      GroupsWidget(),
-                      SizedBox(height: 30)
-                    ],
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Divider(
+                    color: AppColors.grey.withOpacity(.4),
+                    height: 0,
+                    thickness: 6,
                   ),
+                ),
+                BroadCastsWidget(),
+                GroupsWidget(),
+                SizedBox(height: 30)
+              ],
+            ),
           ],
         ),
       ),

@@ -12,7 +12,7 @@ class BroadCastList extends StatefulWidget {
 }
 
 class _BroadCastListState extends State<BroadCastList> {
-  bool selectall = false;
+  List<int> selectedindex = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +26,9 @@ class _BroadCastListState extends State<BroadCastList> {
             color: AppColors.black,
           ),
         ),
-        title: selectall
+        title: selectedindex.isNotEmpty
             ? Text(
-                '9 Selected',
+                '${selectedindex.length} Selected',
                 style: TextStyle(color: AppColors.black),
               )
             : Text(
@@ -36,7 +36,7 @@ class _BroadCastListState extends State<BroadCastList> {
                 style: TextStyle(color: AppColors.black),
               ),
         actions: [
-          selectall
+          selectedindex.isNotEmpty
               ? GestureDetector(
                   onTap: () {
                     showDialog(
@@ -57,19 +57,26 @@ class _BroadCastListState extends State<BroadCastList> {
                   PopupMenuItem(
                     value: 1,
                     child: Text(
-                      selectall ? "Deselect all" : 'Select all',
+                      selectedindex.length != 9 ? 'Select all' : 'Deselect all',
                       style: TextStyle(fontSize: 14),
                     ),
-                  )
+                  ),
                 ];
               },
               offset: Offset(0, 100),
               color: Colors.white,
               elevation: 2,
               onSelected: (value) {
-                setState(() {
-                  selectall = !selectall;
-                });
+                if (selectedindex.length != 9) {
+                  setState(() {
+                    selectedindex.clear();
+                  });
+                  selectedindex.addAll([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+                } else {
+                  setState(() {
+                    selectedindex.clear();
+                  });
+                }
               })
         ],
       ),
@@ -81,13 +88,23 @@ class _BroadCastListState extends State<BroadCastList> {
                 shrinkWrap: true,
                 itemCount: 9,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    splashColor: AppColors.seconderyColor,
+                  return GestureDetector(
+                    onTap: () {
+                      if (selectedindex.contains(index)) {
+                        selectedindex.remove(index);
+                      }
+                    },
+                    onLongPress: () {
+                      setState(() {
+                        selectedindex.add(index);
+                      });
+                    },
                     child: Container(
-                      color: selectall
+                      color: selectedindex.contains(index)
                           ? AppColors.primaryColor.withOpacity(.1)
-                          : null,
+                          : selectedindex.contains(index)
+                              ? AppColors.primaryColor.withOpacity(.1)
+                              : null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 7),
@@ -97,7 +114,7 @@ class _BroadCastListState extends State<BroadCastList> {
                           children: [
                             InkWell(
                                 onTap: () {},
-                                child: selectall
+                                child: selectedindex.contains(index)
                                     ? Container(
                                         height: 65,
                                         width: 65,

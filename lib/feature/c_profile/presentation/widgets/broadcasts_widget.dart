@@ -23,11 +23,8 @@ class BroadCastsWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: AppColors.black),
               ),
-              Icon(
-                Icons.error_outline,
-                size: 15,
-                color: AppColors.grey,
-              ),
+              SizedBox(width: 5),
+              Icon(Icons.error_outline, size: 15, color: AppColors.grey),
               Spacer(),
               GestureDetector(
                 onTap: () {
