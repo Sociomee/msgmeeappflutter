@@ -9,10 +9,18 @@ class CustomBottomModelSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Container(
+            height: 5,
+            width: 80,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.lightgrey),
+          ),
+          SizedBox(height: 10),
           const Text(
             'Select Media From?',
             textScaleFactor: 1.0,
@@ -38,13 +46,18 @@ class CustomBottomModelSheet extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: AppColors.lightgrey,
-                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.lightgrey.withOpacity(.4),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.lightgrey.withOpacity(.5),
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
+                            spreadRadius: 0,
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        size: 30,
-                      ),
+                      child: const Icon(Icons.camera_alt, size: 30),
                     ),
                     const SizedBox(
                       height: 8,
@@ -65,19 +78,19 @@ class CustomBottomModelSheet extends StatelessWidget {
                       width: 60,
                       decoration: BoxDecoration(
                         color: AppColors.white,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
-                          ),
+                            color: AppColors.lightgrey.withOpacity(.5),
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
+                            spreadRadius: 0,
+                          )
                         ],
                       ),
                       child: const Icon(
-                        Icons.folder_open_outlined,
+                        Icons.image,
+                        // Icons.folder_open_outlined,
                         size: 30,
                       ),
                     ),
