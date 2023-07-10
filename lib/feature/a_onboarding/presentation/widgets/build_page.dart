@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../theme/colors.dart';
+
 class BuildPages extends StatelessWidget {
   const BuildPages(
       {super.key,
@@ -40,8 +42,9 @@ class BuildPages extends StatelessWidget {
                   descriptionText,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey,
+                      fontSize: 16.sp,
+                      fontFamily: 'Poppins',
+                      color: AppColors.onboardingTextColor,
                       fontWeight: FontWeight.w400),
                   textScaleFactor: 1.0,
                 ),

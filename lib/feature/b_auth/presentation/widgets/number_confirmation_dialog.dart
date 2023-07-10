@@ -70,7 +70,7 @@ class _NumberConfirmationDialogState extends State<NumberConfirmationDialog> {
                 ontap: () {
                   Navigator.pop(context);
                 },
-                title: 'EDIT',
+                title: 'Edit',
                 color: AppColors.white,
                 textColor: AppColors.primaryColor,
               )
