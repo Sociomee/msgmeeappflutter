@@ -106,6 +106,7 @@ class _MyQRTabState extends State<MyQRTab> {
             backgroundColor: AppColors.grey,
             backgroundImage: NetworkImage(
                 'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
+        SizedBox(height: 10),
         Text('Anna More',
             style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700)),
         SizedBox(height: 10),
@@ -115,7 +116,20 @@ class _MyQRTabState extends State<MyQRTab> {
                 fontWeight: FontWeight.w400,
                 color: Colors.black54)),
         SizedBox(height: 20),
-        Image.asset('assets/my_qr.png'),
+        Stack(
+          children: [
+            Align(child: Image.asset('assets/my_qr.png')),
+            Positioned(
+              top: 100,
+              left: MediaQuery.of(context).size.width / 2 - 13,
+              child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: AppColors.grey,
+                  backgroundImage: NetworkImage(
+                      'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
+            ),
+          ],
+        ),
         SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),

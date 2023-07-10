@@ -33,14 +33,6 @@ class ProfilePage extends StatelessWidget {
             PersonalDetailsWidget(),
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Divider(
-                    color: AppColors.grey.withOpacity(.4),
-                    height: 0,
-                    thickness: 6,
-                  ),
-                ),
                 BroadCastsWidget(),
                 GroupsWidget(),
                 SizedBox(height: 30)
