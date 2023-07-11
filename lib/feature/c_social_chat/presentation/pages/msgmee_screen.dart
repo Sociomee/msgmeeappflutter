@@ -16,6 +16,7 @@ import 'package:stories_editor/stories_editor.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
+import 'message_search/pages/message_search_page.dart';
 
 class MsgmeeScreen extends StatefulWidget {
   const MsgmeeScreen({super.key});
@@ -180,7 +181,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           Icons.search,
                           color: AppColors.black,
                         ),
-                        onPressed: () {}),
+                        onPressed: () {
+                          animatedScreenNavigator(context, MessageSearchPage());
+                        }),
                     GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
