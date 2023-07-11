@@ -11,7 +11,6 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_
 import 'package:msgmee/helper/getpdf_size.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
-import '../../../cubit/show_audio_recorder.dart';
 import '../attach_contact_page.dart';
 import '../attach_location_page.dart';
 import '../image_preview_page.dart';
@@ -106,6 +105,28 @@ class _AttachedIconState extends State<AttachedIcon> {
     }
   }
 
+  pickAudio() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['mp3'],
+      allowMultiple: false,
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      String? path = file.path;
+      String? size = getFileSize(File(result.files.single.path!));
+
+      setState(() {
+        pdfname = path!.split('/').last;
+      });
+      animatedScreenNavigator(
+          context, DocSendingPage(pftname: "${pdfname}/${size}"));
+    } else {
+      // User canceled file picking
+      print('No PDF file selected');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -117,7 +138,8 @@ class _AttachedIconState extends State<AttachedIcon> {
           return GestureDetector(
             onTap: () {
               if (index == 0) {
-                context.read<ShowAudioRecorder>().toggleValue();
+                pickAudio();
+                // context.read<ShowAudioRecorder>().toggleValue();
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 1) {
                 pickCameraPic();

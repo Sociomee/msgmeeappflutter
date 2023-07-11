@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
@@ -49,7 +50,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: 281,
+      width: 249.w,
       duration: Duration(milliseconds: 500),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -109,7 +110,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
           SizedBox(height: 10),
           SizedBox(
             height: 30,
-            width: 270,
+            width: 270.w,
             child: TextFormField(
               onChanged: onChanged,
               cursorColor: AppColors.primaryColor,

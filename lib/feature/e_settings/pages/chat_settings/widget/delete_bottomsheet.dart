@@ -176,7 +176,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                 ),
               ),
               CustomButtonWidget(
-                  title: 'Ok',
+                  title: 'OK',
                   color: AppColors.primaryColor,
                   ontap: () {
                     Navigator.pop(context);

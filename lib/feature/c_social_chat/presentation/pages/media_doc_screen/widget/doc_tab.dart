@@ -150,11 +150,7 @@ class DocTabScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 SizedBox(width: 16),
-                                Icon(
-                                  Icons.insert_drive_file_outlined,
-                                  color: AppColors.primaryColor,
-                                  size: 40,
-                                ),
+                                Image.asset('assets/document-empty.png'),
                                 SizedBox(width: 16),
                                 Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -198,11 +194,7 @@ class DocTabScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 SizedBox(width: 16),
-                                Icon(
-                                  Icons.insert_drive_file_outlined,
-                                  color: AppColors.primaryColor,
-                                  size: 40,
-                                ),
+                                Image.asset('assets/document-empty.png'),
                                 SizedBox(width: 16),
                                 Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -223,9 +215,7 @@ class DocTabScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Divider(
-                            color: AppColors.grey,
-                          ),
+                          Divider(color: AppColors.grey),
                         ],
                       );
                     })

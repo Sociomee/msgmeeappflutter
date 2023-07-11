@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 List<String> images = [
   'https://images.pexels.com/photos/1226721/pexels-photo-1226721.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -33,7 +34,7 @@ class MediaTab extends StatelessWidget {
                 ),
                 Image.network(
                   'https://images.pexels.com/photos/5586512/pexels-photo-5586512.jpeg?auto=compress&cs=tinysrgb&w=1600',
-                  width: 103,
+                  width: 90.w,
                   height: 103,
                   fit: BoxFit.cover,
                 ),

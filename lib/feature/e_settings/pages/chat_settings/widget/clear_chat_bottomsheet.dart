@@ -181,7 +181,7 @@ class _ClearChatBottomSheetState extends State<ClearChatBottomSheet> {
                 ),
               ),
               CustomButtonWidget(
-                  title: 'Ok',
+                  title: 'OK',
                   color: AppColors.primaryColor,
                   ontap: () {
                     Navigator.pop(context);

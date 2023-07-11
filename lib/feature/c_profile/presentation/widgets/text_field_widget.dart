@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../theme/colors.dart';
 
 // ignore: must_be_immutable
@@ -38,6 +39,9 @@ class TextFieldWidget extends StatelessWidget {
           onChanged: onChanged,
           controller: controller,
           cursorColor: AppColors.primaryColor,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(38),
+          ],
           decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               enabledBorder: OutlineInputBorder(
@@ -60,7 +64,7 @@ class TextFieldWidget extends StatelessWidget {
                   children: [
                     Spacer(),
                     Text(
-                      'Max $remainChar Characters',
+                      'Max 38 Characters',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: AppColors.black, fontSize: 12),
                     ),

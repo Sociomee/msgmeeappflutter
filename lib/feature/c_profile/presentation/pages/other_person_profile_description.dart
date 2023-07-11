@@ -275,7 +275,7 @@ class _OtherPersonProfileDescriptionState
                       ),
                       Spacer(),
                       Text(
-                        'On',
+                        notification ? 'On' : 'Off',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color(0xFF333333),
@@ -324,7 +324,7 @@ class _OtherPersonProfileDescriptionState
                       ),
                       Spacer(),
                       Text(
-                        'On',
+                        mute ? 'On' : 'Off',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color(0xFF333333),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/locations_model.dart';
@@ -11,6 +12,7 @@ class AttachLocationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
@@ -31,24 +33,24 @@ class AttachLocationPage extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            height: 200,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration:
-                BoxDecoration(border: Border.all(color: AppColors.black)),
-            child: Text('Map Area'),
-          ),
-          SizedBox(height: 20),
-          Text(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Container(
+          height: 200,
+          width: double.infinity,
+          child: MapViewWidget(),
+        ),
+        SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
             'Share Live Location',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
-          Container(
+        ),
+        SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -64,11 +66,14 @@ class AttachLocationPage extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey.withOpacity(.4), thickness: 1),
-          ),
-          Container(
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Divider(color: AppColors.grey.withOpacity(.4), thickness: 1),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue),
@@ -91,11 +96,15 @@ class AttachLocationPage extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Text('Popular Nearby Locations'),
-          ),
-          ListView.separated(
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Text('Popular Nearby Locations'),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ListView.separated(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: locations.length,
               separatorBuilder: (context, index) {
@@ -126,9 +135,9 @@ class AttachLocationPage extends StatelessWidget {
                     )
                   ],
                 );
-              })
-        ]),
-      ),
+              }),
+        )
+      ]),
     );
   }
 }

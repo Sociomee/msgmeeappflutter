@@ -9,7 +9,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_icons.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
@@ -373,7 +373,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               },
                             )),
                             SizedBox(width: 10),
-                            istyping
+                            istyping ||
+                                    context.watch<ShowContactTextField>().state
                                 ? GestureDetector(
                                     onTap: () {
                                       if (messageController.text.isNotEmpty) {
@@ -404,6 +405,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 ));
 
                                         messageController.clear();
+                                        context
+                                            .read<ShowContactTextField>()
+                                            .toggleValue();
                                       } else if (context
                                           .read<ShowAudioRecorder>()
                                           .state) {
@@ -419,6 +423,22 @@ class _ChatScreenState extends State<ChatScreen> {
                                         setState(() {});
                                         context
                                             .read<ShowAudioRecorder>()
+                                            .toggleValue();
+                                      } else if (context
+                                          .read<ShowContactTextField>()
+                                          .state) {
+                                        context
+                                            .read<AddMessageCubit>()
+                                            .addMessage(ChatMessage(
+                                              messageContent:
+                                                  messageController.text,
+                                              messageType: 'sender',
+                                              msgStatus: 'send',
+                                              time: getCurrentTime(),
+                                              type: MessageType.contact,
+                                            ));
+                                        context
+                                            .read<ShowContactTextField>()
                                             .toggleValue();
                                       }
                                     },
