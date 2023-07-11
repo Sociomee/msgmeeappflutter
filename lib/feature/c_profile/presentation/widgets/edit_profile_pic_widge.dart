@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/text_field_widget.dart';
 
@@ -17,6 +18,7 @@ class EditProfilePicWidget extends StatefulWidget {
 class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
   final ImagePicker _picker = ImagePicker();
   late TextEditingController nameController;
+  late TextEditingController usernameController;
   File? imageFile;
   int remainchar = 64;
   void pickGprofilePic() async {
@@ -41,25 +43,34 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
 
   @override
   void initState() {
-    nameController = TextEditingController();
+    nameController = TextEditingController(text: 'Anna More');
+    usernameController = TextEditingController(text: '@shreya_singh012');
+
     super.initState();
   }
 
   @override
   void dispose() {
     nameController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+          leadingWidth: 40,
+          titleSpacing: 0,
           leading: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+              )),
           elevation: 0,
           title:
               Text('Your Profile', style: TextStyle(color: AppColors.black))),
@@ -145,6 +156,48 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
               },
               remainChar: remainchar.toString(),
               textWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              'Username',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: TextFormField(
+              onTap: () {},
+              onChanged: (e) {},
+              controller: usernameController,
+              cursorColor: AppColors.primaryColor,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(38),
+              ],
+              decoration: InputDecoration(
+                  fillColor: AppColors.lightgrey1,
+                  filled: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: AppColors.lightgrey1)),
+                  border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: AppColors.lightgrey1)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: AppColors.primaryColor)),
+                  hintText: '@shreya_singh012',
+                  hintStyle: const TextStyle(
+                      color: AppColors.hinttextColor, fontSize: 14)),
             ),
           ),
           Spacer(),
