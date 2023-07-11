@@ -7,7 +7,6 @@ import '../widgets/common_groups.dart';
 import '../../../../theme/colors.dart';
 import 'media_tab.dart';
 import '../widgets/options_button_widget.dart';
-import '../widgets/profile_bottom_sheet.dart';
 import '../../../c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 
 class OtherPersonProfileDescription extends StatefulWidget {
@@ -47,25 +46,11 @@ class _OtherPersonProfileDescriptionState
             titleSpacing: 5,
             title: Text(
               widget.name,
-              style: TextStyle(color: AppColors.black, fontSize: 18),
+              style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(25.0),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) {
-                          return ProfileBottomModelSheet();
-                        });
-                  },
-                  icon: Icon(Icons.more_vert, color: AppColors.black))
-            ],
           ),
           body: SingleChildScrollView(
             child: Column(

@@ -36,9 +36,20 @@ class OptionsButtomWidgets extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   children: [
-                    SvgPicture.asset(options[index].imageUrl),
-                    SizedBox(height: 15),
-                    Text(options[index].title)
+                    SvgPicture.asset(
+                      options[index].imageUrl,
+                      height: 20,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      options[index].title,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
                   ],
                 ),
               );

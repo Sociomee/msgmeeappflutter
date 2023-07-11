@@ -13,6 +13,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'package:stories_editor/stories_editor.dart';
+import '../widgets/messenger_bottomsheet.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
 
@@ -180,7 +181,21 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           color: AppColors.black,
                         ),
                         onPressed: () {}),
-                    SvgPicture.asset('assets/msgmee_icon.svg'),
+                    GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25.0),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return MessengerOptionsBottomSheet();
+                              });
+                        },
+                        child: SvgPicture.asset('assets/msgmee_icon.svg')),
                     PopupMenuButtonWidget()
                   ],
                 ),
@@ -255,6 +270,12 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const WhatsappStoryEditor()),
+                                    // );
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

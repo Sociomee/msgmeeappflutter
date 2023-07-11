@@ -109,10 +109,9 @@ class SentMessageWidget extends StatelessWidget {
                         color:
                             context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          bottomLeft: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                        ),
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -213,10 +212,9 @@ class SentMessageWidget extends StatelessWidget {
                         color:
                             context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          bottomLeft: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                        ),
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -294,10 +292,9 @@ class SentMessageWidget extends StatelessWidget {
                         color:
                             context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          bottomLeft: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                        ),
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -404,10 +401,9 @@ class SentMessageWidget extends StatelessWidget {
                         color:
                             context.watch<ChatThemeCubit>().state.chatDeepColor,
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          bottomLeft: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                        ),
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -497,7 +493,6 @@ class SentMessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-          
           ],
         ),
       ),

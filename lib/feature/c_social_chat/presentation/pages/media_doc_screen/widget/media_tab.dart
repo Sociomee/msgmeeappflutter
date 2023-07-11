@@ -28,16 +28,18 @@ class MediaTab extends StatelessWidget {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                      const EdgeInsets.only(left: 10.0, top: 10, bottom: 10),
                   child: Text('RECENT'),
                 ),
                 Image.network(
                   'https://images.pexels.com/photos/5586512/pexels-photo-5586512.jpeg?auto=compress&cs=tinysrgb&w=1600',
                   width: 103,
+                  height: 103,
+                  fit: BoxFit.cover,
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                      const EdgeInsets.only(left: 10.0, top: 10, bottom: 3),
                   child: Text('LAST WEEK'),
                 ),
                 GridView.count(
@@ -56,7 +58,7 @@ class MediaTab extends StatelessWidget {
                     })),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                      const EdgeInsets.only(left: 10.0, top: 30, bottom: 3),
                   child: Text('LAST MONTH'),
                 ),
                 GridView.count(
@@ -74,8 +76,7 @@ class MediaTab extends StatelessWidget {
                       );
                     })),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                  padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
                   child: Text('NOVEMBER'),
                 ),
                 GridView.count(

@@ -14,7 +14,7 @@ class MediaAndDocScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 1,
+          elevation: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);

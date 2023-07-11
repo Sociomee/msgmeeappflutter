@@ -58,7 +58,15 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(e.option),
+                              Text(
+                                e.option,
+                                style: TextStyle(
+                                  color: Color(0xFF4E4E4E),
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                               e.id == 6
                                   ? Text(
                                       'No syncing processed yet',
@@ -71,8 +79,8 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   ? Container()
                                   : Divider(
                                       height: 0,
-                                      color: AppColors.grey,
-                                    )
+                                      thickness: 1,
+                                      color: AppColors.grey)
                             ],
                           ),
                         )),
@@ -87,7 +95,15 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(e.option),
+                              Text(
+                                e.option,
+                                style: TextStyle(
+                                  color: Color(0xFF4E4E4E),
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                               e.id == 7
                                   ? Text(
                                       'No syncing processed yet',
@@ -100,6 +116,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   ? Container()
                                   : Divider(
                                       height: 0,
+                                      thickness: 1,
                                       color: AppColors.grey,
                                     )
                             ],

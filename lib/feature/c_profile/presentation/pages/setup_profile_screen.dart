@@ -25,7 +25,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   File? imageFile;
   bool isValid = false;
   bool isTyping = false;
-  int remainchar = 64;
+  int remainchar = 38;
   // int remainchar1 = 64;
   void pickGprofilePic() async {
     // Pick an image
@@ -116,10 +116,18 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   child: Stack(
                     children: [
                       imageFile != null
-                          ? CircleAvatar(
-                              radius: 77,
-                              backgroundColor: AppColors.grey,
-                              backgroundImage: FileImage(File(imageFile!.path)),
+                          ? Container(
+                              height: 172,
+                              width: 172,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.file(
+                                      File(
+                                        imageFile!.path,
+                                      ),
+                                      fit: BoxFit.cover)),
                             )
                           : Container(
                               height: 172,
@@ -171,7 +179,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 const SizedBox(height: 20),
                 Center(
                   child: const Text(
-                    'This will be your display picture, this picture will be visible\n to your connections or contacts.',
+                    "The picture you're about to set as your display picture will\nbe visible to your connections.",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(color: AppColors.hinttextColor, fontSize: 12),
@@ -185,7 +193,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   textWeight: FontWeight.bold,
                   onChanged: (e) {
                     setState(() {
-                      remainchar = 64 - nameController.text.length;
+                      remainchar = 38 - nameController.text.length;
                       nameController.text.isNotEmpty
                           ? isValid = true
                           : isValid = false;

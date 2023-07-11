@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class CustomBottomModelSheet extends StatelessWidget {
@@ -21,16 +22,16 @@ class CustomBottomModelSheet extends StatelessWidget {
                 color: AppColors.lightgrey),
           ),
           SizedBox(height: 10),
-          const Text(
+          Text(
             'Select Media From?',
             textScaleFactor: 1.0,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16.sp),
           ),
-          const Text(
+          Text(
             'Use camera or select file from device gallery',
             textScaleFactor: 1.0,
             style: TextStyle(
-                fontSize: 12, color: Color.fromARGB(255, 109, 109, 109)),
+                fontSize: 12.sp, color: Color.fromARGB(255, 109, 109, 109)),
           ),
           const SizedBox(
             height: 20,
