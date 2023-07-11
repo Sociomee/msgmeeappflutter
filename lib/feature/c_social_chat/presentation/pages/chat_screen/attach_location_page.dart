@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
 
+import '../../../../../data/model/chat_model.dart';
 import '../../../../../data/model/locations_model.dart';
+import '../../../../../helper/get_currenttime.dart';
+import '../../cubit/add_message/add_message_cubit.dart';
 
 class AttachLocationPage extends StatelessWidget {
   const AttachLocationPage({super.key});
@@ -50,20 +55,32 @@ class AttachLocationPage extends StatelessWidget {
         SizedBox(height: 10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: AppColors.darkgreen),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset('assets/share_location.svg'),
-                Text(
-                  'Share your live location',
-                  style: TextStyle(color: AppColors.white),
-                )
-              ],
+          child: GestureDetector(
+            onTap: () {
+              context.read<AddMessageCubit>().addMessage(ChatMessage(
+                    messageContent: '',
+                    messageType: 'sender',
+                    msgStatus: 'send',
+                    time: getCurrentTime(),
+                    type: MessageType.location,
+                  ));
+              Navigator.pop(context);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: AppColors.darkgreen),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset('assets/share_location.svg'),
+                  Text(
+                    'Share your live location',
+                    style: TextStyle(color: AppColors.white),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -71,29 +88,41 @@ class AttachLocationPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Divider(color: AppColors.grey.withOpacity(.4), thickness: 1),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.circular(5),
-                color: AppColors.white),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.my_location_outlined,
-                  color: Colors.blue,
-                  size: 18,
-                ),
-                SizedBox(width: 5),
-                Text(
-                  'Share your current location',
-                  style: TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.w500),
-                )
-              ],
+        GestureDetector(
+          onTap: () {
+            context.read<AddMessageCubit>().addMessage(ChatMessage(
+                  messageContent: '',
+                  messageType: 'sender',
+                  msgStatus: 'send',
+                  time: getCurrentTime(),
+                  type: MessageType.location,
+                ));
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(5),
+                  color: AppColors.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.my_location_outlined,
+                    color: Colors.blue,
+                    size: 18,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    'Share your current location',
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
             ),
           ),
         ),

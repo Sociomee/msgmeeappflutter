@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/chat_theme/chat_theme_cubit.dart';
@@ -497,7 +498,79 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-
+    final locationMessage = Flexible(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(
+                          top: 5, left: 5, right: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 140,
+                            width: 220,
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: MapViewWidget(),
+                          ),
+                          SizedBox(height: 5),
+                          Text(message,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                          SizedBox(height: 2),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              SizedBox(
+                                width: message.trim().length <= 15
+                                    ? 40
+                                    : message.trim().length <= 21
+                                        ? 80
+                                        : 200,
+                              ),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -2,
+                    right: 0,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
     return Padding(
       padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
       child: Row(
@@ -511,7 +584,9 @@ class SentMessageWidget extends StatelessWidget {
                       ? docMessage
                       : type == MessageType.image
                           ? imageMessage
-                          : messageTextGroup,
+                          : type == MessageType.location
+                              ? locationMessage
+                              : messageTextGroup,
         ],
       ),
     );
