@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.dart';
@@ -9,16 +8,6 @@ import 'package:msgmee/theme/colors.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../widgets/build_page.dart';
-
-class OnboardingModel {
-  final String imageUrl;
-  final String desc;
-
-  OnboardingModel({
-    required this.imageUrl,
-    required this.desc,
-  });
-}
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -36,107 +25,117 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  List<OnboardingModel> onboardingData = [
-    OnboardingModel(
-      imageUrl: '',
-      desc: '',
-    ),
-    OnboardingModel(
-      imageUrl: '',
-      desc: '',
-    ),
-    OnboardingModel(
-      imageUrl: '',
-      desc: '',
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(elevation: 0, actions: [
-          isLastPage
-              ? Container()
-              : TextButton(
-                  onPressed: () {
-                    screenNavigator(context, const MsgmeeScreen());
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/onboarding_bg.png'))),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * .85,
+                child: PageView(
+                  controller: pagecontroller,
+                  onPageChanged: (index) {
+                    setState(() {
+                      isLastPage = index == 2;
+                    });
                   },
-                  child: Text('Skip', style: TextStyle(color: Colors.black)))
-        ]),
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 390.h,
-              child: PageView(
-                controller: pagecontroller,
-                onPageChanged: (index) {
-                  setState(() {
-                    isLastPage = index == 2;
-                  });
-                },
-                children: [
-                  BuildPages(
-                      index: 1,
-                      imageUrl: 'assets/onboarding1.png',
-                      descriptionText:
-                          'Communicate with your friends\nin a fast, reliable and secure\nway.'),
-                  BuildPages(
-                      index: 2,
-                      imageUrl: 'assets/onboarding2.png',
-                      descriptionText:
-                          'Engage with your friends,\nbuild relationships.'),
-                  BuildPages(
-                      index: 3,
-                      imageUrl: 'assets/onboarding3.png',
-                      descriptionText:
-                          'Come to MsgMee, and Become\nPart of a Growing Community.'),
-                ],
-              ),
-            ),
-            Center(
-              child: SmoothPageIndicator(
-                controller: pagecontroller,
-                count: 3,
-                onDotClicked: (index) => pagecontroller.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-                effect: ExpandingDotsEffect(
-                  dotHeight: 7,
-                  dotWidth: 7,
-                  spacing: 5,
-                  dotColor: AppColors.primaryColor.withOpacity(.5),
-                  activeDotColor: AppColors.primaryDarkColor,
+                  children: [
+                    BuildPages(
+                        title: 'Welcome to\nMsgMee',
+                        index: 1,
+                        imageUrl: 'assets/onboarding1.svg',
+                        descriptionText:
+                            'Connecting with friends in a secure, fast and reliable way.'),
+                    BuildPages(
+                        title: 'Empower Your\nVoice ',
+                        index: 2,
+                        imageUrl: 'assets/onboarding2.svg',
+                        descriptionText:
+                            'Engage with your friends,\nbuild relationships.'),
+                    BuildPages(
+                        title: 'Be The\nPresenter',
+                        index: 3,
+                        imageUrl: 'assets/onboarding3.svg',
+                        descriptionText:
+                            'Come to MsgMee, and Become\nPart of a Growing Community.'),
+                  ],
                 ),
               ),
-            ),
-            SizedBox(height: 45),
-            GestureDetector(
-                onTap: isLastPage
-                    ? () {
-                        animatedScreenNavigator(context, WelcomeScreen());
-                      }
-                    : () {
-                        pagecontroller.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOut);
+              Center(
+                child: SmoothPageIndicator(
+                  controller: pagecontroller,
+                  count: 3,
+                  onDotClicked: (index) => pagecontroller.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  ),
+                  effect: ExpandingDotsEffect(
+                    dotHeight: 7,
+                    dotWidth: 7,
+                    spacing: 5,
+                    dotColor: AppColors.primaryColor.withOpacity(.5),
+                    activeDotColor: AppColors.primaryDarkColor,
+                  ),
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        screenNavigator(context, MsgmeeScreen());
                       },
-                child: Container(
-                  width: 55,
-                  padding: EdgeInsets.all(12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: AppColors.primaryColor, width: 2),
-                      borderRadius: BorderRadius.circular(15)),
-                  child:
-                      Icon(Icons.arrow_forward, color: AppColors.primaryColor),
-                )),
-          ],
+                      child: Text('Skip',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ),
+                    GestureDetector(
+                        onTap: isLastPage
+                            ? () {
+                                animatedScreenNavigator(
+                                    context, WelcomeScreen());
+                              }
+                            : () {
+                                pagecontroller.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeInOut);
+                              },
+                        child: Container(
+                          height: 41,
+                          width: 41,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF93CA65),
+                              border: Border.all(
+                                  color: Color(0xFF93CA65), width: 2),
+                              borderRadius: BorderRadius.circular(15)),
+                          child:
+                              Icon(Icons.arrow_forward, color: AppColors.white),
+                        ))
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
