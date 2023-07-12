@@ -45,6 +45,7 @@ class AttachedIcon extends StatefulWidget {
 class _AttachedIconState extends State<AttachedIcon> {
   final ImagePicker _picker = ImagePicker();
   String pdfname = '';
+  List<String> pdfNames = [];
   void pickGalleryPic() async {
     // Pick an image
     final List<XFile>? images = await _picker.pickMultiImage();
@@ -91,14 +92,22 @@ class _AttachedIconState extends State<AttachedIcon> {
     );
     if (result != null) {
       PlatformFile file = result.files.first;
+      List<PlatformFile> files = result.files;
       String? path = file.path;
       String? size = getFileSize(File(result.files[0].path!));
 
       setState(() {
         pdfname = path!.split('/').last;
+        for (var i = 0; i < files.length; i++) {
+          pdfNames.add(files[i].path!.split('/').last);
+        }
       });
       animatedScreenNavigator(
-          context, DocSendingPage(pftname: "${pdfname}/${size}"));
+          context,
+          DocSendingPage(
+            pftname: "${pdfname}/${size}",
+            names: pdfNames,
+          ));
     } else {
       print('No PDF file selected');
     }

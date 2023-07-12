@@ -306,12 +306,16 @@ class SentMessageWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           images != null
-                              ? GridView.count(
+                              ? GridView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  crossAxisCount: 2,
-                                  children:
-                                      List.generate(images!.length, (index) {
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 10,
+                                          mainAxisExtent: 200),
+                                  itemBuilder: (context, index) {
                                     return SizedBox(
                                       height: 100,
                                       width: 100,
@@ -325,7 +329,7 @@ class SentMessageWidget extends StatelessWidget {
                                             fit: BoxFit.cover,
                                           )),
                                     );
-                                  }),
+                                  },
                                 )
                               : Container(),
                           SizedBox(height: 5),
