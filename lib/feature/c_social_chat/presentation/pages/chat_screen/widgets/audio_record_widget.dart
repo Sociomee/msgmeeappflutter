@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:msgmee/helper/get_currenttime.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../../data/model/chat_model.dart';
@@ -26,9 +27,6 @@ class _AudioRecordWidgetState extends State<AudioRecordWidget> {
   void initState() {
     super.initState();
     initRecorder();
-    Timer(Duration(milliseconds: 500), () {
-      record();
-    });
   }
 
   @override
@@ -44,7 +42,9 @@ class _AudioRecordWidgetState extends State<AudioRecordWidget> {
     } else if (status == PermissionStatus.granted) {
       await recorder.openRecorder();
       recorder.setSubscriptionDuration(Duration(microseconds: 500));
-      record();
+      Timer(Duration(milliseconds: 500), () {
+        record();
+      });
     }
   }
 
@@ -95,7 +95,7 @@ class _AudioRecordWidgetState extends State<AudioRecordWidget> {
                   messageContent: '',
                   messageType: 'sender',
                   msgStatus: 'send',
-                  time: '4:28 pm',
+                  time: getCurrentTime(),
                   type: MessageType.audio,
                 ));
             context.read<ShowAudioRecorder>().toggleValue();

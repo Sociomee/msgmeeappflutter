@@ -92,7 +92,7 @@ class _AttachedIconState extends State<AttachedIcon> {
     if (result != null) {
       PlatformFile file = result.files.first;
       String? path = file.path;
-      String? size = getFileSize(File(result.files.single.path!));
+      String? size = getFileSize(File(result.files[0].path!));
 
       setState(() {
         pdfname = path!.split('/').last;
