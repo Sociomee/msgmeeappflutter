@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -12,6 +13,7 @@ class ChatMessage {
   final String? docName;
   final List<File?>? images;
   final List<String>? docs;
+  final int? numberofContact;
 
   ChatMessage({
     required this.messageContent,
@@ -23,6 +25,7 @@ class ChatMessage {
     this.docName,
     this.images,
     this.docs,
+    this.numberofContact,
   });
 }
 

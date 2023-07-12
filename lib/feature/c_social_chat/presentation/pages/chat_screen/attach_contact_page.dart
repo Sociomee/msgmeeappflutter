@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
+
+import '../../../../../data/model/chat_model.dart';
+import '../../../../../helper/get_currenttime.dart';
+import '../../cubit/add_message/add_message_cubit.dart';
 
 class ContactModel {
   final String name;
@@ -49,6 +54,16 @@ class _AttachContactPageState extends State<AttachContactPage> {
               if (selected.isNotEmpty) {
                 context.read<ShowContactTextField>().toggleValue();
                 Navigator.pop(context);
+              }
+              if (selected.length > 1) {
+                context.read<AddMessageCubit>().addMessage(ChatMessage(
+                      messageContent: '',
+                      messageType: 'sender',
+                      msgStatus: 'send',
+                      time: getCurrentTime(),
+                      type: MessageType.multiplecontact,
+                      numberofContact: selected.length,
+                    ));
               }
             },
             child: Padding(
