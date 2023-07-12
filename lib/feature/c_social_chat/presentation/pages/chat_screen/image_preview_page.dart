@@ -10,6 +10,7 @@ import 'package:photofilters/photofilters.dart';
 import '../../../../../data/model/chat_model.dart';
 import 'package:image/image.dart' as imageLib;
 
+import '../../../../../helper/get_currenttime.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
 
 class ImagePreViewPage extends StatefulWidget {
@@ -267,7 +268,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                     messageContent: messageController.text,
                     messageType: 'sender',
                     msgStatus: 'send',
-                    time: '4:28 pm',
+                    time: getCurrentTime(),
                     type: MessageType.image,
                     image_url: imagelist[selectedImage]!));
 

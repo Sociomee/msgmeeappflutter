@@ -50,7 +50,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: 249.w,
+      width: 243.w,
       duration: Duration(milliseconds: 500),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -85,7 +85,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 60),
+                    SizedBox(width: 40.w),
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10),

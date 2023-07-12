@@ -227,7 +227,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: CustomButtonWidget(
                           title: 'Sync with account credentials',
                           color: AppColors.primaryColor,

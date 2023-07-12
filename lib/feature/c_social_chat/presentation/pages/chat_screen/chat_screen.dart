@@ -407,7 +407,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         messageController.clear();
                                         context
                                             .read<ShowContactTextField>()
-                                            .toggleValue();
+                                            .getinitilstate();
                                       } else if (context
                                           .read<ShowAudioRecorder>()
                                           .state) {
@@ -453,7 +453,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ),
                                   )
                                 : GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      context
+                                          .read<ShowAudioRecorder>()
+                                          .toggleValue();
+                                    },
                                     child: Container(
                                       height: 30,
                                       width: 30,

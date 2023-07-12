@@ -135,7 +135,7 @@ class SentMessageWidget extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                SizedBox(width: 10.w),
                                 Text(
                                   'Joy Arthur',
                                   textAlign: TextAlign.center,
