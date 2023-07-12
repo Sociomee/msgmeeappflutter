@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
@@ -12,7 +14,8 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_but
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
-import 'package:stories_editor/stories_editor.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import '../widgets/messenger_bottomsheet.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
@@ -29,6 +32,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
   int _selectedIndex = 0;
+  File? image;
+
   @override
   void initState() {
     super.initState();
@@ -272,27 +277,48 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                             child: Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    // await [
+                                    //   Permission.photos,
+                                    //   Permission.storage,
+                                    // ].request();
+                                    // final picker = ImagePicker();
+                                    // await picker
+                                    //     .pickImage(source: ImageSource.gallery)
+                                    //     .then((file) async {
+                                    //   final File editedFile =
+                                    //       await Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => StoryMaker(
+                                    //         filePath: file!.path,
+                                    //       ),
+                                    //     ),
+                                    //   );
+                                    //   setState(() {
+                                    //     image = editedFile;
+                                    //   });
+                                    //   print('editedFile: ${image!.path}');
+                                    // });
                                     // Navigator.push(
                                     //   context,
                                     //   MaterialPageRoute(
                                     //       builder: (context) =>
                                     //           const WhatsappStoryEditor()),
                                     // );
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => StoriesEditor(
-                                                  giphyKey:
-                                                      'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                  //fontFamilyList: const ['Shizuru', 'Aladin'],
-                                                  galleryThumbnailQuality: 300,
-                                                  //isCustomFontList: true,
-                                                  onDone: (uri) {
-                                                    debugPrint(uri);
-                                                    // Share.shareFiles([uri]);
-                                                  },
-                                                )));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => StoriesEditor(
+                                    //               giphyKey:
+                                    //                   'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                    //               //fontFamilyList: const ['Shizuru', 'Aladin'],
+                                    //               galleryThumbnailQuality: 300,
+                                    //               //isCustomFontList: true,
+                                    //               onDone: (uri) {
+                                    //                 debugPrint(uri);
+                                    //                 // Share.shareFiles([uri]);
+                                    //               },
+                                    //             )));
                                   },
                                   child: Container(
                                     height: 42,

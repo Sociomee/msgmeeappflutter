@@ -524,11 +524,12 @@ class SentMessageWidget extends StatelessWidget {
                         children: [
                           Container(
                             height: 140,
-                            width: 220,
                             decoration: BoxDecoration(
                                 color: AppColors.white,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: MapViewWidget(),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: MapViewWidget()),
                           ),
                           SizedBox(height: 5),
                           Text(message,

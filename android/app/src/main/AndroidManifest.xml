@@ -35,4 +35,5 @@
             android:value="AIzaSyB3cGAZqnXaZIm_Nks0yQ3vIdhfJR9Xtgc" />     
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 </manifest>
