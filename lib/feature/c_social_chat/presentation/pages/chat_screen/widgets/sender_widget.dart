@@ -200,108 +200,8 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-    final multiplecontact = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            child: Stack(
-              children: [
-                Container(
-                    padding: const EdgeInsets.only(
-                        top: 5, left: 5, right: 5, bottom: 5),
-                    decoration: BoxDecoration(
-                      color:
-                          context.watch<ChatThemeCubit>().state.chatDeepColor,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
-                          bottomLeft: Radius.circular(12)),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListView.builder(
-                            itemCount: numberofContact,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.all(6),
-                                decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.network(
-                                        'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                                        height: 44,
-                                        width: 44,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    Text(
-                                      'Joy Arthur',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color(0xFF141414),
-                                        fontSize: 14,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Icon(Icons.videocam_outlined),
-                                    SizedBox(width: 10),
-                                    Icon(Icons.phone_outlined, size: 19)
-                                  ],
-                                ),
-                              );
-                            }),
-                        SizedBox(height: 5),
-                        Text(message,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14)),
-                        SizedBox(height: 2),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(time,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            SizedBox(
-                              width: message.length == 0
-                                  ? 110.w
-                                  : message.trim().length <= 21
-                                      ? 80
-                                      : 200,
-                            ),
-                            Text(msgStatus,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                          ],
-                        )
-                      ],
-                    )),
-                Positioned(
-                  bottom: -2,
-                  right: 0,
-                  child: msgStatus == 'read'
-                      ? MessageStatus.read
-                      : msgStatus == 'send'
-                          ? MessageStatus.sent
-                          : MessageStatus.delivered,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    final multiplecontact = contactMessage;
+
     final imageMessage = Flexible(
       child: Container(
         child: Row(
@@ -775,7 +675,9 @@ class SentMessageWidget extends StatelessWidget {
                               ? locationMessage
                               : type == MessageType.multipleImage
                                   ? multipleImageMessage
-                                  : messageTextGroup,
+                                  : type == MessageType.multiplecontact
+                                      ? multiplecontact
+                                      : messageTextGroup,
         ],
       ),
     );

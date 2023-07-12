@@ -51,19 +51,25 @@ class _AttachContactPageState extends State<AttachContactPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              if (selected.isNotEmpty) {
+              if (selected.isNotEmpty && selected.length == 1) {
                 context.read<ShowContactTextField>().toggleValue();
                 Navigator.pop(context);
-              }
-              if (selected.length > 1) {
-                context.read<AddMessageCubit>().addMessage(ChatMessage(
-                      messageContent: '',
-                      messageType: 'sender',
-                      msgStatus: 'send',
-                      time: getCurrentTime(),
-                      type: MessageType.multiplecontact,
-                      numberofContact: selected.length,
-                    ));
+              } else if (selected.length > 1) {
+                print(selected.length);
+
+                for (var i = 0; i < selected.length; i++) {
+                  context.read<AddMessageCubit>().addMessage(ChatMessage(
+                        messageContent: '',
+                        messageType: 'sender',
+                        msgStatus: 'send',
+                        time: getCurrentTime(),
+                        type: MessageType.multiplecontact,
+                        numberofContact: selected.length,
+                      ));
+                }
+
+                print(selected.length);
+                Navigator.pop(context);
               }
             },
             child: Padding(

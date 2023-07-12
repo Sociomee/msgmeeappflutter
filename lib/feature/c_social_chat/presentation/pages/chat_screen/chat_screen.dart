@@ -300,6 +300,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 .state
                                 .messages[index]
                                 .images,
+                            numberofContact: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .numberofContact,
                           ),
                         ),
                 );
