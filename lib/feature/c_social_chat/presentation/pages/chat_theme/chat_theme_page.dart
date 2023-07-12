@@ -67,9 +67,15 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                       context
                                           .read<ChatThemeCubit>()
                                           .selectTheme(index);
+
                                       context
                                           .read<ChatThemeCubit>()
-                                          .getInitalTheme();
+                                          .changeTheme(
+                                            themes[index].rightColor,
+                                            themes[index].leftColor,
+                                          );
+                                      print(
+                                          '${themes[index].rightColor} ${themes[index].leftColor}');
                                     },
                                     child: Container(
                                         height: 22,

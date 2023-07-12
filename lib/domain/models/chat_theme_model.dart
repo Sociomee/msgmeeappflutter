@@ -39,8 +39,8 @@ List<ChatThemeModel> themes = [
       name: "Ocean",
       isSelected: false),
   ChatThemeModel(
-      leftColor: AppColors.oceanGradientLight,
-      rightColor: AppColors.oceanGradientDeep,
+      leftColor: AppColors.berryGradientLight[3],
+      rightColor: AppColors.berryGradientLight[2],
       name: "Berry",
       isSelected: false),
   ChatThemeModel(
