@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         } else if (value.length < 10) {
                           setState(() {
-                            error = 'Mobile number is not valid.';
+                            error = 'Please Enter A Valid Mobile Number';
                           });
                         } else {
                           setState(() {
