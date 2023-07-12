@@ -18,15 +18,19 @@ class SentMessageWidget extends StatelessWidget {
   final MessageType type;
   final File? image;
   final String? doc;
-  const SentMessageWidget(
-      {Key? key,
-      required this.message,
-      required this.msgStatus,
-      required this.time,
-      required this.type,
-      this.image,
-      this.doc})
-      : super(key: key);
+  final List<File?>? images;
+  final List<String>? docs;
+  const SentMessageWidget({
+    Key? key,
+    required this.message,
+    required this.msgStatus,
+    required this.time,
+    required this.type,
+    this.image,
+    this.doc,
+    this.images,
+    this.docs,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -149,10 +153,7 @@ class SentMessageWidget extends StatelessWidget {
                                 SizedBox(width: 10),
                                 Icon(Icons.videocam_outlined),
                                 SizedBox(width: 10),
-                                Icon(
-                                  Icons.phone_outlined,
-                                  size: 19,
-                                )
+                                Icon(Icons.phone_outlined, size: 19)
                               ],
                             ),
                           ),
@@ -168,8 +169,8 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
+                                width: message.length == 0
+                                    ? 110.w
                                     : message.trim().length <= 21
                                         ? 80
                                         : 200,
@@ -236,6 +237,93 @@ class SentMessageWidget extends StatelessWidget {
                                     ))
                                 : Container(),
                           ),
+                          SizedBox(height: 5),
+                          Text(message,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                          SizedBox(height: 2),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              SizedBox(
+                                width: message.trim().length <= 15
+                                    ? 40
+                                    : message.trim().length <= 21
+                                        ? 80
+                                        : 200,
+                              ),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -2,
+                    right: 0,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    final multipleImageMessage = Flexible(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12)),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          images != null
+                              ? GridView.count(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  crossAxisCount: 2,
+                                  children:
+                                      List.generate(images!.length, (index) {
+                                    return SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.file(
+                                            images![index]!,
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          )),
+                                    );
+                                  }),
+                                )
+                              : Container(),
                           SizedBox(height: 5),
                           Text(message,
                               style: const TextStyle(
@@ -460,20 +548,14 @@ class SentMessageWidget extends StatelessWidget {
                           ),
                           SizedBox(height: 2),
                           Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 10),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(time,
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 10)),
-                                SizedBox(
-                                  width: message.trim().length <= 15
-                                      ? 40
-                                      : message.trim().length <= 21
-                                          ? 80
-                                          : 200,
-                                ),
                                 Text(msgStatus,
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 10)),
@@ -587,7 +669,9 @@ class SentMessageWidget extends StatelessWidget {
                           ? imageMessage
                           : type == MessageType.location
                               ? locationMessage
-                              : messageTextGroup,
+                              : type == MessageType.multipleImage
+                                  ? multipleImageMessage
+                                  : messageTextGroup,
         ],
       ),
     );

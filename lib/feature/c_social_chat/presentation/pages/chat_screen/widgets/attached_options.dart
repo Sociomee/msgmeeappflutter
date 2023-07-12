@@ -47,13 +47,13 @@ class _AttachedIconState extends State<AttachedIcon> {
   String pdfname = '';
   void pickGalleryPic() async {
     // Pick an image
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
+    final List<XFile>? images = await _picker.pickMultiImage();
+    if (images != null) {
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: File(image.path),
             profileImage: widget.profileImage,
+            images: images,
           ));
     }
   }
@@ -64,7 +64,7 @@ class _AttachedIconState extends State<AttachedIcon> {
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: File(images[0].path),
+            images: images,
             profileImage: widget.profileImage,
           ));
     }
@@ -77,7 +77,7 @@ class _AttachedIconState extends State<AttachedIcon> {
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: File(photo.path),
+            images: [photo],
             profileImage: widget.profileImage,
           ));
     }
@@ -100,7 +100,6 @@ class _AttachedIconState extends State<AttachedIcon> {
       animatedScreenNavigator(
           context, DocSendingPage(pftname: "${pdfname}/${size}"));
     } else {
-      // User canceled file picking
       print('No PDF file selected');
     }
   }

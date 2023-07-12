@@ -62,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: File(image.path),
+            images: [image],
             profileImage: widget.imageUrl,
           ));
     }
@@ -75,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
       animatedScreenNavigator(
           context,
           ImagePreViewPage(
-            image: File(photo.path),
+            images: [photo],
             profileImage: widget.imageUrl,
           ));
     }
@@ -295,6 +295,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 .state
                                 .messages[index]
                                 .image_url,
+                            images: context
+                                .watch<AddMessageCubit>()
+                                .state
+                                .messages[index]
+                                .images,
                           ),
                         ),
                 );

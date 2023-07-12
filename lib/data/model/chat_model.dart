@@ -10,6 +10,8 @@ class ChatMessage {
   final MessageType type;
   final File? image_url;
   final String? docName;
+  final List<File?>? images;
+  final List<String>? docs;
 
   ChatMessage({
     required this.messageContent,
@@ -19,6 +21,8 @@ class ChatMessage {
     required this.type,
     this.image_url,
     this.docName,
+    this.images,
+    this.docs,
   });
 }
 

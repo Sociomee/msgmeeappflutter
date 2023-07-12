@@ -14,9 +14,9 @@ import '../../../../../helper/get_currenttime.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
 
 class ImagePreViewPage extends StatefulWidget {
-  const ImagePreViewPage({super.key, this.image, required this.profileImage});
-  final File? image;
+  const ImagePreViewPage({super.key, this.images, required this.profileImage});
 
+  final List<XFile>? images;
   final String profileImage;
   @override
   State<ImagePreViewPage> createState() => _ImagePreViewPageState();
@@ -61,9 +61,11 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      setState(() {
-        imagelist.add(File(image.path));
-      });
+      for (var i = 0; i < widget.images!.length; i++) {
+        setState(() {
+          imagelist.add(File(widget.images![i].path));
+        });
+      }
     }
   }
 
@@ -80,7 +82,10 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
   @override
   void initState() {
     messageController = TextEditingController();
-    imagelist.add(widget.image);
+
+    for (var i = 0; i < widget.images!.length; i++) {
+      imagelist.add(File(widget.images![i].path));
+    }
     super.initState();
   }
 
@@ -264,13 +269,26 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
             SizedBox(width: 5),
             GestureDetector(
               onTap: () async {
-                context.read<AddMessageCubit>().addMessage(ChatMessage(
-                    messageContent: messageController.text,
-                    messageType: 'sender',
-                    msgStatus: 'send',
-                    time: getCurrentTime(),
-                    type: MessageType.image,
-                    image_url: imagelist[selectedImage]!));
+                if (imagelist.isNotEmpty && imagelist.length == 1) {
+                  context.read<AddMessageCubit>().addMessage(ChatMessage(
+                        messageContent: messageController.text,
+                        messageType: 'sender',
+                        msgStatus: 'send',
+                        time: getCurrentTime(),
+                        type: MessageType.image,
+                        image_url: imagelist[selectedImage]!,
+                        images: imagelist,
+                      ));
+                } else if (imagelist.length > 1) {
+                  context.read<AddMessageCubit>().addMessage(ChatMessage(
+                        messageContent: messageController.text,
+                        messageType: 'sender',
+                        msgStatus: 'send',
+                        time: getCurrentTime(),
+                        type: MessageType.multipleImage,
+                        images: imagelist,
+                      ));
+                }
 
                 Navigator.pop(context);
                 setState(() {});

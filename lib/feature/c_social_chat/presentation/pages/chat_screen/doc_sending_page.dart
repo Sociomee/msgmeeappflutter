@@ -36,16 +36,13 @@ class _DocSendingPageState extends State<DocSendingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-        title: Text(
-          widget.pftname.split('/').first,
-          style: TextStyle(color: AppColors.black),
-        ),
-      ),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+          title: Text(widget.pftname.split('/').first,
+              style: TextStyle(color: AppColors.black))),
       body: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
