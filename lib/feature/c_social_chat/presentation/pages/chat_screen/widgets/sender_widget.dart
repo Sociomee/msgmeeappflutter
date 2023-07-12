@@ -309,12 +309,13 @@ class SentMessageWidget extends StatelessWidget {
                               ? GridView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
+                                  itemCount: images!.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 10,
-                                          mainAxisExtent: 200),
+                                          crossAxisSpacing: 5,
+                                          mainAxisSpacing: 5,
+                                          mainAxisExtent: 100),
                                   itemBuilder: (context, index) {
                                     return SizedBox(
                                       height: 100,

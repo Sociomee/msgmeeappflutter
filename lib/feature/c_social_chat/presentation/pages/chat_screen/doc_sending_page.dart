@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
+
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
-import 'package:msgmee/helper/navigator_function.dart';
+
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/chat_model.dart';
@@ -219,9 +219,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                   context
                                                       .read<AddMessageCubit>()
                                                       .addMessage(ChatMessage(
-                                                        messageContent:
-                                                            messageController
-                                                                .text,
+                                                        messageContent: '',
                                                         messageType: 'sender',
                                                         msgStatus: 'send',
                                                         time: getCurrentTime(),
