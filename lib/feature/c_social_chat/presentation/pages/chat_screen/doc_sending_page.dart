@@ -64,13 +64,55 @@ class _DocSendingPageState extends State<DocSendingPage> {
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.lightgrey),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 220.h),
-                    SvgPicture.asset('assets/docx.svg'),
+                    widget.pftname
+                                .split('/')
+                                .first
+                                .split('.')
+                                .last
+                                .toString() ==
+                            'pdf'
+                        ? SvgPicture.asset('assets/docx.svg', height: 50.h)
+                        : widget.pftname
+                                    .split('/')
+                                    .first
+                                    .split('.')
+                                    .last
+                                    .toString() ==
+                                'mp3'
+                            ? SvgPicture.asset('assets/mp3.svg', height: 50.h)
+                            : widget.pftname
+                                        .split('/')
+                                        .first
+                                        .split('.')
+                                        .last
+                                        .toString() ==
+                                    'mp4'
+                                ? SvgPicture.asset('assets/mp4.svg',
+                                    height: 50.h)
+                                : widget.pftname
+                                            .split('/')
+                                            .first
+                                            .split('.')
+                                            .last
+                                            .toString() ==
+                                        'png'
+                                    ? SvgPicture.asset('assets/png.svg',
+                                        height: 50.h)
+                                    : SvgPicture.asset('assets/jpg.svg',
+                                        height: 50.h),
                     SizedBox(height: 5),
-                    Text(
-                      widget.pftname.split('/').first,
-                      style: TextStyle(color: AppColors.black, fontSize: 20),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 65.w),
+                      child: Center(
+                        child: Text(
+                          widget.pftname.split('/').first,
+                          style:
+                              TextStyle(color: AppColors.black, fontSize: 20),
+                        ),
+                      ),
                     ),
                     Spacer(),
                     Padding(

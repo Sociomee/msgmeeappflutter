@@ -100,6 +100,7 @@ class _AttachedIconState extends State<AttachedIcon> {
         pdfname = path!.split('/').last;
         for (var i = 0; i < files.length; i++) {
           pdfNames.add(files[i].path!.split('/').last);
+          
         }
       });
       animatedScreenNavigator(
