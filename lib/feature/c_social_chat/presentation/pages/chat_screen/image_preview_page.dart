@@ -219,7 +219,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                                         : null,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(7),
                                   child: Image.file(
                                     imagelist[index]!,
                                     fit: BoxFit.cover,
