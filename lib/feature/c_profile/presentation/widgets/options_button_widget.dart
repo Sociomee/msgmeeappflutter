@@ -39,6 +39,7 @@ class OptionsButtomWidgets extends StatelessWidget {
                     SvgPicture.asset(
                       options[index].imageUrl,
                       height: 20,
+                      fit: BoxFit.cover,
                     ),
                     SizedBox(height: 8),
                     Text(

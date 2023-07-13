@@ -15,6 +15,8 @@ class MediaAndDocScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
+          leadingWidth: 40,
+          titleSpacing: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -25,7 +27,12 @@ class MediaAndDocScreen extends StatelessWidget {
               )),
           title: Text(
             profilename,
-            style: TextStyle(color: AppColors.black),
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         body: SingleChildScrollView(
@@ -46,19 +53,31 @@ class MediaAndDocScreen extends StatelessWidget {
                     Tab(
                       icon: Text(
                         'Media',
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     Tab(
                       icon: Text(
                         'Docs',
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     Tab(
                       icon: Text(
                         'Links',
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],

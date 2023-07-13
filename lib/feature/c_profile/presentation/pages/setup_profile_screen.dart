@@ -79,18 +79,18 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
           ),
           backgroundColor: AppColors.white,
           elevation: 0,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_ios, color: AppColors.black)),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, right: 10),
-              child: Text(
-                'Skip',
-                style: TextStyle(
-                    color: isValid ? AppColors.primaryColor : AppColors.grey),
+            GestureDetector(
+              onTap: () {
+                screenNavigator(context, MsgmeeScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0, right: 10),
+                child: Text(
+                  'Skip',
+                  style: TextStyle(
+                      color: isValid ? AppColors.primaryColor : AppColors.grey),
+                ),
               ),
             )
           ],

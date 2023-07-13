@@ -91,25 +91,21 @@ class SettingScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.black,
-              )),
-        ),
-        leadingWidth: 40,
-        titleSpacing: 10,
-        title: Text(
-          'Settings',
-          style: TextStyle(color: AppColors.black),
-        ),
-      ),
+          elevation: 0,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                )),
+          ),
+          leadingWidth: 40,
+          titleSpacing: 0,
+          title: Text('Settings', style: TextStyle(color: AppColors.black))),
       body: SingleChildScrollView(
         child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),

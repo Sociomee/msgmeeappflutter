@@ -97,7 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        screenNavigator(context, MsgmeeScreen());
+                        animatedScreenNavigator(context, MsgmeeScreen());
                       },
                       child: Text('Skip',
                           style: TextStyle(

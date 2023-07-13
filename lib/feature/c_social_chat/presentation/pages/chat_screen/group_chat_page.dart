@@ -111,7 +111,8 @@ class _GroupChatPageState extends State<GroupChatPage> {
           Center(child: OptionsButtomWidgets()),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey, thickness: 3),
+            child: Divider(
+                color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -165,7 +166,8 @@ class _GroupChatPageState extends State<GroupChatPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey, thickness: 3),
+            child: Divider(
+                color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -195,7 +197,8 @@ class _GroupChatPageState extends State<GroupChatPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey, thickness: 3),
+            child: Divider(
+                color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
           ListTile(
             leading: Text('Mute Notification',
@@ -222,12 +225,17 @@ class _GroupChatPageState extends State<GroupChatPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: AppColors.grey, thickness: 3),
+            child: Divider(
+                color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20),
             child: Text('1 Member',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                )),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -241,17 +249,30 @@ class _GroupChatPageState extends State<GroupChatPage> {
                 ),
                 SizedBox(width: 10),
                 Text('You',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    )),
                 Spacer(),
-                Text('Group Admin', style: TextStyle(color: Colors.blue))
+                Text('Group Admin',
+                    style: TextStyle(
+                      color: Color(0xFF2F80ED),
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ))
               ],
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20),
-            child: Text('Add participants',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text('Add more participants',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                )),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -271,9 +292,20 @@ class _GroupChatPageState extends State<GroupChatPage> {
                                 dummyGroupParticipantsData[index].imageUrl)),
                         SizedBox(width: 10),
                         Text(dummyGroupParticipantsData[index].name,
-                            style: TextStyle(fontSize: 16)),
+                            style: TextStyle(
+                              color: Color(0xFF151624),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            )),
                         Spacer(),
-                        Text('invite', style: TextStyle(color: Colors.blue))
+                        Text('Invite',
+                            style: TextStyle(
+                              color: Color(0xFF2F80ED),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ))
                       ],
                     ),
                   );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../theme/colors.dart';
+import '../../../cubit/show_attachment.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
 class MessageTextFieldWidget extends StatelessWidget {
@@ -19,6 +20,9 @@ class MessageTextFieldWidget extends StatelessWidget {
     return TextField(
       cursorColor: AppColors.primaryColor,
       controller: messageController,
+      onTap: () {
+        context.read<ShowAttachment>().closeAttachment();
+      },
       decoration: InputDecoration(
         fillColor: color ?? AppColors.lightgrey1,
         filled: true,
@@ -125,6 +129,9 @@ class ContactMessageFieldWidget extends StatelessWidget {
               onChanged: onChanged,
               cursorColor: AppColors.primaryColor,
               controller: messageController,
+              onTap: () {
+                context.read<ShowAttachment>().closeAttachment();
+              },
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
