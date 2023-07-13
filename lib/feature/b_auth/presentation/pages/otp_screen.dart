@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/helper/nth_character_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
@@ -21,56 +22,48 @@ class _OtpScreenState extends State<OtpScreen> {
   final pinController = TextEditingController();
   bool isFocused = false;
   bool isValid = false;
+  bool textFieldclick = false;
   Duration duration = Duration(seconds: 120);
   Timer? timer;
   removeTime() {
     setState(() {
-      var seconds = duration.inSeconds - 1;
-      duration = Duration(seconds: seconds);
+      if (duration.inSeconds >= 1) {
+        var seconds = duration.inSeconds - 1;
+        duration = Duration(seconds: seconds);
+      }
     });
   }
 
-  void startNewTimer() {
+  void startTimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) => removeTime());
   }
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
-  int _timerDuration = 20;
+
   String error = '';
-  void startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      if (_timerDuration == 1) {
-        setState(() {
-          timer.cancel();
-        });
-      }
-      setState(() {
-        _timerDuration--;
-      });
-    });
-  }
 
   @override
   void initState() {
     super.initState();
+
     startTimer();
-    startNewTimer();
   }
 
   @override
   void dispose() {
     pinController.dispose();
+
+    timer!.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    var min = strDigits(_timerDuration.remainder(60));
-    var sec = strDigits(_timerDuration.remainder(60));
-    var min1 = strDigits(duration.inMinutes.remainder(60));
-    var sec1 = strDigits(duration.inSeconds.remainder(60));
+
+    var min = strDigits(duration.inMinutes.remainder(60));
+    var sec = strDigits(duration.inSeconds.remainder(60));
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
@@ -161,6 +154,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   onTap: () {
                     setState(() {
                       isFocused = true;
+                      textFieldclick = true;
                     });
                   },
                   pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
@@ -195,7 +189,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               const SizedBox(height: 68),
               Text(
-                "$min1:$sec1 sec",
+                "$min:$sec sec",
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16),
               ),
@@ -227,7 +221,62 @@ class _OtpScreenState extends State<OtpScreen> {
                   color: isValid
                       ? AppColors.primaryColor
                       : AppColors.primaryColor.withOpacity(.5)),
-              const SizedBox(height: 48),
+              const SizedBox(height: 10),
+              textFieldclick
+                  ? Container()
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'By Signing-up, you agree to our ',
+                          style: TextStyle(color: AppColors.grey),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              'Terms & Conditions.',
+                              style: TextStyle(color: AppColors.black),
+                            ),
+                            Container(
+                              height: 1,
+                              width: 113.w,
+                              color: AppColors.black,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+              textFieldclick
+                  ? Container()
+                  : RichText(
+                      text: const TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'By Signing-up, you agree to our ',
+                            style: TextStyle(color: AppColors.grey)),
+                        TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(
+                                color: AppColors.black,
+                                decoration: TextDecoration.underline)),
+                      ],
+                    )),
+              textFieldclick
+                  ? Container()
+                  : RichText(
+                      text: const TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'and ',
+                            style: TextStyle(color: AppColors.grey)),
+                        TextSpan(
+                            text: 'Cookies Policy',
+                            style: TextStyle(
+                                color: AppColors.black,
+                                decoration: TextDecoration.underline)),
+                      ],
+                    )),
+              const SizedBox(height: 20)
             ],
           ),
         ),
