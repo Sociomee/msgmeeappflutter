@@ -91,7 +91,9 @@ class _BroadCastListState extends State<BroadCastList> {
                   return GestureDetector(
                     onTap: () {
                       if (selectedindex.contains(index)) {
-                        selectedindex.remove(index);
+                        setState(() {
+                          selectedindex.remove(index);
+                        });
                       }
                     },
                     onLongPress: () {
@@ -112,20 +114,18 @@ class _BroadCastListState extends State<BroadCastList> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            InkWell(
-                                onTap: () {},
-                                child: selectedindex.contains(index)
-                                    ? Container(
-                                        height: 65,
-                                        width: 65,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            color: AppColors.black),
-                                        alignment: Alignment.center,
-                                        child: Icon(Icons.check,
-                                            color: AppColors.white, size: 30))
-                                    : SvgPicture.asset('assets/broadcast.svg')),
+                            selectedindex.contains(index)
+                                ? Container(
+                                    height: 65,
+                                    width: 65,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: AppColors.black),
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.check,
+                                        color: AppColors.white, size: 30))
+                                : SvgPicture.asset('assets/broadcast.svg'),
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Column(
@@ -151,7 +151,11 @@ class _BroadCastListState extends State<BroadCastList> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text('2w ago',
                                   style: TextStyle(
-                                      fontSize: 13, color: AppColors.grey)),
+                                    color: AppColors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Niramit',
+                                    fontWeight: FontWeight.w400,
+                                  )),
                             ),
                           ],
                         ),

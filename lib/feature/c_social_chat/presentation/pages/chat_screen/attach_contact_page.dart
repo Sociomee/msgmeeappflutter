@@ -87,6 +87,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: TextFormField(
                   decoration: InputDecoration(
+                      hintText: 'Search contacts',
                       contentPadding: EdgeInsets.only(top: 13),
                       prefixIcon: Icon(Icons.search, color: AppColors.grey),
                       border: InputBorder.none))),

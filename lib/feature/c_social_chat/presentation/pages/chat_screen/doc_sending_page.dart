@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,9 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
-
 import 'package:msgmee/theme/colors.dart';
-
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
@@ -274,6 +270,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                 }
                                                 widget.names!.clear();
                                                 Navigator.pop(context);
+                                                Navigator.pop(context);
                                               },
                                               child: Text(
                                                 'Send',
@@ -290,9 +287,6 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                       ],
                                     );
                                   });
-                              Timer(Duration(milliseconds: 1500), () {
-                                Navigator.pop(context);
-                              });
                             },
                             child: Container(
                               height: 30,
