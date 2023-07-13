@@ -368,21 +368,26 @@ class SentMessageWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          images != null
-                              ? GridView.count(
-                                  shrinkWrap: true,
-                                  crossAxisCount: 2,
-                                  childAspectRatio: .4 / .4,
-                                  children: List.generate(
-                                    images!.length,
-                                    (index) => ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.file(
-                                          images![index]!,
-                                          height: 100,
-                                          width: 100,
-                                          fit: BoxFit.cover,
-                                        )),
+                          images != null && images!.length < 4
+                              ? Container(
+                                  height: 200,
+                                  width: 200,
+                                  child: GridView.count(
+                                    shrinkWrap: true,
+                                    crossAxisCount: 2,
+                                    childAspectRatio: .4 / .4,
+                                    children: List.generate(
+                                      images!.length,
+                                      (index) => ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.file(
+                                            images![index]!,
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          )),
+                                    ),
                                   ),
                                 )
                               : images != null && images!.length > 4
@@ -393,17 +398,20 @@ class SentMessageWidget extends StatelessWidget {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(8)),
                                                 child: Image.file(
                                                   images![0]!,
                                                   height: 100,
                                                   width: 100,
                                                   fit: BoxFit.cover,
                                                 )),
+                                            SizedBox(width: 5),
                                             ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(8)),
                                                 child: Image.file(
                                                   images![1]!,
                                                   height: 100,
@@ -412,24 +420,29 @@ class SentMessageWidget extends StatelessWidget {
                                                 )),
                                           ],
                                         ),
+                                        SizedBox(height: 5),
                                         Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                                borderRadius: BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(8)),
                                                 child: Image.file(
                                                   images![2]!,
                                                   height: 100,
                                                   width: 100,
                                                   fit: BoxFit.cover,
                                                 )),
+                                            SizedBox(width: 5),
                                             Stack(
                                               children: [
                                                 ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
+                                                        BorderRadius.only(
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    8)),
                                                     child: Image.file(
                                                       images![3]!,
                                                       height: 100,
@@ -440,6 +453,12 @@ class SentMessageWidget extends StatelessWidget {
                                                   height: 100,
                                                   width: 100,
                                                   decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          8)),
                                                       color: AppColors.black
                                                           .withOpacity(.5)),
                                                   alignment: Alignment.center,
@@ -461,28 +480,33 @@ class SentMessageWidget extends StatelessWidget {
                                       ],
                                     )
                                   : Container(),
-                          Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(time,
+                          message == ''
+                              ? SizedBox(height: 5)
+                              : Text(message,
                                   style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                              SizedBox(
-                                width: message.trim().length == 0
-                                    ? 220.w
-                                    : message.trim().length <= 15
-                                        ? 40
-                                        : message.trim().length <= 21
-                                            ? 80
-                                            : 300,
-                              ),
-                              Text(msgStatus,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                            ],
+                                      color: Colors.white, fontSize: 14)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(time,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                                SizedBox(
+                                  width: message.trim().length == 0
+                                      ? 110.w
+                                      : message.trim().length <= 15
+                                          ? 40
+                                          : message.trim().length <= 21
+                                              ? 80
+                                              : 100,
+                                ),
+                                Text(msgStatus,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                              ],
+                            ),
                           )
                         ],
                       )),
