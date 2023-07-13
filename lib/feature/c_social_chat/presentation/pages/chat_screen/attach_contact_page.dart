@@ -35,6 +35,22 @@ class AttachContactPage extends StatefulWidget {
 
 class _AttachContactPageState extends State<AttachContactPage> {
   List<int> selected = [];
+  late TextEditingController searchController;
+  List<ContactModel> filterdList = [];
+
+  @override
+  void initState() {
+    searchController = TextEditingController();
+    filterdList = List.from(contacts);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +102,20 @@ class _AttachContactPageState extends State<AttachContactPage> {
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: TextFormField(
+                  controller: searchController,
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.isEmpty) {
+                        filterdList = List.from(contacts);
+                      } else {
+                        filterdList = contacts
+                            .where((model) => model.name
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      }
+                    });
+                  },
                   decoration: InputDecoration(
                       hintText: 'Search contacts',
                       contentPadding: EdgeInsets.only(top: 13),
@@ -95,7 +125,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
           ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: contacts.length,
+              itemCount: filterdList.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -128,7 +158,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
                                       color: AppColors.primaryColor,
                                       borderRadius: BorderRadius.circular(100)),
                                   child: Text(
-                                    contacts[index].name[0],
+                                    filterdList[index].name[0],
                                     style: TextStyle(
                                         fontSize: 20, color: AppColors.white),
                                   ),
@@ -138,7 +168,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      contacts[index].name,
+                                      filterdList[index].name,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500),
                                     ),

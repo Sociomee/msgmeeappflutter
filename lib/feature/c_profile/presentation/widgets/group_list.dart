@@ -12,7 +12,8 @@ class GroupList extends StatefulWidget {
 }
 
 class _GroupListState extends State<GroupList> {
-  bool selectall = false;
+  bool selectMode = false;
+  List<int> selectedindex = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +27,9 @@ class _GroupListState extends State<GroupList> {
             color: AppColors.black,
           ),
         ),
-        title: selectall
+        title: selectedindex.isNotEmpty
             ? Text(
-                '9 Selected',
+                '${selectedindex.length} Selected',
                 style: TextStyle(color: AppColors.black),
               )
             : Text(
@@ -36,7 +37,7 @@ class _GroupListState extends State<GroupList> {
                 style: TextStyle(color: AppColors.black),
               ),
         actions: [
-          selectall
+          selectedindex.isNotEmpty
               ? GestureDetector(
                   onTap: () {
                     showDialog(
@@ -57,7 +58,7 @@ class _GroupListState extends State<GroupList> {
                   PopupMenuItem(
                     value: 1,
                     child: Text(
-                      selectall ? "Deselect all" : 'Select all',
+                      selectedindex.length != 9 ? 'Select all' : 'Deselect all',
                       style: TextStyle(fontSize: 14),
                     ),
                   )
@@ -67,9 +68,16 @@ class _GroupListState extends State<GroupList> {
               color: Colors.white,
               elevation: 2,
               onSelected: (value) {
-                setState(() {
-                  selectall = !selectall;
-                });
+                if (selectedindex.length != 9) {
+                  setState(() {
+                    selectedindex.clear();
+                  });
+                  selectedindex.addAll([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+                } else {
+                  setState(() {
+                    selectedindex.clear();
+                  });
+                }
               })
         ],
       ),
@@ -81,13 +89,30 @@ class _GroupListState extends State<GroupList> {
                 shrinkWrap: true,
                 itemCount: 9,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    splashColor: AppColors.seconderyColor,
+                  return GestureDetector(
+                    onTap: () {
+                      if (selectedindex.contains(index)) {
+                        setState(() {
+                          selectedindex.remove(index);
+                        });
+                      } else if (selectMode) {
+                        setState(() {
+                          selectedindex.add(index);
+                        });
+                      }
+                    },
+                    onLongPress: () {
+                      setState(() {
+                        selectMode = !selectMode;
+                        selectedindex.add(index);
+                      });
+                    },
                     child: Container(
-                      color: selectall
+                      color: selectedindex.contains(index)
                           ? AppColors.primaryColor.withOpacity(.1)
-                          : null,
+                          : selectedindex.contains(index)
+                              ? AppColors.primaryColor.withOpacity(.1)
+                              : null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 7),
@@ -95,20 +120,18 @@ class _GroupListState extends State<GroupList> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            InkWell(
-                                onTap: () {},
-                                child: selectall
-                                    ? Container(
-                                        height: 65,
-                                        width: 65,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            color: AppColors.black),
-                                        alignment: Alignment.center,
-                                        child: Icon(Icons.check,
-                                            color: AppColors.white, size: 30))
-                                    : SvgPicture.asset('assets/group.svg')),
+                            selectedindex.contains(index)
+                                ? Container(
+                                    height: 65,
+                                    width: 65,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: AppColors.black),
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.check,
+                                        color: AppColors.white, size: 30))
+                                : SvgPicture.asset('assets/group.svg'),
                             SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

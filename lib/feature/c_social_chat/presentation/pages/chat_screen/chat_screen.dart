@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
@@ -99,14 +100,12 @@ class _ChatScreenState extends State<ChatScreen> {
           toolbarHeight: 80,
           elevation: 1,
           leadingWidth: 20,
+          titleSpacing: 11.w,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.black,
-              )),
+              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: GestureDetector(
             onTap: () {
               widget.name == 'Office Group'
@@ -125,6 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ));
             },
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Hero(
                   tag: widget.imageUrl,
@@ -133,15 +133,16 @@ class _ChatScreenState extends State<ChatScreen> {
                       isOnline: widget.isOnline,
                       hasStory: widget.hasStory),
                 ),
-                SizedBox(width: 13),
+                SizedBox(width: 10.w),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(widget.name,
                         style: TextStyle(
-                          fontSize: 16,
                           color: AppColors.black,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
                         )),
                     SizedBox(height: 8),
@@ -154,7 +155,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           actions: [
             SvgPicture.asset('assets/video.svg'),
-            SizedBox(width: 28),
+            SizedBox(width: 25.w),
             SvgPicture.asset('assets/calling.svg'),
             SinglechatPopupMenu(name: widget.name),
           ],
@@ -494,7 +495,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,
-                        left: 84,
+                        left: 40.w,
                         child: ContactMessageFieldWidget(
                           messageController: messageController,
                           onChanged: (e) {

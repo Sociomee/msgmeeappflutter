@@ -64,7 +64,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: 243.w,
+      width: 280.w,
       duration: Duration(milliseconds: 500),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -73,41 +73,66 @@ class ContactMessageFieldWidget extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 52,
                 margin: EdgeInsets.only(top: 5, left: 5),
-                padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(15)),
                 child: Row(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Abriella Bond'),
-                        Row(
-                          children: [
-                            Text('Contact:'),
-                            Icon(
-                              Icons.person_2_outlined,
-                              size: 18,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Abriella Bond',
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 10.sp,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
                             ),
-                            Text('Joy Arthur')
-                          ],
-                        ),
-                      ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Contact:',
+                                style: TextStyle(
+                                  color: Color(0xFF555555),
+                                  fontSize: 10.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Icon(Icons.person_2_outlined, size: 18),
+                              Text(
+                                'Joy Arthur',
+                                style: TextStyle(
+                                  color: Color(0xFF333333),
+                                  fontSize: 10.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 40.w),
+                    SizedBox(width: 90.w),
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10)),
                       child: Image.network(
                         'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                        height: 44,
-                        width: 44,
+                        height: 44.h,
+                        width: 44.w,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -118,7 +143,10 @@ class ContactMessageFieldWidget extends StatelessWidget {
                   onTap: () {
                     context.read<ShowContactTextField>().toggleValue();
                   },
-                  child: Icon(Icons.close))
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 8.0, left: 4.w),
+                    child: Icon(Icons.close),
+                  ))
             ],
           ),
           SizedBox(height: 10),

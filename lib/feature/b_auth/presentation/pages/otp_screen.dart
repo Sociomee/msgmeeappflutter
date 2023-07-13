@@ -79,12 +79,17 @@ class _OtpScreenState extends State<OtpScreen> {
               color: AppColors.black,
             )),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(top: 18.0, right: 10),
-            child: Text(
-              'CONTINUE',
-              style: TextStyle(
-                  color: isValid ? AppColors.primaryColor : AppColors.grey),
+          GestureDetector(
+            onTap: () {
+              screenNavigator(context, const SetupProfileScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 18.0, right: 10),
+              child: Text(
+                'CONTINUE',
+                style: TextStyle(
+                    color: isValid ? AppColors.primaryColor : AppColors.grey),
+              ),
             ),
           )
         ],

@@ -143,10 +143,9 @@ class _OtherPersonProfileDescriptionState
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Divider(
-                      color: AppColors.grey.withOpacity(.3), thickness: 5),
-                ),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Divider(
+                        color: AppColors.grey.withOpacity(.3), thickness: 5)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(

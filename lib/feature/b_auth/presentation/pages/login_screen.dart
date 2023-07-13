@@ -62,14 +62,28 @@ class _LoginScreenState extends State<LoginScreen> {
         centerTitle: true,
         title: ChooseLanguage(),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(top: 18.0, right: 10),
-            child: Text(
-              'CONTINUE',
-              style: TextStyle(
-                  color: context.watch<NumberValidationCubit>().state.isvalid
-                      ? AppColors.primaryColor
-                      : AppColors.grey),
+          GestureDetector(
+            onTap: () {
+              if (_formKey.currentState!.validate()) {
+                context.read<NumberValidationCubit>().state.isvalid
+                    ? showDialog(
+                        context: context,
+                        builder: (context) {
+                          return NumberConfirmationDialog(
+                              inputNumber: numberController.text);
+                        })
+                    : null;
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 18.0, right: 10),
+              child: Text(
+                'CONTINUE',
+                style: TextStyle(
+                    color: context.watch<NumberValidationCubit>().state.isvalid
+                        ? AppColors.primaryColor
+                        : AppColors.grey),
+              ),
             ),
           )
         ],

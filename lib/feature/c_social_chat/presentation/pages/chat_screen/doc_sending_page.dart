@@ -221,14 +221,19 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(
-                                            'Sending ${widget.names!.length} files to Razdar Hasan ?',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Sending ${widget.names!.length} files to Razdar Hasan ?',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              SizedBox(width: 35.w)
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -250,7 +255,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(width: 20.w),
+                                            SizedBox(width: 35.w),
                                             GestureDetector(
                                               onTap: () {
                                                 for (var i = 0;
@@ -281,7 +286,8 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                            )
+                                            ),
+                                            SizedBox(width: 15)
                                           ],
                                         )
                                       ],

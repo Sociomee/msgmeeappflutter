@@ -14,6 +14,7 @@ class SyncDialogWidget extends StatefulWidget {
 class _SyncDialogWidgetState extends State<SyncDialogWidget> {
   bool accountfound = false;
   bool useotherac = false;
+  bool showpassword = false;
   final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -157,7 +158,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       SizedBox(height: 20),
                       TextFormField(
                         controller: passwordController,
-                        obscureText: true,
+                        obscureText: showpassword,
                         cursorColor: AppColors.primaryColor,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -179,7 +180,15 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               color: AppColors.primaryColor,
                             )),
                             hintText: 'Enter Password',
-                            suffixIcon: Icon(Icons.visibility_off, size: 18),
+                            suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    showpassword = !showpassword;
+                                  });
+                                },
+                                child: showpassword
+                                    ? Icon(Icons.visibility_off, size: 18)
+                                    : Icon(Icons.visibility, size: 18)),
                             hintStyle: TextStyle(fontSize: 12),
                             suffixIconColor: AppColors.primaryColor,
                             contentPadding: EdgeInsets.symmetric(

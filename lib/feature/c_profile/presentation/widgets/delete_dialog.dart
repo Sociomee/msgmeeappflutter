@@ -12,7 +12,13 @@ class DeleteDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-              'You are going to delete 9 selected\nGroups.\nAll data will be removed!'),
+            'You are going to delete 9 selected\nGroups.\nAll data will be removed!',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           SizedBox(height: 20),
           CustomButtonWidget(
               title: 'Delete',
@@ -21,13 +27,23 @@ class DeleteDialogWidget extends StatelessWidget {
                 Navigator.pop(context);
               }),
           SizedBox(height: 10),
-          CustomButtonWidget(
-              title: 'Cancel',
-              color: AppColors.white,
-              textColor: AppColors.primaryColor,
-              ontap: () {
-                Navigator.pop(context);
-              }),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: AppColors.primaryColor,
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -368,6 +368,8 @@ class SentMessageWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                         
+                         
                           images != null && images!.length < 4
                               ? Container(
                                   height: 200,
@@ -486,7 +488,7 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 14)),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.only(left: 10, right: 12),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -495,7 +497,7 @@ class SentMessageWidget extends StatelessWidget {
                                         color: Colors.white, fontSize: 10)),
                                 SizedBox(
                                   width: message.trim().length == 0
-                                      ? 110.w
+                                      ? 100.w
                                       : message.trim().length <= 15
                                           ? 40
                                           : message.trim().length <= 21
