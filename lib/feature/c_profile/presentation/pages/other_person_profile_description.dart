@@ -132,7 +132,14 @@ class _OtherPersonProfileDescriptionState
                         color: AppColors.grey.withOpacity(.1),
                         borderRadius: BorderRadius.circular(10)),
                     child: Text(
-                        'Norem ipsum dolor sit amet, consectetur adipiscing elit.\nNunc vulputate libero et velit.'),
+                      'Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit.',
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -147,7 +154,11 @@ class _OtherPersonProfileDescriptionState
                       Text(
                         'Media, Docs, Links',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                          color: Color(0xFF333333),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       Spacer(),
                       GestureDetector(
@@ -161,7 +172,11 @@ class _OtherPersonProfileDescriptionState
                         child: Text(
                           '248',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                            color: Color(0xFF333333),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                       Icon(Icons.arrow_forward_ios_outlined, size: 15)
@@ -170,8 +185,16 @@ class _OtherPersonProfileDescriptionState
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 15.0, top: 20, bottom: 10),
-                  child: Text('Recent media'),
+                      const EdgeInsets.only(left: 15.0, top: 24, bottom: 10),
+                  child: Text(
+                    'Recent media',
+                    style: TextStyle(
+                      color: Color(0xFF4E4E4E),
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),

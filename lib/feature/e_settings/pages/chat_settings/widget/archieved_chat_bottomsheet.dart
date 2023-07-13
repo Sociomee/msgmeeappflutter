@@ -78,68 +78,93 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                   shrinkWrap: true,
                   itemCount: archievedChatList.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3)),
-                              activeColor: AppColors.primaryColor,
-                              side: MaterialStateBorderSide.resolveWith(
-                                (states) => const BorderSide(
-                                    width: 1.0, color: AppColors.primaryColor),
-                              ),
-                              value: archievedChatList[index].selected,
-                              onChanged: (e) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          archievedChatList[index].selected =
+                              !archievedChatList[index].selected;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3)),
+                                activeColor: AppColors.primaryColor,
+                                side: MaterialStateBorderSide.resolveWith(
+                                  (states) => const BorderSide(
+                                      width: 1.0,
+                                      color: AppColors.primaryColor),
+                                ),
+                                value: archievedChatList[index].selected,
+                                onChanged: (e) {
+                                  setState(() {
+                                    archievedChatList[index].selected =
+                                        !archievedChatList[index].selected;
+                                  });
+                                }),
+                            SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
                                 setState(() {
                                   archievedChatList[index].selected =
                                       !archievedChatList[index].selected;
                                 });
-                              }),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 44,
-                            height: 44,
-                            alignment: Alignment.center,
-                            decoration: ShapeDecoration(
-                              color: index % 2 == 0
-                                  ? AppColors.blue
-                                  : AppColors.darkgreen,
-                              shape: OvalBorder(),
-                            ),
-                            child: Text(
-                              archievedChatList[index].name[0],
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                              },
+                              child: Container(
+                                width: 44,
+                                height: 44,
+                                alignment: Alignment.center,
+                                decoration: ShapeDecoration(
+                                  color: index % 2 == 0
+                                      ? AppColors.blue
+                                      : AppColors.darkgreen,
+                                  shape: OvalBorder(),
+                                ),
+                                child: Text(
+                                  archievedChatList[index].name[0],
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            archievedChatList[index].name,
-                            style: TextStyle(
-                              color: Color(0xFF151624),
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
+                            SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  archievedChatList[index].selected =
+                                      !archievedChatList[index].selected;
+                                });
+                              },
+                              child: Text(
+                                archievedChatList[index].name,
+                                style: TextStyle(
+                                  color: Color(0xFF151624),
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                             ),
-                          ),
-                          Spacer(),
-                          Text(
-                            archievedChatList[index].size,
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Color(0xFF979797),
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
+                            Spacer(),
+                            Text(
+                              archievedChatList[index].size,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: Color(0xFF979797),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                        ],
+                            SizedBox(width: 10),
+                          ],
+                        ),
                       ),
                     );
                   }),

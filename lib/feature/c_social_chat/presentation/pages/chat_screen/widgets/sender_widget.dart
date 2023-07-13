@@ -604,27 +604,25 @@ class SentMessageWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
-                          SizedBox(height: 2),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(time,
+                          message.isEmpty
+                              ? SizedBox(height: 5)
+                              : Text(message,
                                   style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                              SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
-                                    : message.trim().length <= 21
-                                        ? 80
-                                        : 200,
-                              ),
-                              Text(msgStatus,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                            ],
+                                      color: Colors.white, fontSize: 14)),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 14),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(time,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                                Spacer(),
+                                Text(msgStatus,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                              ],
+                            ),
                           )
                         ],
                       )),

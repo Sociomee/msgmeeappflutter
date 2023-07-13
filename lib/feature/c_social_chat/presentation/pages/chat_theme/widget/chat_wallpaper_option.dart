@@ -63,8 +63,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 160.w,
-                      width: 160.w,
+                      height: 150.w,
+                      width: 150.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: context.watch<ChooseSolidColorCubit>().state),
@@ -96,8 +96,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           context.watch<ChooseImageWallpaperCubit>().state,
-                          height: 160.w,
-                          width: 160.w,
+                          height: 150.w,
+                          width: 150.w,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -130,14 +130,14 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   child: imageFile != null
                       ? Image.file(
                           File(imageFile!.path),
-                          height: 160.w,
-                          width: 160.w,
+                          height: 150.w,
+                          width: 150.w,
                           fit: BoxFit.cover,
                         )
                       : Image.network(
                           phoneImg,
-                          height: 160.w,
-                          width: 160.w,
+                          height: 150.w,
+                          width: 150.w,
                           fit: BoxFit.cover,
                         )),
               SizedBox(height: 5),
@@ -175,7 +175,7 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
             },
             child: Center(
               child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 80.w, vertical: 15),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: AppColors.primaryColor,
