@@ -56,20 +56,22 @@ class _AttachedIconState extends State<AttachedIcon> {
             profileImage: widget.profileImage,
             images: images,
           ));
+    } else {
+      return null;
     }
   }
 
-  void pickMultipleGalleryPic() async {
-    final List<XFile> images = await _picker.pickMultiImage();
-    if (images.isNotEmpty) {
-      animatedScreenNavigator(
-          context,
-          ImagePreViewPage(
-            images: images,
-            profileImage: widget.profileImage,
-          ));
-    }
-  }
+  // void pickMultipleGalleryPic() async {
+  //   final List<XFile> images = await _picker.pickMultiImage();
+  //   if (images.isNotEmpty) {
+  //     animatedScreenNavigator(
+  //         context,
+  //         ImagePreViewPage(
+  //           images: images,
+  //           profileImage: widget.profileImage,
+  //         ));
+  //   }
+  // }
 
   void pickCameraPic() async {
     // Capture a photo
@@ -100,7 +102,6 @@ class _AttachedIconState extends State<AttachedIcon> {
         pdfname = path!.split('/').last;
         for (var i = 0; i < files.length; i++) {
           pdfNames.add(files[i].path!.split('/').last);
-          
         }
       });
       animatedScreenNavigator(

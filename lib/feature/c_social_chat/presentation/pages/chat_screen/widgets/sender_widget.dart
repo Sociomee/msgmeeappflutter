@@ -264,7 +264,6 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-    final multiplecontact = contactMessage;
 
     final imageMessage = Flexible(
       child: Container(
@@ -369,39 +368,135 @@ class SentMessageWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          images != null
-                              ? GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: images!.length,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 5,
-                                          mainAxisSpacing: 5,
-                                          mainAxisExtent: 100),
-                                  itemBuilder: (context, index) {
-                                    return SizedBox(
-                                      height: 100,
-                                      width: 100,
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: Image.file(
-                                            images![index]!,
-                                            height: 100,
-                                            width: 100,
-                                            fit: BoxFit.cover,
-                                          )),
-                                    );
-                                  },
+                          images != null && images!.length == 4
+                              ? Column(
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.file(
+                                              images![0]!,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            )),
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.file(
+                                              images![1]!,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.file(
+                                              images![2]!,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            )),
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.file(
+                                              images![3]!,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            ))
+                                      ],
+                                    )
+                                  ],
                                 )
-                              : Container(),
-                          SizedBox(height: 5),
+                              : images != null && images!.length > 4
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.file(
+                                                  images![0]!,
+                                                  height: 100,
+                                                  width: 100,
+                                                  fit: BoxFit.cover,
+                                                )),
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.file(
+                                                  images![1]!,
+                                                  height: 100,
+                                                  width: 100,
+                                                  fit: BoxFit.cover,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.file(
+                                                  images![2]!,
+                                                  height: 100,
+                                                  width: 100,
+                                                  fit: BoxFit.cover,
+                                                )),
+                                            Stack(
+                                              children: [
+                                                ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.file(
+                                                      images![3]!,
+                                                      height: 100,
+                                                      width: 100,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                Container(
+                                                  height: 100,
+                                                  width: 100,
+                                                  decoration: BoxDecoration(
+                                                      color: AppColors.black
+                                                          .withOpacity(.5)),
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    '+${images!.length - 4}',
+                                                    style: TextStyle(
+                                                      color: AppColors.white,
+                                                      fontSize: 30,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  : Container(),
                           Text(message,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)),
-                          SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -409,11 +504,13 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
-                                    : message.trim().length <= 21
-                                        ? 80
-                                        : 200,
+                                width: message.trim().length == 0
+                                    ? 110.w
+                                    : message.trim().length <= 15
+                                        ? 40
+                                        : message.trim().length <= 21
+                                            ? 80
+                                            : 200,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(
@@ -802,7 +899,7 @@ class SentMessageWidget extends StatelessWidget {
                               : type == MessageType.multipleImage
                                   ? multipleImageMessage
                                   : type == MessageType.multiplecontact
-                                      ? multiplecontact
+                                      ? contactMessage
                                       : messageTextGroup,
         ],
       ),

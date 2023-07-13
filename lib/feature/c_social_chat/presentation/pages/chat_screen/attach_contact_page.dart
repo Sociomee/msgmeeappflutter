@@ -47,7 +47,11 @@ class _AttachContactPageState extends State<AttachContactPage> {
           },
           child: Icon(Icons.arrow_back_ios, color: AppColors.black),
         ),
-        title: Text('Contact', style: TextStyle(color: AppColors.black)),
+        title: Text(
+            selected.isEmpty
+                ? 'Contact'
+                : 'Contact ${selected.length} Selected',
+            style: TextStyle(color: AppColors.black)),
         actions: [
           GestureDetector(
             onTap: () {
@@ -65,7 +69,6 @@ class _AttachContactPageState extends State<AttachContactPage> {
                         numberofContact: selected.length,
                       ));
                 }
-
                 Navigator.pop(context);
               }
             },
