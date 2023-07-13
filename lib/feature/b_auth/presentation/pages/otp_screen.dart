@@ -21,6 +21,18 @@ class _OtpScreenState extends State<OtpScreen> {
   final pinController = TextEditingController();
   bool isFocused = false;
   bool isValid = false;
+  Duration duration = Duration(seconds: 120);
+  Timer? timer;
+  removeTime() {
+    setState(() {
+      var seconds = duration.inSeconds - 1;
+      duration = Duration(seconds: seconds);
+    });
+  }
+
+  void startNewTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) => removeTime());
+  }
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
@@ -43,6 +55,7 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
     startTimer();
+    startNewTimer();
   }
 
   @override
@@ -53,8 +66,11 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final seconds = twoDigits(_timerDuration);
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    var min = strDigits(_timerDuration.remainder(60));
+    var sec = strDigits(_timerDuration.remainder(60));
+    var min1 = strDigits(duration.inMinutes.remainder(60));
+    var sec1 = strDigits(duration.inSeconds.remainder(60));
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
@@ -179,7 +195,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               const SizedBox(height: 68),
               Text(
-                "00:$seconds sec",
+                "$min1:$sec1 sec",
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16),
               ),
@@ -192,7 +208,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 TextSpan(
                     text: 'Resend',
                     style: TextStyle(
-                        color: seconds == '00'
+                        color: sec == '00'
                             ? AppColors.primaryColor
                             : AppColors.primaryColor.withOpacity(.5),
                         fontSize: 14)),

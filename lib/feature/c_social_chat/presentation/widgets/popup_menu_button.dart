@@ -80,7 +80,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   : Divider(
                                       height: 0,
                                       thickness: 1,
-                                      color: AppColors.grey)
+                                      color: AppColors.grey.withOpacity(.5))
                             ],
                           ),
                         )),
@@ -117,7 +117,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   : Divider(
                                       height: 0,
                                       thickness: 1,
-                                      color: AppColors.grey,
+                                      color: AppColors.grey.withOpacity(.5),
                                     )
                             ],
                           ),
@@ -125,7 +125,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                   )
                   .toList();
         },
-        offset: Offset(0, 100),
+        offset: Offset(-30, 30),
         color: Colors.white,
         elevation: 2,
         onSelected: context.watch<SyncMsgCubit>().state

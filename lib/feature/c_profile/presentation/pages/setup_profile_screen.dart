@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
@@ -106,7 +107,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 40),
+                SizedBox(height: 10.h),
                 const Center(
                     child: Text('Setup Profile',
                         style: TextStyle(
