@@ -55,8 +55,6 @@ class _AttachContactPageState extends State<AttachContactPage> {
                 context.read<ShowContactTextField>().toggleValue();
                 Navigator.pop(context);
               } else if (selected.length > 1) {
-                print(selected.length);
-
                 for (var i = 0; i < selected.length; i++) {
                   context.read<AddMessageCubit>().addMessage(ChatMessage(
                         messageContent: '',
@@ -68,7 +66,6 @@ class _AttachContactPageState extends State<AttachContactPage> {
                       ));
                 }
 
-                print(selected.length);
                 Navigator.pop(context);
               }
             },

@@ -144,8 +144,16 @@ class ContactMessageFieldWidget extends StatelessWidget {
                 filled: true,
                 hintText: "Type your message",
                 hintStyle: TextStyle(color: Colors.black54),
-                suffixIcon:
-                    Image.asset('assets/smiley.png', width: 18, height: 18),
+                suffixIcon: SizedBox(
+                  width: 10,
+                  height: 10,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/smiley.svg',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
