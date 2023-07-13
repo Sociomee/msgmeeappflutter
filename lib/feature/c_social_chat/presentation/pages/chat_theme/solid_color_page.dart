@@ -27,17 +27,27 @@ class SolidColorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
+        leadingWidth: 50,
+        titleSpacing: 0,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
+            icon: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.black,
+              ),
             )),
         title: Text(
           'Solid Color',
-          style: TextStyle(color: AppColors.black),
+          style: TextStyle(
+            color: AppColors.black,
+            fontSize: 16,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
       body: Column(

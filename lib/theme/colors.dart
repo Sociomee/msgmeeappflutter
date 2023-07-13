@@ -100,4 +100,46 @@ class AppColors {
     fontWeight: FontWeight.w500,
     height: 1.375,
   );
+  static Decoration wallpaparPreviewdecoration = BoxDecoration(
+    borderRadius: BorderRadius.circular(7),
+    color: AppColors.white,
+    boxShadow: [
+      BoxShadow(
+        color: Color(0x19000000),
+        blurRadius: 0,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x19000000),
+        blurRadius: 3,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x16000000),
+        blurRadius: 6,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x0C000000),
+        blurRadius: 8,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x02000000),
+        blurRadius: 9,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x00000000),
+        blurRadius: 10,
+        offset: Offset(0, 0),
+        spreadRadius: 0,
+      )
+    ],
+  );
 }

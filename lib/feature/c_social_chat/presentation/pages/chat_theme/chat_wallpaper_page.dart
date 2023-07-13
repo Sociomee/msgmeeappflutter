@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_bg_type.dart';
@@ -43,64 +44,19 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                 Container(
                   height: 515,
                   margin: EdgeInsets.symmetric(horizontal: 70),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x19000000),
-                        blurRadius: 0,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Color(0x19000000),
-                        blurRadius: 3,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Color(0x16000000),
-                        blurRadius: 6,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Color(0x0C000000),
-                        blurRadius: 8,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Color(0x02000000),
-                        blurRadius: 9,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Color(0x00000000),
-                        blurRadius: 10,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
+                  decoration: AppColors.wallpaparPreviewdecoration,
                   child: Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.arrow_back_ios,
-                              color: AppColors.black,
-                              size: 15,
-                            ),
+                            Icon(Icons.arrow_back_ios,
+                                color: AppColors.black, size: 15),
                             CircleAvatar(
-                              radius: 18,
-                              backgroundColor: AppColors.grey,
-                              backgroundImage: NetworkImage(imageurl),
-                            ),
+                                radius: 18,
+                                backgroundColor: AppColors.grey,
+                                backgroundImage: NetworkImage(imageurl)),
                             SizedBox(width: 8),
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -207,19 +163,13 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                   right: 18,
                                                   bottom: 5),
                                               decoration: BoxDecoration(
-                                                color: context
-                                                    .watch<ChatThemeCubit>()
-                                                    .state
-                                                    .chatLightColor,
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topRight: Radius.circular(18),
-                                                  bottomLeft:
-                                                      Radius.circular(18),
-                                                  bottomRight:
-                                                      Radius.circular(18),
-                                                ),
-                                              ),
+                                                  color: context
+                                                      .watch<ChatThemeCubit>()
+                                                      .state
+                                                      .chatLightColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12)),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -295,15 +245,15 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                         borderRadius:
                                                             const BorderRadius
                                                                 .only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  12),
                                                           topLeft:
                                                               Radius.circular(
-                                                                  18),
+                                                                  12),
                                                           bottomLeft:
                                                               Radius.circular(
-                                                                  18),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  18),
+                                                                  12),
                                                         ),
                                                       ),
                                                       child: Column(
@@ -347,7 +297,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                     : messagecubit[index].messageContent.trim().length <=
                                                                             21
                                                                         ? 60
-                                                                        : 100,
+                                                                        : 110,
                                                               ),
                                                               Text(
                                                                   messagecubit[
@@ -377,7 +327,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SizedBox(width: 10),
+                          SizedBox(width: 5.w),
                           Container(
                               height: 20,
                               width: 20,
@@ -388,7 +338,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                   angle: -15,
                                   child: Icon(Icons.attach_file_outlined,
                                       size: 16, color: AppColors.black))),
-                          SizedBox(width: 10),
+                          SizedBox(width: 5.w),
                           Container(
                             height: 20,
                             width: 20,
@@ -401,7 +351,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ),
                           SizedBox(width: 10),
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(2.w),
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: AppColors.grey.withOpacity(.4)),
@@ -441,7 +391,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                   ),
                 ),
                 Spacer(),
-                Divider(color: AppColors.grey, thickness: 1),
+                Divider(
+                    color: AppColors.lightgrey.withOpacity(.5), thickness: 1),
                 SizedBox(height: 42),
                 GestureDetector(
                   onTap: () {

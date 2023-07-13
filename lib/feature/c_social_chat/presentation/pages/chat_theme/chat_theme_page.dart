@@ -19,13 +19,24 @@ class _ChatThemePageState extends State<ChatThemePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 1,
+        elevation: 0,
+        leadingWidth: 50,
+        titleSpacing: 0,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-        title: Text('Chat Theme', style: TextStyle(color: AppColors.black)),
+            icon: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+            )),
+        title: Text('Chat Theme',
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            )),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,10 +46,11 @@ class _ChatThemePageState extends State<ChatThemePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text('Colors & Gradients',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600))),
+                    color: AppColors.black,
+                    fontSize: 18,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ))),
           SizedBox(height: 20),
           ListView.builder(
               physics: NeverScrollableScrollPhysics(),

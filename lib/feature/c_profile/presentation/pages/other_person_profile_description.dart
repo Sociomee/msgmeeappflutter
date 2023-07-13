@@ -59,10 +59,13 @@ class _OtherPersonProfileDescriptionState
                 Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                          radius: 80,
-                          backgroundColor: AppColors.grey,
-                          backgroundImage: NetworkImage(widget.imageUrl)),
+                      Hero(
+                        tag: widget.imageUrl,
+                        child: CircleAvatar(
+                            radius: 80,
+                            backgroundColor: AppColors.grey,
+                            backgroundImage: NetworkImage(widget.imageUrl)),
+                      ),
                       SizedBox(height: 10),
                       widget.isOnline
                           ? Row(

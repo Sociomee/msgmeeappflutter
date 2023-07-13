@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/language_change_widget.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
@@ -156,10 +157,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 30),
-              const Text(
-                'We at MsgMee want to ensure that you have the best\nexperience possible.\nTo ensure that your mobile number is verified, please enter\nyour country code along with your mobile number.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 13),
+              Center(
+                child: SizedBox(
+                  width: 350.w,
+                  child: const Text(
+                    'We at MsgMee want to ensure that you have the best\nexperience possible.\nTo ensure that your mobile number is verified, please enter\nyour country code along with your mobile number.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
               ),
               const Spacer(),
               CustomButtonWidget(
@@ -174,8 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               context: context,
                               builder: (context) {
                                 return NumberConfirmationDialog(
-                                  inputNumber: numberController.text,
-                                );
+                                    inputNumber: numberController.text);
                               })
                           : null;
                     }
@@ -187,6 +197,30 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 10),
               textFieldclick
                   ? Container()
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'By Signing-up, you agree to our ',
+                          style: TextStyle(color: AppColors.grey),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              'Terms & Conditions.',
+                              style: TextStyle(color: AppColors.black),
+                            ),
+                            Container(
+                              height: 1,
+                              width: 113.w,
+                              color: AppColors.black,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+              textFieldclick
+                  ? Container()
                   : RichText(
                       text: const TextSpan(
                       children: <TextSpan>[
@@ -194,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             text: 'By Signing-up, you agree to our ',
                             style: TextStyle(color: AppColors.grey)),
                         TextSpan(
-                            text: 'Terms & Conditions.',
+                            text: 'Privacy Policy',
                             style: TextStyle(
                                 color: AppColors.black,
                                 decoration: TextDecoration.underline)),
@@ -206,21 +240,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: const TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                            text: 'By Signing-up, you agree to our ',
+                            text: 'and ',
                             style: TextStyle(color: AppColors.grey)),
                         TextSpan(
-                            text: 'Privacy Policy ',
+                            text: 'Cookies Policy',
                             style: TextStyle(
                                 color: AppColors.black,
                                 decoration: TextDecoration.underline)),
                       ],
                     )),
-              textFieldclick
-                  ? Container()
-                  : const Text('and Cookies Policy',
-                      style: TextStyle(
-                          color: AppColors.black,
-                          decoration: TextDecoration.underline)),
               const SizedBox(height: 20)
             ],
           ),

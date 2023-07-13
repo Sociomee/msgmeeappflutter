@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/choose_image_wallpaper_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/choose_solid_color_cubit.dart';
@@ -62,8 +63,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 180,
-                      width: 180,
+                      height: 160.w,
+                      width: 160.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: context.watch<ChooseSolidColorCubit>().state),
@@ -95,8 +96,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           context.watch<ChooseImageWallpaperCubit>().state,
-                          height: 180,
-                          width: 180,
+                          height: 160.w,
+                          width: 160.w,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -129,14 +130,14 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   child: imageFile != null
                       ? Image.file(
                           File(imageFile!.path),
-                          height: 180,
-                          width: 180,
+                          height: 160.w,
+                          width: 160.w,
                           fit: BoxFit.cover,
                         )
                       : Image.network(
                           phoneImg,
-                          height: 180,
-                          width: 180,
+                          height: 160.w,
+                          width: 160.w,
                           fit: BoxFit.cover,
                         )),
               SizedBox(height: 5),

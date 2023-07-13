@@ -147,7 +147,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
           Stack(
             children: [
               Image.file(imagelist[selectedImage]!,
-                  height: MediaQuery.of(context).size.height * .7,
+                  height: MediaQuery.of(context).size.height * .69,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover),
               Positioned(
@@ -247,6 +247,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                       )
                     ],
                   ),
+                  SizedBox(height: 10)
                 ],
               ),
             ),

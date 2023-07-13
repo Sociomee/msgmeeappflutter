@@ -34,9 +34,16 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                 Icons.arrow_back_ios,
                 color: AppColors.black,
               )),
+          leadingWidth: 30,
+          titleSpacing: 0,
           title: Text(
             'Chat Settings',
-            style: TextStyle(color: AppColors.black),
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           )),
       body: SingleChildScrollView(
         child: Column(
@@ -120,7 +127,12 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   Text(
                       'Back up your messages and videos to selected google drive\nyou can restore them when you reinstall MsgMee.',
                       softWrap: true,
-                      style: TextStyle(color: AppColors.grey, fontSize: 12)),
+                      style: TextStyle(
+                        color: Color(0xFF888888),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      )),
                 ],
               ),
             ),

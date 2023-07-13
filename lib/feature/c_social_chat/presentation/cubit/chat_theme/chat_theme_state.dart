@@ -12,7 +12,7 @@ class ChatThemeState extends Equatable {
   factory ChatThemeState.initial() {
     return ChatThemeState(
         chatDeepColor: AppColors.darkgreen,
-        chatLightColor: AppColors.seconderyColor1,
+        chatLightColor: AppColors.seconderyColor,
         selectedTheme: 0);
   }
 
@@ -23,7 +23,6 @@ class ChatThemeState extends Equatable {
     Color? chatDeepColor,
     Color? chatLightColor,
     int? selectedTheme,
-    
   }) {
     return ChatThemeState(
       chatDeepColor: chatDeepColor ?? this.chatDeepColor,

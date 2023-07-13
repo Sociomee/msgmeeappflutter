@@ -83,7 +83,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    context.read<SetChatbgCubit>().chooseType(ChatBgType.solidColor);
+    context
+        .read<SetChatbgCubit>()
+        .chooseType(context.read<SetChatbgCubit>().state.bgType);
     super.initState();
   }
 
@@ -114,7 +116,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         imageUrl: widget.imageUrl,
                         name: widget.name,
                       ))
-                  : animatedScreenNavigator(
+                  : screenNavigator(
                       context,
                       OtherPersonProfileDescription(
                         imageUrl: widget.imageUrl,
@@ -124,10 +126,13 @@ class _ChatScreenState extends State<ChatScreen> {
             },
             child: Row(
               children: [
-                ChatProfileWidget(
-                    imageUrl: widget.imageUrl,
-                    isOnline: widget.isOnline,
-                    hasStory: widget.hasStory),
+                Hero(
+                  tag: widget.imageUrl,
+                  child: ChatProfileWidget(
+                      imageUrl: widget.imageUrl,
+                      isOnline: widget.isOnline,
+                      hasStory: widget.hasStory),
+                ),
                 SizedBox(width: 13),
                 Column(
                   mainAxisSize: MainAxisSize.min,

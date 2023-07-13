@@ -16,4 +16,5 @@ class SetChatbgCubit extends Cubit<SetChatbgState> {
   chooseType(ChatBgType type) {
     emit(state.copyWith(bgType: type));
   }
+  
 }

@@ -15,21 +15,16 @@ class ProfileViewDialog extends StatelessWidget {
       content: Stack(
         children: [
           InkWell(
-            onTap: () {
-              screenNavigator(
-                  context,
-                  ProfileImageViewScreen(
-                    profilename: profilename,
-                    imageUrl: imageUrl,
-                  ));
-            },
-            child: Image.network(
-              imageUrl,
-              height: 328,
-              width: 328,
-              fit: BoxFit.cover,
-            ),
-          ),
+              onTap: () {
+                screenNavigator(
+                    context,
+                    ProfileImageViewScreen(
+                      profilename: profilename,
+                      imageUrl: imageUrl,
+                    ));
+              },
+              child: Image.network(imageUrl,
+                  height: 328, width: 328, fit: BoxFit.cover)),
           Opacity(
             opacity: 0.63,
             child: Container(

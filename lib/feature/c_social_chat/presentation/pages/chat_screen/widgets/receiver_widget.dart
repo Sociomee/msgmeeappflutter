@@ -31,7 +31,11 @@ class ReceivedMessageWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, left: 14, right: 18, bottom: 5),
                 decoration: BoxDecoration(
-                  color: context.watch<ChatThemeCubit>().state.chatLightColor,
+                  color: context
+                      .watch<ChatThemeCubit>()
+                      .state
+                      .chatLightColor
+                      .withOpacity(.4),
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(12),
                     topLeft: Radius.circular(12),
@@ -78,7 +82,11 @@ class ReceivedMessageWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, left: 14, right: 18, bottom: 15),
                 decoration: BoxDecoration(
-                    color: context.watch<ChatThemeCubit>().state.chatLightColor,
+                    color: context
+                        .watch<ChatThemeCubit>()
+                        .state
+                        .chatLightColor
+                        .withOpacity(.5),
                     borderRadius: BorderRadius.circular(100)),
                 child: Column(
                   children: [
