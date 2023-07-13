@@ -522,13 +522,17 @@ class SentMessageWidget extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            doc!.split('/').first,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12.sp,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
+                                          SizedBox(
+                                            width: 130.w,
+                                            child: Text(
+                                              doc!.split('/').first,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 12.sp,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w500,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             ),
                                           ),
                                           SizedBox(height: 5),

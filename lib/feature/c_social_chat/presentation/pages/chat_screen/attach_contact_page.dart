@@ -97,15 +97,16 @@ class _AttachContactPageState extends State<AttachContactPage> {
               itemCount: contacts.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onLongPress: () {
-                    setState(() {
-                      selected.add(index);
-                    });
-                  },
                   onTap: () {
-                    setState(() {
-                      selected.remove(index);
-                    });
+                    if (selected.contains(index)) {
+                      setState(() {
+                        selected.remove(index);
+                      });
+                    } else {
+                      setState(() {
+                        selected.add(index);
+                      });
+                    }
                   },
                   child: Container(
                     color: selected.contains(index)

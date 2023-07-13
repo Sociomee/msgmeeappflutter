@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
@@ -34,7 +35,16 @@ class MessageTextFieldWidget extends StatelessWidget {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
-        suffixIcon: Image.asset('assets/smiley.png', width: 18, height: 18),
+        suffixIcon: SizedBox(
+          width: 10,
+          height: 10,
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/smiley.svg',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
       ),
       onChanged: onChanged,
     );

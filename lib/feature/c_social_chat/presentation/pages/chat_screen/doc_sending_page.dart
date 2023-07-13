@@ -47,7 +47,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
               },
               child: Icon(Icons.arrow_back_ios, color: AppColors.black)),
           title: Text(widget.pftname.split('/').first,
-              style: TextStyle(color: AppColors.black))),
+              style: TextStyle(
+                color: AppColors.black,
+              ))),
       body: widget.names!.length == 1
           ? Container(
               padding: EdgeInsets.all(10),
