@@ -33,11 +33,13 @@ class ChatScreen extends StatefulWidget {
       required this.name,
       required this.imageUrl,
       required this.isOnline,
-      required this.hasStory});
+      required this.hasStory,
+      this.marketplace});
   final String name;
   final String imageUrl;
   final bool isOnline;
   final bool hasStory;
+  final bool? marketplace;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -138,14 +140,22 @@ class _ChatScreenState extends State<ChatScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.name,
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        )),
+                    SizedBox(
+                      width: 152.w,
+                      child: Text(widget.name,
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ),
                     SizedBox(height: 8),
+                    widget.marketplace != null && widget.marketplace!
+                        ? Text('Open now',
+                            style:
+                                TextStyle(fontSize: 13, color: AppColors.grey))
+                        : Container(),
                     Text(widget.isOnline ? 'Active Now' : '',
                         style: TextStyle(fontSize: 13, color: AppColors.grey)),
                   ],
