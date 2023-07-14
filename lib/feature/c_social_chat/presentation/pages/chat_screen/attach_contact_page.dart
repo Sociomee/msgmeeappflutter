@@ -66,8 +66,13 @@ class _AttachContactPageState extends State<AttachContactPage> {
         title: Text(
             selected.isEmpty
                 ? 'Contact'
-                : 'Contact ${selected.length} Selected',
-            style: TextStyle(color: AppColors.black)),
+                : 'Contact (${selected.length} Selected)',
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 18,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+            )),
         actions: [
           GestureDetector(
             onTap: () {

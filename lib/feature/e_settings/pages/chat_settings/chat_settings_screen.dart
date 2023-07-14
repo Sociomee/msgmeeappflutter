@@ -30,12 +30,15 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.black,
+              icon: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                ),
               )),
-          leadingWidth: 30,
-          titleSpacing: 0,
+          leadingWidth: 40,
+          titleSpacing: 6,
           title: Text(
             'Chat Settings',
             style: TextStyle(
@@ -125,8 +128,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   ),
                   SizedBox(height: 15),
                   Text(
-                      'Back up your messages and videos to selected google drive\nyou can restore them when you reinstall MsgMee.',
+                      'Back up your messages and videos to selected google drive you can restore them when you reinstall MsgMee.',
                       softWrap: true,
+                      overflow: TextOverflow.clip,
                       style: TextStyle(
                         color: Color(0xFF888888),
                         fontSize: 12,
@@ -330,9 +334,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 30,
-            )
+            SizedBox(height: 30)
           ],
         ),
       ),

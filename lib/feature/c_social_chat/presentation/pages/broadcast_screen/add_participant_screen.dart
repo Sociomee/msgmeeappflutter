@@ -6,8 +6,6 @@ import 'package:msgmee/theme/colors.dart';
 import '../../../../../data/model/participants_model.dart';
 import 'widget/filter_dropdown.dart';
 
-
-
 class AddParticipantsScreen extends StatefulWidget {
   const AddParticipantsScreen({super.key});
 
@@ -22,17 +20,27 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
           appBar: AppBar(
+            leadingWidth: 40,
+            titleSpacing: 5,
             leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.black,
+                icon: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.black,
+                  ),
                 )),
             title: Text(
               'Add Participants',
-              style: TextStyle(color: AppColors.black),
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
             ),
             actions: [
               TextButton(
@@ -42,7 +50,12 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                   },
                   child: Text(
                     'DONE',
-                    style: TextStyle(color: AppColors.primaryColor),
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700,
+                    ),
                   ))
             ],
           ),

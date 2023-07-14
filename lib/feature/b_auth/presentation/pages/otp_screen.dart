@@ -90,7 +90,9 @@ class _OtpScreenState extends State<OtpScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              screenNavigator(context, const SetupProfileScreen());
+              if (isValid && _otpController.length == 6) {
+                screenNavigator(context, const SetupProfileScreen());
+              }
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 18.0, right: 10),
@@ -213,7 +215,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       ? AppColors.primaryColor
                       : AppColors.primaryColor.withOpacity(.5),
                   ontap: () {
-                    if (formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate() &&
+                        _otpController.length == 6 &&
+                        isValid) {
                       screenNavigator(context, const SetupProfileScreen());
                     }
                   },

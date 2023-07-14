@@ -13,6 +13,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_but
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
+import 'package:stories_editor/stories_editor.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import 'biz_page/biz_page.dart';
 import 'calls_tab/call_tab_screen.dart';
@@ -370,20 +371,20 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                     //       builder: (context) =>
                                     //           const WhatsappStoryEditor()),
                                     // );
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => StoriesEditor(
-                                    //               giphyKey:
-                                    //                   'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                    //               //fontFamilyList: const ['Shizuru', 'Aladin'],
-                                    //               galleryThumbnailQuality: 300,
-                                    //               //isCustomFontList: true,
-                                    //               onDone: (uri) {
-                                    //                 debugPrint(uri);
-                                    //                 // Share.shareFiles([uri]);
-                                    //               },
-                                    //             )));
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => StoriesEditor(
+                                                  giphyKey:
+                                                      'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                  //fontFamilyList: const ['Shizuru', 'Aladin'],
+                                                  galleryThumbnailQuality: 300,
+                                                  //isCustomFontList: true,
+                                                  onDone: (uri) {
+                                                    debugPrint(uri);
+                                                    // Share.shareFiles([uri]);
+                                                  },
+                                                )));
                                   },
                                   child: Container(
                                     height: 42,
@@ -422,4 +423,3 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     );
   }
 }
- 

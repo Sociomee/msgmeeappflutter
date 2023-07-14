@@ -101,10 +101,11 @@ class SettingScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.black,
+                  size: 20,
                 )),
           ),
           leadingWidth: 40,
-          titleSpacing: 0,
+          titleSpacing: 3,
           title: Text('Settings', style: TextStyle(color: AppColors.black))),
       body: SingleChildScrollView(
         child: ListView.builder(

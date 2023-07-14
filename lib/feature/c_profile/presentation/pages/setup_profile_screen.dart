@@ -90,7 +90,11 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 child: Text(
                   'Skip',
                   style: TextStyle(
-                      color: isValid ? AppColors.primaryColor : AppColors.grey),
+                    color: AppColors.primaryColor,
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             )

@@ -28,10 +28,9 @@ class _GroupsWidgetState extends State<GroupsWidget> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Divider(
-                  color: AppColors.grey.withOpacity(.4),
-                  height: 0,
-                  thickness: 6,
-                ),
+                    color: AppColors.grey.withOpacity(.4),
+                    height: 0,
+                    thickness: 6),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -80,44 +79,58 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 7),
-                        child: Row(
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            InkWell(
-                                onTap: () {},
-                                child: SvgPicture.asset('assets/group.svg')),
-                            SizedBox(width: 13.w),
-                            Column(
+                            Row(
                               mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                    index == 1
-                                        ? "Family Group"
-                                        : index == 2
-                                            ? 'Office Group'
-                                            : 'College Group',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500)),
-                                SizedBox(height: 8),
-                                Text('Members:33',
-                                    style: TextStyle(
-                                        fontSize: 13, color: AppColors.black)),
+                                InkWell(
+                                    onTap: () {},
+                                    child:
+                                        SvgPicture.asset('assets/group.svg')),
+                                SizedBox(width: 13.w),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        index == 1
+                                            ? "Family Group"
+                                            : index == 2
+                                                ? 'Office Group'
+                                                : 'College Group',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500)),
+                                    SizedBox(height: 8),
+                                    Text('Members:33',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: AppColors.black)),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text('Admin',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: AppColors.black)),
+                                    Text('Since : 27 Dec, 2023',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: AppColors.grey)),
+                                  ],
+                                ),
                               ],
                             ),
-                            Spacer(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text('Admin',
-                                    style: TextStyle(
-                                        fontSize: 13, color: AppColors.black)),
-                                Text('Since : 27 Dec, 2023',
-                                    style: TextStyle(
-                                        fontSize: 13, color: AppColors.grey)),
-                              ],
-                            ),
+                            index == 2
+                                ? Container()
+                                : Divider(
+                                    color: AppColors.lightgrey.withOpacity(.6),
+                                    thickness: 1)
                           ],
                         ),
                       ),

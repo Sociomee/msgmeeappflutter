@@ -9,8 +9,47 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widge
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_wallpaper_option.dart';
 import 'package:msgmee/theme/colors.dart';
 
-import '../../cubit/add_message/add_message_cubit.dart';
+import '../../../../../data/model/chat_model.dart';
 import '../../cubit/chat_theme/chat_theme_cubit.dart';
+import '../chat_screen/widgets/message_type.dart';
+
+List<ChatMessage> messages = [
+  ChatMessage(
+    messageContent: "Hello, Will",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "How have you been?",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "ehhhh, doing OK.",
+    messageType: "receiver",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+  ChatMessage(
+    messageContent: "Is there any thing wrong?",
+    messageType: "sender",
+    msgStatus: 'read',
+    time: '04.25 pm',
+    type: MessageType.text,
+  ),
+];
 
 class ChangeWallPaperPage extends StatefulWidget {
   const ChangeWallPaperPage({super.key});
@@ -22,7 +61,6 @@ class ChangeWallPaperPage extends StatefulWidget {
 class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
   @override
   Widget build(BuildContext context) {
-    var messagecubit = context.read<AddMessageCubit>().state.messages;
     final String imageurl =
         'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?cs=srgb&dl=pexels-masha-raymers-2726111.jpg&fm=jpg';
     return Scaffold(
@@ -123,30 +161,17 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                       ),
                                     ),
                           ListView.builder(
-                            itemCount: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages
-                                .length,
+                            itemCount: messages.length,
                             shrinkWrap: true,
                             padding: EdgeInsets.only(top: 10),
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Align(
-                                alignment: (context
-                                            .watch<AddMessageCubit>()
-                                            .state
-                                            .messages[index]
-                                            .messageType ==
-                                        "receiver"
-                                    ? Alignment.topLeft
-                                    : Alignment.topRight),
-                                child: context
-                                            .read<AddMessageCubit>()
-                                            .state
-                                            .messages[index]
-                                            .messageType ==
-                                        "receiver"
+                                alignment:
+                                    (messages[index].messageType == "receiver"
+                                        ? Alignment.topLeft
+                                        : Alignment.topRight),
+                                child: messages[index].messageType == "receiver"
                                     ? Padding(
                                         padding: EdgeInsets.only(
                                             bottom: 5, left: 10),
@@ -175,7 +200,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      messagecubit[index]
+                                                      messages[index]
                                                           .messageContent,
                                                       style: TextStyle(
                                                           color:
@@ -187,14 +212,13 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                         MainAxisSize.min,
                                                     children: [
                                                       SizedBox(
-                                                        width: messagecubit[
-                                                                        index]
+                                                        width: messages[index]
                                                                     .messageContent
                                                                     .trim()
                                                                     .length <=
                                                                 15
                                                             ? 40
-                                                            : messagecubit[index]
+                                                            : messages[index]
                                                                         .messageContent
                                                                         .trim()
                                                                         .length <=
@@ -202,9 +226,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                 ? 60
                                                                 : 100,
                                                       ),
-                                                      Text(
-                                                          messagecubit[index]
-                                                              .time,
+                                                      Text(messages[index].time,
                                                           style: const TextStyle(
                                                               color: AppColors
                                                                   .black,
@@ -264,8 +286,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                              messagecubit[
-                                                                      index]
+                                                              messages[index]
                                                                   .messageContent,
                                                               style: const TextStyle(
                                                                   color: Colors
@@ -279,7 +300,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                     .min,
                                                             children: [
                                                               Text(
-                                                                  messagecubit[
+                                                                  messages[
                                                                           index]
                                                                       .time,
                                                                   style: const TextStyle(
@@ -288,19 +309,19 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                       fontSize:
                                                                           8)),
                                                               SizedBox(
-                                                                width: messagecubit[index]
+                                                                width: messages[index]
                                                                             .messageContent
                                                                             .trim()
                                                                             .length <=
                                                                         15
                                                                     ? 40
-                                                                    : messagecubit[index].messageContent.trim().length <=
+                                                                    : messages[index].messageContent.trim().length <=
                                                                             21
                                                                         ? 60
                                                                         : 110,
                                                               ),
                                                               Text(
-                                                                  messagecubit[
+                                                                  messages[
                                                                           index]
                                                                       .msgStatus,
                                                                   style: const TextStyle(

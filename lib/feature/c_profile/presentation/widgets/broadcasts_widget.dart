@@ -76,37 +76,48 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 7),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                        child: Column(
                           children: [
-                            InkWell(
-                                onTap: () {},
-                                child:
-                                    SvgPicture.asset('assets/broadcast.svg')),
-                            SizedBox(width: 10.w),
-                            Column(
+                            Row(
                               mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                    index == 1
-                                        ? "Eid Broadcast"
-                                        : index == 2
-                                            ? 'Diwali Broadcast'
-                                            : 'Christmas Broadcast',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500)),
-                                SizedBox(height: 8),
-                                Text('Alam, Saurabh, Taha Jamal, Anshuman...',
+                                InkWell(
+                                    onTap: () {},
+                                    child: SvgPicture.asset(
+                                        'assets/broadcast.svg')),
+                                SizedBox(width: 10.w),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        index == 1
+                                            ? "Eid Broadcast"
+                                            : index == 2
+                                                ? 'Diwali Broadcast'
+                                                : 'Christmas Broadcast',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500)),
+                                    SizedBox(height: 8),
+                                    Text(
+                                        'Alam, Saurabh, Taha Jamal, Anshuman...',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: AppColors.grey)),
+                                  ],
+                                ),
+                                Spacer(),
+                                Text('2w ago',
                                     style: TextStyle(
                                         fontSize: 13, color: AppColors.grey)),
                               ],
                             ),
-                            Spacer(),
-                            Text('2w ago',
-                                style: TextStyle(
-                                    fontSize: 13, color: AppColors.grey)),
+                            index == 2
+                                ? Container()
+                                : Divider(
+                                    color: AppColors.lightgrey.withOpacity(.6),
+                                    thickness: 1)
                           ],
                         ),
                       ),

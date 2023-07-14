@@ -269,8 +269,7 @@ class SentMessageWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                      padding: const EdgeInsets.only(
-                          top: 5, left: 5, right: 5, bottom: 5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color:
                             context.watch<ChatThemeCubit>().state.chatDeepColor,
@@ -295,23 +294,27 @@ class SentMessageWidget extends StatelessWidget {
                                     ))
                                 : Container(),
                           ),
-                          SizedBox(height: 5),
-                          Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
+                          message.isEmpty
+                              ? SizedBox(height: 5)
+                              : Text(message,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 14)),
                           SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              SizedBox(width: 10),
                               Text(time,
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
-                                    : message.trim().length <= 21
-                                        ? 80
-                                        : 200,
+                                width: message.isEmpty
+                                    ? 120.w
+                                    : message.trim().length <= 15
+                                        ? 40
+                                        : message.trim().length <= 21
+                                            ? 80
+                                            : 200,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(
