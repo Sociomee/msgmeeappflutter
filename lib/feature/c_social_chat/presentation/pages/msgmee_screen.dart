@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
@@ -13,8 +14,10 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../widgets/messenger_bottomsheet.dart';
+import 'biz_page/biz_page.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
+import 'market/market_page.dart';
 import 'message_search/pages/message_search_page.dart';
 
 class MsgmeeScreen extends StatefulWidget {
@@ -25,8 +28,9 @@ class MsgmeeScreen extends StatefulWidget {
 }
 
 class _MsgmeeScreenState extends State<MsgmeeScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _controller;
+  late TabController tabsComtroller;
   int _selectedIndex = 0;
   File? image;
 
@@ -34,7 +38,12 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
-
+    tabsComtroller = TabController(length: 4, vsync: this);
+    tabsComtroller.addListener(() {
+      setState(() {
+        _selectedIndex = _controller.index;
+      });
+    });
     _controller.addListener(() {
       setState(() {
         _selectedIndex = _controller.index;
@@ -45,7 +54,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: context.watch<SyncWithSociomee>().state ? 4 : 2,
       initialIndex: 0,
       child: MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -91,11 +100,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                 ),
                     ),
                     SizedBox(width: 19),
-                    Icon(
-                      Icons.archive_outlined,
-                      color: AppColors.black,
-                      size: 18,
-                    ),
+                    Icon(Icons.archive_outlined,
+                        color: AppColors.black, size: 18),
                     SizedBox(width: 19),
                     GestureDetector(
                       onTap: () {
@@ -208,43 +214,106 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                     children: [
                       Column(
                         children: [
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.0),
-                              border: const Border(
-                                  bottom: BorderSide(
-                                      color: Colors.grey, width: 0.8)),
-                            ),
-                            child: TabBar(
-                              indicatorWeight: 3,
-                              indicatorColor: AppColors.primaryColor,
-                              labelColor: AppColors.primaryColor,
-                              unselectedLabelColor: AppColors.grey,
-                              controller: _controller,
-                              tabs: [
-                                Tab(
-                                  icon: Text(
-                                    'Social',
-                                    style: TextStyle(fontSize: 17),
+                          context.watch<SyncWithSociomee>().state
+                              ? DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.0),
+                                    border: const Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey, width: 0.8)),
+                                  ),
+                                  child: TabBar(
+                                    indicatorWeight: 3,
+                                    indicatorColor: AppColors.primaryColor,
+                                    labelColor: AppColors.primaryColor,
+                                    unselectedLabelColor: AppColors.grey,
+                                    controller: tabsComtroller,
+                                    tabs: [
+                                      Tab(
+                                        icon: Text(
+                                          'Social',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      Tab(
+                                        icon: Text(
+                                          'Biz Page',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      Tab(
+                                        icon: Text(
+                                          'Market',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      Tab(
+                                        icon: Text(
+                                          'Calls',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.0),
+                                    border: const Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey, width: 0.8)),
+                                  ),
+                                  child: TabBar(
+                                    indicatorWeight: 3,
+                                    indicatorColor: AppColors.primaryColor,
+                                    labelColor: AppColors.primaryColor,
+                                    unselectedLabelColor: AppColors.grey,
+                                    controller: _controller,
+                                    tabs: [
+                                      Tab(
+                                        icon: Text(
+                                          'Social',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      Tab(
+                                        icon: Text(
+                                          'Calls',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Tab(
-                                  icon: Text(
-                                    'Calls',
-                                    style: TextStyle(fontSize: 17),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 570.h,
-                            child:
-                                TabBarView(controller: _controller, children: [
-                              SocialTabScreen(),
-                              CallTabScreen(),
-                            ]),
-                          )
+                          context.watch<SyncWithSociomee>().state
+                              ? SizedBox(
+                                  height: 570.h,
+                                  child: TabBarView(
+                                      controller: context
+                                              .watch<SyncWithSociomee>()
+                                              .state
+                                          ? tabsComtroller
+                                          : _controller,
+                                      children: [
+                                        SocialTabScreen(),
+                                        BizPageTab(),
+                                        MarketPageTab(),
+                                        CallTabScreen(),
+                                      ]),
+                                )
+                              : SizedBox(
+                                  height: 570.h,
+                                  child: TabBarView(
+                                      controller: context
+                                              .watch<SyncWithSociomee>()
+                                              .state
+                                          ? tabsComtroller
+                                          : _controller,
+                                      children: [
+                                        SocialTabScreen(),
+                                        CallTabScreen(),
+                                      ]),
+                                )
                         ],
                       ),
                       Positioned(
