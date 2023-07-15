@@ -72,12 +72,29 @@ class AppColors {
     width: 50,
     height: 50,
     textStyle: const TextStyle(
-      fontSize: 14,
-      color: Colors.black,
+      color: Color(0xFF277044),
+      fontSize: 18,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w500,
     ),
     decoration: BoxDecoration(
       color: AppColors.white,
-      border: Border.all(color: AppColors.grey),
+      border: Border.all(color: AppColors.lightgrey),
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+  static final errorpintheme = PinTheme(
+    width: 50,
+    height: 50,
+    textStyle: const TextStyle(
+      color: AppColors.darkbtnColor,
+      fontSize: 18,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w500,
+    ),
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      border: Border.all(color: AppColors.errorRedColor),
       borderRadius: BorderRadius.circular(10),
     ),
   );
@@ -85,8 +102,10 @@ class AppColors {
     width: 50,
     height: 50,
     textStyle: const TextStyle(
-      fontSize: 14,
-      color: Colors.black,
+      color: Color(0xFF277044),
+      fontSize: 18,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w500,
     ),
     decoration: BoxDecoration(
       color: AppColors.white,

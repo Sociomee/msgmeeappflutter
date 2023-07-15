@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/helper/nth_character_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
@@ -19,11 +18,10 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  final pinController = TextEditingController();
   bool isFocused = false;
   bool isValid = false;
   bool textFieldclick = false;
-  Duration duration = Duration(seconds: 120);
+  Duration duration = Duration(seconds: 20);
   Timer? timer;
   removeTime() {
     setState(() {
@@ -52,8 +50,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   void dispose() {
-    pinController.dispose();
-
     timer!.cancel();
     super.dispose();
   }
@@ -72,7 +68,7 @@ class _OtpScreenState extends State<OtpScreen> {
             backgroundColor: AppColors.white,
             valueColor: AlwaysStoppedAnimation<Color>(
                 context.watch<NumberValidationCubit>().state.isvalid
-                    ? AppColors.primaryColor
+                    ? AppColors.darkbtnColor
                     : AppColors.white),
             value: 0.50,
           ),
@@ -102,7 +98,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     fontSize: 17,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
-                    color: isValid ? AppColors.primaryColor : AppColors.grey),
+                    color: isValid ? AppColors.darkbtnColor : AppColors.grey),
               ),
             ),
           )
@@ -112,17 +108,46 @@ class _OtpScreenState extends State<OtpScreen> {
       body: Form(
         key: formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 100),
-              const Center(
-                  child: Text('Enter OTP ', style: TextStyle(fontSize: 33))),
-              const SizedBox(height: 5),
+              SizedBox(height: 26),
               Text(
-                'An OTP has been sent to your phone number \nending with ${widget.number.toString().lastChars(4)}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12),
+                'Verify with OTP\nSent to ${widget.number}',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 24,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 21,
+                    width: 21,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.darkbtnColor),
+                      color: AppColors.darkbtnColor,
+                      backgroundColor: AppColors.grey,
+                      // value: .3,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    'Auto fetching OTP',
+                    style: TextStyle(
+                      color: Color(0xFF828282),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w300,
+                    ),
+                  )
+                ],
               ),
               const SizedBox(height: 20),
               Padding(
@@ -135,8 +160,13 @@ class _OtpScreenState extends State<OtpScreen> {
                   controller: _otpController,
                   length: 6,
                   defaultPinTheme: AppColors.defaultpintheme,
-                  focusedPinTheme: AppColors.focuspintheme,
-                  submittedPinTheme: AppColors.focuspintheme,
+                  focusedPinTheme: error == ''
+                      ? AppColors.focuspintheme
+                      : AppColors.errorpintheme,
+                  submittedPinTheme: error == ''
+                      ? AppColors.focuspintheme
+                      : AppColors.errorpintheme,
+                  errorPinTheme: AppColors.errorpintheme,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   ],
@@ -144,8 +174,36 @@ class _OtpScreenState extends State<OtpScreen> {
                       Container(color: AppColors.black, height: 2, width: 10),
                   errorTextStyle:
                       TextStyle(fontSize: 12, color: AppColors.errorRedColor),
+                  errorText: error,
+                  preFilledWidget: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.lightgrey1,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '0',
+                          style: TextStyle(
+                            color: Color(0xFFABB0BC),
+                            fontSize: 18,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                            color: Color(0xFFABB0BC), height: 2, width: 14.w),
+                      ],
+                    )),
+                  ),
                   validator: (s) {
                     if (s!.isEmpty) {
+                      setState(() {
+                        error = "Please Enter a Otp!";
+                      });
+                    } else if (s.length != 6) {
                       setState(() {
                         error = "Please Enter a Otp!";
                       });
@@ -176,6 +234,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Spacer(),
                     error == ''
                         ? Container()
                         : Icon(
@@ -188,35 +247,56 @@ class _OtpScreenState extends State<OtpScreen> {
                         style: TextStyle(
                           color: AppColors.errorRedColor,
                           fontSize: 12,
-                        ))
+                        )),
+                    SizedBox(width: 15)
                   ],
                 ),
               ),
-              const SizedBox(height: 68),
-              Text(
-                "$min:$sec sec",
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 6),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(
-                    text: 'Didn’t receive OTP yet? ',
-                    style: TextStyle(color: AppColors.black, fontSize: 14)),
-                TextSpan(
-                    text: 'Resend',
-                    style: TextStyle(
+              const SizedBox(height: 24),
+              Center(
+                child: RichText(
+                    text: TextSpan(children: [
+                  const TextSpan(
+                      text: 'Didn’t receive it? Reply in ',
+                      style: TextStyle(
+                        color: Color(0xFF828282),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      )),
+                  TextSpan(
+                      text: "$min:$sec sec",
+                      style: TextStyle(
                         color: sec == '00'
-                            ? AppColors.primaryColor
-                            : AppColors.primaryColor.withOpacity(.5),
-                        fontSize: 14)),
-              ])),
+                            ? AppColors.black
+                            : AppColors.darkbtnColor,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
+                ])),
+              ),
+              SizedBox(height: 24),
+              sec == '00'
+                  ? Center(
+                      child: Text(
+                        'Resend OTP',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFF1976D2),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    )
+                  : Container(),
               const Spacer(),
               CustomButtonWidget(
-                  borderColor: isValid
-                      ? AppColors.primaryColor
-                      : AppColors.primaryColor.withOpacity(.5),
+                  borderColor:
+                      isValid ? AppColors.darkbtnColor : AppColors.lightgrey,
+                  fontsize: 18,
                   ontap: () {
                     if (formKey.currentState!.validate() &&
                         _otpController.length == 6 &&
@@ -224,65 +304,61 @@ class _OtpScreenState extends State<OtpScreen> {
                       screenNavigator(context, const SetupProfileScreen());
                     }
                   },
-                  title: 'CONTINUE',
-                  color: isValid
-                      ? AppColors.primaryColor
-                      : AppColors.primaryColor.withOpacity(.5)),
+                  title: 'Continue',
+                  color:
+                      isValid ? AppColors.darkbtnColor : AppColors.lightgrey),
               const SizedBox(height: 10),
               textFieldclick
                   ? Container()
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'By Signing-up, you agree to our ',
-                          style: TextStyle(color: AppColors.grey),
-                        ),
-                        Column(
+                  : Center(
+                      child: Text.rich(
+                        TextSpan(
                           children: [
-                            Text(
-                              'Terms & Conditions.',
-                              style: TextStyle(color: AppColors.black),
+                            TextSpan(
+                              text: 'By Clicking continue, You agree to our\n',
+                              style: TextStyle(
+                                color: Color(0xFF8F8F8F),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: -0.32,
+                              ),
                             ),
-                            Container(
-                              height: 1,
-                              width: 113.w,
-                              color: AppColors.black,
-                            )
+                            TextSpan(
+                              text: 'Terms of Services',
+                              style: TextStyle(
+                                color: Color(0xFF277044),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.32,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' and ',
+                              style: TextStyle(
+                                color: Color(0xFF8F8F8F),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: -0.32,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Privacy Policy.',
+                              style: TextStyle(
+                                color: Color(0xFF277044),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.32,
+                              ),
+                            ),
                           ],
-                        )
-                      ],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-              textFieldclick
-                  ? Container()
-                  : RichText(
-                      text: const TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'By Signing-up, you agree to our ',
-                            style: TextStyle(color: AppColors.grey)),
-                        TextSpan(
-                            text: 'Privacy Policy',
-                            style: TextStyle(
-                                color: AppColors.black,
-                                decoration: TextDecoration.underline)),
-                      ],
-                    )),
-              textFieldclick
-                  ? Container()
-                  : RichText(
-                      text: const TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'and ',
-                            style: TextStyle(color: AppColors.grey)),
-                        TextSpan(
-                            text: 'Cookies Policy',
-                            style: TextStyle(
-                                color: AppColors.black,
-                                decoration: TextDecoration.underline)),
-                      ],
-                    )),
               const SizedBox(height: 20)
             ],
           ),
