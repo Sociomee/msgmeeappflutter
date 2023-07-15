@@ -8,6 +8,7 @@ class CustomButtonWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.color,
+      this.fontsize = 14,
       this.textColor = AppColors.white,
       this.borderColor = AppColors.primaryColor,
       required this.ontap});
@@ -15,6 +16,7 @@ class CustomButtonWidget extends StatelessWidget {
   final Color color;
   Color? textColor;
   Color? borderColor;
+  double? fontsize;
   final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,9 @@ class CustomButtonWidget extends StatelessWidget {
             border: Border.all(color: borderColor!)),
         child: Text(title,
             style: TextStyle(
-                color: textColor, fontSize: 14, fontWeight: FontWeight.bold)),
+                color: textColor,
+                fontSize: fontsize,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }

@@ -38,19 +38,14 @@ class WelcomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Divider(
-                  color: AppColors.lightgrey,
-                  height: 32,
-                  thickness: 1,
-                ),
+                Divider(color: AppColors.lightgrey, height: 32, thickness: 1),
                 Text(
                   '"Welcome to Msgme, your\nglobal messaging\nplatform!"',
                   style: TextStyle(
-                    color: Color(0xFF368C4E),
-                    fontSize: 24,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                  ),
+                      color: Color(0xFF368C4E),
+                      fontSize: 24,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 16),
                 Text(

@@ -70,6 +70,7 @@ dependencies:
   stories_editor:
     git:
       url: https://github.com/DeveloperMalay/stories_editor
+  country_picker: ^2.0.20
   
   
 

@@ -84,7 +84,7 @@ class _OtpScreenState extends State<OtpScreen> {
               Navigator.pop(context);
             },
             icon: const Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               color: AppColors.black,
             )),
         actions: [
@@ -99,6 +99,9 @@ class _OtpScreenState extends State<OtpScreen> {
               child: Text(
                 'CONTINUE',
                 style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
                     color: isValid ? AppColors.primaryColor : AppColors.grey),
               ),
             ),

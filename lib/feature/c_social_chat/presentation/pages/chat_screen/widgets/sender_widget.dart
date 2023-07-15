@@ -168,11 +168,10 @@ class SentMessageWidget extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(100),
                                           child: Image.network(
-                                            'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                                            height: 40,
-                                            width: 40,
-                                            fit: BoxFit.cover,
-                                          ),
+                                              'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+                                              height: 40,
+                                              width: 40,
+                                              fit: BoxFit.cover),
                                         ),
                                         SizedBox(width: 10.w),
                                         SizedBox(
