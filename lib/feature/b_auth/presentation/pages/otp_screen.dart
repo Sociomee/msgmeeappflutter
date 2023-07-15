@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/feature/b_auth/presentation/pages/name_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
@@ -301,7 +302,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     if (formKey.currentState!.validate() &&
                         _otpController.length == 6 &&
                         isValid) {
-                      screenNavigator(context, const SetupProfileScreen());
+                      screenNavigator(context, const NameScreen());
                     }
                   },
                   title: 'Continue',
