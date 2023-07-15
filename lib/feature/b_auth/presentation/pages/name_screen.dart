@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widgets/custom_button_widget.dart';
+import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
+import '../../../c_profile/presentation/pages/setup_profile_screen.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key});
@@ -50,7 +52,13 @@ class _NameScreenState extends State<NameScreen> {
             )),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              screenNavigator(
+                  context,
+                  SetupProfileScreen(
+                    name: nameController.text,
+                  ));
+            },
             child: Padding(
               padding: const EdgeInsets.only(top: 18.0, right: 18),
               child: Text(
@@ -147,7 +155,13 @@ class _NameScreenState extends State<NameScreen> {
                       isValid ? AppColors.darkbtnColor : AppColors.lightgrey,
                   fontsize: 18,
                   ontap: () {
-                    if (formKey.currentState!.validate()) {}
+                    if (formKey.currentState!.validate()) {
+                      screenNavigator(
+                          context,
+                          SetupProfileScreen(
+                            name: nameController.text,
+                          ));
+                    }
                   },
                   title: 'Continue',
                   color:

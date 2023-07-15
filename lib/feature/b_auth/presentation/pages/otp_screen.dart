@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/pages/name_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import 'package:msgmee/feature/c_profile/presentation/pages/setup_profile_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
@@ -88,7 +87,7 @@ class _OtpScreenState extends State<OtpScreen> {
           GestureDetector(
             onTap: () {
               if (isValid && _otpController.length == 6) {
-                screenNavigator(context, const SetupProfileScreen());
+                screenNavigator(context, const NameScreen());
               }
             },
             child: Padding(

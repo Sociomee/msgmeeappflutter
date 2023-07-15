@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
@@ -10,11 +11,10 @@ import '../../../b_auth/presentation/cubit/number_validation/number_validation_c
 import '../../../../theme/colors.dart';
 import '../../../../common_widgets/custom_bottom_model_sheet.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
-import '../widgets/text_field_widget.dart';
 
 class SetupProfileScreen extends StatefulWidget {
-  const SetupProfileScreen({super.key});
-
+  const SetupProfileScreen({super.key, required this.name});
+  final String name;
   @override
   State<SetupProfileScreen> createState() => _SetupProfileScreenState();
 }
@@ -73,27 +73,40 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               backgroundColor: AppColors.white,
               valueColor: AlwaysStoppedAnimation<Color>(
                   context.watch<NumberValidationCubit>().state.isvalid
-                      ? AppColors.primaryColor
+                      ? AppColors.darkbtnColor
                       : AppColors.white),
-              value: 1.0,
+              value: .90,
+            ),
+          ),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: AppColors.black,
             ),
           ),
           backgroundColor: AppColors.white,
-          elevation: 0,
+          elevation: 2,
           actions: [
             GestureDetector(
               onTap: () {
-                screenNavigator(context, MsgmeeScreen());
+                imageFile != null
+                    ? animatedScreenNavigator(context, MsgmeeScreen())
+                    : null;
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 20.0, right: 10),
                 child: Text(
-                  'Skip',
+                  'CONTINUE',
                   style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 14,
+                    color: imageFile != null
+                        ? AppColors.darkbtnColor
+                        : AppColors.grey,
+                    fontSize: 17,
                     fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -112,11 +125,42 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10.h),
-                const Center(
-                    child: Text('Setup Profile',
-                        style: TextStyle(
-                            fontSize: 33, fontWeight: FontWeight.bold))),
-                const SizedBox(height: 20),
+                Text(
+                  'Update your Profile\nPicture',
+                  style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 24,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 9),
+                Center(
+                  child: Text(
+                    'Set your profile picture for an amazing experience.',
+                    style: TextStyle(
+                      color: Color(0xFF828282),
+                      fontSize: 15,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 20),
+                    child: Text(
+                      widget.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
                 Center(
                   child: Stack(
                     children: [
@@ -128,10 +172,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                                   borderRadius: BorderRadius.circular(100)),
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
-                                  child: Image.file(
-                                      File(
-                                        imageFile!.path,
-                                      ),
+                                  child: Image.file(File(imageFile!.path),
                                       fit: BoxFit.cover)),
                             )
                           : Container(
@@ -139,86 +180,70 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                               width: 172,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100)),
-                              child: Image.asset('assets/profile_icon.png'),
+                              child: SvgPicture.asset('assets/profile.svg'),
                             ),
                       Positioned(
-                        top: 140,
-                        right: 20,
-                        child: InkWell(
-                          onTap: () {
-                            //showing bottom model sheet to upload image
-                            showModalBottomSheet(
-                                context: context,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20))),
-                                builder: (context) {
-                                  return CustomBottomModelSheet(
-                                    cameraClick: () {
-                                      pickCprofilePic();
-                                    },
-                                    galleryClick: () {
-                                      pickGprofilePic();
-                                    },
-                                  );
-                                });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(100)),
-                            child: Image.asset(
-                              'assets/camera.png',
-                              height: 20,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
+                          top: 130,
+                          right: 10,
+                          child: GestureDetector(
+                              onTap: () {
+                                //showing bottom model sheet to upload image
+                                showModalBottomSheet(
+                                    context: context,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20))),
+                                    builder: (context) {
+                                      return CustomBottomModelSheet(
+                                        cameraClick: () {
+                                          pickCprofilePic();
+                                        },
+                                        galleryClick: () {
+                                          pickGprofilePic();
+                                        },
+                                      );
+                                    });
+                              },
+                              child: Image.asset('assets/camera2.png',
+                                  height: 42, fit: BoxFit.cover)))
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
-                Center(
-                  child: const Text(
-                    "The picture you're about to set as your display picture will\nbe visible to your connections.",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(color: AppColors.hinttextColor, fontSize: 12),
-                  ),
-                ),
-                const SizedBox(height: 32),
-                TextFieldWidget(
-                  title: 'Your full name',
-                  hintText: 'Write your full name here',
-                  controller: nameController,
-                  textWeight: FontWeight.bold,
-                  onChanged: (e) {
-                    setState(() {
-                      remainchar = 38 - nameController.text.length;
-                      nameController.text.isNotEmpty
-                          ? isValid = true
-                          : isValid = false;
-                    });
-                  },
-                  remainChar: remainchar.toString(),
-                ),
                 Spacer(),
                 CustomButtonWidget(
-                    borderColor: isValid
-                        ? AppColors.primaryColor
-                        : AppColors.primaryColor.withOpacity(.5),
+                    borderColor:
+                        isValid ? AppColors.darkbtnColor : AppColors.lightgrey,
+                    fontsize: 18,
                     ontap: () {
-                      screenNavigator(context, const MsgmeeScreen());
+                      imageFile != null
+                          ? animatedScreenNavigator(context, MsgmeeScreen())
+                          : null;
                     },
-                    title: 'CONTINUE',
-                    color: isValid
-                        ? AppColors.primaryColor
-                        : AppColors.primaryColor.withOpacity(.5)),
-                const SizedBox(height: 100),
+                    title: 'Continue',
+                    color: imageFile != null
+                        ? AppColors.darkbtnColor
+                        : AppColors.lightgrey),
+                const SizedBox(height: 24),
+                GestureDetector(
+                  onTap: () {
+                    animatedScreenNavigator(context, MsgmeeScreen());
+                  },
+                  child: Center(
+                    child: Text(
+                      'SKIP',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 17,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 54),
               ],
             ),
           ),
