@@ -120,15 +120,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               },
                         child: Container(
                           height: 41,
-                          width: 41,
+                          padding: EdgeInsets.only(left: 15, right: 10),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Color(0xFF93CA65),
                               border: Border.all(
                                   color: Color(0xFF93CA65), width: 2),
-                              borderRadius: BorderRadius.circular(15)),
-                          child:
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Next',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               Icon(Icons.arrow_forward, color: AppColors.white),
+                            ],
+                          ),
                         ))
                   ],
                 ),
