@@ -140,7 +140,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                     'Set your profile picture for an amazing experience.',
                     style: TextStyle(
                       color: Color(0xFF828282),
-                      fontSize: 15,
+                      fontSize: 13.sp,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
                     ),

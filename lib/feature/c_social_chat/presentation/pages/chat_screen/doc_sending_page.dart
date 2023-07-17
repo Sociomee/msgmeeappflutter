@@ -103,11 +103,16 @@ class _DocSendingPageState extends State<DocSendingPage> {
                     SizedBox(height: 5),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 65.w),
-                      child: Center(
-                        child: Text(
-                          widget.pftname.split('/').first,
-                          style:
-                              TextStyle(color: AppColors.black, fontSize: 20),
+                      child: SizedBox(
+                        height: 30,
+                        width: 400,
+                        child: Center(
+                          child: Text(
+                            widget.pftname.split('/').first,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                TextStyle(color: AppColors.black, fontSize: 20),
+                          ),
                         ),
                       ),
                     ),
