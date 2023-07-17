@@ -118,11 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontsize: 18,
                 color: context.watch<NumberValidationCubit>().state.isvalid
                     ? AppColors.darkbtnColor
-                    : AppColors.lightgrey,
+                    : AppColors.inactivegrey,
                 borderColor:
                     context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.darkbtnColor
-                        : AppColors.lightgrey,
+                        : AppColors.inactivegrey,
                 ontap: () {
                   context.read<NumberValidationCubit>().state.isvalid
                       ? screenNavigator(
