@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/archived_list_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialog.dart';
 
 import '../../../../helper/navigator_function.dart';
@@ -139,12 +140,13 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                 } else if (value == 4) {
                   animatedScreenNavigator(context, AddParticipantsScreen());
                 } else if (value == 5) {
+                  animatedScreenNavigator(context, ArchivedListScreen());
+                } else if (value == 6) {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return SyncDialogWidget();
                       });
-                } else if (value == 6) {
                   context.read<SyncWithSociomee>().sync();
                   // screenNavigator(context, LinkedDevicesScreen());
                 } else if (value == 7) {
@@ -155,19 +157,20 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                 if (value == 1) {
                   screenNavigator(context, NewMessageScreen());
                 } else if (value == 2) {
-                  animatedScreenNavigator(context, CreateGroupPage());
                 } else if (value == 3) {
+                  animatedScreenNavigator(context, CreateGroupPage());
                 } else if (value == 4) {
                   screenNavigator(context, LinkedDevicesScreen());
                 } else if (value == 5) {
                   screenNavigator(context, AddParticipantsScreen());
                 } else if (value == 6) {
+                  animatedScreenNavigator(context, ArchivedListScreen());
+                } else if (value == 7) {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return SyncDialogWidget();
                       });
-                } else if (value == 7) {
                   context.read<SyncWithSociomee>().sync();
                 } else if (value == 8) {
                   screenNavigator(context, SettingScreen());
