@@ -35,6 +35,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("${widget.names != null}" '/' "${widget.names}");
     return Scaffold(
       appBar: AppBar(
           leading: GestureDetector(
@@ -46,7 +47,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
               style: TextStyle(
                 color: AppColors.black,
               ))),
-      body: widget.names!.length == 1
+      body: widget.pftname.isNotEmpty
           ? Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -139,7 +140,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                     docName: widget.pftname,
                                   ));
                               Navigator.pop(context);
-                              widget.names!.clear();
+                              if (widget.names != null) {
+                                widget.names!.clear();
+                              }
                             },
                             child: Container(
                               height: 30,
@@ -158,159 +161,172 @@ class _DocSendingPageState extends State<DocSendingPage> {
                 ),
               ),
             )
-          : Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [AppColors.lightgrey1, AppColors.grey])),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.lightgrey),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 365,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: widget.names!.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: Column(
-                                children: [
-                                  Spacer(),
-                                  SvgPicture.asset('assets/docx.svg'),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    widget.names![index],
-                                    style: TextStyle(
-                                        color: AppColors.black, fontSize: 20),
+          : widget.names != null && widget.names!.length > 1
+              ? Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [AppColors.lightgrey1, AppColors.grey])),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.lightgrey),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 365,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: widget.names!.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    children: [
+                                      Spacer(),
+                                      SvgPicture.asset('assets/docx.svg'),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        widget.names![index],
+                                        style: TextStyle(
+                                            color: AppColors.black,
+                                            fontSize: 20),
+                                      ),
+                                      Spacer(),
+                                    ],
                                   ),
-                                  Spacer(),
-                                ],
-                              ),
-                            );
-                          }),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 5, right: 5, bottom: 0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: SizedBox(
-                            height: 40,
-                            child: MessageTextFieldWidget(
-                              messageController: messageController,
-                              color: AppColors.white,
-                              onChanged: (e) {},
-                            ),
-                          )),
-                          SizedBox(width: 5),
-                          GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Row(
+                                );
+                              }),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 5, right: 5, bottom: 0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: SizedBox(
+                                height: 40,
+                                child: MessageTextFieldWidget(
+                                  messageController: messageController,
+                                  color: AppColors.white,
+                                  onChanged: (e) {},
+                                ),
+                              )),
+                              SizedBox(width: 5),
+                              GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(
-                                                'Sending ${widget.names!.length} files to Razdar Hasan ?',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w400,
-                                                ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Sending ${widget.names!.length} files to Razdar Hasan ?',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 35.w)
+                                                ],
                                               ),
-                                              SizedBox(width: 35.w)
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                      actions: [
-                                        Row(
-                                          children: [
-                                            Spacer(),
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text(
-                                                'Cancel',
-                                                style: TextStyle(
-                                                  color: Color(0xFF368C4E),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                Spacer(),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: TextStyle(
+                                                      color: Color(0xFF368C4E),
+                                                      fontSize: 16,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 35.w),
-                                            GestureDetector(
-                                              onTap: () {
-                                                for (var i = 0;
-                                                    i < widget.names!.length;
-                                                    i++) {
-                                                  context
-                                                      .read<AddMessageCubit>()
-                                                      .addMessage(ChatMessage(
-                                                        messageContent: '',
-                                                        messageType: 'sender',
-                                                        msgStatus: 'send',
-                                                        time: getCurrentTime(),
-                                                        type: MessageType.doc,
-                                                        docName:
-                                                            widget.names![i],
-                                                      ));
-                                                }
-                                                widget.names!.clear();
-                                                Navigator.pop(context);
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text(
-                                                'Send',
-                                                style: TextStyle(
-                                                  color: Color(0xFF368C4E),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
+                                                SizedBox(width: 35.w),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    for (var i = 0;
+                                                        i <
+                                                            widget
+                                                                .names!.length;
+                                                        i++) {
+                                                      context
+                                                          .read<
+                                                              AddMessageCubit>()
+                                                          .addMessage(
+                                                              ChatMessage(
+                                                            messageContent: '',
+                                                            messageType:
+                                                                'sender',
+                                                            msgStatus: 'send',
+                                                            time:
+                                                                getCurrentTime(),
+                                                            type:
+                                                                MessageType.doc,
+                                                            docName: widget
+                                                                .names![i],
+                                                          ));
+                                                    }
+                                                    widget.names!.clear();
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(
+                                                    'Send',
+                                                    style: TextStyle(
+                                                      color: Color(0xFF368C4E),
+                                                      fontSize: 16,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 15)
+                                                SizedBox(width: 15)
+                                              ],
+                                            )
                                           ],
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Image.asset('assets/attach.png'),
-                            ),
-                          )
-                        ],
-                      ),
+                                        );
+                                      });
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.lightgrey1,
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Image.asset('assets/attach.png'),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 28)
+                      ],
                     ),
-                    SizedBox(height: 28)
-                  ],
-                ),
-              ),
-            ),
+                  ),
+                )
+              : Container(),
     );
   }
 }

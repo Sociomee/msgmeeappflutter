@@ -38,15 +38,23 @@ class _SplashScreenState extends State<SplashScreen>
         animation: _animationcontroller,
         builder: (context, child) {
           return Scaffold(
-            body: Center(
-              child: FadeTransition(
-                opacity: _animation,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset('assets/msgmee_logo.png',
-                        height: 114, width: 114)
-                  ],
+            body: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/onboarding_bg.png'))),
+              child: Center(
+                child: FadeTransition(
+                  opacity: _animation,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/msgmee_logo.png',
+                          height: 114, width: 114)
+                    ],
+                  ),
                 ),
               ),
             ),
