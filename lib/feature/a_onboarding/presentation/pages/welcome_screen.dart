@@ -28,6 +28,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(height: 40.h),
                 Image.asset('assets/msgmee_logo.png',
                     height: 128, width: 136, fit: BoxFit.cover),
+                SizedBox(height: 20),
                 Text(
                   'MsgMee',
                   textAlign: TextAlign.center,
@@ -48,20 +49,24 @@ class WelcomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  '"Connect, chat, and share with Msgme, uniting\nthe world through messages."',
-                  style: TextStyle(
-                    color: Color(0xFF828282),
-                    fontSize: 15,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.32,
+                SizedBox(
+                  width: 300.w,
+                  child: Text(
+                    '"Connect, chat, and share with Msgme, uniting the world through messages."',
+                    style: TextStyle(
+                      color: Color(0xFF828282),
+                      fontSize: 15,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: -0.32,
+                    ),
                   ),
                 ),
                 Spacer(),
                 CustomButtonWidget(
                     title: 'Accept terms & Conditions',
                     color: AppColors.darkbtnColor,
+                    fontsize: 18,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
                     }),

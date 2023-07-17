@@ -110,19 +110,20 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                   LengthLimitingTextInputFormatter(10),
                 ],
                 decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(3),
-                          bottomRight: Radius.circular(3))),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(3),
-                          bottomRight: Radius.circular(3)),
-                      borderSide:
-                          BorderSide(width: 2, color: AppColors.primaryColor)),
-                  hintText: 'Enter your mobile number',
-                ),
+                    contentPadding:
+                        EdgeInsets.only(top: 5, bottom: 5, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(3),
+                            bottomRight: Radius.circular(3))),
+                    focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(3),
+                            bottomRight: Radius.circular(3)),
+                        borderSide: BorderSide(
+                            width: 2, color: AppColors.primaryColor)),
+                    hintText: 'Enter your mobile number',
+                    hintStyle: TextStyle(color: AppColors.inactivegrey)),
                 onTap: () {
                   setState(() {
                     textFieldclick = true;

@@ -12,9 +12,14 @@ import '../../../widgets/chat_profile_widget.dart';
 import '../../../widgets/profile_image_view_dialog.dart';
 import '../../chat_screen/chat_screen.dart';
 
-class SocialchatWidget extends StatelessWidget {
+class SocialchatWidget extends StatefulWidget {
   const SocialchatWidget({super.key});
 
+  @override
+  State<SocialchatWidget> createState() => _SocialchatWidgetState();
+}
+
+class _SocialchatWidgetState extends State<SocialchatWidget> {
   @override
   Widget build(BuildContext context) {
     var selectcubit = context.watch<SelectedchatCubit>().state;
@@ -27,17 +32,32 @@ class SocialchatWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onLongPress: () {
-                  context.read<SelectedchatCubit>().select(index);
+                  if (!context
+                      .read<SelectedchatCubit>()
+                      .state
+                      .selectedchat
+                      .contains(index)) {
+                    context.read<SelectedchatCubit>().select(index);
+                  }
                 },
                 onTap: () {
-                  screenNavigator(
-                      context,
-                      ChatScreen(
-                        name: dummyData[index].name,
-                        imageUrl: dummyData[index].imageUrl,
-                        isOnline: dummyData[index].isOnline,
-                        hasStory: dummyData[index].hasStory,
-                      ));
+                  if (context
+                      .read<SelectedchatCubit>()
+                      .state
+                      .selectedchat
+                      .contains(index)) {
+                    context.read<SelectedchatCubit>().remove(index);
+                    setState(() {});
+                  } else {
+                    screenNavigator(
+                        context,
+                        ChatScreen(
+                          name: dummyData[index].name,
+                          imageUrl: dummyData[index].imageUrl,
+                          isOnline: dummyData[index].isOnline,
+                          hasStory: dummyData[index].hasStory,
+                        ));
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(

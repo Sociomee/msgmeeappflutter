@@ -64,12 +64,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                 appBar: AppBar(
                   leading: GestureDetector(
                     onTap: () {
-                      context.read<SelectedchatCubit>().remove();
+                      context.read<SelectedchatCubit>().removeall();
                     },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.black,
-                    ),
+                    child: Icon(Icons.arrow_back_ios, color: AppColors.black),
                   ),
                   titleSpacing: 0,
                   title: Text(
@@ -80,11 +77,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         .length
                         .toString(),
                     style: TextStyle(
-                      color: Color(0xFF4E4E4E),
-                      fontSize: 18,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
+                        color: Color(0xFF4E4E4E),
+                        fontSize: 18,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600),
                   ),
                   actions: [
                     GestureDetector(

@@ -10,7 +10,13 @@ class SelectedchatCubit extends Cubit<SelectedchatState> {
     emit(state.copyWith(selectedchat: [...state.selectedchat, index]));
   }
 
-  remove() {
+  remove(int index) {
+    List<int> removedList = state.selectedchat;
+    removedList.remove(index);
+    emit(state.copyWith(selectedchat: removedList));
+  }
+
+  removeall() {
     emit(state.copyWith(selectedchat: []));
   }
 
