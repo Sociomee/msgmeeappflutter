@@ -47,7 +47,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
               style: TextStyle(
                 color: AppColors.black,
               ))),
-      body: widget.pftname.isNotEmpty
+      body: widget.pftname.isNotEmpty && widget.names == null
           ? Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -161,7 +161,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                 ),
               ),
             )
-          : widget.names != null && widget.names!.length > 1
+          : widget.names != null
               ? Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
