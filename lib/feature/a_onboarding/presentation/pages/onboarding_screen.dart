@@ -17,8 +17,15 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final pagecontroller = PageController();
+  late PageController pagecontroller;
   bool isLastPage = false;
+
+  @override
+  void initState() {
+    pagecontroller = PageController();
+    super.initState();
+  }
+
   @override
   void dispose() {
     pagecontroller.dispose();
