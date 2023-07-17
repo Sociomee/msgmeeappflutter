@@ -227,6 +227,18 @@ class _OtpScreenState extends State<OtpScreen> {
                   },
                   pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                   showCursor: true,
+                  onChanged: (pin) {
+                    print(pin.isEmpty);
+                    if (pin.isNotEmpty && pin.length == 6) {
+                      setState(() {
+                        isValid = true;
+                      });
+                    } else if (pin.isEmpty) {
+                      setState(() {
+                        isValid = false;
+                      });
+                    }
+                  },
                   onCompleted: (pin) {
                     setState(() {
                       isValid = true;

@@ -43,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Icon(
             Icons.arrow_back,
             color: AppColors.black,
+            size: 30,
           ),
         ),
         bottom: PreferredSize(
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.w500,
                     color: context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.darkbtnColor
-                        : AppColors.grey),
+                        : AppColors.inactivegrey),
               ),
             ),
           )
