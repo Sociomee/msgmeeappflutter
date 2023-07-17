@@ -36,6 +36,12 @@ class _OtpScreenState extends State<OtpScreen> {
     timer = Timer.periodic(Duration(seconds: 1), (timer) => removeTime());
   }
 
+  void resetTimer() {
+    setState(() {
+      duration = Duration(seconds: 20);
+    });
+  }
+
   final formKey = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
 
@@ -44,7 +50,6 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-
     startTimer();
   }
 
@@ -279,7 +284,9 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(height: 24),
               sec == '00'
                   ? GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        resetTimer();
+                      },
                       child: Center(
                         child: Text(
                           'Resend OTP',
