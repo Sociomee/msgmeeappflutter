@@ -278,16 +278,19 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               SizedBox(height: 24),
               sec == '00'
-                  ? Center(
-                      child: Text(
-                        'Resend OTP',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF1976D2),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
+                  ? GestureDetector(
+                      onTap: () {},
+                      child: Center(
+                        child: Text(
+                          'Resend OTP',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF1976D2),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     )

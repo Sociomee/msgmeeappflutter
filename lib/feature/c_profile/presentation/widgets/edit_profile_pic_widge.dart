@@ -108,11 +108,16 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                                   topRight: Radius.circular(20))),
                           builder: (context) {
                             return CustomBottomModelSheet(
+                              title: 'Select Your Profile Image ',
+                              subheading:
+                                  'Use DP, camera or select file from device Gallery.',
                               cameraClick: () {
                                 pickCprofilePic();
+                                Navigator.pop(context);
                               },
                               galleryClick: () {
                                 pickGprofilePic();
+                                Navigator.pop(context);
                               },
                             );
                           });

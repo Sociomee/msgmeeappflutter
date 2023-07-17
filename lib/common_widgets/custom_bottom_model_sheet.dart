@@ -3,10 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class CustomBottomModelSheet extends StatelessWidget {
-  const CustomBottomModelSheet(
-      {super.key, required this.cameraClick, required this.galleryClick});
+  const CustomBottomModelSheet({
+    super.key,
+    required this.cameraClick,
+    required this.galleryClick,
+    this.title,
+    this.subheading,
+  });
   final VoidCallback cameraClick;
   final VoidCallback galleryClick;
+  final String? title;
+  final String? subheading;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,12 +30,12 @@ class CustomBottomModelSheet extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'Select Media From?',
+            title ?? 'Select Media From?',
             textScaleFactor: 1.0,
             style: TextStyle(fontSize: 16.sp),
           ),
           Text(
-            'Use camera or select file from device gallery',
+            subheading ?? 'Use camera or select file from device gallery',
             textScaleFactor: 1.0,
             style: TextStyle(
                 fontSize: 12.sp, color: Color.fromARGB(255, 109, 109, 109)),
@@ -47,7 +54,8 @@ class CustomBottomModelSheet extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: AppColors.lightgrey.withOpacity(.4),
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.lightgrey.withOpacity(.5),
@@ -56,7 +64,6 @@ class CustomBottomModelSheet extends StatelessWidget {
                             spreadRadius: 0,
                           )
                         ],
-                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(Icons.camera_alt, size: 30),
                     ),
