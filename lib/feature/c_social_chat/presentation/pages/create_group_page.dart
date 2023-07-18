@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/theme/colors.dart';
 
+import '../../../../common_widgets/custom_bottom_model_sheet.dart';
 import '../../../../data/model/group_participants_model.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../c_profile/presentation/widgets/text_field_widget.dart';
@@ -17,11 +21,32 @@ class CreateGroupPage extends StatefulWidget {
 class _CreateGroupPageState extends State<CreateGroupPage> {
   late TextEditingController nameController;
   late TextEditingController summeyConroller;
+  final ImagePicker _picker = ImagePicker();
   bool isValid = false;
-
+  File? imageFile;
   int remainchar = 64;
   int desc = 150;
   bool isSelected = false;
+  void pickGprofilePic() async {
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        imageFile = File(image.path);
+      });
+    }
+  }
+
+  void pickCprofilePic() async {
+    // Capture a photo
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      setState(() {
+        imageFile = File(photo.path);
+      });
+    }
+  }
+
   @override
   void initState() {
     nameController = TextEditingController();
@@ -68,40 +93,84 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                     'Group Image',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(
-                    'Add',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: AppColors.primaryColor),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20))),
+                          builder: (context) {
+                            return CustomBottomModelSheet(
+                              cameraClick: () {
+                                pickCprofilePic();
+                              },
+                              galleryClick: () {
+                                pickGprofilePic();
+                              },
+                            );
+                          });
+                    },
+                    child: Text(
+                      'Add',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: AppColors.primaryColor),
+                    ),
                   )
                 ],
               ),
             ),
             Center(
-              child: Container(
-                  height: 120,
-                  width: 120,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 0),
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: AppColors.lightgrey)
-                      ],
-                      border: Border.all(color: AppColors.white, width: 5),
-                      borderRadius: BorderRadius.circular(200),
-                      color: const Color.fromARGB(255, 197, 197, 197)),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/group_img.svg',
-                      height: 58,
-                      width: 58,
-                      fit: BoxFit.cover,
-                    ),
-                  )),
+              child: imageFile != null
+                  ? Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 0),
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: AppColors.lightgrey)
+                          ],
+                          border: Border.all(color: AppColors.white, width: 5),
+                          borderRadius: BorderRadius.circular(200),
+                          color: const Color.fromARGB(255, 197, 197, 197)),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.file(
+                            File(
+                              imageFile!.path,
+                            ),
+                            fit: BoxFit.cover,
+                          )),
+                    )
+                  : Container(
+                      height: 120,
+                      width: 120,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 0),
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: AppColors.lightgrey)
+                          ],
+                          border: Border.all(color: AppColors.white, width: 5),
+                          borderRadius: BorderRadius.circular(200),
+                          color: const Color.fromARGB(255, 197, 197, 197)),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/group_img.svg',
+                          height: 58,
+                          width: 58,
+                          fit: BoxFit.cover,
+                        ),
+                      )),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -245,7 +314,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               child: CustomButtonWidget(
                 borderColor: AppColors.primaryColor,
                 // : AppColors.primaryColor.withOpacity(.5),
-                ontap: () {},
+                ontap: () {
+                  Navigator.pop(context);
+                },
                 title: 'CONTINUE',
                 color:
                     // context.watch<NumberValidationCubit>().state.isvalid

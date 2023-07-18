@@ -62,8 +62,13 @@ class _AttachContactPageState extends State<AttachContactPage> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+          ),
         ),
+        leadingWidth: 40,
+        titleSpacing: 5,
         title: Text(
             selected.isEmpty
                 ? 'Contact'

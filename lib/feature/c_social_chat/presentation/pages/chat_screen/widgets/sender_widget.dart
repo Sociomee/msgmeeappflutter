@@ -851,28 +851,49 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-    return Padding(
-      padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          type == MessageType.contact
-              ? contactMessage
-              : type == MessageType.audio
-                  ? audioMessage
-                  : type == MessageType.doc
-                      ? docMessage
-                      : type == MessageType.image
-                          ? imageMessage
-                          : type == MessageType.location
-                              ? locationMessage
-                              : type == MessageType.multipleImage
-                                  ? multipleImageMessage
-                                  : type == MessageType.multiplecontact
-                                      ? contactMessage
-                                      : messageTextGroup,
-        ],
-      ),
-    );
+    switch (type) {
+      case MessageType.contact:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: contactMessage,
+        );
+      case MessageType.audio:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: audioMessage,
+        );
+      case MessageType.doc:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: docMessage,
+        );
+      case MessageType.image:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: imageMessage,
+        );
+      case MessageType.location:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: locationMessage,
+        );
+      case MessageType.multipleImage:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: multipleImageMessage,
+        );
+      case MessageType.multiplecontact:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: contactMessage,
+        );
+      case MessageType.text:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: messageTextGroup,
+        );
+      default:
+        return Container();
+    }
   }
 }
