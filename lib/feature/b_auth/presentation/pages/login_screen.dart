@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               });
         } else if (state.status == LoginStatus.loaded) {
-          animatedScreenNavigator(
+          animatedScreenReplaceNavigator(
               context, OtpScreen(number: numberController.text));
         }
       },
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (context.read<NumberValidationCubit>().state.isvalid) {
                         context
                             .read<AuthCubit>()
-                            .sendOtp(numberController.text);
+                            .sendOtp("+91${numberController.text}");
                       }
                     }),
                 SizedBox(height: 32),
