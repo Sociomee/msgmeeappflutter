@@ -11,6 +11,7 @@ import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../data/model/chat_model.dart';
 import '../../cubit/chat_theme/chat_theme_cubit.dart';
+import '../chat_screen/widgets/message_status_widget.dart';
 import '../chat_screen/widgets/message_type.dart';
 
 List<ChatMessage> messages = [
@@ -86,13 +87,14 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                         child: Row(
                           children: [
                             Icon(Icons.arrow_back_ios,
                                 color: AppColors.black, size: 15),
                             CircleAvatar(
-                                radius: 18,
+                                radius: 16,
                                 backgroundColor: AppColors.grey,
                                 backgroundImage: NetworkImage(imageurl)),
                             SizedBox(width: 8),
@@ -102,26 +104,26 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               children: [
                                 Text('Abriella Bond',
                                     style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 12,
                                       color: AppColors.black,
                                       fontWeight: FontWeight.w500,
                                     )),
                                 SizedBox(height: 4),
                                 Text('Active Now',
                                     style: TextStyle(
-                                        fontSize: 11, color: AppColors.grey)),
+                                        fontSize: 10, color: AppColors.grey)),
                               ],
                             ),
                             Spacer(),
-                            Icon(Icons.videocam_outlined),
+                            Icon(Icons.videocam_outlined, size: 18),
                             SizedBox(width: 13),
-                            Icon(Icons.phone_outlined, size: 17),
+                            Icon(Icons.phone_outlined, size: 15),
                             SizedBox(width: 13),
-                            Icon(Icons.more_vert_outlined, size: 22)
+                            Icon(Icons.more_vert_outlined, size: 18)
                           ],
                         ),
                       ),
-                      Divider(color: AppColors.grey, thickness: 1, height: 0),
+                      Divider(color: AppColors.grey, thickness: .3, height: 0),
                       Stack(
                         children: [
                           context.watch<SetChatbgCubit>().state.bgType ==
@@ -259,25 +261,15 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                               right: 18,
                                                               bottom: 5),
                                                       decoration: BoxDecoration(
-                                                        color: context
-                                                            .watch<
-                                                                ChatThemeCubit>()
-                                                            .state
-                                                            .chatDeepColor,
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .only(
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  12),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  12),
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  12),
-                                                        ),
-                                                      ),
+                                                          color: context
+                                                              .watch<
+                                                                  ChatThemeCubit>()
+                                                              .state
+                                                              .chatDeepColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      12)),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
@@ -333,6 +325,20 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                           )
                                                         ],
                                                       )),
+                                                  Positioned(
+                                                    bottom: -1,
+                                                    right: -1,
+                                                    child: messages[index]
+                                                                .msgStatus ==
+                                                            'read'
+                                                        ? MessageStatus.read
+                                                        : messages[index]
+                                                                    .msgStatus ==
+                                                                'send'
+                                                            ? MessageStatus.sent
+                                                            : MessageStatus
+                                                                .delivered,
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -344,7 +350,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ),
                         ],
                       ),
-                      Divider(color: AppColors.grey, thickness: 1, height: 0),
+                      Spacer(),
+                      Divider(color: AppColors.grey, thickness: .7, height: 0),
                       SizedBox(height: 10),
                       Row(
                         children: [
@@ -372,7 +379,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ),
                           SizedBox(width: 10),
                           Container(
-                            padding: EdgeInsets.all(2.w),
+                            padding: EdgeInsets.all(5.w),
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: AppColors.grey.withOpacity(.4)),
@@ -408,6 +415,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),
