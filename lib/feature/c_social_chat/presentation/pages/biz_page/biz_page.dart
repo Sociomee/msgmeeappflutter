@@ -52,7 +52,7 @@ class BizPageTab extends StatelessWidget {
                               bizpage[index].title,
                               style: TextStyle(
                                 color: AppColors.black,
-                                fontSize: 16,
+                                fontSize: 15.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -64,7 +64,7 @@ class BizPageTab extends StatelessWidget {
                                   bizpage[index].industry,
                                   style: TextStyle(
                                     color: Color(0xFF333333),
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -77,7 +77,7 @@ class BizPageTab extends StatelessWidget {
                                   bizpage[index].followers,
                                   style: TextStyle(
                                     color: Color(0xFF81C14B),
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w500,
                                   ),

@@ -235,7 +235,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                       Tab(
                                         icon: Text(
                                           'Biz Page',
-                                          style: TextStyle(fontSize: 17),
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                       ),
                                       Tab(

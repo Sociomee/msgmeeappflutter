@@ -97,11 +97,14 @@ class _BroadCastListState extends State<BroadCastList> {
                       }
                     },
                     onLongPress: () {
-                      setState(() {
-                        selectedindex.add(index);
-                      });
+                      if (selectedindex.length < 9) {
+                        setState(() {
+                          selectedindex.add(index);
+                        });
+                      }
                     },
                     child: Container(
+                      width: MediaQuery.of(context).size.width,
                       color: selectedindex.contains(index)
                           ? AppColors.primaryColor.withOpacity(.1)
                           : selectedindex.contains(index)

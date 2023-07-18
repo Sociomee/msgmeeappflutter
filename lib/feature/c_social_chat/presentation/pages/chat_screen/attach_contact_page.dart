@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -124,7 +125,16 @@ class _AttachContactPageState extends State<AttachContactPage> {
                   decoration: InputDecoration(
                       hintText: 'Search contacts',
                       contentPadding: EdgeInsets.only(top: 13),
-                      prefixIcon: Icon(Icons.search, color: AppColors.grey),
+                      prefixIcon: SizedBox(
+                        height: 12.h,
+                        width: 12.w,
+                        child: Center(
+                          child: SvgPicture.asset(
+                            'assets/Search.svg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                       border: InputBorder.none))),
           Divider(height: 0, color: AppColors.grey, thickness: .7),
           ListView.builder(
