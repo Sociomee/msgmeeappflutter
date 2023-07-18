@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/b_auth/presentation/cubit/authentication/auth_cubit.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
@@ -19,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController numberController;
   bool textFieldclick = false;
   String error = '';
-
+  final GlobalKey<State> alertDialogKey = GlobalKey<State>();
   @override
   void initState() {
     numberController = TextEditingController();
@@ -34,120 +35,143 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: AppColors.black,
-            size: 30,
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.status == LoginStatus.loading) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.darkbtnColor)),
+                    ],
+                  ),
+                );
+              });
+        } else if (state.status == LoginStatus.loaded) {
+          animatedScreenNavigator(
+              context, OtpScreen(number: numberController.text));
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back, color: AppColors.black, size: 30),
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(6.0),
+              child: LinearProgressIndicator(
+                backgroundColor: AppColors.white,
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(AppColors.darkbtnColor),
+                value: context.watch<NumberValidationCubit>().state.isvalid
+                    ? 0.25
+                    : 0,
+              ),
+            ),
+            elevation: 2,
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  context.read<NumberValidationCubit>().state.isvalid
+                      ? showDialog(
+                          context: context,
+                          builder: (context) {
+                            return NumberConfirmationDialog(
+                                inputNumber: numberController.text);
+                          })
+                      : null;
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0, right: 10),
+                  child: Text(
+                    'GET OTP',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        color:
+                            context.watch<NumberValidationCubit>().state.isvalid
+                                ? AppColors.darkbtnColor
+                                : AppColors.inactivegrey),
+                  ),
+                ),
+              )
+            ],
           ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(6.0),
-          child: LinearProgressIndicator(
-            backgroundColor: AppColors.white,
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkbtnColor),
-            value:
-                context.watch<NumberValidationCubit>().state.isvalid ? 0.25 : 0,
-          ),
-        ),
-        elevation: 2,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              context.read<NumberValidationCubit>().state.isvalid
-                  ? showDialog(
-                      context: context,
-                      builder: (context) {
-                        return NumberConfirmationDialog(
-                            inputNumber: numberController.text);
-                      })
-                  : null;
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0, right: 10),
-              child: Text(
-                'GET OTP',
-                style: TextStyle(
-                    fontSize: 17,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 26),
+                Text(
+                  'Enter your \nPhone Number',
+                  style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 24,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
+                    letterSpacing: -0.32,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'OTP will be sent to this number',
+                  style: TextStyle(
+                    color: Color(0xFF828282),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.32,
+                  ),
+                ),
+                SizedBox(height: 16),
+                CountryCodeTextField(controller: numberController),
+                Spacer(),
+                CustomButtonWidget(
+                    title: 'Get OTP',
+                    fontsize: 18,
                     color: context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.darkbtnColor
-                        : AppColors.inactivegrey),
-              ),
-            ),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 26),
-            Text(
-              'Enter your \nPhone Number',
-              style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 24,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.32,
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'OTP will be sent to this number',
-              style: TextStyle(
-                color: Color(0xFF828282),
-                fontSize: 15,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-                letterSpacing: -0.32,
-              ),
-            ),
-            SizedBox(height: 16),
-            CountryCodeTextField(controller: numberController),
-            Spacer(),
-            CustomButtonWidget(
-                title: 'Get OTP',
-                fontsize: 18,
-                color: context.watch<NumberValidationCubit>().state.isvalid
-                    ? AppColors.darkbtnColor
-                    : AppColors.inactivegrey,
-                borderColor:
-                    context.watch<NumberValidationCubit>().state.isvalid
-                        ? AppColors.darkbtnColor
                         : AppColors.inactivegrey,
-                ontap: () {
-                  context.read<NumberValidationCubit>().state.isvalid
-                      ? screenNavigator(
-                          context, OtpScreen(number: numberController.text))
-                      : null;
-                }),
-            SizedBox(height: 32),
-            Center(
-              child: Text(
-                ' Terms of Services & Privacy Policy.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF368C4E),
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.underline,
+                    borderColor:
+                        context.watch<NumberValidationCubit>().state.isvalid
+                            ? AppColors.darkbtnColor
+                            : AppColors.inactivegrey,
+                    ontap: () {
+                      if (context.read<NumberValidationCubit>().state.isvalid) {
+                        context
+                            .read<AuthCubit>()
+                            .sendOtp(numberController.text);
+                      }
+                    }),
+                SizedBox(height: 32),
+                Center(
+                  child: Text(' Terms of Services & Privacy Policy.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color(0xFF368C4E),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline)),
                 ),
-              ),
+                SizedBox(height: 51)
+              ],
             ),
-            SizedBox(height: 51)
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
