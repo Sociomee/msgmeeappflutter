@@ -71,6 +71,7 @@ dependencies:
     git:
       url: https://github.com/DeveloperMalay/stories_editor
   country_picker: ^2.0.20
+  freezed: ^2.4.1
   
   
 
