@@ -4,19 +4,24 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../common_cubits/custom_error.dart';
 import '../../../../../data/repository/auth/auth_repository.dart';
+import '../otp_send/otp_send_cubit.dart';
 
-part 'auth_state.dart';
+part 'otp_verify_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthState.initial());
+class OtpVerifyCubit extends Cubit<OtpVerifyState> {
+  OtpVerifyCubit() : super(OtpVerifyState.initial());
 
-  Future<void> sendOtp(String phone) async {
+  Future<void> verifyUserOtp(String phone, String otp) async {
     emit(state.copyWith(status: LoginStatus.loading));
     Dio dio = Dio();
     var auth = AuthService(dio);
     try {
-      var res = await auth.sendOtp(phone);
-      emit(state.copyWith(status: LoginStatus.loaded));
+      var res = await auth.verifyOtp(phone, otp);
+      if (res) {
+        emit(state.copyWith(status: LoginStatus.loaded));
+      } else {
+        emit(state.copyWith(status: LoginStatus.error));
+      }
       print(res);
     } on CustomError catch (e) {
       emit(state.copyWith(status: LoginStatus.error, error: e));

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/feature/b_auth/presentation/cubit/authentication/auth_cubit.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../helper/navigator_function.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
+import '../cubit/otp_send/otp_send_cubit.dart';
 import '../widgets/country_code.dart';
 import 'otp_screen.dart';
 
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<OtpSendCubit, OtpSendState>(
       listener: (context, state) {
         if (state.status == LoginStatus.loading) {
           showDialog(
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ontap: () {
                       if (context.read<NumberValidationCubit>().state.isvalid) {
                         context
-                            .read<AuthCubit>()
+                            .read<OtpSendCubit>()
                             .sendOtp("+91${numberController.text}");
                       }
                     }),

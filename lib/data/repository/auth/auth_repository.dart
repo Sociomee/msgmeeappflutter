@@ -23,7 +23,21 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<void> verigyOtp() {
-    throw UnimplementedError();
+  Future<bool> verifyOtp(String phone, String otp) async {
+    try {
+      final response = await dio.post('$baseUrl/auth/verify-otp', data: {
+        "phone": phone,
+        "deviceId": phone,
+        "otp": otp,
+      });
+      if (response.statusCode == 200) {
+        print("data --->${response.data['success']}");
+        return response.data['success'];
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
   }
 }
