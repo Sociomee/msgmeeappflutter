@@ -72,7 +72,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
         title: Text(
             selected.isEmpty
                 ? 'Contact'
-                : 'Contact (${selected.length} Selected)',
+                : 'Contact (${selected.length} selected)',
             style: TextStyle(
               color: AppColors.black,
               fontSize: 18,
