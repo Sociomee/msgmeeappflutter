@@ -92,7 +92,11 @@ class _OtpScreenState extends State<OtpScreen> {
                 );
               });
         } else if (state.status == LoginStatus.loaded) {
-          animatedScreenReplaceNavigator(context, NameScreen());
+          animatedScreenReplaceNavigator(
+              context,
+              NameScreen(
+                phone: widget.number,
+              ));
         }
       },
       builder: (context, state) {
@@ -123,7 +127,7 @@ class _OtpScreenState extends State<OtpScreen> {
               GestureDetector(
                 onTap: () {
                   if (isValid && _otpController.length == 6) {
-                    screenNavigator(context, const NameScreen());
+                    screenNavigator(context, NameScreen(phone: widget.number));
                   }
                 },
                 child: Padding(

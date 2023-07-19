@@ -40,4 +40,25 @@ class AuthService implements AuthRepository {
       return false;
     }
   }
+
+  @override
+  Future<bool> createUser(String phone, String name) async {
+    try {
+      final response = await dio.post('$baseUrl/users/createUser', data: {
+        "phone": phone,
+        "__v": 0,
+        "name": name,
+        "profilePic": "pfp.pngs"
+      });
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print(response);
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }
