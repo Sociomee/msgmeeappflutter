@@ -102,10 +102,12 @@ class _GroupListState extends State<GroupList> {
                       }
                     },
                     onLongPress: () {
-                      setState(() {
-                        selectMode = !selectMode;
-                        selectedindex.add(index);
-                      });
+                      if (selectedindex.length < 9 &&
+                          !selectedindex.contains(index))
+                        setState(() {
+                          selectMode = !selectMode;
+                          selectedindex.add(index);
+                        });
                     },
                     child: Container(
                       color: selectedindex.contains(index)
