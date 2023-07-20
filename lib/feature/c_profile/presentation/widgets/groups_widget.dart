@@ -39,7 +39,7 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                     Text(
                       'My Groups (3)',
                       style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: AppColors.black),
                     ),
@@ -62,7 +62,8 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                         animatedScreenNavigator(context, GroupList());
                       },
                       child: Text('See More',
-                          style: TextStyle(fontSize: 16, color: Colors.blue)),
+                          style:
+                              TextStyle(fontSize: 15.sp, color: Colors.blue)),
                     )
                   ],
                 ),

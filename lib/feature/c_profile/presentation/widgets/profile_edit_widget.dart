@@ -20,8 +20,8 @@ class ProfileEditWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                  height: 125,
-                  width: 125,
+                  height: 125.w,
+                  width: 125.w,
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
@@ -53,7 +53,7 @@ class ProfileEditWidget extends StatelessWidget {
               SizedBox(height: 10),
               Text('@shreya_singh012',
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54)),
               SizedBox(height: 10),
@@ -73,8 +73,8 @@ class ProfileEditWidget extends StatelessWidget {
                   animatedScreenNavigator(context, EditProfilePicWidget());
                 },
                 child: Text('Edit',
-                    style:
-                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+                    style: TextStyle(
+                        fontSize: 16.sp, color: AppColors.primaryColor)),
               ),
               SizedBox(height: 66)
             ],

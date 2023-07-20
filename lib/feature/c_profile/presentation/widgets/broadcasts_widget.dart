@@ -40,7 +40,7 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                     Text(
                       'My Broadcasts (3)',
                       style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: AppColors.black),
                     ),
@@ -59,7 +59,8 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                         animatedScreenNavigator(context, BroadCastList());
                       },
                       child: Text('See More',
-                          style: TextStyle(fontSize: 16, color: Colors.blue)),
+                          style:
+                              TextStyle(fontSize: 15.sp, color: Colors.blue)),
                     )
                   ],
                 ),
@@ -80,37 +81,54 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                           children: [
                             Row(
                               mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
                                     onTap: () {},
                                     child: SvgPicture.asset(
-                                        'assets/broadcast.svg')),
+                                        'assets/broadcast.svg',
+                                        height: 45.h,
+                                        fit: BoxFit.cover)),
                                 SizedBox(width: 10.w),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        index == 1
-                                            ? "Eid Broadcast"
-                                            : index == 2
-                                                ? 'Diwali Broadcast'
-                                                : 'Christmas Broadcast',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 8),
-                                    Text(
-                                        'Alam, Saurabh, Taha Jamal, Anshuman...',
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            color: AppColors.grey)),
-                                  ],
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 195.w,
+                                        child: Text(
+                                            index == 1
+                                                ? "Eid Broadcast"
+                                                : index == 2
+                                                    ? 'Diwali Broadcast'
+                                                    : 'Christmas Broadcast',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w500)),
+                                      ),
+                                      SizedBox(height: 8),
+                                      SizedBox(
+                                        child: Text(
+                                            'Alam, Saurabh, Taha Jamal, Anshuman...',
+                                            style: TextStyle(
+                                                fontSize: 13.sp,
+                                                color: AppColors.grey)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Spacer(),
-                                Text('2w ago',
-                                    style: TextStyle(
-                                        fontSize: 13, color: AppColors.grey)),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text('2w ago',
+                                      style: TextStyle(
+                                          fontSize: 11.sp,
+                                          color: AppColors.grey)),
+                                ),
                               ],
                             ),
                             index == 2

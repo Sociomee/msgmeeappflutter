@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'choose_date_of_birth.dart';
@@ -21,7 +22,8 @@ class PersonalDetailsWidget extends StatelessWidget {
               Icon(Icons.description_outlined),
               SizedBox(width: 5),
               Text('Bio',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
               Spacer(),
               GestureDetector(
                 onTap: () {
@@ -36,8 +38,8 @@ class PersonalDetailsWidget extends StatelessWidget {
                       });
                 },
                 child: Text('Edit',
-                    style:
-                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+                    style: TextStyle(
+                        fontSize: 16.sp, color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -51,7 +53,14 @@ class PersonalDetailsWidget extends StatelessWidget {
                 color: AppColors.grey.withOpacity(.1),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
-                'Norem ipsum dolor sit amet, consectetur adipiscing elit.\nNunc vulputate libero et velit.'),
+              'Norem ipsum dolor sit amet, consectetur adipiscing elit.Nunc vulputate libero et velit.',
+              style: TextStyle(
+                color: Color(0xFF333333),
+                fontSize: 12.sp,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
         ),
         SizedBox(height: 20),
@@ -65,7 +74,8 @@ class PersonalDetailsWidget extends StatelessWidget {
               ),
               SizedBox(width: 5),
               Text('Mobile Number',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
             ],
           ),
         ),
@@ -78,7 +88,18 @@ class PersonalDetailsWidget extends StatelessWidget {
                 color: AppColors.grey.withOpacity(.1),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
-              children: [Text('+91 4546431585'), Spacer()],
+              children: [
+                Text(
+                  '+91 4546431585',
+                  style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 12.sp,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Spacer()
+              ],
             ),
           ),
         ),
@@ -90,7 +111,8 @@ class PersonalDetailsWidget extends StatelessWidget {
               SvgPicture.asset('assets/account_circle.svg'),
               SizedBox(width: 5),
               Text('Gender',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
             ],
           ),
         ),
@@ -103,7 +125,18 @@ class PersonalDetailsWidget extends StatelessWidget {
                 color: AppColors.grey.withOpacity(.1),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
-              children: [Text('Female'), Spacer()],
+              children: [
+                Text(
+                  'Female',
+                  style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 12.sp,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Spacer()
+              ],
             ),
           ),
         ),
@@ -115,7 +148,8 @@ class PersonalDetailsWidget extends StatelessWidget {
               SvgPicture.asset('assets/event.svg'),
               SizedBox(width: 5),
               Text('Date Of Birth',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
               Spacer(),
               GestureDetector(
                 onTap: () {
@@ -130,8 +164,8 @@ class PersonalDetailsWidget extends StatelessWidget {
                       });
                 },
                 child: Text('Edit',
-                    style:
-                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+                    style: TextStyle(
+                        fontSize: 16.sp, color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -145,7 +179,18 @@ class PersonalDetailsWidget extends StatelessWidget {
                 color: AppColors.grey.withOpacity(.1),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
-              children: [Text('16/03/2022'), Spacer()],
+              children: [
+                Text(
+                  '16/03/2022',
+                  style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 12.sp,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Spacer()
+              ],
             ),
           ),
         ),
@@ -157,7 +202,8 @@ class PersonalDetailsWidget extends StatelessWidget {
               SvgPicture.asset('assets/heart_plus.svg'),
               SizedBox(width: 5),
               Text('Interests',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
               Spacer(),
               GestureDetector(
                 onTap: () {
@@ -172,8 +218,8 @@ class PersonalDetailsWidget extends StatelessWidget {
                       });
                 },
                 child: Text('Edit',
-                    style:
-                        TextStyle(fontSize: 16, color: AppColors.primaryColor)),
+                    style: TextStyle(
+                        fontSize: 16.sp, color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -201,7 +247,12 @@ class PersonalDetailsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text('Sleeping',
-                              style: TextStyle(color: AppColors.white)),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15.sp,
+                                fontFamily: 'DM Sans',
+                                fontWeight: FontWeight.w700,
+                              )),
                           Icon(Icons.close, color: AppColors.white)
                         ],
                       ),
@@ -217,7 +268,12 @@ class PersonalDetailsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text('Photography',
-                              style: TextStyle(color: AppColors.white)),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15.sp,
+                                fontFamily: 'DM Sans',
+                                fontWeight: FontWeight.w700,
+                              )),
                           Icon(Icons.close, color: AppColors.white)
                         ],
                       ),
@@ -234,7 +290,13 @@ class PersonalDetailsWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Playing', style: TextStyle(color: AppColors.white)),
+                      Text('Playing',
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 15.sp,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w700,
+                          )),
                       Icon(Icons.close, color: AppColors.white)
                     ],
                   ),
