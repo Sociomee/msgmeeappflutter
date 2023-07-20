@@ -144,9 +144,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                           boxShadow: [
                             BoxShadow(
                                 offset: Offset(0, 0),
-                                spreadRadius: 2,
+                                spreadRadius: 0,
                                 blurRadius: 10,
-                                color: AppColors.lightgrey)
+                                color: AppColors.lightgrey.withOpacity(.7))
                           ],
                           border: Border.all(color: AppColors.white, width: 5),
                           borderRadius: BorderRadius.circular(200),
@@ -168,9 +168,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                           boxShadow: [
                             BoxShadow(
                                 offset: Offset(0, 0),
-                                spreadRadius: 2,
+                                spreadRadius: 0,
                                 blurRadius: 10,
-                                color: AppColors.lightgrey)
+                                color: AppColors.lightgrey.withOpacity(.7))
                           ],
                           border: Border.all(color: AppColors.white, width: 5),
                           borderRadius: BorderRadius.circular(200),

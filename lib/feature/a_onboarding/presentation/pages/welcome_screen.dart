@@ -17,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage('assets/onboarding_bg.png'),
+            image: AssetImage('assets/welcome_bg.png'),
             fit: BoxFit.cover,
           )),
           child: Padding(
@@ -27,14 +27,14 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 40.h),
                 Image.asset('assets/msgmee_logo.png',
-                    height: 128, width: 136, fit: BoxFit.cover),
-                SizedBox(height: 20),
+                    height: 128, width: 136.w, fit: BoxFit.cover),
+                SizedBox(height: 16.h),
                 Text(
                   'MsgMee',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF083A3D),
-                    fontSize: 36.27,
+                    fontSize: 36.27.sp,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
                   ),
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                   '"Welcome to Msgme, your\nglobal messaging\nplatform!"',
                   style: TextStyle(
                       color: Color(0xFF368C4E),
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600),
                 ),
@@ -66,18 +66,19 @@ class WelcomeScreen extends StatelessWidget {
                 CustomButtonWidget(
                     title: 'Accept terms & Conditions',
                     color: AppColors.darkbtnColor,
+                    borderColor: AppColors.darkbtnColor,
                     fontsize: 18.sp,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
                     }),
-                SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 Center(
                   child: Text(
                     'Terms of Services & Privacy Policy.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFF354052),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
                       decoration: TextDecoration.underline,
@@ -85,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 50)
+                SizedBox(height: 50.h)
               ],
             ),
           ),

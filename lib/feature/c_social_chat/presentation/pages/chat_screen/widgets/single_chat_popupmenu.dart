@@ -29,10 +29,7 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
   Widget build(BuildContext context) {
     return Container(
       child: PopupMenuButton(
-        icon: Icon(
-          Icons.more_vert,
-          color: Colors.black,
-        ),
+        icon: Icon(Icons.more_vert, color: Colors.black),
         offset: Offset(0, 30),
         color: Colors.white,
         itemBuilder: (context) {

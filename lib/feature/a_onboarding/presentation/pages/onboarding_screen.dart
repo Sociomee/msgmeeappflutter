@@ -19,6 +19,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   late PageController pagecontroller;
   bool isLastPage = false;
+  int pageIndex = 0;
 
   @override
   void initState() {
@@ -43,7 +44,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/onboarding_bg.png'))),
+                  image: pageIndex == 0
+                      ? AssetImage('assets/onboard_bg1.png')
+                      : pageIndex == 1
+                          ? AssetImage('assets/onboard_bg2.png')
+                          : AssetImage('assets/onboard_bg3.png')
+                  // image: AssetImage('assets/onboarding_bg.png'),
+                  )),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -54,6 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPageChanged: (index) {
                     setState(() {
                       isLastPage = index == 2;
+                      pageIndex = index;
                     });
                   },
                   children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back, color: AppColors.black, size: 30),
+              child: Icon(Icons.arrow_back, color: AppColors.black, size: 30.h),
             ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(6.0),
@@ -73,9 +74,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: AppColors.white,
                 valueColor:
                     AlwaysStoppedAnimation<Color>(AppColors.darkbtnColor),
-                value: context.watch<NumberValidationCubit>().state.isvalid
-                    ? 0.25
-                    : 0,
+                value:
+                    // context.watch<NumberValidationCubit>().state.isvalid
+                    // ?
+                    0.25
+                // : 0
+                ,
               ),
             ),
             elevation: 2,
@@ -96,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'GET OTP',
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                         color:
@@ -118,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Enter your \nPhone Number',
                   style: TextStyle(
                     color: Color(0xFF333333),
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
                     letterSpacing: -0.32,
@@ -129,18 +133,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   'OTP will be sent to this number',
                   style: TextStyle(
                     color: Color(0xFF828282),
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                     letterSpacing: -0.32,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 CountryCodeTextField(controller: numberController),
                 Spacer(),
                 CustomButtonWidget(
                     title: 'Get OTP',
-                    fontsize: 18,
+                    fontsize: 18.sp,
                     color: context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.darkbtnColor
                         : AppColors.inactivegrey,
@@ -155,18 +159,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             .sendOtp("+91${numberController.text}");
                       }
                     }),
-                SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 Center(
                   child: Text(' Terms of Services & Privacy Policy.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color(0xFF368C4E),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline)),
                 ),
-                SizedBox(height: 51)
+                SizedBox(height: 51.h)
               ],
             ),
           ),

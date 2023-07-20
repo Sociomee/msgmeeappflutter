@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../data/model/all_connections_model.dart';
 import '../../../../theme/colors.dart';
 import '../widgets/all_connections_widget.dart';
-import '../widgets/bottom_options_widget.dart';
 import '../widgets/invite_friends_list.dart';
+import '../widgets/social_bottom_model_sheet.dart';
+
+List<ChatOptionsModel> options = [
+  ChatOptionsModel(id: 1, option: 'All Contacts'),
+  ChatOptionsModel(id: 2, option: 'MsgMee Contacts'),
+  ChatOptionsModel(id: 3, option: 'SocioMee Users'),
+];
 
 class NewMessageScreen extends StatefulWidget {
   const NewMessageScreen({super.key});
@@ -15,6 +22,21 @@ class NewMessageScreen extends StatefulWidget {
 }
 
 class _NewMessageScreenState extends State<NewMessageScreen> {
+  late TextEditingController searchController;
+  List<AllConnectionsModel> filterdList = [];
+  @override
+  void initState() {
+    searchController = TextEditingController();
+    filterdList = List.from(dummyconnections);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +51,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
               child: Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.black,
+                size: 20.h,
               ),
             )),
         leadingWidth: 30.w,
@@ -42,15 +65,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
-              color: AppColors.black,
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -76,8 +90,22 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                   SizedBox(width: 20.w),
                   Expanded(
                     child: TextFormField(
+                      controller: searchController,
+                      onChanged: (value) {
+                        setState(() {
+                          if (value.isEmpty) {
+                            filterdList = List.from(dummyconnections);
+                          } else {
+                            filterdList = dummyconnections
+                                .where((model) => model.connectionName
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()))
+                                .toList();
+                          }
+                        });
+                      },
                       decoration: InputDecoration(
-                          hintText: 'Search ...',
+                          hintText: 'Search......',
                           hintStyle: TextStyle(
                             fontSize: 12.sp,
                             fontFamily: 'Niramit',
@@ -87,28 +115,57 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                           focusedBorder: InputBorder.none),
                     ),
                   ),
-                  IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(25.0),
-                              ),
-                            ),
-                            context: context,
-                            builder: (context) {
-                              return BottomOptionsWidget();
-                            });
-                      },
-                      icon: Icon(Icons.tune_outlined))
+                  PopupMenuButton(
+                    icon: SvgPicture.asset('assets/filter.svg'),
+                    offset: Offset(-20, 35),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    color: Colors.white,
+                    itemBuilder: (context) {
+                      return options
+                          .map(
+                            (e) => PopupMenuItem(
+                                value: e.id,
+                                child: Text(
+                                  e.option,
+                                  style: TextStyle(
+                                    color: Color(0xFF4E4E4E),
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )),
+                          )
+                          .toList();
+                    },
+                    onSelected: (value) {
+                      if (value == 1) {
+                        setState(() {
+                          filterdList = List.from(dummyconnections);
+                        });
+                      } else if (value == 2) {
+                        setState(() {
+                          filterdList = dummyconnections
+                              .where((model) => model.connectionType
+                                  .toLowerCase()
+                                  .contains('MsgMee'.toLowerCase()))
+                              .toList();
+                        });
+                      } else if (value == 3) {
+                        setState(() {
+                          filterdList = dummyconnections
+                              .where((model) => model.connectionType
+                                  .toLowerCase()
+                                  .contains('SocioMee'.toLowerCase()))
+                              .toList();
+                        });
+                      }
+                    },
+                  )
                 ],
               ),
             ),
-            Divider(
-              height: 0,
-              color: AppColors.grey,
-            ),
+            Divider(height: 0, color: AppColors.grey),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
               child: Column(
@@ -120,7 +177,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                         TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  AllconnectionsWidget(),
+                  AllconnectionsWidget(list: filterdList),
                   SizedBox(height: 30),
                   Text('Invite Friends',
                       style: TextStyle(

@@ -31,7 +31,7 @@ class ChatProfileWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 42.h,
+          top: 40.h,
           right: 0,
           child: isOnline
               ? Container(
