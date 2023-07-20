@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../data/model/all_connections_model.dart';
 import '../../../../theme/colors.dart';
 import '../widgets/all_connections_widget.dart';
+import '../widgets/contact_filtering_design.dart';
 import '../widgets/invite_friends_list.dart';
 import '../widgets/social_bottom_model_sheet.dart';
 
@@ -12,6 +13,35 @@ List<ChatOptionsModel> options = [
   ChatOptionsModel(id: 1, option: 'All Contacts'),
   ChatOptionsModel(id: 2, option: 'MsgMee Contacts'),
   ChatOptionsModel(id: 3, option: 'SocioMee Users'),
+];
+
+List<String> alphabats = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
 ];
 
 class NewMessageScreen extends StatefulWidget {
@@ -24,6 +54,9 @@ class NewMessageScreen extends StatefulWidget {
 class _NewMessageScreenState extends State<NewMessageScreen> {
   late TextEditingController searchController;
   List<AllConnectionsModel> filterdList = [];
+  bool show = false;
+  int currentindex = 0;
+  double top = 17;
   @override
   void initState() {
     searchController = TextEditingController();
@@ -78,15 +111,11 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    height: 17.h,
-                    width: 15.w,
-                    child: Center(
-                      child: SvgPicture.asset(
-                        'assets/Search.svg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                      height: 17.h,
+                      width: 15.w,
+                      child: Center(
+                          child: SvgPicture.asset('assets/Search.svg',
+                              fit: BoxFit.cover))),
                   SizedBox(width: 20.w),
                   Expanded(
                     child: TextFormField(
@@ -168,22 +197,84 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
             Divider(height: 0, color: AppColors.grey),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  Text(
-                    'All Connections',
-                    style:
-                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'All Connections',
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                              flex: 110,
+                              child: AllconnectionsWidget(list: filterdList)),
+                          SizedBox(width: 10),
+                          Expanded(
+                              flex: 1,
+                              child: ListView.separated(
+                                padding: EdgeInsets.all(0),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        currentindex = index;
+
+                                        show = !show;
+                                      });
+                                      print(alphabats[index]);
+                                    },
+                                    child: Container(
+                                      height: 3,
+                                      width: 3,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: AppColors.darkbtnColor),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return SizedBox(height: 23.h);
+                                },
+                                itemCount: 26,
+                              )),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Text('Invite Contacts',
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 24),
+                      InviteFriendsList()
+                    ],
                   ),
-                  SizedBox(height: 10),
-                  AllconnectionsWidget(list: filterdList),
-                  SizedBox(height: 30),
-                  Text('Invite Friends',
-                      style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 24),
-                  InviteFriendsList()
+                  show
+                      ? Positioned(
+                          top: top,
+                          right: 3,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                show = !show;
+                                filterdList = dummyconnections
+                                    .where((model) => model.connectionName
+                                        .toLowerCase()
+                                        .contains(alphabats[currentindex]
+                                            .toLowerCase()))
+                                    .toList();
+                              });
+                            },
+                            child: ContactFilteringDesign(
+                                text: alphabats[currentindex]),
+                          ))
+                      : Container()
                 ],
               ),
             ),

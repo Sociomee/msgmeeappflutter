@@ -11,6 +11,7 @@ class AllconnectionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(0),
         shrinkWrap: true,
         itemCount: list.length,
         itemBuilder: (context, index) {
@@ -24,17 +25,12 @@ class AllconnectionsWidget extends StatelessWidget {
                     isOnline: list[index].isOnline,
                     hasStory: false),
                 SizedBox(width: 12.w),
-                Text(
-                  list[index].connectionName,
-                  style: TextStyle(fontSize: 14.sp),
-                ),
+                Text(list[index].connectionName,
+                    style: TextStyle(fontSize: 14.sp)),
                 Spacer(),
                 list[index].connectionType == "SocioMee"
-                    ? SvgPicture.asset(
-                        'assets/sociomee.svg',
-                        height: 14.h,
-                        fit: BoxFit.cover,
-                      )
+                    ? SvgPicture.asset('assets/sociomee.svg',
+                        height: 14.h, fit: BoxFit.cover)
                     : Container(),
                 SizedBox(width: 5.w),
                 SvgPicture.asset('assets/msgmee.svg',

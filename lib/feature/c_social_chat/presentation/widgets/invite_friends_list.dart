@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../theme/colors.dart';
 
 List invitelist = [
@@ -55,11 +57,7 @@ class InviteFriendsList extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.person_add,
-                        color: AppColors.primaryColor,
-                        size: 16,
-                      ),
+                      SvgPicture.asset('assets/invite.svg', height: 16.h),
                       SizedBox(
                         width: 5,
                       ),
