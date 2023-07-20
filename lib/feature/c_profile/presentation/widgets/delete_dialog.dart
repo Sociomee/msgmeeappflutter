@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 
@@ -12,9 +13,9 @@ class DeleteDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'You are going to delete 9 selected\nGroups.\nAll data will be removed!',
+            'You are going to delete 9 selected Groups.All data will be removed!',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15.sp,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w400,
             ),
@@ -23,6 +24,7 @@ class DeleteDialogWidget extends StatelessWidget {
           CustomButtonWidget(
               title: 'Delete',
               color: AppColors.primaryColor,
+              fontsize: 15.sp,
               ontap: () {
                 Navigator.pop(context);
               }),
@@ -37,7 +39,7 @@ class DeleteDialogWidget extends StatelessWidget {
                 'Cancel',
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize: 16,
+                  fontSize: 15.sp,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
                 ),

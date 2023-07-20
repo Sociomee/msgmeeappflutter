@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
                     '"Connect, chat, and share with Msgme, uniting the world through messages."',
                     style: TextStyle(
                       color: Color(0xFF828282),
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
                       letterSpacing: -0.32,
@@ -66,7 +66,7 @@ class WelcomeScreen extends StatelessWidget {
                 CustomButtonWidget(
                     title: 'Accept terms & Conditions',
                     color: AppColors.darkbtnColor,
-                    fontsize: 18,
+                    fontsize: 18.sp,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
                     }),

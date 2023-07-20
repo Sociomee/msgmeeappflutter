@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/theme/colors.dart';
 
@@ -21,19 +22,34 @@ class _BroadCastListState extends State<BroadCastList> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.black,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20.w),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+            ),
           ),
         ),
+        leadingWidth: 40.w,
+        titleSpacing: 10.w,
         title: selectedindex.isNotEmpty
             ? Text(
                 '${selectedindex.length} Selected',
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18.sp,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               )
             : Text(
                 'My Broadcasts',
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18.sp,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
         actions: [
           selectedindex.isNotEmpty
@@ -45,20 +61,17 @@ class _BroadCastListState extends State<BroadCastList> {
                           return DeleteDialogWidget();
                         });
                   },
-                  child: Icon(Icons.delete, color: AppColors.black))
+                  child: Icon(Icons.delete, color: AppColors.black, size: 24.h))
               : Container(),
           PopupMenuButton<int>(
-              icon: Icon(
-                Icons.more_vert,
-                color: Colors.black,
-              ),
+              icon: Icon(Icons.more_vert, color: Colors.black, size: 24.h),
               itemBuilder: (context) {
                 return [
                   PopupMenuItem(
                     value: 1,
                     child: Text(
                       selectedindex.length != 9 ? 'Select all' : 'Deselect all',
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14.sp),
                     ),
                   ),
                 ];
@@ -120,8 +133,8 @@ class _BroadCastListState extends State<BroadCastList> {
                           children: [
                             selectedindex.contains(index)
                                 ? Container(
-                                    height: 65,
-                                    width: 65,
+                                    height: 60.w,
+                                    width: 60.w,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
@@ -129,7 +142,10 @@ class _BroadCastListState extends State<BroadCastList> {
                                     alignment: Alignment.center,
                                     child: Icon(Icons.check,
                                         color: AppColors.white, size: 30))
-                                : SvgPicture.asset('assets/broadcast.svg'),
+                                : SvgPicture.asset(
+                                    'assets/broadcast.svg',
+                                    width: 60.w,
+                                  ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Column(
@@ -142,12 +158,13 @@ class _BroadCastListState extends State<BroadCastList> {
                                               ? 'Diwali Broadcast'
                                               : 'Christmas Broadcast',
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w500)),
                                   SizedBox(height: 8),
                                   Text('Alam, Saurabh, Taha Jamal, Anshuman...',
                                       style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey)),
+                                          fontSize: 12.sp,
+                                          color: AppColors.grey)),
                                 ],
                               ),
                             ),
@@ -156,7 +173,7 @@ class _BroadCastListState extends State<BroadCastList> {
                               child: Text('2w ago',
                                   style: TextStyle(
                                     color: AppColors.black,
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     fontFamily: 'Niramit',
                                     fontWeight: FontWeight.w400,
                                   )),

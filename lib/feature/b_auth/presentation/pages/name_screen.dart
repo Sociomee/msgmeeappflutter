@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/b_auth/presentation/cubit/create_user/create_user_cubit.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../helper/navigator_function.dart';
@@ -19,6 +21,7 @@ class _NameScreenState extends State<NameScreen> {
   late TextEditingController nameController;
   bool isValid = false;
   final formKey = GlobalKey<FormState>();
+  int maxchar = 64;
   @override
   void initState() {
     super.initState();
@@ -143,6 +146,9 @@ class _NameScreenState extends State<NameScreen> {
                   TextFormField(
                     controller: nameController,
                     onChanged: (value) {
+                      setState(() {
+                        maxchar = 64 - nameController.length;
+                      });
                       if (value.isNotEmpty) {
                         setState(() {
                           isValid = true;
@@ -153,6 +159,9 @@ class _NameScreenState extends State<NameScreen> {
                         });
                       }
                     },
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(64),
+                    ],
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.lightgrey1,
@@ -177,7 +186,7 @@ class _NameScreenState extends State<NameScreen> {
                     children: [
                       Spacer(),
                       Text(
-                        'Max 64 Characters',
+                        'Max ${maxchar} Characters',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color(0xFF828282),
