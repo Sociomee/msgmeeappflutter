@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../theme/colors.dart';
 
 // ignore: must_be_immutable
@@ -31,7 +32,7 @@ class TextFieldWidget extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: AppColors.black, fontSize: 14, fontWeight: textWeight),
+              color: AppColors.black, fontSize: 14.sp, fontWeight: textWeight),
         ),
         const SizedBox(height: 12),
         TextFormField(
@@ -54,8 +55,8 @@ class TextFieldWidget extends StatelessWidget {
                   borderSide:
                       BorderSide(width: 2, color: AppColors.primaryColor)),
               hintText: hintText,
-              hintStyle: const TextStyle(
-                  color: AppColors.hinttextColor, fontSize: 14)),
+              hintStyle:
+                  TextStyle(color: AppColors.hinttextColor, fontSize: 14.sp)),
         ),
         showchar!
             ? Padding(
@@ -66,7 +67,7 @@ class TextFieldWidget extends StatelessWidget {
                     Text(
                       'Max 38 Characters',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: AppColors.black, fontSize: 12),
+                      style: TextStyle(color: AppColors.black, fontSize: 12.sp),
                     ),
                   ],
                 ),

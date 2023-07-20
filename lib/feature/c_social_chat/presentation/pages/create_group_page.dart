@@ -69,14 +69,25 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+              size: 24.h,
+            ),
           ),
         ),
+        leadingWidth: 50.w,
+        titleSpacing: 0,
         title: Text(
           'Create Group',
-          style: TextStyle(color: AppColors.black),
+          style: TextStyle(
+            color: AppColors.black,
+            fontSize: 18.sp,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -91,7 +102,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 children: [
                   Text(
                     'Group Image',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -116,7 +128,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                       'Add',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           color: AppColors.primaryColor),
                     ),
                   )
@@ -126,8 +138,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             Center(
               child: imageFile != null
                   ? Container(
-                      height: 120,
-                      width: 120,
+                      height: 120.w,
+                      width: 120.w,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -149,8 +161,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                           )),
                     )
                   : Container(
-                      height: 120,
-                      width: 120,
+                      height: 120.w,
+                      width: 120.w,
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           boxShadow: [
@@ -208,10 +220,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 remainChar: desc.toString(),
               ),
             ),
-            Divider(
-              thickness: 3,
-              height: 0,
-            ),
+            Divider(thickness: 3, height: 0),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
               child: Row(
@@ -219,7 +228,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 children: [
                   Text(
                     'Mute Notification',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                   ),
                   Checkbox(
                       shape: RoundedRectangleBorder(
@@ -242,7 +252,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20),
               child: Text('1 Member',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp)),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),

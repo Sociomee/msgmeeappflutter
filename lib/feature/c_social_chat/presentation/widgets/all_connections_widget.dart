@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import '../../../../data/model/all_connections_model.dart';
 import '../../../../theme/colors.dart';
@@ -22,24 +24,22 @@ class AllconnectionsWidget extends StatelessWidget {
                     imageUrl: dummyconnections[index].imageUrl,
                     isOnline: dummyconnections[index].isOnline,
                     hasStory: false),
-                SizedBox(
-                  width: 12,
-                ),
+                SizedBox(width: 12.w),
                 Text(
                   dummyconnections[index].connectionName,
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 14.sp),
                 ),
                 Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Text(
-                    dummyconnections[index].connectionType,
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.grey,
-                        fontWeight: FontWeight.w500),
-                  ),
-                )
+                dummyconnections[index].connectionType == "SocioMee"
+                    ? SvgPicture.asset(
+                        'assets/sociomee.svg',
+                        height: 14.h,
+                        fit: BoxFit.cover,
+                      )
+                    : Container(),
+                SizedBox(width: 5.w),
+                SvgPicture.asset('assets/msgmee.svg',
+                    height: 14.h, fit: BoxFit.cover),
               ],
             ),
           );

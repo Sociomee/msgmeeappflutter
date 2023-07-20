@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../theme/colors.dart';
 import '../widgets/all_connections_widget.dart';
@@ -22,13 +24,23 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
+            icon: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.black,
+              ),
             )),
+        leadingWidth: 30.w,
+        titleSpacing: 15.w,
         title: Text(
           'New message',
-          style: TextStyle(color: AppColors.black),
+          style: TextStyle(
+            color: AppColors.black,
+            fontSize: 18.sp,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           IconButton(
@@ -51,17 +63,26 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.search,
-                    color: AppColors.grey,
-                  ),
                   SizedBox(
-                    width: 26,
+                    height: 17.h,
+                    width: 15.w,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        'assets/Search.svg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
+                  SizedBox(width: 20.w),
                   Expanded(
                     child: TextFormField(
                       decoration: InputDecoration(
-                          hintText: 'search ...',
+                          hintText: 'Search ...',
+                          hintStyle: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: 'Niramit',
+                            fontWeight: FontWeight.w400,
+                          ),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none),
                     ),
@@ -95,14 +116,15 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                 children: [
                   Text(
                     'All Connections',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
                   AllconnectionsWidget(),
                   SizedBox(height: 30),
                   Text('Invite Friends',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeight.bold)),
                   SizedBox(height: 24),
                   InviteFriendsList()
                 ],
