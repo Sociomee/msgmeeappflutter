@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/theme/app_theme.dart';
+import 'common_cubits/reduce_number_cubit.dart';
 import 'feature/b_auth/presentation/cubit/create_user/create_user_cubit.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => SyncWithSociomee()),
             BlocProvider(create: (context) => OtpSendCubit()),
             BlocProvider(create: (context) => OtpVerifyCubit()),
-            BlocProvider(create: (context) => CreateUserCubit())
+            BlocProvider(create: (context) => CreateUserCubit()),
+            BlocProvider(create: (context) => ReduceNumberCubit()),
           ],
           child: MaterialApp(
             title: 'Msgmee App',

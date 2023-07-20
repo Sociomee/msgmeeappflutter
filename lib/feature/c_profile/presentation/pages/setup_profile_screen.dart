@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import '../../../../helper/responsive_text.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../../../b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import '../../../../theme/colors.dart';
@@ -138,6 +139,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 Center(
                   child: Text(
                     'Set your profile picture for an amazing experience.',
+                    textScaleFactor: 1,
                     style: TextStyle(
                       color: Color(0xFF828282),
                       fontSize: 13.sp,

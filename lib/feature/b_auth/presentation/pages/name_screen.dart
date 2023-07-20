@@ -143,7 +143,7 @@ class _NameScreenState extends State<NameScreen> {
                   TextFormField(
                     controller: nameController,
                     onChanged: (value) {
-                      if (value.isNotEmpty && value.length > 4) {
+                      if (value.isNotEmpty) {
                         setState(() {
                           isValid = true;
                         });

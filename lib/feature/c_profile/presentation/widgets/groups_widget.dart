@@ -77,8 +77,8 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                       onTap: () {},
                       splashColor: AppColors.seconderyColor,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 7),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12.w, vertical: 7),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -87,8 +87,30 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                               children: [
                                 InkWell(
                                     onTap: () {},
-                                    child:
-                                        SvgPicture.asset('assets/group.svg')),
+                                    child: index == 1
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Image.network(
+                                                'https://media.istockphoto.com/id/1082467846/photo/smiling-parents-with-two-children.jpg?s=612x612&w=0&k=20&c=U73LbULmJ7Gqt6jPtuZRL_--xw4lWSh24GIqCDSTkGI=',
+                                                height: 42.h,
+                                                width: 42.h,
+                                                fit: BoxFit.cover),
+                                          )
+                                        : index == 2
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                child: Image.network(
+                                                    'https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2ZmaWNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+                                                    height: 42.h,
+                                                    width: 42.h,
+                                                    fit: BoxFit.cover),
+                                              )
+                                            : SvgPicture.asset(
+                                                'assets/group.svg',
+                                                height: 42.h,
+                                                fit: BoxFit.cover)),
                                 SizedBox(width: 13.w),
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -101,12 +123,12 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                                                 ? 'Office Group'
                                                 : 'College Group',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.w500)),
                                     SizedBox(height: 8),
                                     Text('Members:33',
                                         style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 13.sp,
                                             color: AppColors.black)),
                                   ],
                                 ),
