@@ -271,7 +271,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           setState(() {
                             isValid = true;
                           });
-                        } else if (pin.isEmpty) {
+                        } else if (pin.length < 6) {
                           setState(() {
                             isValid = false;
                           });

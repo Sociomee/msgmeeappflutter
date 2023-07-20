@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                     title: 'Accept terms & Conditions',
                     color: AppColors.darkbtnColor,
                     borderColor: AppColors.darkbtnColor,
-                    fontsize: 18.sp,
+                    fontsize: 15.sp,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
                     }),

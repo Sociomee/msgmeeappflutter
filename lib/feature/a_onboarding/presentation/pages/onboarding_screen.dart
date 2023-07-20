@@ -43,14 +43,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: pageIndex == 0
-                      ? AssetImage('assets/onboard_bg1.png')
-                      : pageIndex == 1
-                          ? AssetImage('assets/onboard_bg2.png')
-                          : AssetImage('assets/onboard_bg3.png')
-                  // image: AssetImage('assets/onboarding_bg.png'),
-                  )),
+            fit: BoxFit.cover,
+            // image: pageIndex == 0
+            //     ? AssetImage('assets/onboard_bg1.png')
+            //     : pageIndex == 1
+            //         ? AssetImage('assets/onboard_bg2.png')
+            //         : AssetImage('assets/onboard_bg3.png')
+            image: AssetImage('assets/onboarding_bg.png'),
+          )),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

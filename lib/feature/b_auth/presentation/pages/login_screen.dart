@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'GET OTP',
                     style: TextStyle(
-                        fontSize: 17.sp,
+                        fontSize: 15.sp,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                         color:
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Spacer(),
                 CustomButtonWidget(
                     title: 'Get OTP',
-                    fontsize: 18.sp,
+                    fontsize: 15.sp,
                     color: context.watch<NumberValidationCubit>().state.isvalid
                         ? AppColors.darkbtnColor
                         : AppColors.inactivegrey,

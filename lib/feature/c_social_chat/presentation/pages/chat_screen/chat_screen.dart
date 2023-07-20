@@ -95,6 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    var msg = context.read<AddMessageCubit>().state.messages;
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -172,7 +173,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         body: Stack(
-          children: <Widget>[
+          children: [
             context.watch<SetChatbgCubit>().state.bgType ==
                     ChatBgType.solidColor
                 ? Container(
@@ -208,30 +209,18 @@ class _ChatScreenState extends State<ChatScreen> {
                         : Container(),
             ListView.builder(
               controller: _listViewController,
-              itemCount: context.watch<AddMessageCubit>().state.messages.length,
+              itemCount: msg.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 60),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Align(
-                  alignment: (context
-                              .watch<AddMessageCubit>()
-                              .state
-                              .messages[index]
-                              .messageType ==
-                          "receiver"
+                  alignment: (msg[index].messageType == "receiver"
                       ? Alignment.topLeft
                       : Alignment.topRight),
-                  child: context
-                              .read<AddMessageCubit>()
-                              .state
-                              .messages[index]
-                              .messageType ==
-                          "receiver"
+                  child: msg[index].messageType == "receiver"
                       ? SwipeTo(
-                          onRightSwipe: () {
-                            print('ekjne');
-                          },
+                          onRightSwipe: () {},
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -246,35 +235,16 @@ class _ChatScreenState extends State<ChatScreen> {
                               });
                             },
                             child: ReceivedMessageWidget(
-                              message: context
-                                  .read<AddMessageCubit>()
-                                  .state
-                                  .messages[index]
-                                  .messageContent,
-                              msgStatus: context
-                                  .read<AddMessageCubit>()
-                                  .state
-                                  .messages[index]
-                                  .msgStatus,
-                              time: context
-                                  .read<AddMessageCubit>()
-                                  .state
-                                  .messages[index]
-                                  .time,
-                              type: context
-                                  .read<AddMessageCubit>()
-                                  .state
-                                  .messages[index]
-                                  .messageType,
+                              message: msg[index].messageContent,
+                              msgStatus: msg[index].msgStatus,
+                              time: msg[index].time,
+                              type: msg[index].messageType,
                             ),
                           ),
                         )
                       : GestureDetector(
                           onTap: () {
-                            setState(() {
-                              // chattileIndex
-                              //     .remove(messages[index].messageContent);
-                            });
+                            setState(() {});
                           },
                           onLongPress: () async {
                             setState(() {
@@ -282,46 +252,14 @@ class _ChatScreenState extends State<ChatScreen> {
                             });
                           },
                           child: SentMessageWidget(
-                            doc: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .docName,
-                            message: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .messageContent,
-                            msgStatus: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .msgStatus,
-                            time: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .time,
-                            type: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .type,
-                            image: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .image_url,
-                            images: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .images,
-                            numberofContact: context
-                                .watch<AddMessageCubit>()
-                                .state
-                                .messages[index]
-                                .numberofContact,
+                            doc: msg[index].docName,
+                            message: msg[index].messageContent,
+                            msgStatus: msg[index].msgStatus,
+                            time: msg[index].time,
+                            type: msg[index].type,
+                            image: msg[index].image_url,
+                            images: msg[index].images,
+                            numberofContact: msg[index].numberofContact,
                           ),
                         ),
                 );
@@ -342,6 +280,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         width: double.infinity,
                         color: Colors.white,
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
@@ -373,15 +312,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                 pickCameraPic();
                               },
                               child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Icon(Icons.photo_camera_outlined,
-                                    size: 20, color: AppColors.iconColor),
-                              ),
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightgrey1,
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Icon(Icons.photo_camera_outlined,
+                                      size: 20, color: AppColors.iconColor)),
                             ),
                             SizedBox(width: 10),
                             Expanded(
@@ -545,4 +483,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
- 

@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/onboarding_bg.png'))),
+                      image: AssetImage('assets/splash.png'))),
               child: Center(
                 child: FadeTransition(
                   opacity: _animation,

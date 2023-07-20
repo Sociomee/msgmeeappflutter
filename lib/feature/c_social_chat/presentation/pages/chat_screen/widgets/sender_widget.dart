@@ -855,42 +855,82 @@ class SentMessageWidget extends StatelessWidget {
       case MessageType.contact:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: contactMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              contactMessage,
+            ],
+          ),
         );
       case MessageType.audio:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: audioMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              audioMessage,
+            ],
+          ),
         );
       case MessageType.doc:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: docMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              docMessage,
+            ],
+          ),
         );
       case MessageType.image:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: imageMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              imageMessage,
+            ],
+          ),
         );
       case MessageType.location:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: locationMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              locationMessage,
+            ],
+          ),
         );
       case MessageType.multipleImage:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: multipleImageMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              multipleImageMessage,
+            ],
+          ),
         );
       case MessageType.multiplecontact:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: contactMessage,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              contactMessage,
+            ],
+          ),
         );
       case MessageType.text:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
-          child: messageTextGroup,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              messageTextGroup,
+            ],
+          ),
         );
       default:
         return Container();
