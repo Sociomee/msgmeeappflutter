@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/e_settings/pages/settings/widgets/logout_dialog.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
@@ -101,12 +102,18 @@ class SettingScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.black,
-                  size: 20,
+                  size: 24.h,
                 )),
           ),
           leadingWidth: 40,
           titleSpacing: 3,
-          title: Text('Settings', style: TextStyle(color: AppColors.black))),
+          title: Text('Settings',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18.sp,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: SingleChildScrollView(
         child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),

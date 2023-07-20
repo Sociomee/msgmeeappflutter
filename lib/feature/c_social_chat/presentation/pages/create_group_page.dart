@@ -279,14 +279,29 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                       decoration: BoxDecoration(),
                       child: Row(
                         children: [
-                          CircleAvatar(
-                              radius: 20,
-                              backgroundColor: AppColors.grey,
-                              backgroundImage: NetworkImage(
-                                  dummyGroupParticipantsData[index].imageUrl)),
+                          Stack(
+                            children: [
+                              Container(
+                                height: 40.w,
+                                width: 40.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.black.withOpacity(.2),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.black.withOpacity(0.6),
+                                            BlendMode.dstATop),
+                                        image: NetworkImage(
+                                            dummyGroupParticipantsData[index]
+                                                .imageUrl))),
+                              ),
+                            ],
+                          ),
                           SizedBox(width: 10),
                           Text(dummyGroupParticipantsData[index].name,
-                              style: TextStyle(fontSize: 16)),
+                              style: TextStyle(
+                                  fontSize: 15.sp, color: AppColors.grey)),
                           Spacer(),
                           Checkbox(
                               shape: RoundedRectangleBorder(
