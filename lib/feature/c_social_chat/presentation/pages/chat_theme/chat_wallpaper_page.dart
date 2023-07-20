@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_bg_type.dart';
@@ -81,11 +82,34 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
               children: [
                 SizedBox(height: 30),
                 Container(
-                  height: 515,
+                  height: 415.h,
                   margin: EdgeInsets.symmetric(horizontal: 70),
                   decoration: AppColors.wallpaparPreviewdecoration,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 10.w, right: 10.w, top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              '9:27',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF333333),
+                                fontSize: 10.sp,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Spacer(),
+                            SvgPicture.asset('assets/network.svg'),
+                            SvgPicture.asset('assets/Wifi.svg'),
+                            SvgPicture.asset('assets/Battery.svg')
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -129,7 +153,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           context.watch<SetChatbgCubit>().state.bgType ==
                                   ChatBgType.solidColor
                               ? Container(
-                                  height: 400,
+                                  height: 320.h,
                                   width: 300,
                                   color: context
                                       .read<SetChatbgCubit>()
@@ -138,7 +162,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               : context.watch<SetChatbgCubit>().state.bgType ==
                                       ChatBgType.fileImage
                                   ? Container(
-                                      height: 400,
+                                      height: 320.h,
                                       width: 300,
                                       child: Image.file(
                                         File(
@@ -152,7 +176,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                       ),
                                     )
                                   : Container(
-                                      height: 400,
+                                      height: 320.h,
                                       width: 300,
                                       child: Image.network(
                                         context
@@ -244,16 +268,17 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                     : Padding(
                                         padding: EdgeInsets.only(
                                             bottom: 15, right: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Flexible(
-                                              child: Stack(
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Stack(
                                                 children: [
                                                   Container(
+                                                      // width: 150.w,
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 10,
@@ -301,17 +326,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                       fontSize:
                                                                           8)),
                                                               SizedBox(
-                                                                width: messages[index]
-                                                                            .messageContent
-                                                                            .trim()
-                                                                            .length <=
-                                                                        15
-                                                                    ? 40
-                                                                    : messages[index].messageContent.trim().length <=
-                                                                            21
-                                                                        ? 60
-                                                                        : 110,
-                                                              ),
+                                                                  width: 100.w),
                                                               Text(
                                                                   messages[
                                                                           index]
@@ -341,8 +356,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                               );
@@ -353,67 +368,71 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                       Spacer(),
                       Divider(color: AppColors.grey, thickness: .7, height: 0),
                       SizedBox(height: 10),
-                      Row(
-                        children: [
-                          SizedBox(width: 5.w),
-                          Container(
+                      Container(
+                        width: 270.w,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(width: 5.w),
+                            Container(
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    color: AppColors.lightgrey1,
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Transform.rotate(
+                                    angle: -15,
+                                    child: Icon(Icons.attach_file_outlined,
+                                        size: 16, color: AppColors.black))),
+                            SizedBox(width: 5.w),
+                            Container(
                               height: 20,
                               width: 20,
                               decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Transform.rotate(
-                                  angle: -15,
-                                  child: Icon(Icons.attach_file_outlined,
-                                      size: 16, color: AppColors.black))),
-                          SizedBox(width: 5.w),
-                          Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightgrey1,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Icon(Icons.photo_camera_outlined,
-                                size: 16, color: AppColors.iconColor),
-                          ),
-                          SizedBox(width: 10),
-                          Container(
-                            padding: EdgeInsets.all(5.w),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: AppColors.grey.withOpacity(.4)),
                                 color: AppColors.lightgrey1,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Type your message',
-                                  style: TextStyle(
-                                    color: Color(0xFF4E4E4E),
-                                    fontSize: 8.48,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Icon(Icons.photo_camera_outlined,
+                                  size: 16, color: AppColors.iconColor),
+                            ),
+                            SizedBox(width: 10.w),
+                            Container(
+                              padding: EdgeInsets.all(5.w),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColors.grey.withOpacity(.4)),
+                                  color: AppColors.lightgrey1,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Type your message',
+                                    style: TextStyle(
+                                      color: Color(0xFF4E4E4E),
+                                      fontSize: 8.sp,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 50),
-                                Icon(Icons.emoji_emotions_outlined, size: 15)
-                              ],
+                                  SizedBox(width: 40.w),
+                                  Icon(Icons.emoji_emotions_outlined, size: 15)
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightgrey1,
-                              borderRadius: BorderRadius.circular(30),
+                            SizedBox(width: 10.w),
+                            Container(
+                              height: 20,
+                              width: 20.w,
+                              decoration: BoxDecoration(
+                                color: AppColors.lightgrey1,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Icon(Icons.mic_none,
+                                  size: 16, color: AppColors.iconColor),
                             ),
-                            child: Icon(Icons.mic_none,
-                                size: 16, color: AppColors.iconColor),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       SizedBox(height: 10),
                     ],
