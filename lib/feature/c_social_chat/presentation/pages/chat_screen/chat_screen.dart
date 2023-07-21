@@ -141,8 +141,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 139.w,
+                    Container(
+                      width: 130.w,
                       child: Text(widget.name,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(

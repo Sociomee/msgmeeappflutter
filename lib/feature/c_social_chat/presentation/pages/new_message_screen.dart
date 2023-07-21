@@ -247,7 +247,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                         ],
                       ),
                       SizedBox(height: 30),
-                      Text('Invite Contacts',
+                      Text('Invite Contact',
                           style: TextStyle(
                               fontSize: 16.sp, fontWeight: FontWeight.bold)),
                       SizedBox(height: 24),

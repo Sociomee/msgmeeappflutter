@@ -123,60 +123,70 @@ class _BroadCastListState extends State<BroadCastList> {
                               ? AppColors.primaryColor.withOpacity(.1)
                               : null,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 7),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            selectedindex.contains(index)
-                                ? Container(
-                                    height: 60.w,
-                                    width: 60.w,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: AppColors.black),
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.check,
-                                        color: AppColors.white, size: 30))
-                                : SvgPicture.asset(
-                                    'assets/broadcast.svg',
-                                    width: 60.w,
-                                  ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      index == 1
-                                          ? "Eid Broadcast"
-                                          : index == 2
-                                              ? 'Diwali Broadcast'
-                                              : 'Christmas Broadcast',
-                                      style: TextStyle(
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w500)),
-                                  SizedBox(height: 8),
-                                  Text('Alam, Saurabh, Taha Jamal, Anshuman...',
-                                      style: TextStyle(
-                                          fontSize: 12.sp,
-                                          color: AppColors.grey)),
-                                ],
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10.w, vertical: 7),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              selectedindex.contains(index)
+                                  ? Container(
+                                      height: 60.w,
+                                      width: 60.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: AppColors.black),
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.check,
+                                          color: AppColors.white, size: 30.r))
+                                  : SvgPicture.asset(
+                                      'assets/broadcast.svg',
+                                      width: 60.w,
+                                      fit: BoxFit.cover,
+                                    ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        index == 1
+                                            ? "Eid Broadcast"
+                                            : index == 2
+                                                ? 'Diwali Broadcast'
+                                                : 'Christmas Broadcast',
+                                        style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.w500)),
+                                    SizedBox(height: 8),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          .60.w,
+                                      child: Text(
+                                          'Alam, Saurabh, Taha Jamal, Anshuman...',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: AppColors.grey)),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text('2w ago',
-                                  style: TextStyle(
-                                    color: AppColors.black,
-                                    fontSize: 12.sp,
-                                    fontFamily: 'Niramit',
-                                    fontWeight: FontWeight.w400,
-                                  )),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text('2w ago',
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: 12.sp,
+                                      fontFamily: 'Niramit',
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

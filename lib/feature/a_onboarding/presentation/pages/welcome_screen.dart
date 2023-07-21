@@ -25,9 +25,9 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 40.h),
+                SizedBox(height: 30.h),
                 Image.asset('assets/msgmee_logo.png',
-                    height: 128, width: 136.w, fit: BoxFit.cover),
+                    height: 128.h, width: 136.w, fit: BoxFit.cover),
                 SizedBox(height: 16.h),
                 Text(
                   'MsgMee',
@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 Divider(color: AppColors.lightgrey, height: 32, thickness: 1),
                 Text(
-                  '"Welcome to Msgme, your\nglobal messaging\nplatform!"',
+                  '"Welcome to Msgme, your global messaging\nplatform!"',
                   style: TextStyle(
                       color: Color(0xFF368C4E),
                       fontSize: 24.sp,
