@@ -225,7 +225,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                     onTap: () {
                                       setState(() {
                                         currentindex = index;
-
                                         show = !show;
                                       });
                                       print(alphabats[index]);

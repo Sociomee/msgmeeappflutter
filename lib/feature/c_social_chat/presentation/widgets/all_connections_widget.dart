@@ -9,35 +9,38 @@ class AllconnectionsWidget extends StatelessWidget {
   final List<AllConnectionsModel> list;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.all(0),
-        shrinkWrap: true,
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 14.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ChatProfileWidget(
-                    imageUrl: list[index].imageUrl,
-                    isOnline: list[index].isOnline,
-                    hasStory: false),
-                SizedBox(width: 12.w),
-                Text(list[index].connectionName,
-                    style: TextStyle(fontSize: 14.sp)),
-                Spacer(),
-                list[index].connectionType == "SocioMee"
-                    ? SvgPicture.asset('assets/sociomee.svg',
-                        height: 14.h, fit: BoxFit.cover)
-                    : Container(),
-                SizedBox(width: 5.w),
-                SvgPicture.asset('assets/msgmee.svg',
-                    height: 14.h, fit: BoxFit.cover),
-              ],
-            ),
-          );
-        });
+    return SizedBox(
+      height: 610.h,
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.all(0),
+          shrinkWrap: true,
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 14.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ChatProfileWidget(
+                      imageUrl: list[index].imageUrl,
+                      isOnline: list[index].isOnline,
+                      hasStory: false),
+                  SizedBox(width: 12.w),
+                  Text(list[index].connectionName,
+                      style: TextStyle(fontSize: 14.sp)),
+                  Spacer(),
+                  list[index].connectionType == "SocioMee"
+                      ? SvgPicture.asset('assets/sociomee.svg',
+                          height: 14.h, fit: BoxFit.cover)
+                      : Container(),
+                  SizedBox(width: 5.w),
+                  SvgPicture.asset('assets/msgmee.svg',
+                      height: 14.h, fit: BoxFit.cover),
+                ],
+              ),
+            );
+          }),
+    );
   }
 }

@@ -18,20 +18,18 @@ class ChatProfileWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            border: hasStory
-                ? Border.all(color: AppColors.primaryColor, width: 3)
-                : null,
-          ),
-          child: CircleAvatar(
-            radius: 28.r,
-            backgroundColor: AppColors.grey,
-            backgroundImage: NetworkImage(imageUrl),
-          ),
-        ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: hasStory
+                  ? Border.all(color: AppColors.primaryColor, width: 3)
+                  : null,
+            ),
+            child: CircleAvatar(
+                radius: 28.r,
+                backgroundColor: AppColors.grey,
+                backgroundImage: NetworkImage(imageUrl))),
         Positioned(
-          top: 40.h,
+          top: 36.h,
           right: 0,
           child: isOnline
               ? Container(
