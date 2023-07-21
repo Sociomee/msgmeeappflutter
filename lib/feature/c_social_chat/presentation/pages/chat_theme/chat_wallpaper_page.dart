@@ -82,7 +82,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
               children: [
                 SizedBox(height: 30),
                 Container(
-                  height: 415.h,
+                  height: 418.h,
                   margin: EdgeInsets.symmetric(horizontal: 70),
                   decoration: AppColors.wallpaparPreviewdecoration,
                   child: Column(
@@ -139,9 +139,15 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               ],
                             ),
                             Spacer(),
-                            Icon(Icons.videocam_outlined, size: 18),
+                            SvgPicture.asset(
+                              'assets/video.svg',
+                              height: 15.w,
+                            ),
                             SizedBox(width: 13),
-                            Icon(Icons.phone_outlined, size: 15),
+                            SvgPicture.asset(
+                              'assets/calling.svg',
+                              height: 15.w,
+                            ),
                             SizedBox(width: 13),
                             Icon(Icons.more_vert_outlined, size: 18)
                           ],
@@ -211,7 +217,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                               padding: const EdgeInsets.only(
                                                   top: 10,
                                                   left: 14,
-                                                  right: 18,
+                                                  right: 5,
                                                   bottom: 5),
                                               decoration: BoxDecoration(
                                                   color: context
@@ -220,7 +226,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                       .chatLightColor,
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          12)),
+                                                          10)),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -237,21 +243,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      SizedBox(
-                                                        width: messages[index]
-                                                                    .messageContent
-                                                                    .trim()
-                                                                    .length <=
-                                                                15
-                                                            ? 40
-                                                            : messages[index]
-                                                                        .messageContent
-                                                                        .trim()
-                                                                        .length <=
-                                                                    21
-                                                                ? 60
-                                                                : 100,
-                                                      ),
+                                                      SizedBox(width: 50.w),
                                                       Text(messages[index].time,
                                                           style: const TextStyle(
                                                               color: AppColors
@@ -283,7 +275,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                           const EdgeInsets.only(
                                                               top: 10,
                                                               left: 14,
-                                                              right: 18,
+                                                              right: 17,
                                                               bottom: 5),
                                                       decoration: BoxDecoration(
                                                           color: context
@@ -326,7 +318,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                       fontSize:
                                                                           8)),
                                                               SizedBox(
-                                                                  width: 100.w),
+                                                                  width: 104.w),
                                                               Text(
                                                                   messages[
                                                                           index]
@@ -341,8 +333,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                         ],
                                                       )),
                                                   Positioned(
-                                                    bottom: -1,
-                                                    right: -1,
+                                                    bottom: 0,
+                                                    right: 0,
                                                     child: messages[index]
                                                                 .msgStatus ==
                                                             'read'
@@ -367,31 +359,30 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                       ),
                       Spacer(),
                       Divider(color: AppColors.grey, thickness: .7, height: 0),
-                      SizedBox(height: 10),
+                      SizedBox(height: 5.h),
                       Container(
-                        width: 270.w,
+                        width: 273.w,
+                        padding: EdgeInsets.only(right: 10, left: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SizedBox(width: 5.w),
                             Container(
-                                height: 20,
-                                width: 20,
+                                width: 14,
+                                height: 14,
                                 decoration: BoxDecoration(
-                                    color: AppColors.lightgrey1,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Transform.rotate(
-                                    angle: -15,
-                                    child: Icon(Icons.attach_file_outlined,
-                                        size: 16, color: AppColors.black))),
+                                  color: AppColors.lightgrey1,
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: SvgPicture.asset(
+                                  'assets/clip.svg',
+                                )),
                             SizedBox(width: 5.w),
                             Container(
                               height: 20,
                               width: 20,
                               decoration: BoxDecoration(
-                                color: AppColors.lightgrey1,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
+                                  color: AppColors.lightgrey1,
+                                  borderRadius: BorderRadius.circular(30)),
                               child: Icon(Icons.photo_camera_outlined,
                                   size: 16, color: AppColors.iconColor),
                             ),
@@ -416,25 +407,35 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                     ),
                                   ),
                                   SizedBox(width: 40.w),
-                                  Icon(Icons.emoji_emotions_outlined, size: 15)
+                                  SizedBox(
+                                    width: 14,
+                                    height: 14,
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                          'assets/smiley.svg',
+                                          fit: BoxFit.contain),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            SizedBox(width: 10.w),
+                            Spacer(),
                             Container(
-                              height: 20,
-                              width: 20.w,
+                              width: 14,
+                              height: 14,
                               decoration: BoxDecoration(
                                 color: AppColors.lightgrey1,
                                 borderRadius: BorderRadius.circular(30),
                               ),
-                              child: Icon(Icons.mic_none,
-                                  size: 16, color: AppColors.iconColor),
+                              child: SvgPicture.asset(
+                                'assets/microphone.svg',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 5.h),
                     ],
                   ),
                 ),
