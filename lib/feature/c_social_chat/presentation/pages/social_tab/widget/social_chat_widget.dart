@@ -38,6 +38,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       .selectedchat
                       .contains(index)) {
                     context.read<SelectedchatCubit>().select(index);
+                    context.read<SelectedchatCubit>().selectmode();
                   }
                 },
                 onTap: () {
@@ -47,7 +48,13 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       .selectedchat
                       .contains(index)) {
                     context.read<SelectedchatCubit>().remove(index);
-                    setState(() {});
+
+                    print(context.read<SelectedchatCubit>().state.selctmode);
+                  } else if (context
+                      .read<SelectedchatCubit>()
+                      .state
+                      .selctmode) {
+                    context.read<SelectedchatCubit>().select(index);
                   } else {
                     screenNavigator(
                         context,

@@ -95,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
-    var msg = context.read<AddMessageCubit>().state.messages;
+    var msg = context.watch<AddMessageCubit>().state.messages;
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(

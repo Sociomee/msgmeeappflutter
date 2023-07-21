@@ -94,7 +94,7 @@ class SettingScreen extends StatelessWidget {
       appBar: AppBar(
           elevation: 0,
           leading: Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: 10.w),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -105,8 +105,8 @@ class SettingScreen extends StatelessWidget {
                   size: 24.h,
                 )),
           ),
-          leadingWidth: 40,
-          titleSpacing: 3,
+          leadingWidth: 45,
+          titleSpacing: 5,
           title: Text('Settings',
               style: TextStyle(
                 color: AppColors.black,

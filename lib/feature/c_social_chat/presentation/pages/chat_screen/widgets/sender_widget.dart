@@ -811,9 +811,11 @@ class SentMessageWidget extends StatelessWidget {
                                 child: MapViewWidget()),
                           ),
                           SizedBox(height: 5),
-                          Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
+                          message == ''
+                              ? Container()
+                              : Text(message,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 14)),
                           SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
@@ -822,8 +824,8 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
+                                width: message.length == 0
+                                    ? 220.w
                                     : message.trim().length <= 21
                                         ? 80
                                         : 200,

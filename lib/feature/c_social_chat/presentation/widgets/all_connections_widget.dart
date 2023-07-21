@@ -10,7 +10,7 @@ class AllconnectionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 610.h,
+      height: 651.h,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(0),

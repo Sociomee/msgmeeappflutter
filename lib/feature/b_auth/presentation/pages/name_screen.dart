@@ -204,7 +204,8 @@ class _NameScreenState extends State<NameScreen> {
                           : AppColors.lightgrey,
                       fontsize: 18,
                       ontap: () {
-                        if (formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate() &&
+                            nameController.text.isNotEmpty) {
                           context
                               .read<CreateUserCubit>()
                               .createUser(widget.phone, nameController.text);

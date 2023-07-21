@@ -7,15 +7,20 @@ class SelectedchatState extends Equatable {
   final bool starClicked;
   final bool mute;
   final bool pinned;
-  SelectedchatState({
-    required this.selectedchat,
-    required this.starClicked,
-    required this.mute,
-    required this.pinned,
-  });
+  final bool selctmode;
+  SelectedchatState(
+      {required this.selectedchat,
+      required this.starClicked,
+      required this.mute,
+      required this.pinned,
+      required this.selctmode});
   factory SelectedchatState.initial() {
     return SelectedchatState(
-        selectedchat: [], starClicked: false, mute: false, pinned: false);
+        selectedchat: [],
+        starClicked: false,
+        mute: false,
+        pinned: false,
+        selctmode: false);
   }
 
   @override
@@ -26,12 +31,13 @@ class SelectedchatState extends Equatable {
     bool? starClicked,
     bool? mute,
     bool? pinned,
+    bool? selectmode,
   }) {
     return SelectedchatState(
-      selectedchat: selectedchat ?? this.selectedchat,
-      starClicked: starClicked ?? this.starClicked,
-      mute: mute ?? this.mute,
-      pinned: pinned ?? this.pinned,
-    );
+        selectedchat: selectedchat ?? this.selectedchat,
+        starClicked: starClicked ?? this.starClicked,
+        mute: mute ?? this.mute,
+        pinned: pinned ?? this.pinned,
+        selctmode: selectmode ?? this.selctmode);
   }
 }

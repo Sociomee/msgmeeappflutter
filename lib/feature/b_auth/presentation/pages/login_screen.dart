@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/feature/b_auth/presentation/widgets/number_confirmation_dialog.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../helper/navigator_function.dart';
@@ -86,14 +85,11 @@ class _LoginScreenState extends State<LoginScreen> {
             actions: [
               GestureDetector(
                 onTap: () {
-                  context.read<NumberValidationCubit>().state.isvalid
-                      ? showDialog(
-                          context: context,
-                          builder: (context) {
-                            return NumberConfirmationDialog(
-                                inputNumber: numberController.text);
-                          })
-                      : null;
+                  if (context.read<NumberValidationCubit>().state.isvalid) {
+                    context
+                        .read<OtpSendCubit>()
+                        .sendOtp("+91${numberController.text}");
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20.0, right: 10),

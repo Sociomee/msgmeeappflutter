@@ -126,8 +126,12 @@ class _OtpScreenState extends State<OtpScreen> {
             actions: [
               GestureDetector(
                 onTap: () {
-                  if (isValid && _otpController.length == 6) {
-                    screenNavigator(context, NameScreen(phone: widget.number));
+                  if (formKey.currentState!.validate() &&
+                      _otpController.length == 6 &&
+                      isValid) {
+                    context
+                        .read<OtpVerifyCubit>()
+                        .verifyUserOtp(widget.number, _otpController.text);
                   }
                 },
                 child: Padding(

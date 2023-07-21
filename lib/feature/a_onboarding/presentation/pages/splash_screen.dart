@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'onboarding_screen.dart';
 
@@ -52,7 +53,18 @@ class _SplashScreenState extends State<SplashScreen>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset('assets/msgmee_logo.png',
-                          height: 114, width: 114)
+                          height: 167.h, width: 175.w),
+                      SizedBox(height: 24.h),
+                      Text(
+                        'MsgMee',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFF083A3D),
+                          fontSize: 44.87,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
                     ],
                   ),
                 ),

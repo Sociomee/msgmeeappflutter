@@ -54,6 +54,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
 
   @override
   Widget build(BuildContext context) {
+    print(context.read<SelectedchatCubit>().state.selectedchat.length);
     return DefaultTabController(
       length: context.watch<SyncWithSociomee>().state ? 4 : 2,
       initialIndex: 0,
