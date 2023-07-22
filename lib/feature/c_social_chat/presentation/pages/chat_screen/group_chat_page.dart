@@ -200,23 +200,30 @@ class _GroupChatPageState extends State<GroupChatPage> {
             child: Divider(
                 color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
-          ListTile(
-            leading: Text('Mute Notification',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            trailing: Checkbox(
-                side: MaterialStateBorderSide.resolveWith(
-                  (states) =>
-                      BorderSide(width: 1.0, color: AppColors.primaryColor),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3)),
-                activeColor: AppColors.primaryColor,
-                value: isSelected,
-                onChanged: (w) {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                }),
+          Padding(
+            padding: EdgeInsets.only(left: 13.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Mute Notification',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Checkbox(
+                    side: MaterialStateBorderSide.resolveWith(
+                      (states) =>
+                          BorderSide(width: 1.0, color: AppColors.primaryColor),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3)),
+                    activeColor: AppColors.primaryColor,
+                    value: isSelected,
+                    onChanged: (w) {
+                      setState(() {
+                        isSelected = !isSelected;
+                      });
+                    }),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),

@@ -248,9 +248,31 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  locations[index].title,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                Row(
+                                  children: [
+                                    Text(
+                                      locations[index].title,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    index == 2
+                                        ? Container(
+                                            height: 13.w,
+                                            width: 13.w,
+                                            margin: EdgeInsets.only(left: 5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: AppColors.errorRedColor
+                                                    .withOpacity(.5)),
+                                            child: Icon(
+                                              Icons.fiber_manual_record,
+                                              color: AppColors.errorRedColor,
+                                              size: 12.r,
+                                            ),
+                                          )
+                                        : Container()
+                                  ],
                                 ),
                                 SizedBox(height: 5),
                                 Text(locations[index].subtitle),

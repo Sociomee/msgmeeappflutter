@@ -82,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         index: 3,
                         imageUrl: 'assets/onboarding3.svg',
                         descriptionText:
-                            'Come to MsgMee, and Become\npart of a growing community.'),
+                            'Join MsgMee, and become\npart of a growing community.'),
                   ],
                 ),
               ),

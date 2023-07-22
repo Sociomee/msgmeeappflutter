@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../theme/colors.dart';
 import '../../cubit/choose_solid_color_cubit.dart';
@@ -44,7 +45,7 @@ class SolidColorPage extends StatelessWidget {
           'Solid Color',
           style: TextStyle(
             color: AppColors.black,
-            fontSize: 16,
+            fontSize: 16.sp,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
           ),
