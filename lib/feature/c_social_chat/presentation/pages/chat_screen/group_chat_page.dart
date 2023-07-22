@@ -311,6 +311,35 @@ class _GroupChatPageState extends State<GroupChatPage> {
                   );
                 }),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Divider(
+                color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.w, bottom: 60.h),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.delete_forever_outlined,
+                      color: AppColors.errorRedColor),
+                  Text(
+                    "Delete 'College Group'",
+                    style: TextStyle(
+                      color: Color(0xCCFF1F1F),
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
         ]),
       ),
     );

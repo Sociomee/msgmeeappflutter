@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -119,11 +120,21 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: Icon(Icons.delete_outline, color: AppColors.black),
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/trash.svg',
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: Icon(Icons.insert_emoticon_outlined, color: AppColors.black),
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/smiley.svg',
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 15, bottom: 15, right: 20),
@@ -137,7 +148,12 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: Icon(Icons.edit_outlined, color: AppColors.black),
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/pencil.svg',
+                fit: BoxFit.contain,
+              ),
+            ),
           )
         ],
       ),
