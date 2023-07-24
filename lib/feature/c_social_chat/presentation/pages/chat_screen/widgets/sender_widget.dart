@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/chat_theme/chat_theme_cubit.dart';
 
+import '../location_preview.dart';
 import 'message_type.dart';
 
 class SentMessageWidget extends StatelessWidget {
@@ -790,54 +792,61 @@ class SentMessageWidget extends StatelessWidget {
             Flexible(
               child: Stack(
                 children: [
-                  Container(
-                      padding: const EdgeInsets.only(
-                          top: 5, left: 5, right: 5, bottom: 5),
-                      decoration: BoxDecoration(
-                        color:
-                            context.watch<ChatThemeCubit>().state.chatDeepColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 140,
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: MapViewWidget()),
-                          ),
-                          SizedBox(height: 5),
-                          message == ''
-                              ? Container()
-                              : Text(message,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 14)),
-                          SizedBox(height: 2),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(time,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                              SizedBox(
-                                width: message.length == 0
-                                    ? 220.w
-                                    : message.trim().length <= 21
-                                        ? 240
-                                        : 200,
-                              ),
-                              Text(msgStatus,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                            ],
-                          )
-                        ],
-                      )),
+                  GestureDetector(
+                    onTap: () {
+                      animatedScreenNavigator(context, LocationPreviewPage());
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 5, left: 5, right: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                          color: context
+                              .watch<ChatThemeCubit>()
+                              .state
+                              .chatDeepColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 140,
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: MapViewWidget()),
+                            ),
+                            SizedBox(height: 5),
+                            message == ''
+                                ? Container()
+                                : Text(message,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                            SizedBox(height: 2),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(time,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                                SizedBox(
+                                  width: message.length == 0
+                                      ? 220.w
+                                      : message.trim().length <= 21
+                                          ? 240
+                                          : 200,
+                                ),
+                                Text(msgStatus,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)),
+                              ],
+                            )
+                          ],
+                        )),
+                  ),
                   Positioned(
                     bottom: -2,
                     right: 0,

@@ -395,7 +395,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                   Expanded(
                     flex: 6,
                     child: SizedBox(
-                      height: 30,
+                      height: 40,
                       child: TextFormField(
                         controller: controller,
                         decoration: InputDecoration(
