@@ -120,10 +120,7 @@ class _BroadCastDescriptionScreenState
             TextButton(
                 onPressed: () {
                   animatedScreenReplaceNavigator(
-                      context,
-                      BroadcastInfo(
-                        editscreen: true,
-                      ));
+                      context, BroadcastInfo(editscreen: true));
                 },
                 child: Text(
                   'Edit',

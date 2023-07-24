@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/repositories.dart';
 
@@ -11,6 +13,7 @@ class AuthService implements AuthRepository {
       final response = await dio.post('$baseUrl/auth/send-otp', data: {
         "phone": phone,
       });
+      log("response -->>${response.statusCode}");
       if (response.statusCode == 200) {
         print(response.data);
         return true;
@@ -30,6 +33,7 @@ class AuthService implements AuthRepository {
         "deviceId": phone,
         "otp": otp,
       });
+      log("response -->>${response.statusCode}");
       if (response.statusCode == 200) {
         print("data --->${response.data['success']}");
         return response.data['success'];

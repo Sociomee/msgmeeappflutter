@@ -68,11 +68,13 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
-                                width: message.trim().length <= 15
-                                    ? 40
-                                    : message.trim().length <= 21
-                                        ? 80
-                                        : 200,
+                                width: message.trim().length <= 6
+                                    ? 10
+                                    : message.trim().length <= 15
+                                        ? 20
+                                        : message.trim().length <= 21
+                                            ? 80
+                                            : 200,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(

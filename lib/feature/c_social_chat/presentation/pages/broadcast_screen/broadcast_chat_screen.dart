@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/widget/popup_menu.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broad_cast_desc_screen.dart';
@@ -7,7 +8,6 @@ import '../../../../../theme/colors.dart';
 import '../chat_screen/widgets/attached_options.dart';
 import '../chat_screen/widgets/message_textField.dart';
 import '../chat_screen/widgets/sender_widget.dart';
-import 'widget/broadcast_bottomsheet.dart';
 
 class BroadCastChatScreen extends StatefulWidget {
   const BroadCastChatScreen({super.key});
@@ -85,27 +85,28 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
             ),
           ),
           actions: [
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(25.0),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context) {
-                      return BroadcastBottomModelSheet(
-                        profilename: 'widget.name',
-                      );
-                    });
-              },
-              icon: const Icon(
-                Icons.more_vert,
-                color: AppColors.black,
-              ),
-            )
+            PopupMenuWidget()
+            // IconButton(
+            //   onPressed: () {
+            //     showModalBottomSheet(
+            //         isScrollControlled: true,
+            //         shape: const RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.vertical(
+            //             top: Radius.circular(25.0),
+            //           ),
+            //         ),
+            //         context: context,
+            //         builder: (context) {
+            //           return BroadcastBottomModelSheet(
+            //             profilename: 'widget.name',
+            //           );
+            //         });
+            //   },
+            //   icon: const Icon(
+            //     Icons.more_vert,
+            //     color: AppColors.black,
+            //   ),
+            // )
           ],
         ),
         body: Column(

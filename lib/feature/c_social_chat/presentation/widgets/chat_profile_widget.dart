@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../theme/colors.dart';
 
 class ChatProfileWidget extends StatelessWidget {
@@ -25,16 +24,16 @@ class ChatProfileWidget extends StatelessWidget {
                   : null,
             ),
             child: CircleAvatar(
-                radius: 28.r,
+                radius: 28,
                 backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(imageUrl))),
         Positioned(
-          top: 36.h,
+          top: 40,
           right: 0,
           child: isOnline
               ? Container(
-                  height: 14.w,
-                  width: 14.w,
+                  height: 14,
+                  width: 14,
                   decoration: BoxDecoration(
                       border: Border.all(color: AppColors.white, width: 2),
                       color: AppColors.primaryColor,
