@@ -311,127 +311,136 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              height: 190,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: MapViewWidget())),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text('Share your live location',
-                  style: TextStyle(
-                      color: Color(0xFF333333),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500))),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      insetPadding: EdgeInsets.symmetric(horizontal: 20),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  height: 36,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  alignment: Alignment.center,
-                  decoration: ShapeDecoration(
-                      color: AppColors.darkgreen,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6))),
-                  child: Text('15 Min',
+                  width: double.infinity,
+                  height: 190,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: MapViewWidget())),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text('Share your live location',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
+                          color: Color(0xFF333333),
+                          fontSize: 14,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500))),
-              Container(
-                  height: 36,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  alignment: Alignment.center,
-                  decoration: ShapeDecoration(
-                      color: AppColors.lightgrey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6))),
-                  child: Text('1 Hour',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500))),
-              Container(
-                  height: 36,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  alignment: Alignment.center,
-                  decoration: ShapeDecoration(
-                      color: AppColors.lightgrey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6))),
-                  child: Text('2 Hour',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500)))
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                flex: 6,
-                child: SizedBox(
-                  height: 30,
-                  child: TextFormField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                      hintText: "Message",
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      height: 36,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 0),
+                      alignment: Alignment.center,
+                      decoration: ShapeDecoration(
+                          color: AppColors.darkgreen,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6))),
+                      child: Text('15 Min',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500))),
+                  Container(
+                      height: 36,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 0),
+                      alignment: Alignment.center,
+                      decoration: ShapeDecoration(
+                          color: AppColors.lightgrey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6))),
+                      child: Text('1 Hour',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500))),
+                  Container(
+                      height: 36,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 0),
+                      alignment: Alignment.center,
+                      decoration: ShapeDecoration(
+                          color: AppColors.lightgrey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6))),
+                      child: Text('2 Hour',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500)))
+                ],
               ),
-              Expanded(
-                flex: 1,
-                child: GestureDetector(
-                  onTap: () {
-                    context.read<AddMessageCubit>().addMessage(ChatMessage(
-                        messageContent: controller.text,
-                        messageType: 'sender',
-                        msgStatus: 'send',
-                        time: getCurrentTime(),
-                        type: MessageType.location));
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightgrey1,
-                      borderRadius: BorderRadius.circular(30),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: SizedBox(
+                      height: 30,
+                      child: TextFormField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          hintText: "Message",
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Image.asset('assets/attach.png'),
                   ),
-                ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<AddMessageCubit>().addMessage(ChatMessage(
+                            messageContent: controller.text,
+                            messageType: 'sender',
+                            msgStatus: 'send',
+                            time: getCurrentTime(),
+                            type: MessageType.location));
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          color: AppColors.lightgrey1,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Image.asset('assets/attach.png'),
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
