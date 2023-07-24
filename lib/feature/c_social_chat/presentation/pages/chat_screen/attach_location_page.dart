@@ -127,7 +127,19 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                           expand = !expand;
                         });
                       },
-                      child: SvgPicture.asset('assets/expand.svg')))
+                      child: expand
+                          ? Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.black.withOpacity(.5)),
+                              child: Icon(
+                                Icons.fullscreen_exit_outlined,
+                                color: AppColors.white,
+                                size: 26,
+                              ),
+                            )
+                          : SvgPicture.asset('assets/expand.svg')))
             ],
           ),
           SizedBox(height: 20),
