@@ -111,10 +111,9 @@ class SentMessageWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         top: 5, left: 5, right: 5, bottom: 5),
                     decoration: BoxDecoration(
-                      color:
-                          context.watch<ChatThemeCubit>().state.chatDeepColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
+                        borderRadius: BorderRadius.circular(12)),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -829,7 +828,7 @@ class SentMessageWidget extends StatelessWidget {
                                 width: message.length == 0
                                     ? 220.w
                                     : message.trim().length <= 21
-                                        ? 80
+                                        ? 240
                                         : 200,
                               ),
                               Text(msgStatus,

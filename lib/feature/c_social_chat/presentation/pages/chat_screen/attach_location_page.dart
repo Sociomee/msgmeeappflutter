@@ -153,13 +153,6 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                     builder: (context) {
                       return ShareLiveLocationPopup();
                     });
-                // context.read<AddMessageCubit>().addMessage(ChatMessage(
-                //     messageContent: '',
-                //     messageType: 'sender',
-                //     msgStatus: 'send',
-                //     time: getCurrentTime(),
-                //     type: MessageType.location));
-                // Navigator.pop(context);
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -295,8 +288,27 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
   }
 }
 
-class ShareLiveLocationPopup extends StatelessWidget {
+class ShareLiveLocationPopup extends StatefulWidget {
   const ShareLiveLocationPopup({Key? key}) : super(key: key);
+
+  @override
+  State<ShareLiveLocationPopup> createState() => _ShareLiveLocationPopupState();
+}
+
+class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
+  late TextEditingController controller;
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -378,7 +390,9 @@ class ShareLiveLocationPopup extends StatelessWidget {
                 child: SizedBox(
                   height: 30,
                   child: TextFormField(
+                    controller: controller,
                     decoration: InputDecoration(
+                      hintText: "Message",
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                       border: OutlineInputBorder(
@@ -395,6 +409,13 @@ class ShareLiveLocationPopup extends StatelessWidget {
                 flex: 1,
                 child: GestureDetector(
                   onTap: () {
+                    context.read<AddMessageCubit>().addMessage(ChatMessage(
+                        messageContent: controller.text,
+                        messageType: 'sender',
+                        msgStatus: 'send',
+                        time: getCurrentTime(),
+                        type: MessageType.location));
+                    Navigator.pop(context);
                     Navigator.pop(context);
                   },
                   child: Container(
