@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../theme/colors.dart';
 import '../../cubit/choose_solid_color_cubit.dart';
@@ -28,7 +27,7 @@ class SolidColorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        leadingWidth: 50,
+        leadingWidth: 45,
         titleSpacing: 0,
         leading: IconButton(
             onPressed: () {
@@ -39,13 +38,14 @@ class SolidColorPage extends StatelessWidget {
               child: Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.black,
+                size: 20,
               ),
             )),
         title: Text(
           'Solid Color',
           style: TextStyle(
             color: AppColors.black,
-            fontSize: 16.sp,
+            fontSize: 16,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
           ),
