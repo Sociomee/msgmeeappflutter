@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
@@ -256,7 +258,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       : Alignment.topRight),
                   child: msg[index].messageType == "receiver"
                       ? SwipeTo(
-                          onRightSwipe: () {},
+                          onRightSwipe: () {
+                            context.read<ReplyMsgCubit>().replyMsg(
+                                widget.name, msg[index].messageContent);
+                          },
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -291,36 +296,43 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                           ),
                         )
-                      : GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              chattileIndex.remove(index);
-                            });
+                      : SwipeTo(
+                          onLeftSwipe: () {
+                            context
+                                .read<ReplyMsgCubit>()
+                                .replyMsg('You', msg[index].messageContent);
                           },
-                          onLongPress: () async {
-                            if (!chattileIndex.contains(index)) {
-                              setState(() {
-                                chattileIndex.add(index);
-                              });
-                            } else {
+                          child: GestureDetector(
+                            onTap: () {
                               setState(() {
                                 chattileIndex.remove(index);
                               });
-                            }
-                          },
-                          child: Container(
-                            color: chattileIndex.contains(index)
-                                ? AppColors.seconderyColor1
-                                : AppColors.white,
-                            child: SentMessageWidget(
-                              doc: msg[index].docName,
-                              message: msg[index].messageContent,
-                              msgStatus: msg[index].msgStatus,
-                              time: msg[index].time,
-                              type: msg[index].type,
-                              image: msg[index].image_url,
-                              images: msg[index].images,
-                              numberofContact: msg[index].numberofContact,
+                            },
+                            onLongPress: () async {
+                              if (!chattileIndex.contains(index)) {
+                                setState(() {
+                                  chattileIndex.add(index);
+                                });
+                              } else {
+                                setState(() {
+                                  chattileIndex.remove(index);
+                                });
+                              }
+                            },
+                            child: Container(
+                              color: chattileIndex.contains(index)
+                                  ? AppColors.seconderyColor1
+                                  : AppColors.white,
+                              child: SentMessageWidget(
+                                doc: msg[index].docName,
+                                message: msg[index].messageContent,
+                                msgStatus: msg[index].msgStatus,
+                                time: msg[index].time,
+                                type: msg[index].type,
+                                image: msg[index].image_url,
+                                images: msg[index].images,
+                                numberofContact: msg[index].numberofContact,
+                              ),
                             ),
                           ),
                         ),
@@ -452,6 +464,24 @@ class _ChatScreenState extends State<ChatScreen> {
                                             .read<ShowAudioRecorder>()
                                             .toggleValue();
                                       } else if (context
+                                          .read<ReplyMsgCubit>()
+                                          .state
+                                          .reply) {
+                                        context
+                                            .read<AddMessageCubit>()
+                                            .addMessage(ChatMessage(
+                                              messageContent:
+                                                  messageController.text,
+                                              messageType: 'sender',
+                                              msgStatus: 'send',
+                                              time: getCurrentTime(),
+                                              type: MessageType.replyMessage,
+                                            ));
+                                        context
+                                            .read<ReplyMsgCubit>()
+                                            .closeReplyMsg();
+                                        print('reply');
+                                      } else if (context
                                           .read<ShowContactTextField>()
                                           .state) {
                                         context
@@ -502,6 +532,27 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
+                //?showing reply message textfield
+                context.watch<ReplyMsgCubit>().state.reply
+                    ? Positioned(
+                        bottom: 10,
+                        left: 40.w,
+                        child: ReplyMessageTextField(
+                          messageController: messageController,
+                          onChanged: (e) {
+                            if (e.isNotEmpty) {
+                              setState(() {
+                                istyping = true;
+                              });
+                            } else {
+                              setState(() {
+                                istyping = false;
+                              });
+                            }
+                          },
+                        ),
+                      )
+                    : Container(),
                 //showing contack sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(

@@ -10,4 +10,5 @@ enum MessageType {
   multipleVideo,
   multipleDoc,
   multiplecontact,
+  replyMessage
 }

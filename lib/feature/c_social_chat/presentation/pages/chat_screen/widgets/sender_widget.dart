@@ -101,6 +101,71 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
+
+    final replyMessageText = Flexible(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(
+                          top: 10, left: 14, right: 18, bottom: 5),
+                      decoration: BoxDecoration(
+                        color:
+                            context.watch<ChatThemeCubit>().state.chatDeepColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(message,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                          SizedBox(height: 2),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              SizedBox(
+                                width: message.trim().length <= 6
+                                    ? 10
+                                    : message.trim().length <= 15
+                                        ? 20
+                                        : message.trim().length <= 21
+                                            ? 80
+                                            : 200,
+                              ),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          )
+                        ],
+                      )),
+                  Positioned(
+                    bottom: -1,
+                    right: -1,
+                    child: msgStatus == 'read'
+                        ? MessageStatus.read
+                        : msgStatus == 'send'
+                            ? MessageStatus.sent
+                            : MessageStatus.delivered,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
     final contactMessage = Flexible(
       child: Container(
         child: Row(
@@ -942,6 +1007,14 @@ class SentMessageWidget extends StatelessWidget {
             children: [
               messageTextGroup,
             ],
+          ),
+        );
+      case MessageType.replyMessage:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [replyMessageText],
           ),
         );
       default:

@@ -14,6 +14,7 @@ import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/choose_image_wallpaper_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/choose_solid_color_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => OtpVerifyCubit()),
             BlocProvider(create: (context) => CreateUserCubit()),
             BlocProvider(create: (context) => ReduceNumberCubit()),
+            BlocProvider(create: (context) => ReplyMsgCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',
