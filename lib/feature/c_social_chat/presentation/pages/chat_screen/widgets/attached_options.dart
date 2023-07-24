@@ -83,6 +83,8 @@ class _AttachedIconState extends State<AttachedIcon> {
             images: [photo],
             profileImage: widget.profileImage,
           ));
+    } else {
+      return null;
     }
   }
 

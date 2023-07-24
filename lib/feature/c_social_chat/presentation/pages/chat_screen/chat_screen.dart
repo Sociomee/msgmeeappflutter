@@ -99,79 +99,115 @@ class _ChatScreenState extends State<ChatScreen> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 80,
-          elevation: 1,
-          leadingWidth: 20,
-          titleSpacing: 11.w,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-          title: GestureDetector(
-            onTap: () {
-              widget.name == 'Office Group'
-                  ? animatedScreenNavigator(
-                      context,
-                      GroupChatPage(
-                        imageUrl: widget.imageUrl,
-                        name: widget.name,
-                      ))
-                  : screenNavigator(
-                      context,
-                      OtherPersonProfileDescription(
-                        imageUrl: widget.imageUrl,
-                        name: widget.name,
-                        isOnline: widget.isOnline,
-                      ));
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Hero(
-                  tag: widget.imageUrl,
-                  child: ChatProfileWidget(
-                      imageUrl: widget.imageUrl,
-                      isOnline: widget.isOnline,
-                      hasStory: widget.hasStory),
+        appBar: chattileIndex.isNotEmpty
+            ? AppBar(
+                leading: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Icon(Icons.arrow_back_ios,
+                        color: AppColors.black, size: 20),
+                  ),
                 ),
-                SizedBox(width: 10.w),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 130.w,
-                      child: Text(widget.name,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ),
-                    SizedBox(height: 8),
-                    widget.marketplace != null && widget.marketplace!
-                        ? Text('Open now',
-                            style:
-                                TextStyle(fontSize: 13, color: AppColors.grey))
-                        : Container(),
-                    Text(widget.isOnline ? 'Active Now' : '',
-                        style: TextStyle(fontSize: 13, color: AppColors.grey)),
-                  ],
+                elevation: 1,
+                leadingWidth: 30,
+                titleSpacing: 5,
+                title: Text(chattileIndex.length.toString(),
+                    style: TextStyle(color: AppColors.black)),
+                actions: [
+                  SvgPicture.asset('assets/Forward.svg'),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/trash.svg', height: 18),
+                  SizedBox(width: 19),
+                  Icon(Icons.error_outline_outlined,
+                      color: AppColors.black, size: 16),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/note.svg', height: 18),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/pencil.svg', height: 18),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/copy.svg', height: 18),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/reply.svg', height: 18),
+                  SizedBox(width: 19),
+                ],
+              )
+            : AppBar(
+                toolbarHeight: 80,
+                elevation: 1,
+                leadingWidth: 20,
+                titleSpacing: 11.w,
+                leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+                title: GestureDetector(
+                  onTap: () {
+                    widget.name == 'Office Group'
+                        ? animatedScreenNavigator(
+                            context,
+                            GroupChatPage(
+                              imageUrl: widget.imageUrl,
+                              name: widget.name,
+                            ))
+                        : screenNavigator(
+                            context,
+                            OtherPersonProfileDescription(
+                              imageUrl: widget.imageUrl,
+                              name: widget.name,
+                              isOnline: widget.isOnline,
+                            ));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Hero(
+                        tag: widget.imageUrl,
+                        child: ChatProfileWidget(
+                            imageUrl: widget.imageUrl,
+                            isOnline: widget.isOnline,
+                            hasStory: widget.hasStory),
+                      ),
+                      SizedBox(width: 10.w),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 130.w,
+                            child: Text(widget.name,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                )),
+                          ),
+                          SizedBox(height: 8),
+                          widget.marketplace != null && widget.marketplace!
+                              ? Text('Open now',
+                                  style: TextStyle(
+                                      fontSize: 13, color: AppColors.grey))
+                              : Container(),
+                          Text(widget.isOnline ? 'Active Now' : '',
+                              style: TextStyle(
+                                  fontSize: 13, color: AppColors.grey)),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-          actions: [
-            SvgPicture.asset('assets/video.svg'),
-            SizedBox(width: 25.w),
-            SvgPicture.asset('assets/calling.svg'),
-            SinglechatPopupMenu(name: widget.name),
-          ],
-        ),
+                actions: [
+                  SvgPicture.asset('assets/video.svg'),
+                  SizedBox(width: 25.w),
+                  SvgPicture.asset('assets/calling.svg'),
+                  SinglechatPopupMenu(name: widget.name),
+                ],
+              ),
         body: Stack(
           children: [
             context.watch<SetChatbgCubit>().state.bgType ==
@@ -224,42 +260,68 @@ class _ChatScreenState extends State<ChatScreen> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                chattileIndex
-                                    .remove(messages[index].messageContent);
+                                chattileIndex.remove(index);
                               });
+                              // setState(() {
+                              //   chattileIndex
+                              //       .remove(messages[index].messageContent);
+                              // });
                             },
                             onLongPress: () {
-                              setState(() {
-                                chattileIndex
-                                    .add(messages[index].messageContent);
-                              });
+                              if (!chattileIndex.contains(index)) {
+                                setState(() {
+                                  chattileIndex.add(index);
+                                });
+                              } else {
+                                setState(() {
+                                  chattileIndex.remove(index);
+                                });
+                              }
                             },
-                            child: ReceivedMessageWidget(
-                              message: msg[index].messageContent,
-                              msgStatus: msg[index].msgStatus,
-                              time: msg[index].time,
-                              type: msg[index].messageType,
+                            child: Container(
+                              color: chattileIndex.contains(index)
+                                  ? AppColors.seconderyColor1
+                                  : AppColors.white,
+                              child: ReceivedMessageWidget(
+                                message: msg[index].messageContent,
+                                msgStatus: msg[index].msgStatus,
+                                time: msg[index].time,
+                                type: msg[index].messageType,
+                              ),
                             ),
                           ),
                         )
                       : GestureDetector(
                           onTap: () {
-                            setState(() {});
-                          },
-                          onLongPress: () async {
                             setState(() {
-                              chattileIndex.add(messages[index].messageContent);
+                              chattileIndex.remove(index);
                             });
                           },
-                          child: SentMessageWidget(
-                            doc: msg[index].docName,
-                            message: msg[index].messageContent,
-                            msgStatus: msg[index].msgStatus,
-                            time: msg[index].time,
-                            type: msg[index].type,
-                            image: msg[index].image_url,
-                            images: msg[index].images,
-                            numberofContact: msg[index].numberofContact,
+                          onLongPress: () async {
+                            if (!chattileIndex.contains(index)) {
+                              setState(() {
+                                chattileIndex.add(index);
+                              });
+                            } else {
+                              setState(() {
+                                chattileIndex.remove(index);
+                              });
+                            }
+                          },
+                          child: Container(
+                            color: chattileIndex.contains(index)
+                                ? AppColors.seconderyColor1
+                                : AppColors.white,
+                            child: SentMessageWidget(
+                              doc: msg[index].docName,
+                              message: msg[index].messageContent,
+                              msgStatus: msg[index].msgStatus,
+                              time: msg[index].time,
+                              type: msg[index].type,
+                              image: msg[index].image_url,
+                              images: msg[index].images,
+                              numberofContact: msg[index].numberofContact,
+                            ),
                           ),
                         ),
                 );
