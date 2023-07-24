@@ -28,6 +28,7 @@ class ReplyMessageTextField extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                width: 240.w,
                 height: 52,
                 margin: EdgeInsets.only(top: 5, left: 5),
                 decoration: BoxDecoration(

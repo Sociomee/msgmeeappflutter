@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -104,30 +105,73 @@ class SentMessageWidget extends StatelessWidget {
 
     final replyMessageText = Flexible(
       child: Container(
+        margin: EdgeInsets.only(top: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: Stack(
-                children: [
-                  Container(
-                      padding: const EdgeInsets.only(
-                          top: 10, left: 14, right: 18, bottom: 5),
-                      decoration: BoxDecoration(
-                        color:
-                            context.watch<ChatThemeCubit>().state.chatDeepColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(message,
+            Stack(
+              children: [
+                Container(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    decoration: BoxDecoration(
+                      color:
+                          context.watch<ChatThemeCubit>().state.chatDeepColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 200.w,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.lightgrey),
+                              color: AppColors.lightgrey1,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context
+                                      .watch<ReplyMsgCubit>()
+                                      .state
+                                      .replymodel
+                                      .owner,
+                                  style: TextStyle(
+                                    color: AppColors.black,
+                                    fontSize: 10.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  context
+                                      .watch<ReplyMsgCubit>()
+                                      .state
+                                      .replymodel
+                                      .msg,
+                                  style: TextStyle(
+                                    color: Color(0xFF555555),
+                                    fontSize: 10.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ]),
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(message,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)),
-                          SizedBox(height: 2),
-                          Row(
+                        ),
+                        SizedBox(height: 2),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(time,
@@ -135,9 +179,9 @@ class SentMessageWidget extends StatelessWidget {
                                       color: Colors.white, fontSize: 10)),
                               SizedBox(
                                 width: message.trim().length <= 6
-                                    ? 10
+                                    ? 115
                                     : message.trim().length <= 15
-                                        ? 20
+                                        ? 115
                                         : message.trim().length <= 21
                                             ? 80
                                             : 200,
@@ -146,20 +190,20 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],
-                          )
-                        ],
-                      )),
-                  Positioned(
-                    bottom: -1,
-                    right: -1,
-                    child: msgStatus == 'read'
-                        ? MessageStatus.read
-                        : msgStatus == 'send'
-                            ? MessageStatus.sent
-                            : MessageStatus.delivered,
-                  ),
-                ],
-              ),
+                          ),
+                        )
+                      ],
+                    )),
+                Positioned(
+                  bottom: -1,
+                  right: -1,
+                  child: msgStatus == 'read'
+                      ? MessageStatus.read
+                      : msgStatus == 'send'
+                          ? MessageStatus.sent
+                          : MessageStatus.delivered,
+                ),
+              ],
             ),
           ],
         ),
@@ -1014,7 +1058,9 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [replyMessageText],
+            children: [
+              replyMessageText,
+            ],
           ),
         );
       default:

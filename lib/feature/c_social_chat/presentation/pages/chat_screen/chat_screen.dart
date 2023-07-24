@@ -433,20 +433,39 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   type: MessageType.contact,
                                                 ))
                                             : context
-                                                .read<AddMessageCubit>()
-                                                .addMessage(ChatMessage(
-                                                  messageContent:
-                                                      messageController.text,
-                                                  messageType: 'sender',
-                                                  msgStatus: 'send',
-                                                  time: getCurrentTime(),
-                                                  type: MessageType.text,
-                                                ));
-
+                                                    .read<ReplyMsgCubit>()
+                                                    .state
+                                                    .reply
+                                                ? context
+                                                    .read<AddMessageCubit>()
+                                                    .addMessage(ChatMessage(
+                                                      messageContent:
+                                                          messageController
+                                                              .text,
+                                                      messageType: 'sender',
+                                                      msgStatus: 'send',
+                                                      time: getCurrentTime(),
+                                                      type: MessageType
+                                                          .replyMessage,
+                                                    ))
+                                                : context
+                                                    .read<AddMessageCubit>()
+                                                    .addMessage(ChatMessage(
+                                                      messageContent:
+                                                          messageController
+                                                              .text,
+                                                      messageType: 'sender',
+                                                      msgStatus: 'send',
+                                                      time: getCurrentTime(),
+                                                      type: MessageType.text,
+                                                    ));
                                         messageController.clear();
                                         context
                                             .read<ShowContactTextField>()
                                             .getinitilstate();
+                                        context
+                                            .read<ReplyMsgCubit>()
+                                            .closeReplyMsg();
                                       } else if (context
                                           .read<ShowAudioRecorder>()
                                           .state) {
@@ -480,7 +499,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context
                                             .read<ReplyMsgCubit>()
                                             .closeReplyMsg();
-                                        print('reply');
                                       } else if (context
                                           .read<ShowContactTextField>()
                                           .state) {
