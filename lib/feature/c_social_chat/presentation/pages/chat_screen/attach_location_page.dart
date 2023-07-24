@@ -133,36 +133,33 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: AppColors.black.withOpacity(.5)),
-                              child: Icon(
-                                Icons.fullscreen_exit_outlined,
-                                color: AppColors.white,
-                                size: 26,
-                              ),
-                            )
+                              child: Icon(Icons.fullscreen_exit_outlined,
+                                  color: AppColors.white, size: 26))
                           : SvgPicture.asset('assets/expand.svg')))
             ],
           ),
           SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Share Live Location',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Share Live Location',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
           SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: GestureDetector(
               onTap: () {
-                context.read<AddMessageCubit>().addMessage(ChatMessage(
-                      messageContent: '',
-                      messageType: 'sender',
-                      msgStatus: 'send',
-                      time: getCurrentTime(),
-                      type: MessageType.location,
-                    ));
-                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ShareLiveLocationPopup();
+                    });
+                // context.read<AddMessageCubit>().addMessage(ChatMessage(
+                //     messageContent: '',
+                //     messageType: 'sender',
+                //     msgStatus: 'send',
+                //     time: getCurrentTime(),
+                //     type: MessageType.location));
+                // Navigator.pop(context);
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -173,10 +170,8 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/share_location.svg'),
-                    Text(
-                      'Share your live location',
-                      style: TextStyle(color: AppColors.white),
-                    )
+                    Text('Share your live location',
+                        style: TextStyle(color: AppColors.white))
                   ],
                 ),
               ),
@@ -295,6 +290,127 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                       }),
                 )
         ]),
+      ),
+    );
+  }
+}
+
+class ShareLiveLocationPopup extends StatelessWidget {
+  const ShareLiveLocationPopup({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              height: 190,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: MapViewWidget())),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text('Share your live location',
+                  style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500))),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  height: 36,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  alignment: Alignment.center,
+                  decoration: ShapeDecoration(
+                      color: AppColors.darkgreen,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6))),
+                  child: Text('15 Min',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500))),
+              Container(
+                  height: 36,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  alignment: Alignment.center,
+                  decoration: ShapeDecoration(
+                      color: AppColors.lightgrey,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6))),
+                  child: Text('1 Hour',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500))),
+              Container(
+                  height: 36,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  alignment: Alignment.center,
+                  decoration: ShapeDecoration(
+                      color: AppColors.lightgrey,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6))),
+                  child: Text('2 Hour',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500)))
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                flex: 6,
+                child: SizedBox(
+                  height: 30,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightgrey1,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Image.asset('assets/attach.png'),
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
