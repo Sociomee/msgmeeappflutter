@@ -1,3 +1,5 @@
+// ignore_for_file: argument_type_not_assignable_to_error_handler
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +62,10 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
 
   void pickGalleryPic() async {
     // Pick an image
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image =
+        await _picker.pickImage(source: ImageSource.gallery).catchError(() {
+      throw 'error';
+    });
     if (image != null) {
       for (var i = 0; i < widget.images!.length; i++) {
         setState(() {
@@ -72,7 +77,11 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
 
   void pickCameraPic() async {
     // Capture a photo
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? photo =
+        await _picker.pickImage(source: ImageSource.camera).catchError(() {
+      throw 'error';
+    });
+    ;
     if (photo != null) {
       setState(() {
         imagelist.add(File(photo.path));

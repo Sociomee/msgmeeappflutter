@@ -16,6 +16,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
@@ -62,27 +63,40 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void pickGalleryPic() async {
     // Pick an image
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      animatedScreenNavigator(
-          context,
-          ImagePreViewPage(
-            images: [image],
-            profileImage: widget.imageUrl,
-          ));
+
+    var status = await Permission.camera.status;
+    if (status.isDenied) {
+      openAppSettings();
+    } else if (status.isGranted) {
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+      if (image != null) {
+        animatedScreenNavigator(
+            context,
+            ImagePreViewPage(
+              images: [image],
+              profileImage: widget.imageUrl,
+            ));
+      }
     }
   }
 
   void pickCameraPic() async {
     // Capture a photo
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-    if (photo != null) {
-      animatedScreenNavigator(
-          context,
-          ImagePreViewPage(
-            images: [photo],
-            profileImage: widget.imageUrl,
-          ));
+
+    var status = await Permission.camera.status;
+    if (status.isDenied) {
+      openAppSettings();
+    } else if (status.isGranted) {
+      final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+      if (photo != null) {
+        animatedScreenNavigator(
+            context,
+            ImagePreViewPage(
+              images: [photo],
+              profileImage: widget.imageUrl,
+            ));
+      }
     }
   }
 

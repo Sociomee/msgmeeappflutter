@@ -10,6 +10,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_attachment.
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/doc_sending_page.dart';
 import 'package:msgmee/helper/getpdf_size.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../attach_contact_page.dart';
 import '../attach_location_page.dart';
@@ -48,16 +49,20 @@ class _AttachedIconState extends State<AttachedIcon> {
   List<String> pdfNames = [];
   void pickGalleryPic() async {
     // Pick an image
-    final List<XFile>? images = await _picker.pickMultiImage();
-    if (images != null) {
-      animatedScreenNavigator(
-          context,
-          ImagePreViewPage(
-            profileImage: widget.profileImage,
-            images: images,
-          ));
-    } else {
-      return null;
+
+    var status = await Permission.camera.status;
+    if (status.isDenied) {
+      openAppSettings();
+    } else if (status.isGranted) {
+      final List<XFile>? images = await _picker.pickMultiImage();
+      if (images != null && images.length != 0) {
+        animatedScreenNavigator(
+            context,
+            ImagePreViewPage(
+              profileImage: widget.profileImage,
+              images: images,
+            ));
+      }
     }
   }
 
@@ -75,16 +80,30 @@ class _AttachedIconState extends State<AttachedIcon> {
 
   void pickCameraPic() async {
     // Capture a photo
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-    if (photo != null) {
-      animatedScreenNavigator(
-          context,
-          ImagePreViewPage(
-            images: [photo],
-            profileImage: widget.profileImage,
-          ));
-    } else {
-      return null;
+    // final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    // if (photo != null) {
+    //   animatedScreenNavigator(
+    //       context,
+    //       ImagePreViewPage(
+    //         images: [photo],
+    //         profileImage: widget.profileImage,
+    //       ));
+    // } else {
+    //   return null;
+    // }
+    var status = await Permission.camera.status;
+    if (status.isDenied) {
+      openAppSettings();
+    } else if (status.isGranted) {
+      final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+      if (photo != null) {
+        animatedScreenNavigator(
+            context,
+            ImagePreViewPage(
+              images: [photo],
+              profileImage: widget.profileImage,
+            ));
+      }
     }
   }
 
