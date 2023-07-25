@@ -240,6 +240,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
 
                             Expanded(
                                 child: MessageTextFieldWidget(
+                              imageTextfield: false,
                               messageController: messageController,
                               onChanged: (e) {
                                 if (e.isNotEmpty) {

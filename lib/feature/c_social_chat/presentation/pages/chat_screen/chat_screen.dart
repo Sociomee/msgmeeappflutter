@@ -398,6 +398,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             SizedBox(width: 10),
                             Expanded(
                                 child: MessageTextFieldWidget(
+                              imageTextfield: false,
                               messageController: messageController,
                               onChanged: (e) {
                                 if (e.isNotEmpty) {

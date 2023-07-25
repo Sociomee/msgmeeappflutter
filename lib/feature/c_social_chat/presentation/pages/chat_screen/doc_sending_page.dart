@@ -126,6 +126,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                               child: SizedBox(
                             height: 40,
                             child: MessageTextFieldWidget(
+                              imageTextfield: false,
                               messageController: messageController,
                               color: AppColors.white,
                               onChanged: (e) {},
@@ -216,6 +217,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                   child: SizedBox(
                                 height: 40,
                                 child: MessageTextFieldWidget(
+                                  imageTextfield: false,
                                   messageController: messageController,
                                   color: AppColors.white,
                                   onChanged: (e) {},

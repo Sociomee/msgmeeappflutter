@@ -7,14 +7,17 @@ import '../../../cubit/show_attachment.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
 class MessageTextFieldWidget extends StatelessWidget {
-  const MessageTextFieldWidget(
-      {super.key,
-      required this.messageController,
-      required this.onChanged,
-      this.color});
+  const MessageTextFieldWidget({
+    super.key,
+    required this.messageController,
+    required this.onChanged,
+    this.color,
+    required this.imageTextfield,
+  });
   final TextEditingController messageController;
   final ValueChanged<String>? onChanged;
   final Color? color;
+  final bool imageTextfield;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -44,9 +47,8 @@ class MessageTextFieldWidget extends StatelessWidget {
           height: 10,
           child: Center(
             child: SvgPicture.asset(
-              'assets/smiley.svg',
-              fit: BoxFit.contain,
-            ),
+                imageTextfield ? 'assets/smiley_dark.svg' : 'assets/smiley.svg',
+                fit: BoxFit.contain),
           ),
         ),
       ),

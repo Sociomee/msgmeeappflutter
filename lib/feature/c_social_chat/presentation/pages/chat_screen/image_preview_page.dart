@@ -278,6 +278,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                 child: SizedBox(
               height: 40,
               child: MessageTextFieldWidget(
+                imageTextfield: true,
                 messageController: messageController,
                 color: AppColors.white,
                 onChanged: (e) {},
@@ -317,7 +318,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                   color: AppColors.lightgrey1,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: Image.asset('assets/attach.png'),
+                child: SvgPicture.asset('assets/send.svg'),
               ),
             )
           ],
