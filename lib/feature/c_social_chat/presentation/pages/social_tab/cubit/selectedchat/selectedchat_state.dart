@@ -8,6 +8,7 @@ class SelectedchatState extends Equatable {
   final bool mute;
   final bool pinned;
   final bool selctmode;
+
   SelectedchatState(
       {required this.selectedchat,
       required this.starClicked,

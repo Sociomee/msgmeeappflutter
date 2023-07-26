@@ -297,6 +297,7 @@ class ShareLiveLocationPopup extends StatefulWidget {
 
 class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
   late TextEditingController controller;
+  int selectedIndex = 0;
   @override
   void initState() {
     controller = TextEditingController();
@@ -342,51 +343,78 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      height: 36,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 0),
-                      alignment: Alignment.center,
-                      decoration: ShapeDecoration(
-                          color: AppColors.darkgreen,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6))),
-                      child: Text('15 Min',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500))),
-                  Container(
-                      height: 36,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 0),
-                      alignment: Alignment.center,
-                      decoration: ShapeDecoration(
-                          color: AppColors.lightgrey,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6))),
-                      child: Text('1 Hour',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500))),
-                  Container(
-                      height: 36,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 0),
-                      alignment: Alignment.center,
-                      decoration: ShapeDecoration(
-                          color: AppColors.lightgrey,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6))),
-                      child: Text('2 Hour',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500)))
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 0;
+                      });
+                    },
+                    child: Container(
+                        height: 36,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
+                        alignment: Alignment.center,
+                        decoration: ShapeDecoration(
+                            color: selectedIndex == 0
+                                ? AppColors.darkgreen
+                                : AppColors.lightgrey,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6))),
+                        child: Text('15 Min',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500))),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 1;
+                      });
+                    },
+                    child: Container(
+                        height: 36,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
+                        alignment: Alignment.center,
+                        decoration: ShapeDecoration(
+                            color: selectedIndex == 1
+                                ? AppColors.darkgreen
+                                : AppColors.lightgrey,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6))),
+                        child: Text('1 Hour',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500))),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 2;
+                      });
+                    },
+                    child: Container(
+                        height: 36,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
+                        alignment: Alignment.center,
+                        decoration: ShapeDecoration(
+                            color: selectedIndex == 2
+                                ? AppColors.darkgreen
+                                : AppColors.lightgrey,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6))),
+                        child: Text('2 Hour',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500))),
+                  )
                 ],
               ),
               SizedBox(height: 10),
