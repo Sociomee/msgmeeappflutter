@@ -93,11 +93,12 @@ class _NameScreenState extends State<NameScreen> {
             actions: [
               GestureDetector(
                 onTap: () {
-                  screenNavigator(
-                      context,
-                      SetupProfileScreen(
-                        name: nameController.text,
-                      ));
+                  if (formKey.currentState!.validate() &&
+                      nameController.text.isNotEmpty) {
+                    context
+                        .read<CreateUserCubit>()
+                        .createUser(widget.phone, nameController.text);
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 18.0, right: 18),

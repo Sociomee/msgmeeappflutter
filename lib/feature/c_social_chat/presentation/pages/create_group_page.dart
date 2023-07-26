@@ -22,6 +22,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   late TextEditingController nameController;
   late TextEditingController summeyConroller;
   final ImagePicker _picker = ImagePicker();
+  GlobalKey<ScaffoldState> _bottomSheetKey = GlobalKey();
+
   bool isValid = false;
   File? imageFile;
   int remainchar = 64;
@@ -46,6 +48,29 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
       });
     }
   }
+
+  void _showBottomSheet() {
+    _bottomSheetKey.currentState!.showBottomSheet(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      (context) {
+        return CustomBottomModelSheet(
+          cameraClick: () {
+            pickCprofilePic();
+          },
+          galleryClick: () {
+            pickGprofilePic();
+          },
+        );
+      },
+    );
+  }
+
+  // void _closeBottomSheet() {
+  //   _bottomSheetKey.currentState?.hideCurrentSnackBar();
+  //   _bottomSheetKey.currentState?.hideBottomSheet();
+  // }
 
   @override
   void initState() {
@@ -117,9 +142,11 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                             return CustomBottomModelSheet(
                               cameraClick: () {
                                 pickCprofilePic();
+                                Navigator.pop(context);
                               },
                               galleryClick: () {
                                 pickGprofilePic();
+                                Navigator.pop(context);
                               },
                             );
                           });
