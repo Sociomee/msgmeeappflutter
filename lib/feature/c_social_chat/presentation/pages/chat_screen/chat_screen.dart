@@ -533,14 +533,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                       }
                                     },
                                     child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightgrey1,
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Image.asset('assets/attach.png'),
-                                    ),
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.lightgrey1,
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child:
+                                            Image.asset('assets/attach.png')),
                                   )
                                 : GestureDetector(
                                     onTap: () {
@@ -565,7 +565,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
-                //?showing reply message textfield
+//?    showing reply message textfield
                 context.watch<ReplyMsgCubit>().state.reply
                     ? Positioned(
                         bottom: 10,
@@ -586,7 +586,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       )
                     : Container(),
-                //showing contack sender textfield widget
+  //?   showing contack sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,
@@ -608,7 +608,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       )
                     : Container(),
 
-                //showing audio recorder widget
+      //?   showing audio recorder widget
                 context.watch<ShowAudioRecorder>().state
                     ? Positioned(
                         bottom: 10, left: 86, child: AudioRecordWidget())

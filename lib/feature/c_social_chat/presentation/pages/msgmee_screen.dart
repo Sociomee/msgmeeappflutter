@@ -109,10 +109,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                     size: 18,
                                   ),
                       ),
-                      SizedBox(width: 19),
-                      Icon(Icons.archive_outlined,
-                          color: AppColors.black, size: 18),
-                      SizedBox(width: 19),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 19),
+                        child: Icon(Icons.archive_outlined,
+                            color: AppColors.black, size: 18),
+                      ),
                       GestureDetector(
                         onTap: () {
                           context.read<SelectedchatCubit>().pinClicked();
@@ -128,18 +129,19 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                 ),
                               ),
                       ),
-                      SizedBox(width: 19),
                       GestureDetector(
                         onTap: () {
                           context.read<SelectedchatCubit>().muteClicked();
                         },
-                        child: Icon(
-                          Icons.volume_mute_outlined,
-                          color: AppColors.black,
-                          size: 18,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 19),
+                          child: Icon(
+                            Icons.volume_mute_outlined,
+                            color: AppColors.black,
+                            size: 18,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 19),
                       Icon(
                         Icons.delete_outline,
                         color: AppColors.black,

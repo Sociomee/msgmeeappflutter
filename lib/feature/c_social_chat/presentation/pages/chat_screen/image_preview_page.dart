@@ -127,12 +127,18 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
           backgroundImage: NetworkImage(widget.profileImage),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Center(
-              child: SvgPicture.asset(
-                'assets/trash.svg',
-                fit: BoxFit.contain,
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+              imagelist.clear();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/trash.svg',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
@@ -320,13 +326,12 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                   }
                 } else if (imagelist.length > 4) {
                   context.read<AddMessageCubit>().addMessage(ChatMessage(
-                        messageContent: messageController.text,
-                        messageType: 'sender',
-                        msgStatus: 'send',
-                        time: getCurrentTime(),
-                        type: MessageType.multipleImage,
-                        images: imagelist,
-                      ));
+                      messageContent: messageController.text,
+                      messageType: 'sender',
+                      msgStatus: 'send',
+                      time: getCurrentTime(),
+                      type: MessageType.multipleImage,
+                      images: imagelist));
                 }
 
                 Navigator.pop(context);

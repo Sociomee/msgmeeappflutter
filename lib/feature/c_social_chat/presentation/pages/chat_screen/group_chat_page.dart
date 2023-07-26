@@ -292,11 +292,21 @@ class _GroupChatPageState extends State<GroupChatPage> {
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
-                        CircleAvatar(
-                            radius: 20,
-                            backgroundColor: AppColors.grey,
-                            backgroundImage: NetworkImage(
-                                dummyGroupParticipantsData[index].imageUrl)),
+                        Container(
+                          height: 40.w,
+                          width: 40.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: AppColors.black.withOpacity(.2),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.6),
+                                      BlendMode.dstATop),
+                                  image: NetworkImage(
+                                      dummyGroupParticipantsData[index]
+                                          .imageUrl))),
+                        ),
                         SizedBox(width: 10),
                         Text(dummyGroupParticipantsData[index].name,
                             style: TextStyle(

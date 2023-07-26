@@ -123,7 +123,9 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                         borderSide: BorderSide(
                             width: 2, color: AppColors.primaryColor)),
                     hintText: 'Enter your mobile number',
-                    hintStyle: TextStyle(color: AppColors.inactivegrey)),
+                    hintStyle: TextStyle(
+                      color: Color(0xFFC4C5C9),
+                    )),
                 onTap: () {
                   setState(() {
                     textFieldclick = true;
