@@ -399,14 +399,36 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                       child: TextFormField(
                         controller: controller,
                         decoration: InputDecoration(
-                          hintText: "Message",
+                          hintText: "Add message",
+                          hintStyle: TextStyle(
+                            color: Color(0xFF4E4E4E),
+                            fontSize: 13,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          filled: true,
+                          fillColor: AppColors.lightgrey1,
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  BorderSide(color: AppColors.lightgrey)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  BorderSide(color: AppColors.lightgrey)),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  BorderSide(color: AppColors.lightgrey)),
+                          suffixIcon: SizedBox(
+                            width: 10,
+                            height: 10,
+                            child: Center(
+                              child: SvgPicture.asset('assets/smiley.svg',
+                                  fit: BoxFit.contain),
+                            ),
                           ),
                         ),
                       ),
@@ -425,15 +447,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                         Navigator.pop(context);
                         Navigator.pop(context);
                       },
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          color: AppColors.lightgrey1,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Image.asset('assets/attach.png'),
-                      ),
+                      child: Image.asset('assets/attach.png'),
                     ),
                   )
                 ],

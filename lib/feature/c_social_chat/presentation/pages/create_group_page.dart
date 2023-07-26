@@ -371,9 +371,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                   Navigator.pop(context);
                 },
                 title: 'CONTINUE',
-                color:
-                    // context.watch<NumberValidationCubit>().state.isvalid
-                    AppColors.primaryColor,
+                color: AppColors.primaryColor,
               ),
             ),
             SizedBox(height: 30.h),
