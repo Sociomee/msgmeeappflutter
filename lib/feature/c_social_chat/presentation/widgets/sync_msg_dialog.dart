@@ -14,7 +14,7 @@ class SyncDialogWidget extends StatefulWidget {
 class _SyncDialogWidgetState extends State<SyncDialogWidget> {
   bool accountfound = false;
   bool useotherac = false;
-  bool showpassword = false;
+  bool showpassword = true;
   final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;

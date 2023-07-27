@@ -345,8 +345,8 @@ class SentMessageWidget extends StatelessWidget {
                               width: message.length == 0
                                   ? 130.w
                                   : message.trim().length <= 21
-                                      ? 80
-                                      : 200,
+                                      ? 120
+                                      : 130.w,
                             ),
                             Text(msgStatus,
                                 style: const TextStyle(

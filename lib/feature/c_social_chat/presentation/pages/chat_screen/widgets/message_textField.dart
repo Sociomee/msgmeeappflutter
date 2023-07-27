@@ -154,7 +154,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
           SizedBox(height: 10),
           SizedBox(
             height: 30,
-            width: 270.w,
+            width: 278.w,
             child: TextFormField(
               onChanged: onChanged,
               cursorColor: AppColors.primaryColor,
@@ -164,26 +164,28 @@ class ContactMessageFieldWidget extends StatelessWidget {
               },
               decoration: InputDecoration(
                 contentPadding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
+                    EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 0),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
-                        BorderSide(width: 2, color: AppColors.lightgrey1)),
+                        BorderSide(width: 0, color: AppColors.lightgrey1)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
-                        BorderSide(width: 2, color: AppColors.lightgrey1)),
+                        BorderSide(width: 0, color: AppColors.lightgrey1)),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
-                        BorderSide(width: 2, color: AppColors.lightgrey1)),
+                        BorderSide(width: 0, color: AppColors.lightgrey1)),
                 fillColor: color ?? AppColors.lightgrey1,
                 filled: true,
                 hintText: "Type your message",
                 hintStyle: TextStyle(color: Colors.black54),
+                suffixIconConstraints:
+                    BoxConstraints(minWidth: 31, maxHeight: 30),
                 suffixIcon: SizedBox(
-                  width: 10,
-                  height: 10,
+                  width: 18,
+                  height: 18,
                   child: Center(
                     child: SvgPicture.asset(
                       'assets/smiley.svg',
