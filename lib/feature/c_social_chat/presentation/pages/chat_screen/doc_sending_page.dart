@@ -282,7 +282,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                               AddMessageCubit>()
                                                           .addMessage(
                                                               ChatMessage(
-                                                            messageContent: '',
+                                                            messageContent:
+                                                                messageController
+                                                                    .text,
                                                             messageType:
                                                                 'sender',
                                                             msgStatus: 'send',

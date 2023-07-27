@@ -75,9 +75,9 @@ class SentMessageWidget extends StatelessWidget {
                                     ? 10
                                     : message.trim().length <= 15
                                         ? 20
-                                        : message.trim().length <= 21
-                                            ? 80
-                                            : 200,
+                                        : message.trim().length <= 25
+                                            ? 95
+                                            : 170,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(
@@ -337,6 +337,7 @@ class SentMessageWidget extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            SizedBox(width: 5),
                             Text(time,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 10)),
@@ -748,84 +749,30 @@ class SentMessageWidget extends StatelessWidget {
                     color: context.watch<ChatThemeCubit>().state.chatDeepColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 5),
-                        decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                  child: message.isEmpty
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            doc != null
-                                ? Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Jocelyn Westervelt',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      SizedBox(height: 6),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/document.svg'),
-                                          SizedBox(width: 6),
-                                          SizedBox(
-                                            width: 120.w,
-                                            child: Text(
-                                              doc!.split('/').first,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 10.sp,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w400,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            doc != null
-                                ? Container(
-                                    height: 48,
-                                    width: 48,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.seconderyColor1,
-                                        borderRadius: BorderRadius.only(
-                                            bottomRight: Radius.circular(10),
-                                            topRight: Radius.circular(10))),
-                                    child: Center(
-                                        child: doc!
-                                                    .split('/')
-                                                    .first
-                                                    .split('.')
-                                                    .last
-                                                    .toString() ==
-                                                'pdf'
-                                            ? SvgPicture.asset('assets/docx.svg',
-                                                height: 35)
-                                            : doc!
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: doc != null
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Center(
+                                            child: doc!
                                                         .split('/')
                                                         .first
                                                         .split('.')
                                                         .last
                                                         .toString() ==
-                                                    'mp3'
-                                                ? SvgPicture.asset('assets/mp3.svg',
+                                                    'pdf'
+                                                ? SvgPicture.asset('assets/docx.svg',
                                                     height: 35)
                                                 : doc!
                                                             .split('/')
@@ -833,8 +780,8 @@ class SentMessageWidget extends StatelessWidget {
                                                             .split('.')
                                                             .last
                                                             .toString() ==
-                                                        'mp4'
-                                                    ? SvgPicture.asset('assets/mp4.svg',
+                                                        'mp3'
+                                                    ? SvgPicture.asset('assets/mp3.svg',
                                                         height: 35)
                                                     : doc!
                                                                 .split('/')
@@ -842,44 +789,254 @@ class SentMessageWidget extends StatelessWidget {
                                                                 .split('.')
                                                                 .last
                                                                 .toString() ==
-                                                            'png'
-                                                        ? SvgPicture.asset(
-                                                            'assets/png.svg',
+                                                            'mp4'
+                                                        ? SvgPicture.asset('assets/mp4.svg',
                                                             height: 35)
-                                                        : SvgPicture.asset(
-                                                            'assets/jpg.svg',
-                                                            height: 35)),
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      ),
-                      message == ""
-                          ? SizedBox(height: 5)
-                          : Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8.0, bottom: 2, top: 3),
-                              child: Text(message,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 14)),
+                                                        : doc!
+                                                                    .split('/')
+                                                                    .first
+                                                                    .split('.')
+                                                                    .last
+                                                                    .toString() ==
+                                                                'png'
+                                                            ? SvgPicture.asset(
+                                                                'assets/png.svg',
+                                                                height: 35)
+                                                            : SvgPicture.asset(
+                                                                'assets/jpg.svg',
+                                                                height: 35)),
+                                        SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(
+                                              width: 120.w,
+                                              child: Text(
+                                                doc!.split('/').first,
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w400,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                              ),
+                                            ),
+                                            Text(
+                                              '105 Kb',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : Container(),
                             ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(time,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            SizedBox(width: 110.w),
-                            Text(msgStatus,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8.0, right: 10, top: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(time,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 10)),
+                                  SizedBox(width: 95.w),
+                                  Text(msgStatus,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 10)),
+                                ],
+                              ),
+                            )
                           ],
-                        ),
-                      )
-                    ],
-                  )),
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  doc != null
+                                      ? doc!
+                                                  .split('/')
+                                                  .first
+                                                  .split('.')
+                                                  .last
+                                                  .toString() ==
+                                              'pdf'
+                                          ? SvgPicture.asset('assets/docx.svg',
+                                              height: 35)
+                                          : doc!
+                                                      .split('/')
+                                                      .first
+                                                      .split('.')
+                                                      .last
+                                                      .toString() ==
+                                                  'mp3'
+                                              ? SvgPicture.asset(
+                                                  'assets/mp3.svg',
+                                                  height: 35)
+                                              : doc!
+                                                          .split('/')
+                                                          .first
+                                                          .split('.')
+                                                          .last
+                                                          .toString() ==
+                                                      'mp4'
+                                                  ? SvgPicture.asset(
+                                                      'assets/mp4.svg',
+                                                      height: 35)
+                                                  : doc!
+                                                              .split('/')
+                                                              .first
+                                                              .split('.')
+                                                              .last
+                                                              .toString() ==
+                                                          'png'
+                                                      ? SvgPicture.asset(
+                                                          'assets/png.svg',
+                                                          height: 35)
+                                                      : SvgPicture.asset(
+                                                          'assets/jpg.svg',
+                                                          height: 35)
+                                      : Container(),
+                                  doc != null
+                                      ? Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Jocelyn Westervelt',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            SizedBox(height: 6),
+                                            Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                    'assets/document.svg'),
+                                                SizedBox(width: 6),
+                                                SizedBox(
+                                                  width: 120.w,
+                                                  child: Text(
+                                                    doc!.split('/').first,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 10.sp,
+                                                        fontFamily: 'Poppins',
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      : Container(),
+                                  doc != null
+                                      ? Container(
+                                          height: 48,
+                                          width: 48,
+                                          decoration: BoxDecoration(
+                                              color: AppColors.seconderyColor1,
+                                              borderRadius: BorderRadius.only(
+                                                  bottomRight:
+                                                      Radius.circular(10),
+                                                  topRight:
+                                                      Radius.circular(10))),
+                                          child: Center(
+                                              child: doc!
+                                                          .split('/')
+                                                          .first
+                                                          .split('.')
+                                                          .last
+                                                          .toString() ==
+                                                      'pdf'
+                                                  ? SvgPicture.asset(
+                                                      'assets/docx.svg',
+                                                      height: 35)
+                                                  : doc!
+                                                              .split('/')
+                                                              .first
+                                                              .split('.')
+                                                              .last
+                                                              .toString() ==
+                                                          'mp3'
+                                                      ? SvgPicture.asset(
+                                                          'assets/mp3.svg',
+                                                          height: 35)
+                                                      : doc!
+                                                                  .split('/')
+                                                                  .first
+                                                                  .split('.')
+                                                                  .last
+                                                                  .toString() ==
+                                                              'mp4'
+                                                          ? SvgPicture.asset(
+                                                              'assets/mp4.svg',
+                                                              height: 35)
+                                                          : doc!.split('/').first.split('.').last.toString() ==
+                                                                  'png'
+                                                              ? SvgPicture.asset(
+                                                                  'assets/png.svg',
+                                                                  height: 35)
+                                                              : SvgPicture.asset(
+                                                                  'assets/jpg.svg',
+                                                                  height: 35)),
+                                        )
+                                      : Container(),
+                                ],
+                              ),
+                            ),
+                            message == ""
+                                ? SizedBox(height: 5)
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, bottom: 2, top: 3),
+                                    child: Text(message,
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 14)),
+                                  ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(time,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 10)),
+                                  SizedBox(width: 110.w),
+                                  Text(msgStatus,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 10)),
+                                ],
+                              ),
+                            )
+                          ],
+                        )),
               Positioned(
                 bottom: -2,
                 right: 0,
