@@ -87,6 +87,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                 size: 20.h,
               ),
             )),
+        centerTitle: false,
         leadingWidth: 30.w,
         titleSpacing: 15.w,
         title: Text(

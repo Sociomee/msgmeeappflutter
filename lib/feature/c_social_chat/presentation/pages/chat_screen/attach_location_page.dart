@@ -220,7 +220,12 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
               : Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: Text('Popular Nearby Locations'),
+                  child: Text(
+                    'Popular Nearby Locations',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 135, 135, 135),
+                    ),
+                  ),
                 ),
           expand
               ? Container()
@@ -275,7 +280,12 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                                   ],
                                 ),
                                 SizedBox(height: 5),
-                                Text(locations[index].subtitle),
+                                Text(
+                                  locations[index].subtitle,
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 135, 135, 135),
+                                  ),
+                                ),
                               ],
                             )
                           ],

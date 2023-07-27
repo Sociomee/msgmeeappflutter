@@ -25,21 +25,20 @@ class ProfileViewDialog extends StatelessWidget {
               },
               child: Image.network(imageUrl,
                   height: 328, width: 328, fit: BoxFit.cover)),
-          Opacity(
-            opacity: 0.63,
-            child: Container(
-              height: 42,
-              width: 328,
-              padding: EdgeInsets.only(
-                left: 17,
-                top: 8,
-                bottom: 8,
-                right: 17,
-              ),
-              decoration: BoxDecoration(color: AppColors.black),
-              child: Text(
-                profilename,
-                style: TextStyle(color: AppColors.white, fontSize: 18),
+          Positioned(
+            top: 0,
+            child: Opacity(
+              opacity: 0.63,
+              child: Container(
+                height: 42,
+                width: 328,
+                padding:
+                    EdgeInsets.only(left: 17, top: 8, bottom: 8, right: 17),
+                decoration: BoxDecoration(color: AppColors.black),
+                child: Text(
+                  profilename,
+                  style: TextStyle(color: AppColors.white, fontSize: 18),
+                ),
               ),
             ),
           ),

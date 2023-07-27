@@ -16,15 +16,19 @@ class MediaAndDocScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           leadingWidth: 40,
-          titleSpacing: 0,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.black,
-              )),
+          titleSpacing: 5,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                )),
+          ),
           title: Text(
             profilename,
             style: TextStyle(
