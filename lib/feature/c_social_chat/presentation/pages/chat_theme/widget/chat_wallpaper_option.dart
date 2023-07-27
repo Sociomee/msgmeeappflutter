@@ -63,8 +63,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 150.w,
-                      width: 150.w,
+                      height: 155.w,
+                      width: 155.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: context.watch<ChooseSolidColorCubit>().state),
@@ -96,8 +96,8 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           context.watch<ChooseImageWallpaperCubit>().state,
-                          height: 150.w,
-                          width: 150.w,
+                          height: 155.w,
+                          width: 155.w,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -130,14 +130,14 @@ class _WallpaperOptionsWidgetState extends State<WallpaperOptionsWidget> {
                   child: imageFile != null
                       ? Image.file(
                           File(imageFile!.path),
-                          height: 150.w,
-                          width: 150.w,
+                          height: 155.w,
+                          width: 155.w,
                           fit: BoxFit.cover,
                         )
                       : Image.network(
                           phoneImg,
-                          height: 150.w,
-                          width: 150.w,
+                          height: 155.w,
+                          width: 155.w,
                           fit: BoxFit.cover,
                         )),
               SizedBox(height: 5),

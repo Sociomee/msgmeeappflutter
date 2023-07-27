@@ -871,50 +871,6 @@ class SentMessageWidget extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   doc != null
-                                      ? doc!
-                                                  .split('/')
-                                                  .first
-                                                  .split('.')
-                                                  .last
-                                                  .toString() ==
-                                              'pdf'
-                                          ? SvgPicture.asset('assets/docx.svg',
-                                              height: 35)
-                                          : doc!
-                                                      .split('/')
-                                                      .first
-                                                      .split('.')
-                                                      .last
-                                                      .toString() ==
-                                                  'mp3'
-                                              ? SvgPicture.asset(
-                                                  'assets/mp3.svg',
-                                                  height: 35)
-                                              : doc!
-                                                          .split('/')
-                                                          .first
-                                                          .split('.')
-                                                          .last
-                                                          .toString() ==
-                                                      'mp4'
-                                                  ? SvgPicture.asset(
-                                                      'assets/mp4.svg',
-                                                      height: 35)
-                                                  : doc!
-                                                              .split('/')
-                                                              .first
-                                                              .split('.')
-                                                              .last
-                                                              .toString() ==
-                                                          'png'
-                                                      ? SvgPicture.asset(
-                                                          'assets/png.svg',
-                                                          height: 35)
-                                                      : SvgPicture.asset(
-                                                          'assets/jpg.svg',
-                                                          height: 35)
-                                      : Container(),
-                                  doc != null
                                       ? Column(
                                           mainAxisSize: MainAxisSize.min,
                                           crossAxisAlignment:
@@ -1013,14 +969,14 @@ class SentMessageWidget extends StatelessWidget {
                                 ? SizedBox(height: 5)
                                 : Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 8.0, bottom: 2, top: 3),
+                                        left: 8.0, bottom: 5, top: 5),
                                     child: Text(message,
                                         style: const TextStyle(
                                             color: Colors.white, fontSize: 14)),
                                   ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(left: 8.0, right: 10),
+                                  const EdgeInsets.only(left: 5.0, right: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

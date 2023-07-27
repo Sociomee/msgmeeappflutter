@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../widgets/broadcasts_widget.dart';
@@ -17,17 +16,22 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        leadingWidth: 40,
         leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
-            child:
-                Icon(Icons.arrow_back_ios, color: AppColors.black, size: 24.h)),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child:
+                  Icon(Icons.arrow_back_ios, color: AppColors.black, size: 20),
+            )),
+        titleSpacing: 0,
         title: Text(
           'Profile',
           style: TextStyle(
             color: AppColors.black,
-            fontSize: 18.sp,
+            fontSize: 18,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
           ),

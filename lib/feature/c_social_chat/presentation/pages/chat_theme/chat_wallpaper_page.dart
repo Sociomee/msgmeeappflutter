@@ -354,28 +354,23 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                             },
                           ),
                           Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              width: 81.48,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 11.74, vertical: 6.52),
-                              decoration: ShapeDecoration(
-                                color: Color(0xFFF3FFE9),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3.91),
-                                ),
-                              ),
-                              child: Text(
-                                '23 March, 2021',
-                                style: TextStyle(
-                                  color: Color(0xFF81C14B),
-                                  fontSize: 7.83,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          )
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                  width: 81.48,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 11.74, vertical: 6.52),
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFF3FFE9),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3.91),
+                                    ),
+                                  ),
+                                  child: Text('23 March, 2021',
+                                      style: TextStyle(
+                                          color: Color(0xFF81C14B),
+                                          fontSize: 7.83,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600))))
                         ],
                       ),
                       Spacer(),
@@ -395,9 +390,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                   color: AppColors.lightgrey1,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
-                                child: SvgPicture.asset(
-                                  'assets/clip.svg',
-                                )),
+                                child: SvgPicture.asset('assets/clip.svg')),
                             SizedBox(width: 5.w),
                             Container(
                               height: 20,

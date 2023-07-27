@@ -62,18 +62,27 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           leadingWidth: 40,
-          titleSpacing: 0,
+          titleSpacing: 10,
           leading: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
               child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+                padding: const EdgeInsets.only(left: 20),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                ),
               )),
           elevation: 0,
-          title:
-              Text('Your Profile', style: TextStyle(color: AppColors.black))),
+          title: Text('Your Profile',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

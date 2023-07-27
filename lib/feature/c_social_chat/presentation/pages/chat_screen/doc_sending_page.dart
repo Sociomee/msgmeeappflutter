@@ -230,6 +230,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
@@ -269,7 +272,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 35.w),
+                                                SizedBox(width: 42),
                                                 GestureDetector(
                                                   onTap: () {
                                                     for (var i = 0;

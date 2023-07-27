@@ -102,7 +102,7 @@ class SettingScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.black,
-                  size: 24.h,
+                  size: 20,
                 )),
           ),
           leadingWidth: 45,
@@ -110,7 +110,7 @@ class SettingScreen extends StatelessWidget {
           title: Text('Settings',
               style: TextStyle(
                 color: AppColors.black,
-                fontSize: 18.sp,
+                fontSize: 18,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ))),
