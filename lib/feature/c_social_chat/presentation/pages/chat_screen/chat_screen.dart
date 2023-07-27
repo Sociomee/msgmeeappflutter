@@ -316,7 +316,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         )
                       : SwipeTo(
-                          onLeftSwipe: () {
+                          onRightSwipe: () {
                             context
                                 .read<ReplyMsgCubit>()
                                 .replyMsg('You', msg[index].messageContent);

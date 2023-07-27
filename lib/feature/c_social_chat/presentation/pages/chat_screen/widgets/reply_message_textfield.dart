@@ -25,6 +25,7 @@ class ReplyMessageTextField extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -48,12 +49,16 @@ class ReplyMessageTextField extends StatelessWidget {
                                   fontSize: 10.sp,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500)),
-                          Text(cubit.msg,
-                              style: TextStyle(
-                                  color: Color(0xFF555555),
-                                  fontSize: 10.sp,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400))
+                          SizedBox(
+                            width: 110.w,
+                            child: Text(cubit.msg,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Color(0xFF555555),
+                                    fontSize: 10.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400)),
+                          )
                         ],
                       ),
                     ),
