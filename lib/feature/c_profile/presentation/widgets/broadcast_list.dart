@@ -133,8 +133,8 @@ class _BroadCastListState extends State<BroadCastList> {
                             children: [
                               selectedindex.contains(index)
                                   ? Container(
-                                      height: 60.w,
-                                      width: 60.w,
+                                      height: 50.w,
+                                      width: 50.w,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(100),
@@ -142,11 +142,8 @@ class _BroadCastListState extends State<BroadCastList> {
                                       alignment: Alignment.center,
                                       child: Icon(Icons.check,
                                           color: AppColors.white, size: 30.r))
-                                  : SvgPicture.asset(
-                                      'assets/broadcast.svg',
-                                      width: 60.w,
-                                      fit: BoxFit.cover,
-                                    ),
+                                  : SvgPicture.asset('assets/broadcast.svg',
+                                      width: 50.w, fit: BoxFit.cover),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Column(
@@ -166,7 +163,7 @@ class _BroadCastListState extends State<BroadCastList> {
                                       width: MediaQuery.of(context).size.width *
                                           .60.w,
                                       child: Text(
-                                          'Alam, Saurabh, Taha Jamal, Anshuman...',
+                                          'Alam,Saurabh,Taha Jamal,Anshuman...',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 12.sp,
