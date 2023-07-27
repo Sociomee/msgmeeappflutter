@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import '../../../../data/model/all_connections_model.dart';
+import '../../../../helper/navigator_function.dart';
+import '../pages/chat_screen/chat_screen.dart';
 
 class AllconnectionsWidget extends StatelessWidget {
   const AllconnectionsWidget({super.key, required this.list});
@@ -17,27 +19,39 @@ class AllconnectionsWidget extends StatelessWidget {
           shrinkWrap: true,
           itemCount: list.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 14.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ChatProfileWidget(
+            return GestureDetector(
+              onTap: () {
+                screenNavigator(
+                    context,
+                    ChatScreen(
+                      name: list[index].connectionName,
                       imageUrl: list[index].imageUrl,
                       isOnline: list[index].isOnline,
-                      hasStory: false),
-                  SizedBox(width: 12.w),
-                  Text(list[index].connectionName,
-                      style: TextStyle(fontSize: 14.sp)),
-                  Spacer(),
-                  list[index].connectionType == "SocioMee"
-                      ? SvgPicture.asset('assets/sociomee.svg',
-                          height: 14.h, fit: BoxFit.cover)
-                      : Container(),
-                  SizedBox(width: 5.w),
-                  SvgPicture.asset('assets/msgmee.svg',
-                      height: 14.h, fit: BoxFit.cover),
-                ],
+                      hasStory: false,
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 14.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ChatProfileWidget(
+                        imageUrl: list[index].imageUrl,
+                        isOnline: list[index].isOnline,
+                        hasStory: false),
+                    SizedBox(width: 12.w),
+                    Text(list[index].connectionName,
+                        style: TextStyle(fontSize: 14.sp)),
+                    Spacer(),
+                    list[index].connectionType == "SocioMee"
+                        ? SvgPicture.asset('assets/sociomee.svg',
+                            height: 14.h, fit: BoxFit.cover)
+                        : Container(),
+                    SizedBox(width: 5.w),
+                    SvgPicture.asset('assets/msgmee.svg',
+                        height: 14.h, fit: BoxFit.cover),
+                  ],
+                ),
               ),
             );
           }),
