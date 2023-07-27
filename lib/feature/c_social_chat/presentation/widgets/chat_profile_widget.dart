@@ -6,10 +6,11 @@ class ChatProfileWidget extends StatelessWidget {
       {super.key,
       required this.imageUrl,
       required this.isOnline,
-      required this.hasStory});
+      required this.hasStory,
+      this.radius});
   final String imageUrl;
   final bool isOnline;
-
+  final double? radius;
   final bool hasStory;
 
   @override
@@ -24,7 +25,7 @@ class ChatProfileWidget extends StatelessWidget {
                   : null,
             ),
             child: CircleAvatar(
-                radius: 28,
+                radius: radius ?? 28,
                 backgroundColor: AppColors.grey,
                 backgroundImage: NetworkImage(imageUrl))),
         Positioned(

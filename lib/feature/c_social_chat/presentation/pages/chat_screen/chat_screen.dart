@@ -26,6 +26,7 @@ import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
+import 'forward_msg_page.dart';
 import 'group_chat_page.dart';
 import 'image_preview_page.dart';
 import 'widgets/message_textField.dart';
@@ -146,7 +147,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   SizedBox(width: 19),
                   SvgPicture.asset('assets/copy.svg', height: 18),
                   SizedBox(width: 19),
-                  SvgPicture.asset('assets/reply.svg', height: 18),
+                  GestureDetector(
+                      onTap: () {
+                        animatedScreenNavigator(context, ForwardMessagePage());
+                      },
+                      child: SvgPicture.asset('assets/reply.svg', height: 18)),
                   SizedBox(width: 19),
                 ],
               )
@@ -586,7 +591,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       )
                     : Container(),
-  //?   showing contack sender textfield widget
+                //?   showing contack sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,
@@ -608,7 +613,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       )
                     : Container(),
 
-      //?   showing audio recorder widget
+                //?   showing audio recorder widget
                 context.watch<ShowAudioRecorder>().state
                     ? Positioned(
                         bottom: 10, left: 86, child: AudioRecordWidget())
