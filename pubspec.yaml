@@ -74,6 +74,7 @@ dependencies:
   freezed: ^2.4.1
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+  calendar_date_picker2: ^0.5.2
   
   
 

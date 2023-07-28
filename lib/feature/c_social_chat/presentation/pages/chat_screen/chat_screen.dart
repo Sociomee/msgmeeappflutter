@@ -11,6 +11,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_tex
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/select_duration.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
@@ -191,7 +192,21 @@ class _ChatScreenState extends State<ChatScreen> {
                           style: TextStyle(color: AppColors.black),
                         ),
                       ),
-                      Icon(Icons.calendar_month_sharp, color: AppColors.black)
+                      GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: SelectDuration(),
+                                  );
+                                });
+                          },
+                          child: Icon(Icons.calendar_month_sharp,
+                              color: AppColors.black))
                     ],
                   )
                 : AppBar(
