@@ -356,7 +356,6 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           Align(
                               alignment: Alignment.topCenter,
                               child: Container(
-                                  width: 81.48,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 11.74, vertical: 6.52),
                                   decoration: ShapeDecoration(

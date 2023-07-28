@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/create_group_page.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 import '../../../../../../helper/navigator_function.dart';
+import '../../../cubit/search_mode.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
 import '../../chat_theme/chat_theme_page.dart';
 import '../../chat_theme/chat_wallpaper_page.dart';
@@ -51,6 +53,7 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
         },
         onSelected: (value) {
           if (value == 1) {
+            context.read<SearchModeCubit>().changeMode();
           } else if (value == 2) {
           } else if (value == 3) {
           } else if (value == 5) {

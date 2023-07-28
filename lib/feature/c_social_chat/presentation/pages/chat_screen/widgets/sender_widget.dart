@@ -77,7 +77,9 @@ class SentMessageWidget extends StatelessWidget {
                                         ? 20
                                         : message.trim().length <= 25
                                             ? 95
-                                            : 170,
+                                            : message.trim().length > 40
+                                                ? 245
+                                                : 170,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(
@@ -162,12 +164,14 @@ class SentMessageWidget extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
-                        ),
+                        SizedBox(
+                            width: 200.w,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Text(message,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 14)),
+                            )),
                         SizedBox(height: 2),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
@@ -184,7 +188,7 @@ class SentMessageWidget extends StatelessWidget {
                                         ? 115
                                         : message.trim().length <= 21
                                             ? 80
-                                            : 200,
+                                            : 130,
                               ),
                               Text(msgStatus,
                                   style: const TextStyle(
@@ -805,7 +809,7 @@ class SentMessageWidget extends StatelessWidget {
                                                             : SvgPicture.asset(
                                                                 'assets/jpg.svg',
                                                                 height: 35)),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 15),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -849,7 +853,7 @@ class SentMessageWidget extends StatelessWidget {
                                   Text(time,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 10)),
-                                  SizedBox(width: 95.w),
+                                  SizedBox(width: 90.w),
                                   Text(msgStatus,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 10)),
@@ -970,9 +974,13 @@ class SentMessageWidget extends StatelessWidget {
                                 : Padding(
                                     padding: const EdgeInsets.only(
                                         left: 8.0, bottom: 5, top: 5),
-                                    child: Text(message,
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 14)),
+                                    child: SizedBox(
+                                      width: 175.w,
+                                      child: Text(message,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14)),
+                                    ),
                                   ),
                             Padding(
                               padding:
@@ -1093,9 +1101,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              contactMessage,
-            ],
+            children: [contactMessage],
           ),
         );
       case MessageType.audio:
@@ -1103,9 +1109,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              audioMessage,
-            ],
+            children: [audioMessage],
           ),
         );
       case MessageType.doc:
@@ -1113,9 +1117,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              docMessage,
-            ],
+            children: [docMessage],
           ),
         );
       case MessageType.image:
@@ -1123,9 +1125,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              imageMessage,
-            ],
+            children: [imageMessage],
           ),
         );
       case MessageType.location:
@@ -1133,9 +1133,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              locationMessage,
-            ],
+            children: [locationMessage],
           ),
         );
       case MessageType.multipleImage:
@@ -1143,9 +1141,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              multipleImageMessage,
-            ],
+            children: [multipleImageMessage],
           ),
         );
       case MessageType.multiplecontact:
@@ -1153,9 +1149,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              contactMessage,
-            ],
+            children: [contactMessage],
           ),
         );
       case MessageType.text:
@@ -1163,9 +1157,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              messageTextGroup,
-            ],
+            children: [messageTextGroup],
           ),
         );
       case MessageType.replyMessage:
@@ -1173,9 +1165,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              replyMessageText,
-            ],
+            children: [replyMessageText],
           ),
         );
       default:

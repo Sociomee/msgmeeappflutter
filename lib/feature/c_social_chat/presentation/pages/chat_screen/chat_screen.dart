@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/search_mode.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
@@ -155,80 +156,119 @@ class _ChatScreenState extends State<ChatScreen> {
                   SizedBox(width: 19),
                 ],
               )
-            : AppBar(
-                toolbarHeight: 80,
-                elevation: 1,
-                leadingWidth: 20,
-                titleSpacing: 11.w,
-                leading: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-                title: GestureDetector(
-                  onTap: () {
-                    widget.name == 'Office Group'
-                        ? animatedScreenNavigator(
-                            context,
-                            GroupChatPage(
-                              imageUrl: widget.imageUrl,
-                              name: widget.name,
-                            ))
-                        : screenNavigator(
-                            context,
-                            OtherPersonProfileDescription(
-                              imageUrl: widget.imageUrl,
-                              name: widget.name,
-                              isOnline: widget.isOnline,
-                            ));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Hero(
-                        tag: widget.imageUrl,
-                        child: ChatProfileWidget(
-                            imageUrl: widget.imageUrl,
-                            isOnline: widget.isOnline,
-                            hasStory: widget.hasStory),
+            : context.watch<SearchModeCubit>().state
+                ? AppBar(
+                    elevation: 1,
+                    leadingWidth: 20,
+                    titleSpacing: 11.w,
+                    leading: IconButton(
+                        onPressed: () {
+                          context.read<SearchModeCubit>().changeMode();
+                        },
+                        icon:
+                            Icon(Icons.arrow_back_ios, color: AppColors.black)),
+                    title: Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            hintText: 'Search',
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.black))),
                       ),
-                      SizedBox(width: 10.w),
-                      Column(
+                    ),
+                    actions: [
+                      Icon(Icons.keyboard_arrow_down, color: AppColors.black),
+                      Icon(Icons.keyboard_arrow_up, color: AppColors.black),
+                      Padding(
+                        padding: EdgeInsets.only(top: 17, left: 10, right: 10),
+                        child: Text(
+                          '10/12',
+                          style: TextStyle(color: AppColors.black),
+                        ),
+                      ),
+                      Icon(Icons.calendar_month_sharp, color: AppColors.black)
+                    ],
+                  )
+                : AppBar(
+                    toolbarHeight: 80,
+                    elevation: 1,
+                    leadingWidth: 20,
+                    titleSpacing: 11.w,
+                    leading: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon:
+                            Icon(Icons.arrow_back_ios, color: AppColors.black)),
+                    title: GestureDetector(
+                      onTap: () {
+                        widget.name == 'Office Group'
+                            ? animatedScreenNavigator(
+                                context,
+                                GroupChatPage(
+                                  imageUrl: widget.imageUrl,
+                                  name: widget.name,
+                                ))
+                            : screenNavigator(
+                                context,
+                                OtherPersonProfileDescription(
+                                  imageUrl: widget.imageUrl,
+                                  name: widget.name,
+                                  isOnline: widget.isOnline,
+                                ));
+                      },
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 130.w,
-                            child: Text(widget.name,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: AppColors.black,
-                                  fontSize: 16,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                )),
+                          Hero(
+                            tag: widget.imageUrl,
+                            child: ChatProfileWidget(
+                                imageUrl: widget.imageUrl,
+                                isOnline: widget.isOnline,
+                                hasStory: widget.hasStory),
                           ),
-                          SizedBox(height: 8),
-                          widget.marketplace != null && widget.marketplace!
-                              ? Text('Open now',
+                          SizedBox(width: 10.w),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 130.w,
+                                child: Text(widget.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    )),
+                              ),
+                              SizedBox(height: 8),
+                              widget.marketplace != null && widget.marketplace!
+                                  ? Text('Open now',
+                                      style: TextStyle(
+                                          fontSize: 13, color: AppColors.grey))
+                                  : Container(),
+                              Text(widget.isOnline ? 'Active Now' : '',
                                   style: TextStyle(
-                                      fontSize: 13, color: AppColors.grey))
-                              : Container(),
-                          Text(widget.isOnline ? 'Active Now' : '',
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.grey)),
+                                      fontSize: 13, color: AppColors.grey)),
+                            ],
+                          ),
                         ],
                       ),
+                    ),
+                    actions: [
+                      SvgPicture.asset('assets/video.svg'),
+                      SizedBox(width: 25.w),
+                      SvgPicture.asset('assets/calling.svg'),
+                      SinglechatPopupMenu(name: widget.name),
                     ],
                   ),
-                ),
-                actions: [
-                  SvgPicture.asset('assets/video.svg'),
-                  SizedBox(width: 25.w),
-                  SvgPicture.asset('assets/calling.svg'),
-                  SinglechatPopupMenu(name: widget.name),
-                ],
-              ),
         body: Stack(
           children: [
             context.watch<SetChatbgCubit>().state.bgType ==
@@ -305,7 +345,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             child: Container(
                               color: chattileIndex.contains(index)
                                   ? AppColors.seconderyColor1
-                                  : AppColors.white,
+                                  : Colors.transparent,
                               child: ReceivedMessageWidget(
                                 message: msg[index].messageContent,
                                 msgStatus: msg[index].msgStatus,
@@ -341,7 +381,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             child: Container(
                               color: chattileIndex.contains(index)
                                   ? AppColors.seconderyColor1
-                                  : AppColors.white,
+                                  : Colors.transparent,
                               child: SentMessageWidget(
                                 doc: msg[index].docName,
                                 message: msg[index].messageContent,
