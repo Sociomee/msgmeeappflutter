@@ -159,39 +159,86 @@ class _ChatScreenState extends State<ChatScreen> {
               )
             : context.watch<SearchModeCubit>().state
                 ? AppBar(
+                    toolbarHeight: 70,
                     elevation: 1,
-                    leadingWidth: 20,
-                    titleSpacing: 11.w,
-                    leading: IconButton(
-                        onPressed: () {
-                          context.read<SearchModeCubit>().changeMode();
-                        },
-                        icon:
-                            Icon(Icons.arrow_back_ios, color: AppColors.black)),
-                    title: Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 10),
-                            hintText: 'Search',
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.black),
+                    leadingWidth: 0,
+                    titleSpacing: 0,
+                    title: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  context.read<SearchModeCubit>().changeMode();
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: AppColors.black,
+                                  size: 20,
+                                )),
+                            Expanded(
+                              child: SizedBox(
+                                height: 40,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 0),
+                                      hintText: 'Search',
+                                      border: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: AppColors.black),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: AppColors.black))),
+                                ),
+                              ),
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColors.black))),
-                      ),
+                          ],
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, bottom: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Chats From:',
+                                style: TextStyle(
+                                  color: Color(0xFF333333),
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                '14 Feb -  28 Feb',
+                                style: TextStyle(
+                                  color: Color(0xFF368C4E),
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                     actions: [
                       Icon(Icons.keyboard_arrow_down, color: AppColors.black),
                       Icon(Icons.keyboard_arrow_up, color: AppColors.black),
                       Padding(
-                        padding: EdgeInsets.only(top: 17, left: 10, right: 10),
-                        child: Text(
-                          '10/12',
-                          style: TextStyle(color: AppColors.black),
-                        ),
-                      ),
+                          padding:
+                              EdgeInsets.only(top: 17, left: 10, right: 10),
+                          child: Text('10/12',
+                              style: TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500))),
                       GestureDetector(
                           onTap: () {
                             showDialog(
@@ -205,8 +252,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                   );
                                 });
                           },
-                          child: Icon(Icons.calendar_month_sharp,
-                              color: AppColors.black))
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: SvgPicture.asset('assets/calender.svg'),
+                          ))
                     ],
                   )
                 : AppBar(

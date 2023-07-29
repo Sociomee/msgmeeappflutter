@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/exit_alert_dialog.dart';
 
 import 'package:msgmee/theme/colors.dart';
@@ -335,7 +336,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
                 color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20.w, bottom: 60.h),
+            padding: EdgeInsets.only(left: 24, bottom: 60.h),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -344,15 +345,13 @@ class _GroupChatPageState extends State<GroupChatPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SvgPicture.asset('assets/delete_forever.svg'),
-                  Text(
-                    "Delete 'College Group'",
-                    style: TextStyle(
-                      color: Color(0xCCFF1F1F),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )
+                  SizedBox(width: 10),
+                  Text("Delete 'College Group'",
+                      style: TextStyle(
+                          color: Color(0xCCFF1F1F),
+                          fontSize: 16,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontWeight: FontWeight.w500))
                 ],
               ),
             ),

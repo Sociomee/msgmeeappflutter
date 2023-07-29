@@ -507,9 +507,8 @@ class SentMessageWidget extends StatelessWidget {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             ClipRRect(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 child: Image.file(
                                                   images![0]!,
                                                   height: 100,
@@ -518,9 +517,8 @@ class SentMessageWidget extends StatelessWidget {
                                                 )),
                                             SizedBox(width: 5),
                                             ClipRRect(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 child: Image.file(
                                                   images![1]!,
                                                   height: 100,
@@ -534,9 +532,8 @@ class SentMessageWidget extends StatelessWidget {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             ClipRRect(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 child: Image.file(
                                                   images![2]!,
                                                   height: 100,
@@ -548,10 +545,8 @@ class SentMessageWidget extends StatelessWidget {
                                               children: [
                                                 ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.only(
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    8)),
+                                                        BorderRadius.circular(
+                                                            8),
                                                     child: Image.file(
                                                       images![3]!,
                                                       height: 100,
@@ -563,11 +558,8 @@ class SentMessageWidget extends StatelessWidget {
                                                   width: 100,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.only(
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          8)),
+                                                          BorderRadius.circular(
+                                                              8),
                                                       color: AppColors.black
                                                           .withOpacity(.5)),
                                                   alignment: Alignment.center,

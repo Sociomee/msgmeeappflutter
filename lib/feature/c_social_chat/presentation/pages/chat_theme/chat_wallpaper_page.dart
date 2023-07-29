@@ -383,19 +383,21 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                                width: 14,
-                                height: 14,
+                                width: 20,
+                                height: 20,
+                                padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
+                                  color: Color(0xFFFAFAFA),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: SvgPicture.asset('assets/clip.svg')),
                             SizedBox(width: 5.w),
                             Container(
-                              height: 20,
                               width: 20,
+                              height: 20,
+                              padding: EdgeInsets.all(3),
                               decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
+                                  color: Color(0xFFFAFAFA),
                                   borderRadius: BorderRadius.circular(30)),
                               child: Icon(Icons.photo_camera_outlined,
                                   size: 16, color: AppColors.iconColor),
@@ -406,7 +408,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: AppColors.grey.withOpacity(.4)),
-                                  color: AppColors.lightgrey1,
+                                  color: Color(0xFFFAFAFA),
                                   borderRadius: BorderRadius.circular(20)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -435,17 +437,15 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                             ),
                             Spacer(),
                             Container(
-                              width: 14,
-                              height: 14,
-                              decoration: BoxDecoration(
-                                color: AppColors.lightgrey1,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: SvgPicture.asset(
-                                'assets/microphone.svg',
-                                fit: BoxFit.contain,
-                              ),
-                            ),
+                                width: 20,
+                                height: 20,
+                                padding: EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFAFAFA),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: SvgPicture.asset('assets/microphone.svg',
+                                    fit: BoxFit.contain)),
                             SizedBox(width: 5)
                           ],
                         ),

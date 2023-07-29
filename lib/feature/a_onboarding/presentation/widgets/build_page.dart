@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../theme/colors.dart';
 
@@ -27,7 +28,7 @@ class BuildPages extends StatelessWidget {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontSize: 30,
-            fontFamily: 'Poppins',
+            fontFamily: GoogleFonts.poppins().fontFamily,
             fontWeight: FontWeight.w600,
           ),
           textScaleFactor: 1.0,
@@ -48,7 +49,7 @@ class BuildPages extends StatelessWidget {
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
-                fontFamily: 'Poppins',
+                fontFamily: GoogleFonts.poppins().fontFamily,
                 fontWeight: FontWeight.w400,
               ),
               textScaleFactor: 1.0,

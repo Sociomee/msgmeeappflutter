@@ -40,6 +40,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
       appBar: AppBar(
           leading: GestureDetector(
               onTap: () {
+                widget.names!.clear();
                 Navigator.pop(context);
               },
               child: Icon(Icons.arrow_back_ios, color: AppColors.black)),

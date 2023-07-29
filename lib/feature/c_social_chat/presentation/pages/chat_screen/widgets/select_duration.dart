@@ -26,7 +26,8 @@ class _SelectDurationState extends State<SelectDuration> {
       // One item already selected, so create a range selection
       int start = selectedIndices.first;
       int end = index;
-
+      print('start $start');
+      print('end $end');
       setState(() {
         selectedIndices.clear();
         selectedIndices
