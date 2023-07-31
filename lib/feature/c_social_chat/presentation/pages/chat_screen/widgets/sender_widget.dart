@@ -56,9 +56,12 @@ class SentMessageWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(message,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 14)),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 300),
+                      child: Text(message,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 14)),
+                    ),
                     SizedBox(height: 2),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -75,7 +78,7 @@ class SentMessageWidget extends StatelessWidget {
                                         ? 90
                                         : message.trim().length < 40
                                             ? 170
-                                            : 170),
+                                            : 230),
                         Text(msgStatus,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 10)),
@@ -233,6 +236,8 @@ class SentMessageWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(100),
@@ -326,9 +331,15 @@ class SentMessageWidget extends StatelessWidget {
                         SizedBox(height: 5),
                         message == ""
                             ? Container()
-                            : Text(message,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 14)),
+                            : ConstrainedBox(
+                                constraints: BoxConstraints(maxWidth: 300),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 4.0),
+                                  child: Text(message,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 14)),
+                                ),
+                              ),
                         SizedBox(height: 5),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -341,8 +352,8 @@ class SentMessageWidget extends StatelessWidget {
                               width: message.length == 0
                                   ? 130.w
                                   : message.trim().length <= 21
-                                      ? 120
-                                      : 130.w,
+                                      ? 115
+                                      : 215,
                             ),
                             Text(msgStatus,
                                 style: const TextStyle(

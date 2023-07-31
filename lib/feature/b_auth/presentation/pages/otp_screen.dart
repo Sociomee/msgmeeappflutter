@@ -376,58 +376,55 @@ class _OtpScreenState extends State<OtpScreen> {
                           ? AppColors.darkbtnColor
                           : AppColors.lightgrey),
                   const SizedBox(height: 10),
-                  textFieldclick
-                      ? Container()
-                      : Center(
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text:
-                                      'By Clicking continue, You agree to our\n',
-                                  style: TextStyle(
-                                    color: Color(0xFF8F8F8F),
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.32,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Terms of Services',
-                                  style: TextStyle(
-                                    color: Color(0xFF277044),
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: -0.32,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' and ',
-                                  style: TextStyle(
-                                    color: Color(0xFF8F8F8F),
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.32,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Privacy Policy.',
-                                  style: TextStyle(
-                                    color: Color(0xFF277044),
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: -0.32,
-                                  ),
-                                ),
-                              ],
+                  Center(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'By Clicking continue, You agree to our\n',
+                            style: TextStyle(
+                              color: Color(0xFF8F8F8F),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.32,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
+                          TextSpan(
+                            text: 'Terms of Services',
+                            style: TextStyle(
+                              color: Color(0xFF277044),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.32,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' and ',
+                            style: TextStyle(
+                              color: Color(0xFF8F8F8F),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.32,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Privacy Policy.',
+                            style: TextStyle(
+                              color: Color(0xFF277044),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.32,
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   const SizedBox(height: 20)
                 ],
               ),
