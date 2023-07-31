@@ -26,6 +26,8 @@ class MessageTextFieldWidget extends StatelessWidget {
       onTap: () {
         context.read<ShowAttachment>().closeAttachment();
       },
+      minLines: 1,
+      maxLines: 5,
       decoration: InputDecoration(
         fillColor: color ?? AppColors.lightgrey1,
         filled: true,
@@ -153,7 +155,6 @@ class ContactMessageFieldWidget extends StatelessWidget {
           ),
           SizedBox(height: 10),
           SizedBox(
-            height: 30,
             width: 278.w,
             child: TextFormField(
               onChanged: onChanged,
@@ -162,6 +163,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
               onTap: () {
                 context.read<ShowAttachment>().closeAttachment();
               },
+              maxLines: 5,
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 0),

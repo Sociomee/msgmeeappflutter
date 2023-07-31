@@ -473,7 +473,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       Container(
                         padding: EdgeInsets.only(
                             left: 10, bottom: 10, top: 10, right: 10),
-                        height: 60,
+                        // height: 60,
                         width: double.infinity,
                         color: Colors.white,
                         child: Row(

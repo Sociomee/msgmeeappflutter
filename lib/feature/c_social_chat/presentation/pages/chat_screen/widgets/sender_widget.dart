@@ -40,67 +40,61 @@ class SentMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('message length ---->${message.trim().length}');
-    final messageTextGroup = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              Container(
-                  padding: const EdgeInsets.only(
-                      top: 10, left: 14, right: 18, bottom: 5),
-                  decoration: BoxDecoration(
+    final messageTextGroup = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          children: [
+            Container(
+                padding: const EdgeInsets.only(
+                    top: 10, left: 14, right: 18, bottom: 5),
+                decoration: BoxDecoration(
                     color: context.watch<ChatThemeCubit>().state.chatDeepColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(message,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(message,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14)),
+                    SizedBox(height: 2),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(time,
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 14)),
-                      ),
-                      SizedBox(height: 2),
-                      Row(
-                        // mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(time,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 10)),
-                          SizedBox(
-                              width: message.trim().length <= 6
-                                  ? 10
-                                  : message.trim().length <= 15
-                                      ? 20
-                                      : message.trim().length <= 30
-                                          ? 95
-                                          : message.trim().length > 40
-                                              ? 245
-                                              : 170),
-                          Text(msgStatus,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 10)),
-                        ],
-                      )
-                    ],
-                  )),
-              Positioned(
-                bottom: -1,
-                right: -1,
-                child: msgStatus == 'read'
-                    ? MessageStatus.read
-                    : msgStatus == 'send'
-                        ? MessageStatus.sent
-                        : MessageStatus.delivered,
-              ),
-            ],
-          ),
-        ],
-      ),
+                                color: Colors.white, fontSize: 10)),
+                        SizedBox(
+                            width: message.trim().length <= 9
+                                ? 3
+                                : message.trim().length <= 15
+                                    ? 40
+                                    : message.trim().length <= 35
+                                        ? 90
+                                        : message.trim().length < 40
+                                            ? 170
+                                            : 170),
+                        Text(msgStatus,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 10)),
+                      ],
+                    )
+                  ],
+                )),
+            Positioned(
+              bottom: 0,
+              right: -1,
+              child: msgStatus == 'read'
+                  ? MessageStatus.read
+                  : msgStatus == 'send'
+                      ? MessageStatus.sent
+                      : MessageStatus.delivered,
+            ),
+          ],
+        ),
+      ],
     );
 
     final replyMessageText = Flexible(
@@ -197,7 +191,7 @@ class SentMessageWidget extends StatelessWidget {
                       ],
                     )),
                 Positioned(
-                  bottom: -1,
+                  bottom: 0,
                   right: -1,
                   child: msgStatus == 'read'
                       ? MessageStatus.read
@@ -358,7 +352,7 @@ class SentMessageWidget extends StatelessWidget {
                       ],
                     )),
                 Positioned(
-                  bottom: -2,
+                  bottom: 0,
                   right: 0,
                   child: msgStatus == 'read'
                       ? MessageStatus.read
@@ -440,7 +434,7 @@ class SentMessageWidget extends StatelessWidget {
                         ],
                       )),
                   Positioned(
-                    bottom: -2,
+                    bottom: 0,
                     right: 0,
                     child: msgStatus == 'read'
                         ? MessageStatus.read
@@ -610,7 +604,7 @@ class SentMessageWidget extends StatelessWidget {
                         ],
                       )),
                   Positioned(
-                    bottom: -2,
+                    bottom: 0,
                     right: 0,
                     child: msgStatus == 'read'
                         ? MessageStatus.read
@@ -714,7 +708,7 @@ class SentMessageWidget extends StatelessWidget {
                         ],
                       )),
                   Positioned(
-                    bottom: -2,
+                    bottom: 0,
                     right: 0,
                     child: msgStatus == 'read'
                         ? MessageStatus.read
@@ -992,7 +986,7 @@ class SentMessageWidget extends StatelessWidget {
                           ],
                         )),
               Positioned(
-                bottom: -2,
+                bottom: 0,
                 right: 0,
                 child: msgStatus == 'read'
                     ? MessageStatus.read
@@ -1070,7 +1064,7 @@ class SentMessageWidget extends StatelessWidget {
                         )),
                   ),
                   Positioned(
-                    bottom: -2,
+                    bottom: 0,
                     right: 0,
                     child: msgStatus == 'read'
                         ? MessageStatus.read
