@@ -30,6 +30,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
   @override
   void dispose() {
     messageController.dispose();
+    widget.names!.clear();
     super.dispose();
   }
 

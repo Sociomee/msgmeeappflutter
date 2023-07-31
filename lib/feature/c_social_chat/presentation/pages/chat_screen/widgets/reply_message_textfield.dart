@@ -81,6 +81,7 @@ class ReplyMessageTextField extends StatelessWidget {
             height: 30,
             width: 270.w,
             child: TextFormField(
+              autofocus: true,
               onChanged: onChanged,
               cursorColor: AppColors.primaryColor,
               controller: messageController,

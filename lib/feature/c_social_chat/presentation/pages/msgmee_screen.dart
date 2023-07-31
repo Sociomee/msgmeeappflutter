@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
@@ -34,7 +35,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   late TabController tabsComtroller;
   int _selectedIndex = 0;
   File? image;
-
+  late FToast fToast;
   @override
   void initState() {
     super.initState();
@@ -50,6 +51,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
         _selectedIndex = _controller.index;
       });
     });
+    fToast = FToast();
+    fToast.init(context);
   }
 
   @override
@@ -109,10 +112,36 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                     size: 18,
                                   ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 19),
-                        child: Icon(Icons.archive_outlined,
-                            color: AppColors.black, size: 18),
+                      GestureDetector(
+                        onTap: () {
+                          Widget toast = Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 12.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25.0),
+                                color: AppColors.iconColor),
+                            child: Text(
+                              "Chat moved to archive",
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          );
+
+                          fToast.showToast(
+                            child: toast,
+                            gravity: ToastGravity.BOTTOM,
+                            toastDuration: Duration(seconds: 2),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 19),
+                          child: Icon(Icons.archive_outlined,
+                              color: AppColors.black, size: 18),
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {

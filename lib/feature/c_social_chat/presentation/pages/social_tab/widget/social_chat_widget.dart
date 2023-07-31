@@ -179,11 +179,9 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
               ),
               Divider(
                 height: 0,
-                // color: AppColors.grey,
                 thickness: 1,
-                color: Color(0xFFE4E4E4),
+                color: Color(0xFFE4E4E4).withOpacity(.5),
               ),
-              // SizedBox(height: 5)
             ],
           );
         });
