@@ -408,7 +408,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: AppColors.grey.withOpacity(.4)),
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0xFFF5F5F5),
                                   borderRadius: BorderRadius.circular(20)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,

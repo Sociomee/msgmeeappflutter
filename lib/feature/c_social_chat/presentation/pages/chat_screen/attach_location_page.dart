@@ -1,3 +1,4 @@
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
-
+import 'package:flutter/foundation.dart' as foundation;
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../data/model/locations_model.dart';
 import '../../../../../helper/get_currenttime.dart';
@@ -308,6 +309,7 @@ class ShareLiveLocationPopup extends StatefulWidget {
 class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
   late TextEditingController controller;
   int selectedIndex = 0;
+  bool emojiShowing = false;
   @override
   void initState() {
     controller = TextEditingController();
@@ -320,6 +322,13 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
     super.dispose();
   }
 
+  _onBackspacePressed() {
+    controller
+      ..text = controller.text.characters.toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: controller.text.length));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -330,170 +339,224 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
           width: double.infinity,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  width: double.infinity,
-                  height: 190,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: MapViewWidget())),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Text('Share your live location',
-                      style: TextStyle(
-                          color: Color(0xFF333333),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500))),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 0;
-                      });
-                    },
-                    child: Container(
-                        height: 36,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 0),
-                        alignment: Alignment.center,
-                        decoration: ShapeDecoration(
-                            color: selectedIndex == 0
-                                ? AppColors.darkgreen
-                                : AppColors.lightgrey,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6))),
-                        child: Text('15 Min',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500))),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 1;
-                      });
-                    },
-                    child: Container(
-                        height: 36,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 0),
-                        alignment: Alignment.center,
-                        decoration: ShapeDecoration(
-                            color: selectedIndex == 1
-                                ? AppColors.darkgreen
-                                : AppColors.lightgrey,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6))),
-                        child: Text('1 Hour',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500))),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 2;
-                      });
-                    },
-                    child: Container(
-                        height: 36,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 0),
-                        alignment: Alignment.center,
-                        decoration: ShapeDecoration(
-                            color: selectedIndex == 2
-                                ? AppColors.darkgreen
-                                : AppColors.lightgrey,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6))),
-                        child: Text('2 Hour',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500))),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 6,
-                    child: SizedBox(
-                      height: 40,
-                      child: TextFormField(
-                        controller: controller,
-                        decoration: InputDecoration(
-                          hintText: "Add message",
-                          hintStyle: TextStyle(
-                            color: Color(0xFF4E4E4E),
-                            fontSize: 13,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    width: double.infinity,
+                    height: 190,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: MapViewWidget())),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text('Share your live location',
+                        style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 14,
                             fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filled: true,
-                          fillColor: AppColors.lightgrey1,
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                color: Color(0xFFFAFAFA),
-                              )),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                color: Color(0xFFFAFAFA),
-                              )),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                color: Color(0xFFFAFAFA),
-                              )),
-                          suffixIcon: SizedBox(
-                            width: 10,
-                            height: 10,
-                            child: Center(
-                              child: SvgPicture.asset('assets/smiley.svg',
-                                  fit: BoxFit.contain),
+                            fontWeight: FontWeight.w500))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 0;
+                        });
+                      },
+                      child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 0),
+                          alignment: Alignment.center,
+                          decoration: ShapeDecoration(
+                              color: selectedIndex == 0
+                                  ? AppColors.darkgreen
+                                  : AppColors.lightgrey,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6))),
+                          child: Text('15 Min',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500))),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 1;
+                        });
+                      },
+                      child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 0),
+                          alignment: Alignment.center,
+                          decoration: ShapeDecoration(
+                              color: selectedIndex == 1
+                                  ? AppColors.darkgreen
+                                  : AppColors.lightgrey,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6))),
+                          child: Text('1 Hour',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500))),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 2;
+                        });
+                      },
+                      child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 0),
+                          alignment: Alignment.center,
+                          decoration: ShapeDecoration(
+                              color: selectedIndex == 2
+                                  ? AppColors.darkgreen
+                                  : AppColors.lightgrey,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6))),
+                          child: Text('2 Hour',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500))),
+                    )
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: SizedBox(
+                        height: 40,
+                        child: TextFormField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                            hintText: "Add message",
+                            hintStyle: TextStyle(
+                              color: Color(0xFF4E4E4E),
+                              fontSize: 13,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            filled: true,
+                            fillColor: AppColors.lightgrey1,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: Color(0xFFFAFAFA),
+                                )),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: Color(0xFFFAFAFA),
+                                )),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: Color(0xFFFAFAFA),
+                                )),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                setState(() {
+                                  emojiShowing = !emojiShowing;
+                                });
+                              },
+                              child: SizedBox(
+                                width: 10,
+                                height: 10,
+                                child: Center(
+                                  child: SvgPicture.asset('assets/smiley.svg',
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        context.read<AddMessageCubit>().addMessage(ChatMessage(
-                            messageContent: controller.text,
-                            messageType: 'sender',
-                            msgStatus: 'send',
-                            time: getCurrentTime(),
-                            type: MessageType.location));
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      },
-                      child: Image.asset('assets/attach.png'),
-                    ),
-                  )
-                ],
-              )
-            ],
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<AddMessageCubit>().addMessage(
+                              ChatMessage(
+                                  messageContent: controller.text,
+                                  messageType: 'sender',
+                                  msgStatus: 'send',
+                                  time: getCurrentTime(),
+                                  type: MessageType.location));
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Image.asset('assets/attach.png'),
+                      ),
+                    )
+                  ],
+                ),
+                Offstage(
+                    offstage: !emojiShowing,
+                    child: SizedBox(
+                        height: 250,
+                        child: EmojiPicker(
+                          textEditingController: controller,
+                          onBackspacePressed: _onBackspacePressed,
+                          config: Config(
+                            columns: 7,
+                            // Issue: https://github.com/flutter/flutter/issues/28894
+                            emojiSizeMax: 32 *
+                                (foundation.defaultTargetPlatform ==
+                                        TargetPlatform.iOS
+                                    ? 1.30
+                                    : 1.0),
+                            verticalSpacing: 0,
+                            horizontalSpacing: 0,
+                            gridPadding: EdgeInsets.zero,
+                            initCategory: Category.RECENT,
+                            bgColor: const Color(0xFFF2F2F2),
+                            indicatorColor: Colors.blue,
+                            iconColor: Colors.grey,
+                            iconColorSelected: Colors.blue,
+                            backspaceColor: Colors.blue,
+                            skinToneDialogBgColor: Colors.white,
+                            skinToneIndicatorColor: Colors.grey,
+                            enableSkinTones: true,
+                            recentTabBehavior: RecentTabBehavior.RECENT,
+                            recentsLimit: 28,
+                            replaceEmojiOnLimitExceed: false,
+                            noRecents: const Text(
+                              'No Recents',
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.black26),
+                              textAlign: TextAlign.center,
+                            ),
+                            loadingIndicator: const SizedBox.shrink(),
+                            tabIndicatorAnimDuration: kTabScrollDuration,
+                            categoryIcons: const CategoryIcons(),
+                            buttonMode: ButtonMode.MATERIAL,
+                            checkPlatformCompatibility: true,
+                          ),
+                        ))),
+              ],
+            ),
           ),
         ),
       ),
