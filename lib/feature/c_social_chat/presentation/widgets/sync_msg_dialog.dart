@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
@@ -77,6 +78,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomButtonWidget(
+                      height: 40.w,
                       title: 'Continue',
                       color: AppColors.primaryColor,
                       ontap: () {
@@ -88,6 +90,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomButtonWidget(
+                      height: 40.w,
                       title: 'Other Account',
                       color: AppColors.white,
                       textColor: AppColors.primaryColor,
@@ -151,7 +154,10 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               color: AppColors.primaryColor,
                             )),
                             hintText: 'Enter Email/Mobile Number',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF999999),
+                            ),
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 0, horizontal: 10)),
                       ),
@@ -189,7 +195,10 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 child: showpassword
                                     ? Icon(Icons.visibility_off, size: 18)
                                     : Icon(Icons.visibility, size: 18)),
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF999999),
+                            ),
                             suffixIconColor: AppColors.primaryColor,
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 0, horizontal: 10)),
@@ -197,8 +206,9 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            horizontal: 20, vertical: 0),
                         child: CustomButtonWidget(
+                            height: 40.w,
                             title: 'Continue',
                             color: emailController.text.isEmpty &
                                     passwordController.text.isEmpty
@@ -236,8 +246,10 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 0),
                       child: CustomButtonWidget(
+                          height: 40.w,
                           title: 'Sync with account credentials',
                           color: AppColors.primaryColor,
                           ontap: () {

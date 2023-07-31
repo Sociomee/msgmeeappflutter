@@ -39,69 +39,67 @@ class SentMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final messageTextGroup = Flexible(
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              child: Stack(
-                children: [
-                  Container(
-                      padding: const EdgeInsets.only(
-                          top: 10, left: 14, right: 18, bottom: 5),
-                      decoration: BoxDecoration(
-                        color:
-                            context.watch<ChatThemeCubit>().state.chatDeepColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
-                          SizedBox(height: 2),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(time,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                              SizedBox(
-                                width: message.trim().length <= 6
-                                    ? 10
-                                    : message.trim().length <= 15
-                                        ? 20
-                                        : message.trim().length <= 25
-                                            ? 95
-                                            : message.trim().length > 40
-                                                ? 245
-                                                : 170,
-                              ),
-                              Text(msgStatus,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                            ],
-                          )
-                        ],
-                      )),
-                  Positioned(
-                    bottom: -1,
-                    right: -1,
-                    child: msgStatus == 'read'
-                        ? MessageStatus.read
-                        : msgStatus == 'send'
-                            ? MessageStatus.sent
-                            : MessageStatus.delivered,
+    print('message length ---->${message.trim().length}');
+    final messageTextGroup = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Container(
+                  padding: const EdgeInsets.only(
+                      top: 10, left: 14, right: 18, bottom: 5),
+                  decoration: BoxDecoration(
+                    color: context.watch<ChatThemeCubit>().state.chatDeepColor,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ],
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(message,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 14)),
+                      ),
+                      SizedBox(height: 2),
+                      Row(
+                        // mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(time,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10)),
+                          SizedBox(
+                              width: message.trim().length <= 6
+                                  ? 10
+                                  : message.trim().length <= 15
+                                      ? 20
+                                      : message.trim().length <= 30
+                                          ? 95
+                                          : message.trim().length > 40
+                                              ? 245
+                                              : 170),
+                          Text(msgStatus,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10)),
+                        ],
+                      )
+                    ],
+                  )),
+              Positioned(
+                bottom: -1,
+                right: -1,
+                child: msgStatus == 'read'
+                    ? MessageStatus.read
+                    : msgStatus == 'send'
+                        ? MessageStatus.sent
+                        : MessageStatus.delivered,
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
 

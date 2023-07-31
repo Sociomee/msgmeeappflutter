@@ -11,20 +11,22 @@ class CustomButtonWidget extends StatelessWidget {
       this.fontsize = 14,
       this.textColor = AppColors.white,
       this.borderColor = AppColors.primaryColor,
-      required this.ontap});
+      required this.ontap,
+      this.height});
   final String title;
   final Color color;
   Color? textColor;
   Color? borderColor;
   double? fontsize;
   final VoidCallback ontap;
+  double? height;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: ontap,
       child: Container(
         alignment: Alignment.center,
-        height: 50.w,
+        height: height ?? 50.w,
         width: 334.w,
         decoration: BoxDecoration(
             color: color,
