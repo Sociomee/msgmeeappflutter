@@ -127,7 +127,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                   )
                   .toList();
         },
-        offset: Offset(-30, 30),
+        offset: Offset(-30, 35),
         color: Colors.white,
         elevation: 2,
         onSelected: context.watch<SyncMsgCubit>().state

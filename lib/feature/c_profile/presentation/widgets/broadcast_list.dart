@@ -56,7 +56,9 @@ class _BroadCastListState extends State<BroadCastList> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return DeleteDialogWidget();
+                          return DeleteDialogWidget(
+                            selected: selectedindex.length.toString(),
+                          );
                         });
                   },
                   child: Icon(Icons.delete, color: AppColors.black, size: 24.h))

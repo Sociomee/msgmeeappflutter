@@ -4,8 +4,8 @@ import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class DeleteDialogWidget extends StatelessWidget {
-  const DeleteDialogWidget({super.key});
-
+  const DeleteDialogWidget({super.key, required this.selected});
+  final String selected;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -13,7 +13,8 @@ class DeleteDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'You are going to delete 9 selected Groups.All data will be removed!',
+            'You are going to delete $selected selected Groups.All data will be removed!',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15.sp,
               fontFamily: 'Poppins',
@@ -22,6 +23,7 @@ class DeleteDialogWidget extends StatelessWidget {
           ),
           SizedBox(height: 20),
           CustomButtonWidget(
+              height: 40.w,
               title: 'Delete',
               color: AppColors.primaryColor,
               fontsize: 15.sp,

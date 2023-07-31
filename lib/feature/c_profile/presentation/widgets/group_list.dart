@@ -43,7 +43,9 @@ class _GroupListState extends State<GroupList> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return DeleteDialogWidget();
+                          return DeleteDialogWidget(
+                            selected: selectedindex.length.toString(),
+                          );
                         });
                   },
                   child: Icon(Icons.delete, color: AppColors.black))

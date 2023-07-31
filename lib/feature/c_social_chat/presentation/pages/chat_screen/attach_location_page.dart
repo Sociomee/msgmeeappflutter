@@ -450,16 +450,19 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightgrey)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFFAFAFA),
+                              )),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightgrey)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFFAFAFA),
+                              )),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightgrey)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFFAFAFA),
+                              )),
                           suffixIcon: SizedBox(
                             width: 10,
                             height: 10,

@@ -81,7 +81,7 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                   padding: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: AppColors.grey),
+                      border: Border.all(color: Color(0xFFC4C5C9)),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(3),
                           bottomLeft: Radius.circular(3))),
@@ -112,7 +112,13 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                 decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.only(top: 5, bottom: 5, left: 15),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFC4C5C9)),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(3),
+                            bottomRight: Radius.circular(3))),
                     border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFC4C5C9)),
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(3),
                             bottomRight: Radius.circular(3))),
@@ -123,9 +129,7 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                         borderSide: BorderSide(
                             width: 2, color: AppColors.primaryColor)),
                     hintText: 'Enter your mobile number',
-                    hintStyle: TextStyle(
-                      color: Color(0xFFC4C5C9),
-                    )),
+                    hintStyle: TextStyle(color: Color(0xFFC4C5C9))),
                 onTap: () {
                   setState(() {
                     textFieldclick = true;

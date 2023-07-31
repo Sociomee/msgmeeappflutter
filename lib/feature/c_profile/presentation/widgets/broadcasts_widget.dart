@@ -72,74 +72,69 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {},
-                      splashColor: AppColors.seconderyColor,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 7),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                InkWell(
-                                    onTap: () {},
-                                    child: SvgPicture.asset(
-                                        'assets/broadcast.svg',
-                                        height: 45.h,
-                                        fit: BoxFit.cover)),
-                                SizedBox(width: 10.w),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 195.w,
-                                        child: Text(
-                                            index == 1
-                                                ? "Eid Broadcast"
-                                                : index == 2
-                                                    ? 'Diwali Broadcast'
-                                                    : 'Christmas Broadcast',
-                                            overflow: TextOverflow.ellipsis,
+                        onTap: () {},
+                        splashColor: AppColors.seconderyColor,
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 7),
+                            child: Column(children: [
+                              Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                        onTap: () {},
+                                        child: SvgPicture.asset(
+                                            'assets/broadcast.svg',
+                                            height: 45.h,
+                                            fit: BoxFit.cover)),
+                                    SizedBox(width: 10.w),
+                                    Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: 195.w,
+                                                child: Text(
+                                                    index == 1
+                                                        ? "Eid Broadcast"
+                                                        : index == 2
+                                                            ? 'Diwali Broadcast'
+                                                            : 'Christmas Broadcast',
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                              ),
+                                              SizedBox(height: 8),
+                                              SizedBox(
+                                                  child: Text(
+                                                      'Alam, Saurabh, Taha Jamal, Anshuman...',
+                                                      style: TextStyle(
+                                                          fontSize: 13.sp,
+                                                          color:
+                                                              AppColors.grey)))
+                                            ])),
+                                    Spacer(),
+                                    Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Text('2w ago',
                                             style: TextStyle(
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.w500)),
-                                      ),
-                                      SizedBox(height: 8),
-                                      SizedBox(
-                                        child: Text(
-                                            'Alam, Saurabh, Taha Jamal, Anshuman...',
-                                            style: TextStyle(
-                                                fontSize: 13.sp,
-                                                color: AppColors.grey)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Text('2w ago',
-                                      style: TextStyle(
-                                          fontSize: 11.sp,
-                                          color: AppColors.grey)),
-                                ),
-                              ],
-                            ),
-                            index == 2
-                                ? Container()
-                                : Divider(
-                                    color: AppColors.lightgrey.withOpacity(.6),
-                                    thickness: 1)
-                          ],
-                        ),
-                      ),
-                    );
+                                                fontSize: 11.sp,
+                                                color: AppColors.grey)))
+                                  ]),
+                              index == 2
+                                  ? Container()
+                                  : Divider(
+                                      color:
+                                          AppColors.lightgrey.withOpacity(.6),
+                                      thickness: 1)
+                            ])));
                   })
             ],
           ),
@@ -152,27 +147,23 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 117, 117, 117),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Text(
-                          'All your’s created broadcast were listed here.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 117, 117, 117),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                              'All your’s created broadcast were listed here.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400))),
                       Padding(
-                        padding: const EdgeInsets.only(left: 70),
-                        child: Transform.rotate(
-                            angle: pi, child: const Triangle()),
-                      ),
+                          padding: const EdgeInsets.only(left: 70),
+                          child: Transform.rotate(
+                              angle: pi, child: const Triangle()))
                     ],
                   ),
                 )
