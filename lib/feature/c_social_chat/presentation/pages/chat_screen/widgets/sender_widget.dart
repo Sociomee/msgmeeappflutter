@@ -40,7 +40,7 @@ class SentMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('message length ---->${message.trim().length}');
-    final messageTextGroup = Row(
+    final textMessage = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -64,24 +64,13 @@ class SentMessageWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(time,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 10)),
                         SizedBox(
-                            width: message.trim().length <= 9
-                                ? 3
-                                : message.trim().length <= 15
-                                    ? 40
-                                    : message.trim().length <= 35
-                                        ? 90
-                                        : message.trim().length < 40
-                                            ? 170
-                                            : 230),
-                        Text(msgStatus,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 10)),
+                          width: 25,
+                        )
                       ],
                     )
                   ],
@@ -94,6 +83,12 @@ class SentMessageWidget extends StatelessWidget {
                   : msgStatus == 'send'
                       ? MessageStatus.sent
                       : MessageStatus.delivered,
+            ),
+            Positioned(
+              bottom: 5,
+              right: 18,
+              child: Text(msgStatus,
+                  style: const TextStyle(color: Colors.white, fontSize: 10)),
             ),
           ],
         ),
@@ -1152,7 +1147,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [messageTextGroup],
+            children: [textMessage],
           ),
         );
       case MessageType.replyMessage:
