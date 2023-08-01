@@ -88,15 +88,18 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
           SizedBox(height: 43.w),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: GridView.count(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 0.0,
+                  mainAxisSpacing: 8.0,
+                  mainAxisExtent: 40),
               padding: EdgeInsets.all(0),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              crossAxisCount: 3,
-              childAspectRatio: 103 / 36,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              children: List.generate(interestList.length, (index) {
+              itemCount: interestList.length,
+              itemBuilder: (context, index) {
+                double textWidth = interestList[index].length * 13;
                 return GestureDetector(
                   onTap: () {
                     if (selected.contains(index)) {
@@ -109,28 +112,41 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
                       });
                     }
                   },
-                  child: Container(
-                      height: 36,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: selected.contains(index)
-                              ? AppColors.primaryColor
-                              : AppColors.lightgrey1,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        interestList[index],
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: selected.contains(index)
-                              ? AppColors.white
-                              : Color(0xFF4E4E4E),
-                          fontSize: 16,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w400,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 36,
+                        width: textWidth,
+                        child: Center(
+                          child: Container(
+                              margin: EdgeInsets.only(left: 10),
+                              height: 36,
+                              width: textWidth,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: selected.contains(index)
+                                      ? AppColors.primaryColor
+                                      : AppColors.lightgrey1,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                interestList[index],
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: selected.contains(index)
+                                      ? AppColors.white
+                                      : Color(0xFF4E4E4E),
+                                  fontSize: 16,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )),
                         ),
-                      )),
+                      ),
+                    ],
+                  ),
                 );
-              }),
+              },
             ),
           ),
           SizedBox(height: 35.w),
