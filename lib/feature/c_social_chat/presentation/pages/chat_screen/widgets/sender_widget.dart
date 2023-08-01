@@ -68,9 +68,7 @@ class SentMessageWidget extends StatelessWidget {
                         Text(time,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 10)),
-                        SizedBox(
-                          width: 25,
-                        )
+                        SizedBox(width: 25)
                       ],
                     )
                   ],
