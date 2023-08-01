@@ -13,6 +13,7 @@ class BroadCastList extends StatefulWidget {
 }
 
 class _BroadCastListState extends State<BroadCastList> {
+  bool selectMode = false;
   List<int> selectedindex = [];
   @override
   Widget build(BuildContext context) {
@@ -24,8 +25,7 @@ class _BroadCastListState extends State<BroadCastList> {
           },
           child: Padding(
             padding: EdgeInsets.only(left: 20.w),
-            child:
-                Icon(Icons.arrow_back_ios, color: AppColors.black, size: 24.h),
+            child: Icon(Icons.arrow_back_ios, color: AppColors.black, size: 20),
           ),
         ),
         leadingWidth: 40.w,
@@ -107,15 +107,19 @@ class _BroadCastListState extends State<BroadCastList> {
                         setState(() {
                           selectedindex.remove(index);
                         });
-                      }
-                    },
-                    onLongPress: () {
-                      if (selectedindex.length < 9 &&
-                          !selectedindex.contains(index)) {
+                      } else if (selectMode) {
                         setState(() {
                           selectedindex.add(index);
                         });
                       }
+                    },
+                    onLongPress: () {
+                      if (selectedindex.length < 9 &&
+                          !selectedindex.contains(index))
+                        setState(() {
+                          selectMode = !selectMode;
+                          selectedindex.add(index);
+                        });
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
