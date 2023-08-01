@@ -143,9 +143,11 @@ class _OtherPersonProfileDescriptionState
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 24),
                     child: Divider(
-                        color: AppColors.grey.withOpacity(.3), thickness: 5)),
+                        height: 0,
+                        color: AppColors.grey.withOpacity(.3),
+                        thickness: 5)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
@@ -184,7 +186,7 @@ class _OtherPersonProfileDescriptionState
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 15.0, top: 24, bottom: 10),
+                      const EdgeInsets.only(left: 15.0, top: 24, bottom: 12),
                   child: Text(
                     'Recent media',
                     style: TextStyle(
