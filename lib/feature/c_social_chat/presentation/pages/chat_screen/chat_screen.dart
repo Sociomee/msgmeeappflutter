@@ -372,7 +372,7 @@ class _ChatScreenState extends State<ChatScreen> {
               controller: _listViewController,
               itemCount: msg.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10, bottom: 60),
+              padding: EdgeInsets.only(top: 10, bottom: 70),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Align(
@@ -674,7 +674,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
-//?    showing reply message textfield
+                //?showing reply message textfield
                 context.watch<ReplyMsgCubit>().state.reply
                     ? Positioned(
                         bottom: 10,
@@ -695,7 +695,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       )
                     : Container(),
-                //?   showing contack sender textfield widget
+                //?showing contack sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,
@@ -717,7 +717,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       )
                     : Container(),
 
-                //?   showing audio recorder widget
+                //?showing audio recorder widget
                 context.watch<ShowAudioRecorder>().state
                     ? Positioned(
                         bottom: 10, left: 86, child: AudioRecordWidget())

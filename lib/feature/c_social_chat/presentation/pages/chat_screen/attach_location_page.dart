@@ -377,12 +377,14 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           decoration: ShapeDecoration(
                               color: selectedIndex == 0
                                   ? AppColors.darkgreen
-                                  : AppColors.lightgrey,
+                                  : Color(0x3F999999),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6))),
                           child: Text('15 Min',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: selectedIndex == 0
+                                      ? Colors.white
+                                      : AppColors.black,
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500))),
@@ -401,12 +403,14 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           decoration: ShapeDecoration(
                               color: selectedIndex == 1
                                   ? AppColors.darkgreen
-                                  : AppColors.lightgrey,
+                                  : Color(0x3F999999),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6))),
                           child: Text('1 Hour',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: selectedIndex == 1
+                                      ? Colors.white
+                                      : AppColors.black,
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500))),
@@ -425,12 +429,14 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           decoration: ShapeDecoration(
                               color: selectedIndex == 2
                                   ? AppColors.darkgreen
-                                  : AppColors.lightgrey,
+                                  : Color(0x3F999999),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6))),
                           child: Text('2 Hour',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: selectedIndex == 2
+                                      ? Colors.white
+                                      : AppColors.black,
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500))),
@@ -449,7 +455,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           decoration: InputDecoration(
                             hintText: "Add message",
                             hintStyle: TextStyle(
-                              color: Color(0xFF4E4E4E),
+                              color: Color.fromARGB(255, 134, 134, 134),
                               fontSize: 13,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
@@ -461,17 +467,17 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0x3F999999),
                                 )),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0x3F999999),
                                 )),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: BorderSide(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0x3F999999),
                                 )),
                             suffixIcon: GestureDetector(
                               onTap: () {

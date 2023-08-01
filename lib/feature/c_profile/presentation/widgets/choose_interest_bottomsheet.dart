@@ -59,7 +59,7 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
             TextSpan(
                 text: 'Please select ',
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: Color(0xB2333333),
                   fontSize: 14,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
@@ -74,12 +74,17 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
             TextSpan(
                 text: ' for a better',
                 style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black)),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xB2333333),
+                )),
           ])),
-          Text('in-app experience', style: TextStyle(fontSize: 14)),
+          Text('in-app experience',
+              style: TextStyle(
+                fontSize: 14,
+                color: Color(0xB2333333),
+              )),
           SizedBox(height: 43.w),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
