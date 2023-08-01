@@ -387,7 +387,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                 height: 20,
                                 padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0xFFF5F5F5),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: SvgPicture.asset('assets/clip.svg')),
@@ -397,7 +397,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               height: 20,
                               padding: EdgeInsets.all(3),
                               decoration: BoxDecoration(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0xFFF5F5F5),
                                   borderRadius: BorderRadius.circular(30)),
                               child: Icon(Icons.photo_camera_outlined,
                                   size: 16, color: AppColors.iconColor),
@@ -416,7 +416,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                   Text(
                                     'Type your message',
                                     style: TextStyle(
-                                      color: Color(0xFF4E4E4E),
+                                      color: AppColors.grey,
                                       fontSize: 8.sp,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400,
@@ -435,18 +435,17 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                 ],
                               ),
                             ),
-                            Spacer(),
+                            SizedBox(width: 7.17),
                             Container(
                                 width: 20,
                                 height: 20,
                                 padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFFAFAFA),
+                                  color: Color(0xFFF5F5F5),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: SvgPicture.asset('assets/microphone.svg',
                                     fit: BoxFit.contain)),
-                            SizedBox(width: 5)
                           ],
                         ),
                       ),
