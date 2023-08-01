@@ -473,7 +473,7 @@ class SentMessageWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          images != null && images!.length < 4
+                          images != null && images!.length == 4
                               ? Container(
                                   height: 200,
                                   width: 200,
@@ -483,15 +483,18 @@ class SentMessageWidget extends StatelessWidget {
                                     childAspectRatio: .4 / .4,
                                     children: List.generate(
                                       images!.length,
-                                      (index) => ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: Image.file(
-                                            images![index]!,
-                                            height: 100,
-                                            width: 100,
-                                            fit: BoxFit.cover,
-                                          )),
+                                      (index) => Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.file(
+                                              images![index]!,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            )),
+                                      ),
                                     ),
                                   ),
                                 )
@@ -560,7 +563,7 @@ class SentMessageWidget extends StatelessWidget {
                                                           .withOpacity(.5)),
                                                   alignment: Alignment.center,
                                                   child: Text(
-                                                    '+${images!.length - 4}',
+                                                    '+${images!.length - 3}',
                                                     style: TextStyle(
                                                       color: AppColors.white,
                                                       fontSize: 30,

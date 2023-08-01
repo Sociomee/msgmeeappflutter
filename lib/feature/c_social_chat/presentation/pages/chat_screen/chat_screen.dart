@@ -108,12 +108,12 @@ class _ChatScreenState extends State<ChatScreen> {
     context
         .read<SetChatbgCubit>()
         .chooseType(context.read<SetChatbgCubit>().state.bgType);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     var msg = context.watch<AddMessageCubit>().state.messages;
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -427,9 +427,11 @@ class _ChatScreenState extends State<ChatScreen> {
                           },
                           child: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                chattileIndex.remove(index);
-                              });
+                              if (chattileIndex.contains(index)) {
+                                setState(() {
+                                  chattileIndex.remove(index);
+                                });
+                              }
                             },
                             onLongPress: () async {
                               if (!chattileIndex.contains(index)) {

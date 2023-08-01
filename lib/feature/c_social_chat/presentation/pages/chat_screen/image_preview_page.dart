@@ -312,7 +312,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                         image_url: imagelist[selectedImage]!,
                         images: imagelist,
                       ));
-                } else if (imagelist.length < 4 || imagelist.length == 4) {
+                } else if (imagelist.length < 4) {
                   for (var i = 0; i < imagelist.length; i++) {
                     context.read<AddMessageCubit>().addMessage(ChatMessage(
                           messageContent: messageController.text,
@@ -324,6 +324,14 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                           images: imagelist,
                         ));
                   }
+                } else if (imagelist.length == 4) {
+                  context.read<AddMessageCubit>().addMessage(ChatMessage(
+                      messageContent: messageController.text,
+                      messageType: 'sender',
+                      msgStatus: 'send',
+                      time: getCurrentTime(),
+                      type: MessageType.multipleImage,
+                      images: imagelist));
                 } else if (imagelist.length > 4) {
                   context.read<AddMessageCubit>().addMessage(ChatMessage(
                       messageContent: messageController.text,
