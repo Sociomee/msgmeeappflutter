@@ -99,7 +99,7 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
               shrinkWrap: true,
               itemCount: interestList.length,
               itemBuilder: (context, index) {
-                double textWidth = interestList[index].length * 13;
+                double textWidth = interestList[index].length * 17;
                 return GestureDetector(
                   onTap: () {
                     if (selected.contains(index)) {
@@ -159,7 +159,9 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
                 color: selected.isNotEmpty
                     ? AppColors.primaryColor
                     : AppColors.primaryColor.withOpacity(.7),
-                ontap: () {}),
+                ontap: () {
+                  Navigator.pop(context);
+                }),
           )
         ],
       ),
