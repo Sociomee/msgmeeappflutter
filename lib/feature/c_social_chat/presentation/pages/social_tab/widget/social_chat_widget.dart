@@ -107,21 +107,16 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                       fontWeight: FontWeight.w500)),
                               selectcubit.starClicked &&
                                       selectcubit.selectedchat.contains(index)
-                                  ? Icon(
-                                      Icons.star,
-                                      color: AppColors.primaryColor,
-                                      size: 16,
-                                    )
+                                  ? Icon(Icons.star,
+                                      color: AppColors.primaryColor, size: 16)
                                   : Container(),
                               selectcubit.pinned &&
                                       selectcubit.selectedchat.contains(index)
                                   ? Transform.rotate(
                                       angle: pi / 4,
-                                      child: Icon(
-                                        Icons.push_pin,
-                                        color: AppColors.primaryColor,
-                                        size: 16,
-                                      ),
+                                      child: Icon(Icons.push_pin,
+                                          color: AppColors.primaryColor,
+                                          size: 16),
                                     )
                                   : Container()
                             ],
@@ -178,10 +173,9 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                 ),
               ),
               Divider(
-                height: 0,
-                thickness: 1,
-                color: Color(0xFFE4E4E4).withOpacity(.5),
-              ),
+                  height: 0,
+                  thickness: 1,
+                  color: Color(0xFFE4E4E4).withOpacity(.5)),
             ],
           );
         });
