@@ -45,14 +45,6 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                           color: AppColors.black),
                     ),
                     SizedBox(width: 5),
-                    GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            show = !show;
-                          });
-                        },
-                        child: Icon(Icons.error_outline,
-                            size: 18.sp, color: AppColors.grey)),
                     Spacer(),
                     GestureDetector(
                       onTap: () {
@@ -138,36 +130,57 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                   })
             ],
           ),
-          show
-              ? Positioned(
-                  left: constraint.maxWidth * .27,
-                  top: 8,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                          decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 117, 117, 117),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Text(
-                              'All your’s created broadcast were listed here.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400))),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 70),
-                          child: Transform.rotate(
-                              angle: pi, child: const Triangle()))
-                    ],
-                  ),
-                )
-              : Container(),
+          Positioned(
+            left: constraint.maxWidth * .27,
+            top: 8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                show
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 7),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 117, 117, 117),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Text(
+                                  'All your’s created broadcast were listed here.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w400))),
+                          Padding(
+                              padding: const EdgeInsets.only(left: 70),
+                              child: Transform.rotate(
+                                  angle: pi, child: const Triangle())),
+                        ],
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
+          Positioned(
+            left: constraint.maxWidth * .42,
+            top: 40,
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    show = !show;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Icon(Icons.error_outline,
+                      size: 18.sp, color: AppColors.grey),
+                )),
+          ),
         ],
       );
     });

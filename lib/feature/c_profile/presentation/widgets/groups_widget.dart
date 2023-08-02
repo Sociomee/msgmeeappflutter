@@ -43,19 +43,6 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                           fontWeight: FontWeight.bold,
                           color: AppColors.black),
                     ),
-                    SizedBox(width: 5.w),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          show = !show;
-                        });
-                      },
-                      child: Icon(
-                        Icons.error_outline,
-                        size: 18.sp,
-                        color: AppColors.grey,
-                      ),
-                    ),
                     Spacer(),
                     GestureDetector(
                       onTap: () {
@@ -195,6 +182,21 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                   ),
                 )
               : Container(),
+          Positioned(
+            left: constraint.maxWidth * .34,
+            top: 40,
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    show = !show;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Icon(Icons.error_outline,
+                      size: 18.sp, color: AppColors.grey),
+                )),
+          ),
         ],
       );
     });
