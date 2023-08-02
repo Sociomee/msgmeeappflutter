@@ -25,7 +25,8 @@ class SelectedchatState extends Equatable {
   }
 
   @override
-  List<Object> get props => [selectedchat, starClicked, mute, pinned];
+  List<Object> get props =>
+      [selectedchat, starClicked, mute, pinned, selctmode];
 
   SelectedchatState copyWith({
     List<int>? selectedchat,

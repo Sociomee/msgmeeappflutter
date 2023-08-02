@@ -32,13 +32,21 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
             children: [
               GestureDetector(
                 onLongPress: () {
+                  print(
+                      "----->>>>>${context.read<SelectedchatCubit>().state.selectedchat}${context.read<SelectedchatCubit>().state.selctmode}");
                   if (!context
                       .read<SelectedchatCubit>()
                       .state
                       .selectedchat
                       .contains(index)) {
-                    context.read<SelectedchatCubit>().select(index);
                     context.read<SelectedchatCubit>().selectmode();
+                    context.read<SelectedchatCubit>().select(index);
+                  } else if (context
+                      .read<SelectedchatCubit>()
+                      .state
+                      .selectedchat
+                      .contains(index)) {
+                    context.read<SelectedchatCubit>().remove(index);
                   }
                 },
                 onTap: () {

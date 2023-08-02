@@ -163,26 +163,9 @@ class SentMessageWidget extends StatelessWidget {
                         SizedBox(height: 2),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(time,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                              SizedBox(
-                                width: message.trim().length <= 6
-                                    ? 115
-                                    : message.trim().length <= 15
-                                        ? 115
-                                        : message.trim().length <= 21
-                                            ? 80
-                                            : 130,
-                              ),
-                              Text(msgStatus,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 10)),
-                            ],
-                          ),
+                          child: Text(time,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10)),
                         )
                       ],
                     )),
@@ -194,6 +177,13 @@ class SentMessageWidget extends StatelessWidget {
                       : msgStatus == 'send'
                           ? MessageStatus.sent
                           : MessageStatus.delivered,
+                ),
+                Positioned(
+                  bottom: 5,
+                  right: 18,
+                  child: Text(msgStatus,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 10)),
                 ),
               ],
             ),
