@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
@@ -115,6 +116,8 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     var msg = context.watch<AddMessageCubit>().state.messages;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('d MMMM, y').format(now);
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -741,7 +744,28 @@ class _ChatScreenState extends State<ChatScreen> {
                         height:
                             context.watch<ShowAttachment>().state ? 44 * 6 : 0,
                         width: 150,
-                        child: AttachedIcon(profileImage: widget.imageUrl)))
+                        child: AttachedIcon(profileImage: widget.imageUrl))),
+
+                //?showing current date
+                Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                        margin: EdgeInsets.only(top: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 11.74, vertical: 6.52),
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF3FFE9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3.91),
+                          ),
+                        ),
+                        child: Text(formattedDate,
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            ))))
               ],
             ),
           ],
