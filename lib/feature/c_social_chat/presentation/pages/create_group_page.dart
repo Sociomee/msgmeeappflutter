@@ -49,7 +49,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     }
   }
 
-  void _showBottomSheet() {
+  void showBottomSheet() {
     _bottomSheetKey.currentState!.showBottomSheet(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

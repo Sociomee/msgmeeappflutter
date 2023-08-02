@@ -126,8 +126,8 @@ class _GroupListState extends State<GroupList> {
                           children: [
                             selectedindex.contains(index)
                                 ? Container(
-                                    height: 65,
-                                    width: 65,
+                                    height: 51,
+                                    width: 51,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),

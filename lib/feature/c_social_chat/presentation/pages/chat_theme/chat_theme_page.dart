@@ -126,16 +126,38 @@ class _ChatThemePageState extends State<ChatThemePage> {
                             padding: const EdgeInsets.only(right: 22),
                             child: Row(
                               children: [
-                                ChatThemeColorContainer(
-                                  leftColor: themes[index].leftColor,
-                                  rightColor: themes[index].rightColor,
+                                GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<ChatThemeCubit>()
+                                        .selectTheme(index);
+                                    context.read<ChatThemeCubit>().changeTheme(
+                                          themes[index].rightColor,
+                                          themes[index].leftColor,
+                                        );
+                                  },
+                                  child: ChatThemeColorContainer(
+                                    leftColor: themes[index].leftColor,
+                                    rightColor: themes[index].rightColor,
+                                  ),
                                 ),
-                                Text(themes[index].name,
-                                    style: TextStyle(
-                                        color: Color(0xFF333333),
-                                        fontSize: 15,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500)),
+                                GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<ChatThemeCubit>()
+                                        .selectTheme(index);
+                                    context.read<ChatThemeCubit>().changeTheme(
+                                          themes[index].rightColor,
+                                          themes[index].leftColor,
+                                        );
+                                  },
+                                  child: Text(themes[index].name,
+                                      style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: 15,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500)),
+                                ),
                                 Spacer(),
                                 GestureDetector(
                                   onTap: () {
