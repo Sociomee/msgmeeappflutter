@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/cubit/search_mode.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
@@ -24,6 +23,7 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
+import '../../cubit/cubit/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../widgets/chat_profile_widget.dart';
@@ -157,7 +157,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   SizedBox(width: 19),
                 ],
               )
-            : context.watch<SearchModeCubit>().state
+            : context.watch<SearchModeCubit>().state.msgSearchMode
                 ? AppBar(
                     toolbarHeight: 70,
                     elevation: 1,
@@ -171,7 +171,9 @@ class _ChatScreenState extends State<ChatScreen> {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  context.read<SearchModeCubit>().changeMode();
+                                  context
+                                      .read<SearchModeCubit>()
+                                      .changemsgSearchMode();
                                 },
                                 icon: Icon(
                                   Icons.arrow_back_ios,

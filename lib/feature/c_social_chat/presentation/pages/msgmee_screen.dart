@@ -15,6 +15,7 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'package:stories_editor/stories_editor.dart';
+import '../cubit/cubit/search_mode_cubit.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import 'biz_page/biz_page.dart';
 import 'calls_tab/call_tab_screen.dart';
@@ -36,11 +37,13 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   int _selectedIndex = 0;
   File? image;
   late FToast fToast;
+
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
+
     tabsComtroller.addListener(() {
       setState(() {
         _selectedIndex = _controller.index;
@@ -191,186 +194,197 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                     ),
                   ),
                 )
-              : Scaffold(
-                  appBar: AppBar(
-                    toolbarHeight: 70,
-                    elevation: 0,
-                    leadingWidth: 0,
-                    title: Row(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(right: 14.0),
-                            child: GestureDetector(
-                                onTap: () {
-                                  animatedScreenNavigator(
-                                      context, PersonalPeofileDesc());
-                                },
-                                child: ProfilePicWidget())),
-                        _selectedIndex == 0
-                            ? Text(
-                                "MsgMee",
-                                style: TextStyle(
-                                  color: AppColors.black,
-                                  fontSize: 22,
-                                ),
-                              )
-                            : Text(
-                                "Social Calls",
-                                style: TextStyle(
-                                  color: AppColors.black,
-                                  fontSize: 22,
-                                ),
-                              ),
-                      ],
-                    ),
-                    actions: [
-                      IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            color: AppColors.black,
-                          ),
-                          onPressed: () {
-                            animatedScreenNavigator(
-                                context, MessageSearchPage());
-                          }),
-                      GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(25.0),
-                                  ),
-                                ),
-                                context: context,
-                                builder: (context) {
-                                  return MessengerOptionsBottomSheet();
-                                });
-                          },
-                          child: SvgPicture.asset('assets/msgmee_icon.svg')),
-                      PopupMenuButtonWidget()
-                    ],
-                  ),
-                  body: SingleChildScrollView(
-                    child: Stack(
-                      children: [
-                        Column(
+              : context.watch<SearchModeCubit>().state.chatuserSearchMode
+                  ? MessageSearchPage()
+                  : Scaffold(
+                      appBar: AppBar(
+                        toolbarHeight: 70,
+                        elevation: 0,
+                        leadingWidth: 0,
+                        title: Row(
                           children: [
-                            context.watch<SyncWithSociomee>().state
-                                ? DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.0),
-                                      border: const Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey, width: 0.8)),
-                                    ),
-                                    child: TabBar(
-                                      indicatorWeight: 3,
-                                      indicatorColor: AppColors.primaryColor,
-                                      labelColor: AppColors.primaryColor,
-                                      unselectedLabelColor: AppColors.grey,
-                                      controller: tabsComtroller,
-                                      tabs: [
-                                        Tab(
-                                          icon: Text(
-                                            'Social',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                        Tab(
-                                          icon: Text(
-                                            'Biz Page',
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        Tab(
-                                          icon: Text(
-                                            'Market',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                        Tab(
-                                          icon: Text(
-                                            'Calls',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                      ],
+                            Padding(
+                                padding: EdgeInsets.only(right: 14.0),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      animatedScreenNavigator(
+                                          context, PersonalPeofileDesc());
+                                    },
+                                    child: ProfilePicWidget())),
+                            _selectedIndex == 0
+                                ? Text(
+                                    "MsgMee",
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: 22,
                                     ),
                                   )
-                                : DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.0),
-                                      border: const Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey, width: 0.8)),
-                                    ),
-                                    child: TabBar(
-                                      indicatorWeight: 3,
-                                      indicatorColor: AppColors.primaryColor,
-                                      labelColor: AppColors.primaryColor,
-                                      unselectedLabelColor: AppColors.grey,
-                                      controller: _controller,
-                                      tabs: [
-                                        Tab(
-                                          icon: Text(
-                                            'Social',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                        Tab(
-                                          icon: Text(
-                                            'Calls',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                      ],
+                                : Text(
+                                    "Social Calls",
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: 22,
                                     ),
                                   ),
-                            context.watch<SyncWithSociomee>().state
-                                ? SizedBox(
-                                    height: 570.h,
-                                    child: TabBarView(
-                                        controller: context
-                                                .watch<SyncWithSociomee>()
-                                                .state
-                                            ? tabsComtroller
-                                            : _controller,
-                                        children: [
-                                          SocialTabScreen(),
-                                          BizPageTab(),
-                                          MarketPageTab(),
-                                          CallTabScreen(),
-                                        ]),
-                                  )
-                                : SizedBox(
-                                    height: 570.h,
-                                    child: TabBarView(
-                                        controller: context
-                                                .watch<SyncWithSociomee>()
-                                                .state
-                                            ? tabsComtroller
-                                            : _controller,
-                                        children: [
-                                          SocialTabScreen(),
-                                          CallTabScreen(),
-                                        ]),
-                                  )
                           ],
                         ),
-                        Positioned(
-                          top: 10,
-                          child: AnimatedContainer(
-                            height: context.watch<ShoweditbtnCubit>().state.show
-                                ? 130
-                                : 0,
-                            duration: Duration(milliseconds: 500),
-                            margin: EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow:
-                                  context.watch<ShoweditbtnCubit>().state.show
+                        actions: [
+                          IconButton(
+                              icon: const Icon(
+                                Icons.search,
+                                color: AppColors.black,
+                              ),
+                              onPressed: () {
+                                context
+                                    .read<SearchModeCubit>()
+                                    .changeuserSearchMode();
+                              }),
+                          GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(25.0),
+                                      ),
+                                    ),
+                                    context: context,
+                                    builder: (context) {
+                                      return MessengerOptionsBottomSheet();
+                                    });
+                              },
+                              child:
+                                  SvgPicture.asset('assets/msgmee_icon.svg')),
+                          PopupMenuButtonWidget()
+                        ],
+                      ),
+                      body: SingleChildScrollView(
+                        child: Stack(
+                          children: [
+                            Column(
+                              children: [
+                                context.watch<SyncWithSociomee>().state
+                                    ? DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.0),
+                                          border: const Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.8)),
+                                        ),
+                                        child: TabBar(
+                                          indicatorWeight: 3,
+                                          indicatorColor:
+                                              AppColors.primaryColor,
+                                          labelColor: AppColors.primaryColor,
+                                          unselectedLabelColor: AppColors.grey,
+                                          controller: tabsComtroller,
+                                          tabs: [
+                                            Tab(
+                                              icon: Text(
+                                                'Social',
+                                                style: TextStyle(fontSize: 17),
+                                              ),
+                                            ),
+                                            Tab(
+                                              icon: Text(
+                                                'Biz Page',
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                            Tab(
+                                              icon: Text(
+                                                'Market',
+                                                style: TextStyle(fontSize: 17),
+                                              ),
+                                            ),
+                                            Tab(
+                                              icon: Text(
+                                                'Calls',
+                                                style: TextStyle(fontSize: 17),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.0),
+                                          border: const Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.8)),
+                                        ),
+                                        child: TabBar(
+                                          indicatorWeight: 3,
+                                          indicatorColor:
+                                              AppColors.primaryColor,
+                                          labelColor: AppColors.primaryColor,
+                                          unselectedLabelColor: AppColors.grey,
+                                          controller: _controller,
+                                          tabs: [
+                                            Tab(
+                                              icon: Text(
+                                                'Social',
+                                                style: TextStyle(fontSize: 17),
+                                              ),
+                                            ),
+                                            Tab(
+                                              icon: Text(
+                                                'Calls',
+                                                style: TextStyle(fontSize: 17),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                context.watch<SyncWithSociomee>().state
+                                    ? SizedBox(
+                                        height: 570.h,
+                                        child: TabBarView(
+                                            controller: context
+                                                    .watch<SyncWithSociomee>()
+                                                    .state
+                                                ? tabsComtroller
+                                                : _controller,
+                                            children: [
+                                              SocialTabScreen(),
+                                              BizPageTab(),
+                                              MarketPageTab(),
+                                              CallTabScreen(),
+                                            ]),
+                                      )
+                                    : SizedBox(
+                                        height: 570.h,
+                                        child: TabBarView(
+                                            controller: context
+                                                    .watch<SyncWithSociomee>()
+                                                    .state
+                                                ? tabsComtroller
+                                                : _controller,
+                                            children: [
+                                              SocialTabScreen(),
+                                              CallTabScreen(),
+                                            ]),
+                                      )
+                              ],
+                            ),
+                            Positioned(
+                              top: 10,
+                              child: AnimatedContainer(
+                                height:
+                                    context.watch<ShoweditbtnCubit>().state.show
+                                        ? 130
+                                        : 0,
+                                duration: Duration(milliseconds: 500),
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: context
+                                          .watch<ShoweditbtnCubit>()
+                                          .state
+                                          .show
                                       ? [
                                           BoxShadow(
                                               color: AppColors.lightgrey,
@@ -379,90 +393,61 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                               spreadRadius: 5),
                                         ]
                                       : null,
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      // await [
-                                      //   Permission.photos,
-                                      //   Permission.storage,
-                                      // ].request();
-                                      // final picker = ImagePicker();
-                                      // await picker
-                                      //     .pickImage(source: ImageSource.gallery)
-                                      //     .then((file) async {
-                                      //   final File editedFile =
-                                      //       await Navigator.of(context).push(
-                                      //     MaterialPageRoute(
-                                      //       builder: (context) => StoryMaker(
-                                      //         filePath: file!.path,
-                                      //       ),
-                                      //     ),
-                                      //   );
-                                      //   setState(() {
-                                      //     image = editedFile;
-                                      //   });
-                                      //   print('editedFile: ${image!.path}');
-                                      // });
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           const WhatsappStoryEditor()),
-                                      // );
-                                      await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StoriesEditor(
-                                                    giphyKey:
-                                                        'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                    //fontFamilyList: const ['Shizuru', 'Aladin'],
-                                                    galleryThumbnailQuality:
-                                                        300,
-                                                    //isCustomFontList: true,
-                                                    onDone: (uri) {
-                                                      debugPrint(uri);
-                                                      // Share.shareFiles([uri]);
-                                                    },
-                                                  )));
-                                    },
-                                    child: Container(
-                                      height: 42,
-                                      width: 42,
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 10),
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: AppColors.black),
-                                      child: Image.asset('assets/camera1.png'),
-                                    ),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StoriesEditor(
+                                                        giphyKey:
+                                                            'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                        galleryThumbnailQuality:
+                                                            300,
+                                                        onDone: (uri) {
+                                                          debugPrint(uri);
+                                                        },
+                                                      )));
+                                        },
+                                        child: Container(
+                                          height: 42,
+                                          width: 42,
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 10),
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: AppColors.black),
+                                          child:
+                                              Image.asset('assets/camera1.png'),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 42,
+                                        width: 42,
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 19),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            color: AppColors.primaryColor),
+                                        child: Image.asset('assets/edit1.png'),
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    height: 42,
-                                    width: 42,
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 19),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: AppColors.primaryColor),
-                                    child: Image.asset('assets/edit1.png'),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        )
-                      ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
         ),
       ),
     );

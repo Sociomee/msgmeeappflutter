@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/theme/colors.dart';
 
+import '../../../cubit/cubit/search_mode_cubit.dart';
 import '../../calls_tab/call_tab_screen.dart';
 import '../../social_tab/widget/social_chat_widget.dart';
 
@@ -37,6 +39,7 @@ class _MessageSearchPageState extends State<MessageSearchPage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Column(
             children: [
@@ -46,10 +49,13 @@ class _MessageSearchPageState extends State<MessageSearchPage>
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          context
+                              .read<SearchModeCubit>()
+                              .changeuserSearchMode();
                         },
                         child:
                             Icon(Icons.arrow_back_ios, color: AppColors.grey)),
+                    SizedBox(width: 10),
                     Expanded(
                       child: TextFormField(
                         controller: searchController,
