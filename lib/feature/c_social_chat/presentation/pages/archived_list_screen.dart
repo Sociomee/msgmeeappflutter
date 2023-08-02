@@ -294,7 +294,10 @@ class _ArchivedListScreenState extends State<ArchivedListScreen> {
                           ),
                         ),
                       ),
-                      Divider(color: AppColors.grey, thickness: 1, height: 0)
+                      Divider(
+                          height: 0,
+                          thickness: 1,
+                          color: Color(0xFFE4E4E4).withOpacity(.5)),
                     ],
                   );
                 })
