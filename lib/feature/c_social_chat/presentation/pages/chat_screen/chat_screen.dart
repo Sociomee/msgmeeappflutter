@@ -161,7 +161,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ? AppBar(
                     toolbarHeight: 70,
                     elevation: 1,
-                    leadingWidth: 0,
+                    leadingWidth: 10,
                     titleSpacing: 0,
                     title: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -175,34 +175,40 @@ class _ChatScreenState extends State<ChatScreen> {
                                       .read<SearchModeCubit>()
                                       .changemsgSearchMode();
                                 },
-                                icon: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: AppColors.black,
-                                  size: 20,
+                                icon: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, top: 10),
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: AppColors.black,
+                                    size: 20,
+                                  ),
                                 )),
-                            Expanded(
-                              child: SizedBox(
+                            SizedBox(
                                 height: 40,
+                                width: 155.w,
                                 child: TextFormField(
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 0),
-                                      hintText: 'Search',
-                                      border: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: AppColors.black),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: AppColors.black))),
-                                ),
-                              ),
-                            ),
+                                    decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 0),
+                                        hintText: 'Search',
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 2,
+                                                color: Color(0XFF255D3A))),
+                                        border: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 2,
+                                                color: Color(0XFF255D3A))),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 2,
+                                                color: Color(0XFF255D3A))))))
                           ],
                         ),
                         Padding(
                           padding:
-                              const EdgeInsets.only(left: 20.0, bottom: 10),
+                              const EdgeInsets.only(left: 17.0, bottom: 10),
                           child: Row(
                             children: [
                               Text(
@@ -230,11 +236,13 @@ class _ChatScreenState extends State<ChatScreen> {
                       ],
                     ),
                     actions: [
+                      SizedBox(width: 10),
                       Icon(Icons.keyboard_arrow_down, color: AppColors.black),
+                      SizedBox(width: 20),
                       Icon(Icons.keyboard_arrow_up, color: AppColors.black),
                       Padding(
                           padding:
-                              EdgeInsets.only(top: 17, left: 10, right: 10),
+                              EdgeInsets.only(top: 25, left: 10, right: 10),
                           child: Text('10/12',
                               style: TextStyle(
                                   color: AppColors.black,
@@ -255,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(right: 10.w),
                             child: SvgPicture.asset('assets/calender.svg'),
                           ))
                     ],
