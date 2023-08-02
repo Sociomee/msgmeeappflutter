@@ -343,7 +343,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       SvgPicture.asset('assets/video.svg'),
                       SizedBox(width: 25.w),
                       SvgPicture.asset('assets/calling.svg'),
-                      SinglechatPopupMenu(name: widget.name),
+                      SinglechatPopupMenu(
+                        name: widget.name,
+                        imageUrl: widget.imageUrl,
+                      ),
                     ],
                   ),
         body: Stack(
