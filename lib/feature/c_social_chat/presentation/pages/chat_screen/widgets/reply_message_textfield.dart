@@ -82,13 +82,14 @@ class ReplyMessageTextField extends StatelessWidget {
           ),
           SizedBox(height: 10),
           SizedBox(
-            height: 30,
             width: 270.w,
             child: TextFormField(
               autofocus: true,
               onChanged: onChanged,
               cursorColor: AppColors.primaryColor,
               controller: messageController,
+              minLines: 1,
+              maxLines: 5,
               onTap: () {
                 // context.read<ReplyMsgCubit>().closeReplyMsg();
               },
