@@ -38,7 +38,7 @@ class _AttachContactPageState extends State<AttachContactPage> {
   List<int> selected = [];
   late TextEditingController searchController;
   List<ContactModel> filterdList = [];
-
+  bool searchMode = false;
   @override
   void initState() {
     searchController = TextEditingController();
@@ -148,12 +148,20 @@ class _AttachContactPageState extends State<AttachContactPage> {
               itemCount: filterdList.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
+                  onLongPress: () {
+                    if (!selected.contains(index)) {
+                      setState(() {
+                        searchMode = !searchMode;
+                        selected.add(index);
+                      });
+                    }
+                  },
                   onTap: () {
                     if (selected.contains(index)) {
                       setState(() {
                         selected.remove(index);
                       });
-                    } else {
+                    } else if (!selected.contains(index) && searchMode) {
                       setState(() {
                         selected.add(index);
                       });
