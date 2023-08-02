@@ -63,6 +63,14 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       .state
                       .selctmode) {
                     context.read<SelectedchatCubit>().select(index);
+                  } else if (context
+                              .watch<SelectedchatCubit>()
+                              .state
+                              .selectedchat
+                              .length ==
+                          1 &&
+                      context.read<SelectedchatCubit>().state.selctmode) {
+                    context.read<SelectedchatCubit>().selectmode();
                   } else {
                     screenNavigator(
                         context,

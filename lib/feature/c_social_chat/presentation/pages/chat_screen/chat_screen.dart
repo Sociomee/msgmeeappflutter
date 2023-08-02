@@ -240,9 +240,17 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     actions: [
                       SizedBox(width: 10),
-                      Icon(Icons.keyboard_arrow_down, color: AppColors.black),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: AppColors.black,
+                        size: 20,
+                      ),
                       SizedBox(width: 20),
-                      Icon(Icons.keyboard_arrow_up, color: AppColors.black),
+                      Icon(
+                        Icons.keyboard_arrow_up,
+                        color: AppColors.black,
+                        size: 20,
+                      ),
                       Padding(
                           padding:
                               EdgeInsets.only(top: 25, left: 10, right: 10),

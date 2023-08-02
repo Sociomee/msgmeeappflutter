@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     appBarTheme: AppBarTheme(
       color: AppColors.white,
       iconTheme: IconThemeData(color: Colors.white),

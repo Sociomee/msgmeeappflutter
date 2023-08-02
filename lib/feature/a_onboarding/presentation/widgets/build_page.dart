@@ -28,18 +28,17 @@ class BuildPages extends StatelessWidget {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontSize: 30,
-            fontFamily: GoogleFonts.poppins().fontFamily,
             fontWeight: FontWeight.w600,
           ),
           textScaleFactor: 1.0,
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 20.h),
         SvgPicture.asset(
           imageUrl,
-          height: 380.h,
+          height: 330.h,
           width: double.infinity,
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 20.h),
         Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 35.w),
