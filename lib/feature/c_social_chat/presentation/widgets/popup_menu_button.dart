@@ -110,7 +110,9 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   ? Text(
                                       'No syncing processed yet',
                                       style: TextStyle(
-                                          fontSize: 10, color: AppColors.grey),
+                                          fontSize: 10,
+                                          color: AppColors.grey,
+                                          fontStyle: FontStyle.italic),
                                     )
                                   : Container(),
                               SizedBox(height: 10),
