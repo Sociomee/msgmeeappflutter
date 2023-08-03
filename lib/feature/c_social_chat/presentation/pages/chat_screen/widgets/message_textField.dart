@@ -48,7 +48,12 @@ class _MessageTextFieldWidgetState extends State<MessageTextFieldWidget> {
             fillColor: widget.color ?? AppColors.lightgrey1,
             filled: true,
             hintText: "Type your message",
-            hintStyle: TextStyle(color: Colors.black54),
+            hintStyle: TextStyle(
+              color: Color(0xFF4E4E4E),
+              fontSize: 13,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+            ),
             contentPadding:
                 EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
             enabledBorder: OutlineInputBorder(
