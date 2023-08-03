@@ -688,7 +688,7 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 14)),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 14),
+                            padding: const EdgeInsets.only(left: 2, right: 14),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -705,14 +705,13 @@ class SentMessageWidget extends StatelessWidget {
                         ],
                       )),
                   Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: msgStatus == 'read'
-                        ? MessageStatus.read
-                        : msgStatus == 'send'
-                            ? MessageStatus.sent
-                            : MessageStatus.delivered,
-                  ),
+                      bottom: 0,
+                      right: 0,
+                      child: msgStatus == 'read'
+                          ? MessageStatus.read
+                          : msgStatus == 'send'
+                              ? MessageStatus.sent
+                              : MessageStatus.delivered),
                 ],
               ),
             ),
@@ -790,7 +789,7 @@ class SentMessageWidget extends StatelessWidget {
                                                             : SvgPicture.asset(
                                                                 'assets/jpg.svg',
                                                                 height: 35)),
-                                        SizedBox(width: 15),
+                                        SizedBox(width: 10),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -809,6 +808,7 @@ class SentMessageWidget extends StatelessWidget {
                                                         TextOverflow.ellipsis),
                                               ),
                                             ),
+                                            SizedBox(height: 8),
                                             Text(
                                               '105 Kb',
                                               style: TextStyle(

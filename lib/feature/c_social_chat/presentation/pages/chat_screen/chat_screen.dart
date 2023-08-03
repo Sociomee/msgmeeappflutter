@@ -311,12 +311,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Hero(
-                            tag: widget.imageUrl,
-                            child: ChatProfileWidget(
-                                imageUrl: widget.imageUrl,
-                                isOnline: widget.isOnline,
-                                hasStory: widget.hasStory),
-                          ),
+                              tag: widget.imageUrl,
+                              child: ChatProfileWidget(
+                                  imageUrl: widget.imageUrl,
+                                  isOnline: widget.isOnline,
+                                  hasStory: widget.hasStory)),
                           SizedBox(width: 10.w),
                           Column(
                             mainAxisSize: MainAxisSize.min,

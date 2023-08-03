@@ -435,7 +435,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 7.17),
+                            SizedBox(width: 7.w),
                             Container(
                                 width: 20,
                                 height: 20,

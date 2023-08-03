@@ -60,21 +60,21 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
                 text: 'Please select ',
                 style: TextStyle(
                   color: Color(0xB2333333),
-                  fontSize: 14,
+                  fontSize: 15,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                 )),
             TextSpan(
                 text: 'at least 3 interests',
                 style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                     color: AppColors.primaryColor.withOpacity(.8))),
             TextSpan(
                 text: ' for a better',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                   color: Color(0xB2333333),

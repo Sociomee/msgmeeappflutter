@@ -95,8 +95,11 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
           child: Icon(
             Icons.arrow_back_ios,
             color: AppColors.black,
+            size: 20,
           ),
         ),
+        leadingWidth: 40,
+        titleSpacing: 0,
         title: Text(
           'Send Location',
           style: TextStyle(color: AppColors.black),
@@ -371,8 +374,8 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                       },
                       child: Container(
                           height: 36,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 0),
+                          width: 95.w,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           alignment: Alignment.center,
                           decoration: ShapeDecoration(
                               color: selectedIndex == 0
@@ -397,6 +400,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                       },
                       child: Container(
                           height: 36,
+                          width: 95.w,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 0),
                           alignment: Alignment.center,
@@ -423,6 +427,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                       },
                       child: Container(
                           height: 36,
+                          width: 95.w,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 0),
                           alignment: Alignment.center,

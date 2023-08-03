@@ -63,8 +63,9 @@ class _AudioRecordWidgetState extends State<AudioRecordWidget> {
     return Row(
       children: [
         Container(
-          height: 40,
+          height: 45,
           width: 240.w,
+          margin: EdgeInsets.only(bottom: 4),
           decoration: BoxDecoration(
               color: AppColors.lightgrey1,
               borderRadius: BorderRadius.circular(40)),
@@ -88,7 +89,7 @@ class _AudioRecordWidgetState extends State<AudioRecordWidget> {
             ],
           ),
         ),
-        SizedBox(width: 7),
+        SizedBox(width: 10),
         GestureDetector(
           onTap: () {
             context.read<AddMessageCubit>().addMessage(ChatMessage(
