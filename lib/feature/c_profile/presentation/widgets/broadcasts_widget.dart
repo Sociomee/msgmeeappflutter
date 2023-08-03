@@ -26,13 +26,11 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Divider(
-                  color: AppColors.grey.withOpacity(.4),
-                  height: 0,
-                  thickness: 6,
-                ),
-              ),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Divider(
+                      color: AppColors.grey.withOpacity(.4),
+                      height: 0,
+                      thickness: 6)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
