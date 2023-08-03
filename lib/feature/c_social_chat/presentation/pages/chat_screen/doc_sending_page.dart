@@ -113,7 +113,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                             widget.pftname.split('/').first,
                             overflow: TextOverflow.ellipsis,
                             style:
-                                TextStyle(color: AppColors.black, fontSize: 20),
+                                TextStyle(color: AppColors.black, fontSize: 18),
                           ),
                         ),
                       ),
@@ -201,7 +201,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                         widget.names![index],
                                         style: TextStyle(
                                             color: AppColors.black,
-                                            fontSize: 20),
+                                            fontSize: 18),
                                       ),
                                       Spacer(),
                                     ],

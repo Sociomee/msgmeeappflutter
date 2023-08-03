@@ -826,7 +826,7 @@ class SentMessageWidget extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 8.0, right: 10, top: 5),
+                                  left: 2.0, right: 10, top: 5),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -834,7 +834,7 @@ class SentMessageWidget extends StatelessWidget {
                                   Text(time,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 10)),
-                                  SizedBox(width: 90.w),
+                                  SizedBox(width: 95.w),
                                   Text(msgStatus,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 10)),

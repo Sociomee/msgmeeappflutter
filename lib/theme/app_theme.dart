@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
-    fontFamily: GoogleFonts.poppins().fontFamily,
+    // fontFamily: GoogleFonts.poppins().fontFamily,
     appBarTheme: AppBarTheme(
       color: AppColors.white,
       iconTheme: IconThemeData(color: Colors.white),
@@ -23,9 +22,8 @@ class AppTheme {
         fontSize: 18.0,
       ),
     ),
-    textSelectionTheme: TextSelectionThemeData(
-      cursorColor: AppColors.primaryColor, //<-- SEE HERE
-    ),
+    textSelectionTheme:
+        TextSelectionThemeData(cursorColor: AppColors.primaryColor),
   );
 
   static final ThemeData darkTheme = ThemeData(

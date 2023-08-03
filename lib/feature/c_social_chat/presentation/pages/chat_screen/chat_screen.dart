@@ -70,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     var status = await Permission.camera.status;
     if (status.isDenied) {
-      openAppSettings();
+      Permission.camera.request();
     } else if (status.isGranted) {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
@@ -90,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     var status = await Permission.camera.status;
     if (status.isDenied) {
-      openAppSettings();
+      Permission.camera.request();
     } else if (status.isGranted) {
       final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
       if (photo != null) {
