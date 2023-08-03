@@ -87,11 +87,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void pickCameraPic() async {
     // Capture a photo
-
     var status = await Permission.camera.status;
     if (status.isDenied) {
       Permission.camera.request();
-    } else if (status.isGranted) {
+    } else if (status.isGranted || status.isRestricted) {
       final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
       if (photo != null) {
         animatedScreenNavigator(
@@ -118,6 +117,7 @@ class _ChatScreenState extends State<ChatScreen> {
     var msg = context.watch<AddMessageCubit>().state.messages;
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('d MMMM, y').format(now);
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(

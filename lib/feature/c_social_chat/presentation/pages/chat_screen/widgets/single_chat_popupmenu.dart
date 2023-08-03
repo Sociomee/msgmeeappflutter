@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/common_widgets/checkbox_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/create_group_page.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
@@ -10,6 +9,7 @@ import '../../../cubit/cubit/search_mode_cubit.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
 import '../../chat_theme/chat_theme_page.dart';
 import '../../chat_theme/chat_wallpaper_page.dart';
+import 'block_user_popup.dart';
 
 class SinglechatPopupMenu extends StatefulWidget {
   const SinglechatPopupMenu(
@@ -67,7 +67,7 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return blockUserDialog(context);
+                  return BlockUserPopupWidget();
                 });
           } else if (value == 5) {
             animatedScreenNavigator(context, ChatThemePage());
@@ -193,86 +193,6 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget blockUserDialog(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'You are going to block this contact. You cannot call and chats to this contact after blocking.',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(height: 15),
-          Row(
-            children: [
-              SizedBox(
-                  width: 16,
-                  child: CheckBoxWidget(
-                    selected: selected,
-                    onChange: (e) {
-                      setState(() {
-                        selected = !selected;
-                      });
-                    },
-                  )),
-              SizedBox(width: 8),
-              Text(
-                'Report contact',
-                style: TextStyle(
-                  color: Color(0xFF333333),
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w300,
-                ),
-              )
-            ],
-          ),
-          SizedBox(height: 30),
-          Row(
-            children: [
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Color(0xFF368C4E),
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(width: 42),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Block',
-                  style: TextStyle(
-                    color: Color(0xFF368C4E),
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );
