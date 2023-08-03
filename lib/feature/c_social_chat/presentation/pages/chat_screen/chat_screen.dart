@@ -240,20 +240,26 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     actions: [
                       SizedBox(width: 10),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        color: AppColors.black,
-                        size: 20,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: AppColors.black,
+                          size: 20,
+                        ),
                       ),
                       SizedBox(width: 20),
-                      Icon(
-                        Icons.keyboard_arrow_up,
-                        color: AppColors.black,
-                        size: 20,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Icon(
+                          Icons.keyboard_arrow_up,
+                          color: AppColors.black,
+                          size: 20,
+                        ),
                       ),
                       Padding(
                           padding:
-                              EdgeInsets.only(top: 25, left: 10, right: 10),
+                              EdgeInsets.only(top: 20, left: 10, right: 10),
                           child: Text('10/12',
                               style: TextStyle(
                                   color: AppColors.black,
@@ -274,7 +280,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 });
                           },
                           child: Padding(
-                            padding: EdgeInsets.only(right: 10.w),
+                            padding: EdgeInsets.only(right: 10.w, bottom: 10),
                             child: SvgPicture.asset('assets/calender.svg'),
                           ))
                     ],
@@ -720,7 +726,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       )
                     : Container(),
-                //?showing contack sender textfield widget
+                //?showing contact sender textfield widget
                 context.watch<ShowContactTextField>().state
                     ? Positioned(
                         bottom: 10,

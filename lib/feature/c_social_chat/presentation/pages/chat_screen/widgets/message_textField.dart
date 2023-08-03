@@ -196,6 +196,7 @@ class ContactMessageFieldWidget extends StatelessWidget {
               onTap: () {
                 context.read<ShowAttachment>().closeAttachment();
               },
+              minLines: 1,
               maxLines: 5,
               decoration: InputDecoration(
                 contentPadding:

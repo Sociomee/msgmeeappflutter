@@ -164,7 +164,6 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                               dummyData[index].unseenMessage != 0
                                   ? Container(
                                       height: 20,
-                                      // width: 20,
                                       padding: EdgeInsets.symmetric(
                                           vertical: 3, horizontal: 6),
                                       alignment: Alignment.center,
