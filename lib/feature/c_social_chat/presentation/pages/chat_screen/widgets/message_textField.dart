@@ -6,7 +6,7 @@ import '../../../../../../theme/colors.dart';
 import '../../../cubit/show_attachment.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
-class MessageTextFieldWidget extends StatelessWidget {
+class MessageTextFieldWidget extends StatefulWidget {
   const MessageTextFieldWidget({
     super.key,
     required this.messageController,
@@ -18,43 +18,71 @@ class MessageTextFieldWidget extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final Color? color;
   final bool imageTextfield;
+
+  @override
+  State<MessageTextFieldWidget> createState() => _MessageTextFieldWidgetState();
+}
+
+class _MessageTextFieldWidgetState extends State<MessageTextFieldWidget> {
+  bool emojiShowing = false;
+  onBackspacePressed() {
+    widget.messageController
+      ..text = widget.messageController.text.characters.toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: widget.messageController.text.length));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      cursorColor: AppColors.primaryColor,
-      controller: messageController,
-      onTap: () {
-        context.read<ShowAttachment>().closeAttachment();
-      },
-      minLines: 1,
-      maxLines: 5,
-      decoration: InputDecoration(
-        fillColor: color ?? AppColors.lightgrey1,
-        filled: true,
-        hintText: "Type your message",
-        hintStyle: TextStyle(color: Colors.black54),
-        contentPadding:
-            EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
-        suffixIcon: SizedBox(
-          width: 10,
-          height: 10,
-          child: Center(
-            child: SvgPicture.asset(
-                imageTextfield ? 'assets/smiley_dark.svg' : 'assets/smiley.svg',
-                fit: BoxFit.contain),
+    return Column(
+      children: [
+        TextField(
+          cursorColor: AppColors.primaryColor,
+          controller: widget.messageController,
+          onTap: () {
+            context.read<ShowAttachment>().closeAttachment();
+          },
+          minLines: 1,
+          maxLines: 5,
+          decoration: InputDecoration(
+            fillColor: widget.color ?? AppColors.lightgrey1,
+            filled: true,
+            hintText: "Type your message",
+            hintStyle: TextStyle(color: Colors.black54),
+            contentPadding:
+                EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 10),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                setState(() {
+                  emojiShowing = !emojiShowing;
+                });
+              },
+              child: SizedBox(
+                width: 10,
+                height: 10,
+                child: Center(
+                  child: SvgPicture.asset(
+                      widget.imageTextfield
+                          ? 'assets/smiley_dark.svg'
+                          : 'assets/smiley.svg',
+                      fit: BoxFit.contain),
+                ),
+              ),
+            ),
           ),
+          onChanged: widget.onChanged,
         ),
-      ),
-      onChanged: onChanged,
+      ],
     );
   }
 }

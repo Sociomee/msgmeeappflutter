@@ -167,7 +167,7 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
             ),
           ),
           Positioned(
-            left: constraint.maxWidth * .42,
+            left: constraint.maxWidth * .5,
             top: 40,
             child: GestureDetector(
                 onTap: () {

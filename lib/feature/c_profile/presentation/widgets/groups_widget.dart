@@ -183,7 +183,7 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                 )
               : Container(),
           Positioned(
-            left: constraint.maxWidth * .34,
+            left: constraint.maxWidth * .4,
             top: 40,
             child: GestureDetector(
                 onTap: () {
