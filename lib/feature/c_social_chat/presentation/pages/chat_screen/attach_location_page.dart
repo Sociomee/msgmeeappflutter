@@ -531,8 +531,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           textEditingController: controller,
                           onBackspacePressed: _onBackspacePressed,
                           config: Config(
-                            columns: 7,
-                            // Issue: https://github.com/flutter/flutter/issues/28894
+                            columns: 8,
                             emojiSizeMax: 32 *
                                 (foundation.defaultTargetPlatform ==
                                         TargetPlatform.iOS
@@ -541,7 +540,7 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                             verticalSpacing: 0,
                             horizontalSpacing: 0,
                             gridPadding: EdgeInsets.zero,
-                            initCategory: Category.RECENT,
+                            initCategory: Category.SMILEYS,
                             bgColor: const Color(0xFFF2F2F2),
                             indicatorColor: Colors.blue,
                             iconColor: Colors.grey,

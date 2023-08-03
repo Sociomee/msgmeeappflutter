@@ -119,8 +119,10 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                             children: [
                               Text(dummyData[index].name,
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500)),
+                                    fontSize: 16,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  )),
                               selectcubit.starClicked &&
                                       selectcubit.selectedchat.contains(index)
                                   ? Icon(Icons.star,
