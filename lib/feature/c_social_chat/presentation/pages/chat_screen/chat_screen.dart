@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,6 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool istyping = false;
   bool tap = false;
   List chattileIndex = [];
+  String copiedText = 'empty';
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -150,7 +152,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   SizedBox(width: 19),
                   SvgPicture.asset('assets/pencil.svg', height: 18),
                   SizedBox(width: 19),
-                  SvgPicture.asset('assets/copy.svg', height: 18),
+                  GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: copiedText))
+                            .then((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Copied to your clipboard !')));
+                        });
+                      },
+                      child: SvgPicture.asset('assets/copy.svg', height: 18)),
                   SizedBox(width: 19),
                   GestureDetector(
                       onTap: () {
@@ -419,15 +430,12 @@ class _ChatScreenState extends State<ChatScreen> {
                               setState(() {
                                 chattileIndex.remove(index);
                               });
-                              // setState(() {
-                              //   chattileIndex
-                              //       .remove(messages[index].messageContent);
-                              // });
                             },
                             onLongPress: () {
                               if (!chattileIndex.contains(index)) {
                                 setState(() {
                                   chattileIndex.add(index);
+                                  copiedText = msg[index].messageContent;
                                 });
                               } else {
                                 setState(() {

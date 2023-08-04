@@ -106,8 +106,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
       initialIndex: 0,
       child: WillPopScope(
         onWillPop: () async {
-          if (context.read<SelectedchatCubit>().state.selectedchat.isNotEmpty) {
-            context.read<SelectedchatCubit>().removeall();
+          if (context.watch<SelectionCubit>().state.isNotEmpty) {
+            context.read<SelectionCubit>().clearSelection();
             return false;
           }
           return true;
@@ -119,9 +119,13 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                   appBar: AppBar(
                     leading: GestureDetector(
                       onTap: () {
-                        context.read<SelectedchatCubit>().removeall();
+                        context.read<SelectionCubit>().clearSelection();
                       },
-                      child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.black,
+                        size: 20,
+                      ),
                     ),
                     titleSpacing: 0,
                     title: Text(
@@ -139,7 +143,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         },
                         child:
                             context.watch<SelectedchatCubit>().state.starClicked
-                                ? SvgPicture.asset('assets/star_clicked.svg')
+                                ? SvgPicture.asset(
+                                    'assets/star_clicked.svg',
+                                    height: 14,
+                                    fit: BoxFit.contain,
+                                  )
                                 : Icon(
                                     Icons.star_outline,
                                     color: AppColors.black,
@@ -171,7 +179,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                               toastDuration: Duration(seconds: 2));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 19),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Icon(Icons.archive_outlined,
                               color: AppColors.black, size: 18),
                         ),
@@ -196,7 +204,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           context.read<SelectedchatCubit>().muteClicked();
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 19),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Icon(
                             Icons.volume_mute_outlined,
                             color: AppColors.black,
@@ -209,7 +217,6 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         color: AppColors.black,
                         size: 18,
                       ),
-                      SizedBox(width: 10),
                       PopupMenuButton(
                         icon: Icon(
                           Icons.more_vert,
@@ -238,7 +245,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           } else if (value == 4) {}
                         },
                       ),
-                      SizedBox(width: 13),
+                      SizedBox(width: 5),
                     ],
                   ),
                   body: SingleChildScrollView(
