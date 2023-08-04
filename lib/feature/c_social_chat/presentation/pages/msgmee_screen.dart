@@ -92,7 +92,6 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
 
   @override
   Widget build(BuildContext context) {
-    print(context.read<SelectedchatCubit>().state.selectedchat.length);
     return DefaultTabController(
       length: context.watch<SyncWithSociomee>().state ? 4 : 2,
       initialIndex: 0,
@@ -356,374 +355,411 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                             PopupMenuButtonWidget()
                           ],
                         ),
-                  body: SingleChildScrollView(
-                    child: typing
-                        ? AnimatedOpacity(
-                            duration: Duration(milliseconds: 500),
-                            opacity: typing ? 1 : 0,
-                            child: typing
-                                ? ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: filtedUserList.length,
-                                    itemBuilder: (context, index) {
-                                      return Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              screenNavigator(
-                                                  context,
-                                                  ChatScreen(
-                                                    name: filtedUserList[index]
-                                                        .name,
-                                                    imageUrl:
-                                                        filtedUserList[index]
-                                                            .imageUrl,
-                                                    isOnline:
-                                                        filtedUserList[index]
-                                                            .isOnline,
-                                                    hasStory:
-                                                        filtedUserList[index]
-                                                            .hasStory,
-                                                  ));
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.white),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 12,
-                                                      vertical: 7),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) =>
-                                                              ProfileViewDialog(
-                                                                profilename:
-                                                                    filtedUserList[
-                                                                            index]
-                                                                        .name,
-                                                                imageUrl:
-                                                                    filtedUserList[
-                                                                            index]
-                                                                        .imageUrl,
-                                                              ));
-                                                    },
-                                                    child: ChatProfileWidget(
-                                                        imageUrl:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .imageUrl,
-                                                        isOnline:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .isOnline,
-                                                        hasStory:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .hasStory),
-                                                  ),
-                                                  SizedBox(width: 13),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                          filtedUserList[index]
-                                                              .name,
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500)),
-                                                      SizedBox(height: 8),
-                                                      Text(
-                                                          filtedUserList[index]
-                                                              .message,
-                                                          style: TextStyle(
-                                                              fontSize: 13,
-                                                              color: AppColors
-                                                                  .grey)),
-                                                    ],
-                                                  ),
-                                                  Spacer(),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                          filtedUserList[index]
-                                                              .time,
-                                                          style: TextStyle(
-                                                              fontSize: 13,
-                                                              color: AppColors
-                                                                  .grey)),
-                                                      SizedBox(height: 8),
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(width: 5),
-                                                          filtedUserList[index]
-                                                                      .unseenMessage !=
-                                                                  0
-                                                              ? Container(
-                                                                  height: 20,
-                                                                  padding: EdgeInsets
-                                                                      .symmetric(
-                                                                          vertical:
-                                                                              3,
-                                                                          horizontal:
-                                                                              6),
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  decoration: BoxDecoration(
-                                                                      color: AppColors
-                                                                          .primaryColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              100)),
-                                                                  child: Text(
-                                                                      filtedUserList[
-                                                                              index]
-                                                                          .unseenMessage
-                                                                          .toString(),
-                                                                      style: TextStyle(
-                                                                          color: AppColors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.bold)),
-                                                                )
-                                                              : Container(),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Divider(
-                                              height: 0,
-                                              thickness: 1,
-                                              color: Color(0xFFE4E4E4)
-                                                  .withOpacity(.5)),
-                                        ],
-                                      );
-                                    })
-                                : Container(),
-                          )
-                        : Stack(
+                  body: filtedUserList.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Column(
-                                children: [
-                                  context.watch<SyncWithSociomee>().state
-                                      ? DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.0),
-                                            border: const Border(
-                                                bottom: BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 0.8)),
-                                          ),
-                                          child: TabBar(
-                                            indicatorWeight: 3,
-                                            indicatorColor:
-                                                AppColors.primaryColor,
-                                            labelColor: AppColors.primaryColor,
-                                            unselectedLabelColor:
-                                                AppColors.grey,
-                                            controller: tabsComtroller,
-                                            tabs: [
-                                              Tab(
-                                                icon: Text(
-                                                  'Social',
-                                                  style:
-                                                      TextStyle(fontSize: 17),
-                                                ),
-                                              ),
-                                              Tab(
-                                                icon: Text(
-                                                  'Biz Page',
-                                                  style:
-                                                      TextStyle(fontSize: 16),
-                                                ),
-                                              ),
-                                              Tab(
-                                                icon: Text(
-                                                  'Market',
-                                                  style:
-                                                      TextStyle(fontSize: 17),
-                                                ),
-                                              ),
-                                              Tab(
-                                                icon: Text(
-                                                  'Calls',
-                                                  style:
-                                                      TextStyle(fontSize: 17),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.0),
-                                            border: const Border(
-                                                bottom: BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 0.8)),
-                                          ),
-                                          child: TabBar(
-                                            indicatorWeight: 3,
-                                            indicatorColor:
-                                                AppColors.primaryColor,
-                                            labelColor: AppColors.primaryColor,
-                                            unselectedLabelColor:
-                                                AppColors.grey,
-                                            controller: _controller,
-                                            tabs: [
-                                              Tab(
-                                                icon: Text(
-                                                  'Social',
-                                                  style:
-                                                      TextStyle(fontSize: 17),
-                                                ),
-                                              ),
-                                              Tab(
-                                                icon: Text(
-                                                  'Calls',
-                                                  style:
-                                                      TextStyle(fontSize: 17),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                  context.watch<SyncWithSociomee>().state
-                                      ? SizedBox(
-                                          height: 570.h,
-                                          child: TabBarView(
-                                              controller: context
-                                                      .watch<SyncWithSociomee>()
-                                                      .state
-                                                  ? tabsComtroller
-                                                  : _controller,
-                                              children: [
-                                                SocialTabScreen(),
-                                                BizPageTab(),
-                                                MarketPageTab(),
-                                                CallTabScreen(),
-                                              ]),
-                                        )
-                                      : SizedBox(
-                                          height: 570.h,
-                                          child: TabBarView(
-                                              controller: context
-                                                      .watch<SyncWithSociomee>()
-                                                      .state
-                                                  ? tabsComtroller
-                                                  : _controller,
-                                              children: [
-                                                SocialTabScreen(),
-                                                CallTabScreen(),
-                                              ]),
-                                        )
-                                ],
+                              Center(
+                                child: Container(
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFF1F8EC),
+                                    shape: OvalBorder(),
+                                  ),
+                                  width: 273,
+                                  padding: EdgeInsets.symmetric(vertical: 36),
+                                  alignment: Alignment.center,
+                                  child: SvgPicture.asset(
+                                    'assets/empty_msg.svg',
+                                    height: 97,
+                                    width: 97,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                              Positioned(
-                                top: 10,
-                                child: AnimatedContainer(
-                                  height: context
-                                          .watch<ShoweditbtnCubit>()
-                                          .state
-                                          .show
-                                      ? 130
-                                      : 0,
-                                  duration: Duration(milliseconds: 500),
-                                  margin: EdgeInsets.symmetric(horizontal: 5),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: context
-                                            .watch<ShoweditbtnCubit>()
-                                            .state
-                                            .show
-                                        ? [
-                                            BoxShadow(
-                                                color: AppColors.lightgrey,
-                                                offset: Offset(0, 0.5),
-                                                blurRadius: 10,
-                                                spreadRadius: 5),
-                                          ]
-                                        : null,
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () async {
-                                            await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        StoriesEditor(
-                                                          giphyKey:
-                                                              'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                          galleryThumbnailQuality:
-                                                              300,
-                                                          onDone: (uri) {
-                                                            debugPrint(uri);
-                                                          },
-                                                        )));
-                                          },
-                                          child: Container(
-                                            height: 42,
-                                            width: 42,
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 10, horizontal: 10),
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: AppColors.black),
-                                            child: Image.asset(
-                                                'assets/camera1.png'),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 42,
-                                          width: 42,
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 10, horizontal: 19),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: AppColors.primaryColor),
-                                          child:
-                                              Image.asset('assets/edit1.png'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                              SizedBox(height: 12),
+                              Text(
+                                'No Messages',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF81C14B),
+                                  fontSize: 20,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
                                 ),
                               )
                             ],
                           ),
-                  ),
+                        )
+                      : SingleChildScrollView(
+                          child: typing
+                              ? ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: filtedUserList.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            screenNavigator(
+                                                context,
+                                                ChatScreen(
+                                                  name: filtedUserList[index]
+                                                      .name,
+                                                  imageUrl:
+                                                      filtedUserList[index]
+                                                          .imageUrl,
+                                                  isOnline:
+                                                      filtedUserList[index]
+                                                          .isOnline,
+                                                  hasStory:
+                                                      filtedUserList[index]
+                                                          .hasStory,
+                                                ));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: AppColors.white),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 7),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) =>
+                                                            ProfileViewDialog(
+                                                              profilename:
+                                                                  filtedUserList[
+                                                                          index]
+                                                                      .name,
+                                                              imageUrl:
+                                                                  filtedUserList[
+                                                                          index]
+                                                                      .imageUrl,
+                                                            ));
+                                                  },
+                                                  child: ChatProfileWidget(
+                                                      imageUrl:
+                                                          filtedUserList[index]
+                                                              .imageUrl,
+                                                      isOnline:
+                                                          filtedUserList[index]
+                                                              .isOnline,
+                                                      hasStory:
+                                                          filtedUserList[index]
+                                                              .hasStory),
+                                                ),
+                                                SizedBox(width: 13),
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        filtedUserList[index]
+                                                            .name,
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500)),
+                                                    SizedBox(height: 8),
+                                                    Text(
+                                                        filtedUserList[index]
+                                                            .message,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: AppColors
+                                                                .grey)),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                        filtedUserList[index]
+                                                            .time,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: AppColors
+                                                                .grey)),
+                                                    SizedBox(height: 8),
+                                                    Row(
+                                                      children: [
+                                                        SizedBox(width: 5),
+                                                        filtedUserList[index]
+                                                                    .unseenMessage !=
+                                                                0
+                                                            ? Container(
+                                                                height: 20,
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        vertical:
+                                                                            3,
+                                                                        horizontal:
+                                                                            6),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                decoration: BoxDecoration(
+                                                                    color: AppColors
+                                                                        .primaryColor,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            100)),
+                                                                child: Text(
+                                                                    filtedUserList[
+                                                                            index]
+                                                                        .unseenMessage
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: AppColors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                              )
+                                                            : Container(),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Divider(
+                                            height: 0,
+                                            thickness: 1,
+                                            color: Color(0xFFE4E4E4)
+                                                .withOpacity(.5)),
+                                      ],
+                                    );
+                                  })
+                              : Stack(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        context.watch<SyncWithSociomee>().state
+                                            ? DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.0),
+                                                  border: const Border(
+                                                      bottom: BorderSide(
+                                                          color: Colors.grey,
+                                                          width: 0.8)),
+                                                ),
+                                                child: TabBar(
+                                                  indicatorWeight: 3,
+                                                  indicatorColor:
+                                                      AppColors.primaryColor,
+                                                  labelColor:
+                                                      AppColors.primaryColor,
+                                                  unselectedLabelColor:
+                                                      AppColors.grey,
+                                                  controller: tabsComtroller,
+                                                  tabs: [
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Social',
+                                                        style: TextStyle(
+                                                            fontSize: 17),
+                                                      ),
+                                                    ),
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Biz Page',
+                                                        style: TextStyle(
+                                                            fontSize: 16),
+                                                      ),
+                                                    ),
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Market',
+                                                        style: TextStyle(
+                                                            fontSize: 17),
+                                                      ),
+                                                    ),
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Calls',
+                                                        style: TextStyle(
+                                                            fontSize: 17),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.0),
+                                                  border: const Border(
+                                                      bottom: BorderSide(
+                                                          color: Colors.grey,
+                                                          width: 0.8)),
+                                                ),
+                                                child: TabBar(
+                                                  indicatorWeight: 3,
+                                                  indicatorColor:
+                                                      AppColors.primaryColor,
+                                                  labelColor:
+                                                      AppColors.primaryColor,
+                                                  unselectedLabelColor:
+                                                      AppColors.grey,
+                                                  controller: _controller,
+                                                  tabs: [
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Social',
+                                                        style: TextStyle(
+                                                            fontSize: 17),
+                                                      ),
+                                                    ),
+                                                    Tab(
+                                                      icon: Text(
+                                                        'Calls',
+                                                        style: TextStyle(
+                                                            fontSize: 17),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                        context.watch<SyncWithSociomee>().state
+                                            ? SizedBox(
+                                                height: 570.h,
+                                                child: TabBarView(
+                                                    controller: context
+                                                            .watch<
+                                                                SyncWithSociomee>()
+                                                            .state
+                                                        ? tabsComtroller
+                                                        : _controller,
+                                                    children: [
+                                                      SocialTabScreen(),
+                                                      BizPageTab(),
+                                                      MarketPageTab(),
+                                                      CallTabScreen(),
+                                                    ]),
+                                              )
+                                            : SizedBox(
+                                                height: 570.h,
+                                                child: TabBarView(
+                                                    controller: context
+                                                            .watch<
+                                                                SyncWithSociomee>()
+                                                            .state
+                                                        ? tabsComtroller
+                                                        : _controller,
+                                                    children: [
+                                                      SocialTabScreen(),
+                                                      CallTabScreen(),
+                                                    ]),
+                                              )
+                                      ],
+                                    ),
+                                    Positioned(
+                                      top: 10,
+                                      child: AnimatedContainer(
+                                        height: context
+                                                .watch<ShoweditbtnCubit>()
+                                                .state
+                                                .show
+                                            ? 130
+                                            : 0,
+                                        duration: Duration(milliseconds: 500),
+                                        margin:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: context
+                                                  .watch<ShoweditbtnCubit>()
+                                                  .state
+                                                  .show
+                                              ? [
+                                                  BoxShadow(
+                                                      color:
+                                                          AppColors.lightgrey,
+                                                      offset: Offset(0, 0.5),
+                                                      blurRadius: 10,
+                                                      spreadRadius: 5),
+                                                ]
+                                              : null,
+                                        ),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              StoriesEditor(
+                                                                giphyKey:
+                                                                    'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                                galleryThumbnailQuality:
+                                                                    300,
+                                                                onDone: (uri) {
+                                                                  debugPrint(
+                                                                      uri);
+                                                                },
+                                                              )));
+                                                },
+                                                child: Container(
+                                                  height: 42,
+                                                  width: 42,
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 10),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      color: AppColors.black),
+                                                  child: Image.asset(
+                                                      'assets/camera1.png'),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 42,
+                                                width: 42,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 10,
+                                                    horizontal: 19),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    color:
+                                                        AppColors.primaryColor),
+                                                child: Image.asset(
+                                                    'assets/edit1.png'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                        ),
                 ),
         ),
       ),
