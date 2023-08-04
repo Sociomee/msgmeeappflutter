@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/feature/c_profile/presentation/widgets/triangle_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../theme/colors.dart';
@@ -17,7 +15,16 @@ class GroupsWidget extends StatefulWidget {
 }
 
 class _GroupsWidgetState extends State<GroupsWidget> {
-  bool show = false;
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+  // bool show = false;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
@@ -43,6 +50,34 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                           fontWeight: FontWeight.bold,
                           color: AppColors.black),
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          Widget toast = Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25.0),
+                                color: AppColors.iconColor),
+                            child: Text(
+                              'All groups in which you have added are listed here',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          );
+                          fToast.showToast(
+                              child: toast,
+                              gravity: ToastGravity.BOTTOM,
+                              toastDuration: Duration(seconds: 2));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Icon(Icons.error_outline,
+                              size: 18.sp, color: AppColors.grey),
+                        )),
                     Spacer(),
                     GestureDetector(
                       onTap: () {
@@ -148,55 +183,55 @@ class _GroupsWidgetState extends State<GroupsWidget> {
                   })
             ],
           ),
-          show
-              ? Positioned(
-                  left: constraint.maxWidth * .32,
-                  top: 8,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 117, 117, 117),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Text(
-                          'All groups in which you have added are listed here',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Transform.rotate(
-                            angle: pi, child: const Triangle()),
-                      ),
-                    ],
-                  ),
-                )
-              : Container(),
-          Positioned(
-            left: constraint.maxWidth * .4,
-            top: 40,
-            child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    show = !show;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child: Icon(Icons.error_outline,
-                      size: 18.sp, color: AppColors.grey),
-                )),
-          ),
+          // show
+          //     ? Positioned(
+          //         left: constraint.maxWidth * .32,
+          //         top: 8,
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           children: [
+          //             Container(
+          //               padding:
+          //                   EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+          //               decoration: BoxDecoration(
+          //                   color: Color.fromARGB(255, 117, 117, 117),
+          //                   borderRadius: BorderRadius.circular(20)),
+          //               child: Text(
+          //                 'All groups in which you have added are listed here',
+          //                 textAlign: TextAlign.center,
+          //                 style: TextStyle(
+          //                   color: Colors.white,
+          //                   fontSize: 10,
+          //                   fontFamily: 'Poppins',
+          //                   fontWeight: FontWeight.w400,
+          //                 ),
+          //               ),
+          //             ),
+          //             Padding(
+          //               padding: const EdgeInsets.only(left: 20),
+          //               child: Transform.rotate(
+          //                   angle: pi, child: const Triangle()),
+          //             ),
+          //           ],
+          //         ),
+          //       )
+          //     : Container(),
+          // Positioned(
+          //   left: constraint.maxWidth * .4,
+          //   top: 40,
+          //   child: GestureDetector(
+          //       onTap: () {
+          //         setState(() {
+          //           show = !show;
+          //         });
+          //       },
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 4),
+          //         child: Icon(Icons.error_outline,
+          //             size: 18.sp, color: AppColors.grey),
+          //       )),
+          // ),
         ],
       );
     });

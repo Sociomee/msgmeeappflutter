@@ -135,10 +135,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           );
 
                           fToast.showToast(
-                            child: toast,
-                            gravity: ToastGravity.BOTTOM,
-                            toastDuration: Duration(seconds: 2),
-                          );
+                              child: toast,
+                              gravity: ToastGravity.BOTTOM,
+                              toastDuration: Duration(seconds: 2));
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 19),
