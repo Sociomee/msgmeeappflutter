@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/archived_list_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialog.dart';
 
@@ -149,7 +148,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                       builder: (context) {
                         return SyncDialogWidget();
                       });
-                  context.read<SyncWithSociomee>().sync();
+
                   // screenNavigator(context, LinkedDevicesScreen());
                 } else if (value == 7) {
                   screenNavigator(context, SettingScreen());
@@ -173,7 +172,6 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                       builder: (context) {
                         return SyncDialogWidget();
                       });
-                  context.read<SyncWithSociomee>().sync();
                 } else if (value == 8) {
                   screenNavigator(context, SettingScreen());
                 }
