@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_theme/widget/chat_bg_type.dart';
@@ -65,6 +66,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
   Widget build(BuildContext context) {
     final String imageurl =
         'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?cs=srgb&dl=pexels-masha-raymers-2726111.jpg&fm=jpg';
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('d MMMM, y').format(now);
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -356,6 +359,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                           Align(
                               alignment: Alignment.topCenter,
                               child: Container(
+                                  margin: EdgeInsets.only(top: 5),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 11.74, vertical: 6.52),
                                   decoration: ShapeDecoration(
@@ -364,7 +368,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                       borderRadius: BorderRadius.circular(3.91),
                                     ),
                                   ),
-                                  child: Text('23 March, 2021',
+                                  child: Text(formattedDate,
                                       style: TextStyle(
                                           color: Color(0xFF81C14B),
                                           fontSize: 7.83,
