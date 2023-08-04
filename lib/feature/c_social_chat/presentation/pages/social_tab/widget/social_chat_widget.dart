@@ -1,16 +1,16 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/dummy_chat_model.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/colors.dart';
 
+import '../../../cubit/chat_selection_cubit.dart';
 import '../../../widgets/chat_profile_widget.dart';
 import '../../../widgets/profile_image_view_dialog.dart';
-import '../../chat_screen/chat_screen.dart';
 
 class SocialchatWidget extends StatefulWidget {
   const SocialchatWidget({super.key});
@@ -23,72 +23,36 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
   @override
   Widget build(BuildContext context) {
     var selectcubit = context.watch<SelectedchatCubit>().state;
+    final cubit = context.watch<SelectionCubit>();
+
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: dummyData.length,
         itemBuilder: (context, index) {
+          final isSelected = cubit.state.containsKey(index);
           return Column(
             children: [
               GestureDetector(
                 onLongPress: () {
-                  print(
-                      "----->>>>>${context.read<SelectedchatCubit>().state.selectedchat}${context.read<SelectedchatCubit>().state.selctmode}");
-                  if (!context
-                      .read<SelectedchatCubit>()
-                      .state
-                      .selectedchat
-                      .contains(index)) {
-                    context.read<SelectedchatCubit>().selectmode();
-                    context.read<SelectedchatCubit>().select(index);
-                  } else if (context
-                      .read<SelectedchatCubit>()
-                      .state
-                      .selectedchat
-                      .contains(index)) {
-                    context.read<SelectedchatCubit>().remove(index);
-                  }
+                  cubit.toggleSelection(index);
                 },
-                onTap: () {
-                  if (context
-                      .read<SelectedchatCubit>()
-                      .state
-                      .selectedchat
-                      .contains(index)) {
-                    context.read<SelectedchatCubit>().remove(index);
-
-                    print(context.read<SelectedchatCubit>().state.selctmode);
-                  } else if (context
-                      .read<SelectedchatCubit>()
-                      .state
-                      .selctmode) {
-                    context.read<SelectedchatCubit>().select(index);
-                  } else if (context
-                              .read<SelectedchatCubit>()
-                              .state
-                              .selectedchat
-                              .length ==
-                          1 &&
-                      context.read<SelectedchatCubit>().state.selctmode) {
-                    context.read<SelectedchatCubit>().selectmode();
-                  } else {
-                    screenNavigator(
-                        context,
-                        ChatScreen(
-                          name: dummyData[index].name,
-                          imageUrl: dummyData[index].imageUrl,
-                          isOnline: dummyData[index].isOnline,
-                          hasStory: dummyData[index].hasStory,
-                        ));
-                  }
-                },
+                onTap: cubit.state.isEmpty
+                    ? () {
+                        animatedScreenNavigator(
+                            context,
+                            ChatScreen(
+                                name: dummyData[index].name,
+                                imageUrl: dummyData[index].imageUrl,
+                                isOnline: dummyData[index].isOnline,
+                                hasStory: dummyData[index].hasStory));
+                      }
+                    : () {
+                        cubit.toggleSelection(index);
+                      },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: context
-                              .watch<SelectedchatCubit>()
-                              .state
-                              .selectedchat
-                              .contains(index)
+                      color: isSelected
                           ? AppColors.selectedChatColor
                           : AppColors.white),
                   padding:
@@ -123,13 +87,11 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                   )),
-                              selectcubit.starClicked &&
-                                      selectcubit.selectedchat.contains(index)
+                              selectcubit.starClicked && isSelected
                                   ? Icon(Icons.star,
                                       color: AppColors.primaryColor, size: 16)
                                   : Container(),
-                              selectcubit.pinned &&
-                                      selectcubit.selectedchat.contains(index)
+                              selectcubit.pinned && isSelected
                                   ? Transform.rotate(
                                       angle: pi / 4,
                                       child: Icon(Icons.push_pin,

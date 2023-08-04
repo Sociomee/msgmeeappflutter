@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 part 'number_validation_state.dart';
 
 class NumberValidationCubit extends Cubit<NumberValidationState> {
-  NumberValidationCubit() : super(NumberValidationState.initial());
+   NumberValidationCubit() : super(NumberValidationState.initial());
 
   void checkingValidation(String number) {
     if (number.isNotEmpty && number.length == 10) {

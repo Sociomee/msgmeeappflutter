@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
@@ -25,6 +26,7 @@ import 'biz_page/biz_page.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
 import 'chat_screen/chat_screen.dart';
+
 import 'market/market_page.dart';
 
 class MsgmeeScreen extends StatefulWidget {
@@ -112,11 +114,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
         },
         child: MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: context
-                  .watch<SelectedchatCubit>()
-                  .state
-                  .selectedchat
-                  .isNotEmpty
+          child: context.watch<SelectionCubit>().state.isNotEmpty
               ? Scaffold(
                   appBar: AppBar(
                     leading: GestureDetector(
@@ -127,12 +125,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                     ),
                     titleSpacing: 0,
                     title: Text(
-                      context
-                          .watch<SelectedchatCubit>()
-                          .state
-                          .selectedchat
-                          .length
-                          .toString(),
+                      context.watch<SelectionCubit>().state.length.toString(),
                       style: TextStyle(
                           color: Color(0xFF4E4E4E),
                           fontSize: 18,
