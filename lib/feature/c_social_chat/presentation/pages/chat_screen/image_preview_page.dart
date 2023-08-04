@@ -122,26 +122,20 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
         ),
         titleSpacing: 0,
         title: CircleAvatar(
-          radius: 15,
-          backgroundColor: AppColors.grey,
-          backgroundImage: NetworkImage(widget.profileImage),
-        ),
+            radius: 15,
+            backgroundColor: AppColors.grey,
+            backgroundImage: NetworkImage(widget.profileImage)),
         actions: [
           GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-              imagelist.clear();
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/trash.svg',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-          ),
+              onTap: () {
+                Navigator.pop(context);
+                imagelist.clear();
+              },
+              child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Center(
+                      child: SvgPicture.asset('assets/trash.svg',
+                          fit: BoxFit.contain)))),
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: Center(
@@ -187,11 +181,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                 child: GestureDetector(
                   onTap: () {
                     getImage(context);
-                    // animatedScreenNavigator(
-                    //     context,
-                    //     ImageEditingPage(
-                    //       image: imagelist[selectedImage],
-                    //     ));
+                 
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -291,7 +281,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
           children: [
             Expanded(
                 child: SizedBox(
-              height: 40,
+              height: 50,
               child: MessageTextFieldWidget(
                 imageTextfield: true,
                 messageController: messageController,

@@ -245,16 +245,16 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: Icon(
                           Icons.keyboard_arrow_down,
                           color: AppColors.black,
-                          size: 20,
+                          size: 30,
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 10),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Icon(
                           Icons.keyboard_arrow_up,
                           color: AppColors.black,
-                          size: 20,
+                          size: 30,
                         ),
                       ),
                       Padding(

@@ -317,31 +317,18 @@ class SentMessageWidget extends StatelessWidget {
                             : ConstrainedBox(
                                 constraints: BoxConstraints(maxWidth: 300),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 4.0, bottom: 3),
                                   child: Text(message,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 14)),
                                 ),
                               ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(width: 5),
-                            Text(time,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            SizedBox(
-                              width: message.length == 0
-                                  ? 130.w
-                                  : message.trim().length <= 21
-                                      ? 115
-                                      : 215,
-                            ),
-                            Text(msgStatus,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(time,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10)),
                         )
                       ],
                     )),
@@ -354,6 +341,13 @@ class SentMessageWidget extends StatelessWidget {
                           ? MessageStatus.sent
                           : MessageStatus.delivered,
                 ),
+                Positioned(
+                  bottom: 5,
+                  right: 20,
+                  child: Text(msgStatus,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 10)),
+                )
               ],
             ),
           ],
