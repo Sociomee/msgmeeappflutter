@@ -20,6 +20,7 @@ import '../cubit/cubit/search_mode_cubit.dart';
 import '../widgets/chat_profile_widget.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import '../widgets/profile_image_view_dialog.dart';
+import '../widgets/social_bottom_model_sheet.dart';
 import 'biz_page/biz_page.dart';
 import 'calls_tab/call_tab_screen.dart';
 import '../widgets/profile_pic.dart';
@@ -45,6 +46,12 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   bool typing = false;
   late TextEditingController searchController;
   List<ChatModel> filtedUserList = [];
+  List<ChatOptionsModel> options = [
+    ChatOptionsModel(id: 1, option: 'Mark as unread'),
+    ChatOptionsModel(id: 2, option: 'Block user'),
+    ChatOptionsModel(id: 3, option: 'Clear chats'),
+    ChatOptionsModel(id: 4, option: 'Select all'),
+  ];
   @override
   void initState() {
     super.initState();
@@ -209,11 +216,34 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         color: AppColors.black,
                         size: 18,
                       ),
-                      SizedBox(width: 19),
-                      Icon(
-                        Icons.more_vert,
-                        color: AppColors.black,
-                        size: 18,
+                      SizedBox(width: 10),
+                      PopupMenuButton(
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                        itemBuilder: (context) {
+                          return options
+                              .map((e) => PopupMenuItem(
+                                  value: e.id,
+                                  child: Text(
+                                    e.option,
+                                    style: TextStyle(
+                                      color: Color(0xFF4E4E4E),
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )))
+                              .toList();
+                        },
+                        onSelected: (value) {
+                          if (value == 1) {
+                          } else if (value == 2) {
+                          } else if (value == 3) {
+                          } else if (value == 4) {}
+                        },
                       ),
                       SizedBox(width: 13),
                     ],
