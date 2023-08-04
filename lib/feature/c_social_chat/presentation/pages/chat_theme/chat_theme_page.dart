@@ -60,59 +60,57 @@ class _ChatThemePageState extends State<ChatThemePage> {
                 return index == 4
                     ? Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 22),
-                            child: Row(
-                              children: [
-                                GradientColorContainer(
-                                    leftColor: AppColors.berryGradientLight,
-                                    rightColor: AppColors.berryGradientDeep),
-                                Text(themes[index].name,
-                                    style: TextStyle(
-                                        color: Color(0xFF333333),
-                                        fontSize: 15,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500)),
-                                Spacer(),
-                                GestureDetector(
-                                    onTap: () {
-                                      context
-                                          .read<ChatThemeCubit>()
-                                          .selectTheme(index);
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              context.read<ChatThemeCubit>().selectTheme(index);
 
-                                      context
-                                          .read<ChatThemeCubit>()
-                                          .changeTheme(
-                                            themes[index].rightColor,
-                                            themes[index].leftColor,
-                                          );
-                                      print(
-                                          '${themes[index].rightColor} ${themes[index].leftColor}');
-                                    },
-                                    child: Container(
-                                        height: 22,
-                                        width: 22,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                color: context
-                                                            .watch<
-                                                                ChatThemeCubit>()
-                                                            .state
-                                                            .selectedTheme ==
-                                                        index
-                                                    ? AppColors.darkgreen
-                                                    : AppColors.grey,
-                                                width: context
-                                                            .watch<
-                                                                ChatThemeCubit>()
-                                                            .state
-                                                            .selectedTheme ==
-                                                        index
-                                                    ? 15
-                                                    : 2))))
-                              ],
+                              context.read<ChatThemeCubit>().changeTheme(
+                                    themes[index].rightColor,
+                                    themes[index].leftColor,
+                                  );
+                              print(
+                                  '${themes[index].rightColor} ${themes[index].leftColor}');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 22),
+                              child: Row(
+                                children: [
+                                  GradientColorContainer(
+                                      leftColor: AppColors.berryGradientLight,
+                                      rightColor: AppColors.berryGradientDeep),
+                                  Text(themes[index].name,
+                                      style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: 15,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500)),
+                                  Spacer(),
+                                  Container(
+                                      height: 22,
+                                      width: 22,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              color: context
+                                                          .watch<
+                                                              ChatThemeCubit>()
+                                                          .state
+                                                          .selectedTheme ==
+                                                      index
+                                                  ? AppColors.darkgreen
+                                                  : AppColors.grey,
+                                              width: context
+                                                          .watch<
+                                                              ChatThemeCubit>()
+                                                          .state
+                                                          .selectedTheme ==
+                                                      index
+                                                  ? 15
+                                                  : 2)))
+                                ],
+                              ),
                             ),
                           ),
                           Divider(
@@ -122,54 +120,31 @@ class _ChatThemePageState extends State<ChatThemePage> {
                       )
                     : Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 22),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    context
-                                        .read<ChatThemeCubit>()
-                                        .selectTheme(index);
-                                    context.read<ChatThemeCubit>().changeTheme(
-                                          themes[index].rightColor,
-                                          themes[index].leftColor,
-                                        );
-                                  },
-                                  child: ChatThemeColorContainer(
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              context.read<ChatThemeCubit>().selectTheme(index);
+                              context.read<ChatThemeCubit>().changeTheme(
+                                    themes[index].rightColor,
+                                    themes[index].leftColor,
+                                  );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 22),
+                              child: Row(
+                                children: [
+                                  ChatThemeColorContainer(
                                     leftColor: themes[index].leftColor,
                                     rightColor: themes[index].rightColor,
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    context
-                                        .read<ChatThemeCubit>()
-                                        .selectTheme(index);
-                                    context.read<ChatThemeCubit>().changeTheme(
-                                          themes[index].rightColor,
-                                          themes[index].leftColor,
-                                        );
-                                  },
-                                  child: Text(themes[index].name,
+                                  Text(themes[index].name,
                                       style: TextStyle(
                                           color: Color(0xFF333333),
                                           fontSize: 15,
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500)),
-                                ),
-                                Spacer(),
-                                GestureDetector(
-                                  onTap: () {
-                                    context
-                                        .read<ChatThemeCubit>()
-                                        .selectTheme(index);
-                                    context.read<ChatThemeCubit>().changeTheme(
-                                          themes[index].rightColor,
-                                          themes[index].leftColor,
-                                        );
-                                  },
-                                  child: Container(
+                                  Spacer(),
+                                  Container(
                                     height: 22,
                                     width: 22,
                                     decoration: BoxDecoration(
@@ -190,9 +165,9 @@ class _ChatThemePageState extends State<ChatThemePage> {
                                                     index
                                                 ? 15
                                                 : 2)),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           Divider(

@@ -271,7 +271,6 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                               Stack(
                                                 children: [
                                                   Container(
-                                                      // width: 150.w,
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 10,
@@ -304,33 +303,13 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                                   fontSize:
                                                                       10)),
                                                           SizedBox(height: 2),
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            children: [
-                                                              Text(
-                                                                  messages[
-                                                                          index]
-                                                                      .time,
-                                                                  style: const TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          8)),
-                                                              SizedBox(
-                                                                  width: 104.w),
-                                                              Text(
-                                                                  messages[
-                                                                          index]
-                                                                      .msgStatus,
-                                                                  style: const TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          8)),
-                                                            ],
-                                                          )
+                                                          Text(
+                                                              messages[index]
+                                                                  .time,
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 8))
                                                         ],
                                                       )),
                                                   Positioned(
@@ -347,6 +326,16 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                                             : MessageStatus
                                                                 .delivered,
                                                   ),
+                                                  Positioned(
+                                                    bottom: 5,
+                                                    right: 18,
+                                                    child: Text(
+                                                        messages[index]
+                                                            .msgStatus,
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 8)),
+                                                  )
                                                 ],
                                               ),
                                             ],
