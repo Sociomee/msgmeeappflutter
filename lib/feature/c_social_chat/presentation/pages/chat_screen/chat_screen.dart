@@ -412,7 +412,7 @@ class _ChatScreenState extends State<ChatScreen> {
               controller: _listViewController,
               itemCount: msg.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10, bottom: 70),
+              padding: EdgeInsets.only(top: 10, bottom: 100),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Align(

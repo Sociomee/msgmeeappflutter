@@ -7,10 +7,11 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/colors.dart';
-
 import '../../../cubit/chat_selection_cubit.dart';
 import '../../../widgets/chat_profile_widget.dart';
 import '../../../widgets/profile_image_view_dialog.dart';
+
+
 
 class SocialchatWidget extends StatefulWidget {
   const SocialchatWidget({super.key});

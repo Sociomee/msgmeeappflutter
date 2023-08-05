@@ -55,6 +55,7 @@ class ReplyMessageTextField extends StatelessWidget {
                           ),
                           SizedBox(
                             width: 110.w,
+                            height: 15,
                             child: Text(cubit.msg,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(

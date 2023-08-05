@@ -139,7 +139,19 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                                   color: AppColors.black.withOpacity(.5)),
                               child: Icon(Icons.fullscreen_exit_outlined,
                                   color: AppColors.white, size: 26))
-                          : SvgPicture.asset('assets/expand.svg')))
+                          : SvgPicture.asset('assets/expand.svg'))),
+              Positioned(
+                  right: 10,
+                  bottom: 10,
+                  child: Container(
+                    height: 41,
+                    width: 41,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: AppColors.white),
+                    child: Icon(Icons.my_location_outlined,
+                        color: AppColors.black, size: 18),
+                  ))
             ],
           ),
           SizedBox(height: 20),
@@ -167,6 +179,7 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/share_location.svg'),
+                    SizedBox(width: 5),
                     Text('Share your live location',
                         style: TextStyle(color: AppColors.white))
                   ],
@@ -203,11 +216,7 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.my_location_outlined,
-                      color: Colors.blue,
-                      size: 18,
-                    ),
+                    SvgPicture.asset('assets/location.svg'),
                     SizedBox(width: 5),
                     Text(
                       'Share your current location',
