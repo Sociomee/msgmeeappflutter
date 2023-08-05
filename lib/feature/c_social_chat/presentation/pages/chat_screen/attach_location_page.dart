@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +25,8 @@ class AttachLocationPage extends StatefulWidget {
 
 class _AttachLocationPageState extends State<AttachLocationPage> {
   bool expand = false;
-
-  String? _currentAddress;
+  bool loading = false;
+  String _currentAddress = 'Locaiton not Found!';
   Position? _currentPosition;
 
   Future<bool> _handleLocationPermission() async {
@@ -58,8 +60,10 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
 
   Future<void> _getCurrentPosition() async {
     final hasPermission = await _handleLocationPermission();
-
     if (!hasPermission) return;
+    setState(() {
+      loading = true;
+    });
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       setState(() => _currentPosition = position);
@@ -77,6 +81,7 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
       setState(() {
         _currentAddress =
             '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+        loading = false;
       });
     }).catchError((e) {
       debugPrint(e);
@@ -193,17 +198,18 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
           ),
           GestureDetector(
             onTap: () async {
-              _getCurrentPosition();
-              if (_currentAddress != null) {
+              await _getCurrentPosition();
+              Timer(Duration(milliseconds: 500), () {
                 context.read<AddMessageCubit>().addMessage(ChatMessage(
-                      messageContent: _currentAddress!,
+                      messageContent: _currentAddress,
                       messageType: 'sender',
                       msgStatus: 'send',
                       time: getCurrentTime(),
                       type: MessageType.location,
                     ));
+
                 Navigator.pop(context);
-              }
+              });
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -213,18 +219,31 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                     border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(5),
                     color: AppColors.white),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('assets/location.svg'),
-                    SizedBox(width: 5),
-                    Text(
-                      'Share your current location',
-                      style: TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
+                child: loading
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                                color: AppColors.primaryColor),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/location.svg'),
+                          SizedBox(width: 5),
+                          Text(
+                            'Share your current location',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
               ),
             ),
           ),
