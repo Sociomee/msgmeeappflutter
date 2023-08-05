@@ -42,21 +42,25 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: PopupMenuButton<int>(
-        icon: Icon(
-          Icons.more_vert,
-          color: Colors.black,
-        ),
-        itemBuilder: (context) {
-          return context.read<SyncMsgCubit>().state
-              ? options
-                  .map(
-                    (e) => PopupMenuItem(
-                        value: e.id,
-                        child: Center(
+    return Theme(
+      data: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
+      child: Container(
+        child: PopupMenuButton<int>(
+          icon: Icon(
+            Icons.more_vert,
+            color: Colors.black,
+          ),
+          itemBuilder: (context) {
+            return context.read<SyncMsgCubit>().state
+                ? options
+                    .map(
+                      (e) => PopupMenuItem(
+                          value: e.id,
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -83,99 +87,100 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                       thickness: 1,
                                       color: AppColors.grey.withOpacity(.5))
                             ],
-                          ),
-                        )),
-                  )
-                  .toList()
-              : optionswithoutsync
-                  .map(
-                    (e) => PopupMenuItem(
-                        value: e.id,
-                        child: Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                e.option,
-                                style: TextStyle(
-                                  color: Color(0xFF4E4E4E),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
+                          )),
+                    )
+                    .toList()
+                : optionswithoutsync
+                    .map(
+                      (e) => PopupMenuItem(
+                          value: e.id,
+                          height: 35,
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  e.option,
+                                  style: TextStyle(
+                                    color: Color(0xFF4E4E4E),
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              e.id == 7
-                                  ? Text(
-                                      'No syncing processed yet',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: AppColors.grey,
-                                          fontStyle: FontStyle.italic),
-                                    )
-                                  : Container(),
-                              SizedBox(height: 10),
-                              e.id == 8
-                                  ? Container()
-                                  : Divider(
-                                      height: 0,
-                                      thickness: 1,
-                                      color: AppColors.grey.withOpacity(.5),
-                                    )
-                            ],
-                          ),
-                        )),
-                  )
-                  .toList();
-        },
-        offset: Offset(-30, 35),
-        color: Colors.white,
-        elevation: 2,
-        onSelected: context.watch<SyncMsgCubit>().state
-            ? (value) {
-                if (value == 1) {
-                  screenNavigator(context, NewMessageScreen());
-                } else if (value == 2) {
-                } else if (value == 3) {
-                  animatedScreenNavigator(context, CreateGroupPage());
-                } else if (value == 4) {
-                  animatedScreenNavigator(context, AddParticipantsScreen());
-                } else if (value == 5) {
-                  animatedScreenNavigator(context, ArchivedListScreen());
-                } else if (value == 6) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return SyncDialogWidget();
-                      });
+                                e.id == 7
+                                    ? Text(
+                                        'No syncing processed yet',
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.grey,
+                                            fontStyle: FontStyle.italic),
+                                      )
+                                    : Container(),
+                                SizedBox(height: 10),
+                                e.id == 8
+                                    ? Container()
+                                    : Divider(
+                                        height: 0,
+                                        thickness: 1,
+                                        color: AppColors.grey.withOpacity(.5),
+                                      )
+                              ],
+                            ),
+                          )),
+                    )
+                    .toList();
+          },
+          offset: Offset(-30, 35),
+          color: Colors.white,
+          elevation: 2,
+          onSelected: context.watch<SyncMsgCubit>().state
+              ? (value) {
+                  if (value == 1) {
+                    screenNavigator(context, NewMessageScreen());
+                  } else if (value == 2) {
+                  } else if (value == 3) {
+                    animatedScreenNavigator(context, CreateGroupPage());
+                  } else if (value == 4) {
+                    animatedScreenNavigator(context, AddParticipantsScreen());
+                  } else if (value == 5) {
+                    animatedScreenNavigator(context, ArchivedListScreen());
+                  } else if (value == 6) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SyncDialogWidget();
+                        });
 
-                  // screenNavigator(context, LinkedDevicesScreen());
-                } else if (value == 7) {
-                  screenNavigator(context, SettingScreen());
+                    // screenNavigator(context, LinkedDevicesScreen());
+                  } else if (value == 7) {
+                    screenNavigator(context, SettingScreen());
+                  }
                 }
-              }
-            : (value) {
-                if (value == 1) {
-                  screenNavigator(context, NewMessageScreen());
-                } else if (value == 2) {
-                } else if (value == 3) {
-                  animatedScreenNavigator(context, CreateGroupPage());
-                } else if (value == 4) {
-                  screenNavigator(context, LinkedDevicesScreen());
-                } else if (value == 5) {
-                  screenNavigator(context, AddParticipantsScreen());
-                } else if (value == 6) {
-                  animatedScreenNavigator(context, ArchivedListScreen());
-                } else if (value == 7) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return SyncDialogWidget();
-                      });
-                } else if (value == 8) {
-                  screenNavigator(context, SettingScreen());
-                }
-              },
+              : (value) {
+                  if (value == 1) {
+                    screenNavigator(context, NewMessageScreen());
+                  } else if (value == 2) {
+                  } else if (value == 3) {
+                    animatedScreenNavigator(context, CreateGroupPage());
+                  } else if (value == 4) {
+                    screenNavigator(context, LinkedDevicesScreen());
+                  } else if (value == 5) {
+                    screenNavigator(context, AddParticipantsScreen());
+                  } else if (value == 6) {
+                    animatedScreenNavigator(context, ArchivedListScreen());
+                  } else if (value == 7) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SyncDialogWidget();
+                        });
+                  } else if (value == 8) {
+                    screenNavigator(context, SettingScreen());
+                  }
+                },
+        ),
       ),
     );
   }
