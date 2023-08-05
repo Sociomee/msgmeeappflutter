@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:msgmee/domain/models/onboarding_data_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.dart';
@@ -19,7 +20,6 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   late PageController pagecontroller;
   bool isLastPage = false;
-  int pageIndex = 0;
 
   @override
   void initState() {
@@ -44,48 +44,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
             fit: BoxFit.cover,
-            // image: pageIndex == 0
-            //     ? AssetImage('assets/onboard_bg1.png')
-            //     : pageIndex == 1
-            //         ? AssetImage('assets/onboard_bg2.png')
-            //         : AssetImage('assets/onboard_bg3.png')
             image: AssetImage('assets/onboarding_bg.png'),
           )),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * .85,
-                child: PageView(
-                  controller: pagecontroller,
-                  onPageChanged: (index) {
-                    setState(() {
-                      isLastPage = index == 2;
-                      pageIndex = index;
-                    });
-                  },
-                  children: [
-                    BuildPages(
-                        title: 'Welcome to\nMsgMee',
-                        index: 1,
-                        imageUrl: 'assets/onboarding1.svg',
-                        descriptionText:
-                            'Connecting with friends in a secure, fast and reliable way.'),
-                    BuildPages(
-                        title: 'Empower Your\nVoice ',
-                        index: 2,
-                        imageUrl: 'assets/onboarding2.svg',
-                        descriptionText:
-                            'Engage with your friends,\nbuild relationships.'),
-                    BuildPages(
-                        title: 'Be The\nPresenter',
-                        index: 3,
-                        imageUrl: 'assets/onboarding3.svg',
-                        descriptionText:
-                            'Join MsgMee and become\npart of a growing community.'),
-                  ],
-                ),
-              ),
+                  height: MediaQuery.of(context).size.height * .85,
+                  child: PageView.builder(
+                      controller: pagecontroller,
+                      onPageChanged: (index) {
+                        setState(() {
+                          isLastPage = index == 2;
+                        });
+                      },
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return BuildPages(
+                            title: data[index].title,
+                            index: data[index].index,
+                            imageUrl: data[index].imageUrl,
+                            descriptionText: data[index].descriptionText);
+                      })),
               Center(
                 child: SmoothPageIndicator(
                   controller: pagecontroller,

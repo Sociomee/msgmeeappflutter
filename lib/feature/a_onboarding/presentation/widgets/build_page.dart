@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../theme/colors.dart';
 
@@ -22,22 +21,15 @@ class BuildPages extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 40.h),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 30,
-            fontWeight: FontWeight.w600,
-          ),
-          textScaleFactor: 1.0,
-        ),
+        Text(title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w600),
+            textScaleFactor: 1.0),
         SizedBox(height: 20.h),
-        SvgPicture.asset(
-          imageUrl,
-          height: 330.h,
-          width: double.infinity,
-        ),
+        SvgPicture.asset(imageUrl, height: 330.h, width: double.infinity),
         SizedBox(height: 20.h),
         Center(
           child: Padding(
@@ -48,7 +40,7 @@ class BuildPages extends StatelessWidget {
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
-                fontFamily: GoogleFonts.poppins().fontFamily,
+                fontFamily: 'Poppins',
                 fontWeight: FontWeight.w400,
               ),
               textScaleFactor: 1.0,
