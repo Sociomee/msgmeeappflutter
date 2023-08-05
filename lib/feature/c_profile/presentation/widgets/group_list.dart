@@ -22,19 +22,35 @@ class _GroupListState extends State<GroupList> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+              size: 20,
+            ),
           ),
         ),
+        leadingWidth: 40,
+        titleSpacing: 0,
         title: selectedindex.isNotEmpty
             ? Text(
                 '${selectedindex.length} Selected',
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               )
             : Text(
                 'My Groups',
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
         actions: [
           selectedindex.isNotEmpty
@@ -92,6 +108,7 @@ class _GroupListState extends State<GroupList> {
                 itemCount: 9,
                 itemBuilder: (context, index) {
                   return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () {
                       if (selectedindex.contains(index)) {
                         setState(() {
