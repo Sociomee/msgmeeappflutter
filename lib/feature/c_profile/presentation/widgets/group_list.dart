@@ -61,6 +61,7 @@ class _GroupListState extends State<GroupList> {
                         builder: (context) {
                           return DeleteDialogWidget(
                             selected: selectedindex.length.toString(),
+                            type: 'Groups',
                           );
                         });
                   },

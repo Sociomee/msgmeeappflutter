@@ -58,6 +58,7 @@ class _BroadCastListState extends State<BroadCastList> {
                         builder: (context) {
                           return DeleteDialogWidget(
                             selected: selectedindex.length.toString(),
+                            type: 'Broadcast',
                           );
                         });
                   },
@@ -102,6 +103,7 @@ class _BroadCastListState extends State<BroadCastList> {
                 itemCount: 9,
                 itemBuilder: (context, index) {
                   return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () {
                       if (selectedindex.contains(index)) {
                         setState(() {
