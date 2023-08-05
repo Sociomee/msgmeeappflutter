@@ -26,6 +26,7 @@ class AttachLocationPage extends StatefulWidget {
 class _AttachLocationPageState extends State<AttachLocationPage> {
   bool expand = false;
   bool loading = false;
+  bool searching = false;
   String _currentAddress = 'Locaiton not Found!';
   Position? _currentPosition;
 
@@ -95,25 +96,68 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
         elevation: 1,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            if (searching) {
+              setState(() {
+                searching = false;
+              });
+            } else {
+              Navigator.pop(context);
+            }
           },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.black,
-            size: 20,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+              size: 20,
+            ),
           ),
         ),
         leadingWidth: 40,
         titleSpacing: 0,
-        title: Text(
-          'Send Location',
-          style: TextStyle(color: AppColors.black),
-        ),
+        title: searching
+            ? AnimatedSlide(
+                offset: Offset(0, 0),
+                duration: Duration(milliseconds: 1500),
+                child: Expanded(
+                    child: TextFormField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      hintText: 'Search...',
+                      hintStyle: TextStyle(
+                        color: Color(0xFF999999),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      border: InputBorder.none),
+                )))
+            : Text(
+                'Send Location',
+                style: TextStyle(
+                  color: Color(0xFF333333),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
         actions: [
-          Icon(
-            Icons.search,
-            color: AppColors.black,
-          )
+          searching
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      searching = true;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.search,
+                      color: AppColors.black,
+                    ),
+                  ),
+                )
         ],
       ),
       body: SingleChildScrollView(
