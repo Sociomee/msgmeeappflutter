@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/text_field_widget.dart';
 
-import '../../../../common_widgets/custom_bottom_model_sheet.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
 
@@ -37,6 +38,16 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
     if (photo != null) {
       setState(() {
         imageFile = File(photo.path);
+      });
+    }
+  }
+
+  void deletePic() {
+    if (imageFile != null) {
+      imageFile!.delete().then((_) {
+        setState(() {
+          imageFile == null;
+        });
       });
     }
   }
@@ -116,7 +127,7 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                                   topLeft: Radius.circular(20),
                                   topRight: Radius.circular(20))),
                           builder: (context) {
-                            return CustomBottomModelSheet(
+                            return ProfileBottomModelSheet(
                               title: 'Select Your Profile Image ',
                               subheading:
                                   'Use DP, camera or select file from device Gallery.',
@@ -128,6 +139,11 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                                 pickGprofilePic();
                                 Navigator.pop(context);
                               },
+                              deletePic: () {
+                                deletePic();
+                                Navigator.pop(context);
+                              },
+                              hasProfile: imageFile == null ? false : true,
                             );
                           });
                     },
@@ -226,6 +242,176 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                   }),
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileBottomModelSheet extends StatelessWidget {
+  const ProfileBottomModelSheet({
+    super.key,
+    required this.cameraClick,
+    required this.galleryClick,
+    this.title,
+    this.subheading,
+    required this.deletePic,
+    required this.hasProfile,
+  });
+  final VoidCallback cameraClick;
+  final VoidCallback galleryClick;
+  final VoidCallback deletePic;
+  final String? title;
+  final String? subheading;
+  final bool hasProfile;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 5,
+            width: 80,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.lightgrey),
+          ),
+          SizedBox(height: 10),
+          Text(
+            title ?? 'Select Media From?',
+            textScaleFactor: 1.0,
+            style: TextStyle(fontSize: 16.sp),
+          ),
+          Text(
+            subheading ?? 'Use camera or select file from device gallery',
+            textScaleFactor: 1.0,
+            style: TextStyle(
+                fontSize: 12.sp, color: Color.fromARGB(255, 109, 109, 109)),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              hasProfile
+                  ? InkWell(
+                      onTap: deletePic,
+                      child: Column(
+                        children: [
+                          Container(
+                              height: 60,
+                              width: 60,
+                              margin: EdgeInsets.symmetric(horizontal: 21),
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.lightgrey.withOpacity(.5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 0),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                              alignment: Alignment.center,
+                              child: SvgPicture.asset('assets/trash.svg',
+                                  height: 30, fit: BoxFit.contain)),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Remove Profile',
+                            style: TextStyle(
+                              color: Color(0xFF333333),
+                              fontSize: 10,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : Container(),
+              InkWell(
+                onTap: cameraClick,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      margin: EdgeInsets.symmetric(horizontal: 42),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.lightgrey.withOpacity(.5),
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
+                            spreadRadius: 0,
+                          )
+                        ],
+                      ),
+                      child: const Icon(Icons.camera_alt, size: 30),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const Text(
+                      'Camera',
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 10,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: galleryClick,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: hasProfile ? 21 : 42),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.lightgrey.withOpacity(.5),
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
+                            spreadRadius: 0,
+                          )
+                        ],
+                      ),
+                      child: const Icon(Icons.image_outlined, size: 30),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const Text(
+                      'Gallery',
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 10,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
