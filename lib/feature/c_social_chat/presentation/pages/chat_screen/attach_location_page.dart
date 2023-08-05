@@ -252,56 +252,71 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                         return SizedBox(height: 10);
                       },
                       itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.white,
-                                  border: Border.all(color: AppColors.black)),
-                              child: Icon(Icons.location_on),
-                            ),
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      locations[index].title,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    index == 2
-                                        ? Container(
-                                            height: 13.w,
-                                            width: 13.w,
-                                            margin: EdgeInsets.only(left: 5),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: AppColors.errorRedColor
-                                                    .withOpacity(.5)),
-                                            child: Icon(
-                                              Icons.fiber_manual_record,
-                                              color: AppColors.errorRedColor,
-                                              size: 12.r,
-                                            ),
-                                          )
-                                        : Container()
-                                  ],
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  locations[index].subtitle,
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 135, 135, 135),
+                        return GestureDetector(
+                          onTap: () {
+                            context
+                                .read<AddMessageCubit>()
+                                .addMessage(ChatMessage(
+                                  messageContent: locations[index].subtitle,
+                                  messageType: 'sender',
+                                  msgStatus: 'send',
+                                  time: getCurrentTime(),
+                                  type: MessageType.location,
+                                ));
+                            Navigator.pop(context);
+                          },
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.white,
+                                    border: Border.all(color: AppColors.black)),
+                                child: Icon(Icons.location_on),
+                              ),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        locations[index].title,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      index == 2
+                                          ? Container(
+                                              height: 13.w,
+                                              width: 13.w,
+                                              margin: EdgeInsets.only(left: 5),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  color: AppColors.errorRedColor
+                                                      .withOpacity(.5)),
+                                              child: Icon(
+                                                Icons.fiber_manual_record,
+                                                color: AppColors.errorRedColor,
+                                                size: 12.r,
+                                              ),
+                                            )
+                                          : Container()
+                                    ],
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
+                                  SizedBox(height: 5),
+                                  Text(
+                                    locations[index].subtitle,
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 135, 135, 135),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         );
                       }),
                 )
