@@ -64,7 +64,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 0),
                 child: Text('RECENT'),
               ),
               Padding(
@@ -177,9 +177,8 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                       );
                     }),
               ),
-              SizedBox(height: 25),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
                 child: Text('LAST WEEK'),
               ),
               Padding(
