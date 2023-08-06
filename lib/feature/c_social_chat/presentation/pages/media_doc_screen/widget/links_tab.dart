@@ -65,7 +65,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 0),
-                child: Text('RECENT'),
+                child: Text(
+                  'RECENT',
+                  style: TextStyle(
+                    color: Color(0xFF4E4E4E),
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -180,7 +188,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
-                child: Text('LAST WEEK'),
+                child: Text(
+                  'LAST WEEK',
+                  style: TextStyle(
+                    color: Color(0xFF4E4E4E),
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -294,8 +310,16 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                         );
                       })),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 10),
-                child: Text('LAST MONTH'),
+                padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
+                child: Text(
+                  'LAST MONTH',
+                  style: TextStyle(
+                    color: Color(0xFF4E4E4E),
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
