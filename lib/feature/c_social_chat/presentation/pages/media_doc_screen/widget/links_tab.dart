@@ -80,7 +80,8 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                           width: 391.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: AppColors.grey)),
+                              border: Border.all(
+                                  color: AppColors.lightgrey, width: 1)),
                           child: Column(
                             children: [
                               //? DO Not Delete this code
