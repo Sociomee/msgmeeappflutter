@@ -160,11 +160,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   SizedBox(width: 19),
                   GestureDetector(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: copiedText))
-                            .then((_) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Copied to your clipboard !')));
+                        Clipboard.setData(ClipboardData(text: copiedText));
+                        //     .then((_) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //       const SnackBar(
+                        //           content: Text('Copied to your clipboard !')));
+                        // });
+                        setState(() {
+                          chattileIndex.clear();
                         });
                       },
                       child: SvgPicture.asset('assets/copy.svg', height: 18)),
@@ -480,6 +483,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               if (!chattileIndex.contains(index)) {
                                 setState(() {
                                   chattileIndex.add(index);
+                                  copiedText = msg[index].messageContent;
                                 });
                               } else {
                                 setState(() {
