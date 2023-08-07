@@ -28,6 +28,7 @@ import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/cubit/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
+import '../../cubit/show_emoji_cubit.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
 import 'forward_msg_page.dart';
@@ -439,6 +440,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               setState(() {
                                 chattileIndex.remove(index);
                               });
+                              context.read<ShowEmojiCubit>().removeEmoji();
                             },
                             onLongPress: () {
                               if (!chattileIndex.contains(index)) {
@@ -446,10 +448,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                   chattileIndex.add(index);
                                   copiedText = msg[index].messageContent;
                                 });
+                                context.read<ShowEmojiCubit>().diaplayEmoji();
                               } else {
                                 setState(() {
                                   chattileIndex.remove(index);
                                 });
+                                context.read<ShowEmojiCubit>().removeEmoji();
                               }
                             },
                             child: Container(
@@ -477,6 +481,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 setState(() {
                                   chattileIndex.remove(index);
                                 });
+                                context.read<ShowEmojiCubit>().removeEmoji();
                               }
                             },
                             onLongPress: () async {
@@ -485,10 +490,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                   chattileIndex.add(index);
                                   copiedText = msg[index].messageContent;
                                 });
+                                context.read<ShowEmojiCubit>().diaplayEmoji();
                               } else {
                                 setState(() {
                                   chattileIndex.remove(index);
                                 });
+                                context.read<ShowEmojiCubit>().removeEmoji();
                               }
                             },
                             child: Container(
