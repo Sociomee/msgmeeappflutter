@@ -8,7 +8,6 @@ import '../../../../../helper/navigator_function.dart';
 import '../../../../../theme/colors.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../../widgets/profile_image_view_dialog.dart';
-import '../chat_screen/chat_screen.dart';
 
 class MarketPageTab extends StatefulWidget {
   const MarketPageTab({super.key});
@@ -327,8 +326,14 @@ class _MarketPageTabState extends State<MarketPageTab> {
                             color: AppColors.lightgrey1,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(6),
-                                child: Image.network(marketlist[index].imageUrl,
-                                    height: 41, width: 41, fit: BoxFit.cover))),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.network(
+                                      marketlist[index].imageUrl,
+                                      height: 41,
+                                      width: 41,
+                                      fit: BoxFit.cover),
+                                ))),
                         SizedBox(width: 10.w),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
