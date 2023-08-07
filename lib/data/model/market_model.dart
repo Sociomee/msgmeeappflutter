@@ -15,19 +15,19 @@ List<MarketModel> marketlist = [
   MarketModel(
       imageUrl:
           'https://w7.pngwing.com/pngs/154/370/png-transparent-dxracer-gaming-chair-video-game-resident-evil-zero-chair.png',
-      title: 'Gaming Chair, local pickup...',
+      title: 'Gaming Chair, local pickup',
       industry: 'Technology',
       price: '\$200'),
   MarketModel(
       imageUrl:
           'https://e7.pngegg.com/pngimages/217/151/png-clipart-uncharted-4-a-thief-s-end-uncharted-the-nathan-drake-collection-sony-playstation-4-others-miscellaneous-gadget.png',
-      title: 'Playstation 4 Limited Editio...',
+      title: 'Playstation 4 Limited Edition',
       industry: 'Technology',
       price: '\$200'),
   MarketModel(
       imageUrl:
           'https://cdn.shopify.com/s/files/1/2358/2817/products/air-jordan-1-retro-high-top-3-534340.png?v=1638813029',
-      title: 'Air Jordan 1 Top 3 Sneaker...',
+      title: 'Air Jordan 1 Top 3 Sneaker',
       industry: 'Food & drink',
       price: '\$200'),
   MarketModel(
@@ -51,13 +51,13 @@ List<MarketModel> marketlist = [
   MarketModel(
       imageUrl:
           'https://www.freepnglogos.com/uploads/macbook-png/macbook-cleanmymac-the-best-mac-cleanup-app-for-macos-get-32.png',
-      title: 'Macbook Pro 16 inch (2020 ...',
+      title: 'Macbook Pro 16 inch (2020)',
       industry: 'Real estate activities',
       price: '\$200'),
   MarketModel(
       imageUrl:
           'https://e7.pngegg.com/pngimages/332/438/png-clipart-eames-lounge-chair-charles-and-ray-eames-herman-miller-the-local-vault-chair-angle-furniture.png',
-      title: 'Heimer Miller Sofa (Mint Co...',
+      title: 'Heimer Miller Sofa (Mint Condition)',
       industry: 'Real estate activities',
       price: '\$200'),
 ];

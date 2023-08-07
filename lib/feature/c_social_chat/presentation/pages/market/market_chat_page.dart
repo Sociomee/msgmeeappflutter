@@ -37,18 +37,17 @@ import '../chat_screen/widgets/message_textField.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
 
 class MarketChatScreen extends StatefulWidget {
-  const MarketChatScreen(
-      {super.key,
-      required this.name,
-      required this.imageUrl,
-      required this.isOnline,
-      required this.hasStory,
-      this.marketplace});
+  const MarketChatScreen({
+    super.key,
+    required this.name,
+    required this.imageUrl,
+    required this.isOnline,
+    required this.hasStory,
+  });
   final String name;
   final String imageUrl;
   final bool isOnline;
   final bool hasStory;
-  final bool? marketplace;
 
   @override
   State<MarketChatScreen> createState() => _MarketChatScreenState();
