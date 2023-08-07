@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/data/model/market_model.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../../theme/colors.dart';
+import 'market_chat_page.dart';
 
 class MarketPageTab extends StatelessWidget {
   const MarketPageTab({super.key});
@@ -22,7 +22,7 @@ class MarketPageTab extends StatelessWidget {
                   onTap: () {
                     screenNavigator(
                         context,
-                        ChatScreen(
+                        MarketChatScreen(
                           name: marketlist[index].title,
                           imageUrl: marketlist[index].imageUrl,
                           isOnline: false,
