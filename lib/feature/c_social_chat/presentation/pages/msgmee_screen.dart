@@ -17,7 +17,7 @@ import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_des
 import 'package:msgmee/theme/colors.dart';
 import 'package:stories_editor/stories_editor.dart';
 import '../../../../data/model/dummy_chat_model.dart';
-import '../cubit/cubit/search_mode_cubit.dart';
+import '../cubit/search_mode/search_mode_cubit.dart';
 import '../widgets/chat_profile_widget.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import '../widgets/profile_image_view_dialog.dart';

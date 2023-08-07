@@ -12,4 +12,11 @@ class AddMessageCubit extends Cubit<AddMessageState> {
   addMessage(ChatMessage chat) {
     emit(state.copyWith(messages: [...state.messages, chat]));
   }
+
+  removeMessage(ChatMessage message) {
+    emit(state.copyWith(
+        messages: state.messages
+            .where((e) => e.messageContent != message.messageContent)
+            .toList()));
+  }
 }

@@ -25,7 +25,7 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
-import '../../cubit/cubit/search_mode_cubit.dart';
+import '../../cubit/search_mode/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../cubit/show_emoji/show_emoji_cubit.dart';
@@ -150,7 +150,20 @@ class _ChatScreenState extends State<ChatScreen> {
                       },
                       child: SvgPicture.asset('assets/Forward.svg')),
                   SizedBox(width: 19),
-                  SvgPicture.asset('assets/trash.svg', height: 18),
+                  GestureDetector(
+                      onTap: () {
+                        context
+                            .read<AddMessageCubit>()
+                            .removeMessage(ChatMessage(
+                              messageContent: copiedText,
+                              messageType: 'sender',
+                              msgStatus: 'send',
+                              time: getCurrentTime(),
+                              type: MessageType.contact,
+                            ));
+                        chattileIndex.clear();
+                      },
+                      child: SvgPicture.asset('assets/trash.svg', height: 18)),
                   SizedBox(width: 19),
                   Icon(Icons.error_outline_outlined,
                       color: AppColors.black, size: 16),
@@ -471,7 +484,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     type: msg[index].messageType,
                                   ),
                                   Align(
-                                    alignment: Alignment.bottomRight,
+                                    alignment: Alignment.bottomLeft,
                                     child: GestureDetector(
                                       onTap: () {
                                         context

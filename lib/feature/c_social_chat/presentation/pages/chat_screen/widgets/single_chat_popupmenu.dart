@@ -5,7 +5,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/create_group_pag
 import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen/media_and_doc_screen.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../../../helper/navigator_function.dart';
-import '../../../cubit/cubit/search_mode_cubit.dart';
+import '../../../cubit/search_mode/search_mode_cubit.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
 import '../../chat_theme/chat_theme_page.dart';
 import '../../chat_theme/chat_wallpaper_page.dart';
