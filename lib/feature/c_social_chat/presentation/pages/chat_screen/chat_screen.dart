@@ -141,7 +141,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 title: Text(chattileIndex.length.toString(),
                     style: TextStyle(color: AppColors.black)),
                 actions: [
-                  SvgPicture.asset('assets/Forward.svg'),
+                  GestureDetector(
+                      onTap: () {
+                        context.read<ReplyMsgCubit>().replyMsg(
+                            widget.name, msg[chattileIndex[0]].messageContent);
+                        chattileIndex.clear();
+                      },
+                      child: SvgPicture.asset('assets/Forward.svg')),
                   SizedBox(width: 19),
                   SvgPicture.asset('assets/trash.svg', height: 18),
                   SizedBox(width: 19),
