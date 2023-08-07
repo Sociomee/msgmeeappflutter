@@ -32,7 +32,6 @@ import '../../cubit/show_attachment.dart';
 import '../../cubit/show_emoji/show_emoji_cubit.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../chat_screen/forward_msg_page.dart';
-import '../chat_screen/group_chat_page.dart';
 import '../chat_screen/image_preview_page.dart';
 import '../chat_screen/widgets/message_textField.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
@@ -176,11 +175,7 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                   GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: copiedText));
-                        //     .then((_) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //       const SnackBar(
-                        //           content: Text('Copied to your clipboard !')));
-                        // });
+
                         setState(() {
                           chattileIndex.clear();
                         });
@@ -333,20 +328,13 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                             Icon(Icons.arrow_back_ios, color: AppColors.black)),
                     title: GestureDetector(
                       onTap: () {
-                        widget.name == 'Office Group'
-                            ? animatedScreenNavigator(
-                                context,
-                                GroupChatPage(
-                                  imageUrl: widget.imageUrl,
-                                  name: widget.name,
-                                ))
-                            : screenNavigator(
-                                context,
-                                OtherPersonProfileDescription(
-                                  imageUrl: widget.imageUrl,
-                                  name: widget.name,
-                                  isOnline: widget.isOnline,
-                                ));
+                        screenNavigator(
+                            context,
+                            OtherPersonProfileDescription(
+                              imageUrl: widget.imageUrl,
+                              name: widget.name,
+                              isOnline: widget.isOnline,
+                            ));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -374,11 +362,6 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                                     )),
                               ),
                               SizedBox(height: 8),
-                              widget.marketplace != null && widget.marketplace!
-                                  ? Text('Open now',
-                                      style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey))
-                                  : Container(),
                               Text(widget.isOnline ? 'Active Now' : '',
                                   style: TextStyle(
                                       fontSize: 13, color: AppColors.grey)),

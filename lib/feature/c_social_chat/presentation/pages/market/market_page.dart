@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/data/model/dummy_chat_model.dart';
 import 'package:msgmee/data/model/market_model.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
@@ -23,9 +24,9 @@ class MarketPageTab extends StatelessWidget {
                     screenNavigator(
                         context,
                         MarketChatScreen(
-                          name: marketlist[index].title,
-                          imageUrl: marketlist[index].imageUrl,
-                          isOnline: false,
+                          name: dummyData[index].name,
+                          imageUrl: dummyData[index].imageUrl,
+                          isOnline: dummyData[index].isOnline,
                           hasStory: false,
                           marketplace: true,
                         ));
