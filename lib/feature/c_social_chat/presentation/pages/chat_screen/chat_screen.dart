@@ -529,7 +529,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       Container(
                         padding: EdgeInsets.only(
                             left: 10, bottom: 10, top: 10, right: 10),
-                        // height: 60,
                         width: double.infinity,
                         color: Colors.white,
                         child: Row(
@@ -597,8 +596,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ? GestureDetector(
                                     onTap: () {
                                       if (messageController.text.isNotEmpty) {
-                                        _scrollToBottom();
-
                                         context
                                                 .read<ShowContactTextField>()
                                                 .state
@@ -640,6 +637,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                       type: MessageType.text,
                                                     ));
                                         messageController.clear();
+                                        _scrollToBottom();
                                         context
                                             .read<ShowContactTextField>()
                                             .getinitilstate();
@@ -662,6 +660,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context
                                             .read<ShowAudioRecorder>()
                                             .toggleValue();
+                                        _scrollToBottom();
                                       } else if (context
                                           .read<ReplyMsgCubit>()
                                           .state
@@ -679,6 +678,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context
                                             .read<ReplyMsgCubit>()
                                             .closeReplyMsg();
+                                        _scrollToBottom();
                                       } else if (context
                                           .read<ShowContactTextField>()
                                           .state) {
@@ -695,6 +695,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context
                                             .read<ShowContactTextField>()
                                             .toggleValue();
+                                        _scrollToBottom();
                                       }
                                     },
                                     child: Container(
@@ -712,6 +713,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       context
                                           .read<ShowAudioRecorder>()
                                           .toggleValue();
+                                      _scrollToBottom();
                                     },
                                     child: Container(
                                       height: 30,
