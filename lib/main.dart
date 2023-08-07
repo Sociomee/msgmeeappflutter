@@ -21,7 +21,7 @@ import 'feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dar
 import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
-import 'feature/c_social_chat/presentation/cubit/show_emoji_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/show_emoji/show_emoji_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';

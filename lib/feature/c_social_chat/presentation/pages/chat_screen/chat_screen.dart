@@ -28,7 +28,7 @@ import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/cubit/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
-import '../../cubit/show_emoji_cubit.dart';
+import '../../cubit/show_emoji/show_emoji_cubit.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
 import 'forward_msg_page.dart';
@@ -448,7 +448,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   chattileIndex.add(index);
                                   copiedText = msg[index].messageContent;
                                 });
-                                context.read<ShowEmojiCubit>().diaplayEmoji();
+                                context
+                                    .read<ShowEmojiCubit>()
+                                    .diaplayEmoji(index);
                               } else {
                                 setState(() {
                                   chattileIndex.remove(index);
@@ -460,11 +462,74 @@ class _ChatScreenState extends State<ChatScreen> {
                               color: chattileIndex.contains(index)
                                   ? AppColors.seconderyColor1
                                   : Colors.transparent,
-                              child: ReceivedMessageWidget(
-                                message: msg[index].messageContent,
-                                msgStatus: msg[index].msgStatus,
-                                time: msg[index].time,
-                                type: msg[index].messageType,
+                              child: Stack(
+                                children: [
+                                  ReceivedMessageWidget(
+                                    message: msg[index].messageContent,
+                                    msgStatus: msg[index].msgStatus,
+                                    time: msg[index].time,
+                                    type: msg[index].messageType,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        context
+                                            .read<ShowEmojiCubit>()
+                                            .removeEmoji();
+                                      },
+                                      child: AnimatedScale(
+                                        duration: Duration(milliseconds: 200),
+                                        scale: context
+                                                    .watch<ShowEmojiCubit>()
+                                                    .state
+                                                    .showEmoji &&
+                                                context
+                                                        .watch<ShowEmojiCubit>()
+                                                        .state
+                                                        .index ==
+                                                    index
+                                            ? 1
+                                            : 0,
+                                        child: Container(
+                                          width: context
+                                                      .watch<ShowEmojiCubit>()
+                                                      .state
+                                                      .showEmoji &&
+                                                  context
+                                                          .watch<
+                                                              ShowEmojiCubit>()
+                                                          .state
+                                                          .index ==
+                                                      index
+                                              ? 175
+                                              : 0,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              color: Color(0xFF333333)),
+                                          child: Row(
+                                            children: [
+                                              Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),
+                                              Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      color:
+                                                          AppColors.lightgrey1),
+                                                  child:
+                                                      Icon(Icons.add, size: 15))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),
@@ -490,7 +555,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   chattileIndex.add(index);
                                   copiedText = msg[index].messageContent;
                                 });
-                                context.read<ShowEmojiCubit>().diaplayEmoji();
+                                context
+                                    .read<ShowEmojiCubit>()
+                                    .diaplayEmoji(index);
                               } else {
                                 setState(() {
                                   chattileIndex.remove(index);
@@ -502,15 +569,78 @@ class _ChatScreenState extends State<ChatScreen> {
                               color: chattileIndex.contains(index)
                                   ? AppColors.seconderyColor1
                                   : Colors.transparent,
-                              child: SentMessageWidget(
-                                doc: msg[index].docName,
-                                message: msg[index].messageContent,
-                                msgStatus: msg[index].msgStatus,
-                                time: msg[index].time,
-                                type: msg[index].type,
-                                image: msg[index].image_url,
-                                images: msg[index].images,
-                                numberofContact: msg[index].numberofContact,
+                              child: Stack(
+                                children: [
+                                  SentMessageWidget(
+                                    doc: msg[index].docName,
+                                    message: msg[index].messageContent,
+                                    msgStatus: msg[index].msgStatus,
+                                    time: msg[index].time,
+                                    type: msg[index].type,
+                                    image: msg[index].image_url,
+                                    images: msg[index].images,
+                                    numberofContact: msg[index].numberofContact,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        context
+                                            .read<ShowEmojiCubit>()
+                                            .removeEmoji();
+                                      },
+                                      child: AnimatedScale(
+                                        duration: Duration(milliseconds: 200),
+                                        scale: context
+                                                    .watch<ShowEmojiCubit>()
+                                                    .state
+                                                    .showEmoji &&
+                                                context
+                                                        .watch<ShowEmojiCubit>()
+                                                        .state
+                                                        .index ==
+                                                    index
+                                            ? 1
+                                            : 0,
+                                        child: Container(
+                                          width: context
+                                                      .watch<ShowEmojiCubit>()
+                                                      .state
+                                                      .showEmoji &&
+                                                  context
+                                                          .watch<
+                                                              ShowEmojiCubit>()
+                                                          .state
+                                                          .index ==
+                                                      index
+                                              ? 175
+                                              : 0,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              color: Color(0xFF333333)),
+                                          child: Row(
+                                            children: [
+                                              Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),
+                                              Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      color:
+                                                          AppColors.lightgrey1),
+                                                  child:
+                                                      Icon(Icons.add, size: 15))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),

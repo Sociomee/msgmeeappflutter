@@ -1,11 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_emoji_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -40,89 +38,51 @@ class SentMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('message length ---->${message.trim().length}');
-    final textMessage = Stack(
+    final textMessage = Row(
       children: [
-        Row(
+        Stack(
           children: [
-            Stack(
-              children: [
-                Container(
-                    padding: const EdgeInsets.only(
-                        top: 10, left: 14, right: 18, bottom: 5),
-                    decoration: BoxDecoration(
-                        color:
-                            context.watch<ChatThemeCubit>().state.chatDeepColor,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 300),
-                          child: Text(message,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14)),
-                        ),
-                        SizedBox(height: 2),
-                        Row(
-                          children: [
-                            Text(time,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            SizedBox(width: 25)
-                          ],
-                        )
-                      ],
-                    )),
-                Positioned(
-                  bottom: 0,
-                  right: -1,
-                  child: msgStatus == 'read'
-                      ? MessageStatus.read
-                      : msgStatus == 'send'
-                          ? MessageStatus.sent
-                          : MessageStatus.delivered,
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 18,
-                  child: Text(msgStatus,
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 10)),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<ShowEmojiCubit>().removeEmoji();
-                    },
-                    child: AnimatedScale(
-                      duration: Duration(milliseconds: 200),
-                      scale: context.watch<ShowEmojiCubit>().state ? 1 : 0,
-                      child: Container(
-                        width: context.watch<ShowEmojiCubit>().state ? 175 : 0,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xFF333333)),
-                        child: Row(
-                          children: [
-                            Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),
-                            Container(
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.lightgrey1),
-                                child: Icon(Icons.add, size: 15))
-                          ],
-                        ),
-                      ),
+            Container(
+                padding: const EdgeInsets.only(
+                    top: 10, left: 14, right: 18, bottom: 5),
+                decoration: BoxDecoration(
+                    color: context.watch<ChatThemeCubit>().state.chatDeepColor,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 300),
+                      child: Text(message,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 14)),
                     ),
-                  ),
-                )
-              ],
+                    SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Text(time,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 10)),
+                        SizedBox(width: 25)
+                      ],
+                    )
+                  ],
+                )),
+            Positioned(
+              bottom: 0,
+              right: -1,
+              child: msgStatus == 'read'
+                  ? MessageStatus.read
+                  : msgStatus == 'send'
+                      ? MessageStatus.sent
+                      : MessageStatus.delivered,
+            ),
+            Positioned(
+              bottom: 5,
+              right: 18,
+              child: Text(msgStatus,
+                  style: const TextStyle(color: Colors.white, fontSize: 10)),
             ),
           ],
         ),
