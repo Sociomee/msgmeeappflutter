@@ -18,7 +18,7 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       insetPadding: EdgeInsets.symmetric(horizontal: 21.w),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -45,13 +45,20 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
                       },
                     )),
                 SizedBox(width: 8),
-                Text(
-                  'Report contact',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w300,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selected = !selected;
+                    });
+                  },
+                  child: Text(
+                    'Report contact',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 )
               ],
