@@ -29,16 +29,16 @@ class _MarketPageTabState extends State<MarketPageTab> {
               child: Column(
                 children: [
                   SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              changeview = false;
-                            });
-                          },
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            changeview = false;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
                             children: [
                               Icon(Icons.arrow_back_ios, size: 20),
@@ -55,8 +55,11 @@ class _MarketPageTabState extends State<MarketPageTab> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 24),
-                        Row(
+                      ),
+                      SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Stack(
@@ -98,6 +101,7 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                 )
                               ],
                             ),
+                            SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -156,8 +160,8 @@ class _MarketPageTabState extends State<MarketPageTab> {
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 15),
                   Container(

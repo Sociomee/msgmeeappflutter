@@ -49,10 +49,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
       ),
       child: Container(
         child: PopupMenuButton<int>(
-          icon: Icon(
-            Icons.more_vert,
-            color: Colors.black,
-          ),
+          icon: Icon(Icons.more_vert, color: Colors.black),
           itemBuilder: (context) {
             return context.read<SyncMsgCubit>().state
                 ? options
@@ -76,7 +73,12 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                   ? Text(
                                       'No syncing processed yet',
                                       style: TextStyle(
-                                          fontSize: 10, color: AppColors.grey),
+                                        color: Color(0xB24E4E4E),
+                                        fontSize: 10,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     )
                                   : Container(),
                               SizedBox(height: 10),
@@ -113,9 +115,12 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                     ? Text(
                                         'No syncing processed yet',
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            color: AppColors.grey,
-                                            fontStyle: FontStyle.italic),
+                                          color: Color(0xB24E4E4E),
+                                          fontSize: 10,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       )
                                     : Container(),
                                 SizedBox(height: 10),
