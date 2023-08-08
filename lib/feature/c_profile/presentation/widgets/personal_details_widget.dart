@@ -39,7 +39,10 @@ class PersonalDetailsWidget extends StatelessWidget {
                 },
                 child: Text('Edit',
                     style: TextStyle(
-                        fontSize: 16.sp, color: AppColors.primaryColor)),
+                        fontSize: 12,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -165,7 +168,10 @@ class PersonalDetailsWidget extends StatelessWidget {
                 },
                 child: Text('Edit',
                     style: TextStyle(
-                        fontSize: 16.sp, color: AppColors.primaryColor)),
+                        fontSize: 12,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -219,7 +225,10 @@ class PersonalDetailsWidget extends StatelessWidget {
                 },
                 child: Text('Edit',
                     style: TextStyle(
-                        fontSize: 16.sp, color: AppColors.primaryColor)),
+                        fontSize: 12,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primaryColor)),
               )
             ],
           ),
@@ -357,7 +366,9 @@ class PersonalDetailsWidget extends StatelessWidget {
               ])),
               Text('Unlink',
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
                       color: AppColors.primaryColor,
                       decoration: TextDecoration.underline))
             ],
