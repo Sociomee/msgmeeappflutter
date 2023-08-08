@@ -34,9 +34,8 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 700,
+      height: 600,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: 4,
@@ -49,21 +48,19 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
           SizedBox(height: 12.w),
           Text('Choose your Interests',
               style: TextStyle(
-                fontSize: 18,
-                fontFamily: 'DM Sans',
-                fontWeight: FontWeight.w500,
-              )),
-          SizedBox(height: 24.w),
+                  fontSize: 18,
+                  fontFamily: 'DM Sans',
+                  fontWeight: FontWeight.w500)),
+          SizedBox(height: 14.w),
           RichText(
               text: TextSpan(children: [
             TextSpan(
                 text: 'Please select ',
                 style: TextStyle(
-                  color: Color(0xB2333333),
-                  fontSize: 15,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                )),
+                    color: Color(0xB2333333),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400)),
             TextSpan(
                 text: 'at least 3 interests',
                 style: TextStyle(
@@ -74,18 +71,14 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
             TextSpan(
                 text: ' for a better',
                 style: TextStyle(
-                  fontSize: 15,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xB2333333),
-                )),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xB2333333)))
           ])),
           Text('in-app experience',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xB2333333),
-              )),
-          SizedBox(height: 43.w),
+              style: TextStyle(fontSize: 14, color: Color(0xB2333333))),
+          SizedBox(height: 30.w),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: GridView.builder(
@@ -149,7 +142,7 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
               },
             ),
           ),
-          SizedBox(height: 35.w),
+          SizedBox(height: 26.w),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: CustomButtonWidget(

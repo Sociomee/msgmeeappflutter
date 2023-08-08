@@ -23,14 +23,12 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'You are going to block this contact. You cannot call and chats to this contact after blocking.',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+                'You are going to block this contact. You cannot call and chats to this contact after blocking.',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400)),
             SizedBox(height: 15),
             Row(
               children: [
@@ -46,21 +44,17 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
                     )),
                 SizedBox(width: 8),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selected = !selected;
-                    });
-                  },
-                  child: Text(
-                    'Report contact',
-                    style: TextStyle(
-                      color: Color(0xFF333333),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                )
+                    onTap: () {
+                      setState(() {
+                        selected = !selected;
+                      });
+                    },
+                    child: Text('Report contact',
+                        style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w300)))
               ],
             ),
             SizedBox(height: 30),
@@ -68,34 +62,26 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
               children: [
                 Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Color(0xFF368C4E),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel',
+                        style: TextStyle(
+                            color: Color(0xFF368C4E),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500))),
                 SizedBox(width: 42),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Block',
-                    style: TextStyle(
-                      color: Color(0xFF368C4E),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                )
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Block',
+                        style: TextStyle(
+                            color: Color(0xFF368C4E),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500)))
               ],
             )
           ],

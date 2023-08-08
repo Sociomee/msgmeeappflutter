@@ -1,23 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/show_attachment.dart';
 import '../../../cubit/show_contact_textfield.dart';
 
 class MessageTextFieldWidget extends StatefulWidget {
   const MessageTextFieldWidget({
-    super.key,
+    Key? key,
     required this.messageController,
     required this.onChanged,
     this.color,
     required this.imageTextfield,
-  });
+    this.clickemoji,
+  }) : super(key: key);
   final TextEditingController messageController;
   final ValueChanged<String>? onChanged;
   final Color? color;
   final bool imageTextfield;
+  final VoidCallback? clickemoji;
 
   @override
   State<MessageTextFieldWidget> createState() => _MessageTextFieldWidgetState();
@@ -66,12 +70,7 @@ class _MessageTextFieldWidgetState extends State<MessageTextFieldWidget> {
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(width: 2, color: AppColors.lightgrey1)),
             suffixIcon: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-                setState(() {
-                  emojiShowing = !emojiShowing;
-                });
-              },
+              onTap: widget.clickemoji,
               child: SizedBox(
                 width: 10,
                 height: 10,
