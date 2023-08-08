@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:flutter/foundation.dart' as foundation;
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../../data/model/chat_model.dart';
@@ -160,7 +159,7 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                 filled: true,
                                 hintText: "Type your message",
                                 hintStyle: TextStyle(
-                                  color: Color(0xFF4E4E4E),
+                                  color: Color.fromARGB(255, 125, 125, 125),
                                   fontSize: 13,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w400,
@@ -200,19 +199,6 @@ class _DocSendingPageState extends State<DocSendingPage> {
                               onChanged: (e) {},
                             ),
                           ),
-                          // Expanded(
-                          //     child: MessageTextFieldWidget(
-                          //   imageTextfield: false,
-                          //   messageController: messageController,
-                          //   color: AppColors.white,
-                          //   onChanged: (e) {},
-                          //   clickemoji: () {
-                          //     FocusScope.of(context).unfocus();
-                          //     setState(() {
-                          //       emojiShowing = !emojiShowing;
-                          //     });
-                          //   },
-                          // )),
                           SizedBox(width: 5),
                           GestureDetector(
                             onTap: () {
@@ -355,7 +341,8 @@ class _DocSendingPageState extends State<DocSendingPage> {
                                       filled: true,
                                       hintText: "Type your message",
                                       hintStyle: TextStyle(
-                                        color: Color(0xFF4E4E4E),
+                                        color:
+                                            Color.fromARGB(255, 125, 125, 125),
                                         fontSize: 13,
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w400,

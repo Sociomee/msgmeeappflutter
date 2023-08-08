@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
+import 'package:msgmee/helper/validation.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../cubit/sycn_with_sociomee.dart';
@@ -21,11 +22,26 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  bool _isButtonEnabled = false;
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    emailController.addListener(() {
+      _validateInput();
+    });
+    passwordController.addListener(() {
+      _validateInput();
+    });
     super.initState();
+  }
+
+  void _validateInput() {
+    setState(() {
+      _isButtonEnabled = emailController.text.isValidEmail &&
+          passwordController.text.isNotEmpty &&
+          passwordController.text.length > 8;
+    });
   }
 
   @override
@@ -152,7 +168,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               )),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                color: AppColors.primaryColor,
+                                color: AppColors.lightgrey,
                               )),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -184,7 +200,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               )),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                color: AppColors.primaryColor,
+                                color: AppColors.lightgrey,
                               )),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -207,6 +223,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               suffixIconColor: AppColors.primaryColor,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 10)),
+                          onChanged: (e) {},
                         ),
                         SizedBox(height: 20),
                         Padding(
@@ -215,12 +232,10 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                           child: CustomButtonWidget(
                               height: 40.w,
                               title: 'Continue',
-                              color: emailController.text.isEmpty &
-                                      passwordController.text.isEmpty
+                              color: !_isButtonEnabled
                                   ? AppColors.primaryColor.withOpacity(.5)
                                   : AppColors.primaryColor,
-                              borderColor: emailController.text.isEmpty &
-                                      passwordController.text.isEmpty
+                              borderColor: !_isButtonEnabled
                                   ? AppColors.primaryColor.withOpacity(.5)
                                   : AppColors.primaryColor,
                               ontap: () {
