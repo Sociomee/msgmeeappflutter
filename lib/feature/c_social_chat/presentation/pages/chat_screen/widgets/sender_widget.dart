@@ -249,8 +249,14 @@ class SentMessageWidget extends StatelessWidget {
                                 width: 200.w,
                                 padding: EdgeInsets.symmetric(vertical: 6),
                                 decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(10)),
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                  ),
+                                ),
                                 child: Column(
                                   children: [
                                     Row(
@@ -281,7 +287,8 @@ class SentMessageWidget extends StatelessWidget {
                                           ),
                                         ),
                                         SizedBox(width: 10),
-                                        SvgPicture.asset('assets/video.svg'),
+                                        SvgPicture.asset(
+                                            'assets/contact_video.svg'),
                                         SizedBox(width: 10),
                                         SvgPicture.asset('assets/call.svg')
                                       ],
@@ -321,7 +328,7 @@ class SentMessageWidget extends StatelessWidget {
                                 ),
                               ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Text(time,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 10)),

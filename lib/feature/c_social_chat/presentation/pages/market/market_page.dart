@@ -327,11 +327,14 @@ class _MarketPageTabState extends State<MarketPageTab> {
                     child: Row(
                       children: [
                         Container(
-                            color: AppColors.lightgrey1,
+                            decoration: BoxDecoration(
+                                color: AppColors.lightgrey1,
+                                border: Border.all(color: AppColors.lightgrey),
+                                borderRadius: BorderRadius.circular(8)),
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: BorderRadius.circular(8),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(6),
+                                  borderRadius: BorderRadius.circular(8),
                                   child: Image.network(
                                       marketlist[index].imageUrl,
                                       height: 41,
