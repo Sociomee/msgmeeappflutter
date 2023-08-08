@@ -58,7 +58,7 @@ class _BroadCastsWidgetState extends State<BroadCastsWidget> {
                                 borderRadius: BorderRadius.circular(25.0),
                                 color: AppColors.iconColor),
                             child: Text(
-                              'All your’s created broadcast were listed here.',
+                              "All your's created broadcast were listed here.",
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 14,

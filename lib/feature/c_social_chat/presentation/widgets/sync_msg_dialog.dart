@@ -270,19 +270,15 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                           style: TextStyle(fontSize: 13),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 0),
-                        child: CustomButtonWidget(
-                            height: 40.w,
-                            title: 'Sync with account credentials',
-                            color: AppColors.primaryColor,
-                            ontap: () {
-                              setState(() {
-                                accountfound = true;
-                              });
-                            }),
-                      ),
+                      CustomButtonWidget(
+                          height: 40.w,
+                          title: 'Sync with account credentials',
+                          color: AppColors.primaryColor,
+                          ontap: () {
+                            setState(() {
+                              accountfound = true;
+                            });
+                          }),
                       SizedBox(height: 10),
                     ],
                   ),
