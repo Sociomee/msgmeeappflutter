@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -148,10 +147,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                     height: 14,
                                     fit: BoxFit.contain,
                                   )
-                                : Icon(
-                                    Icons.star_outline,
-                                    color: AppColors.black,
-                                    size: 18,
+                                : SvgPicture.asset(
+                                    'assets/star.svg',
+                                    height: 14,
+                                    fit: BoxFit.contain,
                                   ),
                       ),
                       GestureDetector(
@@ -180,8 +179,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Icon(Icons.archive_outlined,
-                              color: AppColors.black, size: 18),
+                          child: SvgPicture.asset(
+                            'assets/archive.svg',
+                            height: 14,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -189,14 +191,15 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           context.read<SelectedchatCubit>().pinClicked();
                         },
                         child: context.watch<SelectedchatCubit>().state.pinned
-                            ? SvgPicture.asset('assets/pin.svg')
-                            : Transform.rotate(
-                                angle: pi / 4,
-                                child: Icon(
-                                  Icons.push_pin_outlined,
-                                  color: AppColors.black,
-                                  size: 18,
-                                ),
+                            ? SvgPicture.asset(
+                                'assets/pin.svg',
+                                height: 14,
+                                fit: BoxFit.contain,
+                              )
+                            : SvgPicture.asset(
+                                'assets/pin1.svg',
+                                height: 14,
+                                fit: BoxFit.contain,
                               ),
                       ),
                       GestureDetector(
@@ -204,18 +207,17 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           context.read<SelectedchatCubit>().muteClicked();
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Icon(
-                            Icons.volume_mute_outlined,
-                            color: AppColors.black,
-                            size: 18,
-                          ),
-                        ),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: SvgPicture.asset(
+                              'assets/volume_off.svg',
+                              height: 14,
+                              fit: BoxFit.contain,
+                            )),
                       ),
-                      Icon(
-                        Icons.delete_outline,
-                        color: AppColors.black,
-                        size: 18,
+                      SvgPicture.asset(
+                        'assets/delete.svg',
+                        height: 14,
+                        fit: BoxFit.contain,
                       ),
                       PopupMenuButton(
                         icon: Icon(
