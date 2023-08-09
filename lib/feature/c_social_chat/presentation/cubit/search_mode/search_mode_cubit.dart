@@ -13,4 +13,8 @@ class SearchModeCubit extends Cubit<SearchModeState> {
   changeuserSearchMode() {
     emit(state.copyWith(chatuserSearchMode: !state.chatuserSearchMode));
   }
+
+  closeMsgSearchMode() {
+    emit(state.copyWith(chatuserSearchMode: false));
+  }
 }

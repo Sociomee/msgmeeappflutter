@@ -115,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        context.read<SearchModeCubit>().changemsgSearchMode();
+        context.read<SearchModeCubit>().closeMsgSearchMode();
         return true;
       },
       child: MediaQuery(
@@ -177,11 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       GestureDetector(
                           onTap: () {
                             Clipboard.setData(ClipboardData(text: copiedText));
-                            //     .then((_) {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //       const SnackBar(
-                            //           content: Text('Copied to your clipboard !')));
-                            // });
+
                             setState(() {
                               chattileIndex.clear();
                             });
