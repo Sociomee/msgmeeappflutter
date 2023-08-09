@@ -67,7 +67,9 @@ class _DocSendingPageState extends State<DocSendingPage> {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w400,
               ))),
-      body: widget.pftname.isNotEmpty && widget.names!.length == 1
+      body: widget.pftname.isNotEmpty &&
+              widget.names != null &&
+              widget.names!.length == 1
           ? Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

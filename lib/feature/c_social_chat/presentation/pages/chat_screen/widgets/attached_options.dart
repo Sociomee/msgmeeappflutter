@@ -14,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../attach_contact_page.dart';
 import '../attach_location_page.dart';
+import '../audio_sending_page.dart';
 import '../image_preview_page.dart';
 
 List<String> attachments = [
@@ -66,31 +67,7 @@ class _AttachedIconState extends State<AttachedIcon> {
     }
   }
 
-  // void pickMultipleGalleryPic() async {
-  //   final List<XFile> images = await _picker.pickMultiImage();
-  //   if (images.isNotEmpty) {
-  //     animatedScreenNavigator(
-  //         context,
-  //         ImagePreViewPage(
-  //           images: images,
-  //           profileImage: widget.profileImage,
-  //         ));
-  //   }
-  // }
-
   void pickCameraPic() async {
-    // Capture a photo
-    // final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-    // if (photo != null) {
-    //   animatedScreenNavigator(
-    //       context,
-    //       ImagePreViewPage(
-    //         images: [photo],
-    //         profileImage: widget.profileImage,
-    //       ));
-    // } else {
-    //   return null;
-    // }
     var status = await Permission.camera.status;
     if (status.isDenied) {
       openAppSettings();
@@ -151,9 +128,9 @@ class _AttachedIconState extends State<AttachedIcon> {
         pdfname = path!.split('/').last;
       });
       animatedScreenNavigator(
-          context, DocSendingPage(pftname: "${pdfname}/${size}"));
+          context, AudioSendingPage(audiofileName: "${pdfname}/${size}"));
     } else {
-      // User canceled file picking
+      //! User canceled file picking
       print('No PDF file selected');
     }
   }
@@ -173,7 +150,7 @@ class _AttachedIconState extends State<AttachedIcon> {
             onTap: () {
               if (index == 0) {
                 pickAudio();
-                // context.read<ShowAudioRecorder>().toggleValue();
+
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 1) {
                 pickCameraPic();
