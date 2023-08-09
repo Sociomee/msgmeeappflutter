@@ -43,15 +43,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/onboarding_bg.png'),
-          )),
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/onboarding_bg.png'))),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                   height: MediaQuery.of(context).size.height * .85,
                   child: PageView.builder(
+                      padEnds: false,
                       controller: pagecontroller,
                       onPageChanged: (index) {
                         setState(() {
@@ -67,22 +67,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             descriptionText: data[index].descriptionText);
                       })),
               Center(
-                child: SmoothPageIndicator(
-                  controller: pagecontroller,
-                  count: 3,
-                  onDotClicked: (index) => pagecontroller.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  ),
-                  effect: ExpandingDotsEffect(
-                      dotHeight: 7,
-                      dotWidth: 7,
-                      spacing: 5,
-                      dotColor: AppColors.primaryColor.withOpacity(.5),
-                      activeDotColor: AppColors.primaryDarkColor),
-                ),
-              ),
+                  child: SmoothPageIndicator(
+                      controller: pagecontroller,
+                      count: 3,
+                      onDotClicked: (index) => pagecontroller.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut),
+                      effect: ExpandingDotsEffect(
+                          dotHeight: 7,
+                          dotWidth: 7,
+                          spacing: 5,
+                          dotColor: AppColors.primaryColor.withOpacity(.5),
+                          activeDotColor: AppColors.primaryDarkColor))),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -109,11 +106,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               }
                             : () {
                                 pagecontroller.nextPage(
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut);
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.linear);
                               },
                         child: Container(
-                          // height: 41,
                           padding: EdgeInsets.only(
                               left: 15, right: 10, top: 5, bottom: 5),
                           alignment: Alignment.center,
