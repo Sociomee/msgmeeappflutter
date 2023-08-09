@@ -23,6 +23,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool _isButtonEnabled = false;
+  bool validno = false;
   @override
   void initState() {
     emailController = TextEditingController();
@@ -37,11 +38,16 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
   }
 
   void _validateInput() {
+    RegExp phoneRegex = RegExp(r'^\d{10}$');
     setState(() {
-      _isButtonEnabled = emailController.text.isValidEmail &&
+      _isButtonEnabled = validno &&
           passwordController.text.isNotEmpty &&
           passwordController.text.length > 8;
+
+      validno = phoneRegex.hasMatch(emailController.text) ||
+          emailController.text.isValidEmail;
     });
+    print("---->${_isButtonEnabled}   =====${validno}");
   }
 
   @override
