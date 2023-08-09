@@ -721,133 +721,108 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-    final audioMessage = Flexible(
-      child: Container(
-        width: 230,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    final audioMessage = Stack(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              child: Stack(
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: context
-                                    .watch<ChatThemeCubit>()
-                                    .state
-                                    .chatDeepColor,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    width: 230,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color:
+                          context.watch<ChatThemeCubit>().state.chatDeepColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Icon(Icons.headset,
-                                                color: Colors.blue),
-                                            Image.asset('assets/audio_eq.png'),
-                                            Icon(Icons.play_circle_outlined)
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text('00:30'),
-                                            SizedBox(
-                                              width: 120,
-                                              child: SliderTheme(
-                                                data: SliderTheme.of(context)
-                                                    .copyWith(
-                                                  activeTrackColor:
-                                                      Colors.white,
-                                                  thumbShape:
-                                                      RoundSliderThumbShape(
-                                                          enabledThumbRadius:
-                                                              4.0),
-                                                  overlayShape:
-                                                      RoundSliderOverlayShape(
-                                                          overlayRadius: 0.0),
-                                                ),
-                                                child: Slider(
-                                                    value: 130,
-                                                    min: 129.0,
-                                                    max: 160.0,
-                                                    onChanged: (e) {}),
-                                              ),
-                                            ),
-                                            Text('32 KB')
-                                          ],
-                                        )
-                                      ],
+                                  Icon(Icons.headset, color: Colors.blue),
+                                  Image.asset('assets/audio_eq.png'),
+                                  Icon(Icons.play_circle_outlined)
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('00:30'),
+                                  SizedBox(
+                                    width: 120,
+                                    child: SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: Colors.white,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 4.0),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 0.0),
+                                      ),
+                                      child: Slider(
+                                          value: 130,
+                                          min: 129.0,
+                                          max: 160.0,
+                                          onChanged: (e) {}),
                                     ),
                                   ),
-                                  message.isEmpty
-                                      ? SizedBox(height: 5)
-                                      : Text(message,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14)),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 2, right: 14),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(time,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10)),
-                                        Spacer(),
-                                        Text(msgStatus,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10)),
-                                      ],
-                                    ),
-                                  )
+                                  Text('32 KB')
                                 ],
-                              )),
-                          SizedBox(height: 5)
-                        ],
-                      ),
-                      SizedBox(width: 3)
-                    ],
-                  ),
-                  Positioned(
-                      bottom: 2,
-                      right: 0,
-                      child: msgStatus == 'read'
-                          ? MessageStatus.read
-                          : msgStatus == 'send'
-                              ? MessageStatus.sent
-                              : MessageStatus.delivered),
-                ],
-              ),
+                              )
+                            ],
+                          ),
+                        ),
+                        message.isEmpty
+                            ? SizedBox(height: 5)
+                            : Text(message,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 14),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              Spacer(),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          ),
+                        )
+                      ],
+                    )),
+                SizedBox(height: 5)
+              ],
             ),
+            SizedBox(width: 3)
           ],
         ),
-      ),
+        Positioned(
+            bottom: 2,
+            right: 0,
+            child: msgStatus == 'read'
+                ? MessageStatus.read
+                : msgStatus == 'send'
+                    ? MessageStatus.sent
+                    : MessageStatus.delivered),
+      ],
     );
     final docMessage = Container(
       width: 195.w,

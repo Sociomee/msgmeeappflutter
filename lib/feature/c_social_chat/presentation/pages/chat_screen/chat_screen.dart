@@ -480,7 +480,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   });
                                   context.read<ShowEmojiCubit>().removeEmoji();
                                 }
-                              },
+                               },
                               child: Container(
                                 color: chattileIndex.contains(index)
                                     ? AppColors.seconderyColor1
