@@ -480,7 +480,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   });
                                   context.read<ShowEmojiCubit>().removeEmoji();
                                 }
-                               },
+                              },
                               child: Container(
                                 color: chattileIndex.contains(index)
                                     ? AppColors.seconderyColor1
@@ -750,30 +750,20 @@ class _ChatScreenState extends State<ChatScreen> {
                                 },
                               )),
                               SizedBox(width: 10),
-                              istyping ||
-                                      context
-                                          .watch<ShowContactTextField>()
-                                          .state
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        if (messageController.text.isNotEmpty) {
+                              context.watch<ShowAudioRecorder>().state
+                                  ? Container(width: 30)
+                                  : istyping ||
                                           context
-                                                  .read<ShowContactTextField>()
-                                                  .state
-                                              ? context
-                                                  .read<AddMessageCubit>()
-                                                  .addMessage(ChatMessage(
-                                                    messageContent:
-                                                        messageController.text,
-                                                    messageType: 'sender',
-                                                    msgStatus: 'send',
-                                                    time: getCurrentTime(),
-                                                    type: MessageType.contact,
-                                                  ))
-                                              : context
-                                                      .read<ReplyMsgCubit>()
+                                              .watch<ShowContactTextField>()
+                                              .state
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            if (messageController
+                                                .text.isNotEmpty) {
+                                              context
+                                                      .read<
+                                                          ShowContactTextField>()
                                                       .state
-                                                      .reply
                                                   ? context
                                                       .read<AddMessageCubit>()
                                                       .addMessage(ChatMessage(
@@ -783,112 +773,139 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         messageType: 'sender',
                                                         msgStatus: 'send',
                                                         time: getCurrentTime(),
-                                                        type: MessageType
-                                                            .replyMessage,
+                                                        type:
+                                                            MessageType.contact,
                                                       ))
                                                   : context
-                                                      .read<AddMessageCubit>()
-                                                      .addMessage(ChatMessage(
-                                                        messageContent:
-                                                            messageController
+                                                          .read<ReplyMsgCubit>()
+                                                          .state
+                                                          .reply
+                                                      ? context
+                                                          .read<
+                                                              AddMessageCubit>()
+                                                          .addMessage(
+                                                              ChatMessage(
+                                                            messageContent:
+                                                                messageController
+                                                                    .text,
+                                                            messageType:
+                                                                'sender',
+                                                            msgStatus: 'send',
+                                                            time:
+                                                                getCurrentTime(),
+                                                            type: MessageType
+                                                                .replyMessage,
+                                                          ))
+                                                      : context
+                                                          .read<
+                                                              AddMessageCubit>()
+                                                          .addMessage(
+                                                              ChatMessage(
+                                                            messageContent:
+                                                                messageController
+                                                                    .text,
+                                                            messageType:
+                                                                'sender',
+                                                            msgStatus: 'send',
+                                                            time:
+                                                                getCurrentTime(),
+                                                            type: MessageType
                                                                 .text,
-                                                        messageType: 'sender',
-                                                        msgStatus: 'send',
-                                                        time: getCurrentTime(),
-                                                        type: MessageType.text,
-                                                      ));
-                                          messageController.clear();
-                                          _scrollToBottom();
-                                          context
-                                              .read<ShowContactTextField>()
-                                              .getinitilstate();
-                                          context
-                                              .read<ReplyMsgCubit>()
-                                              .closeReplyMsg();
-                                        } else if (context
-                                            .read<ShowAudioRecorder>()
-                                            .state) {
-                                          context
-                                              .read<AddMessageCubit>()
-                                              .addMessage(ChatMessage(
-                                                messageContent: '',
-                                                messageType: 'sender',
-                                                msgStatus: 'send',
-                                                time: getCurrentTime(),
-                                                type: MessageType.audio,
-                                              ));
-                                          setState(() {});
-                                          context
-                                              .read<ShowAudioRecorder>()
-                                              .toggleValue();
-                                          _scrollToBottom();
-                                        } else if (context
-                                            .read<ReplyMsgCubit>()
-                                            .state
-                                            .reply) {
-                                          context
-                                              .read<AddMessageCubit>()
-                                              .addMessage(ChatMessage(
-                                                messageContent:
-                                                    messageController.text,
-                                                messageType: 'sender',
-                                                msgStatus: 'send',
-                                                time: getCurrentTime(),
-                                                type: MessageType.replyMessage,
-                                              ));
-                                          context
-                                              .read<ReplyMsgCubit>()
-                                              .closeReplyMsg();
-                                          _scrollToBottom();
-                                        } else if (context
-                                            .read<ShowContactTextField>()
-                                            .state) {
-                                          context
-                                              .read<AddMessageCubit>()
-                                              .addMessage(ChatMessage(
-                                                messageContent:
-                                                    messageController.text,
-                                                messageType: 'sender',
-                                                msgStatus: 'send',
-                                                time: getCurrentTime(),
-                                                type: MessageType.contact,
-                                              ));
-                                          context
-                                              .read<ShowContactTextField>()
-                                              .toggleValue();
-                                          _scrollToBottom();
-                                        }
-                                      },
-                                      child: Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
+                                                          ));
+                                              messageController.clear();
+                                              _scrollToBottom();
+                                              context
+                                                  .read<ShowContactTextField>()
+                                                  .getinitilstate();
+                                              context
+                                                  .read<ReplyMsgCubit>()
+                                                  .closeReplyMsg();
+                                            } else if (context
+                                                .read<ShowAudioRecorder>()
+                                                .state) {
+                                              context
+                                                  .read<AddMessageCubit>()
+                                                  .addMessage(ChatMessage(
+                                                    messageContent: '',
+                                                    messageType: 'sender',
+                                                    msgStatus: 'send',
+                                                    time: getCurrentTime(),
+                                                    type: MessageType.audio,
+                                                  ));
+                                              setState(() {});
+                                              context
+                                                  .read<ShowAudioRecorder>()
+                                                  .toggleValue();
+                                              _scrollToBottom();
+                                            } else if (context
+                                                .read<ReplyMsgCubit>()
+                                                .state
+                                                .reply) {
+                                              context
+                                                  .read<AddMessageCubit>()
+                                                  .addMessage(ChatMessage(
+                                                    messageContent:
+                                                        messageController.text,
+                                                    messageType: 'sender',
+                                                    msgStatus: 'send',
+                                                    time: getCurrentTime(),
+                                                    type: MessageType
+                                                        .replyMessage,
+                                                  ));
+                                              context
+                                                  .read<ReplyMsgCubit>()
+                                                  .closeReplyMsg();
+                                              _scrollToBottom();
+                                            } else if (context
+                                                .read<ShowContactTextField>()
+                                                .state) {
+                                              context
+                                                  .read<AddMessageCubit>()
+                                                  .addMessage(ChatMessage(
+                                                    messageContent:
+                                                        messageController.text,
+                                                    messageType: 'sender',
+                                                    msgStatus: 'send',
+                                                    time: getCurrentTime(),
+                                                    type: MessageType.contact,
+                                                  ));
+                                              context
+                                                  .read<ShowContactTextField>()
+                                                  .toggleValue();
+                                              _scrollToBottom();
+                                            }
+                                          },
+                                          child: Container(
+                                              height: 30,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.lightgrey1,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              child: Image.asset(
+                                                  'assets/attach.png')),
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            context
+                                                .read<ShowAudioRecorder>()
+                                                .toggleValue();
+                                            _scrollToBottom();
+                                          },
+                                          child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
                                               color: AppColors.lightgrey1,
                                               borderRadius:
-                                                  BorderRadius.circular(30)),
-                                          child:
-                                              Image.asset('assets/attach.png')),
-                                    )
-                                  : GestureDetector(
-                                      onTap: () {
-                                        context
-                                            .read<ShowAudioRecorder>()
-                                            .toggleValue();
-                                        _scrollToBottom();
-                                      },
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.lightgrey1,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
+                                                  BorderRadius.circular(30),
+                                            ),
+                                            child: Icon(Icons.mic_none,
+                                                size: 20,
+                                                color: AppColors.iconColor),
+                                          ),
                                         ),
-                                        child: Icon(Icons.mic_none,
-                                            size: 20,
-                                            color: AppColors.iconColor),
-                                      ),
-                                    ),
                             ],
                           ),
                         ),
