@@ -86,7 +86,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                 SizedBox(height: 30),
                 Container(
                   height: 418.h,
-                  margin: EdgeInsets.symmetric(horizontal: 70),
+                  width: 350.w,
+                  margin: EdgeInsets.symmetric(horizontal: 60.w),
                   decoration: AppColors.wallpaparPreviewdecoration,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,15 +143,10 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                               ],
                             ),
                             Spacer(),
-                            SvgPicture.asset(
-                              'assets/video.svg',
-                              height: 15.w,
-                            ),
+                            SvgPicture.asset('assets/video.svg', height: 15.w),
                             SizedBox(width: 13),
-                            SvgPicture.asset(
-                              'assets/calling.svg',
-                              height: 15.w,
-                            ),
+                            SvgPicture.asset('assets/calling.svg',
+                                height: 15.w),
                             SizedBox(width: 13),
                             Icon(Icons.more_vert_outlined, size: 18)
                           ],
@@ -369,9 +365,8 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                       Divider(
                           color: Color(0xFFE0E0E0), thickness: .7, height: 0),
                       SizedBox(height: 5.h),
-                      Container(
-                        width: 273.w,
-                        padding: EdgeInsets.only(right: 10, left: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -428,7 +423,7 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 7.w),
+                            Spacer(),
                             Container(
                                 width: 20,
                                 height: 20,
