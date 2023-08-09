@@ -27,11 +27,13 @@ class _MarketPageTabState extends State<MarketPageTab> {
       body: changeview
           ? SingleChildScrollView(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 16),
                   Column(
                     children: [
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () {
                           setState(() {
                             changeview = false;
@@ -305,6 +307,7 @@ class _MarketPageTabState extends State<MarketPageTab> {
               itemCount: marketlist.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: () {
                     setState(() {
                       changeview = true;
