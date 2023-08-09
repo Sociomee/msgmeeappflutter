@@ -97,16 +97,13 @@ class _ChangeWallPaperPageState extends State<ChangeWallPaperPage> {
                             EdgeInsets.only(left: 10.w, right: 10.w, top: 10),
                         child: Row(
                           children: [
-                            Text(
-                              '9:27',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFF333333),
-                                fontSize: 10.sp,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            Text('9:27',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xFF333333),
+                                    fontSize: 10.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500)),
                             Spacer(),
                             SvgPicture.asset('assets/network.svg'),
                             SvgPicture.asset('assets/Wifi.svg'),

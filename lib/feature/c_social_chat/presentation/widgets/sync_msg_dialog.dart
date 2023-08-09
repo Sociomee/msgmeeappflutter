@@ -252,7 +252,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                 )
               : Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 42, horizontal: 35),
+                      const EdgeInsets.symmetric(vertical: 42, horizontal: 20),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

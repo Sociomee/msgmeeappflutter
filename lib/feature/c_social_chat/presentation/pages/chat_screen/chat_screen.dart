@@ -78,12 +78,8 @@ class _ChatScreenState extends State<ChatScreen> {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
       if (image != null) {
-        animatedScreenNavigator(
-            context,
-            ImagePreViewPage(
-              images: [image],
-              profileImage: widget.imageUrl,
-            ));
+        animatedScreenNavigator(context,
+            ImagePreViewPage(images: [image], profileImage: widget.imageUrl));
       }
     }
   }
@@ -96,12 +92,8 @@ class _ChatScreenState extends State<ChatScreen> {
     } else if (status.isGranted || status.isRestricted) {
       final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
       if (photo != null) {
-        animatedScreenNavigator(
-            context,
-            ImagePreViewPage(
-              images: [photo],
-              profileImage: widget.imageUrl,
-            ));
+        animatedScreenNavigator(context,
+            ImagePreViewPage(images: [photo], profileImage: widget.imageUrl));
       }
     }
   }
