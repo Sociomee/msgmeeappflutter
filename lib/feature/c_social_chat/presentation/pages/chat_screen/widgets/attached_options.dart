@@ -167,6 +167,9 @@ class _AttachedIconState extends State<AttachedIcon> {
         itemCount: attachments.length,
         itemBuilder: (context, index) {
           return GestureDetector(
+            onTapCancel: () {
+              context.read<ShowAttachment>().closeAttachment();
+            },
             onTap: () {
               if (index == 0) {
                 pickAudio();

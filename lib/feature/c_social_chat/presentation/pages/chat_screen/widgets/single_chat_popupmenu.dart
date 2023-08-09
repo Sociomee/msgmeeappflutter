@@ -6,6 +6,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/media_doc_screen
 import 'package:msgmee/theme/colors.dart';
 import '../../../../../../helper/navigator_function.dart';
 import '../../../cubit/search_mode/search_mode_cubit.dart';
+import '../../../cubit/show_attachment.dart';
 import '../../../widgets/social_bottom_model_sheet.dart';
 import '../../chat_theme/chat_theme_page.dart';
 import '../../chat_theme/chat_wallpaper_page.dart';
@@ -36,7 +37,10 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
       'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg';
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        context.read<ShowAttachment>().closeAttachment();
+      },
       child: PopupMenuButton(
         icon: Icon(Icons.more_vert, color: Colors.black),
         offset: Offset(0, 30),
