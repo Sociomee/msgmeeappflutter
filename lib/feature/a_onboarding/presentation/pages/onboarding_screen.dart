@@ -76,12 +76,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     curve: Curves.easeInOut,
                   ),
                   effect: ExpandingDotsEffect(
-                    dotHeight: 7,
-                    dotWidth: 7,
-                    spacing: 5,
-                    dotColor: AppColors.primaryColor.withOpacity(.5),
-                    activeDotColor: AppColors.primaryDarkColor,
-                  ),
+                      dotHeight: 7,
+                      dotWidth: 7,
+                      spacing: 5,
+                      dotColor: AppColors.primaryColor.withOpacity(.5),
+                      activeDotColor: AppColors.primaryDarkColor),
                 ),
               ),
               Spacer(),
@@ -114,8 +113,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeInOut);
                               },
                         child: Container(
-                          height: 41,
-                          padding: EdgeInsets.only(left: 15, right: 10),
+                          // height: 41,
+                          padding: EdgeInsets.only(
+                              left: 15, right: 10, top: 5, bottom: 5),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Color(0xFF93CA65),
@@ -133,14 +133,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              Icon(Icons.arrow_forward, color: AppColors.white),
+                              Icon(Icons.arrow_forward, color: AppColors.white)
                             ],
                           ),
                         ))
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
             ],
           ),
         ),

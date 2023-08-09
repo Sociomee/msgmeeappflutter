@@ -29,8 +29,13 @@ class BuildPages extends StatelessWidget {
                 fontWeight: FontWeight.w600),
             textScaleFactor: 1.0),
         SizedBox(height: 20.h),
-        SvgPicture.asset(imageUrl, height: 330.h, width: double.infinity),
-        SizedBox(height: 20.h),
+        SvgPicture.asset(
+          imageUrl,
+          height: MediaQuery.of(context).size.height * .55,
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        Spacer(),
         Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 35.w),
@@ -47,6 +52,7 @@ class BuildPages extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 16)
       ],
     );
   }
