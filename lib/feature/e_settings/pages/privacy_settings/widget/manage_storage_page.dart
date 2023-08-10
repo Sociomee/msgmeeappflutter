@@ -186,6 +186,7 @@ class ManageStoragePage extends StatelessWidget {
                 ],
               ),
             ),
+            Divider(color: AppColors.lightgrey1, thickness: 1),
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
@@ -198,57 +199,45 @@ class ManageStoragePage extends StatelessWidget {
                     Text(
                       'Forworded media many times',
                       style: TextStyle(
-                        color: Color(0xFF808080),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
+                          color: Color(0xFF808080),
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500),
                     ),
                     Spacer(),
                     Text(
                       '9.0 MB',
                       style: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
+                          color: Colors.black.withOpacity(0.5),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500),
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                      size: 15,
-                    )
+                    Icon(Icons.arrow_forward_ios,
+                        color: AppColors.black, size: 15)
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+            SizedBox(height: 10),
+            SizedBox(
+              height: 120,
+              child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
                   ),
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                  ),
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                  )
-                ],
-              ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return MediaPreviewWidget(
+                      size: '2.3 MB',
+                      time: '1:30 AM',
+                      image:
+                          'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                    );
+                  }),
             ),
+            SizedBox(height: 30),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
@@ -280,32 +269,25 @@ class ManageStoragePage extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+            SizedBox(height: 10),
+            SizedBox(
+              height: 120,
+              child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
                   ),
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                  ),
-                  MediaPreviewWidget(
-                    size: '2.3 MB',
-                    time: '1:30 AM',
-                    image:
-                        'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                  )
-                ],
-              ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return MediaPreviewWidget(
+                      size: '2.3 MB',
+                      time: '1:30 AM',
+                      image:
+                          'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                    );
+                  }),
             ),
+            SizedBox(height: 42),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
@@ -324,6 +306,7 @@ class ManageStoragePage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 15),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: ListView.builder(

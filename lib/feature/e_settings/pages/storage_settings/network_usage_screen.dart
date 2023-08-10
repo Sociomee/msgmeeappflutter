@@ -27,7 +27,7 @@ class _NetworkUsageScreenState extends State<NetworkUsageScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 2,
+          elevation: 3,
           shadowColor: AppColors.lightgrey1,
           leading: Padding(
             padding: EdgeInsets.only(left: 10.w),
