@@ -104,7 +104,7 @@ class _FingerPrintScreenState extends State<FingerPrintScreen> {
             thickness: 1,
           ),
           Opacity(
-            opacity: 0.50,
+            opacity: fingerprinteneble ? 1 : 0.50,
             child: Text(
               'Your mobile will automatically lock',
               style: TextStyle(
@@ -116,6 +116,7 @@ class _FingerPrintScreenState extends State<FingerPrintScreen> {
               ),
             ),
           ),
+          SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -203,6 +204,7 @@ class _FingerPrintScreenState extends State<FingerPrintScreen> {
                   })
             ],
           ),
+          SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -212,9 +214,9 @@ class _FingerPrintScreenState extends State<FingerPrintScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Enable fingerprint unlock',
+                    'Notifications',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: notification ? AppColors.black : AppColors.grey,
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -222,7 +224,7 @@ class _FingerPrintScreenState extends State<FingerPrintScreen> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "You have to use your fingerprint to open the\nMsgMee. You can't access MsgMee features\nwithout unlocking it.",
+                    "Enable preview of messages on lock screen.",
                     style: TextStyle(
                       color: Color(0xFF555555),
                       fontSize: 12,
