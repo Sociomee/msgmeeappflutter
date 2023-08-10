@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/blocked_bottom_sheet.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_dialog.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_one_user_dialog.dart';
@@ -70,10 +71,8 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
               },
             )),
           ]),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add, color: AppColors.white),
-          backgroundColor: AppColors.primaryColor,
-          onPressed: () {
+      floatingActionButton: GestureDetector(
+          onTap: () {
             showModalBottomSheet(
                 isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
@@ -85,7 +84,8 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                 builder: (context) {
                   return BlockedBottomSheet();
                 });
-          }),
+          },
+          child: SvgPicture.asset('assets/add.svg')),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -110,8 +110,15 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                     });
                   },
                   decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.lightgrey1)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColors.primaryColor)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.lightgrey)),
                       hintText: 'Search...',
                       suffixIcon: Icon(Icons.search)),
                 ),
@@ -155,7 +162,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                           },
                           child: Container(
                             height: 25,
-                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 color: Colors.red,

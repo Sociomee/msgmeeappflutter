@@ -63,23 +63,39 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                   color: AppColors.lightgrey,
                   borderRadius: BorderRadius.circular(10)),
             ),
-            SizedBox(height: 20),
-            Text('Block User',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text('Block User',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Select All',
-                    style:
-                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        for (var i = 0; i < blockedUserlist.length; i++) {
+                          blockedUserlist[i].isSelected = true;
+                        }
+                      });
+                    },
+                    child: Text(
+                      'Select All',
+                      style: TextStyle(
+                          color: AppColors.primaryColor, fontSize: 16),
+                    ),
                   ),
-                  Text(
-                    'Block Selected',
-                    style:
-                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Block Selected',
+                      style: TextStyle(
+                          color: AppColors.primaryColor, fontSize: 16),
+                    ),
                   ),
                 ],
               ),
@@ -90,6 +106,12 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                 itemCount: blockedUserlist.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      setState(() {
+                        blockedUserlist[index].isSelected =
+                            !blockedUserlist[index].isSelected;
+                      });
+                    },
                     leading: Container(
                       height: 44,
                       width: 44,
@@ -110,7 +132,12 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                       children: [
                         Text(
                           blockedUserlist[index].usertype,
-                          style: TextStyle(color: AppColors.grey),
+                          style: TextStyle(
+                            color: Color(0xFFC4C4C4),
+                            fontSize: 13,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         Checkbox(
                             shape: RoundedRectangleBorder(

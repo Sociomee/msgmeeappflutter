@@ -20,26 +20,29 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          titleSpacing: 0,
-          leadingWidth: 50,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Icon(Icons.arrow_back_ios, color: AppColors.black),
-              )),
-          title: Text(
-            'Privacy Setting',
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
-            ),
-          )),
+          elevation: 3,
+          shadowColor: AppColors.lightgrey1,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                )),
+          ),
+          leadingWidth: 45,
+          titleSpacing: 5,
+          title: Text('Privacy Setting',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: SingleChildScrollView(
           child: Column(
         children: [
@@ -169,7 +172,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   context: context,
                   builder: (context) {
                     return OptionsBottomSheet(
-                      title: 'Group Privacy',
+                      title: 'Group',
                       subtitle: 'Who can view me in group',
                     );
                   });

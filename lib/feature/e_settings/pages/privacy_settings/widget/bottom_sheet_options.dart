@@ -1,35 +1,33 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../theme/colors.dart';
 
 class OptionsModel {
   final String title;
   bool isSelected;
-
+  PrivacyOption value;
   OptionsModel({
     required this.title,
     required this.isSelected,
+    required this.value,
   });
 }
 
 List<OptionsModel> options = [
   OptionsModel(
-    title: 'Everyone',
-    isSelected: false,
-  ),
+      title: 'Everyone', isSelected: false, value: PrivacyOption.everyone),
   OptionsModel(
-    title: 'My contacts',
-    isSelected: false,
-  ),
+      title: 'My contacts', isSelected: false, value: PrivacyOption.mycontact),
   OptionsModel(
-    title: 'My contacts exceptation',
-    isSelected: false,
-  ),
-  OptionsModel(
-    title: 'Nobody',
-    isSelected: true,
-  ),
+      title: 'My contacts exceptation',
+      isSelected: false,
+      value: PrivacyOption.excetpcontact),
+  OptionsModel(title: 'Nobody', isSelected: true, value: PrivacyOption.nobody),
 ];
+
+enum PrivacyOption { everyone, mycontact, excetpcontact, nobody }
 
 class OptionsBottomSheet extends StatefulWidget {
   const OptionsBottomSheet(
@@ -41,6 +39,7 @@ class OptionsBottomSheet extends StatefulWidget {
 }
 
 class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
+  PrivacyOption? groupvalue = PrivacyOption.everyone;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -49,9 +48,13 @@ class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
           topRight: Radius.circular(20.0),
         ),
         child: Container(
-          height: 280.h,
+          height: 295.h,
           decoration: BoxDecoration(
-              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              )),
           child: Column(
             children: [
               Container(
@@ -82,51 +85,39 @@ class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
                     return Column(
                       children: [
                         Container(
-                          color: options[index].isSelected
-                              ? AppColors.seconderyColor1
-                              : Colors.transparent,
+                          color: Colors.transparent,
                           child: ListTile(
                             tileColor: AppColors.seconderyColor,
                             selectedTileColor: AppColors.seconderyColor,
-                            onTap: () {
-                              options[index].isSelected =
-                                  !options[index].isSelected;
-                              setState(() {});
-                            },
+                            onTap: () {},
                             leading: Text(
                               options[index].title,
                               style: TextStyle(
                                 fontSize: 14,
                               ),
                             ),
-                            trailing: Container(
-                              height: 20,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                  color: AppColors.white,
-                                  border: Border.all(
-                                      color: AppColors.primaryColor, width: 1),
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: options[index].isSelected
-                                  ? Container(
-                                      height: 5,
-                                      width: 5,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.primaryColor,
-                                          border: Border.all(
-                                              color: AppColors.white, width: 3),
-                                          borderRadius:
-                                              BorderRadius.circular(100)),
-                                    )
-                                  : Container(),
-                            ),
+                            trailing: Radio<PrivacyOption>(
+                                fillColor: MaterialStateColor.resolveWith(
+                                    (states) =>
+                                        groupvalue == options[index].value
+                                            ? AppColors.primaryColor
+                                            : AppColors.lightgrey),
+                                activeColor: AppColors.primaryColor,
+                                value: options[index].value,
+                                groupValue: groupvalue,
+                                onChanged: (PrivacyOption? e) {
+                                  setState(() {
+                                    groupvalue = e;
+                                  });
+                                }),
                           ),
                         ),
                         index == options.length - 1
                             ? Container()
                             : Divider(
-                                color: AppColors.primaryColor,
+                                color: AppColors.lightgrey1,
                                 height: 0,
+                                thickness: 1,
                               ),
                       ],
                     );
