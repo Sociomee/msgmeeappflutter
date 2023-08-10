@@ -35,7 +35,7 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
           topRight: Radius.circular(20.0),
         ),
         child: Container(
-          height: 400.h,
+          height: 435.h,
           decoration: BoxDecoration(
               color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
@@ -48,9 +48,12 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
                     color: AppColors.lightgrey,
                     borderRadius: BorderRadius.circular(10)),
               ),
-              SizedBox(height: 20),
-              Text(widget.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 38),
+                child: Text(widget.title,
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              ),
               ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -90,6 +93,7 @@ class _StorageBottomSheetState extends State<StorageBottomSheet> {
               SizedBox(height: 30),
               CustomButtonWidget(
                   title: 'Ok', color: AppColors.primaryColor, ontap: () {}),
+              SizedBox(height: 20),
             ],
           ),
         ));

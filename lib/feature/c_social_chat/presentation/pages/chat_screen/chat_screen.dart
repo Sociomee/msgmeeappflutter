@@ -548,7 +548,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     color: Color(0xFF333333)),
                                                 child: Row(
                                                   children: [
-                                                    Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),
+                                                    Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),  
                                                     Container(
                                                         padding:
                                                             EdgeInsets.all(5),
