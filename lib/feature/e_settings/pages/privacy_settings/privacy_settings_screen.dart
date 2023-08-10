@@ -20,14 +20,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
+          titleSpacing: 0,
+          leadingWidth: 50,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+              icon: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+              )),
           title: Text(
             'Privacy Setting',
-            style: TextStyle(color: AppColors.black),
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           )),
       body: SingleChildScrollView(
           child: Column(
@@ -49,8 +59,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Last Seen'),
-            subtitle: Text('Everyone'),
+            title: Text(
+              'Last Seen',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Everyone',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -71,8 +97,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Profile Photo'),
-            subtitle: Text('Everyone'),
+            title: Text(
+              'Profile Photo',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Everyone',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -93,8 +135,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Online Status'),
-            subtitle: Text('My contacts except'),
+            title: Text(
+              'Online Status',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'My contacts except',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -115,8 +173,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Group Privacy'),
-            subtitle: Text('Everyone'),
+            title: Text(
+              'Group Privacy',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Everyone',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -137,16 +211,47 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Groups'),
-            subtitle: Text('Everyone'),
+            title: Text(
+              'Groups',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Everyone',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
           SizedBox(height: 15),
           ListTile(
-            title: Text('Read receipts'),
+            title: Text(
+              'Read receipts',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             subtitle: Text(
-                'If turned off, you want send or receive read receipt. read receipts are always sent for\ngroup chats and direct chats '),
+              'If turned off, you want send or receive read receipt. read receipts are always sent for\ngroup chats and direct chats ',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: SizedBox(
               width: 51,
               child: FlutterSwitch(
@@ -190,8 +295,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Live Location'),
-            subtitle: Text('Everyone'),
+            title: Text(
+              'Live Location',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Everyone',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -199,8 +320,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             onTap: () {
               animatedScreenNavigator(context, BlockedContactsPage());
             },
-            title: Text('Blocked Contacts'),
-            subtitle: Text('56 People'),
+            title: Text(
+              'Blocked Contacts',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              '56 People',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),
@@ -221,8 +358,24 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                     );
                   });
             },
-            title: Text('Fingerprint'),
-            subtitle: Text('none'),
+            title: Text(
+              'Fingerprint',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'none',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
           ),
           Divider(color: AppColors.lightgrey, height: 0, thickness: 1),

@@ -42,13 +42,20 @@ class ClearCacheDialog extends StatelessWidget {
                 Navigator.pop(context);
               }),
           SizedBox(height: 20),
-          CustomButtonWidget(
-              title: 'Cancel',
-              color: AppColors.white,
-              textColor: AppColors.primaryColor,
-              ontap: () {
-                Navigator.pop(context);
-              }),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Color(0xFF81C14B),
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -76,13 +76,7 @@ class SettingScreen extends StatelessWidget {
                 builder: (context) {
                   return LogoutDialog();
                 });
-            // showModalBottomSheet(
-            // context: context,
-            // shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(20)),
-            // builder: (context) {
-            //   return LogOutBottomSheet();
-            // });
+          
           }),
       SettingsOption(
           optionName: 'Delete Account',
