@@ -3,23 +3,38 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../../../../theme/colors.dart';
 
-class LanguageOptionBottomSheet extends StatelessWidget {
+class LanguageOptionBottomSheet extends StatefulWidget {
   const LanguageOptionBottomSheet({super.key});
 
   @override
+  State<LanguageOptionBottomSheet> createState() =>
+      _LanguageOptionBottomSheetState();
+}
+
+class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
+  late TextEditingController controller;
+  List<String> languages = [
+    'English',
+    'Deutsch',
+    'Spanish',
+    'Language 4 (native)',
+    'Башҡортса',
+    'Українська',
+    'Yorùbá',
+    '中文',
+    'Кыргызча',
+    'Português'
+  ];
+  List<String> filterlanguage = [];
+  @override
+  void initState() {
+    controller = TextEditingController();
+    filterlanguage = List.from(languages);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<String> languages = [
-      'English',
-      'Deutsch',
-      'Spanish',
-      'Language 4 (native)',
-      'Башҡортса',
-      'Українська',
-      'Yorùbá',
-      '中文',
-      'Кыргызча',
-      'Português'
-    ];
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(20.0),
@@ -62,6 +77,21 @@ class LanguageOptionBottomSheet extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    controller: controller,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        setState(() {
+                          filterlanguage = List.from(languages);
+                        });
+                      } else {
+                        setState(() {
+                          filterlanguage = filterlanguage
+                              .where((e) =>
+                                  e.toLowerCase().contains(value.toLowerCase()))
+                              .toList();
+                        });
+                      }
+                    },
                     decoration: const InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: AppColors.grey),
@@ -83,7 +113,7 @@ class LanguageOptionBottomSheet extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: languages.length,
+                  itemCount: filterlanguage.length,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -96,7 +126,7 @@ class LanguageOptionBottomSheet extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          languages[index],
+                          filterlanguage[index],
                           textScaleFactor: 1.0,
                           style: const TextStyle(
                               color: AppColors.black, fontSize: 17),

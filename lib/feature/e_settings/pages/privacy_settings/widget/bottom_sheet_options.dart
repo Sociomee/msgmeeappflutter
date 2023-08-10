@@ -117,8 +117,7 @@ class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
                             : Divider(
                                 color: AppColors.lightgrey1,
                                 height: 0,
-                                thickness: 1,
-                              ),
+                                thickness: 1),
                       ],
                     );
                   }),
