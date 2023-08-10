@@ -21,9 +21,7 @@ class _StoriesNotificationBottomSheetState
   Widget build(BuildContext context) {
     return ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
+            topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
         child: Container(
           height: 180.h,
           decoration: BoxDecoration(
