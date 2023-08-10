@@ -27,19 +27,29 @@ class _NetworkUsageScreenState extends State<NetworkUsageScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
-            )),
-        title: Text(
-          'Network Usage',
-          style: TextStyle(color: AppColors.black),
-        ),
-      ),
+          elevation: 2,
+          shadowColor: AppColors.lightgrey1,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                )),
+          ),
+          leadingWidth: 45,
+          titleSpacing: 5,
+          title: Text('Network Usage',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: SingleChildScrollView(
         child: Column(
           children: [
