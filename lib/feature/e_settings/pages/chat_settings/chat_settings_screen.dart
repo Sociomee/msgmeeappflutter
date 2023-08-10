@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/archieved_chat_bottomsheet.dart';
@@ -8,6 +9,7 @@ import 'package:msgmee/feature/e_settings/pages/chat_settings/widget/delete_bott
 
 import '../../../../theme/colors.dart';
 import '../../../b_auth/presentation/widgets/language_change_widget.dart';
+import '../../cubit/choose_language_cubit.dart';
 import 'widget/chatbackup_bottomsheet.dart';
 import 'widget/choose_account_sheet.dart';
 
@@ -327,7 +329,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
               },
               child: ListTile(
                 title: Text('Choose Language'),
-                subtitle: Text('English'),
+                subtitle: Text(context.watch<ChooseLanguageCubit>().state),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: AppColors.black,

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
+import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'common_cubits/reduce_number_cubit.dart';
 import 'feature/b_auth/presentation/cubit/create_user/create_user_cubit.dart';
@@ -73,7 +74,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ReplyMsgCubit()),
             BlocProvider(create: (context) => SearchModeCubit()),
             BlocProvider(create: (context) => SelectionCubit()),
-            BlocProvider(create: (context) => ShowEmojiCubit())
+            BlocProvider(create: (context) => ShowEmojiCubit()),
+            BlocProvider(create: (context) => ChooseLanguageCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

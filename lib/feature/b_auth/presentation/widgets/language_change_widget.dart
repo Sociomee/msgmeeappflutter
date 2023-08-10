@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../../../../theme/colors.dart';
+import '../../../e_settings/cubit/choose_language_cubit.dart';
 
 class LanguageOptionBottomSheet extends StatefulWidget {
   const LanguageOptionBottomSheet({super.key});
@@ -115,21 +117,29 @@ class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
               child: ListView.builder(
                   itemCount: filterlanguage.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: AppColors.primaryColor.withOpacity(.2)),
+                    return GestureDetector(
+                      onTap: () {
+                        context
+                            .read<ChooseLanguageCubit>()
+                            .selectlanguage(filterlanguage[index]);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                width: 1.0,
+                                color: AppColors.primaryColor.withOpacity(.2)),
+                          ),
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          filterlanguage[index],
-                          textScaleFactor: 1.0,
-                          style: const TextStyle(
-                              color: AppColors.black, fontSize: 17),
+                        child: Center(
+                          child: Text(
+                            filterlanguage[index],
+                            textScaleFactor: 1.0,
+                            style: const TextStyle(
+                                color: AppColors.black, fontSize: 17),
+                          ),
                         ),
                       ),
                     );
