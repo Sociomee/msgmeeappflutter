@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/e_settings/pages/storage_settings/widgets/clear_ceche_dialog.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
@@ -20,16 +21,29 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            elevation: 1,
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-            title: Text(
-              'Storage and Data Settings',
-              style: TextStyle(color: AppColors.black),
-            )),
+            elevation: 3,
+            shadowColor: AppColors.lightgrey1,
+            leading: Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.black,
+                    size: 20,
+                  )),
+            ),
+            leadingWidth: 45,
+            titleSpacing: 5,
+            title: Text('Storage and Data Settings',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ))),
         body: Column(
           children: [
             ListTile(
