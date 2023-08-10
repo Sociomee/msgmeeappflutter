@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,15 +13,29 @@ class ForwardMsgPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-          title: Text(
-            'Forworded media many times',
-            style: TextStyle(color: AppColors.black),
-          )),
+          elevation: 3,
+          shadowColor: AppColors.lightgrey1,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                )),
+          ),
+          leadingWidth: 45,
+          titleSpacing: 5,
+          title: Text('Forworded media many times',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: Column(
         children: [
           Padding(
@@ -36,7 +52,23 @@ class ForwardMsgPage extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Icon(Icons.tune_outlined, color: AppColors.grey)
+                Container(
+                    width: 36,
+                    height: 36,
+                    alignment: Alignment.center,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFFF6F6F6),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Transform.rotate(
+                      angle: pi / 2,
+                      child: Icon(
+                        Icons.tune_outlined,
+                        color: AppColors.grey,
+                        size: 20,
+                      ),
+                    ))
               ],
             ),
           ),

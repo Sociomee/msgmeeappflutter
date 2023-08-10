@@ -36,10 +36,23 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
               onTap: () {
                 screenNavigator(context, ManageStoragePage());
               },
-              title: Text('Manage Storage'),
+              title: Text(
+                'Manage Storage ',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Text(
                 'Used',
-                style: TextStyle(fontSize: 11),
+                style: TextStyle(
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: Text('8 GB'),
             ),
@@ -48,10 +61,23 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
               onTap: () {
                 screenNavigator(context, NetworkUsageScreen());
               },
-              title: Text('Network Usage'),
+              title: Text(
+                'Network Usage',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Text(
                 '8 Gb sent   12 Gb received ',
-                style: TextStyle(fontSize: 11),
+                style: TextStyle(
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: Text('8 GB'),
             ),
@@ -64,18 +90,34 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                       return ClearCacheDialog();
                     });
               },
-              title: Text('Clear Cache'),
-            ),
-            Container(
-              color: AppColors.lightgrey1,
-              child: ListTile(
-                onTap: () {},
-                title: Text(
-                  'Media download',
-                  style: TextStyle(fontSize: 12),
+              title: Text(
+                'Clear Cache',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
+            Container(
+                height: 40,
+                color: AppColors.lightgrey1,
+                padding: EdgeInsets.only(left: 24),
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Text(
+                      'MEDIA DOWNLOAD',
+                      style: TextStyle(
+                        color: Color(0xFF555555),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )),
             ListTile(
               onTap: () {
                 showModalBottomSheet(
@@ -91,10 +133,23 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                           title: 'Download over mobile data ');
                     });
               },
-              title: Text('Mobile data'),
+              title: Text(
+                'Mobile data',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Text(
                 'Download over mobile data',
-                style: TextStyle(fontSize: 11),
+                style: TextStyle(
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
@@ -112,10 +167,23 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                       return StorageBottomSheet(title: 'Download over wi-fi');
                     });
               },
-              title: Text('Wi-Fi'),
+              title: Text(
+                'Wi-Fi',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Text(
                 'Download over wi-fi',
-                style: TextStyle(fontSize: 11),
+                style: TextStyle(
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
@@ -133,10 +201,23 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                       return StorageBottomSheet(title: 'Download over roaming');
                     });
               },
-              title: Text('Roaming'),
+              title: Text(
+                'Roaming',
+                style: TextStyle(
+                  color: Color(0xFF151624),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Text(
                 'Download over roaming',
-                style: TextStyle(fontSize: 11),
+                style: TextStyle(
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: Icon(Icons.arrow_forward_ios, color: AppColors.grey),
             ),
