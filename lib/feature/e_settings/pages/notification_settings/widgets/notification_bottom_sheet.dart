@@ -1,35 +1,37 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../theme/colors.dart';
 
 class OptionsModel {
   final String title;
   bool isSelected;
+  NotificationOption value;
 
   OptionsModel({
     required this.title,
     required this.isSelected,
+    required this.value,
   });
 }
 
 List<OptionsModel> options = [
   OptionsModel(
-    title: 'Vibrate only',
-    isSelected: false,
-  ),
+      title: 'Vibrate only',
+      isSelected: false,
+      value: NotificationOption.vibrate),
   OptionsModel(
-    title: 'Tone only',
-    isSelected: false,
-  ),
+      title: 'Tone only', isSelected: false, value: NotificationOption.tone),
   OptionsModel(
-    title: 'Vibrate & Tone ',
-    isSelected: false,
-  ),
+      title: 'Vibrate & Tone ',
+      isSelected: false,
+      value: NotificationOption.vibrateandtone),
   OptionsModel(
-    title: 'Silent',
-    isSelected: false,
-  ),
+      title: 'Silent', isSelected: false, value: NotificationOption.slient),
 ];
+
+enum NotificationOption { vibrate, tone, vibrateandtone, slient }
 
 class NotificationBottomSheet extends StatefulWidget {
   const NotificationBottomSheet({
@@ -44,6 +46,7 @@ class NotificationBottomSheet extends StatefulWidget {
 }
 
 class _NotificationBottomSheetState extends State<NotificationBottomSheet> {
+  NotificationOption? groupvalue = NotificationOption.vibrate;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -54,7 +57,9 @@ class _NotificationBottomSheetState extends State<NotificationBottomSheet> {
         child: Container(
           height: 280.h,
           decoration: BoxDecoration(
-              color: AppColors.white, borderRadius: BorderRadius.circular(25)),
+              color: AppColors.white,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25), topLeft: Radius.circular(25))),
           child: Column(
             children: [
               Container(
@@ -79,44 +84,32 @@ class _NotificationBottomSheetState extends State<NotificationBottomSheet> {
                         ListTile(
                           tileColor: AppColors.seconderyColor,
                           selectedTileColor: AppColors.seconderyColor,
-                          onTap: () {
-                            options[index].isSelected =
-                                !options[index].isSelected;
-                            setState(() {});
-                          },
                           leading: Text(
                             options[index].title,
                             style: TextStyle(
                               fontSize: 14,
                             ),
                           ),
-                          trailing: Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                border: Border.all(
-                                    color: AppColors.primaryColor, width: 1),
-                                borderRadius: BorderRadius.circular(100)),
-                            child: options[index].isSelected
-                                ? Container(
-                                    height: 5,
-                                    width: 5,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.primaryColor,
-                                        border: Border.all(
-                                            color: AppColors.white, width: 3),
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                  )
-                                : Container(),
-                          ),
+                          trailing: Radio<NotificationOption>(
+                              fillColor: MaterialStateColor.resolveWith(
+                                  (states) => groupvalue == options[index].value
+                                      ? AppColors.primaryColor
+                                      : AppColors.lightgrey),
+                              activeColor: AppColors.primaryColor,
+                              value: options[index].value,
+                              groupValue: groupvalue,
+                              onChanged: (NotificationOption? e) {
+                                setState(() {
+                                  groupvalue = e;
+                                });
+                              }),
                         ),
                         index == options.length - 1
                             ? Container()
                             : Divider(
                                 color: AppColors.primaryColor,
                                 height: 0,
+                                thickness: 1,
                               ),
                       ],
                     );

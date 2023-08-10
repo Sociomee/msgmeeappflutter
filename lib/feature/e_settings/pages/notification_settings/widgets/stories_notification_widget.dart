@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../theme/colors.dart';
-import 'notification_bottom_sheet.dart';
 
 class StoriesNotificationBottomSheet extends StatefulWidget {
   const StoriesNotificationBottomSheet({
@@ -51,19 +50,20 @@ class _StoriesNotificationBottomSheetState
               SizedBox(height: 24),
               InkWell(
                 onTap: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(25.0),
-                        ),
-                      ),
-                      context: context,
-                      builder: (context) {
-                        return NotificationBottomSheet(
-                          title: 'Chat Notification sound',
-                        );
-                      });
+                  // showModalBottomSheet(
+                  //     isScrollControlled: true,
+                  //     shape: const RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.vertical(
+                  //         top: Radius.circular(25.0),
+                  //       ),
+                  //     ),
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return NotificationBottomSheet(
+                  //         title: 'Chat Notification sound',
+                  //       );
+                  //     });
+                  Navigator.pop(context);
                 },
                 child: Padding(
                   padding:
@@ -79,19 +79,20 @@ class _StoriesNotificationBottomSheetState
               Divider(color: AppColors.seconderyColor, thickness: 1),
               InkWell(
                 onTap: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(25.0),
-                        ),
-                      ),
-                      context: context,
-                      builder: (context) {
-                        return NotificationBottomSheet(
-                          title: 'Chat Notification sound',
-                        );
-                      });
+                  // showModalBottomSheet(
+                  //     isScrollControlled: true,
+                  //     shape: const RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.vertical(
+                  //         top: Radius.circular(25.0),
+                  //       ),
+                  //     ),
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return NotificationBottomSheet(
+                  //         title: 'Chat Notification sound',
+                  //       );
+                  //     });
+                  Navigator.pop(context);
                 },
                 child: Padding(
                   padding:
