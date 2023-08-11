@@ -127,6 +127,10 @@ class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         decoration: BoxDecoration(
+                          color: context.watch<ChooseLanguageCubit>().state ==
+                                  filterlanguage[index]
+                              ? Color(0xFFE3F4EA)
+                              : AppColors.white,
                           border: Border(
                             bottom: BorderSide(
                                 width: 1.0,

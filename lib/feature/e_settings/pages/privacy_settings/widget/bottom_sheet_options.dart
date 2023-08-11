@@ -71,9 +71,12 @@ class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
               SizedBox(height: 6),
               Text(
                 widget.subtitle,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.grey,
-                  fontSize: 14,
+                  color: Color(0xFF555555),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 24),
@@ -89,7 +92,11 @@ class _OptionsBottomSheetState extends State<OptionsBottomSheet> {
                           child: ListTile(
                             tileColor: AppColors.seconderyColor,
                             selectedTileColor: AppColors.seconderyColor,
-                            onTap: () {},
+                            onTap: () {
+                              setState(() {
+                                groupvalue = options[index].value;
+                              });
+                            },
                             leading: Text(
                               options[index].title,
                               style: TextStyle(

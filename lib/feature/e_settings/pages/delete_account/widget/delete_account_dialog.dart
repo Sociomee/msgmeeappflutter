@@ -10,35 +10,50 @@ class DeleteAccountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Do you want to really delete your account ?',
-            style: TextStyle(
-              color: Colors.black.withOpacity(0.800000011920929),
-              fontSize: 16,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
+    return Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: 20),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Do you want to really delete your\naccount ?',
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.800000011920929),
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          SizedBox(height: 40),
-          CustomButtonWidget(
-              title: 'Delete',
-              color: AppColors.primaryColor,
-              ontap: () {
-                animatedScreenReplaceNavigator(context, DeleteSuccessPage());
-              }),
-          SizedBox(height: 20),
-          CustomButtonWidget(
-              title: 'Cancel',
-              color: AppColors.white,
-              textColor: AppColors.primaryColor,
-              ontap: () {
+            SizedBox(height: 24),
+            CustomButtonWidget(
+                title: 'Delete',
+                height: 50,
+                color: AppColors.primaryColor,
+                ontap: () {
+                  animatedScreenReplaceNavigator(context, DeleteSuccessPage());
+                }),
+            SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
                 Navigator.pop(context);
-              }),
-        ],
+              },
+              child: Center(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: Color(0xFF81C14B),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
