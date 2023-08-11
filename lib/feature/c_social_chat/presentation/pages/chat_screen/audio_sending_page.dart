@@ -165,7 +165,7 @@ class _AudioSendingPageState extends State<AudioSendingPage> {
                                 messageType: 'sender',
                                 msgStatus: 'send',
                                 time: getCurrentTime(),
-                                type: MessageType.audio,
+                                type: MessageType.music,
                                 docName: widget.audiofileName,
                               ));
                           Navigator.pop(context);

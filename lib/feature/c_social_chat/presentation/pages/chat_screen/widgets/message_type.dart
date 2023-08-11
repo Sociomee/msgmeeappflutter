@@ -3,6 +3,7 @@ enum MessageType {
   image,
   video,
   audio,
+  music,
   doc,
   contact,
   location,

@@ -17,17 +17,13 @@ class ManageStoragePage extends StatelessWidget {
           elevation: 3,
           shadowColor: AppColors.lightgrey1,
           leading: Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.black,
-                  size: 20,
-                )),
-          ),
+              padding: EdgeInsets.only(left: 10.w),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios,
+                      color: AppColors.black, size: 20))),
           leadingWidth: 45,
           titleSpacing: 5,
           title: Text('Manage Storage',

@@ -1230,6 +1230,111 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
+
+    final musicMessage = Stack(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    width: 230,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color:
+                          context.watch<ChatThemeCubit>().state.chatDeepColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFE7F7FD),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  alignment: Alignment.center,
+                                  child: SvgPicture.asset(
+                                      'assets/headphones.svg')),
+                              SizedBox(width: 8),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Abriella Bond',
+                                    style: TextStyle(
+                                      color: Color(0xFF333333),
+                                      fontSize: 10,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Audio(00:30)',
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 10,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        message.isEmpty
+                            ? SizedBox(height: 5)
+                            : Text(message,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 14),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(time,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                              Spacer(),
+                              Text(msgStatus,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 10)),
+                            ],
+                          ),
+                        )
+                      ],
+                    )),
+                SizedBox(height: 5)
+              ],
+            ),
+            SizedBox(width: 3)
+          ],
+        ),
+        Positioned(
+            bottom: 2,
+            right: 0,
+            child: msgStatus == 'read'
+                ? MessageStatus.read
+                : msgStatus == 'send'
+                    ? MessageStatus.sent
+                    : MessageStatus.delivered),
+      ],
+    );
+
     switch (type) {
       case MessageType.contact:
         return Padding(
@@ -1247,6 +1352,15 @@ class SentMessageWidget extends StatelessWidget {
             children: [audioMessage],
           ),
         );
+      case MessageType.music:
+        return Padding(
+          padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [musicMessage],
+          ),
+        );
+
       case MessageType.doc:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
