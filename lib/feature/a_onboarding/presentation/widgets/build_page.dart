@@ -31,7 +31,7 @@ class BuildPages extends StatelessWidget {
         SizedBox(height: 20.h),
         SvgPicture.asset(
           imageUrl,
-          height: MediaQuery.of(context).size.height * .55,
+          height: MediaQuery.of(context).size.height * .58,
           width: double.infinity,
           fit: BoxFit.cover,
         ),

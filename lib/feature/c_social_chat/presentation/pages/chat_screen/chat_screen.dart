@@ -116,6 +116,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return WillPopScope(
       onWillPop: () async {
         context.read<SearchModeCubit>().closeMsgSearchMode();
+        context.read<ShowAttachment>().closeAttachment();
         return true;
       },
       child: MediaQuery(
@@ -130,6 +131,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     leading: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
+                        context.read<ShowAttachment>().closeAttachment();
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
@@ -548,7 +550,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     color: Color(0xFF333333)),
                                                 child: Row(
                                                   children: [
-                                                    Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),  
+                                                    Text('🤣 ✌️ 👋 ❤️ 😥 👍 '),
                                                     Container(
                                                         padding:
                                                             EdgeInsets.all(5),

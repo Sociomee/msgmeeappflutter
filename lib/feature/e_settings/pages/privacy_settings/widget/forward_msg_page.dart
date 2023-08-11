@@ -28,7 +28,7 @@ class ForwardMsgPage extends StatelessWidget {
                 )),
           ),
           leadingWidth: 45,
-          titleSpacing: 5,
+          titleSpacing: 10,
           title: Text('Forworded media many times',
               style: TextStyle(
                 color: AppColors.black,

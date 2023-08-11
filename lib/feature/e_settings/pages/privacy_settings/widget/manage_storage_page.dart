@@ -25,7 +25,7 @@ class ManageStoragePage extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_ios,
                       color: AppColors.black, size: 20))),
           leadingWidth: 45,
-          titleSpacing: 5,
+          titleSpacing: 12,
           title: Text('Manage Storage',
               style: TextStyle(
                 color: AppColors.black,
@@ -144,10 +144,9 @@ class ManageStoragePage extends StatelessWidget {
                         color: AppColors.primaryColor),
                   ),
                   Container(
-                    width: 216,
-                    height: 10,
-                    decoration: BoxDecoration(color: AppColors.yellowColor),
-                  )
+                      width: 216,
+                      height: 10,
+                      decoration: BoxDecoration(color: AppColors.yellowColor))
                 ],
               ),
             ),
@@ -203,7 +202,7 @@ class ManageStoragePage extends StatelessWidget {
                 screenNavigator(context, ForwardMsgPage());
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
                 child: Row(
                   children: [
                     Text(
@@ -233,9 +232,7 @@ class ManageStoragePage extends StatelessWidget {
             SizedBox(
               height: 120,
               child: ListView.builder(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (context, index) {
@@ -283,9 +280,7 @@ class ManageStoragePage extends StatelessWidget {
             SizedBox(
               height: 120,
               child: ListView.builder(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (context, index) {
@@ -331,18 +326,16 @@ class ManageStoragePage extends StatelessWidget {
                             Stack(
                               children: [
                                 Container(
-                                  width: 44,
-                                  height: 44,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image.network(
-                                      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
-                                      width: 44,
-                                      height: 44,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
+                                    width: 44,
+                                    height: 44,
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.network(
+                                            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
+                                            width: 44,
+                                            height: 44,
+                                            fit: BoxFit.cover))),
                                 Positioned(
                                     bottom: 1,
                                     right: 2,
@@ -350,26 +343,20 @@ class ManageStoragePage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(width: 10),
-                            Text(
-                              'Abriella Bond',
-                              style: TextStyle(
-                                color: Color(0xFF151624),
-                                fontSize: 16,
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            Text('Abriella Bond',
+                                style: TextStyle(
+                                    color: Color(0xFF151624),
+                                    fontSize: 16,
+                                    fontFamily: 'SF Pro Display',
+                                    fontWeight: FontWeight.w500)),
                             Spacer(),
-                            Text(
-                              '229.7 MB',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color(0xFFC4C4C4),
-                                fontSize: 13,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
+                            Text('229.7 MB',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    color: Color(0xFFC4C4C4),
+                                    fontSize: 13,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500))
                           ],
                         ),
                       );
