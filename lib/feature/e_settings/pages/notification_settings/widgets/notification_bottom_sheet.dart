@@ -79,39 +79,48 @@ class _NotificationBottomSheetState extends State<NotificationBottomSheet> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: options.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          tileColor: AppColors.seconderyColor,
-                          selectedTileColor: AppColors.seconderyColor,
-                          leading: Text(
-                            options[index].title,
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          trailing: Radio<NotificationOption>(
-                              fillColor: MaterialStateColor.resolveWith(
-                                  (states) => groupvalue == options[index].value
-                                      ? AppColors.primaryColor
-                                      : AppColors.lightgrey),
-                              activeColor: AppColors.primaryColor,
-                              value: options[index].value,
-                              groupValue: groupvalue,
-                              onChanged: (NotificationOption? e) {
-                                setState(() {
-                                  groupvalue = e;
-                                });
-                              }),
-                        ),
-                        index == options.length - 1
-                            ? Container()
-                            : Divider(
-                                color: AppColors.primaryColor,
-                                height: 0,
-                                thickness: 1,
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        setState(() {
+                          groupvalue = options[index].value;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          ListTile(
+                            tileColor: AppColors.seconderyColor,
+                            selectedTileColor: AppColors.seconderyColor,
+                            leading: Text(
+                              options[index].title,
+                              style: TextStyle(
+                                fontSize: 14,
                               ),
-                      ],
+                            ),
+                            trailing: Radio<NotificationOption>(
+                                fillColor: MaterialStateColor.resolveWith(
+                                    (states) =>
+                                        groupvalue == options[index].value
+                                            ? AppColors.primaryColor
+                                            : AppColors.lightgrey),
+                                activeColor: AppColors.primaryColor,
+                                value: options[index].value,
+                                groupValue: groupvalue,
+                                onChanged: (NotificationOption? e) {
+                                  setState(() {
+                                    groupvalue = e;
+                                  });
+                                }),
+                          ),
+                          index == options.length - 1
+                              ? Container()
+                              : Divider(
+                                  color: AppColors.primaryColor,
+                                  height: 0,
+                                  thickness: 1,
+                                ),
+                        ],
+                      ),
                     );
                   }),
             ],
