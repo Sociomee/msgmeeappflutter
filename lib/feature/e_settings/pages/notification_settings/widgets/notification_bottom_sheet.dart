@@ -115,7 +115,8 @@ class _NotificationBottomSheetState extends State<NotificationBottomSheet> {
                           index == options.length - 1
                               ? Container()
                               : Divider(
-                                  color: AppColors.primaryColor,
+                                  color:
+                                      AppColors.seconderyColor.withOpacity(.5),
                                   height: 0,
                                   thickness: 1,
                                 ),

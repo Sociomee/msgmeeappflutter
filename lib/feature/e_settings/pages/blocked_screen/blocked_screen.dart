@@ -177,16 +177,19 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                     ),
                   );
                 }),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Center(
-                child: Text(
-              'Blocked  people cannot see any activity by you ',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF9D9D9D),
-                fontSize: 12,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 66),
+              child: Text(
+                'Blocked  people cannot see any activity by you ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF9D9D9D),
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
           ],

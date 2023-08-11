@@ -68,9 +68,17 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              trailing: Text('8 GB'),
+              trailing: Text(
+                '8 GB',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            Divider(color: AppColors.lightgrey, thickness: 1),
+            Divider(color: AppColors.lightgrey1, thickness: 1),
             ListTile(
               onTap: () {
                 screenNavigator(context, NetworkUsageScreen());
@@ -93,9 +101,17 @@ class _StorageSettingsScreenState extends State<StorageSettingsScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              trailing: Text('8 GB'),
+              trailing: Text(
+                '8 GB',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            Divider(color: AppColors.lightgrey, thickness: 1),
+            Divider(color: AppColors.lightgrey1, thickness: 1),
             ListTile(
               onTap: () {
                 showDialog(
