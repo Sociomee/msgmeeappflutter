@@ -36,7 +36,7 @@ class _NotificationSettingsScreenState
                 )),
           ),
           leadingWidth: 45,
-          titleSpacing: 5,
+          titleSpacing: 0,
           title: Text('Notification & Sound Settings',
               style: TextStyle(
                 color: AppColors.black,
@@ -104,7 +104,7 @@ class _NotificationSettingsScreenState
               ),
             ),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
@@ -161,7 +161,7 @@ class _NotificationSettingsScreenState
               ),
             ),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
@@ -218,7 +218,7 @@ class _NotificationSettingsScreenState
               ),
             ),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
@@ -275,7 +275,7 @@ class _NotificationSettingsScreenState
               ),
             ),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           ListTile(
             onTap: () {
               setState(() {
@@ -302,7 +302,7 @@ class _NotificationSettingsScreenState
                   });
                 }),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
             child: Row(
@@ -325,7 +325,7 @@ class _NotificationSettingsScreenState
                     SizedBox(
                       width: 270,
                       child: Text(
-                        'If turned off, you want send or receive read receipt. read receipts are always sent for group chats and direct chats ',
+                        'You will get preview of the text message notification at the top of your screen',
                         overflow: TextOverflow.clip,
                         style: TextStyle(
                           color: Color(0xFF555555),
@@ -361,7 +361,7 @@ class _NotificationSettingsScreenState
             ),
           ),
           SizedBox(height: 15),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
@@ -418,7 +418,7 @@ class _NotificationSettingsScreenState
               ),
             ),
           ),
-          Divider(color: AppColors.lightgrey, thickness: 1),
+          Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {

@@ -45,11 +45,8 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20.0),
-        topRight: Radius.circular(20.0),
-      ),
+          topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
       child: Container(
-        // height: 380.h,
         decoration: BoxDecoration(
             color: AppColors.white, borderRadius: BorderRadius.circular(25)),
         child: Column(
@@ -65,9 +62,13 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text('Block User',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              child: Center(
+                child: Text('Block User',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              ),
             ),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
@@ -102,7 +103,11 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                           ? 'Unselect All'
                           : 'Select All',
                       style: TextStyle(
-                          color: AppColors.primaryColor, fontSize: 16),
+                        color: AppColors.primaryColor,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -112,7 +117,11 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                     child: Text(
                       'Block Selected',
                       style: TextStyle(
-                          color: AppColors.primaryColor, fontSize: 16),
+                        color: AppColors.primaryColor,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

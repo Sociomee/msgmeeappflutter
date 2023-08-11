@@ -59,17 +59,21 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
               )),
           actions: [
             Center(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, top: 4),
                 child: TextButton(
-              child: Text('Unblock All',
-                  style: TextStyle(color: AppColors.primaryColor)),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return UnblockUserDialog();
-                    });
-              },
-            )),
+                  child: Text('Unblock All',
+                      style: TextStyle(color: AppColors.primaryColor)),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return UnblockUserDialog();
+                        });
+                  },
+                ),
+              ),
+            ),
           ]),
       floatingActionButton: GestureDetector(
           onTap: () {
@@ -85,7 +89,27 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                   return BlockedBottomSheet();
                 });
           },
-          child: SvgPicture.asset('assets/add.svg')),
+          child: Container(
+              width: 80,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(102, 147, 147, 147),
+                    blurRadius: 15,
+                    offset: Offset(0, 3),
+                    spreadRadius: 0,
+                  )
+                ],
+              ),
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                'assets/add.svg',
+                width: 80,
+                height: 80,
+                fit: BoxFit.cover,
+              ))),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -113,13 +137,18 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                       focusColor: AppColors.primaryColor,
                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.lightgrey1)),
+                          borderSide: BorderSide(
+                        color: Colors.black.withOpacity(0.15000000596046448),
+                      )),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: AppColors.primaryColor)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.lightgrey)),
+                          borderSide: BorderSide(
+                        color: Colors.black.withOpacity(0.15000000596046448),
+                      )),
                       hintText: 'Search...',
+                      hintStyle: TextStyle(color: AppColors.grey),
                       suffixIcon: Icon(Icons.search)),
                 ),
               ),
@@ -130,10 +159,9 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                 itemCount: filteredlist.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
-                    child: Row(
-                      children: [
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 9),
+                      child: Row(children: [
                         CircleAvatar(
                           radius: 20,
                           backgroundColor: AppColors.grey,
@@ -151,31 +179,25 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                         ),
                         Spacer(),
                         InkWell(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return UnblockOneUserDialog(
-                                    title: blockedList[index].title,
-                                  );
-                                });
-                          },
-                          child: Container(
-                            height: 25,
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Text(
-                              'Unblock',
-                              style: TextStyle(color: AppColors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return UnblockOneUserDialog(
+                                      title: blockedList[index].title,
+                                    );
+                                  });
+                            },
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 8),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFEB5757),
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Text('Unblock',
+                                    style: TextStyle(color: AppColors.white))))
+                      ]));
                 }),
             SizedBox(height: 20),
             Center(
