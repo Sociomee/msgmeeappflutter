@@ -75,14 +75,32 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        for (var i = 0; i < blockedUserlist.length; i++) {
-                          blockedUserlist[i].isSelected = true;
-                        }
-                      });
+                      if (blockedUserlist
+                              .where((e) => e.isSelected == true)
+                              .toList()
+                              .length !=
+                          blockedUserlist.length) {
+                        setState(() {
+                          for (var i = 0; i < blockedUserlist.length; i++) {
+                            blockedUserlist[i].isSelected = true;
+                          }
+                        });
+                      } else {
+                        setState(() {
+                          for (var i = 0; i < blockedUserlist.length; i++) {
+                            blockedUserlist[i].isSelected = false;
+                          }
+                        });
+                      }
                     },
                     child: Text(
-                      'Select All',
+                      blockedUserlist
+                                  .where((e) => e.isSelected == true)
+                                  .toList()
+                                  .length ==
+                              blockedUserlist.length
+                          ? 'Unselect All'
+                          : 'Select All',
                       style: TextStyle(
                           color: AppColors.primaryColor, fontSize: 16),
                     ),
