@@ -1252,12 +1252,11 @@ class SentMessageWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
                               color: AppColors.white,
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Container(
                                   width: 60,
@@ -1298,11 +1297,15 @@ class SentMessageWidget extends StatelessWidget {
                         ),
                         message.isEmpty
                             ? SizedBox(height: 5)
-                            : Text(message,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 14)),
+                            : Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, bottom: 3, top: 3),
+                                child: Text(message,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14)),
+                              ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 14),
+                          padding: const EdgeInsets.only(left: 10, right: 14),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
