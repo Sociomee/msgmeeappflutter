@@ -85,7 +85,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 239.w,
                         child: Text(
                           'You will hear the system default sound when a message is sent or received',
                           overflow: TextOverflow.clip,
@@ -142,7 +142,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 238.w,
                         child: Text(
                           'You will hear the system default sound when your friend added their stories',
                           overflow: TextOverflow.clip,
@@ -199,7 +199,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 239.w,
                         child: Text(
                           'You will hear the system default sound when a message is sent or received',
                           overflow: TextOverflow.clip,
@@ -256,7 +256,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 239.w,
                         child: Text(
                           'You will hear the system default sound when anyone mentioned you on story, chats, etc',
                           overflow: TextOverflow.clip,
@@ -312,29 +312,23 @@ class _NotificationSettingsScreenState
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Message preview',
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    Text('Message preview',
+                        style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500)),
                     SizedBox(height: 5),
                     SizedBox(
-                      width: 270,
-                      child: Text(
-                        'You will get preview of the text message notification at the top of your screen',
-                        overflow: TextOverflow.clip,
-                        style: TextStyle(
-                          color: Color(0xFF555555),
-                          fontSize: 11,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    )
+                        width: 233.w,
+                        child: Text(
+                            'You will get preview of the text message notification at the top of your screen',
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                                color: Color(0xFF555555),
+                                fontSize: 11,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400)))
                   ],
                 ),
                 SizedBox(
@@ -399,7 +393,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 239.w,
                         child: Text(
                           'You will hear the system default sound when a message is sent or received',
                           overflow: TextOverflow.clip,
@@ -456,7 +450,7 @@ class _NotificationSettingsScreenState
                       ),
                       SizedBox(height: 5),
                       SizedBox(
-                        width: 270,
+                        width: 239.w,
                         child: Text(
                           'You will hear the system default sound when a message is sent or received',
                           overflow: TextOverflow.clip,
