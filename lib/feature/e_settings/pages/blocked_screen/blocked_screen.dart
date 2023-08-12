@@ -33,6 +33,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           elevation: 3,
           shadowColor: AppColors.lightgrey1,
@@ -92,24 +93,21 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
           child: Container(
               width: 80,
               height: 70,
+              margin: EdgeInsets.only(bottom: 60),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(102, 147, 147, 147),
-                    blurRadius: 15,
-                    offset: Offset(0, 3),
-                    spreadRadius: 0,
+                    color: Color.fromARGB(87, 142, 142, 142),
+                    offset: Offset(0, 0.5),
+                    blurRadius: 10,
+                    spreadRadius: 0.05,
                   )
                 ],
               ),
               alignment: Alignment.center,
-              child: SvgPicture.asset(
-                'assets/add.svg',
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ))),
+              child: SvgPicture.asset('assets/add.svg',
+                  width: 80, height: 80, fit: BoxFit.cover))),
       body: SingleChildScrollView(
         child: Column(
           children: [
