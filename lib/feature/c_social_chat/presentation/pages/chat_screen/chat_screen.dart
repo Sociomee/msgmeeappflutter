@@ -43,12 +43,12 @@ class ChatScreen extends StatefulWidget {
       required this.imageUrl,
       required this.isOnline,
       required this.hasStory,
-      this.marketplace});
+      this.group});
   final String name;
   final String imageUrl;
   final bool isOnline;
   final bool hasStory;
-  final bool? marketplace;
+  final bool? group;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -218,14 +218,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                           .changemsgSearchMode();
                                     },
                                     icon: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, top: 10),
-                                      child: Icon(
-                                        Icons.arrow_back_ios,
-                                        color: AppColors.black,
-                                        size: 20,
-                                      ),
-                                    )),
+                                        padding: const EdgeInsets.only(
+                                            left: 10, top: 10),
+                                        child: Icon(Icons.arrow_back_ios,
+                                            color: AppColors.black, size: 20))),
                                 SizedBox(
                                     height: 40,
                                     width: 155.w,
@@ -283,22 +279,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         actions: [
                           SizedBox(width: 10),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.black,
-                              size: 30,
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Icon(Icons.keyboard_arrow_down,
+                                  color: AppColors.black, size: 30)),
                           SizedBox(width: 10),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Icon(
-                              Icons.keyboard_arrow_up,
-                              color: AppColors.black,
-                              size: 30,
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Icon(Icons.keyboard_arrow_up,
+                                  color: AppColors.black, size: 30)),
                           Padding(
                               padding:
                                   EdgeInsets.only(top: 20, left: 10, right: 10),
@@ -314,18 +302,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                     context: context,
                                     builder: (context) {
                                       return Dialog(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: SelectDuration(),
-                                      );
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: SelectDuration());
                                     });
                               },
                               child: Padding(
-                                padding:
-                                    EdgeInsets.only(right: 10.w, bottom: 10),
-                                child: SvgPicture.asset('assets/calender.svg'),
-                              ))
+                                  padding:
+                                      EdgeInsets.only(right: 10.w, bottom: 10),
+                                  child:
+                                      SvgPicture.asset('assets/calender.svg')))
                         ],
                       )
                     : AppBar(
@@ -370,19 +357,16 @@ class _ChatScreenState extends State<ChatScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    width: 130.w,
-                                    child: Text(widget.name,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: AppColors.black,
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                        )),
-                                  ),
+                                      width: 130.w,
+                                      child: Text(widget.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: AppColors.black,
+                                              fontSize: 16,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500))),
                                   SizedBox(height: 8),
-                                  widget.marketplace != null &&
-                                          widget.marketplace!
+                                  widget.group != null && widget.group!
                                       ? Text('Open now',
                                           style: TextStyle(
                                               fontSize: 13,
@@ -400,8 +384,18 @@ class _ChatScreenState extends State<ChatScreen> {
                           SvgPicture.asset('assets/video.svg'),
                           SizedBox(width: 25.w),
                           SvgPicture.asset('assets/calling.svg'),
-                          SinglechatPopupMenu(
-                              name: widget.name, imageUrl: widget.imageUrl)
+                          // widget.group!
+                          //     ? GroupchatPopupMenu(
+                          //         imageUrl: widget.name,
+                          //         name: widget.name,
+                          //       )
+                          //     :
+
+                          widget.name == 'Office Group'
+                              ? GroupchatPopupMenu(
+                                  imageUrl: widget.name, name: widget.name)
+                              : SinglechatPopupMenu(
+                                  name: widget.name, imageUrl: widget.imageUrl)
                         ],
                       ),
             body: Stack(

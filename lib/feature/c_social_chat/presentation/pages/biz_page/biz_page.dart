@@ -28,7 +28,7 @@ class BizPageTab extends StatelessWidget {
                           imageUrl: bizpage[index].imageUrl,
                           isOnline: false,
                           hasStory: false,
-                          marketplace: true,
+                          group: true,
                         ));
                   },
                   child: Padding(

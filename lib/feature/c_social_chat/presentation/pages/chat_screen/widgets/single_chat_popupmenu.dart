@@ -202,3 +202,77 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
     );
   }
 }
+
+class GroupchatPopupMenu extends StatefulWidget {
+  const GroupchatPopupMenu(
+      {super.key, required this.name, required this.imageUrl});
+  final String name;
+  final String imageUrl;
+  @override
+  State<GroupchatPopupMenu> createState() => _GroupchatPopupMenuState();
+}
+
+class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
+  bool selected = false;
+  List<ChatOptionsModel> options = [
+    ChatOptionsModel(id: 1, option: 'Search'),
+    ChatOptionsModel(id: 2, option: 'Mute Messages'),
+    ChatOptionsModel(id: 3, option: 'Clear Chats'),
+    ChatOptionsModel(id: 4, option: 'Block This User'),
+    ChatOptionsModel(id: 5, option: 'Chat Theme'),
+    ChatOptionsModel(id: 6, option: 'Change Wallpaper'),
+    ChatOptionsModel(id: 7, option: 'Media, links and docs'),
+  ];
+  final String url =
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg';
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<ShowAttachment>().closeAttachment();
+      },
+      child: PopupMenuButton(
+        icon: Icon(Icons.more_vert, color: Colors.black),
+        offset: Offset(0, 30),
+        color: Colors.white,
+        itemBuilder: (context) {
+          return options
+              .map(
+                (e) => PopupMenuItem(
+                    value: e.id,
+                    child: Text(
+                      e.option,
+                      style: TextStyle(
+                        color: Color(0xFF4E4E4E),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )),
+              )
+              .toList();
+        },
+        onSelected: (value) {
+          if (value == 1) {
+            context.read<SearchModeCubit>().changemsgSearchMode();
+          } else if (value == 2) {
+          } else if (value == 3) {
+          } else if (value == 4) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return BlockUserPopupWidget();
+                });
+          } else if (value == 5) {
+            animatedScreenNavigator(context, ChatThemePage());
+          } else if (value == 6) {
+            animatedScreenNavigator(context, ChangeWallPaperPage());
+          } else if (value == 7) {
+            screenNavigator(
+                context, MediaAndDocScreen(profilename: widget.name));
+          }
+        },
+      ),
+    );
+  }
+}
