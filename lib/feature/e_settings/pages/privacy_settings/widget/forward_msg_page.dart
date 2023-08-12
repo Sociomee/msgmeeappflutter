@@ -16,19 +16,15 @@ class ForwardMsgPage extends StatelessWidget {
           elevation: 3,
           shadowColor: AppColors.lightgrey1,
           leading: Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.black,
-                  size: 20,
-                )),
-          ),
+              padding: EdgeInsets.only(left: 10.w),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios,
+                      color: AppColors.black, size: 20))),
           leadingWidth: 45,
-          titleSpacing: 10,
+          titleSpacing: 5,
           title: Text('Forworded media many times',
               style: TextStyle(
                 color: AppColors.black,
@@ -57,18 +53,13 @@ class ForwardMsgPage extends StatelessWidget {
                     height: 36,
                     alignment: Alignment.center,
                     decoration: ShapeDecoration(
-                      color: Color(0xFFF6F6F6),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
+                        color: Color(0xFFF6F6F6),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5))),
                     child: Transform.rotate(
-                      angle: pi / 2,
-                      child: Icon(
-                        Icons.tune_outlined,
-                        color: AppColors.grey,
-                        size: 20,
-                      ),
-                    ))
+                        angle: pi / 2,
+                        child: Icon(Icons.tune_outlined,
+                            color: AppColors.grey, size: 20)))
               ],
             ),
           ),

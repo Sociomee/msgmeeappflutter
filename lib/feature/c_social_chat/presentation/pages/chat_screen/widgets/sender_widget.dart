@@ -1356,7 +1356,7 @@ class SentMessageWidget extends StatelessWidget {
             children: [audioMessage],
           ),
         );
-      case MessageType.text:
+      case MessageType.music:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(

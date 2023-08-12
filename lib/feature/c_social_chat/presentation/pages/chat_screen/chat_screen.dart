@@ -117,6 +117,7 @@ class _ChatScreenState extends State<ChatScreen> {
       onWillPop: () async {
         context.read<SearchModeCubit>().closeMsgSearchMode();
         context.read<ShowAttachment>().closeAttachment();
+        context.read<ShowEmojiCubit>().removeEmoji();
         return true;
       },
       child: MediaQuery(
@@ -132,6 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       onTap: () {
                         Navigator.pop(context);
                         context.read<ShowAttachment>().closeAttachment();
+                        context.read<ShowEmojiCubit>().removeEmoji();
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
@@ -349,10 +351,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                 : screenNavigator(
                                     context,
                                     OtherPersonProfileDescription(
-                                      imageUrl: widget.imageUrl,
-                                      name: widget.name,
-                                      isOnline: widget.isOnline,
-                                    ));
+                                        imageUrl: widget.imageUrl,
+                                        name: widget.name,
+                                        isOnline: widget.isOnline));
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
