@@ -152,27 +152,22 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
           ),
           SizedBox(height: 42),
           GestureDetector(
-            onTap: () {
-              animatedScreenNavigator(context, CreateGroupPage());
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 100),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: AppColors.primaryColor),
-              alignment: Alignment.center,
-              child: Text(
-                'Proceed',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
+              onTap: () {
+                animatedScreenNavigator(context, CreateGroupPage());
+              },
+              child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 100),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: AppColors.primaryColor),
+                  alignment: Alignment.center,
+                  child: Text('Proceed',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600)))),
           SizedBox(height: 16),
           GestureDetector(
             onTap: () {

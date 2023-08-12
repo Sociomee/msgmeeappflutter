@@ -360,7 +360,7 @@ class _NotificationSettingsScreenState
               ],
             ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 5),
           Divider(color: Colors.black.withOpacity(0.1), thickness: 1),
           GestureDetector(
             behavior: HitTestBehavior.opaque,

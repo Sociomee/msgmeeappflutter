@@ -384,13 +384,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           SvgPicture.asset('assets/video.svg'),
                           SizedBox(width: 25.w),
                           SvgPicture.asset('assets/calling.svg'),
-                          // widget.group!
-                          //     ? GroupchatPopupMenu(
-                          //         imageUrl: widget.name,
-                          //         name: widget.name,
-                          //       )
-                          //     :
-
                           widget.name == 'Office Group'
                               ? GroupchatPopupMenu(
                                   imageUrl: widget.name, name: widget.name)

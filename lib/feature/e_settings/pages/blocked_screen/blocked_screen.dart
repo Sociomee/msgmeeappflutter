@@ -61,7 +61,7 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
           actions: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(right: 20, top: 4),
+                padding: const EdgeInsets.only(right: 12, top: 4),
                 child: TextButton(
                   child: Text('Unblock All',
                       style: TextStyle(color: AppColors.primaryColor)),
@@ -114,41 +114,43 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
             SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21),
-              child: SizedBox(
-                height: 45,
-                child: TextFormField(
-                  controller: controller,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value.isEmpty) {
-                        filteredlist = List.from(blockedList);
-                      } else {
-                        filteredlist = blockedList
-                            .where((model) => model.title
-                                .toLowerCase()
-                                .contains(value.toLowerCase()))
-                            .toList();
-                      }
-                    });
-                  },
-                  decoration: InputDecoration(
-                      focusColor: AppColors.primaryColor,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.black.withOpacity(0.15000000596046448),
-                      )),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: AppColors.primaryColor)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.black.withOpacity(0.15000000596046448),
-                      )),
-                      hintText: 'Search...',
-                      hintStyle: TextStyle(color: AppColors.grey),
-                      suffixIcon: Icon(Icons.search)),
-                ),
+              child: TextFormField(
+                controller: controller,
+                onChanged: (value) {
+                  setState(() {
+                    if (value.isEmpty) {
+                      filteredlist = List.from(blockedList);
+                    } else {
+                      filteredlist = blockedList
+                          .where((model) => model.title
+                              .toLowerCase()
+                              .contains(value.toLowerCase()))
+                          .toList();
+                    }
+                  });
+                },
+                decoration: InputDecoration(
+                    focusColor: AppColors.primaryColor,
+                    contentPadding:
+                        EdgeInsets.only(left: 20, top: 12, bottom: 12),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black.withOpacity(0.15000000596046448),
+                    )),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.primaryColor)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black.withOpacity(0.15000000596046448),
+                    )),
+                    hintText: 'Search...',
+                    hintStyle: TextStyle(
+                      color: Color(0xFFC4C4C4),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                    suffixIcon: Icon(Icons.search)),
               ),
             ),
             SizedBox(height: 25),

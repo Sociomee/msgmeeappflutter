@@ -25,7 +25,7 @@ class ManageStoragePage extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_ios,
                       color: AppColors.black, size: 20))),
           leadingWidth: 45,
-          titleSpacing: 12,
+          titleSpacing: 5,
           title: Text('Manage Storage',
               style: TextStyle(
                 color: AppColors.black,
@@ -164,34 +164,25 @@ class ManageStoragePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 5),
-                  Text(
-                    'Social Media',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 11,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
+                  Text('Social Media',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 11,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400)),
                   Spacer(),
                   Container(
-                    width: 8,
-                    height: 8,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFFF8C756),
-                      shape: OvalBorder(),
-                    ),
-                  ),
+                      width: 8,
+                      height: 8,
+                      decoration: ShapeDecoration(
+                          color: Color(0xFFF8C756), shape: OvalBorder())),
                   SizedBox(width: 5),
-                  Text(
-                    'App  and Other item',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 11,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  )
+                  Text('App  and Other item',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 11,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400))
                 ],
               ),
             ),
@@ -205,23 +196,19 @@ class ManageStoragePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                 child: Row(
                   children: [
-                    Text(
-                      'Forworded media many times',
-                      style: TextStyle(
-                          color: Color(0xFF808080),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500),
-                    ),
+                    Text('Forworded media many times',
+                        style: TextStyle(
+                            color: Color(0xFF808080),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500)),
                     Spacer(),
-                    Text(
-                      '9.0 MB',
-                      style: TextStyle(
-                          color: Colors.black.withOpacity(0.5),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500),
-                    ),
+                    Text('9.0 MB',
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500)),
                     Icon(Icons.arrow_forward_ios,
                         color: AppColors.black, size: 15)
                   ],
@@ -229,68 +216,63 @@ class ManageStoragePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return MediaPreviewWidget(
-                      size: '2.3 MB',
-                      time: '1:30 AM',
-                      image:
-                          'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                    );
-                  }),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              child: SizedBox(
+                height: 120,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return MediaPreviewWidget(
+                        size: '2.3 MB',
+                        time: '1:30 AM',
+                        image:
+                            'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                      );
+                    }),
+              ),
             ),
             SizedBox(height: 30),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
                 children: [
-                  Text(
-                    'Larger than 5 MB',
-                    style: TextStyle(
-                      color: Color(0xFF808080),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  Text('Larger than 5 MB',
+                      style: TextStyle(
+                          color: Color(0xFF808080),
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500)),
                   Spacer(),
-                  Text(
-                    '1.1 GB',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppColors.black,
-                    size: 15,
-                  )
+                  Text('1.1 GB',
+                      style: TextStyle(
+                          color: Colors.black.withOpacity(0.5),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500)),
+                  Icon(Icons.arrow_forward_ios,
+                      color: AppColors.black, size: 15)
                 ],
               ),
             ),
             SizedBox(height: 10),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return MediaPreviewWidget(
-                      size: '2.3 MB',
-                      time: '1:30 AM',
-                      image:
-                          'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                    );
-                  }),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              child: SizedBox(
+                height: 120,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return MediaPreviewWidget(
+                        size: '2.3 MB',
+                        time: '1:30 AM',
+                        image:
+                            'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                      );
+                    }),
+              ),
             ),
             SizedBox(height: 42),
             Padding(
