@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../theme/colors.dart';
-
 class BuildPages extends StatelessWidget {
   const BuildPages(
       {super.key,
@@ -24,7 +22,7 @@ class BuildPages extends StatelessWidget {
         Text(title,
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: AppColors.primaryColor,
+                color: Color(0xFF16AF00),
                 fontSize: 30,
                 fontWeight: FontWeight.w600),
             textScaleFactor: 1.0),

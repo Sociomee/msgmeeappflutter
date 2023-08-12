@@ -1241,8 +1241,9 @@ class SentMessageWidget extends StatelessWidget {
               children: [
                 Container(
                     width: 230,
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.only(bottom: 5),
                     decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.lightgrey1),
                       color:
                           context.watch<ChatThemeCubit>().state.chatDeepColor,
                       borderRadius: BorderRadius.circular(12),
@@ -1355,7 +1356,7 @@ class SentMessageWidget extends StatelessWidget {
             children: [audioMessage],
           ),
         );
-      case MessageType.music:
+      case MessageType.text:
         return Padding(
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(

@@ -754,6 +754,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                     context
                                         .read<ShowAttachment>()
                                         .closeAttachment();
+                                    context
+                                        .read<ShowAttachment>()
+                                        .closeAttachment();
                                   },
                                   child: Container(
                                       height: 30,
@@ -913,6 +916,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         ShowContactTextField>()
                                                     .toggleValue();
                                                 _scrollToBottom();
+                                                context
+                                                    .read<ShowAttachment>()
+                                                    .closeAttachment();
                                               }
                                             },
                                             child: Container(
@@ -932,6 +938,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   .read<ShowAudioRecorder>()
                                                   .toggleValue();
                                               _scrollToBottom();
+                                              context
+                                                  .read<ShowAttachment>()
+                                                  .closeAttachment();
                                             },
                                             child: Container(
                                               height: 30,
