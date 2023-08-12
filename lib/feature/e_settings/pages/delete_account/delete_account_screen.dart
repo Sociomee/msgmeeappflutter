@@ -1,12 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/feature/e_settings/pages/delete_account/widget/delete_account_dialog.dart';
 
 import '../../../../theme/colors.dart';
 
-class DeleterAccountScreen extends StatelessWidget {
+class DeleterAccountScreen extends StatefulWidget {
   const DeleterAccountScreen({super.key});
+
+  @override
+  State<DeleterAccountScreen> createState() => _DeleterAccountScreenState();
+}
+
+class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
+  late TextEditingController numberController;
+  late TextEditingController passwordController;
+  bool enable = false;
+  @override
+  void initState() {
+    numberController = TextEditingController();
+    passwordController = TextEditingController();
+    numberController.addListener(() {
+      validateInput();
+    });
+    passwordController.addListener(() {
+      validateInput();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    numberController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  validateInput() {
+    RegExp phoneRegex = RegExp(r'^\d{10}$');
+    setState(() {
+      enable = phoneRegex.hasMatch(numberController.text) &&
+          passwordController.text.isNotEmpty &&
+          passwordController.text.length > 8;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +182,12 @@ class DeleterAccountScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
               child: TextFormField(
+                controller: numberController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$')),
+                  LengthLimitingTextInputFormatter(10),
+                ],
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -152,15 +196,14 @@ class DeleterAccountScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text('Password',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
               child: TextFormField(
+                controller: passwordController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -191,7 +234,12 @@ class DeleterAccountScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: CustomButtonWidget(
                   title: 'Delete my account',
-                  color: AppColors.primaryColor,
+                  color: enable
+                      ? AppColors.primaryColor
+                      : AppColors.primaryColor.withOpacity(.5),
+                  borderColor: enable
+                      ? AppColors.primaryColor
+                      : AppColors.primaryColor.withOpacity(.5),
                   ontap: () {
                     showDialog(
                         context: context,

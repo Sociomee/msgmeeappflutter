@@ -27,6 +27,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(height: 40),
             CustomButtonWidget(
+                height: 50,
                 title: 'Log Out',
                 color: AppColors.primaryColor,
                 ontap: () {

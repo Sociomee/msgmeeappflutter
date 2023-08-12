@@ -19,7 +19,7 @@ class DeleteAccountDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Do you want to really delete your\naccount ?',
+              'Do you really want to delete your \naccount? ',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.800000011920929),
                 fontSize: 16,
@@ -44,7 +44,7 @@ class DeleteAccountDialog extends StatelessWidget {
                 child: Text(
                   'Cancel',
                   style: TextStyle(
-                    color: Color(0xFF81C14B),
+                    color: AppColors.black,
                     fontSize: 16,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,

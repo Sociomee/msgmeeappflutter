@@ -59,7 +59,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   builder: (context) {
                     return OptionsBottomSheet(
                       title: 'Last Seen',
-                      subtitle: 'Who can view me in group',
+                      subtitle: 'Who can add me in group',
                     );
                   });
             },
@@ -97,7 +97,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   builder: (context) {
                     return OptionsBottomSheet(
                       title: 'Profile Photo',
-                      subtitle: 'Who can view me in group',
+                      subtitle: 'Who can add me in group',
                     );
                   });
             },
@@ -135,7 +135,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   builder: (context) {
                     return OptionsBottomSheet(
                       title: 'Online Status',
-                      subtitle: 'Who can view me in group',
+                      subtitle: 'Who can add me in group',
                     );
                   });
             },
@@ -173,7 +173,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   builder: (context) {
                     return OptionsBottomSheet(
                       title: 'Group',
-                      subtitle: 'Who can view me in group',
+                      subtitle: 'Who can add me in group',
                     );
                   });
             },
@@ -211,7 +211,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
                   builder: (context) {
                     return OptionsBottomSheet(
                       title: 'Group Privacy',
-                      subtitle: 'Who can view me in group',
+                      subtitle: 'Who can add me in group',
                     );
                   });
             },
