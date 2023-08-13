@@ -42,7 +42,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
     return Scaffold(
       appBar: AppBar(
           leading: Padding(
-            padding: EdgeInsets.only(left: 10.w),
+            padding: EdgeInsets.only(left: 10),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -53,7 +53,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
                   size: 20,
                 )),
           ),
-          leadingWidth: 45,
+          leadingWidth: 55,
           titleSpacing: 0,
           title: Text(
             'Syncing and Invite',
@@ -66,6 +66,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
           )),
       body: Column(
         children: [
+          SizedBox(height: 28),
           ListTile(
             onTap: () {},
             title: Text(
@@ -78,14 +79,19 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               ),
             ),
             subtitle: Text(
-              'You can sync your SocioMee Connections',
-              style: TextStyle(fontSize: 12),
+              'You can sync to SocioMee',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
             ),
             trailing: SizedBox(
               width: 51,
               child: FlutterSwitch(
                 switchBorder: Border.all(
-                  color: AppColors.primaryColor,
+                  color: readReceipt ? AppColors.primaryColor : AppColors.grey,
                   width: 2.0.w,
                 ),
                 activeColor: AppColors.primaryColor,
@@ -105,47 +111,63 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               ),
             ),
           ),
-          ListTile(
-            onTap: () {},
-            title: Text(
-              'Invite',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            subtitle: Text(
-              'You can invite your connections from SocioMee ',
-              style: TextStyle(fontSize: 12),
-            ),
-            trailing: SizedBox(
-              width: 51,
-              child: FlutterSwitch(
-                switchBorder: Border.all(
-                  color: AppColors.primaryColor,
-                  width: 2.0.w,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Invite',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      'You can invite your connections from sociomee ',
+                      style: TextStyle(
+                        color: Color(0xFF555555),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
-                activeColor: AppColors.primaryColor,
-                inactiveColor: AppColors.white,
-                inactiveToggleColor: AppColors.primaryColor,
-                width: 51.0.w,
-                height: 26.0.h,
-                toggleSize: 23.0.sp,
-                value: invite,
-                borderRadius: 30.0,
-                padding: 2.0,
-                onToggle: (val) {
-                  setState(() {
-                    invite = !invite;
-                  });
-                },
-              ),
+                SizedBox(
+                  width: 51,
+                  child: FlutterSwitch(
+                    switchBorder: Border.all(
+                      color: invite ? AppColors.primaryColor : AppColors.grey,
+                      width: 2.0.w,
+                    ),
+                    activeColor: AppColors.primaryColor,
+                    inactiveColor: AppColors.white,
+                    inactiveToggleColor: AppColors.primaryColor,
+                    width: 51.0.w,
+                    height: 26.0.h,
+                    toggleSize: 23.0.sp,
+                    value: invite,
+                    borderRadius: 30.0,
+                    padding: 2.0,
+                    onToggle: (val) {
+                      setState(() {
+                        invite = !invite;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
               children: [
                 Expanded(
