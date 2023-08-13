@@ -14,18 +14,55 @@ class SyncInviteScreen extends StatefulWidget {
 class _SyncInviteScreenState extends State<SyncInviteScreen> {
   bool readReceipt = false;
   bool invite = false;
+  late TextEditingController controller;
+  bool enable = false;
+  @override
+  void initState() {
+    controller = TextEditingController();
+    controller.addListener(() {
+      enableBtn();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  enableBtn() {
+    setState(() {
+      enable = controller.text.isNotEmpty;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 20,
+                )),
+          ),
+          leadingWidth: 45,
+          titleSpacing: 0,
           title: Text(
             'Syncing and Invite',
-            style: TextStyle(color: AppColors.black),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           )),
       body: Column(
         children: [
@@ -112,24 +149,37 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColors.primaryColor, width: 2)),
-                        hintText: 'Search'),
+                  child: SizedBox(
+                    height: 43,
+                    child: TextFormField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFE0E0E0))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFE0E0E0))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColors.primaryColor, width: 1)),
+                          hintText: 'Search',
+                          hintStyle: TextStyle(
+                            color: AppColors.lightgrey,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.primaryColor),
+                    borderRadius: BorderRadius.circular(5),
+                    color: enable ? AppColors.primaryColor : Color(0xFFDADADA),
+                  ),
                   child: Text(
                     'Invite',
                     style: TextStyle(
