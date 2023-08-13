@@ -1151,63 +1151,49 @@ class SentMessageWidget extends StatelessWidget {
                     onTap: () {
                       animatedScreenNavigator(context, LocationPreviewPage());
                     },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
+                    child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 5, left: 5, right: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                          color: context
+                              .watch<ChatThemeCubit>()
+                              .state
+                              .chatDeepColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                padding: const EdgeInsets.only(
-                                    top: 5, left: 5, right: 5, bottom: 5),
-                                decoration: BoxDecoration(
-                                  color: context
-                                      .watch<ChatThemeCubit>()
-                                      .state
-                                      .chatDeepColor,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: MapViewWidget()),
-                                    ),
-                                    SizedBox(height: 5),
-                                    message == ''
-                                        ? Container()
-                                        : Text(message,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14)),
-                                    SizedBox(height: 2),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(time,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10)),
-                                    )
-                                  ],
-                                )),
-                            SizedBox(height: 5)
+                              height: 140,
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: MapViewWidget()),
+                            ),
+                            SizedBox(height: 5),
+                            message == ''
+                                ? Container()
+                                : Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(message,
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 14)),
+                                  ),
+                            SizedBox(height: 2),
+                            Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(time,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10)))
                           ],
-                        ),
-                        SizedBox(width: 3)
-                      ],
-                    ),
+                        )),
                   ),
                   Positioned(
-                    bottom: 2,
+                    bottom: 0,
                     right: 0,
                     child: msgStatus == 'read'
                         ? MessageStatus.read
@@ -1216,7 +1202,7 @@ class SentMessageWidget extends StatelessWidget {
                             : MessageStatus.delivered,
                   ),
                   Positioned(
-                    bottom: 10,
+                    bottom: 5,
                     right: 20,
                     child: Text(msgStatus,
                         style:

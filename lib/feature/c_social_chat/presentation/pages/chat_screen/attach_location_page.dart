@@ -314,7 +314,9 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                       },
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
                           onTap: () {
+                            Navigator.pop(context);
                             context
                                 .read<AddMessageCubit>()
                                 .addMessage(ChatMessage(
@@ -324,7 +326,6 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                                   time: getCurrentTime(),
                                   type: MessageType.location,
                                 ));
-                            Navigator.pop(context);
                           },
                           child: Row(
                             children: [
@@ -342,11 +343,9 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text(
-                                        locations[index].title,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                      Text(locations[index].title,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                       index == 2
                                           ? Container(
                                               height: 13.w,
@@ -359,21 +358,19 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                                                   color: AppColors.errorRedColor
                                                       .withOpacity(.5)),
                                               child: Icon(
-                                                Icons.fiber_manual_record,
-                                                color: AppColors.errorRedColor,
-                                                size: 12.r,
-                                              ),
+                                                  Icons.fiber_manual_record,
+                                                  color:
+                                                      AppColors.errorRedColor,
+                                                  size: 12.r),
                                             )
                                           : Container()
                                     ],
                                   ),
                                   SizedBox(height: 5),
-                                  Text(
-                                    locations[index].subtitle,
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 135, 135, 135),
-                                    ),
-                                  ),
+                                  Text(locations[index].subtitle,
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 135, 135, 135)))
                                 ],
                               )
                             ],
