@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/multiple_image_perview_page.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
@@ -580,6 +581,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                     context
                                         .read<ShowAttachment>()
                                         .closeAttachment();
+                                    msg[index].type == MessageType.multipleImage
+                                        ? screenNavigator(
+                                            context,
+                                            MultipleImagePreviewPage(
+                                                name: widget.name,
+                                                images: msg[index].images,
+                                                date: formattedDate,
+                                                time:msg[index].time,
+                                                
+                                                ))
+                                        : null;
                                   },
                                   onLongPress: () async {
                                     if (!chattileIndex.contains(index)) {

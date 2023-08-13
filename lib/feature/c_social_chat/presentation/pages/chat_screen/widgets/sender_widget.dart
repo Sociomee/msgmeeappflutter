@@ -561,11 +561,10 @@ class SentMessageWidget extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             8),
                                                     child: Image.file(
-                                                      images![index]!,
-                                                      height: 100,
-                                                      width: 100,
-                                                      fit: BoxFit.cover,
-                                                    )),
+                                                        images![index]!,
+                                                        height: 100,
+                                                        width: 100,
+                                                        fit: BoxFit.cover)),
                                               ),
                                             ),
                                           ),
