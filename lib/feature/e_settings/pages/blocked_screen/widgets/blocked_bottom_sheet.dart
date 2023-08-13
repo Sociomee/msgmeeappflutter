@@ -76,7 +76,7 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      if (blockedUserlist
+                    if (blockedUserlist
                               .where((e) => e.isSelected == true)
                               .toList()
                               .length !=
@@ -93,7 +93,7 @@ class _BlockedBottomSheetState extends State<BlockedBottomSheet> {
                           }
                         });
                       }
-                    },
+                    },  
                     child: Text(
                       blockedUserlist
                                   .where((e) => e.isSelected == true)

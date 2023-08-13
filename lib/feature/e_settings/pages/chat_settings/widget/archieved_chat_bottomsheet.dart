@@ -43,13 +43,40 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Select All',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                    GestureDetector(
+                      onTap: () {
+                        if (archievedChatList
+                                .where((e) => e.selected == true)
+                                .toList()
+                                .length !=
+                            archievedChatList.length) {
+                          setState(() {
+                            for (var i = 0; i < archievedChatList.length; i++) {
+                              archievedChatList[i].selected = true;
+                            }
+                          });
+                        } else {
+                          setState(() {
+                            for (var i = 0; i < archievedChatList.length; i++) {
+                              archievedChatList[i].selected = false;
+                            }
+                          });
+                        }
+                      },
+                      child: Text(
+                        archievedChatList
+                                    .where((e) => e.selected == true)
+                                    .toList()
+                                    .length ==
+                                archievedChatList.length
+                            ? 'Unselect All'
+                            : 'Select All',
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     GestureDetector(

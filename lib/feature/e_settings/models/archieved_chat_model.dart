@@ -41,3 +41,14 @@ List<ArchievedChatModel> archievedChatList = [
   ArchievedChatModel(name: 'Albert Flores', size: '10 Mb', selected: false),
   ArchievedChatModel(name: 'Arlene McCoy', size: '64 Mb', selected: false),
 ];
+List<ArchievedChatModel> deletedChatList = [
+  ArchievedChatModel(name: 'Guy Hawkins', size: '12.4 Mb', selected: false),
+  ArchievedChatModel(name: 'Ralph Edwards', size: '25 Mb', selected: false),
+  ArchievedChatModel(
+      name: 'Cameron Williamson', size: '12.4 Mb', selected: false),
+  ArchievedChatModel(name: 'Annette Black', size: '40 Mb', selected: false),
+  ArchievedChatModel(name: 'Eleanor Pena', size: '120 Mb', selected: false),
+  ArchievedChatModel(name: 'Esther Howard', size: '240 Mb', selected: false),
+  ArchievedChatModel(name: 'Albert Flores', size: '10 Mb', selected: false),
+  ArchievedChatModel(name: 'Arlene McCoy', size: '64 Mb', selected: false),
+];

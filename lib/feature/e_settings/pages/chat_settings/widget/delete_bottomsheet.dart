@@ -30,7 +30,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text('My Chats',
+                child: Text('Delete Chats',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: AppColors.black,
@@ -42,13 +42,40 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Select All',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                    GestureDetector(
+                      onTap: () {
+                        if (deletedChatList
+                                .where((e) => e.selected == true)
+                                .toList()
+                                .length !=
+                            deletedChatList.length) {
+                          setState(() {
+                            for (var i = 0; i < deletedChatList.length; i++) {
+                              deletedChatList[i].selected = true;
+                            }
+                          });
+                        } else {
+                          setState(() {
+                            for (var i = 0; i < deletedChatList.length; i++) {
+                              deletedChatList[i].selected = false;
+                            }
+                          });
+                        }
+                      },
+                      child: Text(
+                        deletedChatList
+                                    .where((e) => e.selected == true)
+                                    .toList()
+                                    .length ==
+                                deletedChatList.length
+                            ? 'Unselect All'
+                            : 'Select All',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -58,7 +85,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                         });
                       },
                       child: Text(
-                        'Archives Selected',
+                        'Clear Selected',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: AppColors.primaryColor,
@@ -75,7 +102,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: archievedChatList.length,
+                  itemCount: deletedChatList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -89,11 +116,11 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                                 (states) => const BorderSide(
                                     width: 1.0, color: AppColors.primaryColor),
                               ),
-                              value: archievedChatList[index].selected,
+                              value: deletedChatList[index].selected,
                               onChanged: (e) {
                                 setState(() {
-                                  archievedChatList[index].selected =
-                                      !archievedChatList[index].selected;
+                                  deletedChatList[index].selected =
+                                      !deletedChatList[index].selected;
                                 });
                               }),
                           SizedBox(width: 10),
@@ -108,7 +135,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                               shape: OvalBorder(),
                             ),
                             child: Text(
-                              archievedChatList[index].name[0],
+                              deletedChatList[index].name[0],
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
@@ -118,7 +145,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                           ),
                           SizedBox(width: 10),
                           Text(
-                            archievedChatList[index].name,
+                            deletedChatList[index].name,
                             style: TextStyle(
                               color: Color(0xFF151624),
                               fontSize: 14,
@@ -128,7 +155,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                           ),
                           Spacer(),
                           Text(
-                            archievedChatList[index].size,
+                            deletedChatList[index].size,
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: Color(0xFF979797),
@@ -148,16 +175,16 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 10),
+              SizedBox(height: 17),
               Container(
-                height: 2,
+                height: 4.5,
                 width: 80.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.grey),
+                    color: AppColors.lightgrey),
               ),
               SizedBox(height: 20),
-              Text('Delete Chats',
+              Text('Delate All Chats',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.black,
@@ -166,7 +193,7 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Text(
-                  'Do you want to realy archive all chats?',
+                  'Are you sure! Do you want to delate all chats?',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -175,12 +202,16 @@ class _DeleteChatBottomSheetState extends State<DeleteChatBottomSheet> {
                   ),
                 ),
               ),
-              CustomButtonWidget(
-                  title: 'OK',
-                  color: AppColors.primaryColor,
-                  ontap: () {
-                    Navigator.pop(context);
-                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: CustomButtonWidget(
+                    height: 49,
+                    title: 'OK',
+                    color: AppColors.primaryColor,
+                    ontap: () {
+                      Navigator.pop(context);
+                    }),
+              ),
               SizedBox(height: 30),
             ],
           );
