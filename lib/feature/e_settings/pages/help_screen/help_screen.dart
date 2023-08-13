@@ -59,21 +59,30 @@ class HelpScreen extends StatelessWidget {
                       index == questionsList.length - 1
                           ? Container(
                               padding: EdgeInsets.only(top: 15, bottom: 15),
-                              child: RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: 'About',
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'About ',
                                       style: TextStyle(
-                                        color: AppColors.black,
-                                      )),
-                                  TextSpan(
-                                      text: ' MsgMee',
+                                        color: Color(0xFF333333),
+                                        fontSize: 14,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'MsgMee',
                                       style: TextStyle(
-                                          color: AppColors.black,
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                              ),
-                            )
+                                        color: Color(0xFF333333),
+                                        fontSize: 14,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ))
                           : InkWell(
                               onTap: questionsList[index].onTap,
                               child: Container(

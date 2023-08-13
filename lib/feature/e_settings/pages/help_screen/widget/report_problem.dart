@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -20,10 +21,20 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
   int remainchar = 360;
   final ImagePicker _picker = ImagePicker();
   List<XFile>? imageFileList = [];
+  bool enable = false;
   @override
   void initState() {
     reasonController = TextEditingController();
+    reasonController.addListener(() {
+      enableButton();
+    });
     super.initState();
+  }
+
+  enableButton() {
+    setState(() {
+      enable = reasonController.text.trim().isNotEmpty;
+    });
   }
 
 //pick image from camera
@@ -62,9 +73,18 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-          title: Text('Report a problem',
-              style: TextStyle(color: AppColors.black))),
+              icon: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(Icons.arrow_back_ios,
+                      color: AppColors.black, size: 18))),
+          leadingWidth: 40,
+          titleSpacing: 6,
+          title: Text('Report a Problem',
+              style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600))),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
@@ -72,22 +92,35 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Please explain what happened and how should we resolve the issue',
-                style: TextStyle(fontWeight: FontWeight.w500),
+                'Please explain what happened',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               SizedBox(height: 20),
               TextFormField(
                   controller: reasonController,
-                  keyboardType: TextInputType.phone,
                   maxLines: 7,
                   decoration: const InputDecoration(
                     contentPadding:
-                        EdgeInsets.only(top: 5, bottom: 5, left: 15),
-                    border: OutlineInputBorder(),
+                        EdgeInsets.only(top: 15, bottom: 5, left: 15),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFE0E0E0))),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFE0E0E0))),
                     focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 2, color: AppColors.primaryColor)),
+                            width: 1, color: AppColors.primaryColor)),
                     hintText: 'Type your reason (optional)...',
+                    hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 131, 131, 131),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   onChanged: (e) {
                     setState(() {
@@ -124,9 +157,11 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                         return CustomBottomModelSheet(
                           cameraClick: () {
                             pickCameraImage();
+                            Navigator.pop(context);
                           },
                           galleryClick: () {
                             pickGalleryImage();
+                            Navigator.pop(context);
                           },
                         );
                       });
@@ -136,65 +171,101 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 2,
+                  childAspectRatio: 175 / 368,
                   children: List.generate(imageFileList!.length, (index) {
-                    return Container(
-                      height: 260,
-                      margin: EdgeInsets.all(6),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 11, vertical: 10),
-                      child: Stack(
-                        children: [
-                          Container(height: 260, width: 260),
-                          Positioned(
-                              top: 10,
-                              right: 10,
-                              child: Image.file(
-                                  File(imageFileList![index].path),
-                                  height: 240)),
-                          Positioned(
-                              top: 0,
-                              right: 0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    imageFileList!.removeAt(index);
-                                  });
-                                },
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.mediaiconColor,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: Icon(Icons.remove,
-                                        color: AppColors.white, size: 15)),
-                              )),
-                        ],
-                      ),
+                    return Stack(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  height: 335,
+                                  width: 156,
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: AppColors.primaryColor)),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Center(
+                                          child: Image.file(
+                                              File(imageFileList![index].path),
+                                              height: 330,
+                                              width: 140,
+                                              fit: BoxFit.cover))),
+                                ),
+                                SizedBox(width: 10)
+                              ],
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                            top: 5,
+                            right: 5,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  imageFileList!.removeAt(index);
+                                });
+                              },
+                              child: Container(
+                                  height: 25,
+                                  width: 25,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: AppColors.white, width: 3),
+                                      color: AppColors.mediaiconColor,
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Icon(Icons.remove,
+                                      color: AppColors.white, size: 15)),
+                            )),
+                      ],
                     );
                   })),
-              SizedBox(height: 70),
-              Text(
-                  'Disclaimer: Learn about how your data will be used. Please ',
-                  style: TextStyle(color: AppColors.black, fontSize: 12)),
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'check our',
-                      style: TextStyle(color: AppColors.black, fontSize: 12)),
-                  TextSpan(
-                      text: ' Data Policy',
-                      style: TextStyle(color: Colors.blue, fontSize: 12)),
-                ]),
+              SizedBox(height: imageFileList!.isEmpty ? 250.h : 70),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text:
+                          'Disclaimer: Learn about how your data will be used. Please check our ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        height: 1.20,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Data Policy',
+                      style: TextStyle(
+                        color: Color(0xFF2F80ED),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        height: 1.20,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: CustomButtonWidget(
                     title: 'Submit',
-                    color: AppColors.primaryColor,
+                    borderColor: enable
+                        ? AppColors.primaryColor
+                        : AppColors.primaryColor.withOpacity(.5),
+                    color: enable
+                        ? AppColors.primaryColor
+                        : AppColors.primaryColor.withOpacity(.5),
                     ontap: () {
                       animatedScreenReplaceNavigator(
                           context, ReportSuccessPage());
