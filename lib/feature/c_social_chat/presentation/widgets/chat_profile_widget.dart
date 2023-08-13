@@ -22,7 +22,7 @@ class ChatProfileWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               border: hasStory
                   ? Border.all(color: AppColors.primaryColor, width: 3)
-                  : null,
+                  : Border.all(color: AppColors.lightgrey, width: 1),
             ),
             child: CircleAvatar(
                 radius: radius ?? 28,

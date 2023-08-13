@@ -357,6 +357,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  widget.name == 'Office Group'
+                                      ? SizedBox(
+                                          height: 13,
+                                        )
+                                      : Container(),
                                   Container(
                                       width: 130.w,
                                       child: Text(widget.name,
@@ -372,6 +377,21 @@ class _ChatScreenState extends State<ChatScreen> {
                                           style: TextStyle(
                                               fontSize: 13,
                                               color: AppColors.grey))
+                                      : Container(),
+                                  widget.name == 'Office Group'
+                                      ? SizedBox(
+                                          width: 141,
+                                          child: Text(
+                                            'Rajdar, Harsh and 20\nothers',
+                                            style: TextStyle(
+                                              color: Color(0xFF141414),
+                                              fontSize: 11,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w400,
+                                              height: 1.08,
+                                            ),
+                                          ),
+                                        )
                                       : Container(),
                                   Text(widget.isOnline ? 'Active Now' : '',
                                       style: TextStyle(
@@ -585,12 +605,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                         ? screenNavigator(
                                             context,
                                             MultipleImagePreviewPage(
-                                                name: widget.name,
-                                                images: msg[index].images,
-                                                date: formattedDate,
-                                                time:msg[index].time,
-                                                
-                                                ))
+                                              name: widget.name,
+                                              images: msg[index].images,
+                                              date: formattedDate,
+                                              time: msg[index].time,
+                                            ))
                                         : null;
                                   },
                                   onLongPress: () async {
