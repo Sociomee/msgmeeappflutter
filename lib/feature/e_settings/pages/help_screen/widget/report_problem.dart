@@ -117,7 +117,9 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   showModalBottomSheet(
                       context: context,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
                       builder: (context) {
                         return CustomBottomModelSheet(
                           cameraClick: () {
@@ -142,36 +144,34 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                           horizontal: 11, vertical: 10),
                       child: Stack(
                         children: [
-                          Container(
-                            height: 260,
-                            width: 260,
-                          ),
+                          Container(height: 260, width: 260),
                           Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Image.file(
-                              File(imageFileList![index].path),
-                              height: 240,
-                            ),
-                          ),
+                              top: 10,
+                              right: 10,
+                              child: Image.file(
+                                  File(imageFileList![index].path),
+                                  height: 240)),
                           Positioned(
-                            top: 0,
-                            right: 0,
-                            child: Container(
-                              height: 25,
-                              width: 25,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  color: AppColors.mediaiconColor,
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: Icon(
-                                Icons.remove,
-                                color: AppColors.white,
-                                size: 15,
-                              ),
-                            ),
-                          ),
+                              top: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    imageFileList!.removeAt(index);
+                                  });
+                                },
+                                child: Container(
+                                    height: 25,
+                                    width: 25,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.mediaiconColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Icon(Icons.remove,
+                                        color: AppColors.white, size: 15)),
+                              )),
                         ],
                       ),
                     );
