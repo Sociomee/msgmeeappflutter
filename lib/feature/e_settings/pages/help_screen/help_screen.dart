@@ -40,12 +40,21 @@ class HelpScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
-          title:
-              Text('Help & Support', style: TextStyle(color: AppColors.black))),
+              icon: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Icon(Icons.arrow_back_ios,
+                      color: AppColors.black, size: 18))),
+          leadingWidth: 50,
+          titleSpacing: 0,
+          title: Text('Help & Support',
+              style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600))),
       body: SingleChildScrollView(
           child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+        padding: const EdgeInsets.only(top: 12),
         child: Column(
           children: [
             ListView.builder(
@@ -58,6 +67,7 @@ class HelpScreen extends StatelessWidget {
                     children: [
                       index == questionsList.length - 1
                           ? Container(
+                              margin: EdgeInsets.symmetric(horizontal: 24),
                               padding: EdgeInsets.only(top: 15, bottom: 15),
                               child: Text.rich(
                                 TextSpan(
@@ -86,13 +96,18 @@ class HelpScreen extends StatelessWidget {
                           : InkWell(
                               onTap: questionsList[index].onTap,
                               child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 24),
                                 padding: EdgeInsets.only(top: 15, bottom: 15),
                                 child: Text(questionsList[index].option),
                               ),
                             ),
                       index == questionsList.length - 1
                           ? Container()
-                          : Divider(color: AppColors.grey)
+                          : Divider(
+                              color: AppColors.lightgrey,
+                              height: 0,
+                              thickness: 1,
+                            )
                     ],
                   );
                 })
