@@ -1,23 +1,55 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
+
 import '../../../../../theme/colors.dart';
 
 class OptionsModel {
   final String option;
   bool isSelected;
-
-  OptionsModel({required this.option, required this.isSelected});
+  ChatBackupOptions value;
+  OptionsModel({
+    required this.option,
+    required this.isSelected,
+    required this.value,
+  });
 }
 
 List<OptionsModel> options = [
-  OptionsModel(option: 'Every hour', isSelected: false),
-  OptionsModel(option: 'Every 4 hours', isSelected: false),
-  OptionsModel(option: 'Everyday', isSelected: false),
-  OptionsModel(option: 'Every week', isSelected: true),
-  OptionsModel(option: 'Every month', isSelected: false),
-  OptionsModel(option: 'Only when i back up', isSelected: false),
+  OptionsModel(
+      option: 'Every hour',
+      isSelected: false,
+      value: ChatBackupOptions.everyhour),
+  OptionsModel(
+      option: 'Every 4 hours',
+      isSelected: false,
+      value: ChatBackupOptions.every4hour),
+  OptionsModel(
+      option: 'Everyday', isSelected: false, value: ChatBackupOptions.everyday),
+  OptionsModel(
+      option: 'Every week',
+      isSelected: true,
+      value: ChatBackupOptions.everyweek),
+  OptionsModel(
+      option: 'Every month',
+      isSelected: false,
+      value: ChatBackupOptions.everymonth),
+  OptionsModel(
+      option: 'Only when i back up',
+      isSelected: false,
+      value: ChatBackupOptions.onlywhenibackup),
 ];
+
+enum ChatBackupOptions {
+  everyhour,
+  every4hour,
+  everyday,
+  everyweek,
+  everymonth,
+  onlywhenibackup,
+}
 
 class ChatBackUpBottomSheet extends StatefulWidget {
   const ChatBackUpBottomSheet({super.key});
@@ -28,6 +60,7 @@ class ChatBackUpBottomSheet extends StatefulWidget {
 
 class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
   int selected = 0;
+  ChatBackupOptions? groupvalue = ChatBackupOptions.everyhour;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -36,7 +69,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
           topRight: Radius.circular(20.0),
         ),
         child: Container(
-          height: 480.h,
+          height: 450.h,
           decoration: BoxDecoration(
               color: AppColors.white, borderRadius: BorderRadius.circular(25)),
           child: Column(
@@ -52,6 +85,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
               SizedBox(height: 20),
               Text('Schedule Chat Backup',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 24),
               ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -59,48 +93,56 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        ListTile(
-                          tileColor: AppColors.seconderyColor,
-                          selectedTileColor: AppColors.seconderyColor,
-                          onTap: () {
-                            setState(() {
-                              selected = index;
-                            });
-                          },
-                          leading: Text(options[index].option),
-                          trailing: Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                border: Border.all(
-                                    color: AppColors.primaryColor, width: 1),
-                                borderRadius: BorderRadius.circular(100)),
-                            child: selected == index
-                                ? Container(
-                                    height: 5,
-                                    width: 5,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.primaryColor,
-                                        border: Border.all(
-                                            color: AppColors.white, width: 3),
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                  )
-                                : Container(),
+                        Container(
+                          color: groupvalue == options[index].value
+                              ? AppColors.seconderyColor1
+                              : Colors.transparent,
+                          child: ListTile(
+                            tileColor: AppColors.seconderyColor,
+                            selectedTileColor: AppColors.seconderyColor,
+                            onTap: () {
+                              setState(() {
+                                groupvalue = options[index].value;
+                              });
+                            },
+                            leading: Text(options[index].option),
+                            trailing: Radio<ChatBackupOptions>(
+                                fillColor: MaterialStateColor.resolveWith(
+                                    (states) =>
+                                        groupvalue == options[index].value
+                                            ? AppColors.primaryColor
+                                            : AppColors.lightgrey),
+                                activeColor: AppColors.primaryColor,
+                                value: options[index].value,
+                                groupValue: groupvalue,
+                                onChanged: (ChatBackupOptions? e) {
+                                  setState(() {
+                                    groupvalue = e;
+                                  });
+                                }),
                           ),
                         ),
-                        Divider(color: AppColors.primaryColor)
+                        index == 5
+                            ? Container()
+                            : Divider(
+                                color: AppColors.seconderyColor,
+                                height: 0,
+                                thickness: .5,
+                              )
                       ],
                     );
                   }),
               SizedBox(height: 30),
-              CustomButtonWidget(
-                  title: 'Ok',
-                  color: AppColors.primaryColor,
-                  ontap: () {
-                    Navigator.pop(context);
-                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: CustomButtonWidget(
+                    height: 49,
+                    title: 'OK',
+                    color: AppColors.primaryColor,
+                    ontap: () {
+                      Navigator.pop(context);
+                    }),
+              ),
             ],
           ),
         ));
