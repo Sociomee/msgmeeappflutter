@@ -38,7 +38,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
           titleSpacing: 5,
           title: Text('Privacy Setting',
               style: TextStyle(
-                color: AppColors.black,
+                color: Colors.black,
                 fontSize: 18,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,

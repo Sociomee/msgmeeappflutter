@@ -37,6 +37,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                 child: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.black,
+                  size: 20,
                 ),
               )),
           leadingWidth: 40,
