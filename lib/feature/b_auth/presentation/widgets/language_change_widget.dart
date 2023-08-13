@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../../../../theme/colors.dart';
 import '../../../e_settings/cubit/choose_language_cubit.dart';
@@ -55,7 +56,7 @@ class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
                 color: Colors.white,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: AppColors.grey,
+                      color: AppColors.lightgrey,
                       blurRadius: 15.0,
                       offset: Offset(0.0, 0.75))
                 ],
@@ -94,19 +95,40 @@ class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
                         });
                       }
                     },
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.grey),
+                        borderSide: BorderSide(
+                          color: AppColors.lightgrey,
+                        ),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.grey),
+                        borderSide: BorderSide(
+                          color: AppColors.lightgrey,
+                        ),
                       ),
                       border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.grey),
+                        borderSide: BorderSide(
+                          color: AppColors.lightgrey,
+                        ),
                       ),
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'Search..',
-                      hintStyle: TextStyle(color: AppColors.grey, fontSize: 12),
+                      prefixIcon: SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              'assets/Search.svg',
+                              height: 18,
+                              width: 18,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                      hintText: 'Search......',
+                      hintStyle: TextStyle(
+                        color: Color(0xFF828282),
+                        fontSize: 12,
+                        fontFamily: 'Niramit',
+                        fontWeight: FontWeight.w400,
+                      ),
                       focusColor: AppColors.primaryColor,
                     ),
                   ),
@@ -142,7 +164,11 @@ class _LanguageOptionBottomSheetState extends State<LanguageOptionBottomSheet> {
                             filterlanguage[index],
                             textScaleFactor: 1.0,
                             style: const TextStyle(
-                                color: AppColors.black, fontSize: 17),
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),
