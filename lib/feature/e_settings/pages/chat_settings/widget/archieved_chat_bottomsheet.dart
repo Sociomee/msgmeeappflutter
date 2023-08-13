@@ -106,6 +106,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                   itemCount: archievedChatList.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () {
                         setState(() {
                           archievedChatList[index].selected =
@@ -133,49 +134,33 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                                   });
                                 }),
                             SizedBox(width: 10),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  archievedChatList[index].selected =
-                                      !archievedChatList[index].selected;
-                                });
-                              },
-                              child: Container(
-                                width: 44,
-                                height: 44,
-                                alignment: Alignment.center,
-                                decoration: ShapeDecoration(
-                                  color: index % 2 == 0
-                                      ? AppColors.blue
-                                      : AppColors.darkgreen,
-                                  shape: OvalBorder(),
-                                ),
-                                child: Text(
-                                  archievedChatList[index].name[0],
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                            Container(
+                              width: 44,
+                              height: 44,
+                              alignment: Alignment.center,
+                              decoration: ShapeDecoration(
+                                color: index % 2 == 0
+                                    ? AppColors.blue
+                                    : AppColors.darkgreen,
+                                shape: OvalBorder(),
+                              ),
+                              child: Text(
+                                archievedChatList[index].name[0],
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
                             SizedBox(width: 10),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  archievedChatList[index].selected =
-                                      !archievedChatList[index].selected;
-                                });
-                              },
-                              child: Text(
-                                archievedChatList[index].name,
-                                style: TextStyle(
-                                  color: Color(0xFF151624),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            Text(
+                              archievedChatList[index].name,
+                              style: TextStyle(
+                                color: Color(0xFF151624),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                             Spacer(),
@@ -229,7 +214,7 @@ class _ArchievedChatBottomSheetState extends State<ArchievedChatBottomSheet> {
                 ),
               ),
               CustomButtonWidget(
-                  title: 'Ok',
+                  title: 'OK',
                   color: AppColors.primaryColor,
                   ontap: () {
                     Navigator.pop(context);
