@@ -87,55 +87,64 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   fontWeight: FontWeight.w600))),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+          padding: const EdgeInsets.only(top: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Please explain what happened',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Please explain what happened',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
-              TextFormField(
-                  controller: reasonController,
-                  maxLines: 7,
-                  decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.only(top: 15, bottom: 5, left: 15),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFE0E0E0))),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFE0E0E0))),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1, color: AppColors.primaryColor)),
-                    hintText: 'Type your reason (optional)...',
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 131, 131, 131),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: TextFormField(
+                    controller: reasonController,
+                    maxLines: 7,
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.only(top: 15, bottom: 5, left: 15),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFE0E0E0))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFE0E0E0))),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1, color: AppColors.primaryColor)),
+                      hintText: 'Type your reason (optional)...',
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 131, 131, 131),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  onChanged: (e) {
-                    setState(() {
-                      remainchar = 360 - reasonController.text.length;
-                    });
-                  }),
-              Row(
-                children: [
-                  Spacer(),
-                  Text(
-                    'Max $remainchar Characters',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.black, fontSize: 12),
-                  ),
-                ],
+                    onChanged: (e) {
+                      setState(() {
+                        remainchar = 360 - reasonController.text.length;
+                      });
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      'Max $remainchar Characters',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.black, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
               Center(
                   child: TextButton(
@@ -167,109 +176,125 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                       });
                 },
               )),
-              GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 175 / 368,
-                  children: List.generate(imageFileList!.length, (index) {
-                    return Stack(
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  height: 335,
-                                  width: 156,
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          color: AppColors.primaryColor)),
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Center(
-                                          child: Image.file(
-                                              File(imageFileList![index].path),
-                                              height: 330,
-                                              width: 140,
-                                              fit: BoxFit.cover))),
-                                ),
-                                SizedBox(width: 10)
-                              ],
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                            top: 5,
-                            right: 5,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  imageFileList!.removeAt(index);
-                                });
-                              },
-                              child: Container(
-                                  height: 25,
-                                  width: 25,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: AppColors.white, width: 3),
-                                      color: AppColors.mediaiconColor,
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Icon(Icons.remove,
-                                      color: AppColors.white, size: 15)),
-                            )),
-                      ],
-                    );
-                  })),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                child: GridView.count(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 16.w,
+                    childAspectRatio: 156 / 335,
+                    children: List.generate(imageFileList!.length, (index) {
+                      return Stack(
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 10),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    height: 335,
+                                    width: 156,
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: AppColors.primaryColor)),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Center(
+                                            child: Image.file(
+                                                File(
+                                                    imageFileList![index].path),
+                                                height: 335,
+                                                width: 156,
+                                                fit: BoxFit.cover))),
+                                  ),
+                                  SizedBox(width: 10)
+                                ],
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                              top: 5,
+                              right: 5,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    imageFileList!.removeAt(index);
+                                  });
+                                },
+                                child: Container(
+                                    height: 25,
+                                    width: 25,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.white, width: 3),
+                                        color: AppColors.mediaiconColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Icon(Icons.remove,
+                                        color: AppColors.white, size: 15)),
+                              )),
+                        ],
+                      );
+                    })),
+              ),
               SizedBox(height: imageFileList!.isEmpty ? 250.h : 70),
-              Text.rich(
-                TextSpan(
-                  children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Text.rich(
                     TextSpan(
-                      text:
-                          'Disclaimer: Learn about how your data will be used. Please check our ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        height: 1.20,
-                      ),
+                      children: [
+                        TextSpan(
+                          text:
+                              'Disclaimer: Learn about how your data will be used. Please check our ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                            height: 1.20,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Data Policy',
+                          style: TextStyle(
+                            color: Color(0xFF2F80ED),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                            height: 1.20,
+                          ),
+                        ),
+                      ],
                     ),
-                    TextSpan(
-                      text: 'Data Policy',
-                      style: TextStyle(
-                        color: Color(0xFF2F80ED),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        height: 1.20,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: CustomButtonWidget(
-                    title: 'Submit',
-                    borderColor: enable
-                        ? AppColors.primaryColor
-                        : AppColors.primaryColor.withOpacity(.5),
-                    color: enable
-                        ? AppColors.primaryColor
-                        : AppColors.primaryColor.withOpacity(.5),
-                    ontap: () {
-                      animatedScreenReplaceNavigator(
-                          context, ReportSuccessPage());
-                    }),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: CustomButtonWidget(
+                      title: 'Submit',
+                      borderColor: enable
+                          ? AppColors.primaryColor
+                          : AppColors.primaryColor.withOpacity(.5),
+                      color: enable
+                          ? AppColors.primaryColor
+                          : AppColors.primaryColor.withOpacity(.5),
+                      ontap: () {
+                        animatedScreenReplaceNavigator(
+                            context, ReportSuccessPage());
+                      }),
+                ),
               ),
             ],
           ),
