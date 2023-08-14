@@ -123,15 +123,12 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                           color: AppColors.iconColor, size: 7),
                     ),
                     SizedBox(width: 8),
-                    Text(
-                      'Reason For Deletion(Optional)',
-                      style: TextStyle(
-                        color: Color(0xFF333333),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
+                    Text('Reason For Deletion(Optional)',
+                        style: TextStyle(
+                            color: Color(0xFF555555),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400))
                   ],
                 ),
               ),
@@ -169,7 +166,14 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                     decoration: InputDecoration(
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF999999))),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 203, 203, 203))),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor)),
                         hintText: 'Type your reason...',
                         hintStyle: TextStyle(
                             color: Color(0xFF999999),
@@ -185,7 +189,7 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
               alignment: Alignment.centerLeft,
               color: Color(0xFFF6F6F6),
               child: Text(
-                'To deleted your account, confirm your country code\nand enter your phone number ',
+                'To deleted your account, confirm your country code and enter your phone number ',
                 style: TextStyle(color: AppColors.black, fontSize: 14),
               ),
             ),
@@ -209,9 +213,20 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF999999))),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 203, 203, 203))),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor)),
                   hintText: '(+91)  9876543210',
-                  hintStyle: TextStyle(color: Color(0xFF999999)),
+                  hintStyle: TextStyle(
+                    color: Color.fromARGB(255, 191, 191, 191),
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -227,10 +242,19 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF999999))),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 203, 203, 203))),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor)),
                   hintText: 'Enter password',
                   hintStyle: TextStyle(
-                    color: Color(0xFF999999),
+                    color: Color.fromARGB(255, 191, 191, 191),
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),

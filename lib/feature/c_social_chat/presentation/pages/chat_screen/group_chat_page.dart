@@ -77,25 +77,29 @@ class _GroupChatPageState extends State<GroupChatPage> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 20),
           Center(
-            child: Container(
-              height: 120,
-              width: 120,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(0, 0),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      color: AppColors.lightgrey)
-                ],
-                border: Border.all(color: AppColors.white, width: 5),
-                borderRadius: BorderRadius.circular(200),
-              ),
-              child: Center(
-                child: CircleAvatar(
-                    radius: 80, backgroundImage: NetworkImage(widget.imageUrl)),
+            child: Hero(
+              tag: widget.imageUrl,
+              child: Container(
+                height: 120,
+                width: 120,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(0, 0),
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        color: AppColors.lightgrey)
+                  ],
+                  border: Border.all(color: AppColors.white, width: 5),
+                  borderRadius: BorderRadius.circular(200),
+                ),
+                child: Center(
+                  child: CircleAvatar(
+                      radius: 80,
+                      backgroundImage: NetworkImage(widget.imageUrl)),
+                ),
               ),
             ),
           ),

@@ -71,7 +71,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void pickGalleryPic() async {
     // Pick an image
-
     var status = await Permission.camera.status;
     if (status.isDenied) {
       Permission.camera.request();
@@ -319,18 +318,17 @@ class _ChatScreenState extends State<ChatScreen> {
                     : AppBar(
                         toolbarHeight: 80,
                         elevation: 1,
-                        leadingWidth: 20,
+                        leadingWidth: widget.name == 'Office Group' ? 35 : 20,
                         titleSpacing: 11.w,
-                        leading: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.arrow_back_ios,
-                                color: AppColors.black)),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 23),
+                          child: Icon(Icons.arrow_back_ios,
+                              color: AppColors.black),
+                        ),
                         title: GestureDetector(
                           onTap: () {
                             widget.name == 'Office Group'
-                                ? animatedScreenNavigator(
+                                ? screenNavigator(
                                     context,
                                     GroupChatPage(
                                       imageUrl: widget.imageUrl,
@@ -348,19 +346,40 @@ class _ChatScreenState extends State<ChatScreen> {
                             children: [
                               Hero(
                                   tag: widget.imageUrl,
-                                  child: ChatProfileWidget(
-                                      imageUrl: widget.imageUrl,
-                                      isOnline: widget.isOnline,
-                                      hasStory: widget.hasStory)),
+                                  child: widget.name == 'Office Group'
+                                      ? Container(
+                                          padding: EdgeInsets.all(3),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    offset: Offset(0, 0),
+                                                    spreadRadius: 0,
+                                                    blurRadius: 10,
+                                                    color: AppColors.lightgrey)
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              border: Border.all(
+                                                  color: AppColors.lightgrey,
+                                                  width: .5)),
+                                          child: CircleAvatar(
+                                              radius: 25,
+                                              backgroundColor: AppColors.grey,
+                                              backgroundImage: NetworkImage(
+                                                  widget.imageUrl)),
+                                        )
+                                      : ChatProfileWidget(
+                                          imageUrl: widget.imageUrl,
+                                          isOnline: widget.isOnline,
+                                          hasStory: widget.hasStory)),
                               SizedBox(width: 10.w),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   widget.name == 'Office Group'
-                                      ? SizedBox(
-                                          height: 13,
-                                        )
+                                      ? SizedBox(height: 13)
                                       : Container(),
                                   Container(
                                       width: 130.w,

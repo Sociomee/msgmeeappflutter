@@ -44,11 +44,10 @@ class DeleteAccountDialog extends StatelessWidget {
                 child: Text(
                   'Cancel',
                   style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                  ),
+                      color: Color(0xFF666666),
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
