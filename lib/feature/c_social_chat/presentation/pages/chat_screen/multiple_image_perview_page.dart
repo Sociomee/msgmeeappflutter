@@ -37,7 +37,7 @@ class MultipleImagePreviewPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              name,
+              "You",
               style: TextStyle(
                 color: Color(0xFF333333),
                 fontSize: 16,
@@ -50,7 +50,7 @@ class MultipleImagePreviewPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  '36 Files',
+                  '${images!.length} Files',
                   style: TextStyle(
                     color: Color(0xFF333333),
                     fontSize: 12,
