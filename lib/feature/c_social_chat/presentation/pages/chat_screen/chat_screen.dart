@@ -320,10 +320,16 @@ class _ChatScreenState extends State<ChatScreen> {
                         elevation: 1,
                         leadingWidth: widget.name == 'Office Group' ? 35 : 20,
                         titleSpacing: 11.w,
-                        leading: Padding(
-                          padding: const EdgeInsets.only(left: 23),
-                          child: Icon(Icons.arrow_back_ios,
-                              color: AppColors.black),
+                        leading: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  left:
+                                      widget.name == 'Office Group' ? 23 : 10),
+                              child: Icon(Icons.arrow_back_ios,
+                                  color: AppColors.black)),
                         ),
                         title: GestureDetector(
                           onTap: () {

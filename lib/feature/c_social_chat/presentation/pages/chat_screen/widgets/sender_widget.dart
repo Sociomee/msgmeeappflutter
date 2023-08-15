@@ -172,7 +172,7 @@ class SentMessageWidget extends StatelessWidget {
                                         )
                                       ]),
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 2),
                                 SizedBox(
                                     width: 200.w,
                                     child: Padding(
@@ -1261,7 +1261,7 @@ class SentMessageWidget extends StatelessWidget {
                                     'Abriella Bond',
                                     style: TextStyle(
                                       color: Color(0xFF333333),
-                                      fontSize: 10,
+                                      fontSize: 12,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -1271,7 +1271,7 @@ class SentMessageWidget extends StatelessWidget {
                                     'Audio(00:30)',
                                     style: TextStyle(
                                       color: Color(0xFF666666),
-                                      fontSize: 10,
+                                      fontSize: 12,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400,
                                     ),

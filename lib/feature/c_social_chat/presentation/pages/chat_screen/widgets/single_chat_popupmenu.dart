@@ -216,7 +216,9 @@ class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
     ChatOptionsModel(id: 4, option: 'Block This User'),
     ChatOptionsModel(id: 5, option: 'Chat Theme'),
     ChatOptionsModel(id: 6, option: 'Change Wallpaper'),
-    ChatOptionsModel(id: 7, option: 'Media, links and docs'),
+    ChatOptionsModel(id: 7, option: 'Export Chat'),
+    ChatOptionsModel(id: 8, option: 'Add Shortcut'),
+    ChatOptionsModel(id: 9, option: 'Media, links and docs'),
   ];
   final String url =
       'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg';
@@ -228,8 +230,9 @@ class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
       },
       child: PopupMenuButton(
         icon: Icon(Icons.more_vert, color: Colors.black),
-        offset: Offset(0, 30),
+        offset: Offset(-23.5, 40),
         color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         itemBuilder: (context) {
           return options
               .map(
@@ -262,7 +265,7 @@ class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
             animatedScreenNavigator(context, ChatThemePage());
           } else if (value == 6) {
             animatedScreenNavigator(context, ChangeWallPaperPage());
-          } else if (value == 7) {
+          } else if (value == 9) {
             screenNavigator(
                 context, MediaAndDocScreen(profilename: widget.name));
           }
