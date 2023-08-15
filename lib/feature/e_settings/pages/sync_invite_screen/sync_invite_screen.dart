@@ -88,21 +88,22 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
               ),
             ),
             trailing: SizedBox(
-              width: 51,
+              width: 41.w,
               child: FlutterSwitch(
                 switchBorder: Border.all(
-                  color: readReceipt ? AppColors.primaryColor : AppColors.grey,
-                  width: 2.0.w,
-                ),
-                activeColor: AppColors.primaryColor,
+                    color:
+                        readReceipt ? AppColors.primaryColor : AppColors.grey,
+                    width: 1),
+                activeColor: AppColors.white,
                 inactiveColor: AppColors.white,
-                inactiveToggleColor: AppColors.primaryColor,
-                width: 51.0.w,
-                height: 26.0.h,
+                activeToggleColor: AppColors.primaryColor,
+                inactiveToggleColor: AppColors.grey,
+                width: 41.0.w,
+                height: 27,
                 toggleSize: 23.0.sp,
                 value: readReceipt,
                 borderRadius: 30.0,
-                padding: 2.0,
+                padding: 0,
                 onToggle: (val) {
                   setState(() {
                     readReceipt = !readReceipt;
@@ -141,21 +142,21 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
                   ],
                 ),
                 SizedBox(
-                  width: 51,
+                  width: 41.w,
                   child: FlutterSwitch(
                     switchBorder: Border.all(
-                      color: invite ? AppColors.primaryColor : AppColors.grey,
-                      width: 2.0.w,
-                    ),
-                    activeColor: AppColors.primaryColor,
+                        color: invite ? AppColors.primaryColor : AppColors.grey,
+                        width: 1),
+                    activeColor: AppColors.white,
                     inactiveColor: AppColors.white,
-                    inactiveToggleColor: AppColors.primaryColor,
-                    width: 51.0.w,
-                    height: 26.0.h,
+                    activeToggleColor: AppColors.primaryColor,
+                    inactiveToggleColor: AppColors.grey,
+                    width: 41.0.w,
+                    height: 27,
                     toggleSize: 23.0.sp,
                     value: invite,
                     borderRadius: 30.0,
-                    padding: 2.0,
+                    padding: 0.0,
                     onToggle: (val) {
                       setState(() {
                         invite = !invite;

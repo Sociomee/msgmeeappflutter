@@ -320,7 +320,7 @@ class _NotificationSettingsScreenState
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 5),
                     SizedBox(
-                        width: 233.w,
+                        width: 245.w,
                         child: Text(
                             'You will get preview of the text message notification at the top of your screen',
                             overflow: TextOverflow.clip,
