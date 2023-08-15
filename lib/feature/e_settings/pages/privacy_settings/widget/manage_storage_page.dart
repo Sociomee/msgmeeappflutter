@@ -25,7 +25,7 @@ class ManageStoragePage extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_ios,
                       color: AppColors.black, size: 20))),
           leadingWidth: 45,
-          titleSpacing: 5,
+          titleSpacing: 0,
           title: Text('Manage Storage',
               style: TextStyle(
                 color: AppColors.black,
