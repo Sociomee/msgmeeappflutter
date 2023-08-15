@@ -113,7 +113,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -130,6 +130,7 @@ class _SyncInviteScreenState extends State<SyncInviteScreen> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+                    SizedBox(height: 8),
                     Text(
                       'You can invite your connections from sociomee ',
                       style: TextStyle(
