@@ -41,7 +41,7 @@ class TextFieldWidget extends StatelessWidget {
           controller: controller,
           cursorColor: AppColors.primaryColor,
           inputFormatters: [
-            LengthLimitingTextInputFormatter(38),
+            LengthLimitingTextInputFormatter(64),
           ],
           decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -65,7 +65,7 @@ class TextFieldWidget extends StatelessWidget {
                   children: [
                     Spacer(),
                     Text(
-                      'Max 38 Characters',
+                      'Max $remainChar Characters',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: AppColors.black, fontSize: 12.sp),
                     ),
