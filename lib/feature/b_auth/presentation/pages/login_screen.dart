@@ -65,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back, color: AppColors.black, size: 30.h),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Icon(Icons.arrow_back, color: AppColors.black, size: 24),
+              ),
             ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(6.0),
@@ -92,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0, right: 10),
+                  padding: const EdgeInsets.only(top: 30.0, right: 10),
                   child: Text(
                     'GET OTP',
                     style: TextStyle(

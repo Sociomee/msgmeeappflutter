@@ -35,7 +35,7 @@ class AuthService implements AuthRepository {
       });
       log("response -->>${response.statusCode}");
       if (response.statusCode == 200) {
-        print("data --->${response.data['success']}");
+        print("data --->${response.data}");
         return response.data['success'];
       } else {
         return false;
