@@ -43,25 +43,26 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   '"Welcome to Msgme, your global messaging\nplatform!"',
                   style: TextStyle(
-                      color: Color(0xFF368C4E),
-                      fontSize: 24.sp,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600),
+                    color: Color(0xFF368C4E),
+                    fontSize: 24,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SizedBox(height: 16),
                 SizedBox(
-                  width: 300.w,
-                  child: Text(
-                    '"Connect, chat, and share with Msgme, uniting the world through messages."',
-                    style: TextStyle(
-                      color: Color(0xFF828282),
-                      fontSize: 15.sp,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: -0.32,
-                    ),
-                  ),
-                ),
+                    width: 300.w,
+                    child: Text(
+                      '"Connect, chat, and share with Msgme, uniting the world through messages."',
+                      style: TextStyle(
+                        color: Color(0xFF828282),
+                        fontSize: 15,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        height: 1.40,
+                        letterSpacing: -0.32,
+                      ),
+                    )),
                 Spacer(),
                 CustomButtonWidget(
                     title: 'Accept terms & Conditions',
