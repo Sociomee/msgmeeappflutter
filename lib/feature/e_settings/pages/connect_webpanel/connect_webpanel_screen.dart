@@ -1,8 +1,36 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../theme/colors.dart';
 
-class ConncetWenPanelScreen extends StatelessWidget {
+class ConncetWenPanelScreen extends StatefulWidget {
   const ConncetWenPanelScreen({super.key});
+
+  @override
+  State<ConncetWenPanelScreen> createState() => _ConncetWenPanelScreenState();
+}
+
+class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  Barcode? result;
+  QRViewController? controller;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +62,29 @@ class ConncetWenPanelScreen extends StatelessWidget {
             )),
         body: Container(
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: AppColors.black.withOpacity(0.6)),
+          decoration: BoxDecoration(color: AppColors.black.withOpacity(.8)),
           child: Column(children: [
-            Image.asset('assets/qr.png'),
+            Spacer(),
+            Center(
+              child: SizedBox(
+                height: 300,
+                width: 300,
+                child: QRView(
+                  key: qrKey,
+                  overlay: QrScannerOverlayShape(
+                      borderColor: AppColors.primaryColor,
+                      borderRadius: 10,
+                      borderLength: 30,
+                      borderWidth: 10,
+                      cutOutBottomOffset: 0),
+                  onQRViewCreated: _onQRViewCreated,
+                  overlayMargin: const EdgeInsets.all(0),
+                ),
+              ),
+            ),
             Spacer(),
             Padding(
-                padding: const EdgeInsets.only(bottom: 47, left: 30, right: 30),
+                padding: const EdgeInsets.only(bottom: 89, left: 30, right: 30),
                 child: Text(
                   'Open web.sociomee.com, desktop app, or other devices.',
                   textAlign: TextAlign.center,
@@ -52,5 +97,20 @@ class ConncetWenPanelScreen extends StatelessWidget {
                 ))
           ]),
         ));
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }
