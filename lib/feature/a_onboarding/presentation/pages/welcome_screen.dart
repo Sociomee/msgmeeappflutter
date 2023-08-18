@@ -50,25 +50,24 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
-                SizedBox(
-                    width: 300.w,
-                    child: Text(
-                      '"Connect, chat, and share with Msgme, uniting the world through messages."',
-                      style: TextStyle(
-                        color: Color(0xFF828282),
-                        fontSize: 15,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        height: 1.40,
-                        letterSpacing: -0.32,
-                      ),
-                    )),
+                Text(
+                  '"Connect, chat, and share with Msgme, uniting the world through messages."',
+                  style: TextStyle(
+                    color: Color(0xFF828282),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    height: 1.40,
+                    letterSpacing: -0.32,
+                  ),
+                ),
                 Spacer(),
                 CustomButtonWidget(
+                    height: 46,
                     title: 'Accept terms & Conditions',
                     color: AppColors.darkbtnColor,
                     borderColor: AppColors.darkbtnColor,
-                    fontsize: 18.sp,
+                    fontsize: 18,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
                     }),
@@ -96,77 +95,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-
-// class WelcomeScreen extends StatelessWidget {
-//   const WelcomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: [
-//           Stack(children: [
-//             Image.asset('assets/bg1.png'),
-//             Image.asset('assets/bg2.png'),
-//             Padding(
-//               padding: const EdgeInsets.only(left: 20),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   SizedBox(height: 77),
-//                   Image.asset(
-//                     'assets/msgmee_logo.png',
-//                     height: 116,
-//                   ),
-//                   SizedBox(height: 12),
-//                   Text(
-//                     'MsgMee',
-//                     style: TextStyle(
-//                         fontSize: 30,
-//                         color: AppColors.primaryDarkColor,
-//                         fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 12),
-//                   Text(
-//                     'In the future of Community\nNetworks',
-//                     style: TextStyle(fontSize: 16),
-//                   )
-//                 ],
-//               ),
-//             )
-//           ]),
-//           Spacer(),
-//           GestureDetector(
-//             onTap: () {
-//               animatedScreenNavigator(context, LoginScreen());
-//             },
-//             child: Center(
-//               child: Container(
-//                   height: 50,
-//                   margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-//                   alignment: Alignment.center,
-//                   decoration: BoxDecoration(
-//                       color: AppColors.white,
-//                       boxShadow: [
-//                         BoxShadow(
-//                           color: Color(0x1E000000),
-//                           blurRadius: 16,
-//                           offset: Offset(0, 0),
-//                           spreadRadius: 0,
-//                         )
-//                       ],
-//                       borderRadius: BorderRadius.circular(8)),
-//                   child: Row(mainAxisSize: MainAxisSize.min, children: [
-//                     Image.asset('assets/mobile.png'),
-//                     SizedBox(width: 7),
-//                     Text('Log In with Mobile Number',
-//                         style: TextStyle(fontSize: 14))
-//                   ])),
-//             ),
-//           ),
-//           SizedBox(height: 100),
-//         ],
-//       ),
-//     );
-//   }
-// }
