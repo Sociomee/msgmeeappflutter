@@ -350,7 +350,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                     height = 48;
                                   });
                                 }),
-                            SizedBox(width: 24),
+                            SizedBox(width: 15),
                             GestureDetector(
                                 onTap: () {
                                   showModalBottomSheet(
@@ -367,7 +367,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                 },
                                 child:
                                     SvgPicture.asset('assets/msgmee_icon.svg')),
-                            SizedBox(width: 24),
+                            SizedBox(width: 15),
                             PopupMenuButtonWidget()
                           ],
                         ),

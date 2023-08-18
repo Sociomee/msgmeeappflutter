@@ -38,12 +38,28 @@ class BizPageTab extends StatelessWidget {
                       children: [
                         ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child: Image.network(
-                              bizpage[index].imageUrl,
-                              height: 41,
-                              width: 41,
-                              fit: BoxFit.cover,
-                            )),
+                            child: Image.network(bizpage[index].imageUrl,
+                                height: 41,
+                                width: 41,
+                                fit: BoxFit.cover, frameBuilder: (context,
+                                    child, frame, wasSynchronouslyLoaded) {
+                              return child;
+                            }, loadingBuilder:
+                                    (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                );
+                              }
+                            })),
                         SizedBox(width: 10.w),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

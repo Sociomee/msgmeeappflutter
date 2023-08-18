@@ -56,12 +56,13 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       color: AppColors.seconderyColor1,
+                      border: Border.all(color: AppColors.white, width: 1.5),
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.lightgrey,
-                          offset: Offset(0, 0.5),
+                          offset: Offset(0, 0),
                           blurRadius: 10,
-                          spreadRadius: 2,
+                          spreadRadius: 0,
                         ),
                       ],
                     ),
@@ -190,6 +191,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                       Divider(
                         height: 0,
                         color: AppColors.grey,
+                        thickness: .5,
                       ),
                       Container(
                         padding: EdgeInsets.only(
@@ -198,7 +200,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                           top: 10,
                           right: 10,
                         ),
-                        height: 60,
+                        // height: 60,
                         width: double.infinity,
                         color: Colors.white,
                         child: Row(
