@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broadcast_info.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
@@ -14,6 +15,21 @@ class AddParticipantsScreen extends StatefulWidget {
 }
 
 class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
+  late TextEditingController controller;
+  List<ParticipantsModel> filteredlist = [];
+  @override
+  void initState() {
+    controller = TextEditingController();
+    filteredlist = List.from(blockedUserlist);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -64,23 +80,43 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  padding: EdgeInsets.symmetric(vertical: 5),
-                  // height: 100,
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: AppColors.grey,
-                          blurRadius: 15.0,
-                          offset: Offset(0.0, 0.75))
+                        color: AppColors.grey,
+                        blurRadius: 15.0,
+                        offset: Offset(0.0, 0.75),
+                      )
                     ],
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextFormField(
-                        decoration: InputDecoration(
+                      SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Center(
+                              child: SvgPicture.asset('assets/Search.svg'))),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller,
+                          onChanged: (value) {
+                            setState(() {
+                              if (value.isEmpty) {
+                                filteredlist = List.from(blockedUserlist);
+                              } else {
+                                filteredlist = blockedUserlist
+                                    .where((model) => model.username
+                                        .toLowerCase()
+                                        .contains(value.toLowerCase()))
+                                    .toList();
+                              }
+                            });
+                          },
+                          decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: AppColors.white),
                             ),
@@ -90,30 +126,36 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(color: AppColors.white),
                             ),
-                            prefixIcon: Icon(Icons.search),
                             hintText: 'Search....',
-                            hintStyle:
-                                TextStyle(color: AppColors.grey, fontSize: 17),
+                            hintStyle: TextStyle(
+                              color: Color(0xFF828282),
+                              fontSize: 12,
+                              fontFamily: 'Niramit',
+                              fontWeight: FontWeight.w400,
+                            ),
                             focusColor: AppColors.primaryColor,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(25.0),
-                                      ),
-                                    ),
-                                    context: context,
-                                    builder: (context) {
-                                      return FilterBottomSheet();
-                                    });
-                              },
-                              icon: Icon(
-                                Icons.tune_outlined,
-                                color: AppColors.black,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25.0),
+                                ),
                               ),
-                            )),
+                              context: context,
+                              builder: (context) {
+                                return FilterBottomSheet();
+                              });
+                        },
+                        child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: Center(
+                                child: SvgPicture.asset('assets/filter.svg'))),
                       ),
                     ],
                   ),
@@ -121,20 +163,20 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                 ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: blockedUserlist.length,
+                    itemCount: filteredlist.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: ListTile(
                           leading: ChatProfileWidget(
-                              imageUrl: blockedUserlist[index].imageUrl,
+                              imageUrl: filteredlist[index].imageUrl,
                               isOnline: true,
                               hasStory: false),
-                          title: Text(blockedUserlist[index].username),
+                          title: Text(filteredlist[index].username),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(blockedUserlist[index].usertype,
+                              Text(filteredlist[index].usertype,
                                   style: TextStyle(color: AppColors.grey)),
                               Checkbox(
                                   side: MaterialStateBorderSide.resolveWith(
@@ -145,11 +187,11 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(3)),
                                   activeColor: AppColors.primaryColor,
-                                  value: blockedUserlist[index].isSelected,
+                                  value: filteredlist[index].isSelected,
                                   onChanged: (w) {
                                     setState(() {
-                                      blockedUserlist[index].isSelected =
-                                          !blockedUserlist[index].isSelected;
+                                      filteredlist[index].isSelected =
+                                          !filteredlist[index].isSelected;
                                     });
                                   })
                             ],
