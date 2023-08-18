@@ -47,6 +47,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: AppColors.black,
+                    size: 18,
                   ),
                 )),
             title: Text(
