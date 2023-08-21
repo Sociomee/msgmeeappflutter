@@ -10,24 +10,34 @@ class ProfileImageViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 1,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
-            )),
-        title: Text(
-          profilename,
-          style: TextStyle(color: AppColors.black),
-        ),
-      ),
+          elevation: 1,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.black,
+                  size: 18,
+                )),
+          ),
+          leadingWidth: 45,
+          titleSpacing: 5,
+          title: Text(profilename,
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ))),
       body: Center(
         child: Image.network(
           imageUrl,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
         ),
       ),
     );

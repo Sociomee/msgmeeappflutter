@@ -56,13 +56,14 @@ class ProfileViewDialog extends StatelessWidget {
                 height: 54,
                 width: 328,
                 padding:
-                    EdgeInsets.only(left: 70, top: 8, bottom: 8, right: 82),
+                    EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Image.asset('assets/msg.png', width: 16),
                     Image.asset('assets/w_call.png', width: 16),
                     Image.asset('assets/w_video.png', width: 16),
+                    Icon(Icons.error_outlined, color: AppColors.white, size: 18)
                   ],
                 )),
           ),

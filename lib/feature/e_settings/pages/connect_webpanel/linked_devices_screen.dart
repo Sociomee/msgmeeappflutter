@@ -99,7 +99,7 @@ class LinkedDevicesScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20), 
                   child: Row(
                     children: [
                       Image.asset(
