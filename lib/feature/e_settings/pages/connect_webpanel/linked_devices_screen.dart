@@ -12,118 +12,154 @@ class LinkedDevicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 1,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
+          elevation: 1,
+          leadingWidth: 40,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Icon(Icons.arrow_back_ios,
+                    color: AppColors.black, size: 18),
+              )),
+          titleSpacing: 5,
+          title: Text(
+            'Linked Device',
+            style: TextStyle(
               color: AppColors.black,
-            )),
-        title: Text(
-          'Linked Device',
-          style: TextStyle(color: AppColors.black),
-        ),
-      ),
+              fontSize: 18,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+            ),
+          )),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 40),
-                  Image.asset('assets/linked_device.png'),
+                  Center(child: Image.asset('assets/linked_device.png')),
                   SizedBox(height: 54),
-                  Text('Use MsgMee On Your Website',
-                      style: TextStyle(fontSize: 23)),
+                  Center(
+                      child: Text(
+                    'Use MsgMee On Your Website',
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )),
                   SizedBox(height: 28),
                   CustomButtonWidget(
+                      height: 50,
                       title: 'Scan A QR Code',
                       color: AppColors.primaryColor,
                       ontap: () {
                         screenNavigator(context, ConncetWenPanelScreen());
                       }),
                   SizedBox(height: 20),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                        text: 'Your personal messages will',
-                        style: TextStyle(
-                            color: AppColors.iconColor, fontSize: 13)),
-                    TextSpan(
-                        text: ' end to end encrypted',
-                        style: TextStyle(
-                            color: AppColors.primaryColor, fontSize: 13)),
-                    TextSpan(
-                        text: ' on all',
-                        style: TextStyle(
-                            color: AppColors.iconColor, fontSize: 13)),
-                  ])),
-                  Text('your devices.',
-                      style:
-                          TextStyle(color: AppColors.iconColor, fontSize: 13)),
-                  SizedBox(height: 25),
+                  Text(
+                    'Your personal messages will end to end encrypted on all your devices.',
+                    style: TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
               ),
             ),
-            Divider(
-              height: 0,
-              color: AppColors.grey,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 18.0, bottom: 5),
-                    child: Text('Device Status',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
-                    child: Text('Tap a device to log out',
-                        style: TextStyle(
-                            fontSize: 15, color: AppColors.iconColor)),
-                  ),
-                  Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(
+                        top: 18.0, bottom: 5, left: 20, right: 20),
+                    child: Text(
+                      'Linked Devices',
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+                SizedBox(height: 10),
+                Divider(
+                  height: 0,
+                  thickness: 1,
+                  color: AppColors.lightgrey,
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
                     children: [
-                      Image.asset('assets/chrome.png'),
+                      Image.asset(
+                        'assets/chrome.png',
+                        height: 46,
+                      ),
                       SizedBox(width: 11),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Google Chrome (Mac Os)',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Google Chrome',
+                                  style: TextStyle(
+                                    color: AppColors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' (Mac Os)',
+                                  style: TextStyle(
+                                    color: AppColors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 4),
-                          Text('Last active today at 07:06 pm',
-                              style: TextStyle(
-                                  fontSize: 15, color: AppColors.iconColor)),
+                          Text(
+                            'Last active today at 07:06 pm',
+                            style: TextStyle(
+                              color: AppColors.grey,
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
                         ],
                       ),
                       Spacer(),
-                      Text('Log out',
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: AppColors.errorRedColor,
-                              fontWeight: FontWeight.bold)),
+                      Text(
+                        'Log out',
+                        style: TextStyle(
+                          color: AppColors.errorRedColor,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
                     ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18.0),
-              child: Divider(
-                height: 0,
-                color: AppColors.grey,
-              ),
+                ),
+              ],
             ),
           ],
         ),

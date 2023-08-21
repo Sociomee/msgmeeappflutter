@@ -64,33 +64,39 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
           ),
           actions: [
             widget.editscreen
-                ? TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'SAVE',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ))
-                : TextButton(
-                    onPressed: () {
-                      animatedScreenReplaceNavigator(
-                          context, BroadCastChatScreen());
-                    },
-                    child: Text(
-                      'SAVE',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ))
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'SAVE',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: TextButton(
+                        onPressed: () {
+                          animatedScreenReplaceNavigator(
+                              context, BroadCastChatScreen());
+                        },
+                        child: Text(
+                          'SAVE',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )),
+                  )
           ],
         ),
         body: SingleChildScrollView(
