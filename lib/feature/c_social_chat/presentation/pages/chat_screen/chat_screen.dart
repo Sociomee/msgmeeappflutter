@@ -33,7 +33,7 @@ import '../../cubit/show_emoji/show_emoji_cubit.dart';
 import '../../widgets/chat_profile_widget.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
 import 'forward_msg_page.dart';
-import 'group_chat_page.dart';
+import 'group_chat_details_page.dart';
 import 'image_preview_page.dart';
 import 'widgets/message_textField.dart';
 

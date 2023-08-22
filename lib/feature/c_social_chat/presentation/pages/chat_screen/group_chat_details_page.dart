@@ -12,6 +12,7 @@ import '../../../../../helper/navigator_function.dart';
 import '../../../../c_profile/presentation/pages/media_tab.dart';
 import '../../../../c_profile/presentation/widgets/options_button_widget.dart';
 import '../media_doc_screen/media_and_doc_screen.dart';
+import 'group_invite_page.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage({
@@ -231,10 +232,15 @@ class _GroupChatPageState extends State<GroupChatPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text('Invite Member via Link',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          GestureDetector(
+            onTap: () {
+              animatedScreenNavigator(context, GroupInvitePage());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text('Invite Member via Link',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),

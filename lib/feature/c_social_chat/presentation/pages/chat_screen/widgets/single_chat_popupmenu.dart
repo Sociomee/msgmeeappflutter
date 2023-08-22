@@ -213,7 +213,7 @@ class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
     ChatOptionsModel(id: 1, option: 'Search'),
     ChatOptionsModel(id: 2, option: 'Mute Messages'),
     ChatOptionsModel(id: 3, option: 'Clear Chats'),
-    ChatOptionsModel(id: 4, option: 'Block This User'),
+    ChatOptionsModel(id: 4, option: 'Block This Group'),
     ChatOptionsModel(id: 5, option: 'Chat Theme'),
     ChatOptionsModel(id: 6, option: 'Change Wallpaper'),
     ChatOptionsModel(id: 7, option: 'Export Chat'),
