@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/single_image_preview.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class MultipleImagePreviewPage extends StatelessWidget {
@@ -88,59 +90,68 @@ class MultipleImagePreviewPage extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: images!.length,
                 itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.file(images![index]!,
-                              height: 234,
-                              width: double.infinity,
-                              fit: BoxFit.cover),
-                          Divider(
-                            height: 0,
-                            thickness: 10,
-                            color: const Color.fromARGB(255, 177, 177, 177),
-                          )
-                        ],
-                      ),
-                      Positioned(
-                        bottom: 13,
-                        left: 10,
-                        child: Text(
-                          time,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 13,
-                        right: 10,
-                        child: Row(
+                  return GestureDetector(
+                    onTap: () {
+                      animatedScreenNavigator(
+                          context,
+                          SingleImagePreView(
+                            image: images![index]!,
+                          ));
+                    },
+                    child: Stack(
+                      children: [
+                        Column(
                           mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
-                              'Delivered',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(width: 5),
-                            MessageStatus.delivered
+                            Image.file(images![index]!,
+                                height: 234,
+                                width: double.infinity,
+                                fit: BoxFit.cover),
+                            Divider(
+                              height: 0,
+                              thickness: 10,
+                              color: const Color.fromARGB(255, 177, 177, 177),
+                            )
                           ],
                         ),
-                      )
-                    ],
+                        Positioned(
+                          bottom: 13,
+                          left: 10,
+                          child: Text(
+                            time,
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 13,
+                          right: 10,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Delivered',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              MessageStatus.delivered
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   );
                 }),
           ],

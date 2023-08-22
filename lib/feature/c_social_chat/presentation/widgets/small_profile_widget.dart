@@ -15,55 +15,32 @@ class SmallProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(color: AppColors.primaryColor, width: 2)),
-              child: CircleAvatar(
-                radius: 30,
-                backgroundColor: AppColors.grey,
-                backgroundImage: NetworkImage(imageUrl),
-              ),
-            ),
-            Positioned(
-              top: 40,
-              right: 0,
-              child: isOnline
-                  ? Container(
-                      height: 13,
-                      width: 13,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.white, width: 2),
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(100)),
-                    )
-                  // : isMe
-                  //     ? InkWell(
-                  //         onTap: () {
-                  //           context.read<ShoweditbtnCubit>().showdialog();
-                  //         },
-                  //         child: Container(
-                  //           height: 19,
-                  //           width: 19,
-                  //           alignment: Alignment.center,
-                  //           decoration: BoxDecoration(
-                  //               color: AppColors.primaryColor,
-                  //               borderRadius: BorderRadius.circular(100)),
-                  //           child: const Icon(
-                  //             Icons.add,
-                  //             color: AppColors.white,
-                  //             size: 17,
-                  //           ),
-                  //         ),
-                  //       )
-                  : Container(),
-            )
-          ],
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: AppColors.primaryColor, width: 2)),
+          child: CircleAvatar(
+            radius: 30,
+            backgroundColor: AppColors.grey,
+            backgroundImage: NetworkImage(imageUrl),
+          ),
         ),
+        Positioned(
+          top: 40,
+          right: 0,
+          child: isOnline
+              ? Container(
+                  height: 13,
+                  width: 13,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.white, width: 2),
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(100)),
+                )
+              : Container(),
+        )
       ],
     );
   }
