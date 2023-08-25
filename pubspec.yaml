@@ -76,6 +76,8 @@ dependencies:
   calendar_date_picker2: ^0.5.2
   google_fonts: ^4.0.4
   fluttertoast: ^8.2.2
+  device_info_plus: ^9.0.3
+  flutter_secure_storage: ^8.0.0
   
   
 

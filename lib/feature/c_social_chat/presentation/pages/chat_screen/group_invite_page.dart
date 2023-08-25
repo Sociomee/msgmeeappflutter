@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/share_group_invitation_page.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../../theme/colors.dart';
 
@@ -88,15 +90,20 @@ class _GroupInvitePageState extends State<GroupInvitePage> {
             ),
           ),
           Divider(height: 0, color: AppColors.lightgrey1, thickness: 4),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
-            child: Text(
-              'Share link via MsgMee',
-              style: TextStyle(
-                color: Color(0xFF4E4E4E),
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+          GestureDetector(
+            onTap: () {
+              animatedScreenNavigator(context, ShareGroupInvitationPage());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+              child: Text(
+                'Share link via MsgMee',
+                style: TextStyle(
+                  color: Color(0xFF4E4E4E),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
@@ -153,7 +160,7 @@ class _GroupInvitePageState extends State<GroupInvitePage> {
               ),
             ),
           ),
-          Divider(height: 0, color: AppColors.lightgrey, thickness: .5),
+          Divider(height: 0, color: AppColors.lightgrey, thickness: .8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             child: Text(

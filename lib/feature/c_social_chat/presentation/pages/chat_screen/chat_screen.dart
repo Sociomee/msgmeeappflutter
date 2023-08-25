@@ -333,6 +333,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         title: GestureDetector(
                           onTap: () {
+                            context.read<ShowAttachment>().closeAttachment();
                             widget.name == 'Office Group'
                                 ? screenNavigator(
                                     context,
@@ -433,8 +434,16 @@ class _ChatScreenState extends State<ChatScreen> {
                           widget.name == 'Office Group'
                               ? GroupchatPopupMenu(
                                   imageUrl: widget.name, name: widget.name)
-                              : SinglechatPopupMenu(
-                                  name: widget.name, imageUrl: widget.imageUrl)
+                              : GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<ShowAttachment>()
+                                        .closeAttachment();
+                                  },
+                                  child: SinglechatPopupMenu(
+                                      name: widget.name,
+                                      imageUrl: widget.imageUrl),
+                                )
                         ],
                       ),
             body: Stack(

@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController numberController;
+  String countryCode = '91';
   bool textFieldclick = false;
   String error = '';
   final GlobalKey<State> alertDialogKey = GlobalKey<State>();
@@ -54,8 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               });
         } else if (state.status == LoginStatus.loaded) {
-          animatedScreenReplaceNavigator(
-              context, OtpScreen(number: numberController.text));
+          animatedScreenReplaceNavigator(context,
+              OtpScreen(number: "+${countryCode}${numberController.text}"));
         }
       },
       builder: (context, state) {
@@ -76,12 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: AppColors.white,
                 valueColor:
                     AlwaysStoppedAnimation<Color>(AppColors.darkbtnColor),
-                value:
-                    // context.watch<NumberValidationCubit>().state.isvalid
-                    // ?
-                    0.25
-                // : 0
-                ,
+                value: 0.25,
               ),
             ),
             elevation: 2,
@@ -91,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (context.read<NumberValidationCubit>().state.isvalid) {
                     context
                         .read<OtpSendCubit>()
-                        .sendOtp("+91${numberController.text}");
+                        .sendOtp("+${countryCode}${numberController.text}");
                   }
                 },
                 child: Padding(
@@ -139,7 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                CountryCodeTextField(controller: numberController),
+                CountryCodeTextField(
+                  controller: numberController,
+                  countryCode: countryCode,
+                ),
                 Spacer(),
                 CustomButtonWidget(
                     height: 46,

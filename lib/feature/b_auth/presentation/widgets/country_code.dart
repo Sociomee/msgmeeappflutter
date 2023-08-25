@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,29 +9,19 @@ import '../../../../theme/colors.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
 
 class CountryCodeTextField extends StatefulWidget {
-  const CountryCodeTextField({super.key, required this.controller});
+  CountryCodeTextField(
+      {super.key, required this.controller, required this.countryCode});
   final TextEditingController controller;
+  String countryCode;
   @override
   State<CountryCodeTextField> createState() => _CountryCodeTextFieldState();
 }
 
 class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
-  String countryCode = '91';
-  late TextEditingController numberController;
+  // late TextEditingController numberController;
   bool textFieldclick = false;
   String error = '';
   final _formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    numberController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    numberController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +61,7 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                       ),
                       onSelect: (Country country) {
                         setState(() {
-                          countryCode = country.phoneCode;
+                          widget.countryCode = country.phoneCode;
                         });
                         print('Select country: ${country.phoneCode}');
                       });
@@ -90,7 +82,7 @@ class _CountryCodeTextFieldState extends State<CountryCodeTextField> {
                     children: [
                       Text(
                           textScaleFactor: 1.0,
-                          "+${countryCode}",
+                          "+${widget.countryCode}",
                           style:
                               TextStyle(color: AppColors.black, fontSize: 15)),
                       // const Icon(Icons.expand_more, size: 18)

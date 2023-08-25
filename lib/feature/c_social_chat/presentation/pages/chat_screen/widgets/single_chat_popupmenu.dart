@@ -45,6 +45,9 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
         icon: Icon(Icons.more_vert, color: Colors.black),
         offset: Offset(0, 30),
         color: Colors.white,
+        onOpened: () {
+          context.read<ShowAttachment>().closeAttachment();
+        },
         itemBuilder: (context) {
           return options
               .map(

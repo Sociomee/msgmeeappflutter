@@ -53,6 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
     startTimer();
+    print(widget.number);
   }
 
   @override
@@ -358,6 +359,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       : Container(),
                   const Spacer(),
                   CustomButtonWidget(
+                      height: 46,
                       borderColor: isValid
                           ? AppColors.darkbtnColor
                           : AppColors.lightgrey,
@@ -366,7 +368,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         if (formKey.currentState!.validate() &&
                             _otpController.length == 6 &&
                             isValid) {
-                          // screenNavigator(context, const NameScreen());
+                          print(widget.number);
                           context.read<OtpVerifyCubit>().verifyUserOtp(
                               widget.number, _otpController.text);
                         }

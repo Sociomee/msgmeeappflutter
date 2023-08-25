@@ -8,7 +8,6 @@ import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../../../c_profile/presentation/pages/setup_profile_screen.dart';
-import '../cubit/otp_send/otp_send_cubit.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key, required this.phone});
@@ -37,37 +36,7 @@ class _NameScreenState extends State<NameScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CreateUserCubit, CreateUserState>(
-      listener: (context, state) {
-        if (state.status == LoginStatus.loading) {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      context.watch<CreateUserCubit>().state.status ==
-                              LoginStatus.error
-                          ? Text(
-                              'Invalid Otp',
-                              style: TextStyle(color: AppColors.errorRedColor),
-                            )
-                          : Center(
-                              child: CircularProgressIndicator(
-                                  color: AppColors.darkbtnColor))
-                    ],
-                  ),
-                );
-              });
-        } else if (state.status == LoginStatus.loaded) {
-          animatedScreenReplaceNavigator(
-              context,
-              SetupProfileScreen(
-                name: nameController.text,
-              ));
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -95,9 +64,12 @@ class _NameScreenState extends State<NameScreen> {
                 onTap: () {
                   if (formKey.currentState!.validate() &&
                       nameController.text.isNotEmpty) {
-                    context
-                        .read<CreateUserCubit>()
-                        .createUser(widget.phone, nameController.text);
+                    animatedScreenReplaceNavigator(
+                        context,
+                        SetupProfileScreen(
+                          name: nameController.text,
+                          phone: widget.phone,
+                        ));
                   }
                 },
                 child: Padding(
@@ -200,6 +172,7 @@ class _NameScreenState extends State<NameScreen> {
                   ),
                   const Spacer(),
                   CustomButtonWidget(
+                      height: 46,
                       borderColor: isValid
                           ? AppColors.darkbtnColor
                           : AppColors.lightgrey,
@@ -207,9 +180,12 @@ class _NameScreenState extends State<NameScreen> {
                       ontap: () {
                         if (formKey.currentState!.validate() &&
                             nameController.text.isNotEmpty) {
-                          context
-                              .read<CreateUserCubit>()
-                              .createUser(widget.phone, nameController.text);
+                          animatedScreenReplaceNavigator(
+                              context,
+                              SetupProfileScreen(
+                                name: nameController.text,
+                                phone: widget.phone,
+                              ));
                         }
                       },
                       title: 'Continue',

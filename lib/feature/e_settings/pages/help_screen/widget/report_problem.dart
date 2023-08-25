@@ -183,9 +183,9 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     crossAxisCount: 2,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 16.w,
-                    childAspectRatio: 156 / 335,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 175 / 368,
                     children: List.generate(imageFileList!.length, (index) {
                       return Stack(
                         children: [
@@ -198,8 +198,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                    height: 335,
-                                    width: 156,
+                                    width: 175,
+                                    height: 368,
                                     padding: EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -211,8 +211,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                                             child: Image.file(
                                                 File(
                                                     imageFileList![index].path),
-                                                height: 335,
-                                                width: 156,
+                                                width: 175,
+                                                height: 368,
                                                 fit: BoxFit.cover))),
                                   ),
                                   SizedBox(width: 10)
@@ -283,6 +283,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: CustomButtonWidget(
+                      height: 46,
                       title: 'Submit',
                       borderColor: enable
                           ? AppColors.primaryColor

@@ -53,12 +53,10 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   '"Connect, chat, and share with Msgme, uniting the world through messages."',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 156, 156, 156),
+                    color: Color.fromARGB(255, 186, 186, 186),
                     fontSize: 15,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
-                    height: 1.40,
-                    letterSpacing: -0.32,
                   ),
                 ),
                 Spacer(),
