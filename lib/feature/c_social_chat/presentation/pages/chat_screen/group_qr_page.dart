@@ -34,7 +34,14 @@ class GroupQrPage extends StatelessWidget {
           ),
         ),
         actions: [
-          Icon(Icons.share),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Icon(
+              Icons.share_outlined,
+              color: AppColors.black,
+              size: 20,
+            ),
+          ),
         ],
       ),
       body: Column(
