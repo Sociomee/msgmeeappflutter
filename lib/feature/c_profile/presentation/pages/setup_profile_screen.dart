@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import '../../../../data/repository/profile/update_profile_repository.dart';
 import '../../../b_auth/presentation/cubit/create_user/create_user_cubit.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../../../b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
@@ -126,8 +128,10 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 GestureDetector(
                   onTap: () {
                     if (imageFile!.path.isNotEmpty) {
-                      context.read<CreateUserCubit>().createUser(
-                          widget.phone, nameController.text, imageFile!);
+                      var profileapi = ProfileService();
+                      var localdata = Localdata();
+                      profileapi.updateUser(localdata.readData('userId'),
+                          imageFile!, widget.name);
                     }
                   },
                   child: Padding(
@@ -255,10 +259,16 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                             ? AppColors.darkbtnColor
                             : AppColors.lightgrey,
                         fontsize: 18,
-                        ontap: () {
+                        ontap: () async {
                           if (imageFile!.path.isNotEmpty) {
-                            context.read<CreateUserCubit>().createUser(
-                                widget.phone, nameController.text, imageFile!);
+                            var profileapi = ProfileService();
+                            var localdata = Localdata();
+                            var userId = await localdata.readData('userId');
+                            profileapi.updateUser(
+                              userId,
+                              imageFile!,
+                              widget.name,
+                            );
                           }
                         },
                         title: 'Continue',

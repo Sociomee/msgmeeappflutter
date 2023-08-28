@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
 
+import '../../../../helper/local_data.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -77,9 +79,16 @@ class _SplashScreenState extends State<SplashScreen>
 
 void startTimer(BuildContext context) {
   Timer(const Duration(seconds: 3), () async {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return const OnboardingScreen();
-    }));
+    var token = await Localdata().readData('token');
+    if (token.toString().isNotEmpty) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const MsgmeeScreen();
+      }));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const OnboardingScreen();
+      }));
+    }
     //It will redirect  after 3 seconds
   });
 }

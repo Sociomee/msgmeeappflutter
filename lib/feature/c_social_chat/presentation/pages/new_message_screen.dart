@@ -1,13 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/data/model/contact_model.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
 
 import '../../../../data/model/all_connections_model.dart';
+import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
-import '../widgets/all_connections_widget.dart';
+import '../widgets/chat_profile_widget.dart';
 import '../widgets/contact_filtering_design.dart';
 import '../widgets/invite_friends_list.dart';
 import '../widgets/social_bottom_model_sheet.dart';
+import 'chat_screen/chat_screen.dart';
 
 List<ChatOptionsModel> options = [
   ChatOptionsModel(id: 1, option: 'All Contacts'),
@@ -54,6 +61,7 @@ class NewMessageScreen extends StatefulWidget {
 class _NewMessageScreenState extends State<NewMessageScreen> {
   late TextEditingController searchController;
   List<AllConnectionsModel> filterdList = [];
+  List<Data> msgmeeList = [];
   bool show = false;
   int currentindex = 0;
   double top = 17;
@@ -61,6 +69,16 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   void initState() {
     searchController = TextEditingController();
     filterdList = List.from(dummyconnections);
+    context.read<MsgmeeContactCubit>().getMsgmeeContact();
+    Timer(Duration(seconds: 3), () {
+      if (context.read<MsgmeeContactCubit>().state.response.data != null) {
+        setState(() {
+          msgmeeList = List.from(
+              context.read<MsgmeeContactCubit>().state.response.data!);
+        });
+      }
+    });
+
     super.initState();
   }
 
@@ -72,6 +90,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.watch<MsgmeeContactCubit>().state.response.data;
+    var avaterUrl =
+        'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -84,7 +105,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
               child: Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.black,
-                size: 20.h,
+                size: 20,
               ),
             )),
         centerTitle: false,
@@ -94,7 +115,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
           'New message',
           style: TextStyle(
             color: AppColors.black,
-            fontSize: 18.sp,
+            fontSize: 18,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
           ),
@@ -124,10 +145,16 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value.isEmpty) {
-                            filterdList = List.from(dummyconnections);
+                            //* filterdList = List.from(dummyconnections);
+                            msgmeeList = List.from(cubit!);
                           } else {
-                            filterdList = dummyconnections
-                                .where((model) => model.connectionName
+                            //* filterdList = dummyconnections
+                            //*     .where((model) => model.connectionName
+                            //*         .toLowerCase()
+                            //*         .contains(value.toLowerCase()))
+                            //*     .toList();
+                            msgmeeList = cubit!
+                                .where((model) => model.firstName!
                                     .toLowerCase()
                                     .contains(value.toLowerCase()))
                                 .toList();
@@ -209,44 +236,86 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                             fontSize: 16.sp, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                              flex: 110,
-                              child: AllconnectionsWidget(list: filterdList)),
-                          SizedBox(width: 10),
-                          Expanded(
-                              flex: 1,
-                              child: ListView.separated(
-                                padding: EdgeInsets.all(0),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        currentindex = index;
-                                        show = !show;
-                                      });
-                                      print(alphabats[index]);
-                                    },
-                                    child: Container(
-                                      height: 3,
-                                      width: 3,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: AppColors.darkbtnColor),
-                                    ),
-                                  );
+                      //*showing msgmee contacts in listview
+                      if (cubit != null)
+                        ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(0),
+                            shrinkWrap: true,
+                            itemCount: msgmeeList.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  screenNavigator(
+                                      context,
+                                      ChatScreen(
+                                        name:
+                                            '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
+                                        imageUrl: avaterUrl,
+                                        isOnline: true,
+                                        hasStory: true,
+                                      ));
                                 },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(height: 23.h);
-                                },
-                                itemCount: 26,
-                              )),
-                        ],
-                      ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 14.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      ChatProfileWidget(
+                                        imageUrl: avaterUrl,
+                                        isOnline: false,
+                                        hasStory: false,
+                                        radius: 20,
+                                      ),
+                                      SizedBox(width: 12),
+                                      Text(
+                                          '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
+                                          style: TextStyle(fontSize: 14.sp)),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     Expanded(
+                      //         flex: 110,
+                      //         child: AllconnectionsWidget(list: filterdList)),
+                      //     SizedBox(width: 10),
+                      //     Expanded(
+                      //         flex: 1,
+                      //         child: ListView.separated(
+                      //           padding: EdgeInsets.all(0),
+                      //           shrinkWrap: true,
+                      //           itemBuilder: (context, index) {
+                      //             return GestureDetector(
+                      //               onTap: () {
+                      //                 setState(() {
+                      //                   currentindex = index;
+                      //                   show = !show;
+                      //                 });
+                      //                 print(alphabats[index]);
+                      //               },
+                      //               child: Container(
+                      //                 height: 3,
+                      //                 width: 3,
+                      //                 decoration: BoxDecoration(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(100),
+                      //                     color: AppColors.darkbtnColor),
+                      //               ),
+                      //             );
+                      //           },
+                      //           separatorBuilder: (context, index) {
+                      //             return SizedBox(height: 23.h);
+                      //           },
+                      //           itemCount: 26,
+                      //         )),
+                      //   ],
+                      // ),
+
                       SizedBox(height: 30),
                       Text('Invite Contact',
                           style: TextStyle(

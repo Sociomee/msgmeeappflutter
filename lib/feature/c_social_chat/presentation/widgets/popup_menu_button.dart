@@ -157,8 +157,6 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                         builder: (context) {
                           return SyncDialogWidget();
                         });
-
-                    // screenNavigator(context, LinkedDevicesScreen());
                   } else if (value == 7) {
                     screenNavigator(context, SettingScreen());
                   }
