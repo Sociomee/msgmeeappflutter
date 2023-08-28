@@ -1,11 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:msgmee/data/model/otp_model.dart';
 import 'package:msgmee/data/repositories.dart';
-
-import '../../../helper/get_device_id.dart';
+import 'package:msgmee/helper/local_data.dart';
 
 class AuthService implements AuthRepository {
   final Dio dio;
@@ -14,12 +12,10 @@ class AuthService implements AuthRepository {
   @override
   Future<bool> sendOtp(String phone) async {
     try {
-      final response = await dio.post('$baseUrl/auth/send-otp', data: {
-        "phone": phone,
-      });
+      final response =
+          await dio.post('$baseUrl/auth/send-otp', data: {"phone": phone});
       log("response -->>${response.statusCode}");
       if (response.statusCode == 200) {
-        print(response.data);
         return true;
       } else {
         return false;
@@ -30,25 +26,24 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<bool> verifyOtp(String phone, String otp) async {
-    var deviceId = await getId();
-    print(deviceId);
-    try {
-      final response = await dio.post('$baseUrl/auth/verify-otp', data: {
-        "phone": phone,
-        "otp": otp,
-      });
-      log("response-->>${response.data}");
-      if (response.statusCode == 200) {
-        FlutterSecureStorage storage = FlutterSecureStorage();
-        storage.write(key: 'token', value: response.data['data']['token']);
-        log('token-->${response.data['data']['token']}');
-        return response.data['success'];
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return false;
+  Future<OtpModel> verifyOtp(String phone, String otp) async {
+    var localdata = Localdata();
+
+    final response = await dio.post('$baseUrl/auth/verify-otp', data: {
+      "phone": phone,
+      "otp": otp,
+    });
+    log("response-->>${response.data}");
+    if (response.statusCode == 200) {
+      var data = OtpModel.fromJson(response.data);
+      localdata.storedata('token', data.data!.token!);
+      localdata.storedata('userId', data.data!.userId!);
+      localdata.storedata('userDeviceId', data.data!.userDeviceId!);
+      localdata.storedata('deviceId', data.data!.deviceId!);
+      log('res from repository ---> $data');
+      return data;
+    } else {
+      return OtpModel.fromJson(response.data);
     }
   }
 

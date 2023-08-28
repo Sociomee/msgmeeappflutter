@@ -65,9 +65,7 @@ class _ChatBackUpBottomSheetState extends State<ChatBackUpBottomSheet> {
   Widget build(BuildContext context) {
     return ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
+            topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
         child: Container(
           height: 450.h,
           decoration: BoxDecoration(

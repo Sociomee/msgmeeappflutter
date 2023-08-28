@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:msgmee/data/model/otp_model.dart';
 
 import '../../../../../common_cubits/custom_error.dart';
 import '../../../../../data/repository/auth/auth_repository.dart';
-import '../otp_send/otp_send_cubit.dart';
 
 part 'otp_verify_state.dart';
 
@@ -12,19 +14,19 @@ class OtpVerifyCubit extends Cubit<OtpVerifyState> {
   OtpVerifyCubit() : super(OtpVerifyState.initial());
 
   Future<void> verifyUserOtp(String phone, String otp) async {
-    emit(state.copyWith(status: LoginStatus.loading));
     Dio dio = Dio();
     var auth = AuthService(dio);
     try {
+      emit(state.copyWith(status: OtpVerifyStatus.loading));
       var res = await auth.verifyOtp(phone, otp);
-      if (res) {
-        emit(state.copyWith(status: LoginStatus.loaded));
+      if (res.success == true && res.status == 200) {
+        emit(state.copyWith(status: OtpVerifyStatus.loaded));
       } else {
-        emit(state.copyWith(status: LoginStatus.error));
+        emit(state.copyWith(status: OtpVerifyStatus.error));
       }
-      print(res);
+      log('response from cubit -->${res.status}');
     } on CustomError catch (e) {
-      emit(state.copyWith(status: LoginStatus.error, error: e));
+      emit(state.copyWith(status: OtpVerifyStatus.error, error: e));
     }
   }
 }

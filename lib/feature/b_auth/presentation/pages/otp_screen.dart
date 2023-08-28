@@ -10,7 +10,6 @@ import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
-import '../cubit/otp_send/otp_send_cubit.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key, required this.number});
@@ -70,7 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
     var sec = strDigits(duration.inSeconds.remainder(60));
     return BlocConsumer<OtpVerifyCubit, OtpVerifyState>(
       listener: (context, state) {
-        if (state.status == LoginStatus.loading) {
+        if (state.status == OtpVerifyStatus.loading) {
           showDialog(
               context: context,
               builder: (context) {
@@ -80,9 +79,10 @@ class _OtpScreenState extends State<OtpScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       context.watch<OtpVerifyCubit>().state.status ==
-                              LoginStatus.error
+                                  OtpVerifyStatus.error &&
+                              state.response.successMessage != null
                           ? Text(
-                              'Invalid Otp',
+                              state.response.successMessage!,
                               style: TextStyle(color: AppColors.errorRedColor),
                             )
                           : Center(
@@ -92,7 +92,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                 );
               });
-        } else if (state.status == LoginStatus.loaded) {
+        } else if (state.status == OtpVerifyStatus.loaded) {
           animatedScreenReplaceNavigator(
               context,
               NameScreen(
