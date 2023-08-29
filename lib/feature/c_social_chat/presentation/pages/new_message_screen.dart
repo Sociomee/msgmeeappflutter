@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,6 +70,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     searchController = TextEditingController();
     filterdList = List.from(dummyconnections);
     context.read<MsgmeeContactCubit>().getMsgmeeContact();
+
     Timer(Duration(seconds: 3), () {
       if (context.read<MsgmeeContactCubit>().state.response.data != null) {
         setState(() {
@@ -79,6 +80,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
       }
     });
 
+    log('called completed');
     super.initState();
   }
 
