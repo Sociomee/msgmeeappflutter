@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:msgmee/data/model/chat_head_model.dart';
 import 'package:msgmee/data/model/contact_model.dart';
 import 'package:msgmee/data/model/otp_model.dart';
 
@@ -23,4 +24,8 @@ abstract class AbContactRepository {
   Future<dynamic> updateContact();
   Future<dynamic> getContactDetailsbyId();
   Future<dynamic> deleteContact();
+}
+
+abstract class AbChatHeadRepository {
+  Future<ChatHeadModel> getChatHeadData();
 }

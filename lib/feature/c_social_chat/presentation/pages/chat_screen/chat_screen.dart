@@ -43,12 +43,12 @@ class ChatScreen extends StatefulWidget {
       required this.name,
       required this.imageUrl,
       required this.isOnline,
-      required this.hasStory,
+      this.hasStory,
       this.group});
   final String name;
   final String imageUrl;
   final bool isOnline;
-  final bool hasStory;
+  final bool? hasStory;
   final bool? group;
 
   @override
@@ -379,7 +379,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       : ChatProfileWidget(
                                           imageUrl: widget.imageUrl,
                                           isOnline: widget.isOnline,
-                                          hasStory: widget.hasStory)),
+                                          hasStory: widget.hasStory ?? false)),
                               SizedBox(width: 10.w),
                               Column(
                                 mainAxisSize: MainAxisSize.min,

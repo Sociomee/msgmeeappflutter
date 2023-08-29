@@ -1,11 +1,11 @@
-import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/contact_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
+import 'package:msgmee/helper/context_ext.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../data/model/all_connections_model.dart';
 import '../../../../helper/navigator_function.dart';
@@ -71,16 +71,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     filterdList = List.from(dummyconnections);
     context.read<MsgmeeContactCubit>().getMsgmeeContact();
 
-    Timer(Duration(seconds: 3), () {
-      if (context.read<MsgmeeContactCubit>().state.response.data != null) {
-        setState(() {
-          msgmeeList = List.from(
-              context.read<MsgmeeContactCubit>().state.response.data!);
-        });
-      }
-    });
-
-    log('called completed');
     super.initState();
   }
 
@@ -93,8 +83,11 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MsgmeeContactCubit>().state.response.data;
+    if (cubit != null && searchController.text.isEmpty)
+      msgmeeList = msgmeeList = List.from(cubit);
     var avaterUrl =
         'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
+
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -155,11 +148,16 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                             //*         .toLowerCase()
                             //*         .contains(value.toLowerCase()))
                             //*     .toList();
-                            msgmeeList = cubit!
-                                .where((model) => model.firstName!
-                                    .toLowerCase()
-                                    .contains(value.toLowerCase()))
-                                .toList();
+                            List<Data> searchedList = cubit!.where((e) {
+                              var fullname = '${e.firstName}${e.lastName}';
+
+                              var list = fullname
+                                  .toLowerCase()
+                                  .trim()
+                                  .contains(value.toLowerCase().trim());
+                              return list;
+                            }).toList();
+                            msgmeeList = List.from(searchedList);
                           }
                         });
                       },
@@ -232,53 +230,87 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'All Connections',
-                        style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.bold),
-                      ),
+                      Text('All Connections',
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
                       //*showing msgmee contacts in listview
-                      if (cubit != null)
-                        ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.all(0),
-                            shrinkWrap: true,
-                            itemCount: msgmeeList.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  screenNavigator(
-                                      context,
-                                      ChatScreen(
-                                        name:
-                                            '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
-                                        imageUrl: avaterUrl,
-                                        isOnline: true,
-                                        hasStory: true,
-                                      ));
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 14.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      ChatProfileWidget(
-                                        imageUrl: avaterUrl,
-                                        isOnline: false,
-                                        hasStory: false,
-                                        radius: 20,
+                      context.watch<MsgmeeContactCubit>().state.status ==
+                              MsgmeeContactStatus.loading
+                          ? Shimmer.fromColors(
+                              baseColor: AppColors.borderColor,
+                              highlightColor: AppColors.grey,
+                              child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 5,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 14.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            height: 40,
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                                color: AppColors.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(100)),
+                                          ),
+                                          SizedBox(width: 12),
+                                          Container(
+                                            height: 20,
+                                            width: context.screenWidth * .7,
+                                            decoration: BoxDecoration(
+                                                color: AppColors.grey),
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(width: 12),
-                                      Text(
-                                          '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
-                                          style: TextStyle(fontSize: 14.sp)),
-                                    ],
+                                    );
+                                  }))
+                          : ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.all(0),
+                              shrinkWrap: true,
+                              itemCount: msgmeeList.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    screenNavigator(
+                                        context,
+                                        ChatScreen(
+                                          name:
+                                              '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
+                                          imageUrl: avaterUrl,
+                                          isOnline: true,
+                                          hasStory: true,
+                                        ));
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 14.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ChatProfileWidget(
+                                          imageUrl: avaterUrl,
+                                          isOnline: false,
+                                          hasStory: false,
+                                          radius: 20,
+                                        ),
+                                        SizedBox(width: 12),
+                                        Text(
+                                            '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
+                                            style: TextStyle(fontSize: 14.sp)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
+                                );
+                              }),
+
                       // Row(
                       //   mainAxisSize: MainAxisSize.min,
                       //   children: [

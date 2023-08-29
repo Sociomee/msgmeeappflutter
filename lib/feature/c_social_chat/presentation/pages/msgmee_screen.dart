@@ -15,7 +15,10 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'package:stories_editor/stories_editor.dart';
+import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
+import '../../../../data/repository/chat_head/chat_head_repository.dart';
+import '../cubit/chatheads/chathead_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
 import '../widgets/chat_profile_widget.dart';
 import '../widgets/messenger_bottomsheet.dart';
@@ -47,6 +50,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   bool typing = false;
   late TextEditingController searchController;
   List<ChatModel> filtedUserList = [];
+  List<ChatHeads> chatheadList = [];
   List<ChatOptionsModel> options = [
     ChatOptionsModel(id: 1, option: 'Mark as unread'),
     ChatOptionsModel(id: 2, option: 'Block user'),
@@ -56,6 +60,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void initState() {
     super.initState();
+    context.read<ChatHeadCubit>().getMsgmeeChatHeads();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
 

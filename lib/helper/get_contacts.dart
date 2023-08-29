@@ -1,12 +1,14 @@
-import 'package:contacts_service/contacts_service.dart';
+// import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<List<Contact>> getContactData(BuildContext context) async {
   PermissionStatus permissionStatus = await _getContactPermission();
 
   if (permissionStatus == PermissionStatus.granted) {
-    List<Contact> contacts = await ContactsService.getContacts();
+    List<Contact> contacts = await FlutterContacts.getContacts();
+    // ContactsService.getContacts();
 
     return contacts;
   } else {

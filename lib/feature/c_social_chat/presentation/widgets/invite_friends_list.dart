@@ -47,7 +47,7 @@ class InviteFriendsList extends StatelessWidget {
                                   : AppColors.blue,
                               borderRadius: BorderRadius.circular(100)),
                           child: Text(
-                            contacts[index].displayName![0],
+                            contacts[index].displayName[0],
                             style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
@@ -56,7 +56,7 @@ class InviteFriendsList extends StatelessWidget {
                         ),
                         SizedBox(width: 12),
                         Text(
-                          contacts[index].displayName!,
+                          contacts[index].displayName,
                           style: TextStyle(fontSize: 14),
                         ),
                         Spacer(),
