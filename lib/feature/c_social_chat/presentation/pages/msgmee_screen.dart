@@ -17,7 +17,7 @@ import 'package:msgmee/theme/colors.dart';
 import 'package:stories_editor/stories_editor.dart';
 import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
-import '../../../../data/repository/chat_head/chat_head_repository.dart';
+import '../../../../data/repository/socket/msgmee_socket.dart';
 import '../cubit/chatheads/chathead_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
 import '../widgets/chat_profile_widget.dart';
@@ -60,6 +60,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void initState() {
     super.initState();
+    MsgmeeSocket().connectToSocket();
     context.read<ChatHeadCubit>().getMsgmeeChatHeads();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
@@ -88,6 +89,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void dispose() {
     searchController.dispose();
+    MsgmeeSocket().closeSocketConnection();
     super.dispose();
   }
 

@@ -31,14 +31,14 @@ import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../cubit/show_emoji/show_emoji_cubit.dart';
 import '../../widgets/chat_profile_widget.dart';
+import '../chat_screen/forward_msg_page.dart';
+import '../chat_screen/image_preview_page.dart';
+import '../chat_screen/widgets/message_textField.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
-import 'forward_msg_page.dart';
 import '../group_chat_screen/group_chat_details_page.dart';
-import 'image_preview_page.dart';
-import 'widgets/message_textField.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen(
+class GroupChatScreen extends StatefulWidget {
+  const GroupChatScreen(
       {super.key,
       required this.name,
       required this.imageUrl,
@@ -52,10 +52,10 @@ class ChatScreen extends StatefulWidget {
   final bool? group;
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<GroupChatScreen> createState() => _GroupChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _GroupChatScreenState extends State<GroupChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   final ImagePicker _picker = ImagePicker();

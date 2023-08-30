@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/group_qr_page.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/group_qr_page.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/share_group_invitation_page.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 

@@ -264,7 +264,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                             height: 20,
                                             width: context.screenWidth * .7,
                                             decoration: BoxDecoration(
-                                                color: AppColors.grey),
+                                                color: AppColors.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
                                           )
                                         ],
                                       ),

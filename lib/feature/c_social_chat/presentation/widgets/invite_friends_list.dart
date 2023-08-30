@@ -2,20 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/helper/get_contacts.dart';
+import '../../../../common_widgets/shimmer_effect.dart';
 import '../../../../theme/colors.dart';
-
-List invitelist = [
-  'Guy Hawkins',
-  'Ralph Edwards',
-  'Cameron Williamson',
-  'Annette Black',
-  'Eleanor Pena',
-  'Esther Howard',
-  'Albert Flores',
-  'Arlene McCoy',
-  'Jenny Wilson',
-  'Kathryn Murphy',
-];
 
 class InviteFriendsList extends StatelessWidget {
   const InviteFriendsList({super.key});
@@ -29,8 +17,8 @@ class InviteFriendsList extends StatelessWidget {
             var contacts = snapshot.data;
             return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
                 itemCount: contacts!.length,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 14.0),
@@ -86,7 +74,7 @@ class InviteFriendsList extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
-          return const CircularProgressIndicator();
+          return ShimmerEffect();
         });
   }
 }

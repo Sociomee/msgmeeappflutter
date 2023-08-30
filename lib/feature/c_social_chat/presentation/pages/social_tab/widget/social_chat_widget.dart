@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatheads/chathead_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/group_chat_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/get_time.dart';
@@ -23,6 +24,9 @@ class SocialchatWidget extends StatefulWidget {
 }
 
 class _SocialchatWidgetState extends State<SocialchatWidget> {
+  var avaterUrl =
+      'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
+
   @override
   Widget build(BuildContext context) {
     var selectcubit = context.watch<SelectedchatCubit>().state;
@@ -92,6 +96,8 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                 chathead.data != null ? chathead.data!.chatHeads!.length : 0,
             itemBuilder: (context, index) {
               final isSelected = cubit.state.containsKey(index);
+              print(
+                  'image Urls ------>>${chathead.data!.chatHeads![index].displayPicture ?? avaterUrl}');
               return Column(
                 children: [
                   GestureDetector(
@@ -100,16 +106,43 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                     },
                     onTap: cubit.state.isEmpty
                         ? () {
-                            animatedScreenNavigator(
-                                context,
-                                ChatScreen(
-                                  name: chathead.data!.chatHeads![index].name!,
-                                  imageUrl: chathead
-                                      .data!.chatHeads![index].displayPicture!,
-                                  isOnline: chathead
-                                          .data!.chatHeads![index].isOnline ??
-                                      false,
-                                ));
+                            chathead.data!.chatHeads![index].chatRoomType ==
+                                    "DM"
+                                ? animatedScreenNavigator(
+                                    context,
+                                    ChatScreen(
+                                      name: chathead
+                                          .data!.chatHeads![index].name!,
+                                      imageUrl: chathead.data!.chatHeads![index]
+                                              .displayPicture!.isNotEmpty
+                                          ? chathead.data!.chatHeads![index]
+                                              .displayPicture!
+                                          : avaterUrl,
+                                      isOnline: chathead.data!.chatHeads![index]
+                                              .isOnline ??
+                                          false,
+                                    ))
+                                : chathead.data!.chatHeads![index]
+                                            .chatRoomType ==
+                                        ''
+                                    ? animatedScreenNavigator(
+                                        context,
+                                        GroupChatScreen(
+                                          name: chathead
+                                              .data!.chatHeads![index].name!,
+                                          imageUrl: chathead
+                                                  .data!
+                                                  .chatHeads![index]
+                                                  .displayPicture!
+                                                  .isNotEmpty
+                                              ? chathead.data!.chatHeads![index]
+                                                  .displayPicture!
+                                              : avaterUrl,
+                                          isOnline: chathead.data!
+                                                  .chatHeads![index].isOnline ??
+                                              false,
+                                        ))
+                                    : null;
                           }
                         : () {
                             cubit.toggleSelection(index);
@@ -131,13 +164,22 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   builder: (context) => ProfileViewDialog(
                                         profilename: chathead
                                             .data!.chatHeads![index].name!,
-                                        imageUrl: chathead.data!
-                                            .chatHeads![index].displayPicture!,
+                                        imageUrl: chathead
+                                                .data!
+                                                .chatHeads![index]
+                                                .displayPicture!
+                                                .isNotEmpty
+                                            ? chathead.data!.chatHeads![index]
+                                                .displayPicture!
+                                            : avaterUrl,
                                       ));
                             },
                             child: ChatProfileWidget(
-                                imageUrl: chathead
-                                    .data!.chatHeads![index].displayPicture!,
+                                imageUrl: chathead.data!.chatHeads![index]
+                                        .displayPicture!.isNotEmpty
+                                    ? chathead
+                                        .data!.chatHeads![index].displayPicture!
+                                    : avaterUrl,
                                 isOnline: false,
                                 // chathead.data!.chatHeads![index].isOnline!,
                                 hasStory: false),
