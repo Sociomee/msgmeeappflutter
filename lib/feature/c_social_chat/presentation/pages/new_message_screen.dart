@@ -70,7 +70,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     searchController = TextEditingController();
     filterdList = List.from(dummyconnections);
     context.read<MsgmeeContactCubit>().getMsgmeeContact();
-
     super.initState();
   }
 
@@ -79,6 +78,18 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     searchController.dispose();
     super.dispose();
   }
+
+  // void _handleInvalidPermissions(BuildContext context) async {
+  //   PermissionStatus permissionStatus = await getContactPermission();
+  //   if (permissionStatus == PermissionStatus.denied) {
+  //     final snackBar = SnackBar(content: Text('Access to contact data denied'));
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //   } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
+  //     final snackBar =
+  //         SnackBar(content: Text('Contact data not available on device'));
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

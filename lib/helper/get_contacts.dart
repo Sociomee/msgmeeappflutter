@@ -1,10 +1,9 @@
-// import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-Future<List<Contact>> getContactData(BuildContext context) async {
-  PermissionStatus permissionStatus = await _getContactPermission();
+Future<List<Contact>> getContactData() async {
+  PermissionStatus permissionStatus = await getContactPermission();
 
   if (permissionStatus == PermissionStatus.granted) {
     List<Contact> contacts = await FlutterContacts.getContacts();
@@ -12,12 +11,12 @@ Future<List<Contact>> getContactData(BuildContext context) async {
 
     return contacts;
   } else {
-    _handleInvalidPermissions(permissionStatus, context);
+    // _handleInvalidPermissions(permissionStatus, context);
     return [];
   }
 }
 
-Future<PermissionStatus> _getContactPermission() async {
+Future<PermissionStatus> getContactPermission() async {
   PermissionStatus permission = await Permission.contacts.status;
   if (permission != PermissionStatus.granted &&
       permission != PermissionStatus.permanentlyDenied) {
@@ -28,14 +27,15 @@ Future<PermissionStatus> _getContactPermission() async {
   }
 }
 
-void _handleInvalidPermissions(
-    PermissionStatus permissionStatus, BuildContext context) {
-  if (permissionStatus == PermissionStatus.denied) {
-    final snackBar = SnackBar(content: Text('Access to contact data denied'));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
-    final snackBar =
-        SnackBar(content: Text('Contact data not available on device'));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-}
+//!write this login in the ui file not here 
+// void _handleInvalidPermissions(
+//     PermissionStatus permissionStatus, BuildContext context) {
+//   if (permissionStatus == PermissionStatus.denied) {
+//     final snackBar = SnackBar(content: Text('Access to contact data denied'));
+//     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//   } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
+//     final snackBar =
+//         SnackBar(content: Text('Contact data not available on device'));
+//     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//   }
+// }

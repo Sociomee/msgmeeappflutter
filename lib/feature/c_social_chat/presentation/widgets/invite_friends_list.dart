@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/helper/get_contacts.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/get_contact/get_contact_cubit.dart';
+
 import '../../../../common_widgets/shimmer_effect.dart';
 import '../../../../theme/colors.dart';
 
@@ -10,71 +12,137 @@ class InviteFriendsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getContactData(context),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var contacts = snapshot.data;
-            return ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: contacts!.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 14.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 44,
-                          width: 44,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: index % 2 == 0
-                                  ? AppColors.darkgreen
-                                  : AppColors.blue,
-                              borderRadius: BorderRadius.circular(100)),
-                          child: Text(
-                            contacts[index].displayName[0],
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Text(
-                          contacts[index].displayName,
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset('assets/invite.svg',
-                                  height: 16.h),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Invite',
+    var cubit = context.watch<GetContactCubit>().state;
+    return Column(
+      children: [
+        cubit.status == GetContactStatus.loading
+            ? ShimmerEffect()
+            : cubit.status == GetContactStatus.loaded
+                ? ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cubit.contacts.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 14.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 44,
+                              width: 44,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: index % 2 == 0
+                                      ? AppColors.darkgreen
+                                      : AppColors.blue,
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: Text(
+                                cubit.contacts[index].displayName[0],
                                 style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.w500),
+                                    color: AppColors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                });
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-          return ShimmerEffect();
-        });
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              cubit.contacts[index].displayName,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset('assets/invite.svg',
+                                      height: 16.h),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Invite',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.primaryColor,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    })
+                : Text("No Contacts Found")
+      ],
+    );
+    // return FutureBuilder(
+    //     future: getContactData(),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.hasData) {
+    //         varcubit.contacts = snapshot.data;
+    //         return ListView.builder(
+    //             physics: NeverScrollableScrollPhysics(),
+    //             itemCount:cubit.contacts!.length,
+    //             shrinkWrap: true,
+    //             itemBuilder: (context, index) {
+    //               return Padding(
+    //                 padding: const EdgeInsets.only(bottom: 14.0),
+    //                 child: Row(
+    //                   crossAxisAlignment: CrossAxisAlignment.center,
+    //                   children: [
+    //                     Container(
+    //                       height: 44,
+    //                       width: 44,
+    //                       alignment: Alignment.center,
+    //                       decoration: BoxDecoration(
+    //                           color: index % 2 == 0
+    //                               ? AppColors.darkgreen
+    //                               : AppColors.blue,
+    //                           borderRadius: BorderRadius.circular(100)),
+    //                       child: Text(
+    //                        cubit.contacts[index].displayName[0],
+    //                         style: TextStyle(
+    //                             color: AppColors.white,
+    //                             fontSize: 20,
+    //                             fontWeight: FontWeight.bold),
+    //                       ),
+    //                     ),
+    //                     SizedBox(width: 12),
+    //                     Text(
+    //                      cubit.contacts[index].displayName,
+    //                       style: TextStyle(fontSize: 14),
+    //                     ),
+    //                     Spacer(),
+    //                     Padding(
+    //                       padding: const EdgeInsets.only(right: 8.0),
+    //                       child: Row(
+    //                         children: [
+    //                           SvgPicture.asset('assets/invite.svg',
+    //                               height: 16.h),
+    //                           SizedBox(
+    //                             width: 5,
+    //                           ),
+    //                           Text(
+    //                             'Invite',
+    //                             style: TextStyle(
+    //                                 fontSize: 12,
+    //                                 color: AppColors.primaryColor,
+    //                                 fontWeight: FontWeight.w500),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     )
+    //                   ],
+    //                 ),
+    //               );
+    //             });
+    //       } else if (snapshot.hasError) {
+    //         log('contact related error--->${snapshot.error}');
+    //         return ShimmerEffect();
+    //       }
+    //       return ShimmerEffect();
+    //     });
   }
 }
