@@ -14,9 +14,9 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_but
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
-import 'package:stories_editor/stories_editor.dart';
 import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
+import '../../../../data/repository/profile/update_profile_repository.dart';
 import '../../../../data/repository/socket/msgmee_socket.dart';
 import '../cubit/chatheads/chathead_cubit.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
@@ -62,7 +62,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   void initState() {
     super.initState();
     context.read<ChatHeadCubit>().getMsgmeeChatHeads();
-    MsgmeeSocket().connectToSocket();
+    ProfileService().getUserDetails();
+    ProfileService().getUserDetailsByPhone('917908450663');
     context.read<GetContactCubit>().getContactsCubit();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
@@ -730,20 +731,20 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                             children: [
                                               GestureDetector(
                                                 onTap: () async {
-                                                  await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              StoriesEditor(
-                                                                giphyKey:
-                                                                    'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                                galleryThumbnailQuality:
-                                                                    300,
-                                                                onDone: (uri) {
-                                                                  debugPrint(
-                                                                      uri);
-                                                                },
-                                                              )));
+                                                  // await Navigator.push(
+                                                  //     context,
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             StoriesEditor(
+                                                  //               giphyKey:
+                                                  //                   'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                  //               galleryThumbnailQuality:
+                                                  //                   300,
+                                                  //               onDone: (uri) {
+                                                  //                 debugPrint(
+                                                  //                     uri);
+                                                  //               },
+                                                  //             )));
                                                 },
                                                 child: Container(
                                                   height: 42,

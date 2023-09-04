@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "61.0.0"
-  align_positioned:
-    dependency: transitive
-    description:
-      name: align_positioned
-      sha256: eca633a4f1a070b6fd1a013272b91bfebc986325c3de6fd575691c0697e70fb3
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   analyzer:
     dependency: transitive
     description:
@@ -25,14 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
-  animated_text_kit:
-    dependency: transitive
-    description:
-      name: animated_text_kit
-      sha256: "37392a5376c9a1a503b02463c38bc0342ef814ddbb8f9977bc90f2a84b22fa92"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.2"
   any_link_preview:
     dependency: "direct main"
     description:
@@ -640,14 +624,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  gallery_media_picker:
-    dependency: transitive
-    description:
-      name: gallery_media_picker
-      sha256: "772b0ededd872dee1915c87c81ee090167757c4fcb547e089ef2815d02756211"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.82"
   geocoding:
     dependency: "direct main"
     description:
@@ -840,14 +816,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  image_gallery_saver:
-    dependency: transitive
-    description:
-      name: image_gallery_saver
-      sha256: be812580c7a320d3bf583af89cac6b376f170d48000aca75215a73285a3223a0
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.7.1"
   image_picker:
     dependency: "direct main"
     description:
@@ -1000,14 +968,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  matrix4_transform:
-    dependency: transitive
-    description:
-      name: matrix4_transform
-      sha256: "6ddeaa2c0e1f5c3f3a197f552377570b3e54fa0b8bf48507728a216fc0fd78a6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   meta:
     dependency: transitive
     description:
@@ -1024,14 +984,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  modal_gif_picker:
-    dependency: transitive
-    description:
-      name: modal_gif_picker
-      sha256: d653c5a8a3e2932bc028132c4623cb51c505d97bf3093f44e81f1260f8d7a595
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   nested:
     dependency: transitive
     description:
@@ -1048,14 +1000,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  oktoast:
-    dependency: transitive
-    description:
-      name: oktoast
-      sha256: fd5dd5c7dd02c41c56bdbdbc163351bd6cd59cba61c416daf255e35d1a86dce1
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.1"
   package_config:
     dependency: transitive
     description:
@@ -1136,14 +1080,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
-  perfect_freehand:
-    dependency: transitive
-    description:
-      name: perfect_freehand
-      sha256: "77bfdd5efb223d120de5cc18c5d6e0b36a835e920521cfe67e281960bad44c9b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
   permission_handler:
     dependency: "direct main"
     description:
@@ -1192,22 +1128,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  photo_manager:
-    dependency: transitive
-    description:
-      name: photo_manager
-      sha256: bdc4ab1fa9fb064d8ccfea6ab44119f55b220293d7ce2e19eb5a5f998db86c88
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.0"
-  photo_view:
-    dependency: transitive
-    description:
-      name: photo_view
-      sha256: "8036802a00bae2a78fc197af8a158e3e2f7b500561ed23b4c458107685e645bb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.14.0"
   photofilters:
     dependency: "direct main"
     description:
@@ -1493,15 +1413,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
-  stories_editor:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d517e0e74d1de36e1b07509d662ada46669317ba
-      url: "https://github.com/DeveloperMalay/stories_editor"
-    source: git
-    version: "0.2.2"
   stream_channel:
     dependency: transitive
     description:

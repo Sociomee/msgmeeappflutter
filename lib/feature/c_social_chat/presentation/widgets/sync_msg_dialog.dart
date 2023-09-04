@@ -7,6 +7,7 @@ import 'package:msgmee/helper/validation.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../cubit/sycn_with_sociomee.dart';
+import '../cubit/sync_sociomee/sync_sociomee_cubit.dart';
 
 class SyncDialogWidget extends StatefulWidget {
   const SyncDialogWidget({super.key});
@@ -75,6 +76,12 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                         radius: 28,
                         backgroundColor: AppColors.grey,
                         backgroundImage: NetworkImage(
+                            // context
+                            //       .watch<SyncSociomeeCubit>()
+                            //       .state
+                            //       .syncResponse
+                            //       .data!
+                            //       .profileImageThumb ??
                             'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600'),
                       ),
                       SizedBox(width: 10),
@@ -82,12 +89,24 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            // context
+                            //         .watch<SyncSociomeeCubit>()
+                            //         .state
+                            //         .syncResponse
+                            //         .data!
+                            //         .userName ??
                             '@shreya_singh012',
                             style:
                                 TextStyle(fontSize: 13, color: AppColors.black),
                           ),
                           SizedBox(height: 5),
                           Text(
+                            // context
+                            //         .watch<SyncSociomeeCubit>()
+                            //         .state
+                            //         .syncResponse
+                            //         .data!
+                            //         .id ??
                             '+ 91 8954543151',
                             style:
                                 TextStyle(fontSize: 13, color: AppColors.grey),
@@ -106,6 +125,9 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                         ontap: () {
                           context.read<SyncMsgCubit>().syncmsg();
                           context.read<SyncWithSociomee>().sync();
+                          context
+                              .read<SyncSociomeeCubit>()
+                              .syncSociomeeCubit('loginId', 'password');
                           Navigator.pop(context);
                         }),
                   ),
@@ -248,6 +270,10 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 if (_formKey.currentState!.validate()) {
                                   context.read<SyncMsgCubit>().syncmsg();
                                   context.read<SyncWithSociomee>().sync();
+                                  context
+                                      .read<SyncSociomeeCubit>()
+                                      .syncSociomeeCubit(emailController.text,
+                                          passwordController.text);
                                   Navigator.pop(context);
                                 }
                               }),

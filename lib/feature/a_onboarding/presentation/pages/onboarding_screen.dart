@@ -7,7 +7,6 @@ import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.da
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../helper/navigator_function.dart';
-import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../widgets/build_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -88,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        animatedScreenNavigator(context, MsgmeeScreen());
+                        animatedScreenNavigator(context, WelcomeScreen());
                       },
                       child: Text('Skip',
                           style: TextStyle(

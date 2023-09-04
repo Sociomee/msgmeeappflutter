@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
+import 'package:msgmee/helper/local_data.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
 import '../../../../../common_widgets/custom_button_widget.dart';
 import '../../../../../theme/colors.dart';
@@ -31,7 +34,9 @@ class LogoutDialog extends StatelessWidget {
                 title: 'Log Out',
                 color: AppColors.primaryColor,
                 ontap: () {
+                  Localdata().deleteData('token');
                   Navigator.pop(context);
+                  animatedScreenReplaceNavigator(context, SplashScreen());
                 }),
             SizedBox(height: 20),
             GestureDetector(

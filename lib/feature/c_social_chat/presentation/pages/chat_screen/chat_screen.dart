@@ -23,6 +23,7 @@ import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile
 import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
+import '../../../../../data/repository/socket/msgmee_socket.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
@@ -904,6 +905,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                               type: MessageType
                                                                   .text,
                                                             ));
+                                                //* sending message to socket
+                                                MsgmeeSocket().sendMessage(
+                                                    messageController.text);
                                                 messageController.clear();
                                                 _scrollToBottom();
                                                 context

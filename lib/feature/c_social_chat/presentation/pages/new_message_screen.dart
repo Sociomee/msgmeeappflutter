@@ -95,7 +95,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MsgmeeContactCubit>().state.response.data;
     if (cubit != null && searchController.text.isEmpty)
-      msgmeeList = msgmeeList = List.from(cubit);
+      msgmeeList = List.from(cubit);
     var avaterUrl =
         'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
 

@@ -66,9 +66,9 @@ dependencies:
   geocoding: ^2.1.0
   geolocator: ^9.0.2
   flutter_sound: ^9.2.13
-  stories_editor:
-    git:
-      url: https://github.com/DeveloperMalay/stories_editor
+  # stories_editor:
+  #   git:
+  #     url: https://github.com/DeveloperMalay/stories_editor
   country_picker: ^2.0.20
   freezed: ^2.4.1
   freezed_annotation: ^2.4.1

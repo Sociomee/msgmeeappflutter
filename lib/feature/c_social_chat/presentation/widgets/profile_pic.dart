@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../theme/colors.dart';
-import '../pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   const ProfilePicWidget({super.key});
@@ -20,7 +18,7 @@ class ProfilePicWidget extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-              context.read<ShoweditbtnCubit>().showdialog();
+              // context.read<ShoweditbtnCubit>().showdialog();
             },
             child: Container(
               height: 19,
