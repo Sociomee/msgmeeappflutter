@@ -11,13 +11,14 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/widget/social_chat_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_button.dart';
+import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
 import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
-import '../../../../data/repository/profile/update_profile_repository.dart';
 import '../../../../data/repository/socket/msgmee_socket.dart';
+import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import '../cubit/chatheads/chathead_cubit.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
@@ -62,9 +63,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   void initState() {
     super.initState();
     context.read<ChatHeadCubit>().getMsgmeeChatHeads();
-    ProfileService().getUserDetails();
-    ProfileService().getUserDetailsByPhone('917908450663');
     context.read<GetContactCubit>().getContactsCubit();
+    getProfileDetails();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
 
@@ -106,6 +106,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     setState(() {
       typing = false;
     });
+  }
+
+  getProfileDetails() async {
+    var phone = await Localdata().readData('phone');
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit(phone);
   }
 
   @override

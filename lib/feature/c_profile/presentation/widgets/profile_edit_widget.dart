@@ -60,7 +60,9 @@ class ProfileEditWidget extends StatelessWidget {
                               radius: 50,
                               backgroundColor: AppColors.grey,
                               backgroundImage: NetworkImage(
-                                  cubit.response.data!.profilePic!)))
+                                  cubit.response.data!.profilePic!),
+                            ),
+                    )
             ],
           ),
           SizedBox(width: 20),

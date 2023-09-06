@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import '../../../../theme/colors.dart';
 
 class ProfilePicWidget extends StatelessWidget {
@@ -6,13 +8,20 @@ class ProfilePicWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.watch<GetUserdetailsCubit>().state;
     return Stack(
       children: [
-        const CircleAvatar(
-            radius: 30,
-            backgroundColor: AppColors.grey,
-            backgroundImage: NetworkImage(
-                'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
+        if (cubit.response.data != null)
+          cubit.response.data!.profilePic == null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset('assets/profile_icon.png',
+                      height: 30, fit: BoxFit.cover))
+              : CircleAvatar(
+                  radius: 30,
+                  backgroundColor: AppColors.grey,
+                  backgroundImage:
+                      NetworkImage(cubit.response.data!.profilePic!)),
         Positioned(
           top: 40,
           right: 0,

@@ -50,13 +50,12 @@ class _ProfilePageState extends State<ProfilePage> {
             if (context.watch<GetUserdetailsCubit>().state.response.data !=
                 null)
               PersonalDetailsWidget(
-                ids: context
-                    .watch<GetUserdetailsCubit>()
-                    .state
-                    .response
-                    .data!
-                    .interests!,
-              ),
+                  ids: context
+                      .watch<GetUserdetailsCubit>()
+                      .state
+                      .response
+                      .data!
+                      .interests!),
             Column(
               children: [
                 BroadCastsWidget(),
