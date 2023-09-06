@@ -1,14 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/navigator_function.dart';
-import '../../../../data/repository/profile/update_profile_repository.dart';
-import '../../../b_auth/presentation/cubit/create_user/create_user_cubit.dart';
+import '../../../b_auth/presentation/cubit/update_user/update_user_cubit.dart';
 import '../../../c_social_chat/presentation/pages/msgmee_screen.dart';
 import '../../../b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import '../../../../theme/colors.dart';
@@ -69,9 +66,9 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CreateUserCubit, CreateUserState>(
+    return BlocConsumer<UpdateUserCubit, UpdateUserState>(
       listener: (context, state) {
-        if (state.status == CreateUserStatus.loading) {
+        if (state.status == UpdateUserStatus.loading) {
           showDialog(
               context: context,
               builder: (context) {
@@ -80,22 +77,15 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      context.watch<CreateUserCubit>().state.status ==
-                              CreateUserStatus.error
-                          ? Text(
-                              'Invalid Otp',
-                              style: TextStyle(color: AppColors.errorRedColor),
-                            )
-                          : Center(
-                              child: CircularProgressIndicator(
-                                  color: AppColors.darkbtnColor))
+                      Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.darkbtnColor))
                     ],
                   ),
                 );
               });
-        } else if (state.status == CreateUserStatus.loaded) {
-          // animatedScreenNavigator(context, MsgmeeScreen());
-          log(state.status.toString());
+        } else if (state.status == UpdateUserStatus.loaded) {
+          animatedScreenNavigator(context, MsgmeeScreen());
         }
       },
       builder: (context, state) {
@@ -128,10 +118,9 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 GestureDetector(
                   onTap: () {
                     if (imageFile!.path.isNotEmpty) {
-                      var profileapi = ProfileService();
-                      var localdata = Localdata();
-                      profileapi.updateUser(localdata.readData('userId'),
-                          imageFile!, widget.name);
+                      context
+                          .read<UpdateUserCubit>()
+                          .updateUser(widget.name, imageFile!);
                     }
                   },
                   child: Padding(
@@ -261,14 +250,9 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                         fontsize: 18,
                         ontap: () async {
                           if (imageFile!.path.isNotEmpty) {
-                            var profileapi = ProfileService();
-                            var localdata = Localdata();
-                            var userId = await localdata.readData('userId');
-                            profileapi.updateUser(
-                              userId,
-                              imageFile!,
-                              widget.name,
-                            );
+                            context
+                                .read<UpdateUserCubit>()
+                                .updateUser(widget.name, imageFile!);
                           }
                         },
                         title: 'Continue',

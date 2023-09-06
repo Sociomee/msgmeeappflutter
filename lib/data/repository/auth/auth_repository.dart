@@ -30,7 +30,7 @@ class AuthService implements AuthRepository {
     var localdata = Localdata();
 
     final response = await dio.post('$baseUrl/auth/verify-otp', data: {
-      "phone": phone,
+      "phone": '+$phone',
       "otp": otp,
     });
     log("response-->>${response.data}");
@@ -40,6 +40,7 @@ class AuthService implements AuthRepository {
       localdata.storedata('userId', data.data!.userId!);
       localdata.storedata('userDeviceId', data.data!.userDeviceId!);
       localdata.storedata('deviceId', data.data!.deviceId!);
+      localdata.storedata('phone', "$phone");
       log('res from repository ---> $data');
       return data;
     } else {

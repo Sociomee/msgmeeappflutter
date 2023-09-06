@@ -1,7 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 
+import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
+import '../cubit/get_user_details/get_userdetails_cubit.dart';
 
 class Gender {
   final String gender;
@@ -62,37 +66,107 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                 shrinkWrap: true,
                 itemCount: genderList.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(genderList[index].gender),
-                            Checkbox(
-                                side: MaterialStateBorderSide.resolveWith(
-                                  (states) => BorderSide(
-                                      width: 2.0,
-                                      color: AppColors.primaryColor),
-                                ),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100)),
-                                activeColor: AppColors.primaryColor,
-                                value: genderList[index].isSelected,
-                                onChanged: (w) {
-                                  setState(() {
-                                    genderList[index].isSelected =
-                                        !genderList[index].isSelected;
-                                  });
-                                })
-                          ],
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () async {
+                      var phone = await Localdata().readData('phone');
+                      if (index == 0) {
+                        setState(() {
+                          genderList[0].isSelected = true;
+                          genderList[1].isSelected = false;
+                          genderList[2].isSelected = false;
+                        });
+                        context
+                            .read<UpdateProfileCubit>()
+                            .updateGender(genderList[0].gender);
+                        context
+                            .read<GetUserdetailsCubit>()
+                            .getUserDetailsCubit(phone);
+                        Navigator.pop(context);
+                      } else if (index == 1) {
+                        setState(() {
+                          genderList[1].isSelected = true;
+                          genderList[0].isSelected = false;
+                          genderList[2].isSelected = false;
+                        });
+                        context
+                            .read<UpdateProfileCubit>()
+                            .updateGender(genderList[1].gender);
+                        context
+                            .read<GetUserdetailsCubit>()
+                            .getUserDetailsCubit(phone);
+                        Navigator.pop(context);
+                      } else {
+                        setState(() {
+                          genderList[0].isSelected = false;
+                          genderList[1].isSelected = false;
+                          genderList[2].isSelected = true;
+                        });
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(genderList[index].gender),
+                              Checkbox(
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (states) => BorderSide(
+                                        width: 2.0,
+                                        color: AppColors.primaryColor),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  activeColor: AppColors.primaryColor,
+                                  value: genderList[index].isSelected,
+                                  onChanged: (w) async {
+                                    var phone =
+                                        await Localdata().readData('phone');
+                                    if (index == 0) {
+                                      setState(() {
+                                        genderList[0].isSelected = true;
+                                        genderList[1].isSelected = false;
+                                        genderList[2].isSelected = false;
+                                      });
+                                      context
+                                          .read<UpdateProfileCubit>()
+                                          .updateGender(genderList[0].gender);
+                                      context
+                                          .read<GetUserdetailsCubit>()
+                                          .getUserDetailsCubit(phone);
+                                    } else if (index == 1) {
+                                      setState(() {
+                                        genderList[1].isSelected = true;
+                                        genderList[0].isSelected = false;
+                                        genderList[2].isSelected = false;
+                                      });
+                                      context
+                                          .read<UpdateProfileCubit>()
+                                          .updateGender(genderList[1].gender);
+                                      context
+                                          .read<GetUserdetailsCubit>()
+                                          .getUserDetailsCubit(phone);
+                                    } else {
+                                      setState(() {
+                                        genderList[0].isSelected = false;
+                                        genderList[1].isSelected = false;
+                                        genderList[2].isSelected = true;
+                                      });
+                                    }
+
+                                    Navigator.pop(context);
+                                  })
+                            ],
+                          ),
                         ),
-                      ),
-                      index == genderList.length - 1
-                          ? Container()
-                          : Divider(color: AppColors.grey)
-                    ],
+                        index == genderList.length - 1
+                            ? Container()
+                            : Divider(color: AppColors.grey, thickness: 1)
+                      ],
+                    ),
                   );
                 }),
             genderList[2].isSelected == true
@@ -112,48 +186,137 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                 shrinkWrap: true,
                                 itemCount: specialCase.length,
                                 itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 40),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(specialCase[index].gender),
-                                            Checkbox(
-                                                side: MaterialStateBorderSide
-                                                    .resolveWith(
-                                                  (states) => BorderSide(
-                                                      width: 2.0,
-                                                      color: AppColors
-                                                          .primaryColor),
-                                                ),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100)),
-                                                activeColor:
-                                                    AppColors.primaryColor,
-                                                value: specialCase[index]
-                                                    .isSelected,
-                                                onChanged: (w) {
-                                                  setState(() {
-                                                    specialCase[index]
-                                                            .isSelected =
-                                                        !specialCase[index]
-                                                            .isSelected;
-                                                  });
-                                                })
-                                          ],
+                                  return GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () async {
+                                      var phone =
+                                          await Localdata().readData('phone');
+                                      if (index == 0) {
+                                        setState(() {
+                                          specialCase[0].isSelected = true;
+                                          specialCase[1].isSelected = false;
+                                          specialCase[2].isSelected = false;
+                                        });
+                                        context
+                                            .read<UpdateProfileCubit>()
+                                            .updateGender(
+                                                'I am Special ${specialCase[0].gender}');
+                                      } else if (index == 1) {
+                                        setState(() {
+                                          specialCase[1].isSelected = true;
+                                          specialCase[0].isSelected = false;
+                                          specialCase[2].isSelected = false;
+                                        });
+                                        context
+                                            .read<UpdateProfileCubit>()
+                                            .updateGender(
+                                                'I am Special ${specialCase[1].gender}');
+                                      } else {
+                                        setState(() {
+                                          specialCase[0].isSelected = false;
+                                          specialCase[1].isSelected = false;
+                                          specialCase[2].isSelected = true;
+                                        });
+                                        context
+                                            .read<UpdateProfileCubit>()
+                                            .updateGender(
+                                                'I am Special ${specialCase[2].gender}');
+                                      }
+                                      context
+                                          .read<GetUserdetailsCubit>()
+                                          .getUserDetailsCubit(phone);
+                                      Navigator.pop(context);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 40),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(specialCase[index].gender),
+                                              Checkbox(
+                                                  side: MaterialStateBorderSide
+                                                      .resolveWith(
+                                                    (states) => BorderSide(
+                                                        width: 2.0,
+                                                        color: AppColors
+                                                            .primaryColor),
+                                                  ),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100)),
+                                                  activeColor:
+                                                      AppColors.primaryColor,
+                                                  value: specialCase[index]
+                                                      .isSelected,
+                                                  onChanged: (w) async {
+                                                    var phone =
+                                                        await Localdata()
+                                                            .readData('phone');
+                                                    if (index == 0) {
+                                                      setState(() {
+                                                        specialCase[0]
+                                                            .isSelected = true;
+                                                        specialCase[1]
+                                                            .isSelected = false;
+                                                        specialCase[2]
+                                                            .isSelected = false;
+                                                      });
+                                                      context
+                                                          .read<
+                                                              UpdateProfileCubit>()
+                                                          .updateGender(
+                                                              'I am Special ${specialCase[0].gender}');
+                                                    } else if (index == 1) {
+                                                      setState(() {
+                                                        specialCase[1]
+                                                            .isSelected = true;
+                                                        specialCase[0]
+                                                            .isSelected = false;
+                                                        specialCase[2]
+                                                            .isSelected = false;
+                                                      });
+                                                      context
+                                                          .read<
+                                                              UpdateProfileCubit>()
+                                                          .updateGender(
+                                                              'I am Special ${specialCase[1].gender}');
+                                                    } else {
+                                                      setState(() {
+                                                        specialCase[0]
+                                                            .isSelected = false;
+                                                        specialCase[1]
+                                                            .isSelected = false;
+                                                        specialCase[2]
+                                                            .isSelected = true;
+                                                      });
+                                                      context
+                                                          .read<
+                                                              UpdateProfileCubit>()
+                                                          .updateGender(
+                                                              'I am Special ${specialCase[2].gender}');
+                                                    }
+                                                    context
+                                                        .read<
+                                                            GetUserdetailsCubit>()
+                                                        .getUserDetailsCubit(
+                                                            phone);
+                                                    Navigator.pop(context);
+                                                  })
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Divider(
-                                        color: AppColors.grey,
-                                        height: 0,
-                                      )
-                                    ],
+                                        Divider(
+                                          color: AppColors.grey,
+                                          height: 0,
+                                          thickness: 1,
+                                        )
+                                      ],
+                                    ),
                                   );
                                 }),
                             SizedBox(height: 20)

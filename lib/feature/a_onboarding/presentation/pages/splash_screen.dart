@@ -80,6 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
 void startTimer(BuildContext context) {
   Timer(const Duration(seconds: 3), () async {
     var token = await Localdata().readData('token');
+
     if (token != null) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return const MsgmeeScreen();

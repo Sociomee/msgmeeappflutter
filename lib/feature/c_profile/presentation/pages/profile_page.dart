@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../widgets/broadcasts_widget.dart';
@@ -6,9 +8,20 @@ import '../widgets/groups_widget.dart';
 import '../widgets/personal_details_widget.dart';
 import '../widgets/profile_edit_widget.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
-  // final bool settings;
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit('917908450663');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

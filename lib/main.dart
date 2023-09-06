@@ -3,13 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
+import 'package:msgmee/feature/b_auth/presentation/cubit/update_user/update_user_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'common_cubits/reduce_number_cubit.dart';
-import 'feature/b_auth/presentation/cubit/create_user/create_user_cubit.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
+import 'feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
+import 'feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
@@ -73,7 +75,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => SyncWithSociomee()),
             BlocProvider(create: (context) => OtpSendCubit()),
             BlocProvider(create: (context) => OtpVerifyCubit()),
-            BlocProvider(create: (context) => CreateUserCubit()),
             BlocProvider(create: (context) => ReduceNumberCubit()),
             BlocProvider(create: (context) => ReplyMsgCubit()),
             BlocProvider(create: (context) => SearchModeCubit()),
@@ -84,6 +85,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ChatHeadCubit()),
             BlocProvider(create: (context) => GetContactCubit()),
             BlocProvider(create: (context) => SyncSociomeeCubit()),
+            BlocProvider(create: (context) => UpdateUserCubit()),
+            BlocProvider(create: (context) => GetUserdetailsCubit()),
+            BlocProvider(create: (context) => UpdateProfileCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

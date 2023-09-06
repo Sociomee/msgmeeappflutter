@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               });
         } else if (state.status == LoginStatus.loaded) {
           animatedScreenReplaceNavigator(context,
-              OtpScreen(number: "+${countryCode}${numberController.text}"));
+              OtpScreen(number: "${countryCode}${numberController.text}"));
         }
       },
       builder: (context, state) {

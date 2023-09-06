@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
+import 'package:msgmee/feature/c_profile/presentation/widgets/choose_gender_bottomsheet.dart';
 
 import 'choose_date_of_birth.dart';
 import 'choose_interest_bottomsheet.dart';
@@ -12,6 +15,7 @@ class PersonalDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.watch<GetUserdetailsCubit>().state;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -48,24 +52,26 @@ class PersonalDetailsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              'Norem ipsum dolor sit amet, consectetur adipiscing elit.Nunc vulputate libero et velit.',
-              style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 12.sp,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+        if (cubit.response.data != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                cubit.response.data!.bio ?? 'not set',
+                style: TextStyle(
+                  color: Color(0xFF333333),
+                  fontSize: 12.sp,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
-        ),
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -83,29 +89,30 @@ class PersonalDetailsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              children: [
-                Text(
-                  '+91 4546431585',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 12.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+        if (cubit.response.data != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                children: [
+                  Text(
+                    cubit.response.data!.phone ?? 'not set',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                Spacer()
-              ],
+                  Spacer()
+                ],
+              ),
             ),
           ),
-        ),
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -116,33 +123,54 @@ class PersonalDetailsWidget extends StatelessWidget {
               Text('Gender',
                   style:
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500)),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      builder: (context) {
+                        return ChooseGenderBottomSheet();
+                      });
+                },
+                child: Text('Edit',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'DM Sans',
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primaryColor)),
+              )
             ],
           ),
         ),
         SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              children: [
-                Text(
-                  'Female',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 12.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+        if (cubit.response.data != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                children: [
+                  Text(
+                    cubit.response.data!.gender ?? 'not set',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                Spacer()
-              ],
+                  Spacer()
+                ],
+              ),
             ),
           ),
-        ),
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -177,29 +205,30 @@ class PersonalDetailsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              children: [
-                Text(
-                  '16/03/2022',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 12.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+        if (cubit.response.data != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                children: [
+                  Text(
+                    cubit.response.data!.dob ?? 'not set',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                Spacer()
-              ],
+                  Spacer()
+                ],
+              ),
             ),
           ),
-        ),
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

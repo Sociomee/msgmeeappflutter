@@ -17,7 +17,7 @@ class InviteFriendsList extends StatelessWidget {
     return Column(
       children: [
         cubit.status == GetContactStatus.loading
-            ? ShimmerEffect()
+            ? CustomShimmerEffect()
             : cubit.status == GetContactStatus.loaded
                 ? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),

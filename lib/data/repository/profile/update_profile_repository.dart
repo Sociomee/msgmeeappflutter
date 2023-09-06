@@ -10,27 +10,33 @@ class ProfileService extends AbProfileRepository {
   Dio dio = Dio();
   var localData = Localdata();
   @override
-  Future updateUser(String userId, File image, String name) async {
+  Future<MsgmeeUserModel> updateUser(File image, String name) async {
     log('image -->$image');
     FormData formData = FormData.fromMap({
-      "userId": userId,
       "firstName": name,
-      'profilePic':
-          await MultipartFile.fromFile(image.path, filename: 'image.jpg')
+      'profilePic': await MultipartFile.fromFile(image.path)
     });
     var token = await localData.readData('token');
     log('token from local storage-->$token');
-    final response = await dio.post(
+    final response = await dio.patch(
       '$baseUrl/users/update',
       data: formData,
-      options: Options(headers: {"Authorization": "Bearer $token"}),
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
     );
     log('update profile response-->$response');
-    if (response.statusCode == 200) {}
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception("Getting Error");
+    }
   }
 
   @override
-  Future getUserDetails() async {
+  Future<MsgmeeUserModel> getUserDetails() async {
     var token = await localData.readData('token');
     var userId = await await localData.readData('userId');
     var response = await dio.get(
@@ -39,19 +45,23 @@ class ProfileService extends AbProfileRepository {
         "Authorization": "Bearer $token",
       }),
     );
-    log('user details response----->>${response.data}');
-    if (response.statusCode == 200) {}
+
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception('Getting error');
+    }
   }
 
   @override
   Future<MsgmeeUserModel> getUserDetailsByPhone(String phone) async {
     var token = await localData.readData('token');
-    var userId = await await localData.readData('userId');
     var response = await dio.get(
       '$baseUrl/users/detail-by-phone/+$phone',
       options: Options(headers: {
         "Authorization": "Bearer $token",
-        "userId": userId,
       }),
     );
     log('res----->$response');
@@ -65,20 +75,101 @@ class ProfileService extends AbProfileRepository {
   }
 
   @override
-  Future updateUserName(String name) async {
+  Future<MsgmeeUserModel> updateBio(String bio) async {
     var token = await localData.readData('token');
-    var userId = await await localData.readData('userId');
     log('token from local storage-->$token');
-    log('userId from local storage-->$userId');
-    final response = await dio.post(
+    final response = await dio.patch(
       '$baseUrl/users/update',
-      data: {"userId": userId, "firstName": name},
+      data: {"bio": bio},
       options: Options(headers: {
         "Authorization": "Bearer $token",
-        "userId": userId,
       }),
     );
-    log('update profile response-->$response');
-    if (response.statusCode == 200) {}
+    log('update profile bio response-->$response');
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception();
+    }
   }
+
+  @override
+  Future<MsgmeeUserModel> updateDOB(String dob) async {
+    var token = await localData.readData('token');
+    log('token from local storage-->$token');
+    final response = await dio.patch(
+      '$baseUrl/users/update',
+      data: {"dob": dob},
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    log('update profile dob response-->$response');
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<MsgmeeUserModel> updateGender(String gender) async {
+    var token = await localData.readData('token');
+    final response = await dio.patch(
+      '$baseUrl/users/update',
+      data: {"gender": gender},
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    log('update profile gender response-->$response');
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<MsgmeeUserModel> updateInterest(List<String> interest) async {
+    var token = await localData.readData('token');
+    final response = await dio.patch(
+      '$baseUrl/users/update',
+      data: {"interest": interest},
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    log('update profile interest response-->$response');
+    if (response.statusCode == 200) {
+      var res = response.data;
+      var data = MsgmeeUserModel.fromJson(res);
+      return data;
+    } else {
+      throw Exception();
+    }
+  }
+
+  // @override
+  // Future updateUserName(String name) async {
+  //   var token = await localData.readData('token');
+  //   var userId = await await localData.readData('userId');
+  //   log('token from local storage-->$token');
+  //   log('userId from local storage-->$userId');
+  //   final response = await dio.patch(
+  //     '$baseUrl/users/update',
+  //     data: {"firstName": name},
+  //     options: Options(headers: {
+  //       "Authorization": "Bearer $token",
+  //     }),
+  //   );
+  //   log('update profile name response-->$response');
+  //   if (response.statusCode == 200) {}
+  // }
 }

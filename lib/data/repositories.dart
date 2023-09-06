@@ -20,9 +20,14 @@ abstract class AuthRepository {
 }
 
 abstract class AbProfileRepository {
-  Future<dynamic> updateUser(String userId, File image, String name);
-  Future<dynamic> updateUserName(String name);
-  Future<dynamic> getUserDetails();
+  Future<MsgmeeUserModel> updateUser(File image, String name);
+  // Future<dynamic> updateUserName(String name);
+  Future<MsgmeeUserModel> updateBio(String bio);
+  Future<MsgmeeUserModel> updateDOB(String dob);
+  Future<MsgmeeUserModel> updateGender(String gender);
+  Future<MsgmeeUserModel> updateInterest(List<String> interest);
+
+  Future<MsgmeeUserModel> getUserDetails();
   Future<MsgmeeUserModel> getUserDetailsByPhone(String phone);
 }
 

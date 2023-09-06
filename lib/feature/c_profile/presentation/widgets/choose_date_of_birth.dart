@@ -1,8 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import '../../../../common_widgets/custom_button_widget.dart';
+import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
+import '../cubit/get_user_details/get_userdetails_cubit.dart';
+import '../cubit/update_profile/update_profile_cubit.dart';
 
-class ChooseDateOfBirthBottomSheet extends StatelessWidget {
+class ChooseDateOfBirthBottomSheet extends StatefulWidget {
   const ChooseDateOfBirthBottomSheet({super.key});
+
+  @override
+  State<ChooseDateOfBirthBottomSheet> createState() =>
+      _ChooseDateOfBirthBottomSheetState();
+}
+
+class _ChooseDateOfBirthBottomSheetState
+    extends State<ChooseDateOfBirthBottomSheet> {
+  DateTime datetime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -26,71 +41,106 @@ class ChooseDateOfBirthBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
             ),
             SizedBox(height: 20),
-            Text('Enter DOB',
+            Text('Enter Date Of Birth',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: '10',
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: AppColors.lightgrey)),
-                            ),
-                          ),
-                          Text('date', style: TextStyle(color: AppColors.grey))
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                                hintText: 'Jan',
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.lightgrey))),
-                          ),
-                          Text('month', style: TextStyle(color: AppColors.grey))
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                                hintText: '2021',
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.lightgrey))),
-                          ),
-                          Text('year', style: TextStyle(color: AppColors.grey))
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: CupertinoDatePicker(
+                  initialDateTime: datetime,
+                  mode: CupertinoDatePickerMode.date,
+                  onDateTimeChanged: (value) {
+                    setState(() {
+                      datetime = value;
+                    });
+
+                    // context.read<UpdateProfileCubit>().updateDOB(datetime.toString());
+                  }),
+            ),
+            Center(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+                child: CustomButtonWidget(
+                    height: 50,
+                    title: 'Save Changes',
+                    color: AppColors.primaryColor,
+                    ontap: () async {
+                      if (datetime.toString().isNotEmpty) {
+                        String dob = DateFormat("d MMMM y").format(datetime);
+                        context.read<UpdateProfileCubit>().updateDOB(dob);
+                        var phone = await Localdata().readData('phone');
+                        context
+                            .read<GetUserdetailsCubit>()
+                            .getUserDetailsCubit(phone);
+                      }
+                      Navigator.pop(context);
+                    }),
               ),
-            )
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+            //   child: Row(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       Expanded(
+            //         flex: 2,
+            //         child: Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 20),
+            //           child: Column(
+            //             children: [
+            //               TextFormField(
+            //                 decoration: InputDecoration(
+            //                   hintText: '10',
+            //                   border: OutlineInputBorder(
+            //                       borderSide:
+            //                           BorderSide(color: AppColors.lightgrey)),
+            //                 ),
+            //               ),
+            //               Text('date', style: TextStyle(color: AppColors.grey))
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //       Expanded(
+            //         flex: 2,
+            //         child: Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 20),
+            //           child: Column(
+            //             children: [
+            //               TextFormField(
+            //                 decoration: InputDecoration(
+            //                     hintText: 'Jan',
+            //                     border: OutlineInputBorder(
+            //                         borderSide: BorderSide(
+            //                             color: AppColors.lightgrey))),
+            //               ),
+            //               Text('month', style: TextStyle(color: AppColors.grey))
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //       Expanded(
+            //         flex: 2,
+            //         child: Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 18),
+            //           child: Column(
+            //             children: [
+            //               TextFormField(
+            //                 decoration: InputDecoration(
+            //                     hintText: '2021',
+            //                     border: OutlineInputBorder(
+            //                         borderSide: BorderSide(
+            //                             color: AppColors.lightgrey))),
+            //               ),
+            //               Text('year', style: TextStyle(color: AppColors.grey))
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),
