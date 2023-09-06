@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/e_settings/pages/settings/widgets/logout_dialog.dart';
+import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../blocked_screen/blocked_screen.dart';
@@ -22,8 +25,26 @@ class SettingsOption {
   });
 }
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
+
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
+  late String phone;
+  getPhone() async {
+    phone = await Localdata().readData('phone');
+    log('phone====>$phone');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getPhone();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +52,7 @@ class SettingScreen extends StatelessWidget {
       SettingsOption(
           optionName: 'Profile Settings',
           ontap: () {
-            screenNavigator(context, ProfilePage());
+            screenNavigator(context, ProfilePage(phone: phone));
           }),
       SettingsOption(
           optionName: 'Chat Settings',
@@ -76,7 +97,6 @@ class SettingScreen extends StatelessWidget {
                 builder: (context) {
                   return LogoutDialog();
                 });
-          
           }),
       SettingsOption(
           optionName: 'Delete Account',

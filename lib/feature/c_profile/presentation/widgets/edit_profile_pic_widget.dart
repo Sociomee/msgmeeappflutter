@@ -275,7 +275,7 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                           .read<GetUserdetailsCubit>()
                           .getUserDetailsCubit(phone);
 
-                      // Navigator.pop(context);
+                      Navigator.pop(context);
                     }
                   }),
             ),

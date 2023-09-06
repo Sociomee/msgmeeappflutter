@@ -51,11 +51,16 @@ class ProfileEditWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: AppColors.grey,
-                          backgroundImage:
-                              NetworkImage(cubit.response.data!.profilePic!)))
+                      child: cubit.response.data!.profilePic == null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.asset('assets/profile_icon.png'),
+                            )
+                          : CircleAvatar(
+                              radius: 50,
+                              backgroundColor: AppColors.grey,
+                              backgroundImage: NetworkImage(
+                                  cubit.response.data!.profilePic!)))
             ],
           ),
           SizedBox(width: 20),
@@ -64,13 +69,13 @@ class ProfileEditWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (cubit.response.data != null)
-                Text(cubit.response.data!.firstName!,
-                    style: TextStyle(
-                        fontSize: 18.sp, fontWeight: FontWeight.w700)),
+                Text(cubit.response.data!.firstName ?? "Name Not Provided",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
               SizedBox(height: 10),
               Text('@shreya_singh012',
                   style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: Colors.black54)),
               SizedBox(height: 10),

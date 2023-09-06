@@ -9,8 +9,8 @@ import '../widgets/personal_details_widget.dart';
 import '../widgets/profile_edit_widget.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
-
+  const ProfilePage({super.key, required this.phone});
+  final String phone;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit('917908450663');
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit(widget.phone);
   }
 
   @override
@@ -47,7 +47,16 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             ProfileEditWidget(),
-            PersonalDetailsWidget(),
+            if (context.watch<GetUserdetailsCubit>().state.response.data !=
+                null)
+              PersonalDetailsWidget(
+                ids: context
+                    .watch<GetUserdetailsCubit>()
+                    .state
+                    .response
+                    .data!
+                    .interests!,
+              ),
             Column(
               children: [
                 BroadCastsWidget(),

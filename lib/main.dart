@@ -11,6 +11,7 @@ import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cu
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
 import 'feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
+import 'feature/c_profile/presentation/cubit/interest/interest_cubit.dart';
 import 'feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
@@ -87,7 +88,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => SyncSociomeeCubit()),
             BlocProvider(create: (context) => UpdateUserCubit()),
             BlocProvider(create: (context) => GetUserdetailsCubit()),
-            BlocProvider(create: (context) => UpdateProfileCubit())
+            BlocProvider(create: (context) => UpdateProfileCubit()),
+            BlocProvider(create: (context) => InterestCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

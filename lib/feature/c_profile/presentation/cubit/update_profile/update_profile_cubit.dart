@@ -39,4 +39,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       emit(state.copyWith(status: UpdateProfileStatus.error, error: e));
     }
   }
+
+  void updateInterest(List<String> interests) async {
+    emit(state.copyWith(status: UpdateProfileStatus.loading));
+    try {
+      var data = await ProfileService().updateInterest(interests);
+      emit(state.copyWith(status: UpdateProfileStatus.loaded, reponse: data));
+    } on CustomError catch (e) {
+      emit(state.copyWith(status: UpdateProfileStatus.error, error: e));
+    }
+  }
 }

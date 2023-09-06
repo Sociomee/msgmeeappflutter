@@ -137,11 +137,11 @@ class ProfileService extends AbProfileRepository {
   }
 
   @override
-  Future<MsgmeeUserModel> updateInterest(List<String> interest) async {
+  Future<MsgmeeUserModel> updateInterest(List<String> interestId) async {
     var token = await localData.readData('token');
     final response = await dio.patch(
       '$baseUrl/users/update',
-      data: {"interest": interest},
+      data: {"interests": interestId},
       options: Options(headers: {
         "Authorization": "Bearer $token",
       }),
