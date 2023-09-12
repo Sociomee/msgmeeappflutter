@@ -94,10 +94,7 @@ class _OtpScreenState extends State<OtpScreen> {
               });
         } else if (state.status == OtpVerifyStatus.loaded) {
           animatedScreenReplaceNavigator(
-              context,
-              NameScreen(
-                phone: widget.number,
-              ));
+              context, NameScreen(phone: widget.number));
         }
       },
       builder: (context, state) {

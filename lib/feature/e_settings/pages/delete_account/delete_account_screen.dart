@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/feature/e_settings/pages/delete_account/widget/delete_account_dialog.dart';
+import 'package:msgmee/helper/context_ext.dart';
 
 import '../../../../theme/colors.dart';
 
@@ -49,6 +52,7 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log('width----->>${context.screenWidth}');
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
@@ -133,7 +137,8 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 5, left: 50.w, bottom: 5),
+                padding:
+                    EdgeInsets.only(top: 5, left: 50.w, bottom: 5, right: 24),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -143,12 +148,17 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
                           color: AppColors.iconColor, size: 7),
                     ),
                     SizedBox(width: 8),
-                    Text('All your Google Drive backup will be deleted.',
-                        style: TextStyle(
-                            color: Color(0xFF555555),
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400))
+                    Container(
+                      width: context.screenWidth - 86.w,
+                      child: Text(
+                          'All your Google Drive backup will be deleted.',
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                              color: Color(0xFF555555),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400)),
+                    )
                   ],
                 ),
               ),
@@ -162,34 +172,37 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
               SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF999999))),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 203, 203, 203))),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColors.primaryColor)),
-                        hintText: 'Type your reason...',
-                        hintStyle: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400))),
+                child: SizedBox(
+                  height: 43,
+                  child: TextFormField(
+                      decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF999999))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 203, 203, 203))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.primaryColor)),
+                          hintText: 'Type your reason...',
+                          hintStyle: TextStyle(
+                              color: Color(0xFF999999),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400))),
+                ),
               )
             ]),
             SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               alignment: Alignment.centerLeft,
               color: Color(0xFFF6F6F6),
               child: Text(
-                'To deleted your account, confirm your country code and enter your phone number ',
+                'To deleted your account, confirm your country code and enter your phone number',
                 style: TextStyle(color: AppColors.black, fontSize: 14),
               ),
             ),
@@ -203,29 +216,32 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-              child: TextFormField(
-                controller: numberController,
-                keyboardType: TextInputType.phone,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$')),
-                  LengthLimitingTextInputFormatter(10),
-                ],
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFF999999))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 203, 203, 203))),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor)),
-                  hintText: '(+91)  9876543210',
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 191, 191, 191),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+              child: SizedBox(
+                height: 43,
+                child: TextFormField(
+                  controller: numberController,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$')),
+                    LengthLimitingTextInputFormatter(10),
+                  ],
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF999999))),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 203, 203, 203))),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.primaryColor)),
+                    hintText: '(+91)  9876543210',
+                    hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 191, 191, 191),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
@@ -237,24 +253,27 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-              child: TextFormField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFF999999))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 203, 203, 203))),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor)),
-                  hintText: 'Enter password',
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 191, 191, 191),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+              child: SizedBox(
+                height: 43,
+                child: TextFormField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF999999))),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 203, 203, 203))),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.primaryColor)),
+                    hintText: 'Enter password',
+                    hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 191, 191, 191),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
@@ -281,6 +300,7 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: CustomButtonWidget(
+                  height: 52,
                   title: 'Delete my account',
                   color: enable
                       ? AppColors.primaryColor

@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/feature/c_profile/presentation/cubit/select_group_cubit/select_group_cubit.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import 'delete_dialog.dart';
@@ -12,10 +16,10 @@ class GroupList extends StatefulWidget {
 }
 
 class _GroupListState extends State<GroupList> {
-  bool selectMode = false;
-  List<int> selectedindex = [];
   @override
   Widget build(BuildContext context) {
+    var selectedGroup = context.watch<SelectionGroupCubit>().state;
+    var cubit = context.read<SelectionGroupCubit>();
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -33,9 +37,9 @@ class _GroupListState extends State<GroupList> {
         ),
         leadingWidth: 40,
         titleSpacing: 0,
-        title: selectedindex.isNotEmpty
+        title: selectedGroup.isNotEmpty
             ? Text(
-                '${selectedindex.length} Selected',
+                '${selectedGroup.length} Selected',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -53,14 +57,14 @@ class _GroupListState extends State<GroupList> {
                 ),
               ),
         actions: [
-          selectedindex.isNotEmpty
+          selectedGroup.isNotEmpty
               ? GestureDetector(
                   onTap: () {
                     showDialog(
                         context: context,
                         builder: (context) {
                           return DeleteDialogWidget(
-                            selected: selectedindex.length.toString(),
+                            selected: selectedGroup.length.toString(),
                             type: 'Groups',
                           );
                         });
@@ -77,7 +81,7 @@ class _GroupListState extends State<GroupList> {
                   PopupMenuItem(
                     value: 1,
                     child: Text(
-                      selectedindex.length != 9 ? 'Select all' : 'Deselect all',
+                      selectedGroup.length != 9 ? 'Select all' : 'Deselect all',
                       style: TextStyle(fontSize: 14),
                     ),
                   )
@@ -87,15 +91,10 @@ class _GroupListState extends State<GroupList> {
               color: Colors.white,
               elevation: 2,
               onSelected: (value) {
-                if (selectedindex.length != 9) {
-                  setState(() {
-                    selectedindex.clear();
-                  });
-                  selectedindex.addAll([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+                if (selectedGroup.length != 9) {
+                  cubit.selectAllItems(selectedGroup.length);
                 } else {
-                  setState(() {
-                    selectedindex.clear();
-                  });
+                  cubit.clearGroupSelection();
                 }
               })
         ],
@@ -111,28 +110,19 @@ class _GroupListState extends State<GroupList> {
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      if (selectedindex.contains(index)) {
-                        setState(() {
-                          selectedindex.remove(index);
-                        });
-                      } else if (selectMode) {
-                        setState(() {
-                          selectedindex.add(index);
-                        });
-                      }
+                      context
+                          .read<SelectionGroupCubit>()
+                          .toggleItemSelection(index);
                     },
                     onLongPress: () {
-                      if (selectedindex.length < 9 &&
-                          !selectedindex.contains(index))
-                        setState(() {
-                          selectMode = !selectMode;
-                          selectedindex.add(index);
-                        });
+                      cubit.toggleItemSelection(index);
+
+                      log('====>>$selectedGroup');
                     },
                     child: Container(
-                      color: selectedindex.contains(index)
+                      color: selectedGroup.containsKey(index)
                           ? AppColors.primaryColor.withOpacity(.1)
-                          : selectedindex.contains(index)
+                          : selectedGroup.containsKey(index)
                               ? AppColors.primaryColor.withOpacity(.1)
                               : null,
                       child: Padding(
@@ -142,7 +132,7 @@ class _GroupListState extends State<GroupList> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            selectedindex.contains(index)
+                            selectedGroup.containsKey(index)
                                 ? Container(
                                     height: 51,
                                     width: 51,

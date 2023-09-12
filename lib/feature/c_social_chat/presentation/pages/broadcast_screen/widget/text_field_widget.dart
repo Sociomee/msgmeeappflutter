@@ -29,11 +29,13 @@ class BroadcastTextFieldWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
-        TextFormField(
-          onChanged: onChanged,
-          controller: controller,
-          cursorColor: AppColors.primaryColor,
-          decoration: InputDecoration(
+        SizedBox(
+          height: 43,
+          child: TextFormField(
+            onChanged: onChanged,
+            controller: controller,
+            cursorColor: AppColors.primaryColor,
+            decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 1, color: AppColors.borderColor)),
@@ -44,7 +46,14 @@ class BroadcastTextFieldWidget extends StatelessWidget {
                   borderSide:
                       BorderSide(width: 2, color: AppColors.primaryColor)),
               hintText: hintText,
-              hintStyle: const TextStyle(color: AppColors.lightgrey)),
+              hintStyle: TextStyle(
+                color: Color(0xFF999999),
+                fontSize: 13,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
         ),
         showchar!
             ? Padding(

@@ -1,14 +1,17 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/common_widgets/shimmer_effect.dart';
 import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/text_field_widget.dart';
 import 'package:msgmee/helper/local_data.dart';
 
+import '../../../../common_widgets/cache_image_provider.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
 import '../../../b_auth/presentation/cubit/update_user/update_user_cubit.dart';
@@ -129,9 +132,26 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                                 borderRadius: BorderRadius.circular(100)),
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                  cubit.response.data!.profilePic!,
-                                  fit: BoxFit.cover,
+                                child: Column(
+                                  children: [
+                                    CacheImageProvider(
+                                      imageId: cubit.response.data!.sId!,
+                                      imageUrl:
+                                          cubit.response.data!.profilePic!,
+                                      height: 144,
+                                      width: 144,
+                                      placeholder: CustomShimmerEffect(
+                                        child: Container(
+                                          height: 144,
+                                          width: 144,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: AppColors.lightgrey),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 )),
                           )
                         : Container(
@@ -212,48 +232,48 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
               textWeight: FontWeight.bold,
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: Text(
-          //     'Username',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 14,
-          //       fontFamily: 'Poppins',
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   ),
-          // ),
-          // const SizedBox(height: 12),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: TextFormField(
-          //     onTap: () {},
-          //     onChanged: (e) {},
-          //     controller: usernameController,
-          //     cursorColor: AppColors.primaryColor,
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(38),
-          //     ],
-          //     decoration: InputDecoration(
-          //         fillColor: AppColors.lightgrey1,
-          //         filled: true,
-          //         contentPadding:
-          //             EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          //         enabledBorder: OutlineInputBorder(
-          //             borderSide:
-          //                 BorderSide(width: 1, color: AppColors.lightgrey1)),
-          //         border: OutlineInputBorder(
-          //             borderSide:
-          //                 BorderSide(width: 2, color: AppColors.lightgrey1)),
-          //         focusedBorder: const OutlineInputBorder(
-          //             borderSide:
-          //                 BorderSide(width: 2, color: AppColors.primaryColor)),
-          //         hintText: '@shreya_singh012',
-          //         hintStyle: const TextStyle(
-          //             color: AppColors.hinttextColor, fontSize: 14)),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              'Username',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: TextFormField(
+              onTap: () {},
+              onChanged: (e) {},
+              controller: usernameController,
+              cursorColor: AppColors.primaryColor,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(38),
+              ],
+              decoration: InputDecoration(
+                  fillColor: AppColors.lightgrey1,
+                  filled: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: AppColors.lightgrey1)),
+                  border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: AppColors.lightgrey1)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: AppColors.primaryColor)),
+                  hintText: '@shreya_singh012',
+                  hintStyle: const TextStyle(
+                      color: AppColors.hinttextColor, fontSize: 14)),
+            ),
+          ),
           Spacer(),
           Center(
             child: Padding(
@@ -264,7 +284,7 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                   color: AppColors.primaryColor,
                   ontap: () async {
                     if (nameController.text.toString() !=
-                            cubit.response.data!.firstName &&
+                            cubit.response.data!.firstName ||
                         imageFile != null) {
                       var phone = await Localdata().readData('phone');
                       log('phone----->$phone');

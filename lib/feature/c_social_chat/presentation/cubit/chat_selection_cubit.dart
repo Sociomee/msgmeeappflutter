@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-// enum SelectMode { inactive, active }
+
 
 enum SelectedState { selected, unselected }
 

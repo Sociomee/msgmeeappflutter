@@ -167,24 +167,34 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     ],
                   ),
                   SizedBox(height: 24),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 3, horizontal: 12),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1, color: AppColors.borderColor)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2, color: AppColors.borderColor)),
-                        focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2, color: AppColors.primaryColor)),
-                        hintText: 'Search Participants...',
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: AppColors.grey,
-                        )),
+                  SizedBox(
+                    height: 34,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 3, horizontal: 12),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.borderColor)),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: AppColors.borderColor)),
+                          focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: AppColors.primaryColor)),
+                          hintText: 'Search Participants...',
+                          hintStyle: TextStyle(
+                            color: Color(0xFF999999),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: AppColors.grey,
+                            size: 20,
+                          )),
+                    ),
                   ),
                   SizedBox(height: 4),
                   Row(

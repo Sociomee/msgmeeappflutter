@@ -85,7 +85,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 );
               });
         } else if (state.status == UpdateUserStatus.loaded) {
-          animatedScreenNavigator(context, MsgmeeScreen());
+          animatedScreenReplaceNavigator(context, MsgmeeScreen());
         }
       },
       builder: (context, state) {

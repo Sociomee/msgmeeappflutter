@@ -82,6 +82,7 @@ dependencies:
   contacts_service: ^0.6.3
   shimmer: ^3.0.0
   socket_io_client: ^2.0.3+1
+  flutter_cache_manager: ^3.3.1
   
   
 
