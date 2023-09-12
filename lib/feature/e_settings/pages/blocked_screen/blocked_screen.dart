@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/common_widgets/cache_image_provider.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/blocked_bottom_sheet.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_dialog.dart';
 import 'package:msgmee/feature/e_settings/pages/blocked_screen/widgets/unblock_one_user_dialog.dart';
@@ -114,43 +115,47 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
             SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21),
-              child: TextFormField(
-                controller: controller,
-                onChanged: (value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      filteredlist = List.from(blockedList);
-                    } else {
-                      filteredlist = blockedList
-                          .where((model) => model.title
-                              .toLowerCase()
-                              .contains(value.toLowerCase()))
-                          .toList();
-                    }
-                  });
-                },
-                decoration: InputDecoration(
-                    focusColor: AppColors.primaryColor,
-                    contentPadding:
-                        EdgeInsets.only(left: 20, top: 12, bottom: 12),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                      color: Colors.black.withOpacity(0.15000000596046448),
-                    )),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.primaryColor)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                      color: Colors.black.withOpacity(0.15000000596046448),
-                    )),
-                    hintText: 'Search...',
-                    hintStyle: TextStyle(
-                      color: Color(0xFFC4C4C4),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                    suffixIcon: Icon(Icons.search)),
+              child: SizedBox(
+                height: 45,
+                child: TextFormField(
+                  controller: controller,
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.isEmpty) {
+                        filteredlist = List.from(blockedList);
+                      } else {
+                        filteredlist = blockedList
+                            .where((model) => model.title
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      }
+                    });
+                  },
+                  decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
+                      contentPadding:
+                          EdgeInsets.only(left: 20, top: 12, bottom: 12),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.black.withOpacity(0.15000000596046448),
+                      )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColors.primaryColor)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.black.withOpacity(0.15000000596046448),
+                      )),
+                      hintText: 'Search...',
+                      hintStyle: TextStyle(
+                        color: Color(0xFFC4C4C4),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                      suffixIcon: Icon(Icons.search)),
+                ),
               ),
             ),
             SizedBox(height: 25),
@@ -162,11 +167,14 @@ class _BlockedPeopleScreenState extends State<BlockedPeopleScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 9),
                       child: Row(children: [
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: AppColors.grey,
-                          backgroundImage:
-                              NetworkImage(filteredlist[index].imageUrl),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: CacheImageProvider(
+                              imageUrl: filteredlist[index].imageUrl,
+                              imageId: filteredlist[index].imageUrl,
+                              width: 34,
+                              height: 34,
+                              placeholder: Container()),
                         ),
                         SizedBox(width: 10),
                         Column(
