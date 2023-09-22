@@ -10,8 +10,10 @@ import '../widgets/personal_details_widget.dart';
 import '../widgets/profile_edit_widget.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key, required this.phone});
-  final String phone;
+  const ProfilePage({
+    super.key,
+  });
+  // final String phone;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -20,11 +22,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit(widget.phone);
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
   }
 
   Future<void> onRefresh() async {
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit(widget.phone);
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
   }
 
   @override
@@ -32,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return RefreshIndicator(
       color: AppColors.primaryColor,
       onRefresh: () async {
-        context.read<GetUserdetailsCubit>().getUserDetailsCubit(widget.phone);
+        context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
         return await Future.delayed(Duration(seconds: 2));
       },
       child: Scaffold(

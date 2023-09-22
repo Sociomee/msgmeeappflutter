@@ -52,7 +52,7 @@ class _SettingScreenState extends State<SettingScreen> {
       SettingsOption(
           optionName: 'Profile Settings',
           ontap: () {
-            screenNavigator(context, ProfilePage(phone: phone));
+            screenNavigator(context, ProfilePage());
           }),
       SettingsOption(
           optionName: 'Chat Settings',

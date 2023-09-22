@@ -1,51 +1,43 @@
 class OtpModel {
-  bool? success;
-  String? successMessage;
-  int? status;
-  Data? data;
+  bool? status;
+  String? message;
+  String? data;
 
-  OtpModel({this.success, this.successMessage, this.status, this.data});
+  OtpModel({this.status, this.message, this.data});
 
   OtpModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    successMessage = json['successMessage'];
     status = json['status'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    message = json['message'];
+    data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['successMessage'] = this.successMessage;
     data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['message'] = this.message;
+    data['data'] = this.data;
     return data;
   }
 }
 
-class Data {
-  String? token;
-  String? userId;
-  String? userDeviceId;
-  String? deviceId;
+class OtpErrorModel {
+  bool? status;
+  String? message;
+  List<String>? data;
 
-  Data({this.token, this.userId, this.userDeviceId, this.deviceId});
+  OtpErrorModel({this.status, this.message, this.data});
 
-  Data.fromJson(Map<String, dynamic> json) {
-    token = json['token'];
-    userId = json['userId'];
-    userDeviceId = json['userDeviceId'];
-    deviceId = json['deviceId'];
+  OtpErrorModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+    data = json['data'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    data['userId'] = this.userId;
-    data['userDeviceId'] = this.userDeviceId;
-    data['deviceId'] = this.deviceId;
+    data['status'] = this.status;
+    data['message'] = this.message;
+    data['data'] = this.data;
     return data;
   }
 }

@@ -19,12 +19,13 @@ class OtpVerifyCubit extends Cubit<OtpVerifyState> {
     try {
       emit(state.copyWith(status: OtpVerifyStatus.loading));
       var res = await auth.verifyOtp(phone, otp);
-      if (res.success == true && res.status == 200) {
+
+      if (res.status == true) {
         emit(state.copyWith(status: OtpVerifyStatus.loaded));
-      } else {
+      } else if (res.status == false) {
         emit(state.copyWith(status: OtpVerifyStatus.error));
       }
-      log('response from cubit -->${res.status}');
+      log('response from cubit -->${res}');
     } on CustomError catch (e) {
       emit(state.copyWith(status: OtpVerifyStatus.error, error: e));
     }

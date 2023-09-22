@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
@@ -109,6 +110,9 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                 child: TextFormField(
                     controller: reasonController,
                     maxLines: 7,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(360),
+                    ],
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.only(top: 15, bottom: 5, left: 15),

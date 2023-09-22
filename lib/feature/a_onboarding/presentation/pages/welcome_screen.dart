@@ -5,7 +5,6 @@ import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/b_auth/presentation/pages/login_screen.dart';
 import 'package:msgmee/theme/colors.dart';
 
-import '../../../../data/repository/contact/contact_repository.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -70,7 +69,6 @@ class WelcomeScreen extends StatelessWidget {
                     fontsize: 18,
                     ontap: () {
                       animatedScreenNavigator(context, LoginScreen());
-                      ContactService().getContacts();
                     }),
                 SizedBox(height: 32.h),
                 Center(

@@ -1,13 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:msgmee/domain/models/onboarding_data_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'package:msgmee/feature/a_onboarding/presentation/pages/welcome_screen.dart';
-import 'package:msgmee/theme/colors.dart';
-
+import '../../../../domain/models/onboarding_data_model.dart';
 import '../../../../helper/navigator_function.dart';
+import '../../../../theme/colors.dart';
 import '../widgets/build_page.dart';
+import 'welcome_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -43,7 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/onboarding_bg.png'))),
+                  image: AssetImage('assets/onboarding/onboarding_bg.png'))),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
+import 'package:msgmee/helper/navigator_function.dart';
 
+import '../../../../../common_widgets/dx_appbar.dart';
 import '../../../../../data/model/dummy_chat_model.dart';
 import '../../../../../theme/colors.dart';
 import '../../widgets/chat_profile_widget.dart';
@@ -18,9 +21,7 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 40,
-        titleSpacing: 0,
+      appBar: DAppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
@@ -39,7 +40,7 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
               ? '${isSelected.length} Selected'
               : 'Share via Msgmee',
           style: TextStyle(
-            color: AppColors.black,
+            color: Color(0xFF4E4E4E),
             fontSize: 16,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
@@ -48,9 +49,7 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              if (isSelected.isNotEmpty) {
-                Navigator.pop(context);
-              }
+              animatedScreenReplaceNavigator(context, MsgmeeScreen());
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 20, right: 20),

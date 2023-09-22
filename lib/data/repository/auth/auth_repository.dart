@@ -13,12 +13,11 @@ class AuthService implements AuthRepository {
   Future<bool> sendOtp(String phone) async {
     try {
       final response =
-          await dio.post('$baseUrl/auth/send-otp', data: {"phone": phone});
-      log("response -->>${response.statusCode}");
+          await dio.post('$baseUrl/api/send-otp', data: {"phone": phone});
       if (response.statusCode == 200) {
-        return true;
+        return response.data['status'];
       } else {
-        return false;
+        return response.data['status'];
       }
     } catch (e) {
       return false;
@@ -26,34 +25,24 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<OtpModel> verifyOtp(String phone, String otp) async {
+  Future<dynamic> verifyOtp(String phone, String otp) async {
     var localdata = Localdata();
-
-    final response = await dio.post('$baseUrl/auth/verify-otp', data: {
-      "phone": '+$phone',
-      "otp": otp,
-    });
-    log("response-->>${response.data}");
-    if (response.statusCode == 200) {
-      var data = OtpModel.fromJson(response.data);
-      localdata.storedata('token', data.data!.token!);
-      localdata.storedata('userId', data.data!.userId!);
-      localdata.storedata('userDeviceId', data.data!.userDeviceId!);
-      localdata.storedata('deviceId', data.data!.deviceId!);
-      localdata.storedata('phone', "$phone");
-      log('res from repository ---> $data');
-      return data;
+    final response = await dio
+        .post('$baseUrl/api/verify-otp', data: {"phone": phone, "otp": otp});
+    log('response ----->>>${response.data['status']}');
+    if (response.statusCode == 200 && response.data['status'] == true) {
+      var res = OtpModel.fromJson(response.data);
+      localdata.storedata('token', res.data!);
+      return res;
     } else {
-      return OtpModel.fromJson(response.data);
+      var res = OtpErrorModel.fromJson(response.data);
+      return res;
     }
   }
 
   @override
   Future<bool> createUser(String phone, String name, File image) async {
     try {
-      // var formData =
-      //     FormData.fromMap({'file': await MultipartFile.fromFile(image.path)});
-
       final response = await dio.post('$baseUrl/users',
           data: {"phone": phone, "name": name, "profilePic": "formData"});
       log('response--->${response.data}');

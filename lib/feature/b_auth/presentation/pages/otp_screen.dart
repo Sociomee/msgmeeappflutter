@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
-import 'package:msgmee/feature/b_auth/presentation/pages/name_screen.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
@@ -69,6 +70,7 @@ class _OtpScreenState extends State<OtpScreen> {
     var sec = strDigits(duration.inSeconds.remainder(60));
     return BlocConsumer<OtpVerifyCubit, OtpVerifyState>(
       listener: (context, state) {
+        log(state.status.toString());
         if (state.status == OtpVerifyStatus.loading) {
           showDialog(
               context: context,
@@ -79,10 +81,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       context.watch<OtpVerifyCubit>().state.status ==
-                                  OtpVerifyStatus.error &&
-                              state.response.successMessage != null
+                              OtpVerifyStatus.error
                           ? Text(
-                              state.response.successMessage!,
+                              'Invalid Otp!',
                               style: TextStyle(color: AppColors.errorRedColor),
                             )
                           : Center(
@@ -93,8 +94,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 );
               });
         } else if (state.status == OtpVerifyStatus.loaded) {
-          animatedScreenReplaceNavigator(
-              context, NameScreen(phone: widget.number));
+          animatedScreenReplaceNavigator(context, MsgmeeScreen());
+          // animatedScreenReplaceNavigator(
+          //     context, NameScreen(phone: widget.number));
         }
       },
       builder: (context, state) {

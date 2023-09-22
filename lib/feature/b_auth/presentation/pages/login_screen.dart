@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (context.read<NumberValidationCubit>().state.isvalid) {
                     context
                         .read<OtpSendCubit>()
-                        .sendOtp("+${countryCode}${numberController.text}");
+                        .sendOtp("${countryCode}${numberController.text}");
                   }
                 },
                 child: Padding(
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (context.read<NumberValidationCubit>().state.isvalid) {
                         context
                             .read<OtpSendCubit>()
-                            .sendOtp("+91${numberController.text}");
+                            .sendOtp("91${numberController.text}");
                       }
                     }),
                 SizedBox(height: 32.h),

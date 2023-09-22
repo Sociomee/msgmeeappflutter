@@ -7,6 +7,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 
 import 'package:msgmee/theme/colors.dart';
 
+import '../../../../../common_widgets/dx_appbar.dart';
 import '../../../../../data/model/group_participants_model.dart';
 import '../../../../../helper/navigator_function.dart';
 import '../../../../c_profile/presentation/pages/media_tab.dart';
@@ -32,21 +33,28 @@ class _GroupChatPageState extends State<GroupChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 40,
-        titleSpacing: 5,
+      appBar: DAppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+              size: 16,
+            ),
           ),
         ),
         title: Text(
           'Group Info.',
-          style: TextStyle(color: AppColors.black),
+          style: TextStyle(
+            color: AppColors.black,
+            fontSize: 18,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           PopupMenuButton(

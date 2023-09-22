@@ -3,20 +3,16 @@ import 'dart:io';
 import 'package:msgmee/data/model/chat_head_model.dart';
 import 'package:msgmee/data/model/contact_model.dart';
 import 'package:msgmee/data/model/interest_model.dart';
-import 'package:msgmee/data/model/otp_model.dart';
 import 'package:msgmee/data/model/socimee_account_model.dart';
 
 import 'model/msgmee_user_model.dart';
 import 'model/sync_model.dart';
 
-final String baseUrl = 'https://msgmee-node-docker-w0fh.onrender.com';
-// 'https://msgmee-node-docker-w0fh.onrender.com';
-//https://node.msgmee.sociomessages.com/
-///
+final String baseUrl = 'https://api.sociomessage.com';
 
 abstract class AuthRepository {
   Future<bool> sendOtp(String phone);
-  Future<OtpModel> verifyOtp(String phone, String otp);
+  Future<dynamic> verifyOtp(String phone, String otp);
   Future<bool> createUser(String phone, String name, File image);
 }
 
@@ -35,7 +31,7 @@ abstract class AbProfileRepository {
 abstract class AbContactRepository {
   Future<dynamic> createContact();
   Future<MsgmeeContactModel> getContacts();
-  Future<dynamic> getContactDetails();
+  // Future<dynamic> getContactDetails();
   Future<dynamic> updateContact();
   Future<dynamic> getContactDetailsbyId();
   Future<dynamic> deleteContact();

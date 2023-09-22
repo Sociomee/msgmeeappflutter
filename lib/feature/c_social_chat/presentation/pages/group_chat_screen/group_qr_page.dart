@@ -86,15 +86,17 @@ class GroupQrPage extends StatelessWidget {
           ),
           SizedBox(height: 54),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              'This group QR code is private. If it is shared with someone, they can scan it with their camera to join this group.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+            padding: const EdgeInsets.symmetric(horizontal: 36),
+            child: Expanded(
+              child: Text(
+                'This group QR code is private. If it is shared with someone, they can scan it with their camera to join this group.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           )

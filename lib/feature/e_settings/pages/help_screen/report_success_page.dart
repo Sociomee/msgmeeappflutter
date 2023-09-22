@@ -59,6 +59,7 @@ class ReportSuccessPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: CustomButtonWidget(
+                height: 46,
                 title: 'Done',
                 color: AppColors.primaryColor,
                 ontap: () {

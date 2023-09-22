@@ -217,6 +217,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                       context
                                           .read<SearchModeCubit>()
                                           .changemsgSearchMode();
+                                      context
+                                          .read<ShowAttachment>()
+                                          .closeAttachment();
                                     },
                                     icon: Padding(
                                         padding: const EdgeInsets.only(
@@ -324,6 +327,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         leading: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
+                            context.read<ShowAttachment>().closeAttachment();
                           },
                           child: Padding(
                               padding: EdgeInsets.only(

@@ -12,6 +12,7 @@ class OtpVerifyState extends Equatable {
   final OtpVerifyStatus status;
   final CustomError error;
   final OtpModel response;
+
   OtpVerifyState(
       {required this.status, required this.error, required this.response});
 

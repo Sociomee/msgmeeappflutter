@@ -116,8 +116,12 @@ class _BroadCastListState extends State<BroadCastList> {
                       }
                     },
                     onLongPress: () {
-                      if (selectedindex.length < 9 &&
-                          !selectedindex.contains(index))
+                      if (selectedindex.length <= 1
+
+                          // &&
+                          // !selectedindex.contains(index)
+
+                          )
                         setState(() {
                           selectMode = !selectMode;
                           selectedindex.add(index);

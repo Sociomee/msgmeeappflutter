@@ -600,7 +600,8 @@ class _ShareLiveLocationPopupState extends State<ShareLiveLocationPopup> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
-                        child: Image.asset('assets/attach.png'),
+                        child: SvgPicture.asset('assets/icons/attach.svg'),
+                        // child: Image.asset('assets/attach.png'),
                       ),
                     )
                   ],
