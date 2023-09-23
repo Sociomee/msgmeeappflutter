@@ -1,40 +1,24 @@
 class SyncModel {
-  bool? success;
-  String? successMessage;
-  int? status;
-  dynamic data;
+  bool? status;
+  String? message;
+  bool? next;
+  int? pageIndex;
 
-  SyncModel({this.success, this.successMessage, this.status, this.data});
+  SyncModel({this.status, this.message, this.next, this.pageIndex});
 
   SyncModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    successMessage = json['successMessage'];
     status = json['status'];
-    data = json['data'];
+    message = json['message'];
+    next = json['next'];
+    pageIndex = json['pageIndex'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['successMessage'] = this.successMessage;
     data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['message'] = this.message;
+    data['next'] = this.next;
+    data['pageIndex'] = this.pageIndex;
     return data;
   }
 }
-
-// class Data {
-
-
-// 	Data({});
-
-// 	Data.fromJson(Map<String, dynamic> json) {
-// 	}
-
-// 	Map<String, dynamic> toJson() {
-// 		final Map<String, dynamic> data = new Map<String, dynamic>();
-// 		return data;
-// 	}
-// }

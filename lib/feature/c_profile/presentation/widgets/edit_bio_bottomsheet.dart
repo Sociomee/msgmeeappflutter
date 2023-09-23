@@ -21,8 +21,8 @@ class _EditBioBottomSheetState extends State<EditBioBottomSheet> {
   int characters = 600;
   @override
   void initState() {
-    bioController = TextEditingController(
-        text: context.read<GetUserdetailsCubit>().state.response.data!.bio);
+    // bioController = TextEditingController(
+    //     text: context.read<GetUserdetailsCubit>().state.response.data!.bio);
     super.initState();
   }
 

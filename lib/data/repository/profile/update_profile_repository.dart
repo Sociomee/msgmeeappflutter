@@ -19,7 +19,7 @@ class ProfileService extends AbProfileRepository {
     var token = await localData.readData('token');
     log('token from local storage-->$token');
     final response = await dio.patch(
-      '$baseUrl/users/update',
+      '$mainbaseUrl/users/update',
       data: formData,
       options: Options(headers: {
         "Authorization": "Bearer $token",
@@ -40,7 +40,7 @@ class ProfileService extends AbProfileRepository {
     var token = await localData.readData('token');
     var userId = await await localData.readData('userId');
     var response = await dio.get(
-      '$baseUrl/users/$userId',
+      '$mainbaseUrl/users/$userId',
       options: Options(headers: {
         "Authorization": "Bearer $token",
       }),
@@ -59,7 +59,7 @@ class ProfileService extends AbProfileRepository {
   Future<MsgmeeUserModel> getUserDetailsByPhone(String phone) async {
     var token = await localData.readData('token');
     var response = await dio.get(
-      '$baseUrl/users/detail-by-phone/+$phone',
+      '$mainbaseUrl/users/detail-by-phone/+$phone',
       options: Options(headers: {
         "Authorization": "Bearer $token",
       }),
@@ -79,7 +79,7 @@ class ProfileService extends AbProfileRepository {
     var token = await localData.readData('token');
     log('token from local storage-->$token');
     final response = await dio.patch(
-      '$baseUrl/users/update',
+      '$mainbaseUrl/users/update',
       data: {"bio": bio},
       options: Options(headers: {
         "Authorization": "Bearer $token",
@@ -100,7 +100,7 @@ class ProfileService extends AbProfileRepository {
     var token = await localData.readData('token');
     log('token from local storage-->$token');
     final response = await dio.patch(
-      '$baseUrl/users/update',
+      '$mainbaseUrl/users/update',
       data: {"dob": dob},
       options: Options(headers: {
         "Authorization": "Bearer $token",
@@ -120,7 +120,7 @@ class ProfileService extends AbProfileRepository {
   Future<MsgmeeUserModel> updateGender(String gender) async {
     var token = await localData.readData('token');
     final response = await dio.patch(
-      '$baseUrl/users/update',
+      '$mainbaseUrl/users/update',
       data: {"gender": gender},
       options: Options(headers: {
         "Authorization": "Bearer $token",
@@ -140,7 +140,7 @@ class ProfileService extends AbProfileRepository {
   Future<MsgmeeUserModel> updateInterest(List<String> interestId) async {
     var token = await localData.readData('token');
     final response = await dio.patch(
-      '$baseUrl/users/update',
+      '$mainbaseUrl/users/update',
       data: {"interests": interestId},
       options: Options(headers: {
         "Authorization": "Bearer $token",

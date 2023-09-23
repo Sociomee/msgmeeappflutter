@@ -30,12 +30,10 @@ import 'feature/c_social_chat/presentation/cubit/show_attachment.dart';
 import 'feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
 import 'feature/c_social_chat/presentation/cubit/show_emoji/show_emoji_cubit.dart';
-import 'feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'feature/c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
-import 'feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -63,7 +61,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => NumberValidationCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
             BlocProvider(create: (context) => ShowContactTextField()),
-            BlocProvider(create: (context) => SyncMsgCubit()),
             BlocProvider(create: (context) => ShowLoaderCubit()),
             BlocProvider(create: (context) => ShowAudioRecorder()),
             BlocProvider(create: (context) => ShowAttachment()),
@@ -74,7 +71,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ChooseImageWallpaperCubit()),
             BlocProvider(create: (context) => SetChatbgCubit()),
             BlocProvider(create: (context) => ChangeWallPaperView()),
-            BlocProvider(create: (context) => SyncWithSociomee()),
             BlocProvider(create: (context) => OtpSendCubit()),
             BlocProvider(create: (context) => OtpVerifyCubit()),
             BlocProvider(create: (context) => ReduceNumberCubit()),
@@ -91,7 +87,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => GetUserdetailsCubit()),
             BlocProvider(create: (context) => UpdateProfileCubit()),
             BlocProvider(create: (context) => InterestCubit()),
-            BlocProvider(create: (context) => SelectionGroupCubit())
+            BlocProvider(create: (context) => SelectionGroupCubit()),
           ],
           child: MaterialApp(
             title: 'Msgmee App',

@@ -19,7 +19,7 @@ class MsgmeeSocket {
     };
 
     IO.Socket socket = IO.io(
-        '$baseUrl',
+        '$mainbaseUrl',
         OptionBuilder()
             .setTransports(['websocket'])
             .setExtraHeaders(queryParameters)
@@ -75,7 +75,7 @@ class MsgmeeSocket {
     };
 
     IO.Socket socket = IO.io(
-        '$baseUrl',
+        '$mainbaseUrl',
         OptionBuilder()
             .setTransports(['websocket'])
             .setExtraHeaders(queryParameters)

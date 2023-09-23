@@ -12,7 +12,7 @@ class DataSets extends AbDataSetsRepository {
   Future<InterestsModel> getinterests() async {
     var token = await Localdata().readData('token');
     final response = await dio.get(
-      '$baseUrl/datasets/interests',
+      '$mainbaseUrl/datasets/interests',
       options: Options(headers: {
         "Authorization": "Bearer $token",
       }),

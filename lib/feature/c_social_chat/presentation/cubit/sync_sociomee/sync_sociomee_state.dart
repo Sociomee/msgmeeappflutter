@@ -9,39 +9,51 @@ enum SyncSociomeeStatus {
 
 class SyncSociomeeState extends Equatable {
   final SyncSociomeeStatus status;
-  final SyncModel response;
-  final SociomeeAccountModel syncResponse;
+  final SociomeeUserModel syncResponse;
   final CustomError error;
+  final String phone;
+  final String socimeeAuthToken;
+  final bool isSocimeeAcSynced;
   SyncSociomeeState({
     required this.status,
-    required this.response,
     required this.syncResponse,
     required this.error,
+    required this.phone,
+    required this.socimeeAuthToken,
+    required this.isSocimeeAcSynced,
   });
 
   factory SyncSociomeeState.initial() {
     return SyncSociomeeState(
       status: SyncSociomeeStatus.initial,
-      response: SyncModel(),
       error: CustomError(),
-      syncResponse: SociomeeAccountModel(),
+      syncResponse: SociomeeUserModel(),
+      phone: '',
+      socimeeAuthToken: '',
+      isSocimeeAcSynced: false,
     );
   }
 
   SyncSociomeeState copyWith({
     SyncSociomeeStatus? status,
     SyncModel? response,
-    SociomeeAccountModel? syncResponse,
+    SociomeeUserModel? syncResponse,
     CustomError? error,
+    String? phone,
+    String? socimeeAuthToken,
+    bool? isSocimeeAcSynced,
   }) {
     return SyncSociomeeState(
       status: status ?? this.status,
-      response: response ?? this.response,
       syncResponse: syncResponse ?? this.syncResponse,
       error: error ?? this.error,
+      phone: phone ?? this.phone,
+      socimeeAuthToken: socimeeAuthToken ?? this.socimeeAuthToken,
+      isSocimeeAcSynced: isSocimeeAcSynced ?? this.isSocimeeAcSynced,
     );
   }
 
   @override
-  List<Object> get props => [status, response, syncResponse, error];
+  List<Object> get props =>
+      [status, syncResponse, error, phone, socimeeAuthToken, isSocimeeAcSynced];
 }

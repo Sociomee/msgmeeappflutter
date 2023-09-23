@@ -13,7 +13,7 @@ class ChatHeadService extends AbChatHeadRepository {
     var userId = await Localdata().readData('userId');
     var token = await Localdata().readData('token');
     final response = await dio.get(
-      '$baseUrl/chats/heads',
+      '$mainbaseUrl/chats/heads',
       options: Options(headers: {
         "Authorization": "Bearer $token", "userid": userId
         // "Authorization":

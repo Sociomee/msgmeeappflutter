@@ -3,17 +3,16 @@ import 'dart:io';
 import 'package:msgmee/data/model/chat_head_model.dart';
 import 'package:msgmee/data/model/contact_model.dart';
 import 'package:msgmee/data/model/interest_model.dart';
-import 'package:msgmee/data/model/socimee_account_model.dart';
+import 'package:msgmee/data/model/socimee_user_model.dart';
 
 import 'model/msgmee_user_model.dart';
 import 'model/sync_model.dart';
 
-final String baseUrl = 'https://api.sociomessage.com';
+final String mainbaseUrl = 'https://api.sociomessage.com';
 
 abstract class AuthRepository {
   Future<bool> sendOtp(String phone);
   Future<dynamic> verifyOtp(String phone, String otp);
-  Future<bool> createUser(String phone, String name, File image);
 }
 
 abstract class AbProfileRepository {
@@ -42,10 +41,14 @@ abstract class AbChatHeadRepository {
 }
 
 abstract class AbSyncSociomeeRepository {
-  Future<SociomeeAccountModel> getSocimeeAccount();
-  Future<SyncModel> syncSocimee(String loginId, String password);
+  Future<SociomeeUserModel> checkSocimeeAccount();
+  Future<SyncModel> syncSocimee(int pageIndex);
 }
 
 abstract class AbDataSetsRepository {
   Future<InterestsModel> getinterests();
+}
+
+abstract class AbUserRepository {
+  Future<MsgmeeUserModel> getUserData();
 }

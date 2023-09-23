@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/cubit/sycn_with_sociomee.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
@@ -19,9 +18,8 @@ import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
 import '../../../../data/repository/socket/msgmee_socket.dart';
 import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
-import '../cubit/chatheads/chathead_cubit.dart';
-import '../cubit/get_contact/get_contact_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
+import '../cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import '../widgets/chat_profile_widget.dart';
 import '../widgets/messenger_bottomsheet.dart';
 import '../widgets/profile_image_view_dialog.dart';
@@ -62,9 +60,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void initState() {
     super.initState();
-    context.read<ChatHeadCubit>().getMsgmeeChatHeads();
-    context.read<GetContactCubit>().getContactsCubit();
-    getProfileDetails();
+    context.read<SyncSociomeeCubit>().checkSocimeeCubit();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
 
@@ -116,7 +112,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: context.watch<SyncWithSociomee>().state ? 4 : 2,
+      length:
+          context.watch<SyncSociomeeCubit>().state.isSocimeeAcSynced ? 4 : 2,
       initialIndex: 0,
       child: WillPopScope(
         onWillPop: () async {
@@ -324,15 +321,17 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                           elevation: 0,
                           leadingWidth: 0,
                           title: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Padding(
                                   padding: EdgeInsets.only(right: 14.0),
                                   child: GestureDetector(
-                                      onTap: () {
-                                        animatedScreenNavigator(
-                                            context, PersonalPeofileDesc());
-                                      },
-                                      child: ProfilePicWidget())),
+                                    onTap: () {
+                                      animatedScreenNavigator(
+                                          context, PersonalPeofileDesc());
+                                    },
+                                    child: ProfilePicWidget(),
+                                  )),
                               _selectedIndex == 0
                                   ? Text(
                                       "MsgMee",
@@ -581,7 +580,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                   children: [
                                     Column(
                                       children: [
-                                        context.watch<SyncWithSociomee>().state
+                                        context
+                                                .watch<SyncSociomeeCubit>()
+                                                .state
+                                                .isSocimeeAcSynced
                                             ? DecoratedBox(
                                                 decoration: BoxDecoration(
                                                   color: Colors.white
@@ -668,14 +670,18 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                   ],
                                                 ),
                                               ),
-                                        context.watch<SyncWithSociomee>().state
+                                        context
+                                                .watch<SyncSociomeeCubit>()
+                                                .state
+                                                .isSocimeeAcSynced
                                             ? SizedBox(
                                                 height: 570.h,
                                                 child: TabBarView(
                                                     controller: context
                                                             .watch<
-                                                                SyncWithSociomee>()
+                                                                SyncSociomeeCubit>()
                                                             .state
+                                                            .isSocimeeAcSynced
                                                         ? tabsComtroller
                                                         : _controller,
                                                     children: [
@@ -690,8 +696,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                 child: TabBarView(
                                                     controller: context
                                                             .watch<
-                                                                SyncWithSociomee>()
+                                                                SyncSociomeeCubit>()
                                                             .state
+                                                            .isSocimeeAcSynced
                                                         ? tabsComtroller
                                                         : _controller,
                                                     children: [
