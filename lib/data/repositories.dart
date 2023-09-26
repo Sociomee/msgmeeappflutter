@@ -51,4 +51,5 @@ abstract class AbDataSetsRepository {
 
 abstract class AbUserRepository {
   Future<MsgmeeUserModel> getUserData();
+  Future<MsgmeeUserList> getFriendList(int limit, String search);
 }

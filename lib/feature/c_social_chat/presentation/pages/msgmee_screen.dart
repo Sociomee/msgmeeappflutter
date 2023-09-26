@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
@@ -61,6 +63,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   void initState() {
     super.initState();
     context.read<SyncSociomeeCubit>().checkSocimeeCubit();
+    context.read<MsgmeeUserListCubit>().getMsgmeeUsersList();
+    log('${context.read<SyncSociomeeCubit>().state.syncResponse.isMigratedOn == null}');
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
 
@@ -88,7 +92,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void dispose() {
     searchController.dispose();
-    MsgmeeSocket().closeSocketConnection();
+    // MsgmeeSocket().closeSocketConnection();
     super.dispose();
   }
 

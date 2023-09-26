@@ -111,3 +111,32 @@ class User {
     return data;
   }
 }
+
+class MsgmeeUserList {
+  int? limit;
+  String? search;
+  List<User>? users;
+
+  MsgmeeUserList({this.limit, this.search, this.users});
+
+  MsgmeeUserList.fromJson(Map<String, dynamic> json) {
+    limit = json['limit'];
+    search = json['search'];
+    if (json['users'] != null) {
+      users = <User>[];
+      json['users'].forEach((v) {
+        users!.add(new User.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['limit'] = this.limit;
+    data['search'] = this.search;
+    if (this.users != null) {
+      data['users'] = this.users!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}

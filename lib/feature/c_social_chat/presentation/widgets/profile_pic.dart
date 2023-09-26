@@ -20,21 +20,23 @@ class ProfilePicWidget extends StatelessWidget {
                   backgroundColor: AppColors.grey,
                 ),
               )
-            : cubit.response.user != null
-                ? CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.grey,
-                    backgroundImage:
-                        NetworkImage(cubit.response.user!.otherProfileImage!),
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/profile_icon.png',
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            :
+            // cubit.response.user != null
+            //     ? CircleAvatar(
+            //         radius: 30,
+            //         backgroundColor: AppColors.grey,
+            //         backgroundImage:
+            //             NetworkImage(cubit.response.user!.otherProfileImage!),
+            //       )
+            //     :
+            ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(
+                  'assets/profile_icon.png',
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
+              ),
         Positioned(
           top: 40,
           right: 0,

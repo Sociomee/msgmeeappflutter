@@ -34,4 +34,26 @@ class UserSerivce implements AbUserRepository {
       throw Exception();
     }
   }
+
+  @override
+  Future<MsgmeeUserList> getFriendList(int limit, String search) async {
+    var token = await localData.readData('token');
+    final response = await apiService.dio.post(
+      '$mainbaseUrl/api/search',
+      data: {
+        "limit": limit,
+        "search": search,
+      },
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    log(response.data.toString());
+    if (response.statusCode == 200) {
+      var res = MsgmeeUserList.fromJson(response.data);
+      return res;
+    } else {
+      throw Exception();
+    }
+  }
 }

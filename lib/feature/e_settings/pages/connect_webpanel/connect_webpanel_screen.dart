@@ -1,6 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:msgmee/data/repositories.dart';
+import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../theme/colors.dart';
 
@@ -15,9 +18,15 @@ class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
+  bool scaning = true;
+
   @override
   void initState() {
     super.initState();
+    MsgmeeSocket().connectSocket();
+    MsgmeeSocket().testSocketUrl(mainbaseUrl).then((value) {
+      log("test---->${value.toString()}");
+    });
   }
 
   // In order to get hot reload to work we need to pause the camera if the platform
@@ -105,12 +114,21 @@ class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
       setState(() {
         result = scanData;
       });
+      if (scaning) {
+        scaning = false;
+        MsgmeeSocket().sendLoginEvent(result!.code!);
+        controller.pauseCamera();
+        if (scanData.toString().isNotEmpty) {
+          Navigator.pop(context);
+        }
+      }
     });
   }
 
   @override
   void dispose() {
     controller?.dispose();
+
     super.dispose();
   }
 }

@@ -910,7 +910,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                   .text,
                                                             ));
                                                 //* sending message to socket
-                                                MsgmeeSocket().sendMessage(
+                                                MsgmeeSocket().sendLoginEvent(
                                                     messageController.text);
                                                 messageController.clear();
                                                 _scrollToBottom();

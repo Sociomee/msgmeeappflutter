@@ -52,278 +52,314 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<SyncSociomeeCubit>().state;
-    return Dialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (cubit.syncResponse.isMigratedOn == null && useotherac == false)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 42, horizontal: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 20),
-                  Image.asset(
-                    'assets/sync_msg.png',
-                    height: 80,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: Text(
-                      'No SocioMee account found with this\nmobile number.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
-                  CustomButtonWidget(
-                      height: 40.w,
-                      title: 'Sync with account credentials',
-                      color: AppColors.primaryColor,
-                      ontap: () {
-                        context.read<SyncSociomeeCubit>().checkSocimeeCubit();
-                        setState(() {
-                          useotherac = !useotherac;
-                        });
-                      }),
-                  SizedBox(height: 10),
-                ],
-              ),
-            ),
-          if (cubit.syncResponse.isMigratedOn != null && useotherac == false)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 42),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 20),
-                  Center(
-                      child: Image.asset('assets/sync_msg.png',
-                          height: 80, fit: BoxFit.cover)),
-                  SizedBox(height: 20),
-                  Text('Account found !',
-                      style: TextStyle(fontSize: 14, color: AppColors.black)),
-                  SizedBox(height: 20),
-                  Row(
+    // var cubit = context.watch<SyncSociomeeCubit>().state;
+    return BlocConsumer<SyncSociomeeCubit, SyncSociomeeState>(
+      listener: (context, state) {
+        if (state.status == SyncSociomeeStatus.loaded &&
+            state.isSocimeeAcSynced) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (state.syncResponse.isMigratedOn == null &&
+                  useotherac == false)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 42, horizontal: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      cubit.status == SyncSociomeeStatus.loading
-                          ? CustomShimmerEffect(
-                              child: CircleAvatar(
-                                radius: 28,
-                                backgroundColor: AppColors.grey,
-                              ),
-                            )
-                          : CircleAvatar(
-                              radius: 28,
-                              backgroundColor: AppColors.grey,
-                              backgroundImage: NetworkImage(cubit.syncResponse
-                                  .data!.successResult!.profileImage!),
-                            ),
-                      SizedBox(width: 10),
-                      if (cubit.status == SyncSociomeeStatus.loading)
-                        CustomShimmerEffect(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 18,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.grey),
-                            ),
-                            SizedBox(height: 5),
-                            Container(
-                              height: 10,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.grey),
-                            )
-                          ],
-                        )),
-                      if (cubit.status == SyncSociomeeStatus.loaded)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              cubit.syncResponse.data!.successResult!.userName!,
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.black),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "+${cubit.phone}",
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.grey),
-                            )
-                          ],
-                        )
-                    ],
-                  ),
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CustomButtonWidget(
-                        height: 40.w,
-                        title: 'Continue',
-                        color: AppColors.primaryColor,
-                        ontap: () {
-                          context.read<SyncSociomeeCubit>().syncSociomeeAc();
-                          Navigator.pop(context);
-                        }),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CustomButtonWidget(
-                        height: 40.w,
-                        title: 'Other Account',
-                        color: AppColors.white,
-                        textColor: AppColors.primaryColor,
-                        ontap: () {
-                          setState(() {
-                            useotherac = true;
-                          });
-                        }),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
-            ),
-          if (useotherac)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 42),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: 20),
-                    Center(
-                      child: Image.asset(
+                      SizedBox(height: 20),
+                      Image.asset(
                         'assets/sync_msg.png',
                         height: 80,
                         fit: BoxFit.cover,
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0),
-                      child: Center(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40),
                         child: Text(
-                          'Sync your SocioMate in MsgMee by\nemail/mobile number and password.',
+                          'No SocioMee account found with this\nmobile number.',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 13),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 40),
-                    TextFormField(
-                      controller: emailController,
-                      cursorColor: AppColors.primaryColor,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter email';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.primaryColor,
-                          )),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.lightgrey,
-                          )),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.primaryColor,
-                          )),
-                          hintText: 'Enter Email/Mobile Number',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF999999),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 10)),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: showpassword,
-                      cursorColor: AppColors.primaryColor,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.primaryColor,
-                          )),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.lightgrey,
-                          )),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: AppColors.primaryColor,
-                          )),
-                          hintText: 'Enter Password',
-                          suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  showpassword = !showpassword;
-                                });
-                              },
-                              child: showpassword
-                                  ? Icon(Icons.visibility_off, size: 18)
-                                  : Icon(Icons.visibility, size: 18)),
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF999999),
-                          ),
-                          suffixIconColor: AppColors.primaryColor,
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 10)),
-                      onChanged: (e) {},
-                    ),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 0),
-                      child: CustomButtonWidget(
+                      CustomButtonWidget(
                           height: 40.w,
-                          title: 'Continue',
-                          color: !_isButtonEnabled
-                              ? AppColors.primaryColor.withOpacity(.5)
-                              : AppColors.primaryColor,
-                          borderColor: !_isButtonEnabled
-                              ? AppColors.primaryColor.withOpacity(.5)
-                              : AppColors.primaryColor,
+                          title: 'Sync with account credentials',
+                          color: AppColors.primaryColor,
                           ontap: () {
-                            if (_formKey.currentState!.validate()) {
-                              context
-                                  .watch<SyncSociomeeCubit>()
-                                  .syncSociomeeAc();
-                              Navigator.pop(context);
-                            }
+                            context
+                                .read<SyncSociomeeCubit>()
+                                .checkSocimeeCubit();
+                            setState(() {
+                              useotherac = !useotherac;
+                            });
                           }),
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                    ],
+                  ),
                 ),
-              ),
-            )
-        ],
-      ),
+              if (state.syncResponse.isMigratedOn != null &&
+                  useotherac == false)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 42),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 20),
+                      Center(
+                          child: Image.asset('assets/sync_msg.png',
+                              height: 80, fit: BoxFit.cover)),
+                      SizedBox(height: 20),
+                      Text('Account found !',
+                          style:
+                              TextStyle(fontSize: 14, color: AppColors.black)),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          state.status == SyncSociomeeStatus.loading
+                              ? CustomShimmerEffect(
+                                  child: CircleAvatar(
+                                    radius: 28,
+                                    backgroundColor: AppColors.grey,
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  radius: 28,
+                                  backgroundColor: AppColors.grey,
+                                  backgroundImage: NetworkImage(state
+                                      .syncResponse
+                                      .data!
+                                      .successResult!
+                                      .profileImage!),
+                                ),
+                          SizedBox(width: 10),
+                          if (state.status == SyncSociomeeStatus.loading)
+                            CustomShimmerEffect(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 18,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: AppColors.grey),
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  height: 10,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: AppColors.grey),
+                                )
+                              ],
+                            )),
+                          if (state.status == SyncSociomeeStatus.loaded)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  state.syncResponse.data!.successResult!
+                                      .userName!,
+                                  style: TextStyle(
+                                      fontSize: 13, color: AppColors.black),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  "+${state.phone}",
+                                  style: TextStyle(
+                                      fontSize: 13, color: AppColors.grey),
+                                )
+                              ],
+                            )
+                        ],
+                      ),
+                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: state.status == SyncSociomeeStatus.loading
+                            ? Container(
+                                alignment: Alignment.center,
+                                height: 40.w,
+                                width: 334.w,
+                                decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                        color: AppColors.primaryColor)),
+                                child: CircularProgressIndicator(
+                                  color: AppColors.white,
+                                ))
+                            : CustomButtonWidget(
+                                height: 40.w,
+                                title: 'Continue',
+                                color: AppColors.primaryColor,
+                                ontap: () {
+                                  context
+                                      .read<SyncSociomeeCubit>()
+                                      .syncSociomeeAc();
+                                }),
+                      ),
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: CustomButtonWidget(
+                            height: 40.w,
+                            title: 'Other Account',
+                            color: AppColors.white,
+                            textColor: AppColors.primaryColor,
+                            ontap: () {
+                              setState(() {
+                                useotherac = true;
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+              if (useotherac)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 42),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Image.asset(
+                            'assets/sync_msg.png',
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0),
+                          child: Center(
+                            child: Text(
+                              'Sync your SocioMate in MsgMee by\nemail/mobile number and password.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                        TextFormField(
+                          controller: emailController,
+                          cursorColor: AppColors.primaryColor,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter email';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.primaryColor,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.lightgrey,
+                              )),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.primaryColor,
+                              )),
+                              hintText: 'Enter Email/Mobile Number',
+                              hintStyle: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF999999),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 10)),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: showpassword,
+                          cursorColor: AppColors.primaryColor,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter password';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.primaryColor,
+                              )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.lightgrey,
+                              )),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: AppColors.primaryColor,
+                              )),
+                              hintText: 'Enter Password',
+                              suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      showpassword = !showpassword;
+                                    });
+                                  },
+                                  child: showpassword
+                                      ? Icon(Icons.visibility_off, size: 18)
+                                      : Icon(Icons.visibility, size: 18)),
+                              hintStyle: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF999999),
+                              ),
+                              suffixIconColor: AppColors.primaryColor,
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 10)),
+                          onChanged: (e) {},
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 0),
+                          child: CustomButtonWidget(
+                              height: 40.w,
+                              title: 'Continue',
+                              color: !_isButtonEnabled
+                                  ? AppColors.primaryColor.withOpacity(.5)
+                                  : AppColors.primaryColor,
+                              borderColor: !_isButtonEnabled
+                                  ? AppColors.primaryColor.withOpacity(.5)
+                                  : AppColors.primaryColor,
+                              ontap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context
+                                      .watch<SyncSociomeeCubit>()
+                                      .syncSociomeeAc();
+                                  Navigator.pop(context);
+                                }
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+            ],
+          ),
+        );
+      },
     );
   }
 }

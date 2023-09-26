@@ -18,11 +18,11 @@ import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.d
 import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dart';
-import 'feature/c_social_chat/presentation/cubit/chatheads/chathead_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/choose_image_wallpaper_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/choose_solid_color_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/get_contact/get_contact_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
+import 'feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/search_mode/search_mode_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/set_chatbg/set_chatbg_cubit.dart';
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShowEmojiCubit()),
             BlocProvider(create: (context) => ChooseLanguageCubit()),
             BlocProvider(create: (context) => MsgmeeContactCubit()),
-            BlocProvider(create: (context) => ChatHeadCubit()),
+            BlocProvider(create: (context) => MsgmeeUserListCubit()),
             BlocProvider(create: (context) => GetContactCubit()),
             BlocProvider(create: (context) => SyncSociomeeCubit()),
             BlocProvider(create: (context) => UpdateUserCubit()),

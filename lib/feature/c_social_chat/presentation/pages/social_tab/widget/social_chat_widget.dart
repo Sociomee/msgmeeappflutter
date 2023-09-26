@@ -1,17 +1,17 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/data/model/dummy_chat_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/group_chat_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
+
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/theme/colors.dart';
+import '../../../../../../data/model/dummy_chat_model.dart';
 import '../../../cubit/chat_selection_cubit.dart';
 import '../../../widgets/chat_profile_widget.dart';
 import '../../../widgets/profile_image_view_dialog.dart';
+import '../../group_chat_screen/group_chat_screen.dart';
 
 class SocialchatWidget extends StatefulWidget {
   const SocialchatWidget({super.key});
@@ -28,7 +28,8 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
   Widget build(BuildContext context) {
     var selectcubit = context.watch<SelectedchatCubit>().state;
     final cubit = context.watch<SelectionCubit>();
-    // var chathead = context.watch<ChatHeadCubit>().state.chatheads;
+    // var userlist =
+    //     context.watch<MsgmeeUserListCubit>().state.msgmeeUserList.users;
 
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
@@ -176,7 +177,8 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
           );
         });
 
-    // return context.watch<ChatHeadCubit>().state.status == ChatHeadStatus.loading
+    // return context.watch<MsgmeeUserListCubit>().state.status ==
+    //         ChatHeadStatus.loading
     //     ? Shimmer.fromColors(
     //         baseColor: AppColors.borderColor,
     //         highlightColor: AppColors.grey,
@@ -235,12 +237,11 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //     : ListView.builder(
     //         physics: NeverScrollableScrollPhysics(),
     //         shrinkWrap: true,
-    //         itemCount:
-    //             chathead.data != null ? chathead.data!.chatHeads!.length : 0,
+    //         itemCount: userlist != null ? userlist.length : 0,
     //         itemBuilder: (context, index) {
     //           final isSelected = cubit.state.containsKey(index);
-    //           print(
-    //               'image Urls ------>>${chathead.data!.chatHeads![index].displayPicture ?? avaterUrl}');
+    //           // print(
+    //           //     'image Urls ------>>${chathead.data!.chatHeads![index].displayPicture ?? avaterUrl}');
     //           return Column(
     //             children: [
     //               GestureDetector(
@@ -249,43 +250,40 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                 },
     //                 onTap: cubit.state.isEmpty
     //                     ? () {
-    //                         chathead.data!.chatHeads![index].chatRoomType ==
-    //                                 "DM"
-    //                             ? animatedScreenNavigator(
-    //                                 context,
-    //                                 ChatScreen(
-    //                                   name: chathead
-    //                                       .data!.chatHeads![index].name!,
-    //                                   imageUrl: chathead.data!.chatHeads![index]
-    //                                           .displayPicture!.isNotEmpty
-    //                                       ? chathead.data!.chatHeads![index]
-    //                                           .displayPicture!
-    //                                       : avaterUrl,
-    //                                   isOnline: chathead.data!.chatHeads![index]
-    //                                           .isOnline ??
-    //                                       false,
-    //                                 ))
-    //                             : chathead.data!.chatHeads![index]
-    //                                         .chatRoomType ==
-    //                                     ''
-    //                                 ? animatedScreenNavigator(
-    //                                     context,
-    //                                     GroupChatScreen(
-    //                                       name: chathead
-    //                                           .data!.chatHeads![index].name!,
-    //                                       imageUrl: chathead
-    //                                               .data!
-    //                                               .chatHeads![index]
-    //                                               .displayPicture!
-    //                                               .isNotEmpty
-    //                                           ? chathead.data!.chatHeads![index]
-    //                                               .displayPicture!
-    //                                           : avaterUrl,
-    //                                       isOnline: chathead.data!
-    //                                               .chatHeads![index].isOnline ??
-    //                                           false,
-    //                                     ))
-    //                                 : null;
+    //                         // userlist![index].chatRoomType ==
+    //                         //         "DM"
+    //                         //     ?
+    //                         animatedScreenNavigator(
+    //                             context,
+    //                             ChatScreen(
+    //                               name: userlist![index].fullName!,
+    //                               imageUrl: userlist[index]
+    //                                   .otherProfileImage!
+    //                                   .toProfileUrl(),
+    //                               // : avaterUrl,
+    //                               isOnline: false,
+    //                             ));
+    //                         // : userlist![index]
+    //                         //             . ==
+    //                         //         ''
+    //                         //     ? animatedScreenNavigator(
+    //                         //         context,
+    //                         //         GroupChatScreen(
+    //                         //           name: chathead
+    //                         //               .data!.chatHeads![index].name!,
+    //                         //           imageUrl: chathead
+    //                         //                   .data!
+    //                         //                   .chatHeads![index]
+    //                         //                   .displayPicture!
+    //                         //                   .isNotEmpty
+    //                         //               ? chathead.data!.chatHeads![index]
+    //                         //                   .displayPicture!
+    //                         //               : avaterUrl,
+    //                         //           isOnline: chathead.data!
+    //                         //                   .chatHeads![index].isOnline ??
+    //                         //               false,
+    //                         //         ))
+    //                         //     : null;
     //                       }
     //                     : () {
     //                         cubit.toggleSelection(index);
@@ -305,24 +303,23 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                           showDialog(
     //                               context: context,
     //                               builder: (context) => ProfileViewDialog(
-    //                                     profilename: chathead
-    //                                         .data!.chatHeads![index].name!,
-    //                                     imageUrl: chathead
-    //                                             .data!
-    //                                             .chatHeads![index]
-    //                                             .displayPicture!
+    //                                     profilename: userlist[index].fullName!,
+    //                                     imageUrl: userlist[index]
+    //                                             .otherProfileImage!
     //                                             .isNotEmpty
-    //                                         ? chathead.data!.chatHeads![index]
-    //                                             .displayPicture!
+    //                                         ? userlist[index].otherProfileImage!
     //                                         : avaterUrl,
     //                                   ));
     //                         },
     //                         child: ChatProfileWidget(
-    //                             imageUrl: chathead.data!.chatHeads![index]
-    //                                     .displayPicture!.isNotEmpty
-    //                                 ? chathead
-    //                                     .data!.chatHeads![index].displayPicture!
-    //                                 : avaterUrl,
+    //                             imageUrl:
+    //                                 //  userlist![index]
+    //                                 // .otherProfileImage!
+    //                                 // .isNotEmpty
+    //                                 // ?
+    //                                 userlist![index]
+    //                                     .otherProfileImage!
+    //                                     .toProfileUrl(), // : avaterUrl,
     //                             isOnline: false,
     //                             // chathead.data!.chatHeads![index].isOnline!,
     //                             hasStory: false),
@@ -334,7 +331,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                         children: [
     //                           Row(
     //                             children: [
-    //                               Text(chathead.data!.chatHeads![index].name!,
+    //                               Text(userlist[index].fullName!,
     //                                   style: TextStyle(
     //                                     fontSize: 16,
     //                                     fontFamily: 'Poppins',
@@ -356,14 +353,17 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                             ],
     //                           ),
     //                           SizedBox(height: 8),
-    //                           chathead.data!.chatHeads![index].latestMessage !=
-    //                                   null
-    //                               ? Text(
-    //                                   chathead.data!.chatHeads![index]
-    //                                       .latestMessage!,
-    //                                   style: TextStyle(
-    //                                       fontSize: 13, color: AppColors.grey))
-    //                               : Container(),
+    //                           Text('last message',
+    //                               style: TextStyle(
+    //                                   fontSize: 13, color: AppColors.grey))
+    //                           // chathead.data!.chatHeads![index].latestMessage !=
+    //                           //         null
+    //                           //     ? Text(
+    //                           //         chathead.data!.chatHeads![index]
+    //                           //             .latestMessage!,
+    //                           //         style: TextStyle(
+    //                           //             fontSize: 13, color: AppColors.grey))
+    //                           //     : Container(),
     //                         ],
     //                       ),
     //                       Spacer(),
@@ -371,14 +371,17 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                         mainAxisSize: MainAxisSize.min,
     //                         crossAxisAlignment: CrossAxisAlignment.end,
     //                         children: [
-    //                           if (chathead.data!.chatHeads![index]
-    //                                   .latestMessageAt !=
-    //                               null)
-    //                             Text(
-    //                                 getTime(chathead.data!.chatHeads![index]
-    //                                     .latestMessageAt!),
-    //                                 style: TextStyle(
-    //                                     fontSize: 13, color: AppColors.grey)),
+    //                           Text('now',
+    //                               style: TextStyle(
+    //                                   fontSize: 13, color: AppColors.grey)),
+    //                           // if (chathead.data!.chatHeads![index]
+    //                           //         .latestMessageAt !=
+    //                           //     null)
+    //                           //   Text(
+    //                           //       getTime(chathead.data!.chatHeads![index]
+    //                           //           .latestMessageAt!),
+    //                           //       style: TextStyle(
+    //                           //           fontSize: 13, color: AppColors.grey)),
     //                           SizedBox(height: 8),
     //                           Row(
     //                             children: [
@@ -388,28 +391,29 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //                                   ? SvgPicture.asset('assets/mute.svg')
     //                                   : Container(),
     //                               SizedBox(width: 5),
-    //                               chathead.data!.chatHeads![index]
-    //                                           .unreadMessageCount !=
-    //                                       0
-    //                                   ? Container(
-    //                                       height: 20,
-    //                                       padding: EdgeInsets.symmetric(
-    //                                           vertical: 3, horizontal: 6),
-    //                                       alignment: Alignment.center,
-    //                                       decoration: BoxDecoration(
-    //                                           color: AppColors.primaryColor,
-    //                                           borderRadius:
-    //                                               BorderRadius.circular(100)),
-    //                                       child: Text(
-    //                                           chathead.data!.chatHeads![index]
-    //                                               .unreadMessageCount
-    //                                               .toString(),
-    //                                           style: TextStyle(
-    //                                               color: AppColors.white,
-    //                                               fontSize: 12,
-    //                                               fontWeight: FontWeight.bold)),
-    //                                     )
-    //                                   : Container(),
+    //                               // chathead.data!.chatHeads![index]
+    //                               //             .unreadMessageCount !=
+    //                               //         0
+    //                               //     ?
+    //                               Container(
+    //                                 height: 20,
+    //                                 padding: EdgeInsets.symmetric(
+    //                                     vertical: 3, horizontal: 6),
+    //                                 alignment: Alignment.center,
+    //                                 decoration: BoxDecoration(
+    //                                     color: AppColors.primaryColor,
+    //                                     borderRadius:
+    //                                         BorderRadius.circular(100)),
+    //                                 child: Text('1',
+    //                                     // chathead.data!.chatHeads![index]
+    //                                     //     .unreadMessageCount
+    //                                     //     .toString(),
+    //                                     style: TextStyle(
+    //                                         color: AppColors.white,
+    //                                         fontSize: 12,
+    //                                         fontWeight: FontWeight.bold)),
+    //                               )
+    //                               // : Container(),
     //                             ],
     //                           )
     //                         ],

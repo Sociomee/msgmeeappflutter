@@ -42,14 +42,15 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
   void checkSocimeeCubit() async {
     emit(state.copyWith(status: SyncSociomeeStatus.loading));
     var phone = await Localdata().readData('phone');
-    var socimeeToken = await Localdata().readData('socimeetoken');
+    // var socimeeToken = await Localdata().readData('socimeetoken');
     try {
       var data = await SyncSocimeeService().checkSocimeeAccount();
       emit(state.copyWith(
-          status: SyncSociomeeStatus.loaded,
-          syncResponse: data,
-          phone: phone,
-          socimeeAuthToken: socimeeToken));
+        status: SyncSociomeeStatus.loaded,
+        syncResponse: data,
+        phone: phone,
+        socimeeAuthToken: data.data!.successResult!.authToken.toString(),
+      ));
     } catch (e) {
       log('message---->$e');
       throw Exception(e);

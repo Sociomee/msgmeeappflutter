@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/data/model/contact_model.dart';
+import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
+import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../data/model/all_connections_model.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../widgets/chat_profile_widget.dart';
@@ -60,15 +61,23 @@ class NewMessageScreen extends StatefulWidget {
 
 class _NewMessageScreenState extends State<NewMessageScreen> {
   late TextEditingController searchController;
-  List<AllConnectionsModel> filterdList = [];
-  List<Data> msgmeeList = [];
+  late List<User> userlist;
+  List<User> filterdList = [];
   bool show = false;
   int currentindex = 0;
   double top = 17;
   @override
   void initState() {
     searchController = TextEditingController();
-    filterdList = List.from(dummyconnections);
+    
+    userlist = context
+        .read<MsgmeeUserListCubit>()
+        .state
+        .msgmeeUserList
+        .users!
+        .toList();
+    filterdList = List.from(
+        context.read<MsgmeeUserListCubit>().state.msgmeeUserList.users!);
     context.read<MsgmeeContactCubit>().getMsgmeeContact();
     super.initState();
   }
@@ -79,25 +88,10 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     super.dispose();
   }
 
-  // void _handleInvalidPermissions(BuildContext context) async {
-  //   PermissionStatus permissionStatus = await getContactPermission();
-  //   if (permissionStatus == PermissionStatus.denied) {
-  //     final snackBar = SnackBar(content: Text('Access to contact data denied'));
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
-  //     final snackBar =
-  //         SnackBar(content: Text('Contact data not available on device'));
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MsgmeeContactCubit>().state.response.data;
-    if (cubit != null && searchController.text.isEmpty)
-      msgmeeList = List.from(cubit);
-    var avaterUrl =
-        'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
+    // var avaterUrl =
+    //     'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
 
     return Scaffold(
       appBar: AppBar(
@@ -151,24 +145,13 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value.isEmpty) {
-                            //* filterdList = List.from(dummyconnections);
-                            msgmeeList = List.from(cubit!);
+                            filterdList = List.from(userlist);
                           } else {
-                            //* filterdList = dummyconnections
-                            //*     .where((model) => model.connectionName
-                            //*         .toLowerCase()
-                            //*         .contains(value.toLowerCase()))
-                            //*     .toList();
-                            List<Data> searchedList = cubit!.where((e) {
-                              var fullname = '${e.firstName}${e.lastName}';
-
-                              var list = fullname
-                                  .toLowerCase()
-                                  .trim()
-                                  .contains(value.toLowerCase().trim());
-                              return list;
-                            }).toList();
-                            msgmeeList = List.from(searchedList);
+                            filterdList = userlist
+                                .where((model) => model.fullName!
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()))
+                                .toList();
                           }
                         });
                       },
@@ -209,20 +192,20 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                     onSelected: (value) {
                       if (value == 1) {
                         setState(() {
-                          filterdList = List.from(dummyconnections);
+                          filterdList = List.from(userlist);
                         });
                       } else if (value == 2) {
                         setState(() {
-                          filterdList = dummyconnections
-                              .where((model) => model.connectionType
+                          filterdList = userlist
+                              .where((model) => model.linkedTo!
                                   .toLowerCase()
-                                  .contains('MsgMee'.toLowerCase()))
+                                  .contains('msgmee'.toLowerCase()))
                               .toList();
                         });
                       } else if (value == 3) {
                         setState(() {
-                          filterdList = dummyconnections
-                              .where((model) => model.connectionType
+                          filterdList = userlist
+                              .where((model) => model.linkedTo!
                                   .toLowerCase()
                                   .contains('SocioMee'.toLowerCase()))
                               .toList();
@@ -246,7 +229,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                               fontSize: 16.sp, fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
                       //*showing msgmee contacts in listview
-                      context.watch<MsgmeeContactCubit>().state.status ==
+                      context.watch<MsgmeeUserListCubit>().state.status ==
                               MsgmeeContactStatus.loading
                           ? Shimmer.fromColors(
                               baseColor: AppColors.borderColor,
@@ -287,16 +270,18 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                               physics: NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.all(0),
                               shrinkWrap: true,
-                              itemCount: msgmeeList.length,
+                              itemCount: filterdList.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
                                     screenNavigator(
                                         context,
                                         ChatScreen(
-                                          name:
-                                              '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
-                                          imageUrl: avaterUrl,
+                                          name: filterdList[index].fullName!,
+                                          imageUrl: filterdList[index]
+                                              .otherProfileImage
+                                              .toString()
+                                              .toProfileUrl(),
                                           isOnline: true,
                                           hasStory: true,
                                         ));
@@ -309,15 +294,20 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         ChatProfileWidget(
-                                          imageUrl: avaterUrl,
+                                          imageUrl: filterdList[index]
+                                              .otherProfileImage
+                                              .toString()
+                                              .toProfileUrl(),
                                           isOnline: false,
                                           hasStory: false,
                                           radius: 20,
                                         ),
                                         SizedBox(width: 12),
-                                        Text(
-                                            '${msgmeeList[index].firstName} ${msgmeeList[index].lastName}',
+                                        Text(filterdList[index].fullName!,
                                             style: TextStyle(fontSize: 14.sp)),
+                                        Spacer(),
+                                        Text(filterdList[index].linkedTo!,
+                                            style: TextStyle(fontSize: 10.sp)),
                                       ],
                                     ),
                                   ),
@@ -379,8 +369,8 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                             onTap: () {
                               setState(() {
                                 show = !show;
-                                filterdList = dummyconnections
-                                    .where((model) => model.connectionName
+                                filterdList = userlist
+                                    .where((model) => model.linkedTo!
                                         .toLowerCase()
                                         .contains(alphabats[currentindex]
                                             .toLowerCase()))
