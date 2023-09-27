@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:msgmee/common_widgets/Mx_appbar.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../common_widgets/custom_bottom_model_sheet.dart';
@@ -89,27 +90,22 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
+      appBar: MAppBar(
+        leading: IconButton(
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.black,
-              size: 24.h,
-            ),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.black,
+            size: 16,
           ),
         ),
-        leadingWidth: 50.w,
-        titleSpacing: 0,
         title: Text(
           'Create Group',
           style: TextStyle(
-            color: AppColors.black,
-            fontSize: 18.sp,
+            color: Color(0xFF4E4E4E),
+            fontSize: 16,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
           ),

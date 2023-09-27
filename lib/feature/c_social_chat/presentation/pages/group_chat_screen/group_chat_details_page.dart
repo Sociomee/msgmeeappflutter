@@ -7,7 +7,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 
 import 'package:msgmee/theme/colors.dart';
 
-import '../../../../../common_widgets/dx_appbar.dart';
+import '../../../../../common_widgets/Mx_appbar.dart';
 import '../../../../../data/model/group_participants_model.dart';
 import '../../../../../helper/navigator_function.dart';
 import '../../../../c_profile/presentation/pages/media_tab.dart';
@@ -33,7 +33,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DAppBar(
+      appBar: MAppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);

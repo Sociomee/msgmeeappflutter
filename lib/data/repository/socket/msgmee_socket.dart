@@ -11,15 +11,23 @@ import '../../repositories.dart';
 
 class MsgmeeSocket {
   IO.Socket socket = IO.io('$mainbaseUrl', <String, dynamic>{
+    'transports': ['websocket'],
     'autoConnect': true,
   });
-  void connectSocket() {
+  void connectSocket() async {
+    log('connecting..');
+    await socket.connect();
     socket.onConnect((data) {
-      log('connected!$data');
+      log('on connect---->$data');
     });
-
-    socket.onDisconnect((_) {
-      log('Disconnected from socket');
+    socket.onConnectError((error) {
+      log('Connection error: $error');
+    });
+    socket.on('time', (data) {
+      log('time--->$data');
+    });
+    socket.onDisconnect((data) {
+      log('on disconnect---->>$data');
       socket.connect();
     });
   }
@@ -28,8 +36,8 @@ class MsgmeeSocket {
     Map<String, dynamic> data = jsonDecode(result);
     String deviceId = data['deviceId'];
     var authtoken = await Localdata().readData('token');
-    log('deviceId $deviceId  \n token  $authtoken');
     socket.emit('msgmee-qr-login', {'deviceId': deviceId, 'token': authtoken});
+    log('deviceId $deviceId  \n token  $authtoken');
   }
 
   Future<bool> testSocketUrl(String url) async {

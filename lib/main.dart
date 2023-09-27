@@ -14,6 +14,7 @@ import 'feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cu
 import 'feature/c_profile/presentation/cubit/interest/interest_cubit.dart';
 import 'feature/c_profile/presentation/cubit/select_group_cubit/select_group_cubit.dart';
 import 'feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
+import 'feature/c_profile/presentation/cubit/upload_profilepic/upload_profilepic_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
 import 'feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
@@ -34,6 +35,7 @@ import 'feature/c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cub
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
+import 'helper/get_contacts.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -88,6 +90,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => UpdateProfileCubit()),
             BlocProvider(create: (context) => InterestCubit()),
             BlocProvider(create: (context) => SelectionGroupCubit()),
+            BlocProvider(create: (context) => ContactCubit()),
+            BlocProvider(create: (context) => UploadProfilepicCubit())
           ],
           child: MaterialApp(
             title: 'Msgmee App',

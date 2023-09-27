@@ -6,6 +6,7 @@ import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
+import 'package:msgmee/helper/get_contacts.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -69,7 +70,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   @override
   void initState() {
     searchController = TextEditingController();
-    
+
     userlist = context
         .read<MsgmeeUserListCubit>()
         .state
@@ -79,6 +80,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     filterdList = List.from(
         context.read<MsgmeeUserListCubit>().state.msgmeeUserList.users!);
     context.read<MsgmeeContactCubit>().getMsgmeeContact();
+    context.read<ContactCubit>().fetchContacts();
     super.initState();
   }
 

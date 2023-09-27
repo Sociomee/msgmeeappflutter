@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:msgmee/theme/colors.dart';
 
-class DAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DAppBar({
+class MAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MAppBar({
     Key? key,
     this.title,
     this.leading,

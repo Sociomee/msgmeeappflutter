@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
-import '../../../../../common_widgets/dx_appbar.dart';
+import '../../../../../common_widgets/Mx_appbar.dart';
 import '../../../../../data/model/dummy_chat_model.dart';
 import '../../../../../theme/colors.dart';
 import '../../widgets/chat_profile_widget.dart';
@@ -21,7 +21,7 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DAppBar(
+      appBar: MAppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);

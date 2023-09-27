@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:msgmee/common_cubits/custom_error.dart';
@@ -26,7 +24,7 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
         if (data.next == true) {
           await SyncSocimeeService().syncSocimee(1);
         }
-        log('sync socimee--->$data');
+
         emit(state.copyWith(
           status: SyncSociomeeStatus.loaded,
           response: data,
@@ -34,7 +32,6 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
         ));
       }
     } catch (e) {
-      log('message---->$e');
       throw Exception(e);
     }
   }
@@ -42,7 +39,6 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
   void checkSocimeeCubit() async {
     emit(state.copyWith(status: SyncSociomeeStatus.loading));
     var phone = await Localdata().readData('phone');
-    // var socimeeToken = await Localdata().readData('socimeetoken');
     try {
       var data = await SyncSocimeeService().checkSocimeeAccount();
       emit(state.copyWith(
@@ -52,7 +48,6 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
         socimeeAuthToken: data.data!.successResult!.authToken.toString(),
       ));
     } catch (e) {
-      log('message---->$e');
       throw Exception(e);
     }
   }

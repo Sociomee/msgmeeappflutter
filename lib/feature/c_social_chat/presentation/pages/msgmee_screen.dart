@@ -1,10 +1,10 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
@@ -18,7 +18,7 @@ import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_des
 import 'package:msgmee/theme/colors.dart';
 import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
-import '../../../../data/repository/socket/msgmee_socket.dart';
+import '../../../../helper/get_contacts.dart';
 import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
 import '../cubit/sync_sociomee/sync_sociomee_cubit.dart';
@@ -64,7 +64,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     super.initState();
     context.read<SyncSociomeeCubit>().checkSocimeeCubit();
     context.read<MsgmeeUserListCubit>().getMsgmeeUsersList();
-    log('${context.read<SyncSociomeeCubit>().state.syncResponse.isMigratedOn == null}');
+    context.read<ContactCubit>().fetchContacts();
+    MsgmeeSocket().connectSocket();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
 

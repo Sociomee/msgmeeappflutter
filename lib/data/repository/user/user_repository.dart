@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/repositories.dart';
@@ -24,7 +22,7 @@ class UserSerivce implements AbUserRepository {
         "Authorization": "Bearer $token",
       }),
     );
-    log(response.data.toString());
+
     if (response.statusCode == 200) {
       var res = MsgmeeUserModel.fromJson(response.data);
       localData.storedata('socimeeId', res.user!.socioMeeId ?? '');
@@ -48,7 +46,7 @@ class UserSerivce implements AbUserRepository {
         "Authorization": "Bearer $token",
       }),
     );
-    log(response.data.toString());
+
     if (response.statusCode == 200) {
       var res = MsgmeeUserList.fromJson(response.data);
       return res;

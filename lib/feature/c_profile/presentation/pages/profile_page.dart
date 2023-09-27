@@ -6,6 +6,8 @@ import 'package:msgmee/theme/colors.dart';
 
 import '../widgets/broadcasts_widget.dart';
 import '../widgets/groups_widget.dart';
+import '../widgets/personal_details_widget.dart';
+import '../widgets/profile_edit_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -57,9 +59,8 @@ class _ProfilePageState extends State<ProfilePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // ProfileEditWidget(),
-              // PersonalDetailsWidget(
-              //     ids: "context.watch<GetUserdetailsCubit.interests!"),
+              ProfileEditWidget(),
+              PersonalDetailsWidget(),
               Column(
                 children: [
                   BroadCastsWidget(),

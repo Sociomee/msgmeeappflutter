@@ -6,7 +6,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_scree
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/share_group_invitation_page.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
-import '../../../../../common_widgets/dx_appbar.dart';
+import '../../../../../common_widgets/Mx_appbar.dart';
 import '../../../../../theme/colors.dart';
 
 class GroupInvitePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _GroupInvitePageState extends State<GroupInvitePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DAppBar(
+      appBar: MAppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
