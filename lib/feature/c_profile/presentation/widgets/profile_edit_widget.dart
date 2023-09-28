@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/common_widgets/cache_image_provider.dart';
 import 'package:msgmee/common_widgets/shimmer_effect.dart';
 import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -16,8 +15,8 @@ class ProfileEditWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<GetUserdetailsCubit>().state;
-    var image =
-        'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?cs=srgb&dl=pexels-masha-raymers-2726111.jpg&fm=jpg';
+    // var image =
+    //     'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?cs=srgb&dl=pexels-masha-raymers-2726111.jpg&fm=jpg';
     if (cubit.status == GetUserDetailsStatus.loaded) {
       return Padding(
         padding: const EdgeInsets.all(18.0),

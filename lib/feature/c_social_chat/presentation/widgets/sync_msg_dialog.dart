@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
-import 'package:msgmee/helper/validation.dart';
+import 'package:msgmee/helper/validation_ext.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../common_widgets/shimmer_effect.dart';
@@ -261,11 +261,9 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                           controller: emailController,
                           cursorColor: AppColors.primaryColor,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter email';
-                            }
-                            return null;
+                            return validateEmailOrPhone(value!);
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -280,6 +278,11 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 color: AppColors.primaryColor,
                               )),
                               hintText: 'Enter Email/Mobile Number',
+                              errorStyle: const TextStyle(
+                                fontSize: 10,
+                                color: AppColors.errorRedColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                               hintStyle: TextStyle(
                                 fontSize: 12,
                                 color: Color(0xFF999999),
@@ -293,11 +296,9 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                           obscureText: showpassword,
                           cursorColor: AppColors.primaryColor,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                            return null;
+                            return passwordValidator(value);
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -312,6 +313,11 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 color: AppColors.primaryColor,
                               )),
                               hintText: 'Enter Password',
+                              errorStyle: const TextStyle(
+                                fontSize: 10,
+                                color: AppColors.errorRedColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                               suffixIcon: GestureDetector(
                                   onTap: () {
                                     setState(() {

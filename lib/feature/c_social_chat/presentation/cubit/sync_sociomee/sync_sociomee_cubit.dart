@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:msgmee/common_cubits/custom_error.dart';
@@ -39,6 +41,7 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
   void checkSocimeeCubit() async {
     emit(state.copyWith(status: SyncSociomeeStatus.loading));
     var phone = await Localdata().readData('phone');
+    log('phone---->$phone');
     try {
       var data = await SyncSocimeeService().checkSocimeeAccount();
       emit(state.copyWith(

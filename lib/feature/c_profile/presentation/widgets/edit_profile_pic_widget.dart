@@ -1,18 +1,12 @@
-import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:msgmee/common_widgets/shimmer_effect.dart';
 import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import 'package:msgmee/feature/c_profile/presentation/cubit/upload_profilepic/upload_profilepic_cubit.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/text_field_widget.dart';
-import 'package:msgmee/helper/local_data.dart';
 
-import '../../../../common_widgets/cache_image_provider.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../theme/colors.dart';
 
@@ -24,40 +18,10 @@ class EditProfilePicWidget extends StatefulWidget {
 }
 
 class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
-  final ImagePicker _picker = ImagePicker();
   late TextEditingController nameController;
   late TextEditingController usernameController;
-  // File? imageFile;
+
   int remainchar = 64;
-  // void pickGprofilePic() async {
-  //   // Pick an image
-  //   final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     setState(() {
-  //       imageFile = File(image.path);
-  //     });
-  //   }
-  // }
-
-  // void pickCprofilePic() async {
-  //   // Capture a photo
-  //   final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-  //   if (photo != null) {
-  //     setState(() {
-  //       imageFile = File(photo.path);
-  //     });
-  //   }
-  // }
-
-  // void deletePic() {
-  //   if (imageFile != null) {
-  //     imageFile!.delete().then((_) {
-  //       setState(() {
-  //         imageFile == null;
-  //       });
-  //     });
-  //   }
-  // }
 
   @override
   void initState() {
@@ -78,7 +42,6 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
 
   @override
   Widget build(BuildContext context) {
-    log('image --->${context.read<UploadProfilepicCubit>().state.imageFile}');
     return BlocConsumer<UploadProfilepicCubit, UploadProfilepicState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -169,7 +132,6 @@ class _EditProfilePicWidgetState extends State<EditProfilePicWidget> {
                                         .read<UploadProfilepicCubit>()
                                         .deleteImage();
                                     Navigator.pop(context);
-                                    log('delete------>>${state.imageFile}');
                                   },
                                   hasProfile:
                                       state.imageFile == null ? false : true,

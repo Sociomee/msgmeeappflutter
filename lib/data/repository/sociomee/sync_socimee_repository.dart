@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
 import 'package:msgmee/data/model/sync_model.dart';
@@ -19,6 +21,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
         },
       ),
     );
+    log('check ac ====>$response');
 
     if (response.statusCode == 200) {
       var res = SociomeeUserModel.fromJson(response.data);

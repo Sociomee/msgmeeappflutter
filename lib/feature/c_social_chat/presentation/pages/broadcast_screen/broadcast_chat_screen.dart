@@ -7,7 +7,7 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../theme/colors.dart';
 import '../chat_screen/widgets/attached_options.dart';
 import '../chat_screen/widgets/message_textField.dart';
-import '../chat_screen/widgets/sender_widget.dart';
+import 'widget/broadcast_send_message.dart';
 
 class BroadCastChatScreen extends StatefulWidget {
   const BroadCastChatScreen({super.key});
@@ -86,28 +86,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
             ),
           ),
           actions: [
-            PopupMenuWidget()
-            // IconButton(
-            //   onPressed: () {
-            //     showModalBottomSheet(
-            //         isScrollControlled: true,
-            //         shape: const RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.vertical(
-            //             top: Radius.circular(25.0),
-            //           ),
-            //         ),
-            //         context: context,
-            //         builder: (context) {
-            //           return BroadcastBottomModelSheet(
-            //             profilename: 'widget.name',
-            //           );
-            //         });
-            //   },
-            //   icon: const Icon(
-            //     Icons.more_vert,
-            //     color: AppColors.black,
-            //   ),
-            // )
+            PopupMenuWidget(),
           ],
         ),
         body: Column(
@@ -144,40 +123,15 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             ListView.builder(
               controller: _listViewController,
-              itemCount: 1,
+              itemCount: 2,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 50),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      onTap: () {
-                        setState(() {
-                          chattileIndex.remove(messages[index].messageContent);
-                        });
-                      },
-                      onLongPress: () async {},
-                      contentPadding: EdgeInsets.zero,
-                      title: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            flex: 12,
-                            child: SentMessageWidget(
-                              doc: '',
-                              message:
-                                  'This is a broadcast message. Please link your SocioMee account with MsgMee account so that we can be friends in both applications',
-                              msgStatus: messages[index].msgStatus,
-                              time: messages[index].time,
-                              type: messages[index].type,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ));
+                return BoradCastSendMessage();
               },
             ),
             Spacer(),

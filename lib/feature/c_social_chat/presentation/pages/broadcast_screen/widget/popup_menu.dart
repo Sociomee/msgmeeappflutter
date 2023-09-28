@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../widgets/social_bottom_model_sheet.dart';
@@ -22,35 +23,30 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
       icon: Icon(Icons.more_vert, color: Colors.black),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      constraints: BoxConstraints(
+        minWidth: 0.5.sw,
+        maxWidth: 0.5.sw,
+      ),
+      padding: EdgeInsets.all(0),
       itemBuilder: (context) {
         return options
             .map(
               (e) => PopupMenuItem(
                   value: e.id,
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 125,
-                          child: Text(
-                            e.option,
-                            style: TextStyle(
-                              color: Color(0xFF4E4E4E),
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                      ],
+                  child: Text(
+                    e.option,
+                    style: TextStyle(
+                      color: Color(0xFF4E4E4E),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
                     ),
                   )),
             )
             .toList();
       },
-      offset: Offset(-30, 30),
+      offset: Offset(-30, 44),
       color: Colors.white,
       elevation: 2,
       onSelected: (value) {

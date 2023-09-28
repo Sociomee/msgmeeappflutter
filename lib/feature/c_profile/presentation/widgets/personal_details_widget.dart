@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/choose_gender_bottomsheet.dart';
 
 import '../cubit/interest/interest_cubit.dart';
@@ -30,9 +29,6 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<GetUserdetailsCubit>().state;
-
-    var interest = context.watch<InterestCubit>().state;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -105,7 +101,6 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
           ),
         ),
         SizedBox(height: 8),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
@@ -163,7 +158,6 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
           ),
         ),
         SizedBox(height: 8),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
@@ -221,7 +215,6 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
           ),
         ),
         SizedBox(height: 8),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
@@ -279,156 +272,141 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
           ),
         ),
         SizedBox(height: 8),
-
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 0.0,
-                  mainAxisSpacing: 8.0,
-                  mainAxisExtent: 40),
-              padding: EdgeInsets.all(0),
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: interest.intersts.length,
-              itemBuilder: (context, index) {
-                double textWidth = interest.intersts[index].name!.length * 17;
-                return GestureDetector(
-                  onTap: () {},
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 36,
-                        width: textWidth,
-                        child: Center(
-                          child: Container(
-                              margin: EdgeInsets.only(left: 10),
-                              height: 36,
-                              width: textWidth,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Text(
-                                interest.intersts[index].name!,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-
         // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   padding: const EdgeInsets.symmetric(horizontal: 30),
         //   child: Container(
         //     padding: EdgeInsets.all(10),
         //     decoration: BoxDecoration(
         //         color: AppColors.grey.withOpacity(.1),
         //         borderRadius: BorderRadius.circular(10)),
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         Row(
-        //           children: [
-        //             Container(
-        //               padding:
-        //                   EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //               decoration: BoxDecoration(
-        //                   borderRadius: BorderRadius.circular(5),
-        //                   color: AppColors.primaryColor),
-        //               child: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.start,
-        //                 children: [
-        //                   if (context
-        //                           .watch<UpdateProfileCubit>()
-        //                           .state
-        //                           .reponse
-        //                           .data !=
-        //                       null)
-        //                     Text(
-        //                         context
-        //                             .watch<UpdateProfileCubit>()
-        //                             .state
-        //                             .reponse
-        //                             .data!
-        //                             .interests[0].,
+        //     child: GridView.builder(
+        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //           crossAxisCount: 3,
+        //           crossAxisSpacing: 0.0,
+        //           mainAxisSpacing: 8.0,
+        //           mainAxisExtent: 40),
+        //       padding: EdgeInsets.all(0),
+        //       physics: NeverScrollableScrollPhysics(),
+        //       shrinkWrap: true,
+        //       itemCount: interest.intersts.length,
+        //       itemBuilder: (context, index) {
+        //         double textWidth = interest.intersts[index].name!.length * 17;
+        //         return GestureDetector(
+        //           onTap: () {},
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               SizedBox(
+        //                 height: 36,
+        //                 width: textWidth,
+        //                 child: Center(
+        //                   child: Container(
+        //                       margin: EdgeInsets.only(left: 10),
+        //                       height: 36,
+        //                       width: textWidth,
+        //                       alignment: Alignment.center,
+        //                       decoration: BoxDecoration(
+        //                           color: AppColors.primaryColor,
+        //                           borderRadius: BorderRadius.circular(10)),
+        //                       child: Text(
+        //                         interest.intersts[index].name!,
+        //                         overflow: TextOverflow.ellipsis,
         //                         style: TextStyle(
         //                           color: AppColors.white,
-        //                           fontSize: 15.sp,
-        //                           fontFamily: 'DM Sans',
-        //                           fontWeight: FontWeight.w700,
-        //                         )),
-        //                   Icon(Icons.close, color: AppColors.white)
-        //                 ],
-        //               ),
-        //             ),
-        //             SizedBox(width: 10),
-        //             Container(
-        //               padding:
-        //                   EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //               decoration: BoxDecoration(
-        //                   borderRadius: BorderRadius.circular(5),
-        //                   color: AppColors.primaryColor),
-        //               child: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.start,
-        //                 children: [
-        //                   Text('Photography',
-        //                       style: TextStyle(
-        //                         color: AppColors.white,
-        //                         fontSize: 15.sp,
-        //                         fontFamily: 'DM Sans',
-        //                         fontWeight: FontWeight.w700,
+        //                           fontSize: 16,
+        //                           fontFamily: 'Roboto',
+        //                           fontWeight: FontWeight.w400,
+        //                         ),
         //                       )),
-        //                   Icon(Icons.close, color: AppColors.white)
-        //                 ],
+        //                 ),
         //               ),
-        //             )
-        //           ],
-        //         ),
-        //         SizedBox(height: 10),
-        //         Container(
-        //           width: 102,
-        //           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //           decoration: BoxDecoration(
-        //               borderRadius: BorderRadius.circular(5),
-        //               color: AppColors.primaryColor),
-        //           child: Row(
-        //             mainAxisAlignment: MainAxisAlignment.start,
-        //             children: [
-        //               Text('Playing',
-        //                   style: TextStyle(
-        //                     color: AppColors.white,
-        //                     fontSize: 15.sp,
-        //                     fontFamily: 'DM Sans',
-        //                     fontWeight: FontWeight.w700,
-        //                   )),
-        //               Icon(Icons.close, color: AppColors.white)
         //             ],
         //           ),
-        //         )
-        //       ],
+        //         );
+        //       },
         //     ),
         //   ),
         // ),
-
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: AppColors.grey.withOpacity(.1),
+                borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppColors.primaryColor),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text("context",
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15.sp,
+                                fontFamily: 'DM Sans',
+                                fontWeight: FontWeight.w700,
+                              )),
+                          Icon(Icons.close, color: AppColors.white)
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppColors.primaryColor),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Photography',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15.sp,
+                                fontFamily: 'DM Sans',
+                                fontWeight: FontWeight.w700,
+                              )),
+                          Icon(Icons.close, color: AppColors.white)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: 102,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.primaryColor),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('Playing',
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 15.sp,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w700,
+                          )),
+                      Icon(Icons.close, color: AppColors.white)
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Divider(

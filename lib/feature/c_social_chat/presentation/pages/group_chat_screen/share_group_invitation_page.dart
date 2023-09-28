@@ -35,6 +35,7 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
             ),
           ),
         ),
+        elevation: 1,
         title: Text(
           isSelected.isNotEmpty
               ? '${isSelected.length} Selected'
@@ -56,7 +57,9 @@ class _ShareGroupInvitationPageState extends State<ShareGroupInvitationPage> {
               child: Text(
                 'Send',
                 style: TextStyle(
-                  color: AppColors.primaryColor,
+                  color: isSelected.isNotEmpty
+                      ? AppColors.primaryColor
+                      : AppColors.grey,
                   fontSize: 16,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w600,

@@ -187,7 +187,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     crossAxisCount: 2,
-                    mainAxisSpacing: 5,
+                    mainAxisSpacing: 10.w,
                     crossAxisSpacing: 10,
                     childAspectRatio: 175 / 368,
                     children: List.generate(imageFileList!.length, (index) {

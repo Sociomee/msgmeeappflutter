@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../../data/model/participants_model.dart';
 import '../../../../../theme/colors.dart';
@@ -189,10 +190,11 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w400,
                           ),
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: AppColors.grey,
-                            size: 20,
+                          suffixIcon: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: Center(
+                                child: SvgPicture.asset('assets/Search.svg')),
                           )),
                     ),
                   ),
