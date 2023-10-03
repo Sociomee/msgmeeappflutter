@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:msgmee/data/repositories.dart';
 import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
+import 'package:msgmee/helper/local_data.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../theme/colors.dart';
 
@@ -75,20 +77,27 @@ class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
           child: Column(children: [
             Spacer(),
             Center(
-              child: SizedBox(
-                height: 300,
-                width: 300,
-                child: QRView(
-                  key: qrKey,
-                  overlay: QrScannerOverlayShape(
-                      borderColor: AppColors.primaryColor,
-                      borderRadius: 10,
-                      borderLength: 30,
-                      borderWidth: 10,
-                      cutOutBottomOffset: 0),
-                  onQRViewCreated: _onQRViewCreated,
-                  overlayMargin: const EdgeInsets.all(0),
-                ),
+              child: Stack(
+                children: [
+                  Center(
+                    child: SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: QRView(
+                        key: qrKey,
+                        overlay: QrScannerOverlayShape(
+                            borderColor: AppColors.primaryColor,
+                            borderRadius: 10,
+                            borderLength: 30,
+                            borderWidth: 10,
+                            cutOutBottomOffset: 0),
+                        onQRViewCreated: _onQRViewCreated,
+                        overlayMargin: const EdgeInsets.all(0),
+                      ),
+                    ),
+                  ),
+                  if (scaning) QRScannerLoader()
+                ],
               ),
             ),
             Spacer(),
@@ -116,9 +125,13 @@ class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
       });
       if (scaning) {
         scaning = false;
-        MsgmeeSocket().sendLoginEvent(result!.code!);
+        log('Qrdata--->${scanData.code}');
+        Map<String, dynamic> data = jsonDecode(result!.code!);
+        String deviceId = data['deviceId'];
+        Localdata().storedata('deviceId', deviceId);
         controller.pauseCamera();
         if (scanData.toString().isNotEmpty) {
+          MsgmeeSocket().sendLoginEvent();
           Navigator.pop(context);
         }
       }
@@ -130,5 +143,61 @@ class _ConncetWenPanelScreenState extends State<ConncetWenPanelScreen> {
     controller?.dispose();
 
     super.dispose();
+  }
+}
+
+class QRScannerLoader extends StatefulWidget {
+  @override
+  _QRScannerLoaderState createState() => _QRScannerLoaderState();
+}
+
+class _QRScannerLoaderState extends State<QRScannerLoader>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1500), // Adjust the duration as needed
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Container(
+            width: 300.0,
+            height: 2.0,
+            margin: EdgeInsets.symmetric(horizontal: 8.0),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primaryColor,
+                  blurRadius: 10.0,
+                  spreadRadius: 2.0,
+                ),
+              ],
+            ),
+            transform: Matrix4.translationValues(
+              0,
+              _controller.value * 300.0,
+              0,
+            ),
+          );
+        },
+      ),
+    );
   }
 }

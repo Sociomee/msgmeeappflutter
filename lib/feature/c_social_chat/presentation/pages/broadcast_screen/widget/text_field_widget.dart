@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../../../theme/colors.dart';
 
 // ignore: must_be_immutable
@@ -10,7 +11,9 @@ class BroadcastTextFieldWidget extends StatelessWidget {
     required this.controller,
     required this.onChanged,
     required this.remainChar,
+    this.formatters,
     this.showchar = true,
+    this.maxlines,
   });
   final String title;
   final String hintText;
@@ -18,6 +21,8 @@ class BroadcastTextFieldWidget extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final String remainChar;
   bool? showchar;
+  final int? maxlines;
+  final List<TextInputFormatter>? formatters;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,29 +34,28 @@ class BroadcastTextFieldWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 43,
-          child: TextFormField(
-            onChanged: onChanged,
-            controller: controller,
-            cursorColor: AppColors.primaryColor,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 1, color: AppColors.borderColor)),
-              border: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 2, color: AppColors.borderColor)),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 2, color: AppColors.primaryColor)),
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Color(0xFF999999),
-                fontSize: 13,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-              ),
+        TextFormField(
+          onChanged: onChanged,
+          controller: controller,
+          cursorColor: AppColors.primaryColor,
+          inputFormatters: formatters,
+          minLines: 1,
+          maxLines: maxlines,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: AppColors.borderColor)),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(width: 2, color: AppColors.borderColor)),
+            focusedBorder: const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 2, color: AppColors.primaryColor)),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Color(0xFF999999),
+              fontSize: 13,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),

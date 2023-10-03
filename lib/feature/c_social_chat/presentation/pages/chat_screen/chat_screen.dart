@@ -23,7 +23,6 @@ import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile
 import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/model/chat_model.dart';
-import '../../../../../data/repository/socket/msgmee_socket.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
@@ -227,28 +226,32 @@ class _ChatScreenState extends State<ChatScreen> {
                                         child: Icon(Icons.arrow_back_ios,
                                             color: AppColors.black, size: 20))),
                                 SizedBox(
-                                    height: 40,
-                                    width: 155.w,
-                                    child: TextFormField(
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 0),
-                                            hintText: 'Search',
-                                            enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color: Color(0XFF255D3A))),
-                                            border: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color: Color(0XFF255D3A))),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color:
-                                                        Color(0XFF255D3A))))))
+                                  height: 40,
+                                  width: 155.w,
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 0),
+                                      hintText: 'Search',
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: Color(0XFF255D3A),
+                                        ),
+                                      ),
+                                      border: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 2,
+                                              color: Color(0XFF255D3A))),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: Color(0XFF255D3A),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                             Padding(
@@ -725,8 +728,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     ? 175
                                                     : 0,
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 8),
+                                                  horizontal: 10,
+                                                  vertical: 8,
+                                                ),
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -772,7 +776,11 @@ class _ChatScreenState extends State<ChatScreen> {
                           Divider(height: 0, color: AppColors.grey),
                           Container(
                             padding: EdgeInsets.only(
-                                left: 10, bottom: 10, top: 10, right: 10),
+                              left: 10,
+                              bottom: 10,
+                              top: 10,
+                              right: 10,
+                            ),
                             width: double.infinity,
                             color: Colors.white,
                             child: Row(
@@ -909,9 +917,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                               type: MessageType
                                                                   .text,
                                                             ));
-                                                //* sending message to socket
-                                                MsgmeeSocket().sendLoginEvent(
-                                                    messageController.text);
+
                                                 messageController.clear();
                                                 _scrollToBottom();
                                                 context

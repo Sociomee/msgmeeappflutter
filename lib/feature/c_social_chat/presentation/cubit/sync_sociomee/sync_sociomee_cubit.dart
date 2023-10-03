@@ -23,10 +23,10 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
       while (apiresponse) {
         var data = await SyncSocimeeService().syncSocimee(index);
         index++;
+        apiresponse = data.next!;
         if (data.next == true) {
-          await SyncSocimeeService().syncSocimee(1);
+          await SyncSocimeeService().syncSocimee(index);
         }
-
         emit(state.copyWith(
           status: SyncSociomeeStatus.loaded,
           response: data,

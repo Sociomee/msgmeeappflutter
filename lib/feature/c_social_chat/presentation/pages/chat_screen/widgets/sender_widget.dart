@@ -1151,6 +1151,7 @@ class SentMessageWidget extends StatelessWidget {
                       animatedScreenNavigator(context, LocationPreviewPage());
                     },
                     child: Container(
+                        width: 246,
                         padding: const EdgeInsets.only(
                             top: 5, left: 5, right: 5, bottom: 5),
                         decoration: BoxDecoration(

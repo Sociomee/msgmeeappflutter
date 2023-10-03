@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/archived_list_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialog.dart';
 import 'package:msgmee/helper/string_ext.dart';
@@ -9,7 +10,6 @@ import '../../../e_settings/pages/connect_webpanel/linked_devices_screen.dart';
 import '../cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import '../pages/broadcast_screen/add_participant_screen.dart';
 import '../pages/new_message_screen.dart';
-import '../../../../theme/colors.dart';
 import '../../../e_settings/pages/settings/settings_screen.dart';
 import '../pages/create_group_page.dart';
 import '../widgets/social_bottom_model_sheet.dart';
@@ -42,7 +42,14 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
     ChatOptionsModel(id: 7, option: 'Settings'),
   ];
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var synctime =
+        context.read<SyncSociomeeCubit>().state.syncResponse.isMigratedOn;
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
@@ -51,6 +58,12 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
       child: Container(
         child: PopupMenuButton<int>(
           icon: Icon(Icons.more_vert, color: Colors.black),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          constraints: BoxConstraints(
+            minWidth: 0.5.sw,
+            maxWidth: 0.5.sw,
+          ),
+          padding: EdgeInsets.all(0),
           itemBuilder: (context) {
             return
                 // context.watch<SyncSociomeeCubit>().state.isSocimeeAcSynced
@@ -62,6 +75,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                           height: 35,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 e.option,
@@ -83,7 +97,7 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                                     .isMigratedOn ==
                                                 null
                                             ? 'No syncing processed yet'
-                                            : "Last migrated on ${context.read<SyncSociomeeCubit>().state.syncResponse.isMigratedOn!.createdAt.toString().toDateTime()}",
+                                            : "Last migrated on ${synctime!.createdAt.toString().toDateTime()}",
                                         overflow: TextOverflow.clip,
                                         style: TextStyle(
                                           color: Color(0xB24E4E4E),
@@ -95,14 +109,15 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
                                       ),
                                     )
                                   : Container(),
-                              SizedBox(height: 10),
+                              SizedBox(height: 12),
                               e.id == 8
                                   ? Container()
                                   : Divider(
-                                      height: 1,
+                                      height: 0,
                                       thickness: 1,
-                                      color: AppColors.lightgrey,
-                                    )
+                                      color: Color.fromARGB(255, 230, 230, 230),
+                                    ),
+                              e.id == 8 ? Container() : SizedBox(height: 10),
                             ],
                           )),
                     )

@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -26,17 +24,33 @@ class MsgmeeSocket {
     socket.on('time', (data) {
       log('time--->$data');
     });
+    socket.on('msgmee-qr-login', (data) {
+      log('msgmee-qr-login ---->$data');
+    });
     socket.onDisconnect((data) {
       log('on disconnect---->>$data');
       socket.connect();
     });
   }
 
-  void sendLoginEvent(String result) async {
-    Map<String, dynamic> data = jsonDecode(result);
-    String deviceId = data['deviceId'];
+  void sendLoginEvent() async {
     var authtoken = await Localdata().readData('token');
-    socket.emit('msgmee-qr-login', {'deviceId': deviceId, 'token': authtoken});
+    var deviceId = await Localdata().readData('deviceId');
+    Map<String, dynamic> deviceData = {
+      "deviceId": deviceId,
+      "token": authtoken
+    };
+    try {
+      socket.emit(
+        'msgmee-qr-login',
+        [deviceData],
+      );
+      socket.on('msgmee-qr-login', (data) {
+        log('msgmee-qr-login ---->$data');
+      });
+    } catch (e) {
+      log('emit error--->$e');
+    }
     log('deviceId $deviceId  \n token  $authtoken');
   }
 

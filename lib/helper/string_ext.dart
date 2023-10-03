@@ -25,4 +25,17 @@ extension StringExtension on String {
     print("Date: $date");
     return time;
   }
+
+  String removeNonNumeric() {
+    return this.replaceAll(RegExp(r'[^\d]+'), '');
+  }
+
+  String toStandardFormat() {
+    String cleanedNumber = this.replaceAll(RegExp(r'[^\d]+'), '');
+    cleanedNumber = cleanedNumber.replaceFirst(RegExp(r'^0+'), '');
+    if (cleanedNumber.startsWith('91')) {
+      cleanedNumber = cleanedNumber.substring(2);
+    }
+    return cleanedNumber;
+  }
 }

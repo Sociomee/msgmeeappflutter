@@ -17,10 +17,13 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   late PageController pagecontroller;
   bool isLastPage = false;
-
+  List<String> images = [];
   @override
   void initState() {
     pagecontroller = PageController();
+    for (var e in data) {
+      images.add(e.imageUrl);
+    }
     super.initState();
   }
 
@@ -28,6 +31,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void dispose() {
     pagecontroller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  Future<void> preloadImages() async {
+    for (final imageUrl in images) {
+      await precacheImage(NetworkImage(imageUrl), context);
+    }
+    setState(() {
+      // Images are preloaded and ready to use
+    });
   }
 
   @override
@@ -39,9 +56,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/onboarding/onboarding_bg.png'))),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/onboarding/onboarding_bg.png'),
+            ),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -60,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         return BuildPages(
                             title: data[index].title,
                             index: data[index].index,
-                            imageUrl: data[index].imageUrl,
+                            imageUrl: images[index],
                             descriptionText: data[index].descriptionText);
                       })),
               Center(

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../common_widgets/shimmer_effect.dart';
-import '../../../../helper/get_contacts.dart';
 import '../../../../theme/colors.dart';
+import '../cubit/get_contact/get_contact_cubit.dart';
 
 class InviteFriendsList extends StatelessWidget {
-  const InviteFriendsList({super.key});
-
+  const InviteFriendsList({super.key, required this.contacts});
+  final List<PhoneBookUserModel> contacts;
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<ContactCubit>().state;
-    print('contacts--->${cubit.contacts.length}');
 
     return Column(
       children: [
@@ -21,7 +21,7 @@ class InviteFriendsList extends StatelessWidget {
             ? CustomShimmerEffect()
             : ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: cubit.contacts.length,
+                itemCount: contacts.toSet().toList().length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -40,7 +40,7 @@ class InviteFriendsList extends StatelessWidget {
                                   : AppColors.blue,
                               borderRadius: BorderRadius.circular(100)),
                           child: Text(
-                            cubit.contacts[index].displayName[0],
+                            contacts[index].name[0],
                             style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
@@ -50,10 +50,20 @@ class InviteFriendsList extends StatelessWidget {
                         SizedBox(width: 12),
                         SizedBox(
                           width: 200,
-                          child: Text(
-                            cubit.contacts[index].displayName,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(fontSize: 14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${contacts[index].name}",
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                "${contacts[index].phone}",
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(fontSize: 10),
+                              ),
+                            ],
                           ),
                         ),
                         Spacer(),
@@ -80,7 +90,6 @@ class InviteFriendsList extends StatelessWidget {
                     ),
                   );
                 })
-        // : Text("No Contacts Found")
       ],
     );
   }

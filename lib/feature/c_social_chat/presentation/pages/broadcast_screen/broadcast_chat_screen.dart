@@ -101,9 +101,17 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 width: 69,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: AppColors.seconderyColor1,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text('Today'),
+                    color: Color(0xFFF3FFE9),
+                    borderRadius: BorderRadius.circular(6)),
+                child: Text(
+                  'Today',
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
             Container(

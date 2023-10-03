@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../../data/model/participants_model.dart';
@@ -112,6 +113,10 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     title: 'Name*',
                     hintText: 'Broadcast Name',
                     controller: nameController,
+                    formatters: [
+                      LengthLimitingTextInputFormatter(25),
+                    ],
+                    maxlines: 1,
                     onChanged: (e) {
                       setState(() {
                         remainchar = 25 - nameController.text.length;
@@ -123,6 +128,10 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                     title: 'Summary',
                     hintText: 'Brief description',
                     controller: summaryController,
+                    formatters: [
+                      LengthLimitingTextInputFormatter(180),
+                    ],
+                    maxlines: 5,
                     onChanged: (e) {
                       setState(() {
                         remainchar1 = 180 - summaryController.text.length;

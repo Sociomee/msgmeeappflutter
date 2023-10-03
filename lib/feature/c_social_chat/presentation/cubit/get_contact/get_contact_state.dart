@@ -1,29 +1,45 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
 part of 'get_contact_cubit.dart';
 
-enum GetContactStatus { initial, loading, loaded, error }
+class PhoneBookUserModel {
+  final String name;
+  final String phone;
 
-class GetContactState extends Equatable {
-  final GetContactStatus status;
+  PhoneBookUserModel({required this.name, required this.phone});
+}
+
+class ContactState {
   final List<Contact> contacts;
-  GetContactState({
-    required this.status,
-    required this.contacts,
-  });
-  factory GetContactState.initial() {
-    return GetContactState(status: GetContactStatus.initial, contacts: []);
-  }
-  @override
-  List<Object> get props => [status, contacts];
+  final bool isLoading;
+  final PermissionStatus permissionStatus;
+  final List<PhoneBookUserModel> phonebookUser;
 
-  GetContactState copyWith({
-    GetContactStatus? status,
+  ContactState({
+    required this.contacts,
+    required this.isLoading,
+    required this.permissionStatus,
+    required this.phonebookUser,
+  });
+
+  factory ContactState.initial() {
+    return ContactState(
+        contacts: [],
+        isLoading: false,
+        permissionStatus: PermissionStatus.denied,
+        phonebookUser: []);
+  }
+
+  ContactState copyWith({
     List<Contact>? contacts,
+    bool? isLoading,
+    PermissionStatus? permissionStatus,
+    List<PhoneBookUserModel>? phonebookUser,
   }) {
-    return GetContactState(
-      status: status ?? this.status,
+    return ContactState(
       contacts: contacts ?? this.contacts,
+      isLoading: isLoading ?? this.isLoading,
+      permissionStatus: permissionStatus ?? this.permissionStatus,
+      phonebookUser: phonebookUser ?? this.phonebookUser,
     );
   }
 }

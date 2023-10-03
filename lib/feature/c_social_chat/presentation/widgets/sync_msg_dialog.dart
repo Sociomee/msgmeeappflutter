@@ -57,6 +57,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
       listener: (context, state) {
         if (state.status == SyncSociomeeStatus.loaded &&
             state.isSocimeeAcSynced) {
+          context.read<SyncSociomeeCubit>().checkSocimeeCubit();
           Navigator.pop(context);
         }
       },
@@ -88,18 +89,18 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                           style: TextStyle(fontSize: 13),
                         ),
                       ),
-                      CustomButtonWidget(
-                          height: 40.w,
-                          title: 'Sync with account credentials',
-                          color: AppColors.primaryColor,
-                          ontap: () {
-                            context
-                                .read<SyncSociomeeCubit>()
-                                .checkSocimeeCubit();
-                            setState(() {
-                              useotherac = !useotherac;
-                            });
-                          }),
+                      // CustomButtonWidget(
+                      //     height: 40.w,
+                      //     title: 'Sync with account credentials',
+                      //     color: AppColors.primaryColor,
+                      //     ontap: () {
+                      //       context
+                      //           .read<SyncSociomeeCubit>()
+                      //           .checkSocimeeCubit();
+                      //       setState(() {
+                      //         useotherac = !useotherac;
+                      //       });
+                      //     }),
                       SizedBox(height: 10),
                     ],
                   ),
@@ -210,20 +211,20 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 }),
                       ),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomButtonWidget(
-                            height: 40.w,
-                            title: 'Other Account',
-                            color: AppColors.white,
-                            textColor: AppColors.primaryColor,
-                            ontap: () {
-                              setState(() {
-                                useotherac = true;
-                              });
-                            }),
-                      ),
-                      SizedBox(height: 10),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                      //   child: CustomButtonWidget(
+                      //       height: 40.w,
+                      //       title: 'Other Account',
+                      //       color: AppColors.white,
+                      //       textColor: AppColors.primaryColor,
+                      //       ontap: () {
+                      //         setState(() {
+                      //           useotherac = true;
+                      //         });
+                      //       }),
+                      // ),
+                      // SizedBox(height: 10),
                     ],
                   ),
                 ),

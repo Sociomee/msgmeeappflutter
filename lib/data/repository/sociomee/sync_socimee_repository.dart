@@ -46,10 +46,11 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
       ),
       data: {
         "token": socimeeToken,
-        "pageIndex": 0,
+        "pageIndex": pageIndex,
         "pageSize": 10,
       },
     );
+    log('sync socimeate--->${response.data}');
     if (response.statusCode == 200) {
       var res = SyncModel.fromJson(response.data);
       return res;

@@ -1,6 +1,6 @@
 part of 'msgmee_user_list_cubit.dart';
 
-enum ChatHeadStatus {
+enum MsgmeeUserListStatus {
   initial,
   loading,
   loaded,
@@ -9,7 +9,7 @@ enum ChatHeadStatus {
 
 class MsgmeeUserListState extends Equatable {
   final MsgmeeUserList msgmeeUserList;
-  final ChatHeadStatus status;
+  final MsgmeeUserListStatus status;
   final CustomError error;
   MsgmeeUserListState({
     required this.msgmeeUserList,
@@ -19,12 +19,12 @@ class MsgmeeUserListState extends Equatable {
   factory MsgmeeUserListState.initial() {
     return MsgmeeUserListState(
         msgmeeUserList: MsgmeeUserList(),
-        status: ChatHeadStatus.initial,
+        status: MsgmeeUserListStatus.initial,
         error: CustomError());
   }
   MsgmeeUserListState copyWith({
     MsgmeeUserList? msgmeeUserList,
-    ChatHeadStatus? status,
+    MsgmeeUserListStatus? status,
     CustomError? error,
   }) {
     return MsgmeeUserListState(

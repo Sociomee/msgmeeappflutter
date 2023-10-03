@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
-import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 
+import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import 'connect_webpanel_screen.dart';
 
@@ -62,7 +61,7 @@ class LinkedDevicesScreen extends StatelessWidget {
                       title: 'Scan A QR Code',
                       color: AppColors.primaryColor,
                       ontap: () {
-                        MsgmeeSocket().connectSocket();
+                        // MsgmeeSocket().sendLoginEvent();
                         screenNavigator(context, ConncetWenPanelScreen());
                       }),
                   SizedBox(height: 20),

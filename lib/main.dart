@@ -22,7 +22,6 @@ import 'feature/c_social_chat/presentation/cubit/chat_theme/chat_theme_cubit.dar
 import 'feature/c_social_chat/presentation/cubit/choose_image_wallpaper_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/choose_solid_color_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/get_contact/get_contact_cubit.dart';
-import 'feature/c_social_chat/presentation/cubit/msgmee_contact/msgmee_contact_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/search_mode/search_mode_cubit.dart';
@@ -35,7 +34,6 @@ import 'feature/c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cub
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
-import 'helper/get_contacts.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -81,9 +79,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => SelectionCubit()),
             BlocProvider(create: (context) => ShowEmojiCubit()),
             BlocProvider(create: (context) => ChooseLanguageCubit()),
-            BlocProvider(create: (context) => MsgmeeContactCubit()),
             BlocProvider(create: (context) => MsgmeeUserListCubit()),
-            BlocProvider(create: (context) => GetContactCubit()),
+            BlocProvider(create: (context) => ContactCubit()),
             BlocProvider(create: (context) => SyncSociomeeCubit()),
             BlocProvider(create: (context) => UpdateUserCubit()),
             BlocProvider(create: (context) => GetUserdetailsCubit()),

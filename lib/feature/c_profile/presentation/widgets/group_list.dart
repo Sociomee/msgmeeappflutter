@@ -85,7 +85,7 @@ class _GroupListState extends State<GroupList> {
                   )
                 ];
               },
-              offset: Offset(0, 100),
+              offset: Offset(-30, 30),
               color: Colors.white,
               elevation: 2,
               onSelected: (value) {

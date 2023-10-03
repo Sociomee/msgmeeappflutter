@@ -68,7 +68,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                 child: Text(
                   'RECENT',
                   style: TextStyle(
-                    color: Color(0xFF4E4E4E),
+                    color: AppColors.grey,
                     fontSize: 12,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
@@ -89,7 +89,8 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  color: AppColors.lightgrey, width: 1)),
+                                  color: Colors.black.withOpacity(0.2),
+                                  width: 1)),
                           child: Column(
                             children: [
                               //? DO Not Delete this code
@@ -118,8 +119,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                     decoration: BoxDecoration(
                                         color: AppColors.black.withOpacity(.2)),
                                     alignment: Alignment.center,
-                                    child: SvgPicture.asset('assets/link.svg',
-                                        height: 44),
+                                    child: index == 2
+                                        ? Image.network(
+                                            'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                                            height: 89,
+                                            width: 89,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : SvgPicture.asset('assets/link.svg',
+                                            height: 44),
                                   ),
                                   Expanded(
                                     child: Container(
@@ -169,8 +177,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                   children: [
                                     SizedBox(
                                       width: 300,
-                                      child: Text(urls[index],
-                                          overflow: TextOverflow.ellipsis),
+                                      child: Text(
+                                        index == 2
+                                            ? 'View Message'
+                                            : urls[index],
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: AppColors.grey,
+                                        ),
+                                      ),
                                     ),
                                     Icon(
                                       Icons.arrow_forward_ios,
@@ -191,7 +206,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                 child: Text(
                   'LAST WEEK',
                   style: TextStyle(
-                    color: Color(0xFF4E4E4E),
+                    color: AppColors.grey,
                     fontSize: 12,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
@@ -211,7 +226,9 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                             width: 391.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: AppColors.grey)),
+                                border: Border.all(
+                                  color: Colors.black.withOpacity(0.2),
+                                )),
                             child: Column(
                               children: [
                                 //? DO Not Delete this code
@@ -241,8 +258,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                           color:
                                               AppColors.black.withOpacity(.2)),
                                       alignment: Alignment.center,
-                                      child: SvgPicture.asset('assets/link.svg',
-                                          height: 44),
+                                      child: index == 2
+                                          ? Image.network(
+                                              'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                                              height: 89,
+                                              width: 89,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : SvgPicture.asset('assets/link.svg',
+                                              height: 44),
                                     ),
                                     Expanded(
                                       child: Container(
@@ -293,8 +317,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                     children: [
                                       SizedBox(
                                         width: 300,
-                                        child: Text(urls[index],
-                                            overflow: TextOverflow.ellipsis),
+                                        child: Text(
+                                          index == 2
+                                              ? 'View Message'
+                                              : urls[index],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: AppColors.grey,
+                                          ),
+                                        ),
                                       ),
                                       Icon(
                                         Icons.arrow_forward_ios,
@@ -314,7 +345,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                 child: Text(
                   'LAST MONTH',
                   style: TextStyle(
-                    color: Color(0xFF4E4E4E),
+                    color: AppColors.grey,
                     fontSize: 12,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
@@ -334,7 +365,9 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                             width: 391.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: AppColors.grey)),
+                                border: Border.all(
+                                  color: Colors.black.withOpacity(0.2),
+                                )),
                             child: Column(
                               children: [
                                 //? DO Not Delete this code
@@ -416,8 +449,13 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                     children: [
                                       SizedBox(
                                         width: 300,
-                                        child: Text(urls[index],
-                                            overflow: TextOverflow.ellipsis),
+                                        child: Text(
+                                          urls[index],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: AppColors.grey,
+                                          ),
+                                        ),
                                       ),
                                       Icon(
                                         Icons.arrow_forward_ios,

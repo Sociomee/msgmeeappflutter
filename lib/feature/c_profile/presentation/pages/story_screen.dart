@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../data/model/story_model.dart';
@@ -69,14 +70,14 @@ class _StoryScreenState extends State<StoryScreen>
                     final StoryModel story = stories[index];
                     switch (story.media) {
                       case MediaType.image:
-                        return Image.network(
-                          story.url,
+                        // return Image.network(
+                        //   story.url,
+                        //   fit: BoxFit.cover,
+                        // );
+                        return CachedNetworkImage(
+                          imageUrl: story.url,
                           fit: BoxFit.cover,
                         );
-                      // return CachedNetworkImage(
-                      //   imageUrl: story.url,
-                      //   fit: BoxFit.cover,
-                      // );
                       case MediaType.video:
                         if (videoController.value.isInitialized) {
                           return FittedBox(

@@ -306,24 +306,29 @@ class ProfileBottomModelSheet extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                              height: 60,
-                              width: 60,
-                              margin: EdgeInsets.symmetric(horizontal: 21),
-                              decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.lightgrey.withOpacity(.5),
-                                    blurRadius: 10,
-                                    offset: Offset(0, 0),
-                                    spreadRadius: 0,
-                                  )
-                                ],
+                            height: 60,
+                            width: 60,
+                            margin: EdgeInsets.symmetric(horizontal: 21),
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.lightgrey.withOpacity(.5),
+                                  blurRadius: 10,
+                                  offset: Offset(0, 0),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                            alignment: Alignment.center,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                'assets/icons/delete.svg',
+                                height: 30,
                               ),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset('assets/trash.svg',
-                                  height: 30, fit: BoxFit.contain)),
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           const Text(
                             'Remove Profile',
@@ -359,7 +364,12 @@ class ProfileBottomModelSheet extends StatelessWidget {
                           )
                         ],
                       ),
-                      child: const Icon(Icons.camera_alt, size: 30),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/icons/camera.svg',
+                          height: 30,
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,
@@ -398,7 +408,12 @@ class ProfileBottomModelSheet extends StatelessWidget {
                           )
                         ],
                       ),
-                      child: const Icon(Icons.image_outlined, size: 30),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/icons/photograph.svg',
+                          height: 30,
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,

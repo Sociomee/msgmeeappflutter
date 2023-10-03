@@ -77,7 +77,7 @@ class _BroadCastListState extends State<BroadCastList> {
                   ),
                 ];
               },
-              offset: Offset(0, 100),
+              offset: Offset(-30, 30),
               color: Colors.white,
               elevation: 2,
               onSelected: (value) {
