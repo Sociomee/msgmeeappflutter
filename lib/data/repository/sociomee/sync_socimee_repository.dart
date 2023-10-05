@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:msgmee/data/model/check_msgmee_model.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
 import 'package:msgmee/data/model/sync_model.dart';
 import 'package:msgmee/data/repositories.dart';
@@ -56,6 +57,64 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
       return res;
     } else {
       throw Exception();
+    }
+  }
+
+  @override
+  Future addContact(
+      {String? firstName,
+      String? lastName,
+      required String phone,
+      required String type,
+      String? msgmeeId,
+      String? fullName}) async {
+    var token = await localData.readData('token');
+
+    var data = {
+      "firstName": firstName ?? "",
+      "lastName": lastName ?? "",
+      "phone": phone,
+      "type": type,
+      "msgMeeId": msgmeeId ?? "",
+      "fullName": fullName ?? "",
+    };
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/add-contact',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+      data: data,
+    );
+    // log('addcontact response---->${response.data}');
+    if (response.statusCode == 200) {
+      log('add contact response----->${response.data}');
+    }
+  }
+
+  @override
+  Future<CheckMsgmeeModel> checkMsgmee(String phone) async {
+    var token = await localData.readData('token');
+    log('chcek msgmee token====>$phone');
+
+    var response = await apiService.dio.post('$mainbaseUrl/api/checkMsgmee',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+        data: {
+          "phone": phone,
+        });
+    // log('chcek msgmee response====>${response.data}');
+    if (response.statusCode == 200 && response.data['status'] == true) {
+      var data = CheckMsgmeeModel.fromJson(response.data);
+      return data;
+    } else if (response.data['status'] == false) {
+      return CheckMsgmeeModel();
+    } else {
+      throw Exception('getting error');
     }
   }
 }

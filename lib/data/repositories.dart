@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:msgmee/data/model/chat_head_model.dart';
+import 'package:msgmee/data/model/check_msgmee_model.dart';
 import 'package:msgmee/data/model/contact_model.dart';
 import 'package:msgmee/data/model/interest_model.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
@@ -43,6 +44,15 @@ abstract class AbChatHeadRepository {
 abstract class AbSyncSociomeeRepository {
   Future<SociomeeUserModel> checkSocimeeAccount();
   Future<SyncModel> syncSocimee(int pageIndex);
+  Future<CheckMsgmeeModel> checkMsgmee(String phone);
+  Future addContact({
+    String? firstName,
+    String? lastName,
+    required String phone,
+    required String type,
+    String? msgmeeId,
+    String? fullName,
+  });
 }
 
 abstract class AbDataSetsRepository {

@@ -67,8 +67,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (state.syncResponse.isMigratedOn == null &&
-                  useotherac == false)
+              if (state.syncResponse.data == null && useotherac == false)
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 42, horizontal: 20),
@@ -105,8 +104,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                     ],
                   ),
                 ),
-              if (state.syncResponse.isMigratedOn != null &&
-                  useotherac == false)
+              if (state.syncResponse.data != null && useotherac == false)
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 42),

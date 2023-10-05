@@ -36,6 +36,15 @@ extension StringExtension on String {
     if (cleanedNumber.startsWith('91')) {
       cleanedNumber = cleanedNumber.substring(2);
     }
+
     return cleanedNumber;
   }
+
+  // String to91Prefix() {
+  //   return '91${this}';
+  // }
+
+  // String normalizePhoneNumber() {
+  //   return this.replaceAll(RegExp(r'[^0-9]'), '');
+  // }
 }

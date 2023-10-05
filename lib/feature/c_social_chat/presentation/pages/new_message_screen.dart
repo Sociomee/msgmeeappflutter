@@ -8,6 +8,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list
 import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../helper/const.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
@@ -69,9 +70,8 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   double top = 17;
   @override
   void initState() {
-    context
-        .read<MsgmeeUserListCubit>()
-        .getMsgmeeUsersList(context.read<ContactCubit>().state.phonebookUser);
+    context.read<MsgmeeUserListCubit>().getMsgmeeUsersList(
+        context.read<ContactCubit>().state.phonebookUser.toList());
     searchController = TextEditingController();
     super.initState();
   }
@@ -329,15 +329,27 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              ChatProfileWidget(
-                                                imageUrl: filterdList[index]
-                                                    .otherProfileImage
-                                                    .toString()
-                                                    .toProfileUrl(),
-                                                isOnline: false,
-                                                hasStory: false,
-                                                radius: 20,
-                                              ),
+                                              filterdList[index]
+                                                          .linkedTo!
+                                                          .toLowerCase() ==
+                                                      'sociomee'
+                                                  ? ChatProfileWidget(
+                                                      imageUrl:
+                                                          defaultProfileImage,
+                                                      isOnline: false,
+                                                      hasStory: false,
+                                                      radius: 20,
+                                                    )
+                                                  : ChatProfileWidget(
+                                                      imageUrl:
+                                                          filterdList[index]
+                                                              .otherProfileImage
+                                                              .toString()
+                                                              .toProfileUrl(),
+                                                      isOnline: false,
+                                                      hasStory: false,
+                                                      radius: 20,
+                                                    ),
                                               SizedBox(width: 12),
                                               Column(
                                                 crossAxisAlignment:
@@ -355,9 +367,25 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                 ],
                                               ),
                                               Spacer(),
-                                              Text(filterdList[index].linkedTo!,
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp)),
+                                              if (filterdList[index]
+                                                      .linkedTo!
+                                                      .toLowerCase() ==
+                                                  'msgmee')
+                                                SvgPicture.asset(
+                                                  'assets/msgmee.svg',
+                                                ),
+                                              if (filterdList[index]
+                                                      .linkedTo!
+                                                      .toLowerCase() ==
+                                                  'sociomee')
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: SvgPicture.asset(
+                                                    'assets/sociomee.svg',
+                                                  ),
+                                                ),
                                             ],
                                           ),
                                         ),
@@ -408,6 +436,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.bold)),
+
                             SizedBox(height: 24),
                             InviteFriendsList(
                               contacts: filterdContactList,

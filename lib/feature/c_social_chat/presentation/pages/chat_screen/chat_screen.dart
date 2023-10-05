@@ -989,15 +989,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                               }
                                             },
                                             child: Container(
-                                                height: 30,
-                                                width: 30,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.lightgrey1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30)),
-                                                child: Image.asset(
-                                                    'assets/attach.png')),
+                                              height: 30,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.lightgrey1,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              child: Image.asset(
+                                                'assets/attach.png',
+                                              ),
+                                            ),
                                           )
                                         : GestureDetector(
                                             onTap: () {

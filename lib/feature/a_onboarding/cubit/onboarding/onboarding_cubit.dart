@@ -32,4 +32,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       ),
     ]));
   }
+
+  getCurrentIndex(int index) {
+    emit(state.copyWith(currentIndex: index + 1));
+  }
 }

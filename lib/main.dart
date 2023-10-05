@@ -7,6 +7,7 @@ import 'package:msgmee/feature/b_auth/presentation/cubit/update_user/update_user
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'common_cubits/reduce_number_cubit.dart';
+import 'feature/a_onboarding/cubit/onboarding/onboarding_cubit.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(create: (context) => OnboardingCubit()),
             BlocProvider(create: (context) => NumberValidationCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
             BlocProvider(create: (context) => ShowContactTextField()),

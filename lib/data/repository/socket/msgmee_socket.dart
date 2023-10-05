@@ -58,18 +58,18 @@ class MsgmeeSocket {
     log(url);
     final completer = Completer<bool>();
     final socket = IO.io(url, <String, dynamic>{
-      'autoConnect': false, // Disable auto-connect for testing
-      'connectTimeout': 5000, // Set a timeout (in milliseconds)
+      'autoConnect': false,
+      'connectTimeout': 5000,
     });
 
     socket.onConnect((_) {
       socket.disconnect();
-      completer.complete(true); // URL is reachable
+      completer.complete(true);
     });
 
     socket.onError((error) {
       socket.disconnect();
-      completer.complete(false); // URL is not reachable
+      completer.complete(false);
     });
 
     socket.connect();
