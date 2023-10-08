@@ -1,14 +1,16 @@
-import 'dart:collection';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/repository/user/user_repository.dart';
+import 'package:msgmee/data/sqlite_data_source/all_connections_repository.dart';
+import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import '../../../../../common_cubits/custom_error.dart';
+import '../../../../../data/model/phonebook_model.dart';
 import '../../../../../data/repository/sociomee/sync_socimee_repository.dart';
-import '../get_contact/get_contact_cubit.dart';
 part 'msgmee_user_list_state.dart';
 
 class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
@@ -20,76 +22,113 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
     try {
       emit(state.copyWith(status: MsgmeeUserListStatus.loading));
       var res = await UserSerivce().getFriendList(100, '');
-
-      // Create a HashSet to store phone numbers from phonebookuser for faster lookup
-      final phoneBookUserSet = HashSet<String>();
-
-      // Populate the HashSet with phone numbers from phonebookuser
-      for (PhoneBookUserModel phoneBookUser in phonebookuser) {
-        String normalizedPhone = phoneBookUser.phone.toStandardFormat();
-        phoneBookUserSet.add(normalizedPhone);
-      }
-
-      List<User> msgmeeUserList = [];
-      msgmeeUserList.addAll(res.users!);
-      // Variables to track data size and filtered data size
-      int totalDataSize = msgmeeUserList.length;
-      int filteredDataSize = 0;
+      List<User> msgmeeUserList = res.users!;
+      List<User> newUserList = [];
       for (User msgmeeUser in msgmeeUserList) {
-        String msgmeeUserPhone = msgmeeUser.phone!.toStandardFormat();
-
-        if (phoneBookUserSet.contains(msgmeeUserPhone) &&
-            msgmeeUser.linkedTo == 'sociomee') {
-          // Phone number found in phonebookuser HashSet and linked to sociomee
-          log('overriding sociomee user $msgmeeUserPhone');
-          PhoneBookUserModel phoneBookUser = phonebookuser.firstWhere(
-            (user) => user.phone.toStandardFormat() == msgmeeUserPhone,
-          );
-          msgmeeUser.fullName = phoneBookUser.name;
-          msgmeeUser.otherProfileImage = '';
-          filteredDataSize++; // Increment filtered data size
-        } else {
-          log('calling check msgmee api');
-          await SyncSocimeeService().checkMsgmee(msgmeeUserPhone).then((value) {
-            if (value.status == true) {
-              // calling addcontact api
-              SyncSocimeeService().addContact(
-                firstName: value.user!.firstName,
-                lastName: value.user!.lastName,
-                fullName: value.user!.fullName,
-                msgmeeId: value.user!.sId,
-                phone: value.user!.phone!,
-                type: 'msgmee',
-              );
-              filteredDataSize++; // Increment filtered data size
-            } else if (value.status == false) {
-              SyncSocimeeService().addContact(
-                fullName: value.user!.fullName,
-                phone: value.user!.phone!,
-                type: 'contact',
-              );
-            }
-          });
+        for (PhoneBookUserModel phoneUser in phonebookuser) {
+          String msgmeeUserPhone =
+              msgmeeUser.phone!.removeFirstTwoCharsAndNormalize();
+          if (phoneUser.phone.removeFirstTwoCharsAndNormalize() ==
+              msgmeeUser.phone) {
+            msgmeeUser.fullName = phoneUser.name;
+          } else {
+            await SyncSocimeeService()
+                .checkMsgmee(msgmeeUserPhone)
+                .then((value) async {
+              if (value.status == true) {
+                await SyncSocimeeService().addContact(
+                  firstName: value.user!.firstName,
+                  lastName: value.user!.lastName,
+                  fullName: value.user!.fullName,
+                  msgmeeId: value.user!.sId,
+                  phone: value.user!.phone!,
+                  type: 'msgmee',
+                );
+                newUserList.add(value.user!);
+              } else if (value.status == false) {
+                SyncSocimeeService().addContact(
+                  fullName: value.user!.fullName,
+                  phone: value.user!.phone!,
+                  type: 'contact',
+                );
+              }
+            });
+          }
         }
       }
-// Calculate the percentage of filtered data
-      double percentage = (filteredDataSize / totalDataSize) * 100;
 
-      emit(
-        state.copyWith(
-          status: MsgmeeUserListStatus.loaded,
-          msgmeeUserList: MsgmeeUserList(
-            limit: res.limit,
-            search: res.search,
-            users: msgmeeUserList,
-          ), // Include the percentage in the state
-          filteredDataPercentage: percentage,
-        ),
-      );
+      //* Inserting data to the local sqlite database
+      var existingUsers = await AllConnectionRepository().getAllConnections();
+      bool dataIsDifferent = !listEquals(existingUsers, msgmeeUserList);
+
+      if (existingUsers.isEmpty && existingUsers.length == 0) {
+        for (var i = 0; i < msgmeeUserList.length; i++) {
+          await AllConnectionRepository()
+              .insertAllconnections(msgmeeUserList[i]);
+        }
+        List<User> users = await AllConnectionRepository().getAllConnections();
+        log('when database is empty---->${users}');
+        emit(
+          state.copyWith(
+            status: MsgmeeUserListStatus.loaded,
+            msgmeeUserList: MsgmeeUserList(
+              limit: res.limit,
+              search: res.search,
+              users: users,
+            ),
+          ),
+        );
+      } else if (dataIsDifferent) {
+        await AllConnectionRepository()
+            .deleteTable(SQLiteHelper().database, Tables.table2);
+        SQLiteHelper().initialize();
+        for (var i = 0; i < msgmeeUserList.length; i++) {
+          await AllConnectionRepository()
+              .insertAllconnections(msgmeeUserList[i]);
+        }
+        List<User> users = await AllConnectionRepository().getAllConnections();
+        log('when data updated---->${users}');
+        emit(
+          state.copyWith(
+            status: MsgmeeUserListStatus.loaded,
+            msgmeeUserList: MsgmeeUserList(
+              limit: res.limit,
+              search: res.search,
+              users: users,
+            ),
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            status: MsgmeeUserListStatus.loaded,
+            msgmeeUserList: MsgmeeUserList(
+              limit: res.limit,
+              search: res.search,
+              users: existingUsers,
+            ),
+          ),
+        );
+      }
     } on CustomError catch (e) {
       emit(state.copyWith(status: MsgmeeUserListStatus.error, error: e));
     }
   }
+
+  getdataLoaclData() async {
+    List<User> users = await AllConnectionRepository().getAllConnections();
+    emit(
+      state.copyWith(
+        status: MsgmeeUserListStatus.loaded,
+        msgmeeUserList: MsgmeeUserList(
+          limit: 0,
+          search: '',
+          users: users,
+        ),
+      ),
+    );
+  }
+}
 
 //   Future<void> getMsgmeeUsersList(
 //     List<PhoneBookUserModel> phonebookuser,
@@ -320,4 +359,4 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
   //     emit(state.copyWith(status: MsgmeeUserListStatus.error, error: e));
   //   }
   // }
-}
+

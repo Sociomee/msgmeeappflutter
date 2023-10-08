@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../common_widgets/shimmer_effect.dart';
+import '../../../../data/model/phonebook_model.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
 

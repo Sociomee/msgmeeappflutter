@@ -7,6 +7,7 @@ import 'package:msgmee/feature/b_auth/presentation/cubit/update_user/update_user
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'common_cubits/reduce_number_cubit.dart';
+import 'data/sqlite_data_source/sqlite_helper.dart';
 import 'feature/a_onboarding/cubit/onboarding/onboarding_cubit.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
@@ -36,7 +37,9 @@ import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/s
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SQLiteHelper().initialize();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // navigation bar color
     statusBarColor: Colors.white, // status bar color
@@ -46,6 +49,7 @@ void main() {
         Colors.white, //Navigation bar divider color
     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
   ));
+
   runApp(const MyApp());
 }
 

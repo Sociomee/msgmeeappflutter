@@ -30,21 +30,12 @@ extension StringExtension on String {
     return this.replaceAll(RegExp(r'[^\d]+'), '');
   }
 
-  String toStandardFormat() {
-    String cleanedNumber = this.replaceAll(RegExp(r'[^\d]+'), '');
-    cleanedNumber = cleanedNumber.replaceFirst(RegExp(r'^0+'), '');
-    if (cleanedNumber.startsWith('91')) {
-      cleanedNumber = cleanedNumber.substring(2);
+  String removeFirstTwoCharsAndNormalize() {
+    final numericString = this.replaceAll(RegExp(r'[^0-9]'), '');
+    if (numericString.length > 10) {
+      return numericString.substring(2);
+    } else {
+      return numericString;
     }
-
-    return cleanedNumber;
   }
-
-  // String to91Prefix() {
-  //   return '91${this}';
-  // }
-
-  // String normalizePhoneNumber() {
-  //   return this.replaceAll(RegExp(r'[^0-9]'), '');
-  // }
 }

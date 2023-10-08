@@ -1,12 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'get_contact_cubit.dart';
 
-class PhoneBookUserModel {
-  final String name;
-  final String phone;
 
-  PhoneBookUserModel({required this.name, required this.phone});
-}
 
 class ContactState {
   final List<Contact> contacts;

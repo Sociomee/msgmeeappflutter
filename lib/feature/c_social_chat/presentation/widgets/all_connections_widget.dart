@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
+import 'package:msgmee/helper/string_ext.dart';
 import '../../../../data/model/all_connections_model.dart';
+import '../../../../data/model/msgmee_user_model.dart';
 import '../../../../helper/navigator_function.dart';
 import '../pages/chat_screen/chat_screen.dart';
 
 class AllconnectionsWidget extends StatelessWidget {
   const AllconnectionsWidget({super.key, required this.list});
-  final List<AllConnectionsModel> list;
+  final List<User> list;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,9 +26,12 @@ class AllconnectionsWidget extends StatelessWidget {
                 screenNavigator(
                     context,
                     ChatScreen(
-                      name: list[index].connectionName,
-                      imageUrl: list[index].imageUrl,
-                      isOnline: list[index].isOnline,
+                      name: list[index].fullName!,
+                      imageUrl: list[index]
+                          .otherProfileImage
+                          .toString()
+                          .toProfileUrl(),
+                      isOnline: false,
                       hasStory: false,
                     ));
               },
@@ -36,20 +41,37 @@ class AllconnectionsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ChatProfileWidget(
-                        imageUrl: list[index].imageUrl,
-                        isOnline: list[index].isOnline,
-                        hasStory: false),
-                    SizedBox(width: 12.w),
-                    Text(list[index].connectionName,
-                        style: TextStyle(fontSize: 14.sp)),
+                      imageUrl: list[index]
+                          .otherProfileImage
+                          .toString()
+                          .toProfileUrl(),
+                      isOnline: false,
+                      hasStory: false,
+                      radius: 20,
+                    ),
+                    SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(list[index].fullName!,
+                            style: TextStyle(fontSize: 14.sp)),
+                        Text(list[index].username!,
+                            style: TextStyle(fontSize: 10))
+                      ],
+                    ),
                     Spacer(),
-                    list[index].connectionType == "SocioMee"
-                        ? SvgPicture.asset('assets/sociomee.svg',
-                            height: 14.h, fit: BoxFit.cover)
-                        : Container(),
-                    SizedBox(width: 5.w),
-                    SvgPicture.asset('assets/msgmee.svg',
-                        height: 14.h, fit: BoxFit.cover),
+                    Spacer(),
+                    if (list[index].linkedTo!.toLowerCase() == 'msgmee')
+                      SvgPicture.asset(
+                        'assets/msgmee.svg',
+                      ),
+                    if (list[index].linkedTo!.toLowerCase() == 'sociomee')
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: SvgPicture.asset(
+                          'assets/sociomee.svg',
+                        ),
+                      ),
                   ],
                 ),
               ),

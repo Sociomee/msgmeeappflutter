@@ -87,7 +87,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['_id'] = this.sId;
     data['email'] = this.email;
     data['socioMeeId'] = this.socioMeeId;
@@ -109,6 +109,19 @@ class User {
     data['__v'] = this.iV;
     data['otp'] = this.otp;
     return data;
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'socioMeeId': socioMeeId,
+      'firstName': firstName,
+      'phone': phone,
+      'lastName': lastName,
+      'username': username,
+      'fullName': fullName,
+      'otherProfileImage': otherProfileImage,
+      'linkedTo': linkedTo
+    };
   }
 }
 

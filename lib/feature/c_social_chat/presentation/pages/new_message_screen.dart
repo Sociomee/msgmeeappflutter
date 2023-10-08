@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_contacts/flutter_contacts.dart';
@@ -8,7 +10,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list
 import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../../helper/const.dart';
+import '../../../../data/model/phonebook_model.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
@@ -62,7 +64,7 @@ class NewMessageScreen extends StatefulWidget {
 
 class _NewMessageScreenState extends State<NewMessageScreen> {
   late TextEditingController searchController;
-
+  late ContactCubit _contact;
   List<User> filterdList = [];
   List<PhoneBookUserModel> filterdContactList = [];
   bool show = false;
@@ -70,8 +72,13 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   double top = 17;
   @override
   void initState() {
-    context.read<MsgmeeUserListCubit>().getMsgmeeUsersList(
-        context.read<ContactCubit>().state.phonebookUser.toList());
+    _contact = context.read<ContactCubit>();
+    log('contacts-->${_contact.state.phonebookUser}');
+    context
+        .read<MsgmeeUserListCubit>()
+        .getMsgmeeUsersList(_contact.state.phonebookUser);
+    context.read<MsgmeeUserListCubit>().getdataLoaclData();
+    _contact.getDatabaseData();
     searchController = TextEditingController();
     super.initState();
   }
@@ -87,13 +94,11 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     return BlocConsumer<MsgmeeUserListCubit, MsgmeeUserListState>(
       listener: (context, state) {
         if (state.status == MsgmeeUserListStatus.loaded) {
-          context.read<ContactCubit>().fetchContacts();
           context
               .read<ContactCubit>()
               .getOverRidedContacts(state.msgmeeUserList.users!);
           filterdList = List.from(state.msgmeeUserList.users!);
-          filterdContactList =
-              List.from(context.read<ContactCubit>().state.phonebookUser);
+          filterdContactList = List.from(_contact.state.phonebookUser);
         }
       },
       builder: (context, state) {
@@ -288,15 +293,14 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                 ),
                                                 SizedBox(width: 12),
                                                 Container(
-                                                  height: 20,
-                                                  width:
-                                                      context.screenWidth * .7,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColors.grey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                )
+                                                    height: 20,
+                                                    width: context.screenWidth *
+                                                        .7,
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.grey,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)))
                                               ],
                                             ),
                                           );
@@ -329,27 +333,15 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              filterdList[index]
-                                                          .linkedTo!
-                                                          .toLowerCase() ==
-                                                      'sociomee'
-                                                  ? ChatProfileWidget(
-                                                      imageUrl:
-                                                          defaultProfileImage,
-                                                      isOnline: false,
-                                                      hasStory: false,
-                                                      radius: 20,
-                                                    )
-                                                  : ChatProfileWidget(
-                                                      imageUrl:
-                                                          filterdList[index]
-                                                              .otherProfileImage
-                                                              .toString()
-                                                              .toProfileUrl(),
-                                                      isOnline: false,
-                                                      hasStory: false,
-                                                      radius: 20,
-                                                    ),
+                                              ChatProfileWidget(
+                                                imageUrl: filterdList[index]
+                                                    .otherProfileImage
+                                                    .toString()
+                                                    .toProfileUrl(),
+                                                isOnline: false,
+                                                hasStory: false,
+                                                radius: 20,
+                                              ),
                                               SizedBox(width: 12),
                                               Column(
                                                 crossAxisAlignment:
@@ -359,11 +351,14 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                       filterdList[index]
                                                           .fullName!,
                                                       style: TextStyle(
-                                                          fontSize: 14.sp)),
+                                                        fontSize: 14.sp,
+                                                      )),
                                                   Text(
-                                                      filterdList[index].phone!,
+                                                      filterdList[index]
+                                                          .username!,
                                                       style: TextStyle(
-                                                          fontSize: 10))
+                                                        fontSize: 10,
+                                                      ))
                                                 ],
                                               ),
                                               Spacer(),
@@ -397,7 +392,8 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                             //   children: [
                             //     Expanded(
                             //         flex: 110,
-                            //         child: AllconnectionsWidget(list: filterdList)),
+                            //         child: AllconnectionsWidget(
+                            //             list: filterdList)),
                             //     SizedBox(width: 10),
                             //     Expanded(
                             //         flex: 1,
@@ -452,7 +448,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                     setState(() {
                                       show = !show;
                                       filterdList = state.msgmeeUserList.users!
-                                          .where((model) => model.linkedTo!
+                                          .where((model) => model.firstName![0]
                                               .toLowerCase()
                                               .contains(alphabats[currentindex]
                                                   .toLowerCase()))
@@ -473,5 +469,14 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
         );
       },
     );
+  }
+}
+
+class AlphabaticalFilterScreen extends StatelessWidget {
+  const AlphabaticalFilterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column();
   }
 }
