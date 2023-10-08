@@ -74,9 +74,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   void initState() {
     _contact = context.read<ContactCubit>();
     log('contacts-->${_contact.state.phonebookUser}');
-    context
-        .read<MsgmeeUserListCubit>()
-        .getMsgmeeUsersList(_contact.state.phonebookUser);
     context.read<MsgmeeUserListCubit>().getdataLoaclData();
     _contact.getDatabaseData();
     searchController = TextEditingController();
@@ -94,9 +91,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     return BlocConsumer<MsgmeeUserListCubit, MsgmeeUserListState>(
       listener: (context, state) {
         if (state.status == MsgmeeUserListStatus.loaded) {
-          context
-              .read<ContactCubit>()
-              .getOverRidedContacts(state.msgmeeUserList.users!);
+          // context
+          //     .read<ContactCubit>()
+          //     .getOverRidedContacts(state.msgmeeUserList.users!);
           filterdList = List.from(state.msgmeeUserList.users!);
           filterdContactList = List.from(_contact.state.phonebookUser);
         }

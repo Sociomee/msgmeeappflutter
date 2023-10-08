@@ -96,7 +96,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
   @override
   Future<CheckMsgmeeModel> checkMsgmee(String phone) async {
     var token = await localData.readData('token');
-    log('chcek msgmee token====>$phone');
+    // log('sending contact phone for backend check $phone');
 
     var response = await apiService.dio.post('$mainbaseUrl/api/checkMsgmee',
         options: Options(
@@ -107,7 +107,6 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
         data: {
           "phone": phone,
         });
-    // log('chcek msgmee response====>${response.data}');
     if (response.statusCode == 200 && response.data['status'] == true) {
       var data = CheckMsgmeeModel.fromJson(response.data);
       return data;

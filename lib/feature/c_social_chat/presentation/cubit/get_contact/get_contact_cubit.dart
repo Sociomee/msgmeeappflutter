@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart';
@@ -24,7 +25,7 @@ class ContactCubit extends Cubit<ContactState> {
   }
 
   //*********  getting all the contacts  *************//
-  Future<void> fetchContacts() async {
+  Future<void> fetchContacts(MsgmeeUserListCubit msgmeecubit) async {
     await requestContactsPermission();
     emit(state.copyWith(isLoading: true));
     List<PhoneBookUserModel> phoneBookList = [];
@@ -40,6 +41,8 @@ class ContactCubit extends Cubit<ContactState> {
       isLoading: false,
       phonebookUser: phoneBookList,
     ));
+    await msgmeecubit.getMsgmeeUsersList(phoneBookList);
+    getOverRidedContacts(msgmeecubit.state.msgmeeUserList.users!);
   }
 
   //*********  converting contact data to custom model class  *************//

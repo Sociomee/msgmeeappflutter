@@ -25,37 +25,82 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
       List<User> msgmeeUserList = res.users!;
       List<User> newUserList = [];
       for (User msgmeeUser in msgmeeUserList) {
-        for (PhoneBookUserModel phoneUser in phonebookuser) {
-          String msgmeeUserPhone =
-              msgmeeUser.phone!.removeFirstTwoCharsAndNormalize();
-          if (phoneUser.phone.removeFirstTwoCharsAndNormalize() ==
-              msgmeeUser.phone) {
-            msgmeeUser.fullName = phoneUser.name;
-          } else {
-            await SyncSocimeeService()
-                .checkMsgmee(msgmeeUserPhone)
-                .then((value) async {
-              if (value.status == true) {
-                await SyncSocimeeService().addContact(
-                  firstName: value.user!.firstName,
-                  lastName: value.user!.lastName,
-                  fullName: value.user!.fullName,
-                  msgmeeId: value.user!.sId,
-                  phone: value.user!.phone!,
-                  type: 'msgmee',
-                );
-                newUserList.add(value.user!);
-              } else if (value.status == false) {
-                SyncSocimeeService().addContact(
-                  fullName: value.user!.fullName,
-                  phone: value.user!.phone!,
-                  type: 'contact',
-                );
-              }
-            });
+        String msgmeeUserPhone =
+            msgmeeUser.phone!.removeFirstTwoCharsAndNormalize();
+        // Create a Set of normalized phone numbers from phonebookuser
+        Set<String> normalizedPhoneNumbers = phonebookuser
+            .map((phoneUser) =>
+                phoneUser.phone.removeFirstTwoCharsAndNormalize())
+            .toSet();
+
+        if (normalizedPhoneNumbers.contains(msgmeeUserPhone)) {
+          // Match found in phonebookuser, update fullName
+          for (PhoneBookUserModel phoneUser in phonebookuser) {
+            if (phoneUser.phone.removeFirstTwoCharsAndNormalize() ==
+                msgmeeUser.phone) {
+              log('matched phone number:${msgmeeUser.phone}');
+              msgmeeUser.fullName = phoneUser.name;
+              break; // No need to continue searching
+            }
           }
+        } else {
+          await SyncSocimeeService()
+              .checkMsgmee(msgmeeUserPhone)
+              .then((value) async {
+            if (value.status == true) {
+              await SyncSocimeeService().addContact(
+                firstName: value.user!.firstName,
+                lastName: value.user!.lastName,
+                fullName: value.user!.fullName,
+                msgmeeId: value.user!.sId,
+                phone: value.user!.phone!,
+                type: 'msgmee',
+              );
+              newUserList.add(value.user!);
+            } else if (value.status == false) {
+              SyncSocimeeService().addContact(
+                fullName: value.user!.fullName,
+                phone: value.user!.phone!,
+                type: 'contact',
+              );
+            }
+          });
         }
       }
+
+      //! DO NOT DELETE
+      // for (User msgmeeUser in msgmeeUserList) {
+      //   for (PhoneBookUserModel phoneUser in phonebookuser) {
+      //     String msgmeeUserPhone =
+      //         msgmeeUser.phone!.removeFirstTwoCharsAndNormalize();
+      //     if (phoneUser.phone.removeFirstTwoCharsAndNormalize() ==
+      //         msgmeeUser.phone) {
+      //       msgmeeUser.fullName = phoneUser.name;
+      //     } else {
+      //       await SyncSocimeeService()
+      //           .checkMsgmee(msgmeeUserPhone)
+      //           .then((value) async {
+      //         if (value.status == true) {
+      //           await SyncSocimeeService().addContact(
+      //             firstName: value.user!.firstName,
+      //             lastName: value.user!.lastName,
+      //             fullName: value.user!.fullName,
+      //             msgmeeId: value.user!.sId,
+      //             phone: value.user!.phone!,
+      //             type: 'msgmee',
+      //           );
+      //           newUserList.add(value.user!);
+      //         } else if (value.status == false) {
+      //           SyncSocimeeService().addContact(
+      //             fullName: value.user!.fullName,
+      //             phone: value.user!.phone!,
+      //             type: 'contact',
+      //           );
+      //         }
+      //       });
+      //     }
+      //   }
+      // }
 
       //* Inserting data to the local sqlite database
       var existingUsers = await AllConnectionRepository().getAllConnections();
@@ -67,7 +112,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
               .insertAllconnections(msgmeeUserList[i]);
         }
         List<User> users = await AllConnectionRepository().getAllConnections();
-        log('when database is empty---->${users}');
+        log('when database is empty${users}');
         emit(
           state.copyWith(
             status: MsgmeeUserListStatus.loaded,
