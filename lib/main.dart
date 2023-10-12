@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
-import 'package:msgmee/feature/b_auth/presentation/cubit/update_user/update_user_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
+import 'common_cubits/connectivity_cubit.dart';
 import 'common_cubits/reduce_number_cubit.dart';
 import 'data/sqlite_data_source/sqlite_helper.dart';
 import 'feature/a_onboarding/cubit/onboarding/onboarding_cubit.dart';
@@ -13,9 +14,7 @@ import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cu
 import 'feature/b_auth/presentation/cubit/otp_send/otp_send_cubit.dart';
 import 'feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
 import 'feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
-import 'feature/c_profile/presentation/cubit/interest/interest_cubit.dart';
 import 'feature/c_profile/presentation/cubit/select_group_cubit/select_group_cubit.dart';
-import 'feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 import 'feature/c_profile/presentation/cubit/upload_profilepic/upload_profilepic_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/add_message/add_message_cubit.dart';
 import 'feature/c_social_chat/presentation/cubit/change_wallpaperview.dart';
@@ -63,6 +62,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(create: (context) => ConnectivityCubit()),
             BlocProvider(create: (context) => OnboardingCubit()),
             BlocProvider(create: (context) => NumberValidationCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
@@ -88,13 +88,13 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => MsgmeeUserListCubit()),
             BlocProvider(create: (context) => ContactCubit()),
             BlocProvider(create: (context) => SyncSociomeeCubit()),
-            BlocProvider(create: (context) => UpdateUserCubit()),
+            // BlocProvider(create: (context) => UpdateUserCubit()),
             BlocProvider(create: (context) => GetUserdetailsCubit()),
-            BlocProvider(create: (context) => UpdateProfileCubit()),
-            BlocProvider(create: (context) => InterestCubit()),
+            // BlocProvider(create: (context) => UpdateProfileCubit()),
             BlocProvider(create: (context) => SelectionGroupCubit()),
             BlocProvider(create: (context) => ContactCubit()),
-            BlocProvider(create: (context) => UploadProfilepicCubit())
+            BlocProvider(create: (context) => UploadProfilepicCubit()),
+            BlocProvider(create: (context) => ChatRoomsCubit()),
           ],
           child: MaterialApp(
             title: 'Msgmee App',

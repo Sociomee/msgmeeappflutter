@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/chat_profile_widget.dart';
 import 'package:msgmee/helper/string_ext.dart';
-import '../../../../data/model/all_connections_model.dart';
 import '../../../../data/model/msgmee_user_model.dart';
 import '../../../../helper/navigator_function.dart';
 import '../pages/chat_screen/chat_screen.dart';
@@ -33,6 +32,7 @@ class AllconnectionsWidget extends StatelessWidget {
                           .toProfileUrl(),
                       isOnline: false,
                       hasStory: false,
+                      lastOnline: '',
                     ));
               },
               child: Padding(

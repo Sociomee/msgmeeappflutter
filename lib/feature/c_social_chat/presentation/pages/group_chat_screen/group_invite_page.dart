@@ -6,7 +6,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_scree
 import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/share_group_invitation_page.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 
-import '../../../../../common_widgets/Mx_appbar.dart';
+import '../../../../../common_widgets/mx_appbar.dart';
 import '../../../../../theme/colors.dart';
 
 class GroupInvitePage extends StatefulWidget {

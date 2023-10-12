@@ -16,14 +16,14 @@ class CacheImageProvider extends StatelessWidget {
       {super.key,
       required this.imageUrl,
       required this.imageId,
-      required this.height,
-      required this.width,
+      this.height,
+      this.width,
       required this.placeholder,
       this.errorWidget});
   final String imageUrl;
   final String imageId;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final Widget placeholder;
   final Widget? errorWidget;
   @override

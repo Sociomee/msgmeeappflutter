@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
-import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
-import '../../../c_profile/presentation/pages/setup_profile_screen.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key, required this.phone});
@@ -57,12 +55,12 @@ class _NameScreenState extends State<NameScreen> {
             onTap: () {
               if (formKey.currentState!.validate() &&
                   nameController.text.isNotEmpty) {
-                animatedScreenReplaceNavigator(
-                    context,
-                    SetupProfileScreen(
-                      name: nameController.text,
-                      phone: widget.phone,
-                    ));
+                // animatedScreenReplaceNavigator(
+                //     context,
+                //     SetupProfileScreen(
+                //       name: nameController.text,
+                //       phone: widget.phone,
+                //     ));
               }
             },
             child: Padding(
@@ -170,12 +168,12 @@ class _NameScreenState extends State<NameScreen> {
                   ontap: () {
                     if (formKey.currentState!.validate() &&
                         nameController.text.isNotEmpty) {
-                      animatedScreenReplaceNavigator(
-                          context,
-                          SetupProfileScreen(
-                            name: nameController.text,
-                            phone: widget.phone,
-                          ));
+                      // animatedScreenReplaceNavigator(
+                      //     context,
+                      //     SetupProfileScreen(
+                      //       name: nameController.text,
+                      //       phone: widget.phone,
+                      //     ));
                     }
                   },
                   title: 'Continue',

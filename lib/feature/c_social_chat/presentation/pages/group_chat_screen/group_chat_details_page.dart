@@ -7,7 +7,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 
 import 'package:msgmee/theme/colors.dart';
 
-import '../../../../../common_widgets/Mx_appbar.dart';
+import '../../../../../common_widgets/mx_appbar.dart';
 import '../../../../../data/model/group_participants_model.dart';
 import '../../../../../helper/navigator_function.dart';
 import '../../../../c_profile/presentation/pages/media_tab.dart';

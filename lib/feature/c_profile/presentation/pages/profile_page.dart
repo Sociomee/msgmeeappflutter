@@ -22,11 +22,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit();
   }
 
   Future<void> onRefresh() async {
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit();
   }
 
   @override
@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return RefreshIndicator(
       color: AppColors.primaryColor,
       onRefresh: () async {
-        context.read<GetUserdetailsCubit>().getUserDetailsCubit('');
+        context.read<GetUserdetailsCubit>().getUserDetailsCubit();
         return await Future.delayed(Duration(seconds: 2));
       },
       child: Scaffold(

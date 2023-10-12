@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../common_widgets/cache_image_provider.dart';
 import '../../../../theme/colors.dart';
 
 class ChatProfileWidget extends StatelessWidget {
@@ -18,16 +19,30 @@ class ChatProfileWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-            decoration: BoxDecoration(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            border: hasStory
+                ? Border.all(color: AppColors.primaryColor, width: 3)
+                : Border.all(color: AppColors.lightgrey, width: 1),
+          ),
+          child: SizedBox(
+            height: 55,
+            width: 55,
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              border: hasStory
-                  ? Border.all(color: AppColors.primaryColor, width: 3)
-                  : Border.all(color: AppColors.lightgrey, width: 1),
+              child: CacheImageProvider(
+                imageUrl: imageUrl,
+                imageId: imageUrl,
+                placeholder: Container(),
+              ),
             ),
-            child: CircleAvatar(
-                radius: radius ?? 28,
-                backgroundColor: AppColors.grey,
-                backgroundImage: NetworkImage(imageUrl))),
+          ),
+          // child: CircleAvatar(
+          //   radius: radius ?? 28,
+          //   backgroundColor: AppColors.grey,
+          //   backgroundImage: NetworkImage(imageUrl),
+          // ),
+        ),
         Positioned(
           top: 40,
           right: 0,

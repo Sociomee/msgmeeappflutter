@@ -68,11 +68,11 @@ class _ChooseDateOfBirthBottomSheetState
                     ontap: () async {
                       if (datetime.toString().isNotEmpty) {
                         String dob = DateFormat("d MMMM y").format(datetime);
-                        context.read<UpdateProfileCubit>().updateDOB(dob);
-                        var phone = await Localdata().readData('phone');
+                        // context.read<UpdateProfileCubit>().updateDOB(dob);
+
                         context
                             .read<GetUserdetailsCubit>()
-                            .getUserDetailsCubit(phone);
+                            .getUserDetailsCubit();
                       }
                       Navigator.pop(context);
                     }),

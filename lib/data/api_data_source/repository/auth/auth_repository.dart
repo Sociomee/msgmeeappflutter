@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/otp_model.dart';
-import 'package:msgmee/data/repositories.dart';
+import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/helper/local_data.dart';
 
 class AuthService implements AuthRepository {

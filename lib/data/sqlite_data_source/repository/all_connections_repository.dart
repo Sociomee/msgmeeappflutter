@@ -4,18 +4,19 @@ import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
-import 'sqlite_helper.dart';
+import '../sqlite_helper.dart';
 
 class AllConnectionRepository extends AbAllConnectionRepository {
-  var sqlite = SQLiteHelper();
+
   @override
   Future<List<User>> getAllConnections() async {
     final List<Map<String, dynamic>> maps =
-        await sqlite.database.query(Tables.table2);
+        await sqlite.database.query(Tables.ALLCONNECTIONS);
     return List.generate(
       maps.length,
       (i) {
         return User(
+          sId: maps[i]['id'],
           socioMeeId: maps[i]['socioMeeId'],
           firstName: maps[i]['firstName'],
           phone: maps[i]['phone'],
@@ -33,7 +34,7 @@ class AllConnectionRepository extends AbAllConnectionRepository {
   Future<void> insertAllconnections(User user) async {
     try {
       await sqlite.database.insert(
-        Tables.table2,
+        Tables.ALLCONNECTIONS,
         user.toMap(),
       );
     } catch (e) {

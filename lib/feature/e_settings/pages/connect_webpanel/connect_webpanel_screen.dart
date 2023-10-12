@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:msgmee/data/repositories.dart';
-import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
+import 'package:msgmee/data/api_data_source/repositories.dart';
+import 'package:msgmee/data/api_data_source/repository/socket/msgmee_socket.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../theme/colors.dart';

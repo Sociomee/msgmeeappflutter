@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:msgmee/data/repository/socket/msgmee_socket.dart';
+import 'package:msgmee/data/api_data_source/repository/socket/msgmee_socket.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
@@ -12,13 +12,13 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/social_tab_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/widget/social_chat_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_button.dart';
-import 'package:msgmee/helper/local_data.dart';
+
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
-import '../../../../data/model/chat_head_model.dart';
 import '../../../../data/model/dummy_chat_model.dart';
 import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
+import '../cubit/chatrooms/chatrooms_cubit.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
 import '../cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import '../cubit/search_mode/search_mode_cubit.dart';
@@ -53,7 +53,6 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   bool typing = false;
   late TextEditingController searchController;
   List<ChatModel> filtedUserList = [];
-  List<ChatHeads> chatheadList = [];
   List<ChatOptionsModel> options = [
     ChatOptionsModel(id: 1, option: 'Mark as unread'),
     ChatOptionsModel(id: 2, option: 'Block user'),
@@ -63,12 +62,16 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   @override
   void initState() {
     super.initState();
-    context.read<SyncSociomeeCubit>().checkSocimeeCubit();
+
     context
         .read<ContactCubit>()
         .fetchContacts(context.read<MsgmeeUserListCubit>());
-
+    context.read<SyncSociomeeCubit>().checkSocimeeCubit();
+    context.read<GetUserdetailsCubit>().getUserDetailsCubit();
     MsgmeeSocket().connectSocket();
+    context.read<ChatRoomsCubit>().getPhoneAndUserid();
+    context.read<ChatRoomsCubit>().getchatroomsList();
+    context.read<ChatRoomsCubit>().getLocalChatRoomData();
     _controller = TabController(length: 2, vsync: this);
     tabsComtroller = TabController(length: 4, vsync: this);
     tabsComtroller.addListener(() {
@@ -108,11 +111,6 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     setState(() {
       typing = false;
     });
-  }
-
-  getProfileDetails() async {
-    var phone = await Localdata().readData('phone');
-    context.read<GetUserdetailsCubit>().getUserDetailsCubit(phone);
   }
 
   @override
@@ -452,6 +450,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                   hasStory:
                                                       filtedUserList[index]
                                                           .hasStory,
+                                                  lastOnline: '',
                                                 ));
                                           },
                                           child: Container(

@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/check_msgmee_model.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
 import 'package:msgmee/data/model/sync_model.dart';
-import 'package:msgmee/data/repositories.dart';
-import 'package:msgmee/data/repository/dio_provider.dart';
+import 'package:msgmee/data/api_data_source/repositories.dart';
+import 'package:msgmee/data/api_data_source/repository/dio_provider.dart';
 import 'package:msgmee/helper/local_data.dart';
 
 class SyncSocimeeService extends AbSyncSociomeeRepository {
@@ -22,7 +22,6 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
         },
       ),
     );
-    log('check ac ====>$response');
 
     if (response.statusCode == 200) {
       var res = SociomeeUserModel.fromJson(response.data);
@@ -51,7 +50,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
         "pageSize": 10,
       },
     );
-    log('sync socimeate--->${response.data}');
+
     if (response.statusCode == 200) {
       var res = SyncModel.fromJson(response.data);
       return res;

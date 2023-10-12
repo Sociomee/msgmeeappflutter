@@ -29,6 +29,7 @@ class BizPageTab extends StatelessWidget {
                           isOnline: false,
                           hasStory: false,
                           group: true,
+                          lastOnline: '',
                         ));
                   },
                   child: Padding(

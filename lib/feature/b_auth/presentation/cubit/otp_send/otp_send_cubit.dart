@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../common_cubits/custom_error.dart';
-import '../../../../../data/repository/auth/auth_repository.dart';
+import '../../../../../data/api_data_source/repository/auth/auth_repository.dart';
 
 part 'otp_send_state.dart';
 

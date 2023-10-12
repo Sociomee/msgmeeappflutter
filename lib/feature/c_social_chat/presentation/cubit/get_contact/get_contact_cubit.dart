@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
+import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart';
@@ -67,13 +68,16 @@ class ContactCubit extends Cubit<ContactState> {
   //********* overriding contact after getting msgmeeuser data *************//
   void getOverRidedContacts(List<User> syncUserList) async {
     emit(state.copyWith(isLoading: true));
+    var userphone = Localdata().readData('userphone');
     final syncUserPhones = syncUserList
         .map((user) => user.phone!.removeFirstTwoCharsAndNormalize())
         .toSet();
     final overRidedSet = <String>{};
     final overRidedList = state.phonebookUser.where((phoneModel) {
       final phone = phoneModel.phone.removeFirstTwoCharsAndNormalize();
-      if (!syncUserPhones.contains(phone) && overRidedSet.add(phone)) {
+      if (!syncUserPhones.contains(phone) &&
+          overRidedSet.add(phone) &&
+          phone != userphone) {
         return true;
       }
       return false;
@@ -99,7 +103,7 @@ Future<void> insertDataIfEmptyOrDifferent(
 
   // Check if the table is empty
   final isEmpty = Sqflite.firstIntValue(
-          await db.rawQuery('SELECT COUNT(*) FROM ${Tables.table1}')) ==
+          await db.rawQuery('SELECT COUNT(*) FROM ${Tables.PHONEBOOK}')) ==
       0;
 
   if (isEmpty) {
@@ -118,7 +122,7 @@ Future<void> insertDataIfEmptyOrDifferent(
 
 Future<List<PhoneBookUserModel>> getDataFromTable(Database database) async {
   final db = await database;
-  final results = await db.query('${Tables.table1}');
+  final results = await db.query('${Tables.PHONEBOOK}');
   // Map the results to your data model
   return results.map((map) => PhoneBookUserModel.fromMap(map)).toList();
 }
@@ -128,11 +132,11 @@ Future<void> insertData(
   final db = await database;
 
   // Clear existing data (optional, depends on your requirements)
-  await db.delete('${Tables.table1}');
+  await db.delete('${Tables.PHONEBOOK}');
 
   // Insert new data
   for (var item in newData) {
-    await db.insert('${Tables.table1}', item.toMap());
+    await db.insert('${Tables.PHONEBOOK}', item.toMap());
   }
 }
 

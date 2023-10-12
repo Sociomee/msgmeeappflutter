@@ -4,13 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
-import 'package:msgmee/data/repository/user/user_repository.dart';
-import 'package:msgmee/data/sqlite_data_source/all_connections_repository.dart';
+import 'package:msgmee/data/api_data_source/repository/user/user_repository.dart';
+import 'package:msgmee/data/sqlite_data_source/repository/all_connections_repository.dart';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import '../../../../../common_cubits/custom_error.dart';
 import '../../../../../data/model/phonebook_model.dart';
-import '../../../../../data/repository/sociomee/sync_socimee_repository.dart';
+import '../../../../../data/api_data_source/repository/sociomee/sync_socimee_repository.dart';
 part 'msgmee_user_list_state.dart';
 
 class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
@@ -125,7 +125,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
         );
       } else if (dataIsDifferent) {
         await AllConnectionRepository()
-            .deleteTable(SQLiteHelper().database, Tables.table2);
+            .deleteTable(SQLiteHelper().database, Tables.ALLCONNECTIONS);
         SQLiteHelper().initialize();
         for (var i = 0; i < msgmeeUserList.length; i++) {
           await AllConnectionRepository()

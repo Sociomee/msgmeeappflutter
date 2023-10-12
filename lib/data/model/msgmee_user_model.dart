@@ -78,10 +78,13 @@ class User {
     otherProfileImage = json['otherProfileImage'];
     role = json['role'];
     linkedTo = json['linkedTo'];
-    favorites = json['favorites'].cast<String>();
+    favorites =
+        json['favorites'] != null ? json['favorites'].cast<String>() : [];
     tagLine = json['tagLine'];
-    msgMeeContacts = json['msgMeeContacts'].cast<String>();
-    contacts = json['contacts'].cast<String>();
+    msgMeeContacts = json['msgMeeContacts'] != null
+        ? json['msgMeeContacts'].cast<String>()
+        : [];
+    contacts = json['contacts'] != null ? json['contacts'].cast<String>() : [];
     iV = json['__v'];
     otp = json['otp'];
   }
@@ -113,6 +116,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': sId,
       'socioMeeId': socioMeeId,
       'firstName': firstName,
       'phone': phone,
@@ -138,7 +142,7 @@ class MsgmeeUserList {
     if (json['users'] != null) {
       users = <User>[];
       json['users'].forEach((v) {
-        users!.add(new User.fromJson(v));
+        users!.add(User.fromJson(v));
       });
     }
   }

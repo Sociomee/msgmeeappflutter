@@ -2,8 +2,11 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class Tables {
-  static const String table1 = 'phonebook';
-  static const String table2 = 'allconnections';
+  static const String PHONEBOOK = 'phonebook';
+  static const String ALLCONNECTIONS = 'allconnections';
+  static const String USER = 'user';
+  static const String ROOM = 'room';
+  static const String MESSAGE = 'message';
 }
 
 class SQLiteHelper {
@@ -13,7 +16,7 @@ class SQLiteHelper {
   SQLiteHelper._internal();
   late Database database;
   static const phonebooktable = '''
-      CREATE TABLE ${Tables.table1} (
+      CREATE TABLE ${Tables.PHONEBOOK} (
         id INTEGER PRIMARY KEY,
         name TEXT,
         phone TEXT
@@ -21,7 +24,7 @@ class SQLiteHelper {
     ''';
 
   static const allconnectiontable = '''
-      CREATE TABLE ${Tables.table2} (
+      CREATE TABLE ${Tables.ALLCONNECTIONS} (
         id TEXT PRIMARY KEY,
         socioMeeId TEXT,
         firstName TEXT,
@@ -33,6 +36,50 @@ class SQLiteHelper {
         linkedTo TEXT
       )
     ''';
+  static const usertable = '''
+      CREATE TABLE ${Tables.USER} (
+        id TEXT PRIMARY KEY,
+        userName TEXT,
+        fullName TEXT,
+        firstName TEXT,
+        lastName TEXT,
+        phone TEXT,
+        otp TEXT,
+        linkedTo TEXT
+        role TEXT,
+        favorites TEXT,
+        tagLine TEXT,
+        picture TEXT,
+        email TEXT,
+        socioMeeId TEXT,
+        msgMeeContacts TEXT,
+        otherProfileImage TEXT
+      )
+''';
+  static const roomtable = '''
+      CREATE TABLE ${Tables.ROOM} (
+        id TEXT PRIMARY KEY,
+        people TEXT,
+        title TEXT,
+        picture TEXT,
+        isGroup TEXT,
+        lastUpdate TEXT,
+        lastAuthor TEXT,
+        lastMessage TEXT
+      )
+    ''';
+  static const messagetable = '''
+      CREATE TABLE ${Tables.MESSAGE} (
+        id TEXT PRIMARY KEY,
+        author TEXT,
+        file TEXT,
+        room TEXT,
+        date TEXT,
+        content TEXT,
+        type TEXT
+      )
+    ''';
+
   Future<void> initialize() async {
     String databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'msgmee_database.db');
@@ -40,19 +87,12 @@ class SQLiteHelper {
       path,
       version: 1,
       onCreate: (Database db, int version) async {
+        await db.execute(roomtable);
+        await db.execute(messagetable);
+        await db.execute(usertable);
         await db.execute(phonebooktable);
         await db.execute(allconnectiontable);
       },
     );
   }
 }
-
-// Extension method to convert PhoneBookUserModel to a map
-// extension PhoneBookUserModelExtension on PhoneBookUserModel {
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'name': name,
-//       'phone': phone,
-//     };
-//   }
-// }

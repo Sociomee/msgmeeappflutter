@@ -1,11 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/string_ext.dart';
@@ -91,9 +90,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     return BlocConsumer<MsgmeeUserListCubit, MsgmeeUserListState>(
       listener: (context, state) {
         if (state.status == MsgmeeUserListStatus.loaded) {
-          // context
-          //     .read<ContactCubit>()
-          //     .getOverRidedContacts(state.msgmeeUserList.users!);
           filterdList = List.from(state.msgmeeUserList.users!);
           filterdContactList = List.from(_contact.state.phonebookUser);
         }
@@ -164,24 +160,36 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                           state.msgmeeUserList.users!);
                                   filterdList =
                                       List.from(state.msgmeeUserList.users!);
-                                  filterdContactList = List.from(context
-                                      .read<ContactCubit>()
-                                      .state
-                                      .phonebookUser);
+                                  filterdContactList =
+                                      List.from(_contact.state.phonebookUser);
                                 } else {
                                   filterdList = state.msgmeeUserList.users!
-                                      .where((model) => model.fullName!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()))
-                                      .toList();
+                                      .where((model) {
+                                    bool hasphone =
+                                        model.phone!.toLowerCase().contains(
+                                              value.toLowerCase(),
+                                            );
+                                    bool hasname =
+                                        model.fullName!.toLowerCase().contains(
+                                              value.toLowerCase(),
+                                            );
+                                    return hasname || hasphone;
+                                  }).toList();
                                   filterdContactList = context
                                       .read<ContactCubit>()
                                       .state
                                       .phonebookUser
-                                      .where((e) => e.name
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()))
-                                      .toList();
+                                      .where((e) {
+                                    bool hasphone =
+                                        e.phone.toLowerCase().contains(
+                                              value.toLowerCase(),
+                                            );
+                                    bool hasname =
+                                        e.name.toLowerCase().contains(
+                                              value.toLowerCase(),
+                                            );
+                                    return hasname || hasphone;
+                                  }).toList();
                                 }
                               });
                             },
@@ -310,17 +318,30 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
                                         onTap: () {
+                                          context
+                                              .read<ChatRoomsCubit>()
+                                              .createchatRoom(
+                                                userid: filterdList[index].sId!,
+                                              );
                                           screenNavigator(
                                               context,
                                               ChatScreen(
                                                 name: filterdList[index]
-                                                    .fullName!,
+                                                        .fullName ??
+                                                    '',
                                                 imageUrl: filterdList[index]
                                                     .otherProfileImage
                                                     .toString()
                                                     .toProfileUrl(),
                                                 isOnline: true,
                                                 hasStory: true,
+                                                lastOnline: '',
+                                                id: context
+                                                    .read<ChatRoomsCubit>()
+                                                    .state
+                                                    .createroom
+                                                    .room!
+                                                    .sId,
                                               ));
                                         },
                                         child: Padding(
@@ -352,24 +373,29 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                       )),
                                                   Text(
                                                       filterdList[index]
-                                                          .username!,
+                                                              .username ??
+                                                          '',
                                                       style: TextStyle(
                                                         fontSize: 10,
                                                       ))
                                                 ],
                                               ),
                                               Spacer(),
-                                              if (filterdList[index]
-                                                      .linkedTo!
-                                                      .toLowerCase() ==
-                                                  'msgmee')
+                                              if (filterdList[index].linkedTo !=
+                                                      null &&
+                                                  filterdList[index]
+                                                          .linkedTo!
+                                                          .toLowerCase() ==
+                                                      'msgmee')
                                                 SvgPicture.asset(
                                                   'assets/msgmee.svg',
                                                 ),
-                                              if (filterdList[index]
-                                                      .linkedTo!
-                                                      .toLowerCase() ==
-                                                  'sociomee')
+                                              if (filterdList[index].linkedTo !=
+                                                      null &&
+                                                  filterdList[index]
+                                                          .linkedTo!
+                                                          .toLowerCase() ==
+                                                      'sociomee')
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -386,38 +412,205 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
 
                             // Row(
                             //   mainAxisSize: MainAxisSize.min,
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
                             //   children: [
                             //     Expanded(
-                            //         flex: 110,
-                            //         child: AllconnectionsWidget(
-                            //             list: filterdList)),
+                            //       flex: 110,
+                            //       child: context
+                            //                   .watch<MsgmeeUserListCubit>()
+                            //                   .state
+                            //                   .status ==
+                            //               MsgmeeUserListStatus.loading
+                            //           ? Shimmer.fromColors(
+                            //               baseColor: AppColors.borderColor,
+                            //               highlightColor: AppColors.grey,
+                            //               child: ListView.builder(
+                            //                   physics:
+                            //                       NeverScrollableScrollPhysics(),
+                            //                   shrinkWrap: true,
+                            //                   itemCount: 5,
+                            //                   itemBuilder: (context, index) {
+                            //                     return Padding(
+                            //                       padding:
+                            //                           const EdgeInsets.only(
+                            //                               bottom: 14.0),
+                            //                       child: Row(
+                            //                         mainAxisSize:
+                            //                             MainAxisSize.min,
+                            //                         children: [
+                            //                           Container(
+                            //                             height: 40,
+                            //                             width: 40,
+                            //                             decoration: BoxDecoration(
+                            //                                 color:
+                            //                                     AppColors.grey,
+                            //                                 borderRadius:
+                            //                                     BorderRadius
+                            //                                         .circular(
+                            //                                             100)),
+                            //                           ),
+                            //                           SizedBox(width: 12),
+                            //                           Container(
+                            //                               height: 20,
+                            //                               width: context
+                            //                                       .screenWidth *
+                            //                                   .7,
+                            //                               decoration: BoxDecoration(
+                            //                                   color: AppColors
+                            //                                       .grey,
+                            //                                   borderRadius:
+                            //                                       BorderRadius
+                            //                                           .circular(
+                            //                                               10)))
+                            //                         ],
+                            //                       ),
+                            //                     );
+                            //                   }))
+                            //           : ListView.builder(
+                            //               physics:
+                            //                   NeverScrollableScrollPhysics(),
+                            //               padding: EdgeInsets.all(0),
+                            //               shrinkWrap: true,
+                            //               itemCount: filterdList.length,
+                            //               itemBuilder: (context, index) {
+                            //                 return GestureDetector(
+                            //                   onTap: () {
+                            //                     screenNavigator(
+                            //                         context,
+                            //                         ChatScreen(
+                            //                           name: filterdList[index]
+                            //                               .fullName!,
+                            //                           imageUrl:
+                            //                               filterdList[index]
+                            //                                   .otherProfileImage
+                            //                                   .toString()
+                            //                                   .toProfileUrl(),
+                            //                           isOnline: true,
+                            //                           hasStory: true,
+                            //                         ));
+                            //                   },
+                            //                   child: Padding(
+                            //                     padding: const EdgeInsets.only(
+                            //                         bottom: 14.0),
+                            //                     child: Row(
+                            //                       crossAxisAlignment:
+                            //                           CrossAxisAlignment.center,
+                            //                       children: [
+                            //                         ChatProfileWidget(
+                            //                           imageUrl:
+                            //                               filterdList[index]
+                            //                                   .otherProfileImage
+                            //                                   .toString()
+                            //                                   .toProfileUrl(),
+                            //                           isOnline: false,
+                            //                           hasStory: false,
+                            //                           radius: 20,
+                            //                         ),
+                            //                         SizedBox(width: 12),
+                            //                         Column(
+                            //                           crossAxisAlignment:
+                            //                               CrossAxisAlignment
+                            //                                   .start,
+                            //                           children: [
+                            //                             Text(
+                            //                                 filterdList[index]
+                            //                                     .fullName!,
+                            //                                 style: TextStyle(
+                            //                                   fontSize: 14.sp,
+                            //                                 )),
+                            //                             Text(
+                            //                                 filterdList[index]
+                            //                                     .username!,
+                            //                                 style: TextStyle(
+                            //                                   fontSize: 10,
+                            //                                 ))
+                            //                           ],
+                            //                         ),
+                            //                         Spacer(),
+                            //                         if (filterdList[index]
+                            //                                 .linkedTo!
+                            //                                 .toLowerCase() ==
+                            //                             'msgmee')
+                            //                           SvgPicture.asset(
+                            //                             'assets/msgmee.svg',
+                            //                           ),
+                            //                         if (filterdList[index]
+                            //                                 .linkedTo!
+                            //                                 .toLowerCase() ==
+                            //                             'sociomee')
+                            //                           Padding(
+                            //                             padding:
+                            //                                 const EdgeInsets
+                            //                                     .only(left: 5),
+                            //                             child: SvgPicture.asset(
+                            //                               'assets/sociomee.svg',
+                            //                             ),
+                            //                           ),
+                            //                       ],
+                            //                     ),
+                            //                   ),
+                            //                 );
+                            //               }),
+                            //     ),
                             //     SizedBox(width: 10),
                             //     Expanded(
-                            //         flex: 1,
+                            //         flex: 5,
                             //         child: ListView.separated(
                             //           padding: EdgeInsets.all(0),
                             //           shrinkWrap: true,
                             //           itemBuilder: (context, index) {
+                            //             final letter = String.fromCharCode(
+                            //                 'A'.codeUnitAt(0) + index);
                             //             return GestureDetector(
                             //               onTap: () {
                             //                 setState(() {
                             //                   currentindex = index;
                             //                   show = !show;
+                            //                   filterdList = state
+                            //                       .msgmeeUserList.users!
+                            //                       .where((model) => model
+                            //                           .firstName![0]
+                            //                           .toLowerCase()
+                            //                           .contains(alphabats[
+                            //                                   currentindex]
+                            //                               .toLowerCase()))
+                            //                       .toList();
+                            //                 });
+                            //                 Timer(Duration(milliseconds: 500),
+                            //                     () {
+                            //                   setState(() {
+                            //                     show = false;
+                            //                   });
                             //                 });
                             //                 print(alphabats[index]);
                             //               },
                             //               child: Container(
-                            //                 height: 3,
-                            //                 width: 3,
+                            //                 // height: 3,
+                            //                 // width: 3,
+                            //                 padding: EdgeInsets.all(2),
                             //                 decoration: BoxDecoration(
-                            //                     borderRadius:
-                            //                         BorderRadius.circular(100),
-                            //                     color: AppColors.darkbtnColor),
+                            //                   color:
+                            //                       // alphabats[index] == letter
+                            //                       // ?
+                            //                       // AppColors.darkbtnColor
+                            //                       // :
+                            //                       Colors.transparent,
+                            //                   borderRadius:
+                            //                       BorderRadius.circular(100),
+                            //                   // color: AppColors.darkbtnColor,
+                            //                 ),
+                            //                 alignment: Alignment.center,
+                            //                 child: Text(
+                            //                   letter,
+                            //                   style: TextStyle(
+                            //                       color: AppColors.black,
+                            //                       fontSize: 12),
+                            //                 ),
                             //               ),
                             //             );
                             //           },
                             //           separatorBuilder: (context, index) {
-                            //             return SizedBox(height: 23.h);
+                            //             return SizedBox(height: 3);
                             //           },
                             //           itemCount: 26,
                             //         )),
@@ -438,8 +631,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                         ),
                         show
                             ? Positioned(
-                                top: top,
-                                right: 3,
+                                // alignment: Alignment.center,
+                                bottom: (context.screenHeight / 2) - 50,
+                                left: (context.screenWidth / 2) - 60,
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -469,11 +663,59 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   }
 }
 
-class AlphabaticalFilterScreen extends StatelessWidget {
+class AlphabaticalFilterScreen extends StatefulWidget {
   const AlphabaticalFilterScreen({super.key});
 
   @override
+  State<AlphabaticalFilterScreen> createState() =>
+      _AlphabaticalFilterScreenState();
+}
+
+class _AlphabaticalFilterScreenState extends State<AlphabaticalFilterScreen> {
+  String selectedLetter = "";
+  List<String> filteredItems = [];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   filteredItems = itemList; // Initialize with all items.
+  // }
+
+  // void filterItemsByLetter(String letter) {
+  //   setState(() {
+  //     selectedLetter = letter;
+  //     filteredItems =
+  //         itemList.where((item) => item.startsWith(letter)).toList();
+  //   });
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    return Column();
+    return Column(
+      children: [
+        Container(
+          height: 400, // Adjust the height as needed
+          child: ListView.builder(
+            itemCount: 26,
+            itemBuilder: (context, index) {
+              final letter = String.fromCharCode('A'.codeUnitAt(0) + index);
+              return GestureDetector(
+                onTap: () {
+                  // filterItemsByLetter(letter);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  color: selectedLetter == letter
+                      ? Colors.blue // Highlight selected letter
+                      : Colors.transparent,
+                  child: Text(letter),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

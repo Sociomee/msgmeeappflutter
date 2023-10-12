@@ -6,7 +6,7 @@ import 'package:msgmee/common_cubits/custom_error.dart';
 import 'package:msgmee/data/model/sync_model.dart';
 
 import '../../../../../data/model/socimee_user_model.dart';
-import '../../../../../data/repository/sociomee/sync_socimee_repository.dart';
+import '../../../../../data/api_data_source/repository/sociomee/sync_socimee_repository.dart';
 import '../../../../../helper/local_data.dart';
 
 part 'sync_sociomee_state.dart';

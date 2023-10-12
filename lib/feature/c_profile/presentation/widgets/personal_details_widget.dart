@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/choose_gender_bottomsheet.dart';
 
-import '../cubit/interest/interest_cubit.dart';
 import 'choose_date_of_birth.dart';
 import 'choose_interest_bottomsheet.dart';
 import '../../../../theme/colors.dart';
@@ -22,7 +21,7 @@ class PersonalDetailsWidget extends StatefulWidget {
 class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
   @override
   void initState() {
-    context.read<InterestCubit>().getInterests();
+    // context.read<InterestCubit>().getInterests();
     // context.read<InterestCubit>().getfilterdData(widget.ids);
     super.initState();
   }

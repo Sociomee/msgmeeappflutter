@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
-import 'package:msgmee/data/repositories.dart';
-import 'package:msgmee/data/repository/dio_provider.dart';
+import 'package:msgmee/data/api_data_source/repositories.dart';
+import 'package:msgmee/data/api_data_source/repository/dio_provider.dart';
 
-import '../../../helper/local_data.dart';
+import '../../../../helper/local_data.dart';
 
 class UserSerivce implements AbUserRepository {
   var apiService = ApiService();
@@ -25,8 +27,10 @@ class UserSerivce implements AbUserRepository {
 
     if (response.statusCode == 200) {
       var res = MsgmeeUserModel.fromJson(response.data);
+      log('userId------>${res.user!.sId}');
       localData.storedata('socimeeId', res.user!.socioMeeId ?? '');
       localData.storedata('socimeePassword', res.user!.password ?? '');
+      localData.storedata('userId', res.user!.sId ?? '');
       return res;
     } else {
       throw Exception();

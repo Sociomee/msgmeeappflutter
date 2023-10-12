@@ -76,12 +76,12 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                           genderList[1].isSelected = false;
                           genderList[2].isSelected = false;
                         });
-                        context
-                            .read<UpdateProfileCubit>()
-                            .updateGender(genderList[0].gender);
+                        // context
+                        //     .read<UpdateProfileCubit>()
+                        //     .updateGender(genderList[0].gender);
                         context
                             .read<GetUserdetailsCubit>()
-                            .getUserDetailsCubit(phone);
+                            .getUserDetailsCubit();
                         Navigator.pop(context);
                       } else if (index == 1) {
                         setState(() {
@@ -89,12 +89,12 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                           genderList[0].isSelected = false;
                           genderList[2].isSelected = false;
                         });
-                        context
-                            .read<UpdateProfileCubit>()
-                            .updateGender(genderList[1].gender);
+                        // context
+                        //     .read<UpdateProfileCubit>()
+                        //     .updateGender(genderList[1].gender);
                         context
                             .read<GetUserdetailsCubit>()
-                            .getUserDetailsCubit(phone);
+                            .getUserDetailsCubit();
                         Navigator.pop(context);
                       } else {
                         setState(() {
@@ -131,24 +131,24 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                         genderList[1].isSelected = false;
                                         genderList[2].isSelected = false;
                                       });
-                                      context
-                                          .read<UpdateProfileCubit>()
-                                          .updateGender(genderList[0].gender);
+                                      // context
+                                      //     .read<UpdateProfileCubit>()
+                                      //     .updateGender(genderList[0].gender);
                                       context
                                           .read<GetUserdetailsCubit>()
-                                          .getUserDetailsCubit(phone);
+                                          .getUserDetailsCubit();
                                     } else if (index == 1) {
                                       setState(() {
                                         genderList[1].isSelected = true;
                                         genderList[0].isSelected = false;
                                         genderList[2].isSelected = false;
                                       });
-                                      context
-                                          .read<UpdateProfileCubit>()
-                                          .updateGender(genderList[1].gender);
+                                      // context
+                                      //     .read<UpdateProfileCubit>()
+                                      //     .updateGender(genderList[1].gender);
                                       context
                                           .read<GetUserdetailsCubit>()
-                                          .getUserDetailsCubit(phone);
+                                          .getUserDetailsCubit();
                                     } else {
                                       setState(() {
                                         genderList[0].isSelected = false;
@@ -197,34 +197,34 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                           specialCase[1].isSelected = false;
                                           specialCase[2].isSelected = false;
                                         });
-                                        context
-                                            .read<UpdateProfileCubit>()
-                                            .updateGender(
-                                                'I am Special ${specialCase[0].gender}');
+                                        // context
+                                        //     .read<UpdateProfileCubit>()
+                                        //     .updateGender(
+                                        //         'I am Special ${specialCase[0].gender}');
                                       } else if (index == 1) {
                                         setState(() {
                                           specialCase[1].isSelected = true;
                                           specialCase[0].isSelected = false;
                                           specialCase[2].isSelected = false;
                                         });
-                                        context
-                                            .read<UpdateProfileCubit>()
-                                            .updateGender(
-                                                'I am Special ${specialCase[1].gender}');
+                                        // context
+                                        //     .read<UpdateProfileCubit>()
+                                        //     .updateGender(
+                                        //         'I am Special ${specialCase[1].gender}');
                                       } else {
                                         setState(() {
                                           specialCase[0].isSelected = false;
                                           specialCase[1].isSelected = false;
                                           specialCase[2].isSelected = true;
                                         });
-                                        context
-                                            .read<UpdateProfileCubit>()
-                                            .updateGender(
-                                                'I am Special ${specialCase[2].gender}');
+                                        // context
+                                        //     .read<UpdateProfileCubit>()
+                                        //     .updateGender(
+                                        //         'I am Special ${specialCase[2].gender}');
                                       }
                                       context
                                           .read<GetUserdetailsCubit>()
-                                          .getUserDetailsCubit(phone);
+                                          .getUserDetailsCubit();
                                       Navigator.pop(context);
                                     },
                                     child: Column(
@@ -266,11 +266,11 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                         specialCase[2]
                                                             .isSelected = false;
                                                       });
-                                                      context
-                                                          .read<
-                                                              UpdateProfileCubit>()
-                                                          .updateGender(
-                                                              'I am Special ${specialCase[0].gender}');
+                                                      // context
+                                                      //     .read<
+                                                      //         UpdateProfileCubit>()
+                                                      //     .updateGender(
+                                                      //         'I am Special ${specialCase[0].gender}');
                                                     } else if (index == 1) {
                                                       setState(() {
                                                         specialCase[1]
@@ -280,11 +280,11 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                         specialCase[2]
                                                             .isSelected = false;
                                                       });
-                                                      context
-                                                          .read<
-                                                              UpdateProfileCubit>()
-                                                          .updateGender(
-                                                              'I am Special ${specialCase[1].gender}');
+                                                      // context
+                                                      //     .read<
+                                                      //         UpdateProfileCubit>()
+                                                      //     .updateGender(
+                                                      //         'I am Special ${specialCase[1].gender}');
                                                     } else {
                                                       setState(() {
                                                         specialCase[0]
@@ -294,17 +294,17 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                         specialCase[2]
                                                             .isSelected = true;
                                                       });
-                                                      context
-                                                          .read<
-                                                              UpdateProfileCubit>()
-                                                          .updateGender(
-                                                              'I am Special ${specialCase[2].gender}');
+                                                      // context
+                                                      //     .read<
+                                                      //         UpdateProfileCubit>()
+                                                      //     .updateGender(
+                                                      //         'I am Special ${specialCase[2].gender}');
                                                     }
                                                     context
                                                         .read<
                                                             GetUserdetailsCubit>()
                                                         .getUserDetailsCubit(
-                                                            phone);
+                                                          );
                                                     Navigator.pop(context);
                                                   })
                                             ],

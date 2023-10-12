@@ -110,12 +110,8 @@ class _EditBioBottomSheetState extends State<EditBioBottomSheet> {
                     ontap: () async {
                       if (bioController.text.isNotEmpty) {
                         context
-                            .read<UpdateProfileCubit>()
-                            .updateBio(bioController.text);
-                        var phone = await Localdata().readData('phone');
-                        context
                             .read<GetUserdetailsCubit>()
-                            .getUserDetailsCubit(phone);
+                            .getUserDetailsCubit();
                       }
 
                       Navigator.pop(context);
