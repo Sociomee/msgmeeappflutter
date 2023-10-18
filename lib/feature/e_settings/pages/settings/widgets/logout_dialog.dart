@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/navigator_function.dart';
@@ -35,6 +36,7 @@ class LogoutDialog extends StatelessWidget {
                 color: AppColors.primaryColor,
                 ontap: () {
                   Localdata().deleteData('token');
+                  SQLiteHelper().clearAndReinitializeDatabase();
                   Navigator.pop(context);
                   animatedScreenReplaceNavigator(context, SplashScreen());
                 }),

@@ -9,7 +9,8 @@ import 'package:msgmee/data/model/socimee_user_model.dart';
 import '../model/msgmee_user_model.dart';
 import '../model/sync_model.dart';
 
-final String mainbaseUrl = 'https://api.sociomessage.com';
+final String mainbaseUrl = 'https://api.msgmee.com';
+// 'https://api.sociomessage.com';
 
 abstract class AuthRepository {
   Future<bool> sendOtp(String phone);

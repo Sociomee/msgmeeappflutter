@@ -6,8 +6,6 @@ import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../c_profile/presentation/pages/story_screen.dart';
 
-
-
 class Story {
   final String imageUrl;
   final String title;
@@ -78,16 +76,22 @@ class SocialStoryWidget extends StatelessWidget {
                           animatedScreenNavigator(context, StoryScreen());
                         },
                         child: SmallProfileWidget(
-                            imageUrl: dummyStory[index].imageUrl,
-                            isOnline: false,
-                            isMe: dummyStory[index].isme,
-                            hasStory: true),
+                          imageUrl: dummyStory[index].imageUrl,
+                          isOnline: false,
+                          isMe: dummyStory[index].isme,
+                          hasStory: true,
+                        ),
                       ),
                       Title(
-                          color: AppColors.primaryColor,
-                          child: Text(dummyStory[index].title,
-                              style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold)))
+                        color: AppColors.primaryColor,
+                        child: Text(
+                          dummyStory[index].title,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

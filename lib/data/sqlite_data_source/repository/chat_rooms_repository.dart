@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
+import 'package:sqflite/sqflite.dart';
 
-import '../../model/chat_roomlist_model.dart';
+import '../../model/local_room_model.dart';
 import '../../model/messages_model.dart';
 import '../repository.dart';
 
@@ -14,10 +15,11 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
   }
 
   @override
-  Future<List<Room>> getRooms() async {
+  Future<List<LocalChatRooms>> getRooms() async {
     try {
-      final List<Map<String, dynamic>> maps =
-          await sqlite.database.query(Tables.ROOM);
+      final List<Map<String, dynamic>> maps = await sqlite.database.query(
+        Tables.ROOM,
+      );
 
       return List.generate(maps.length, (i) {
         final List<dynamic> peopleJson = jsonDecode(maps[i]['people']);
@@ -27,7 +29,7 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
             jsonDecode(maps[i]['lastMessage']);
         final LastMessage lastMessage = LastMessage.fromJson(lastMessageJson);
 
-        return Room(
+        return LocalChatRooms(
           sId: maps[i]['id'],
           people: peopleList,
           isGroup: maps[i]['isGroup'],
@@ -43,11 +45,15 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
   }
 
   @override
-  Future<void> insertRooms(Room room) async {
+  Future<void> insertRooms(LocalChatRooms room) async {
     try {
-      await sqlite.database.insert(Tables.ROOM, room.toMap());
+      await sqlite.database.insert(Tables.ROOM, room.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       log('insert room data to localDb: $e');
     }
   }
+
+  
+
 }

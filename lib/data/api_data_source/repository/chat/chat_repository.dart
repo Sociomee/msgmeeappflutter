@@ -34,24 +34,31 @@ class ChatRepostory extends AbChatReporitory {
 
   @override
   Future<MessagesModel> getChatRoomMessages({required String id}) async {
-    var token = await localData.readData('token');
-    log('token $token');
-    log('id $id');
-    var response = await apiService.dio.post(
-      '$mainbaseUrl/api/room/join',
-      options: Options(
-        headers: {
-          "Authorization": "Bearer $token",
-        },
-      ),
-      data: {'id': id},
-    );
-    // log('message response:${response.data}');
-    if (response.statusCode == 200) {
-      var data = MessagesModel.fromJson(response.data);
-      return data;
-    } else {
-      throw Exception();
+    try {
+      var token = await localData.readData('token');
+      log('token $token');
+      // log('id $id');
+      var response = await apiService.dio.post(
+        '$mainbaseUrl/api/room/join',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+        data: {'id': id},
+      );
+
+      // log('message response:${response.data}');
+
+      if (response.statusCode == 200) {
+        var data = MessagesModel.fromJson(response.data);
+        return data;
+      } else {
+        return MessagesModel();
+      }
+    } catch (e) {
+      log('Error: $e');
+      return MessagesModel();
     }
   }
 
@@ -99,9 +106,10 @@ class ChatRepostory extends AbChatReporitory {
         "contentType": contentType
       },
     );
-    // log('send message response:${response.data}');
+    log('send message response:${response.statusCode}');
     if (response.statusCode == 200) {
       var data = MessageSendSuccessModel.fromJson(response.data);
+      log('send message response:${data}');
       return data;
     } else {
       throw Exception();

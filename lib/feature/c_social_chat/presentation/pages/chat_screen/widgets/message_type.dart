@@ -1,4 +1,5 @@
 enum MessageType {
+  none,
   text,
   image,
   video,

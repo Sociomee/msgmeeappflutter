@@ -26,8 +26,8 @@ class ChatProfileWidget extends StatelessWidget {
                 : Border.all(color: AppColors.lightgrey, width: 1),
           ),
           child: SizedBox(
-            height: 55,
-            width: 55,
+            height: 50,
+            width: 50,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: CacheImageProvider(

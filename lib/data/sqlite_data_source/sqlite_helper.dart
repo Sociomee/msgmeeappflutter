@@ -36,6 +36,7 @@ class SQLiteHelper {
         linkedTo TEXT
       )
     ''';
+
   static const usertable = '''
       CREATE TABLE ${Tables.USER} (
         id TEXT PRIMARY KEY,
@@ -56,6 +57,7 @@ class SQLiteHelper {
         otherProfileImage TEXT
       )
 ''';
+
   static const roomtable = '''
       CREATE TABLE ${Tables.ROOM} (
         id TEXT PRIMARY KEY,
@@ -68,21 +70,45 @@ class SQLiteHelper {
         lastMessage TEXT
       )
     ''';
+
   static const messagetable = '''
       CREATE TABLE ${Tables.MESSAGE} (
         id TEXT PRIMARY KEY,
+        localId TEXT,
         author TEXT,
         file TEXT,
         room TEXT,
         date TEXT,
         content TEXT,
-        type TEXT
+        type TEXT,
+        status TEXT
       )
     ''';
 
   Future<void> initialize() async {
     String databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'msgmee_database.db');
+    database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute(roomtable);
+        await db.execute(messagetable);
+        await db.execute(usertable);
+        await db.execute(phonebooktable);
+        await db.execute(allconnectiontable);
+      },
+    );
+  }
+
+  Future<void> clearAndReinitializeDatabase() async {
+    await database.close();
+
+    String databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, 'msgmee_database.db');
+    await deleteDatabase(path);
+
+    // Reinitialize the database
     database = await openDatabase(
       path,
       version: 1,

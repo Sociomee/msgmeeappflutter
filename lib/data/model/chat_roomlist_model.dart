@@ -1,3 +1,4 @@
+import 'local_room_model.dart';
 import 'messages_model.dart';
 
 class ChatRoomsModel {
@@ -124,34 +125,34 @@ class Picture {
   }
 }
 
-class LastMessage {
-  String? sId;
-  String? author;
-  String? content;
-  String? room;
-  String? date;
-  int? iV;
+// class LastMessage {
+//   String? sId;
+//   String? author;
+//   String? content;
+//   String? room;
+//   String? date;
+//   int? iV;
 
-  LastMessage(
-      {this.sId, this.author, this.content, this.room, this.date, this.iV});
+//   LastMessage(
+//       {this.sId, this.author, this.content, this.room, this.date, this.iV});
 
-  LastMessage.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    author = json['author'];
-    content = json['content'];
-    room = json['room'];
-    date = json['date'];
-    iV = json['__v'];
-  }
+//   LastMessage.fromJson(Map<String, dynamic> json) {
+//     sId = json['_id'];
+//     author = json['author'];
+//     content = json['content'];
+//     room = json['room'];
+//     date = json['date'];
+//     iV = json['__v'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['author'] = this.author;
-    data['content'] = this.content;
-    data['room'] = this.room;
-    data['date'] = this.date;
-    data['__v'] = this.iV;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['_id'] = this.sId;
+//     data['author'] = this.author;
+//     data['content'] = this.content;
+//     data['room'] = this.room;
+//     data['date'] = this.date;
+//     data['__v'] = this.iV;
+//     return data;
+//   }
+// }

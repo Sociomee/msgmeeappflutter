@@ -7,7 +7,6 @@ import 'package:sqflite_common/sqlite_api.dart';
 import '../sqlite_helper.dart';
 
 class AllConnectionRepository extends AbAllConnectionRepository {
-
   @override
   Future<List<User>> getAllConnections() async {
     final List<Map<String, dynamic>> maps =
@@ -33,10 +32,8 @@ class AllConnectionRepository extends AbAllConnectionRepository {
   @override
   Future<void> insertAllconnections(User user) async {
     try {
-      await sqlite.database.insert(
-        Tables.ALLCONNECTIONS,
-        user.toMap(),
-      );
+      await sqlite.database.insert(Tables.ALLCONNECTIONS, user.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       log('insert connection error $e');
     }

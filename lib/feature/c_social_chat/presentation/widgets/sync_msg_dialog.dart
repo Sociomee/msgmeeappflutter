@@ -47,7 +47,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
       validno = phoneRegex.hasMatch(emailController.text) ||
           emailController.text.isValidEmail;
     });
-    print("---->${_isButtonEnabled}   =====${validno}");
+    print("${_isButtonEnabled}\n${validno}");
   }
 
   @override
@@ -123,7 +123,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       SizedBox(height: 20),
                       Row(
                         children: [
-                          state.status == SyncSociomeeStatus.loading
+                          state.checkStatus == CheckSociomeeStatus.loading
                               ? CustomShimmerEffect(
                                   child: CircleAvatar(
                                     radius: 28,
@@ -133,14 +133,13 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                               : CircleAvatar(
                                   radius: 28,
                                   backgroundColor: AppColors.grey,
-                                  backgroundImage: NetworkImage(state
-                                      .syncResponse
-                                      .data!
-                                      .successResult!
-                                      .profileImage!),
+                                  backgroundImage: NetworkImage(
+                                    state.syncResponse.data!.successResult!
+                                        .profileImage!,
+                                  ),
                                 ),
                           SizedBox(width: 10),
-                          if (state.status == SyncSociomeeStatus.loading)
+                          if (state.checkStatus == CheckSociomeeStatus.loading)
                             CustomShimmerEffect(
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +161,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                 )
                               ],
                             )),
-                          if (state.status == SyncSociomeeStatus.loaded)
+                          if (state.checkStatus == CheckSociomeeStatus.loaded)
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -185,20 +184,22 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                       SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: state.status == SyncSociomeeStatus.loading
-                            ? Container(
-                                alignment: Alignment.center,
-                                height: 40.w,
-                                width: 334.w,
-                                decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                        color: AppColors.primaryColor)),
-                                child: CircularProgressIndicator(
-                                  color: AppColors.white,
-                                ))
-                            : CustomButtonWidget(
+                        child:
+                            // state.status == SyncSociomeeStatus.loading
+                            //     ? Container(
+                            //         alignment: Alignment.center,
+                            //         height: 40.w,
+                            //         width: 334.w,
+                            //         decoration: BoxDecoration(
+                            //             color: AppColors.primaryColor,
+                            //             borderRadius: BorderRadius.circular(6),
+                            //             border: Border.all(
+                            //                 color: AppColors.primaryColor)),
+                            //         child: CircularProgressIndicator(
+                            //           color: AppColors.white,
+                            //         ))
+                            //     :
+                            CustomButtonWidget(
                                 height: 40.w,
                                 title: 'Continue',
                                 color: AppColors.primaryColor,
@@ -206,6 +207,7 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
                                   context
                                       .read<SyncSociomeeCubit>()
                                       .syncSociomeeAc();
+                                  Navigator.pop(context);
                                 }),
                       ),
                       SizedBox(height: 20),

@@ -88,7 +88,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
     );
     // log('addcontact response---->${response.data}');
     if (response.statusCode == 200) {
-      log('add contact response----->${response.data}');
+      // log('add contact response----->${response.data}');
     }
   }
 
@@ -106,6 +106,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
         data: {
           "phone": phone,
         });
+    log('check phone: ${response.data['status'] == true}');
     if (response.statusCode == 200 && response.data['status'] == true) {
       var data = CheckMsgmeeModel.fromJson(response.data);
       return data;

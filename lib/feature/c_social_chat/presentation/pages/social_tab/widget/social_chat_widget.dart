@@ -31,6 +31,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
   @override
   void initState() {
     super.initState();
+    context.read<ChatRoomsCubit>().getLocalChatRoomData();
   }
 
   @override
@@ -68,7 +69,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       },
                       onTap: cubit.state.isEmpty
                           ? () {
-                              state.response.rooms![index].isGroup == 'true'
+                              state.chatroom[index].isGroup == 'true'
                                   ? animatedScreenNavigator(
                                       context,
                                       GroupChatScreen(
@@ -89,20 +90,20 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                             .first.otherProfileImage
                                             .toString()
                                             .toProfileUrl(),
-                                        isOnline: state.response.rooms![index]
-                                                .people![0].lastOnline ==
-                                            DateTime.now(),
+                                        isOnline:
+                                            localpeopledata.first.lastOnline ==
+                                                DateTime.now(),
                                         lastOnline: localpeopledata
                                             .first.lastOnline
                                             .toString()
                                             .toLastOnlineTime(),
-                                        id: state.response.rooms![index].sId,
+                                        id: state.chatroom[index].sId,
                                       ));
 
                               context
                                   .read<ChatRoomsCubit>()
                                   .getchatRoomMessages(
-                                      id: state.response.rooms![index].sId!);
+                                      id: state.chatroom[index].sId!);
                             }
                           : () {
                               cubit.toggleSelection(index);
@@ -151,14 +152,17 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                        localpeopledata.first.fullName ??
-                                            "No name",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w600,
-                                        )),
+                                    SizedBox(
+                                      width: context.screenWidth * .65,
+                                      child: Text(
+                                          localpeopledata.first.fullName ??
+                                              "No name",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ),
                                     selectcubit.starClicked && isSelected
                                         ? Icon(Icons.star,
                                             color: AppColors.primaryColor,

@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:msgmee/data/model/chat_roomlist_model.dart';
-
 class MessagesModel {
   Room? room;
 
@@ -23,29 +19,31 @@ class MessagesModel {
 class Room {
   String? sId;
   List<People>? people;
-  String? isGroup;
+  bool? isGroup;
   String? lastUpdate;
   String? lastAuthor;
-  LastMessage? lastMessage;
+  String? lastMessage;
   List<Messages>? messages;
   List<String>? images;
 
-  Room(
-      {this.sId,
-      this.people,
-      this.isGroup,
-      this.lastUpdate,
-      this.lastAuthor,
-      this.lastMessage,
-      this.messages,
-      this.images});
+  Room({
+    this.sId,
+    this.people,
+    this.isGroup,
+    this.lastUpdate,
+    this.lastAuthor,
+    this.lastMessage,
+    this.messages,
+    this.images,
+  });
 
   Room.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
+
     if (json['people'] != null) {
       people = <People>[];
       json['people'].forEach((v) {
-        people!.add(new People.fromJson(v));
+        people!.add(People.fromJson(v));
       });
     }
     isGroup = json['isGroup'];
@@ -76,19 +74,6 @@ class Room {
     }
     data['images'] = this.images;
     return data;
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': sId,
-      'people': jsonEncode(people),
-      'title': '',
-      'picture': '',
-      'isGroup': isGroup,
-      'lastUpdate': lastUpdate,
-      'lastAuthor': lastAuthor,
-      'lastMessage': jsonEncode(lastMessage!.toJson()),
-    };
   }
 }
 
@@ -186,8 +171,7 @@ class Messages {
 
   Messages.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    author =
-        json['author'] != null ? new Author.fromJson(json['author']) : null;
+    author = json['author'] != null ? Author.fromJson(json['author']) : null;
     content = json['content'];
     room = json['room'];
     date = json['date'];
