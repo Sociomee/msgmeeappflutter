@@ -56,6 +56,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
                   phone: res.user!.phone!,
                   type: 'msgmee',
                 );
+
                 newUserList.add(res.user!);
               } else if (res.status == false) {
                 SyncSocimeeService().addContact(

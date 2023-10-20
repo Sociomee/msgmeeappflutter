@@ -344,9 +344,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                 : screenNavigator(
                                     context,
                                     OtherPersonProfileDescription(
-                                        imageUrl: widget.imageUrl,
-                                        name: widget.name,
-                                        isOnline: widget.isOnline));
+                                      imageUrl: widget.imageUrl,
+                                      name: widget.name,
+                                      isOnline: widget.isOnline.toString(),
+                                    ));
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -378,7 +379,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                         )
                                       : ChatProfileWidget(
                                           imageUrl: widget.imageUrl,
-                                          isOnline: widget.isOnline,
+                                          isOnline: widget.isOnline.toString(),
                                           hasStory: widget.hasStory ?? false)),
                               SizedBox(width: 10.w),
                               Column(

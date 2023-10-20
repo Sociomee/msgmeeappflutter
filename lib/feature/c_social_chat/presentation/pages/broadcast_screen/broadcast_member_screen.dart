@@ -140,7 +140,7 @@ class _BroadcastMemberScreenState extends State<BroadcastMemberScreen> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 0),
                           leading: ChatProfileWidget(
                               imageUrl: blockedUserlist[index].imageUrl,
-                              isOnline: false,
+                              isOnline: 'false',
                               hasStory: false),
                           title: Text(blockedUserlist[index].username),
                           trailing: TextButton(

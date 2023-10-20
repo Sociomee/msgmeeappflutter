@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/check_msgmee_model.dart';
 import 'package:msgmee/data/model/contact_model.dart';
@@ -6,6 +8,7 @@ import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
 
+import '../model/image_send_reponse_model.dart';
 import '../model/msgmee_user_model.dart';
 import '../model/sync_model.dart';
 
@@ -64,4 +67,8 @@ abstract class AbChatReporitory {
     required dynamic content,
     required String contentType,
   });
+  Future<ImageSendResponseModel> sendImage(
+      {required File imageFile, required String filename});
+  Future<dynamic> typing(
+      {required bool typing, required Map<String, dynamic> room});
 }

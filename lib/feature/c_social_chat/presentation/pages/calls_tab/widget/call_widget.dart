@@ -42,7 +42,7 @@ class CallWidget extends StatelessWidget {
                     children: [
                       ChatProfileWidget(
                           imageUrl: dummyPhoneData[index].imageUrl,
-                          isOnline: false,
+                          isOnline: 'false',
                           hasStory: false),
                       SizedBox(width: 13),
                       Column(

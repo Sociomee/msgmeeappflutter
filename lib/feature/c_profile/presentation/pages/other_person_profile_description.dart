@@ -17,7 +17,7 @@ class OtherPersonProfileDescription extends StatefulWidget {
       required this.isOnline});
   final String imageUrl;
   final String name;
-  final bool isOnline;
+  final String isOnline;
 
   @override
   State<OtherPersonProfileDescription> createState() =>
@@ -67,7 +67,7 @@ class _OtherPersonProfileDescriptionState
                             backgroundImage: NetworkImage(widget.imageUrl)),
                       ),
                       SizedBox(height: 10),
-                      widget.isOnline
+                      widget.isOnline == 'true'
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [

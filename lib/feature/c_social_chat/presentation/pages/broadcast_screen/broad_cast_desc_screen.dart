@@ -199,7 +199,9 @@ class _BroadCastDescriptionScreenState
                             contentPadding: EdgeInsets.symmetric(horizontal: 0),
                             leading: ChatProfileWidget(
                                 imageUrl: blockedUserlist[index].imageUrl,
-                                isOnline: blockedUserlist[index].isSelected,
+                                isOnline: blockedUserlist[index]
+                                    .isSelected
+                                    .toString(),
                                 hasStory: false),
                             title: Text(blockedUserlist[index].username),
                             trailing: Row(

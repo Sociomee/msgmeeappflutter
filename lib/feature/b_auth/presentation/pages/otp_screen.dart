@@ -201,91 +201,95 @@ class _OtpScreenState extends State<OtpScreen> {
                       left: 10,
                       right: 10,
                     ),
-                    child: Pinput(
-                      controller: _otpController,
-                      length: 6,
-                      defaultPinTheme: AppColors.defaultpintheme,
-                      focusedPinTheme: error == ''
-                          ? AppColors.focuspintheme
-                          : AppColors.errorpintheme,
-                      submittedPinTheme: error == ''
-                          ? AppColors.focuspintheme
-                          : AppColors.errorpintheme,
-                      errorPinTheme: AppColors.errorpintheme,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      ],
-                      cursor: Container(
-                          color: AppColors.black, height: 2, width: 10),
-                      errorTextStyle: TextStyle(
-                          fontSize: 12, color: AppColors.errorRedColor),
-                      errorText: error,
-                      preFilledWidget: Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.lightgrey1,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Center(
-                            child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xFFABB0BC),
-                                fontSize: 18,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                    child: AutofillGroup(
+                      child: Pinput(
+                        controller: _otpController,
+                        length: 6,
+                        defaultPinTheme: AppColors.defaultpintheme,
+                        androidSmsAutofillMethod:
+                            AndroidSmsAutofillMethod.smsRetrieverApi,
+                        focusedPinTheme: error == ''
+                            ? AppColors.focuspintheme
+                            : AppColors.errorpintheme,
+                        submittedPinTheme: error == ''
+                            ? AppColors.focuspintheme
+                            : AppColors.errorpintheme,
+                        errorPinTheme: AppColors.errorpintheme,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        cursor: Container(
+                            color: AppColors.black, height: 2, width: 10),
+                        errorTextStyle: TextStyle(
+                            fontSize: 12, color: AppColors.errorRedColor),
+                        errorText: error,
+                        preFilledWidget: Container(
+                          decoration: BoxDecoration(
+                              color: AppColors.lightgrey1,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                              child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '0',
+                                style: TextStyle(
+                                  color: Color(0xFFABB0BC),
+                                  fontSize: 18,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 5),
-                            Container(
-                                color: Color(0xFFABB0BC),
-                                height: 2,
-                                width: 14.w),
-                          ],
-                        )),
-                      ),
-                      validator: (s) {
-                        if (s!.isEmpty) {
+                              SizedBox(height: 5),
+                              Container(
+                                  color: Color(0xFFABB0BC),
+                                  height: 2,
+                                  width: 14.w),
+                            ],
+                          )),
+                        ),
+                        validator: (s) {
+                          if (s!.isEmpty) {
+                            setState(() {
+                              error = "Please Enter a Otp!";
+                            });
+                          } else if (s.length != 6) {
+                            setState(() {
+                              error = "Please Enter a Otp!";
+                            });
+                          } else {
+                            setState(() {
+                              error = '';
+                            });
+                          }
+                          return null;
+                        },
+                        onTap: () {
                           setState(() {
-                            error = "Please Enter a Otp!";
+                            isFocused = true;
+                            textFieldclick = true;
                           });
-                        } else if (s.length != 6) {
-                          setState(() {
-                            error = "Please Enter a Otp!";
-                          });
-                        } else {
-                          setState(() {
-                            error = '';
-                          });
-                        }
-                        return null;
-                      },
-                      onTap: () {
-                        setState(() {
-                          isFocused = true;
-                          textFieldclick = true;
-                        });
-                      },
-                      pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                      showCursor: true,
-                      onChanged: (pin) {
-                        print(pin.isEmpty);
-                        if (pin.isNotEmpty && pin.length == 6) {
+                        },
+                        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                        showCursor: true,
+                        onChanged: (pin) {
+                          print(pin.isEmpty);
+                          if (pin.isNotEmpty && pin.length == 6) {
+                            setState(() {
+                              isValid = true;
+                            });
+                          } else if (pin.length < 6) {
+                            setState(() {
+                              isValid = false;
+                            });
+                          }
+                        },
+                        onCompleted: (pin) {
                           setState(() {
                             isValid = true;
                           });
-                        } else if (pin.length < 6) {
-                          setState(() {
-                            isValid = false;
-                          });
-                        }
-                      },
-                      onCompleted: (pin) {
-                        setState(() {
-                          isValid = true;
-                        });
-                      },
+                        },
+                      ),
                     ),
                   ),
                   SizedBox(height: 5),

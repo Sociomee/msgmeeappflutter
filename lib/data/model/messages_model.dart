@@ -24,7 +24,7 @@ class Room {
   String? lastAuthor;
   String? lastMessage;
   List<Messages>? messages;
-  List<String>? images;
+  List<Images>? images;
 
   Room({
     this.sId,
@@ -56,7 +56,12 @@ class Room {
         messages!.add(new Messages.fromJson(v));
       });
     }
-    images = json['images'].cast<String>();
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images!.add(Images.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -72,7 +77,10 @@ class Room {
     if (this.messages != null) {
       data['messages'] = this.messages!.map((v) => v.toJson()).toList();
     }
-    data['images'] = this.images;
+    if (this.images != null) {
+      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    }
+
     return data;
   }
 }
@@ -276,3 +284,146 @@ class Author {
     return data;
   }
 }
+
+class Images {
+  String? sId;
+  Author? author;
+  String? content;
+  String? type;
+  String? room;
+  String? date;
+  int? iV;
+
+  Images(
+      {this.sId,
+      this.author,
+      this.content,
+      this.type,
+      this.room,
+      this.date,
+      this.iV});
+
+  Images.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    author =
+        json['author'] != null ? new Author.fromJson(json['author']) : null;
+    content = json['content'];
+    type = json['type'];
+    room = json['room'];
+    date = json['date'];
+    iV = json['__v'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    if (this.author != null) {
+      data['author'] = this.author!.toJson();
+    }
+    data['content'] = this.content;
+    data['type'] = this.type;
+    data['room'] = this.room;
+    data['date'] = this.date;
+    data['__v'] = this.iV;
+    return data;
+  }
+}
+
+// class Author {
+//   String? sId;
+//   String? socioMeeId;
+//   String? firstName;
+//   String? level;
+//   String? phone;
+//   String? countryCode;
+//   String? lastName;
+//   String? username;
+//   String? fullName;
+//   String? otherProfileImage;
+//   String? role;
+//   String? linkedTo;
+//   List<Null>? favorites;
+//   String? tagLine;
+//   List<String>? msgMeeContacts;
+//   List<Null>? contacts;
+//   String? otp;
+//   String? lastOnline;
+
+//   Author(
+//       {this.sId,
+//       this.socioMeeId,
+//       this.firstName,
+//       this.level,
+//       this.phone,
+//       this.countryCode,
+//       this.lastName,
+//       this.username,
+//       this.fullName,
+//       this.otherProfileImage,
+//       this.role,
+//       this.linkedTo,
+//       this.favorites,
+//       this.tagLine,
+//       this.msgMeeContacts,
+//       this.contacts,
+//       this.otp,
+//       this.lastOnline});
+
+//   Author.fromJson(Map<String, dynamic> json) {
+//     sId = json['_id'];
+//     socioMeeId = json['socioMeeId'];
+//     firstName = json['firstName'];
+//     level = json['level'];
+//     phone = json['phone'];
+//     countryCode = json['countryCode'];
+//     lastName = json['lastName'];
+//     username = json['username'];
+//     fullName = json['fullName'];
+//     otherProfileImage = json['otherProfileImage'];
+//     role = json['role'];
+//     linkedTo = json['linkedTo'];
+//     if (json['favorites'] != null) {
+//       favorites = <Null>[];
+//       json['favorites'].forEach((v) {
+//         favorites!.add(new Null.fromJson(v));
+//       });
+//     }
+//     tagLine = json['tagLine'];
+//     msgMeeContacts = json['msgMeeContacts'].cast<String>();
+//     if (json['contacts'] != null) {
+//       contacts = <Null>[];
+//       json['contacts'].forEach((v) {
+//         contacts!.add(new Null.fromJson(v));
+//       });
+//     }
+//     otp = json['otp'];
+//     lastOnline = json['lastOnline'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['_id'] = this.sId;
+//     data['socioMeeId'] = this.socioMeeId;
+//     data['firstName'] = this.firstName;
+//     data['level'] = this.level;
+//     data['phone'] = this.phone;
+//     data['countryCode'] = this.countryCode;
+//     data['lastName'] = this.lastName;
+//     data['username'] = this.username;
+//     data['fullName'] = this.fullName;
+//     data['otherProfileImage'] = this.otherProfileImage;
+//     data['role'] = this.role;
+//     data['linkedTo'] = this.linkedTo;
+//     if (this.favorites != null) {
+//       data['favorites'] = this.favorites!.map((v) => v.toJson()).toList();
+//     }
+//     data['tagLine'] = this.tagLine;
+//     data['msgMeeContacts'] = this.msgMeeContacts;
+//     if (this.contacts != null) {
+//       data['contacts'] = this.contacts!.map((v) => v.toJson()).toList();
+//     }
+//     data['otp'] = this.otp;
+//     data['lastOnline'] = this.lastOnline;
+//     return data;
+//   }
+// }

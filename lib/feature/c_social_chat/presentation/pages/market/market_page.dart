@@ -221,7 +221,7 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                       },
                                       child: ChatProfileWidget(
                                           imageUrl: dummyData[index].imageUrl,
-                                          isOnline: dummyData[index].isOnline,
+                                          isOnline: dummyData[index].isOnline.toString(),
                                           hasStory: dummyData[index].hasStory),
                                     ),
                                     SizedBox(width: 13),

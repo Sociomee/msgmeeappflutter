@@ -179,7 +179,7 @@ class _ForwardMessagePageState extends State<ForwardMessagePage> {
                           ChatProfileWidget(
                               radius: 20,
                               imageUrl: filterdList[index].profilepic,
-                              isOnline: false,
+                              isOnline: 'false',
                               hasStory: false),
                           SizedBox(width: 10),
                           Column(

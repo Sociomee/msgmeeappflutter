@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
@@ -201,6 +202,29 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
       if (sentSuccessfully.room != null) {
         MessagesRepository().updateDb('${e.room}${e.author}');
       }
+    }
+  }
+
+  //* get online users data
+  void updateUserList(List users) {
+    emit(state.copyWith(onlineUsers: users));
+  }
+
+  void typing({required bool typing, required Map<String, dynamic> room}) {
+    try {
+      ChatRepostory().typing(typing: typing, room: room);
+    } catch (e) {
+      log('typing error $e');
+    }
+  }
+
+  //* send image messages
+  Future<void> sendImageMsg(
+      {required File imageFile, required String filename}) async {
+    try {
+      await ChatRepostory().sendImage(imageFile: imageFile, filename: filename);
+    } catch (e) {
+      log('error sending message $e');
     }
   }
 }

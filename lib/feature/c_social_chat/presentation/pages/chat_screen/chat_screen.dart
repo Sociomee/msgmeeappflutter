@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +27,9 @@ import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
+import '../../../../../data/api_data_source/repository/chat/chat_repository.dart';
+import '../../../../../data/api_data_source/repository/socket/msgmee_socket.dart';
 import '../../../../../data/model/chat_model.dart';
-import '../../../../../helper/connectivity_mixin.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
@@ -49,7 +48,7 @@ class ChatScreen extends StatefulWidget {
     super.key,
     required this.name,
     required this.imageUrl,
-    required this.isOnline,
+    required this.senderId,
     this.hasStory,
     this.group,
     required this.lastOnline,
@@ -57,7 +56,7 @@ class ChatScreen extends StatefulWidget {
   });
   final String name;
   final String imageUrl;
-  final bool isOnline;
+  final String senderId;
   final String lastOnline;
   final bool? hasStory;
   final bool? group;
@@ -71,11 +70,12 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   final ImagePicker _picker = ImagePicker();
-  late Timer _timer;
+
   bool istyping = false;
   bool tap = false;
   List chattileIndex = [];
   String copiedText = 'empty';
+  MsgmeeSocket msgmeeSocket = MsgmeeSocket();
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -104,35 +104,16 @@ class _ChatScreenState extends State<ChatScreen> {
     } else if (status.isGranted || status.isRestricted) {
       final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
       if (photo != null) {
-        animatedScreenNavigator(context,
-            ImagePreViewPage(images: [photo], profileImage: widget.imageUrl));
+        var name = photo.name;
+        ChatRepostory().sendImage(filename: name, imageFile: File(photo.path));
+        // animatedScreenNavigator(context,
+        //     ImagePreViewPage(images: [photo], profileImage: widget.imageUrl));
       }
     }
   }
 
-  Map _source = {ConnectivityResult.none: false};
-  final NetworkConnectivity _networkConnectivity = NetworkConnectivity.instance;
-  String string = '';
   @override
   void initState() {
-    _networkConnectivity.initialise();
-    _networkConnectivity.myStream.listen((source) {
-      _source = source;
-      log('source $_source');
-      switch (_source.keys.toList()[0]) {
-        case ConnectivityResult.mobile:
-          string =
-              _source.values.toList()[0] ? 'Mobile: Online' : 'Mobile: Offline';
-          break;
-        case ConnectivityResult.wifi:
-          string =
-              _source.values.toList()[0] ? 'WiFi: Online' : 'WiFi: Offline';
-          break;
-        case ConnectivityResult.none:
-        default:
-          string = 'Offline';
-      }
-    });
     context.read<ChatRoomsCubit>().getPhoneAndUserid();
     context
         .read<SetChatbgCubit>()
@@ -143,7 +124,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    _timer.cancel();
     super.dispose();
   }
 
@@ -153,7 +133,12 @@ class _ChatScreenState extends State<ChatScreen> {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('d MMMM, y').format(now);
     var authorId = context.read<ChatRoomsCubit>().state.userId;
-    log('roomid ${widget.id} author id $authorId');
+
+    var online = context.watch<ChatRoomsCubit>().state.onlineUsers.where((e) {
+      return e['id'] == widget.senderId;
+    }).toList();
+    // log('Online  ${online.first['status']}');
+
     return WillPopScope(
       onWillPop: () async {
         context.read<SearchModeCubit>().closeMsgSearchMode();
@@ -164,10 +149,10 @@ class _ChatScreenState extends State<ChatScreen> {
       child: BlocConsumer<ConnectivityCubit, ConnectivityState>(
         listener: (context, state) {
           if (state.isOnline) {
-            log('sending saved messages from chat ${state.isOnline}');
-            context.read<ChatRoomsCubit>().sendSavedMsg();
+            // log('sending saved messages from chat ${state.isOnline}');
+            // context.read<ChatRoomsCubit>().sendSavedMsg();
           } else if (!state.isOnline) {
-            log('offline mode');
+            // log('offline mode');
           }
         },
         builder: (context, state) {
@@ -447,7 +432,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       OtherPersonProfileDescription(
                                         imageUrl: widget.imageUrl,
                                         name: widget.name,
-                                        isOnline: widget.isOnline,
+                                        isOnline: widget.senderId,
                                       ),
                                     );
                                   },
@@ -461,7 +446,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                           // people.first.otherProfileImage
                                           // .toString()
                                           // .toProfileUrl(),
-                                          isOnline: widget.isOnline,
+                                          isOnline: online.isNotEmpty
+                                              ? online.first['status']
+                                              : 'Offline',
                                           // chathead.data!.chatHeads![index].isOnline!,
                                           hasStory: true,
                                         ),
@@ -491,9 +478,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                           ),
                                           SizedBox(height: 8),
                                           Text(
-                                            widget.isOnline
-                                                ? 'Active Now'
-                                                : "Last Online ${widget.lastOnline}",
+                                            online.isNotEmpty
+                                                ? online.first['status']
+                                                : 'Last Online ${widget.lastOnline}',
+                                            // widget.senderId == 'true'
+                                            //     ? 'Active Now'
+                                            //     : "Last Online ${widget.lastOnline}",
                                             style: TextStyle(
                                               fontSize: 13,
                                               color: AppColors.grey,
@@ -1024,6 +1014,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   istyping = false;
                                                 });
                                               }
+                                              log('roomdata ------>${state.messages.room}');
+                                              var room =
+                                                  state.messages.room!.toJson();
+                                              //* calling typing function
+                                              context
+                                                  .read<ChatRoomsCubit>()
+                                                  .typing(
+                                                      typing: istyping,
+                                                      room: room);
                                             },
                                           )),
                                           SizedBox(width: 10),
@@ -1123,29 +1122,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                             ConnectivityCubit>()
                                                                         .state,
                                                               );
-                                                          context
-                                                              .read<
-                                                                  ChatRoomsCubit>()
-                                                              .getchatroomsList();
-                                                          //* getting message function
-                                                          _timer =
-                                                              Timer.periodic(
-                                                                  Duration(
-                                                                      seconds:
-                                                                          1),
-                                                                  (timer) {
-                                                            context
-                                                                .read<
-                                                                    ChatRoomsCubit>()
-                                                                .getchatRoomMessages(
-                                                                    id: widget
-                                                                        .id!);
-                                                            context
-                                                                .read<
-                                                                    ChatRoomsCubit>()
-                                                                .getLocalDBMessagesById(
-                                                                    widget.id!);
-                                                          });
 
                                                           messageController
                                                               .clear();

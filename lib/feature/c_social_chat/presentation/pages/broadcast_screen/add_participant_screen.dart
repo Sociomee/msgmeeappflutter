@@ -171,7 +171,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                         child: ListTile(
                           leading: ChatProfileWidget(
                               imageUrl: filteredlist[index].imageUrl,
-                              isOnline: true,
+                              isOnline: 'true',
                               hasStory: false),
                           title: Text(filteredlist[index].username),
                           trailing: Row(

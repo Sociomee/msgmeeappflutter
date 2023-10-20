@@ -39,8 +39,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     var selectcubit = context.watch<SelectedchatCubit>().state;
     final cubit = context.watch<SelectionCubit>();
     var authorId = context.read<ChatRoomsCubit>().state.userId;
-    // var userlist =
-    //     context.watch<MsgmeeUserListCubit>().state.msgmeeUserList.users;
+
     return BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -52,10 +51,6 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
               itemBuilder: (context, index) {
                 final isSelected = cubit.state.containsKey(index);
 
-                // var people =
-                //     state.response.rooms![index].people!.where((element) {
-                //   return element.sId != authorId!;
-                // }).toList();
                 var localpeopledata = state.chatroom[index].people!.where((e) {
                   return e.sId != authorId;
                 }).toList();
@@ -85,14 +80,14 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   : animatedScreenNavigator(
                                       context,
                                       ChatScreen(
-                                        name: localpeopledata.first.fullName!,
+                                        name: localpeopledata.first.fullName ??
+                                            '',
                                         imageUrl: localpeopledata
                                             .first.otherProfileImage
                                             .toString()
                                             .toProfileUrl(),
-                                        isOnline:
-                                            localpeopledata.first.lastOnline ==
-                                                DateTime.now(),
+                                        senderId:
+                                            localpeopledata.first.sId ?? '',
                                         lastOnline: localpeopledata
                                             .first.lastOnline
                                             .toString()
@@ -103,7 +98,13 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                               context
                                   .read<ChatRoomsCubit>()
                                   .getchatRoomMessages(
-                                      id: state.chatroom[index].sId!);
+                                    id: state.chatroom[index].sId!,
+                                  );
+                              context
+                                  .read<ChatRoomsCubit>()
+                                  .getLocalDBMessagesById(
+                                    state.chatroom[index].sId ?? '',
+                                  );
                             }
                           : () {
                               cubit.toggleSelection(index);
@@ -136,12 +137,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                     .first.otherProfileImage
                                     .toString()
                                     .toProfileUrl(),
-                                // people.first.otherProfileImage
-                                // .toString()
-                                // .toProfileUrl(),
-                                isOnline: localpeopledata.first.lastOnline ==
-                                    DateTime.now(),
-                                // chathead.data!.chatHeads![index].isOnline!,
+                                isOnline: localpeopledata.first.sId ?? '',
                                 hasStory: true,
                               ),
                             ),
@@ -182,13 +178,13 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                 SizedBox(
                                   width: context.screenWidth * .6,
                                   child: Text(
-                                      state.chatroom[index].lastMessage!
-                                          .content!,
-                                      // state.response.rooms![index].lastMessage!
-                                      //     .content!,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey)),
+                                    "${state.chatroom[index].lastMessage!.content}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppColors.grey,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -201,9 +197,6 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                     state.chatroom[index].lastMessage!.date
                                         .toString()
                                         .formatToCustomDate(),
-                                    // state.response.rooms![index].lastMessage!
-                                    //     .date!
-                                    //     .formatToCustomDate(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 12, color: AppColors.grey)),

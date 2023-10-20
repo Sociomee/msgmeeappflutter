@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'chatrooms_cubit.dart';
 
 enum ChatRoomStatus {
@@ -40,6 +41,7 @@ class ChatRoomsState extends Equatable {
   final String? userId;
   final List<LocalChatRooms> chatroom;
   final List<LocalMessagesModel> localmessage;
+  final List onlineUsers;
   factory ChatRoomsState.initial() {
     return ChatRoomsState(
       response: ChatRoomsModel(),
@@ -51,6 +53,7 @@ class ChatRoomsState extends Equatable {
       messageSendStatus: MessageSendStatus.initial,
       chatroom: [],
       localmessage: [],
+      onlineUsers: [],
     );
   }
 
@@ -66,6 +69,7 @@ class ChatRoomsState extends Equatable {
     this.userId,
     required this.chatroom,
     required this.localmessage,
+    required this.onlineUsers,
   });
 
   @override
@@ -80,7 +84,8 @@ class ChatRoomsState extends Equatable {
         phone ?? '',
         userId ?? "",
         chatroom,
-        localmessage
+        localmessage,
+        onlineUsers,
       ];
 
   ChatRoomsState copyWith({
@@ -95,6 +100,7 @@ class ChatRoomsState extends Equatable {
     String? userId,
     List<LocalChatRooms>? chatroom,
     List<LocalMessagesModel>? localmessage,
+    List? onlineUsers,
   }) {
     return ChatRoomsState(
       response: response ?? this.response,
@@ -108,6 +114,7 @@ class ChatRoomsState extends Equatable {
       userId: userId ?? this.userId,
       chatroom: chatroom ?? this.chatroom,
       localmessage: localmessage ?? this.localmessage,
+      onlineUsers: onlineUsers ?? this.onlineUsers,
     );
   }
 }

@@ -10,7 +10,7 @@ class ChatProfileWidget extends StatelessWidget {
       required this.hasStory,
       this.radius});
   final String imageUrl;
-  final bool isOnline;
+  final String isOnline;
   final double? radius;
   final bool hasStory;
 
@@ -46,7 +46,7 @@ class ChatProfileWidget extends StatelessWidget {
         Positioned(
           top: 40,
           right: 0,
-          child: isOnline
+          child: isOnline == 'online'
               ? Container(
                   height: 14,
                   width: 14,

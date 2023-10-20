@@ -222,7 +222,7 @@ class _BroadcastInfoState extends State<BroadcastInfo> {
                             contentPadding: EdgeInsets.symmetric(horizontal: 0),
                             leading: ChatProfileWidget(
                                 imageUrl: blockedUserlist[index].imageUrl,
-                                isOnline: false,
+                                isOnline: 'false',
                                 hasStory: false),
                             title: Text(blockedUserlist[index].username),
                             trailing: Row(

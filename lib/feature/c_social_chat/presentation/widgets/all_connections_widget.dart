@@ -30,7 +30,7 @@ class AllconnectionsWidget extends StatelessWidget {
                           .otherProfileImage
                           .toString()
                           .toProfileUrl(),
-                      isOnline: false,
+                      senderId: 'false',
                       hasStory: false,
                       lastOnline: '',
                     ));
@@ -45,7 +45,7 @@ class AllconnectionsWidget extends StatelessWidget {
                           .otherProfileImage
                           .toString()
                           .toProfileUrl(),
-                      isOnline: false,
+                      isOnline: 'false',
                       hasStory: false,
                       radius: 20,
                     ),

@@ -54,6 +54,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   double width = 0;
   double height = 0;
   bool typing = false;
+  MsgmeeSocket msgmeeSocket = MsgmeeSocket();
   late TextEditingController searchController;
   List<ChatModel> filtedUserList = [];
   List<ChatOptionsModel> options = [
@@ -104,7 +105,9 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
         .fetchContacts(context.read<MsgmeeUserListCubit>());
     context.read<SyncSociomeeCubit>().checkSocimeeCubit();
     context.read<GetUserdetailsCubit>().getUserDetailsCubit();
-    MsgmeeSocket().connectSocket();
+    msgmeeSocket.connectSocket();
+    msgmeeSocket.getOnlineUsers(context.read<ChatRoomsCubit>());
+    msgmeeSocket.receivedMessage(context.read<ChatRoomsCubit>());
     context.read<ChatRoomsCubit>().getPhoneAndUserid();
     context.read<ChatRoomsCubit>().getchatroomsList();
     _controller = TabController(length: 2, vsync: this);
@@ -493,9 +496,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                     imageUrl:
                                                         filtedUserList[index]
                                                             .imageUrl,
-                                                    isOnline:
+                                                    senderId:
                                                         filtedUserList[index]
-                                                            .isOnline,
+                                                            .isOnline
+                                                            .toString(),
                                                     hasStory:
                                                         filtedUserList[index]
                                                             .hasStory,
@@ -536,7 +540,8 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                         isOnline:
                                                             filtedUserList[
                                                                     index]
-                                                                .isOnline,
+                                                                .isOnline
+                                                                .toString(),
                                                         hasStory:
                                                             filtedUserList[
                                                                     index]

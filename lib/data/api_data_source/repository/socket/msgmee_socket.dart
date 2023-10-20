@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -12,6 +13,7 @@ class MsgmeeSocket {
     'transports': ['websocket'],
     'autoConnect': true,
   });
+
   void connectSocket() async {
     log('connecting..');
     await socket.connect();
@@ -21,9 +23,7 @@ class MsgmeeSocket {
     socket.onConnectError((error) {
       log('Connection error: $error');
     });
-    socket.on('time', (data) {
-      // log('time--->$data');
-    });
+
     socket.on('msgmee-qr-login', (data) {
       log('msgmee-qr-login ---->$data');
     });
@@ -52,6 +52,64 @@ class MsgmeeSocket {
       log('emit error--->$e');
     }
     log('deviceId $deviceId  \n token  $authtoken');
+  }
+
+  void getOnlineUsers(ChatRoomsCubit cubit) async {
+    var token = await Localdata().readData('token');
+    IO.Socket authenticatedSocket = IO.io('$mainbaseUrl', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+      'query': 'token=$token',
+      'extraHeaders': {
+        'token': '$token',
+      },
+    });
+    authenticatedSocket.on('onlineUsers', (data) {
+      final List user = data;
+      cubit.updateUserList(user);
+      log('user is online--->$user');
+    });
+  }
+
+  void receivedMessage(ChatRoomsCubit cubit) async {
+    var token = await Localdata().readData('token');
+    IO.Socket authenticatedSocket = IO.io(
+      '$mainbaseUrl',
+      <String, dynamic>{
+        'transports': ['websocket'],
+        'autoConnect': true,
+        'query': 'token=$token',
+        'extraHeaders': {
+          'token': '$token',
+        },
+      },
+    );
+    authenticatedSocket.onConnect((data) {
+      log('connected....');
+      try {
+        authenticatedSocket.emit('authenticate', [token]);
+      } catch (e) {
+        log('authentication error $e');
+      }
+    });
+    authenticatedSocket.onConnectError((error) {
+      log('Connection error: $error');
+    });
+    authenticatedSocket.on('time', (data) {
+      log('time from message in response--->$data');
+    });
+    authenticatedSocket.on('typing', (data) {
+      log('typing------>$data');
+    });
+    authenticatedSocket.on('authenticated', (data) {
+      log('authenticated $data');
+    });
+    authenticatedSocket.on('message-in', (data) {
+      log('message in response---------->$data');
+      final Map<String, dynamic> messageData = data;
+      final String roomID = messageData['room']['_id'];
+      log('roomId -->$roomID');
+    });
   }
 
   Future<bool> testSocketUrl(String url) async {

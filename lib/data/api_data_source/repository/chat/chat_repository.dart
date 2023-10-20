@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/api_data_source/repositories.dart';
@@ -8,6 +9,7 @@ import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
 
 import '../../../../helper/local_data.dart';
+import '../../../model/image_send_reponse_model.dart';
 import '../dio_provider.dart';
 
 class ChatRepostory extends AbChatReporitory {
@@ -114,5 +116,41 @@ class ChatRepostory extends AbChatReporitory {
     } else {
       throw Exception();
     }
+  }
+
+  @override
+  Future<ImageSendResponseModel> sendImage(
+      {required File imageFile, required String filename}) async {
+    var token = await localData.readData('token');
+    FormData formData = FormData.fromMap({
+      'image': await MultipartFile.fromFile(imageFile.path, filename: filename),
+    });
+    Response response = await apiService.dio.post(
+      '$mainbaseUrl/api/upload',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+      data: formData,
+    );
+    log('image upload image $response');
+    return ImageSendResponseModel.fromJson(response.data);
+  }
+
+  @override
+  Future typing(
+      {required bool typing, required Map<String, dynamic> room}) async {
+    var token = await localData.readData('token');
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/typing',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+      data: {"isTyping": typing, "room": room},
+    );
+    log('is typing response----->${response.statusCode}');
   }
 }

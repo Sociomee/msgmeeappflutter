@@ -26,7 +26,7 @@ class BizPageTab extends StatelessWidget {
                         ChatScreen(
                           name: bizpage[index].title,
                           imageUrl: bizpage[index].imageUrl,
-                          isOnline: false,
+                          senderId: 'false',
                           hasStory: false,
                           group: true,
                           lastOnline: '',

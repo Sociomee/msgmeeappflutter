@@ -332,7 +332,7 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                             OtherPersonProfileDescription(
                               imageUrl: widget.imageUrl,
                               name: widget.name,
-                              isOnline: widget.isOnline,
+                              isOnline: widget.isOnline.toString(),
                             ));
                       },
                       child: Row(
@@ -342,7 +342,7 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                               tag: widget.imageUrl,
                               child: ChatProfileWidget(
                                   imageUrl: widget.imageUrl,
-                                  isOnline: widget.isOnline,
+                                  isOnline: widget.isOnline.toString(),
                                   hasStory: widget.hasStory)),
                           SizedBox(width: 10.w),
                           Column(
