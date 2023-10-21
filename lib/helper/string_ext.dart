@@ -120,4 +120,10 @@ extension StringExtension on String {
   String _getAmPm(DateTime dateTime) {
     return dateTime.hour >= 12 ? 'PM' : 'AM';
   }
+
+  String? extractOtp() {
+    final RegExp otpRegex = RegExp(r'(\d{6})');
+    final Match? match = otpRegex.firstMatch(this);
+    return match != null ? match.group(0) : '';
+  }
 }

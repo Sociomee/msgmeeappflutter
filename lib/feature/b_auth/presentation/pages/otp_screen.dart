@@ -7,8 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import 'package:msgmee/helper/string_ext.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pinput/pinput.dart';
+import '../../../../platform_channel.dart';
 import '../../../../theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../cubit/number_validation/number_validation_cubit.dart';
@@ -49,12 +51,36 @@ class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
 
   String error = '';
+  PlatformChannel platformChannel = PlatformChannel();
+  late StreamSubscription smsSubscription;
+
+  void startListeningToSMS() {
+    smsSubscription = platformChannel.smsStream().listen((smsData) {
+      // Handle SMS events here
+      setState(() {
+        _otpController.text = smsData.toString().extractOtp() ?? '';
+      });
+      print("Received SMS: $smsData");
+    }, onError: (error) {
+      // Handle any errors that may occur while listening to SMS events
+      print("Error: $error");
+    });
+  }
+
+  void stopListeningToSMS() {
+    smsSubscription.cancel();
+  }
 
   @override
   void initState() {
     super.initState();
     startTimer();
     print(widget.number);
+    getPermission().then((value) {
+      if (value) {
+        startListeningToSMS();
+      }
+    });
   }
 
   @override
@@ -181,32 +207,40 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 21,
-                        width: 21,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              AppColors.darkbtnColor),
-                          color: AppColors.darkbtnColor,
-                          backgroundColor: AppColors.grey,
-                          // value: .3,
-                        ),
-                      ),
-                      SizedBox(width: 4),
-                      Text(
-                        'Auto fetching OTP',
-                        style: TextStyle(
-                          color: Color(0xFF828282),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w300,
-                        ),
-                      )
-                    ],
-                  ),
+                  StreamBuilder(
+                      stream: PlatformChannel().smsStream(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          _otpController.text =
+                              snapshot.data.toString().extractOtp() ?? '';
+                        }
+                        return Row(
+                          children: [
+                            SizedBox(
+                              height: 21,
+                              width: 21,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColors.darkbtnColor),
+                                color: AppColors.darkbtnColor,
+                                backgroundColor: AppColors.grey,
+                                // value: .3,
+                              ),
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Auto fetching OTP ${snapshot.data.toString().extractOtp() ?? ''}',
+                              style: TextStyle(
+                                color: Color(0xFF828282),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
                   const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(
