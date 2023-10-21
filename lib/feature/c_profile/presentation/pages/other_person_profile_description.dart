@@ -38,18 +38,23 @@ class _OtherPersonProfileDescriptionState
           appBar: AppBar(
             elevation: 0,
             leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back_ios, color: AppColors.black)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.black,
+              ),
+            ),
             leadingWidth: 40,
             titleSpacing: 5,
             title: Text(
               widget.name,
               style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                color: AppColors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           body: SingleChildScrollView(
@@ -61,9 +66,11 @@ class _OtherPersonProfileDescriptionState
                     children: [
                       Hero(
                         tag: widget.imageUrl,
-                        child: widget.imageUrl ==
+                        child: 
+                        widget.imageUrl ==
                                 'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
-                            ? CircleAvatar(
+                            ?
+                             CircleAvatar(
                                 radius: 80,
                                 backgroundColor: AppColors.white,
                                 backgroundImage:
@@ -76,7 +83,7 @@ class _OtherPersonProfileDescriptionState
                               ),
                       ),
                       SizedBox(height: 10),
-                      widget.isOnline == 'true'
+                      widget.isOnline == 'online'
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -84,13 +91,17 @@ class _OtherPersonProfileDescriptionState
                                   height: 8,
                                   width: 8,
                                   decoration: BoxDecoration(
-                                      color: AppColors.primaryColor,
-                                      borderRadius: BorderRadius.circular(100)),
+                                    color: AppColors.primaryColor,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
                                 ),
                                 SizedBox(width: 5),
-                                Text('online',
-                                    style: TextStyle(
-                                        color: AppColors.primaryColor))
+                                Text(
+                                  'online',
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                  ),
+                                )
                               ],
                             )
                           : Row(
@@ -100,19 +111,27 @@ class _OtherPersonProfileDescriptionState
                                   height: 8,
                                   width: 8,
                                   decoration: BoxDecoration(
-                                      color: AppColors.grey,
-                                      borderRadius: BorderRadius.circular(100)),
+                                    color: AppColors.grey,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
                                 ),
                                 SizedBox(width: 5),
-                                Text('offline',
-                                    style: TextStyle(
-                                        color: AppColors.primaryColor))
+                                Text(
+                                  'offline',
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                  ),
+                                )
                               ],
                             ),
                       SizedBox(height: 10),
-                      Text(widget.name,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(
+                        widget.name,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       SizedBox(height: 6),
                       Text('+91 819-745-8750', style: TextStyle(fontSize: 14))
                     ],
@@ -126,9 +145,13 @@ class _OtherPersonProfileDescriptionState
                     children: [
                       SvgPicture.asset('assets/draft.svg'),
                       SizedBox(width: 5),
-                      Text('Bio',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500)),
+                      Text(
+                        'Bio',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -138,8 +161,9 @@ class _OtherPersonProfileDescriptionState
                   child: Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(10)),
+                      color: AppColors.grey.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Text(
                       'Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit.',
                       style: TextStyle(

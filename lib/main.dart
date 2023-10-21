@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,12 +50,12 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
   ));
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final botToastBuilder = BotToastInit();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -88,9 +89,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => MsgmeeUserListCubit()),
             BlocProvider(create: (context) => ContactCubit()),
             BlocProvider(create: (context) => SyncSociomeeCubit()),
-            // BlocProvider(create: (context) => UpdateUserCubit()),
             BlocProvider(create: (context) => GetUserdetailsCubit()),
-            // BlocProvider(create: (context) => UpdateProfileCubit()),
             BlocProvider(create: (context) => SelectionGroupCubit()),
             BlocProvider(create: (context) => ContactCubit()),
             BlocProvider(create: (context) => UploadProfilepicCubit()),
@@ -101,6 +100,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             home: const SplashScreen(),
+            builder: (context, child) {
+              child = botToastBuilder(context, child);
+              return child;
+            },
           ),
         );
       },

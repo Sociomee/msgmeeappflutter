@@ -118,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
     context
         .read<SetChatbgCubit>()
         .chooseType(context.read<SetChatbgCubit>().state.bgType);
-
+    context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
     super.initState();
   }
 
@@ -417,7 +417,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                     OtherPersonProfileDescription(
                                       imageUrl: widget.imageUrl,
                                       name: widget.name,
-                                      isOnline: widget.senderId,
+                                      isOnline: online.isNotEmpty
+                                          ? online.first['status']
+                                          : 'Offline',
                                     ),
                                   );
                                 },
@@ -436,19 +438,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                             )
                                           : ChatProfileWidget(
                                               imageUrl: widget.imageUrl,
-                                              // people.first.otherProfileImage
-                                              // .toString()
-                                              // .toProfileUrl(),
                                               isOnline: online.isNotEmpty
                                                   ? online.first['status']
                                                   : 'Offline',
-                                              // chathead.data!.chatHeads![index].isOnline!,
                                               hasStory: true,
                                             ),
-                                      // child: ChatProfileWidget(
-                                      //     imageUrl: widget.imageUrl,
-                                      //     isOnline: widget.isOnline,
-                                      //     hasStory: widget.hasStory ?? false),
                                     ),
                                     SizedBox(width: 10.w),
                                     Column(

@@ -123,19 +123,16 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                           children: [
                             InkWell(
                               onTap: () {
-                                if (localpeopledata.first.otherProfileImage !=
-                                    null) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => ProfileViewDialog(
-                                            profilename:
-                                                localpeopledata.first.fullName!,
-                                            imageUrl: localpeopledata
-                                                .first.otherProfileImage
-                                                .toString()
-                                                .toProfileUrl(),
-                                          ));
-                                }
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => ProfileViewDialog(
+                                          profilename:
+                                              localpeopledata.first.fullName!,
+                                          imageUrl: localpeopledata
+                                              .first.otherProfileImage
+                                              .toString()
+                                              .toProfileUrl(),
+                                        ));
                               },
                               child: localpeopledata.first.otherProfileImage ==
                                       null

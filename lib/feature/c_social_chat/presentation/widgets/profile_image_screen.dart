@@ -32,14 +32,18 @@ class ProfileImageViewScreen extends StatelessWidget {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ))),
-      body: Center(
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
-        ),
-      ),
+      body: imageUrl == 'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
+          ? Center(
+              child: Text('No Profile Image'),
+            )
+          : Center(
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width,
+              ),
+            ),
     );
   }
 }

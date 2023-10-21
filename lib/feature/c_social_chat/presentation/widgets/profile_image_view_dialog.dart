@@ -15,16 +15,29 @@ class ProfileViewDialog extends StatelessWidget {
       content: Stack(
         children: [
           InkWell(
-              onTap: () {
-                screenNavigator(
-                    context,
-                    ProfileImageViewScreen(
-                      profilename: profilename,
-                      imageUrl: imageUrl,
-                    ));
-              },
-              child: Image.network(imageUrl,
-                  height: 328, width: 328, fit: BoxFit.cover)),
+            onTap: () {
+              screenNavigator(
+                  context,
+                  ProfileImageViewScreen(
+                    profilename: profilename,
+                    imageUrl: imageUrl,
+                  ));
+            },
+            child: imageUrl ==
+                    'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
+                ? Image.asset(
+                    'assets/profile_icon.png',
+                    height: 328,
+                    width: 328,
+                    fit: BoxFit.cover,
+                  )
+                : Image.network(
+                    imageUrl,
+                    height: 328,
+                    width: 328,
+                    fit: BoxFit.cover,
+                  ),
+          ),
           Positioned(
             top: 0,
             child: Opacity(

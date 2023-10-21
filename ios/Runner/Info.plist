@@ -60,5 +60,7 @@
 	<false/>
 	<key>NSContactsUsageDescription</key>  
 	<string>This app requires contacts access to function properly.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need SMS permission to auto fetch otp from message</string>
 </dict>
 </plist>

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/b_auth/presentation/cubit/otp_verify/otp_verify_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/msgmee_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../theme/colors.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
@@ -60,6 +61,18 @@ class _OtpScreenState extends State<OtpScreen> {
   void dispose() {
     timer!.cancel();
     super.dispose();
+  }
+
+  Future<bool> getPermission() async {
+    if (await Permission.sms.status == PermissionStatus.granted) {
+      return true;
+    } else {
+      if (await Permission.sms.request() == PermissionStatus.granted) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   @override
