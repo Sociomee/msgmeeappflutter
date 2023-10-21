@@ -94,16 +94,25 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
         if (state.createroomstatus == CreateRoomStatus.loaded) {
           context.read<ChatRoomsCubit>().getLocalDBMessagesById(
               context.read<ChatRoomsCubit>().state.createroom.room!.sId!);
-          screenNavigator(
+          animatedScreenNavigator(
               context,
               ChatScreen(
                 name: name ?? '',
                 imageUrl: imageUrl ?? '',
-                senderId: 'true',
-                hasStory: true,
+                senderId: '',
                 lastOnline: '',
                 id: context.read<ChatRoomsCubit>().state.createroom.room!.sId,
               ));
+          // screenNavigator(
+          //     context,
+          //     ChatScreen(
+          //       name: name ?? '',
+          //       imageUrl: imageUrl ?? '',
+          //       senderId: 'true',
+          //       hasStory: true,
+          //       lastOnline: '',
+          //       id: context.read<ChatRoomsCubit>().state.createroom.room!.sId,
+          //     ));
         }
       },
       builder: (context, state) {
@@ -377,15 +386,41 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                ChatProfileWidget(
-                                                  imageUrl: filterdList[index]
-                                                      .otherProfileImage
-                                                      .toString()
-                                                      .toProfileUrl(),
-                                                  isOnline: 'false',
-                                                  hasStory: false,
-                                                  radius: 20,
-                                                ),
+                                                filterdList[index]
+                                                            .otherProfileImage ==
+                                                        null
+                                                    ? Container(
+                                                        height: 50,
+                                                        width: 50,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          border: Border.all(
+                                                              color: AppColors
+                                                                  .lightgrey,
+                                                              width: 1),
+                                                        ),
+                                                        child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child: Image.asset(
+                                                                'assets/profile_icon.png')),
+                                                      )
+                                                    : ChatProfileWidget(
+                                                        imageUrl: filterdList[
+                                                                index]
+                                                            .otherProfileImage
+                                                            .toString()
+                                                            .toProfileUrl(),
+                                                        isOnline: 'false',
+                                                        hasStory: false,
+                                                        radius: 20,
+                                                      ),
                                                 SizedBox(width: 12),
                                                 Column(
                                                   crossAxisAlignment:

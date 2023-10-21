@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:msgmee/theme/colors.dart';
@@ -39,6 +41,7 @@ class CacheImageProvider extends StatelessWidget {
         return placeholder;
       },
       errorWidget: (context, url, error) {
+        log('image loading error $error');
         return errorWidget ??
             Container(
               height: 54,

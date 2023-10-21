@@ -61,10 +61,19 @@ class _OtherPersonProfileDescriptionState
                     children: [
                       Hero(
                         tag: widget.imageUrl,
-                        child: CircleAvatar(
-                            radius: 80,
-                            backgroundColor: AppColors.grey,
-                            backgroundImage: NetworkImage(widget.imageUrl)),
+                        child: widget.imageUrl ==
+                                'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
+                            ? CircleAvatar(
+                                radius: 80,
+                                backgroundColor: AppColors.white,
+                                backgroundImage:
+                                    AssetImage('assets/profile_icon.png'),
+                              )
+                            : CircleAvatar(
+                                radius: 80,
+                                backgroundColor: AppColors.grey,
+                                backgroundImage: NetworkImage(widget.imageUrl),
+                              ),
                       ),
                       SizedBox(height: 10),
                       widget.isOnline == 'true'

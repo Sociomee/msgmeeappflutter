@@ -54,8 +54,10 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                 var localpeopledata = state.chatroom[index].people!.where((e) {
                   return e.sId != authorId;
                 }).toList();
-                print('local data sender chat room:$localpeopledata');
-
+                var online = state.onlineUsers.where((e) {
+                  return e['id'] == localpeopledata.first.sId;
+                }).toList();
+                print('----->$online');
                 return Column(
                   children: [
                     GestureDetector(
@@ -121,25 +123,38 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                           children: [
                             InkWell(
                               onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ProfileViewDialog(
-                                          profilename:
-                                              localpeopledata.first.fullName!,
-                                          imageUrl: localpeopledata
-                                              .first.otherProfileImage
-                                              .toString()
-                                              .toProfileUrl(),
-                                        ));
+                                if (localpeopledata.first.otherProfileImage !=
+                                    null) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => ProfileViewDialog(
+                                            profilename:
+                                                localpeopledata.first.fullName!,
+                                            imageUrl: localpeopledata
+                                                .first.otherProfileImage
+                                                .toString()
+                                                .toProfileUrl(),
+                                          ));
+                                }
                               },
-                              child: ChatProfileWidget(
-                                imageUrl: localpeopledata
-                                    .first.otherProfileImage
-                                    .toString()
-                                    .toProfileUrl(),
-                                isOnline: localpeopledata.first.sId ?? '',
-                                hasStory: true,
-                              ),
+                              child: localpeopledata.first.otherProfileImage ==
+                                      null
+                                  ? DefaultProfileImage(
+                                      isOnline: online.isNotEmpty
+                                          ? online.first['status']
+                                          : 'Offline',
+                                      hasStory: true,
+                                    )
+                                  : ChatProfileWidget(
+                                      imageUrl: localpeopledata
+                                          .first.otherProfileImage
+                                          .toString()
+                                          .toProfileUrl(),
+                                      isOnline: online.isNotEmpty
+                                          ? online.first['status']
+                                          : 'Offline',
+                                      hasStory: true,
+                                    ),
                             ),
                             SizedBox(width: 12),
                             Column(

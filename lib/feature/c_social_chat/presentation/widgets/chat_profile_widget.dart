@@ -34,6 +34,7 @@ class ChatProfileWidget extends StatelessWidget {
                 imageUrl: imageUrl,
                 imageId: imageUrl,
                 placeholder: Container(),
+                errorWidget: Image.asset('assets/profile_icon.png'),
               ),
             ),
           ),
@@ -45,6 +46,54 @@ class ChatProfileWidget extends StatelessWidget {
         ),
         Positioned(
           top: 40,
+          right: 0,
+          child: isOnline == 'online'
+              ? Container(
+                  height: 14,
+                  width: 14,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.white, width: 2),
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(100)),
+                )
+              : Container(),
+        )
+      ],
+    );
+  }
+}
+
+class DefaultProfileImage extends StatelessWidget {
+  const DefaultProfileImage({
+    super.key,
+    required this.isOnline,
+    required this.hasStory,
+  });
+
+  final String isOnline;
+
+  final bool hasStory;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(color: AppColors.grey, width: 1),
+          ),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                'assets/profile_icon.png',
+                fit: BoxFit.cover,
+              )),
+        ),
+        Positioned(
+          top: 38,
           right: 0,
           child: isOnline == 'online'
               ? Container(

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -77,15 +78,20 @@ class MsgmeeSocket {
       '$mainbaseUrl',
       <String, dynamic>{
         'transports': ['websocket'],
-        'autoConnect': true,
-        'query': 'token=$token',
-        'extraHeaders': {
-          'token': '$token',
-        },
+        'autoConnect': false,
+        'query': {'auth_token': token}
       },
     );
+    // IO.Socket authenticatedSocket = IO.io(
+    //   mainbaseUrl,
+    //   OptionBuilder()
+    //       .setTransports(['websocket'])
+    //       .disableAutoConnect()
+    //       .setAuth({'authorization': "$token"})
+    //       .build(),
+    // );
     authenticatedSocket.onConnect((data) {
-      log('connected....');
+      log('connected.... $data');
       try {
         authenticatedSocket.emit('authenticate', [token]);
       } catch (e) {
@@ -96,7 +102,7 @@ class MsgmeeSocket {
       log('Connection error: $error');
     });
     authenticatedSocket.on('time', (data) {
-      log('time from message in response--->$data');
+      // log('time from message in response--->$data');
     });
     authenticatedSocket.on('typing', (data) {
       log('typing------>$data');
