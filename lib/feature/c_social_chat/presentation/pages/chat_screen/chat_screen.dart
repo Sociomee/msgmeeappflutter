@@ -143,6 +143,7 @@ class _ChatScreenState extends State<ChatScreen> {
           context.read<SearchModeCubit>().closeMsgSearchMode();
           context.read<ShowAttachment>().closeAttachment();
           context.read<ShowEmojiCubit>().removeEmoji();
+          context.read<SearchModeCubit>().changemsgSearchMode();
           return true;
         },
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(

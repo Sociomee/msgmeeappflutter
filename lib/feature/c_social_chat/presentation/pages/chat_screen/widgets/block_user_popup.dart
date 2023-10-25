@@ -23,7 +23,7 @@ class _BlockUserPopupWidgetState extends State<BlockUserPopupWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Text(
                   'You are going to block this contact. You cannot call and chats to this contact after blocking.',
                   style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/calls_tab/widget/delete_calls_bottomsheet.dart';
 import '../../../../../../data/model/dummy_phone_model.dart';
@@ -81,18 +82,22 @@ class CallWidget extends StatelessWidget {
                           SizedBox(height: 13),
                           Row(
                             children: [
-                              Image.asset('assets/video.png'),
+                              // Image.asset('assets/video.png'),
+                              SvgPicture.asset('assets/icons/videocam.svg'),
                               SizedBox(width: 30),
                               InkWell(
-                                  splashColor: AppColors.seconderyColor,
-                                  onTap: () {
-                                    animatedScreenNavigator(
-                                        context,
-                                        SingleCallScreen(
-                                            imageUrl: dummyPhoneData[index]
-                                                .imageUrl));
-                                  },
-                                  child: Image.asset('assets/call.png')),
+                                splashColor: AppColors.seconderyColor,
+                                onTap: () {
+                                  animatedScreenNavigator(
+                                      context,
+                                      SingleCallScreen(
+                                          imageUrl:
+                                              dummyPhoneData[index].imageUrl));
+                                },
+                                child:
+                                    SvgPicture.asset('assets/icons/phone.svg'),
+                                // child: Image.asset('assets/call.png'),
+                              ),
                             ],
                           )
                         ],
