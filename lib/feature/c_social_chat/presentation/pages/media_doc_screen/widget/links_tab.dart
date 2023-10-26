@@ -83,14 +83,17 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                     itemCount: urls.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        padding:
+                            const EdgeInsets.only(top: 6, bottom: 6, right: 6),
                         child: Container(
                           width: 391.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.2),
-                                  width: 1)),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.black.withOpacity(0.2),
+                              width: 1,
+                            ),
+                          ),
                           child: Column(
                             children: [
                               //? DO Not Delete this code
@@ -120,14 +123,26 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                         color: AppColors.black.withOpacity(.2)),
                                     alignment: Alignment.center,
                                     child: index == 2
-                                        ? Image.network(
-                                            'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                                            height: 89,
-                                            width: 89,
-                                            fit: BoxFit.cover,
+                                        ? ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                            ),
+                                            child: Image.network(
+                                              'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                                              height: 89,
+                                              width: 89,
+                                              fit: BoxFit.cover,
+                                            ),
                                           )
-                                        : SvgPicture.asset('assets/link.svg',
-                                            height: 44),
+                                        : ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'assets/link.svg',
+                                              height: 44,
+                                            ),
+                                          ),
                                   ),
                                   Expanded(
                                     child: Container(
@@ -146,7 +161,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               SizedBox(
-                                                  width: 271,
+                                                  width: 260,
                                                   child: Text(
                                                     content[index],
                                                     overflow: TextOverflow.clip,

@@ -4,6 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/choose_gender_bottomsheet.dart';
 
+import '../../../../common_widgets/shimmer_effect.dart';
+import '../../../../data/api_data_source/repository/sociomee/sync_socimee_repository.dart';
+import '../../../c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import 'choose_date_of_birth.dart';
 import 'choose_interest_bottomsheet.dart';
 import '../../../../theme/colors.dart';
@@ -19,10 +22,12 @@ class PersonalDetailsWidget extends StatefulWidget {
 }
 
 class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
+  late SyncSociomeeCubit _cubit;
   @override
   void initState() {
     // context.read<InterestCubit>().getInterests();
     // context.read<InterestCubit>().getfilterdData(widget.ids);
+    _cubit = context.read<SyncSociomeeCubit>();
     super.initState();
   }
 
@@ -417,26 +422,57 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SvgPicture.asset('assets/icon.svg')),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: CircleAvatar(
-              radius: 30,
-              backgroundColor: AppColors.grey,
-              backgroundImage: NetworkImage(
-                  'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600')),
-        ),
+
+        _cubit.state.checkStatus == CheckSociomeeStatus.loading
+            ? CustomShimmerEffect(
+                child: CircleAvatar(
+                  radius: 23,
+                  backgroundColor: AppColors.grey,
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundColor: AppColors.grey,
+                  backgroundImage: NetworkImage(
+                    _cubit
+                        .state.syncResponse.data!.successResult!.profileImage!,
+                  ),
+                ),
+              ),
         SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text('@shreya_singh012',
-              style: TextStyle(fontSize: 14, color: AppColors.black)),
-        ),
+        _cubit.state.checkStatus == CheckSociomeeStatus.loading
+            ? CustomShimmerEffect(
+                child: Container(
+                height: 10,
+                width: 90,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.grey),
+              ))
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                    _cubit.state.syncResponse.data!.successResult!.userName ??
+                        '',
+                    style: TextStyle(fontSize: 14, color: AppColors.black)),
+              ),
         SizedBox(height: 12),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text('+ 91 8954543151',
-              style: TextStyle(fontSize: 14, color: AppColors.black)),
-        ),
+        _cubit.state.checkStatus == CheckSociomeeStatus.loading
+            ? CustomShimmerEffect(
+                child: Container(
+                height: 10,
+                width: 90,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.grey),
+              ))
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text("+${_cubit.state.phone}",
+                    style: TextStyle(fontSize: 14, color: AppColors.black)),
+              ),
         SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -456,13 +492,18 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                     text: '232',
                     style: TextStyle(fontSize: 14, color: AppColors.black))
               ])),
-              Text('Unlink',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primaryColor,
-                      decoration: TextDecoration.underline))
+              InkWell(
+                onTap: () {
+                  SyncSocimeeService().removeSocimee();
+                },
+                child: Text('Unlink',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primaryColor,
+                        decoration: TextDecoration.underline)),
+              )
             ],
           ),
         ),

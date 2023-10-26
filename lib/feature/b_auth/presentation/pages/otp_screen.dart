@@ -54,16 +54,31 @@ class _OtpScreenState extends State<OtpScreen> {
   PlatformChannel platformChannel = PlatformChannel();
   late StreamSubscription smsSubscription;
 
+  // void startListeningToSMS() {
+  //   smsSubscription = platformChannel.smsStream().listen((smsData) {
+  //     // Handle SMS events here
+  //     setState(() {
+  //       _otpController.text = smsData.toString().extractOtp() ?? '';
+  //     });
+  //     print("Received SMS: $smsData");
+  //   }, onError: (error) {
+  //     print("Error: $error");
+  //   });
+  // }
   void startListeningToSMS() {
     smsSubscription = platformChannel.smsStream().listen((smsData) {
       // Handle SMS events here
-      setState(() {
-        _otpController.text = smsData.toString().extractOtp() ?? '';
-      });
+      final otp = smsData.toString().extractOtp() ?? '';
+      handleOtp(otp);
       print("Received SMS: $smsData");
     }, onError: (error) {
-      // Handle any errors that may occur while listening to SMS events
       print("Error: $error");
+    });
+  }
+
+  void handleOtp(String otp) {
+    setState(() {
+      _otpController.text = otp;
     });
   }
 
@@ -104,13 +119,13 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
-
     var min = strDigits(duration.inMinutes.remainder(60));
     var sec = strDigits(duration.inSeconds.remainder(60));
     return BlocConsumer<OtpVerifyCubit, OtpVerifyState>(
       listener: (context, state) {
         log(state.status.toString());
         if (state.status == OtpVerifyStatus.loading) {
+          // BotToast.showLoading();
           showDialog(
               context: context,
               builder: (context) {
@@ -133,6 +148,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 );
               });
         } else if (state.status == OtpVerifyStatus.loaded) {
+          // BotToast.showLoading();
           animatedScreenReplaceNavigator(context, MsgmeeScreen());
           // animatedScreenReplaceNavigator(
           //     context, NameScreen(phone: widget.number));
@@ -340,6 +356,12 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                   SizedBox(height: 5),
+                  if (context.watch<OtpVerifyCubit>().state.status ==
+                      OtpVerifyStatus.error)
+                    Text(
+                      'Invalid Otp!',
+                      style: TextStyle(color: AppColors.errorRedColor),
+                    ),
                   Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

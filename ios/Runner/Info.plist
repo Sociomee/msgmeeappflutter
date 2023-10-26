@@ -62,5 +62,10 @@
 	<string>This app requires contacts access to function properly.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need SMS permission to auto fetch otp from message</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  		<string>sms</string>
+  		<string>tel</string>
+	</array>
 </dict>
 </plist>

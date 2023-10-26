@@ -50,6 +50,7 @@ abstract class AbSyncSociomeeRepository {
     String? msgmeeId,
     String? fullName,
   });
+  Future<void> removeSocimee();
 }
 
 abstract class AbUserRepository {

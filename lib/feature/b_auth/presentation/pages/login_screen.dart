@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,22 +40,24 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<OtpSendCubit, OtpSendState>(
       listener: (context, state) {
         if (state.status == LoginStatus.loading) {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Center(
-                          child: CircularProgressIndicator(
-                              color: AppColors.darkbtnColor)),
-                    ],
-                  ),
-                );
-              });
+          // showDialog(
+          //     context: context,
+          //     builder: (context) {
+          //       return AlertDialog(
+          //         contentPadding: EdgeInsets.symmetric(vertical: 10),
+          //         content: Column(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Center(
+          //                 child: CircularProgressIndicator(
+          //                     color: AppColors.darkbtnColor)),
+          //           ],
+          //         ),
+          //       );
+          //     });
+          BotToast.showLoading();
         } else if (state.status == LoginStatus.loaded) {
+          BotToast.closeAllLoading();
           animatedScreenReplaceNavigator(context,
               OtpScreen(number: "${countryCode}${numberController.text}"));
         }
@@ -68,7 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 15),
-                child: Icon(Icons.arrow_back, color: AppColors.black, size: 24),
+                child:
+                    Icon(Icons.arrow_back, color: AppColors.black, size: 24),
               ),
             ),
             bottom: PreferredSize(
@@ -98,10 +102,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 15.sp,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
-                        color:
-                            context.watch<NumberValidationCubit>().state.isvalid
-                                ? AppColors.darkbtnColor
-                                : AppColors.inactivegrey),
+                        color: context
+                                .watch<NumberValidationCubit>()
+                                .state
+                                .isvalid
+                            ? AppColors.darkbtnColor
+                            : AppColors.inactivegrey),
                   ),
                 ),
               )
@@ -144,15 +150,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 46,
                     title: 'Get OTP',
                     fontsize: 15.sp,
-                    color: context.watch<NumberValidationCubit>().state.isvalid
-                        ? AppColors.darkbtnColor
-                        : AppColors.inactivegrey,
+                    color:
+                        context.watch<NumberValidationCubit>().state.isvalid
+                            ? AppColors.darkbtnColor
+                            : AppColors.inactivegrey,
                     borderColor:
                         context.watch<NumberValidationCubit>().state.isvalid
                             ? AppColors.darkbtnColor
                             : AppColors.inactivegrey,
                     ontap: () {
-                      if (context.read<NumberValidationCubit>().state.isvalid) {
+                      if (context
+                              .read<NumberValidationCubit>()
+                              .state
+                              .isvalid &&
+                          numberController.text.isNotEmpty) {
                         context
                             .read<OtpSendCubit>()
                             .sendOtp("91${numberController.text}");
@@ -160,14 +171,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
                 SizedBox(height: 32.h),
                 Center(
-                  child: Text(' Terms of Services & Privacy Policy.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF368C4E),
-                          fontSize: 14.sp,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline)),
+                  child: Text(
+                    'Terms of Services & Privacy Policy.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF368C4E),
+                      fontSize: 14.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 51.h)
               ],

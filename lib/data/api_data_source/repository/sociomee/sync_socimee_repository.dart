@@ -60,13 +60,14 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
   }
 
   @override
-  Future addContact(
-      {String? firstName,
-      String? lastName,
-      required String phone,
-      required String type,
-      String? msgmeeId,
-      String? fullName}) async {
+  Future addContact({
+    String? firstName,
+    String? lastName,
+    required String phone,
+    required String type,
+    String? msgmeeId,
+    String? fullName,
+  }) async {
     var token = await localData.readData('token');
 
     var data = {
@@ -115,5 +116,23 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
     } else {
       throw Exception('getting error');
     }
+  }
+
+  @override
+  Future<void> removeSocimee() async {
+    var token = await localData.readData('token');
+    var socimeeId = await localData.readData('userId');
+    log('remove sociometes $socimeeId');
+    var response =
+        await apiService.dio.post('$mainbaseUrl/api/remove-sociomates',
+            options: Options(
+              headers: {
+                "Authorization": "Bearer $token",
+              },
+            ),
+            data: {
+          "userId": socimeeId,
+        });
+    log('remove sociometes ${response.data}');
   }
 }

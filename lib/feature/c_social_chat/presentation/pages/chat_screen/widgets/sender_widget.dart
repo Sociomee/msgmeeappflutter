@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/map_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_status_widget.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/url_text_widget.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../../../theme/colors.dart';
 import '../../../cubit/chat_theme/chat_theme_cubit.dart';
@@ -63,9 +64,12 @@ class SentMessageWidget extends StatelessWidget {
                           children: [
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300),
-                              child: Text(message,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 14)),
+                              child: UrlTextWidget(text: message),
+                              // child: Text(
+                              //   message,
+                              //   style: const TextStyle(
+                              //       color: Colors.white, fontSize: 14),
+                              // ),
                             ),
                             SizedBox(height: 2),
                             Row(
@@ -869,7 +873,7 @@ class SentMessageWidget extends StatelessWidget {
                                                                 .toString() ==
                                                             'pdf'
                                                         ? SvgPicture.asset(
-                                                            'assets/docx.svg',
+                                                            'assets/pdf.svg',
                                                             height: 35)
                                                         : doc!
                                                                     .split('/')

@@ -3,10 +3,17 @@ import 'package:msgmee/theme/colors.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
+    primaryColor: AppColors.primaryColor,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      primary: AppColors.primaryColor,
+      brightness: Brightness.light,
+    ),
+    progressIndicatorTheme:
+        ProgressIndicatorThemeData(color: AppColors.primaryColor),
     scaffoldBackgroundColor: AppColors.white,
     // fontFamily: GoogleFonts.poppins().fontFamily,
     appBarTheme: AppBarTheme(
-      color: AppColors.white,
+      color: Colors.white,
       iconTheme: IconThemeData(color: Colors.white),
       toolbarTextStyle:
           TextTheme(titleMedium: TextStyle(color: AppColors.black)).bodyMedium,
