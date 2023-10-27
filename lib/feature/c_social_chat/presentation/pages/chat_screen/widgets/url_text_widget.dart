@@ -1,9 +1,9 @@
 import 'dart:developer';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class UrlTextWidget extends StatelessWidget {
   const UrlTextWidget({super.key, required this.text});
@@ -31,17 +31,10 @@ class UrlTextWidget extends StatelessWidget {
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
               log('clicking link..');
+
               if (!await launchUrl(Uri.parse(url!))) {
-                throw Exception('Could not launch $url');
+                throw BotToast.showText(text: "could not launch this url!");
               }
-              // await launchUrlString(url!);
-              // if (await canLaunch(url!)) {
-              //   await launch(url);
-              // } else {
-              //   print('Could not launch $url');
-              // }
-              // Handle URL click (e.g., open the link)
-              // You can use a package like url_launcher to open the link.
             },
         ),
       );

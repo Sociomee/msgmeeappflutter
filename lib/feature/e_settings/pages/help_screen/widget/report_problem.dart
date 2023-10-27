@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
+import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import '../../../../../theme/colors.dart';
 import '../../../../../common_widgets/custom_bottom_model_sheet.dart';
@@ -23,6 +24,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
   final ImagePicker _picker = ImagePicker();
   List<XFile>? imageFileList = [];
   bool enable = false;
+
   @override
   void initState() {
     reasonController = TextEditingController();
@@ -68,6 +70,9 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = 368;
+    double width = context.screenWidth / 2 - 30;
+    // 175;
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
@@ -189,7 +194,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10.w,
                     crossAxisSpacing: 10,
-                    childAspectRatio: 175 / 368,
+                    childAspectRatio: width / height,
+                    // 175 / 368,
                     children: List.generate(imageFileList!.length, (index) {
                       return Stack(
                         children: [
@@ -202,8 +208,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                    width: 175,
-                                    height: 368,
+                                    width: width,
+                                    height: height,
                                     padding: EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -215,8 +221,8 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                                             child: Image.file(
                                                 File(
                                                     imageFileList![index].path),
-                                                width: 175,
-                                                height: 368,
+                                                width: width,
+                                                height: height,
                                                 fit: BoxFit.cover))),
                                   ),
                                   SizedBox(width: 10)

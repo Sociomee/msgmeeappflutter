@@ -568,6 +568,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
+                                // log('message ${state.localmessage[index].content}');
                                 return Align(
                                   alignment: (authorId !=
                                           state.localmessage[index].author
@@ -577,44 +578,46 @@ class _ChatScreenState extends State<ChatScreen> {
                                           state.localmessage[index].author
                                       ? SwipeTo(
                                           onRightSwipe: () {
+                                            // log('message ${state.localmessage[index].content}');
                                             context
                                                 .read<ReplyMsgCubit>()
                                                 .replyMsg(
-                                                  widget.name,
-                                                  msg[index].messageContent,
-                                                );
+                                                    widget.name,
+                                                    state.localmessage[index]
+                                                        .content);
                                           },
                                           child: GestureDetector(
                                             onTap: () {
-                                              setState(() {
-                                                chattileIndex.remove(index);
-                                              });
-                                              context
-                                                  .read<ShowEmojiCubit>()
-                                                  .removeEmoji();
-                                              context
-                                                  .read<ShowAttachment>()
-                                                  .closeAttachment();
+                                              log('message ${state.localmessage[index].content}');
+                                              // setState(() {
+                                              //   chattileIndex.remove(index);
+                                              // });
+                                              // context
+                                              //     .read<ShowEmojiCubit>()
+                                              //     .removeEmoji();
+                                              // context
+                                              //     .read<ShowAttachment>()
+                                              //     .closeAttachment();
                                             },
                                             onLongPress: () {
-                                              if (!chattileIndex
-                                                  .contains(index)) {
-                                                setState(() {
-                                                  chattileIndex.add(index);
-                                                  copiedText =
-                                                      msg[index].messageContent;
-                                                });
-                                                context
-                                                    .read<ShowEmojiCubit>()
-                                                    .diaplayEmoji(index);
-                                              } else {
-                                                setState(() {
-                                                  chattileIndex.remove(index);
-                                                });
-                                                context
-                                                    .read<ShowEmojiCubit>()
-                                                    .removeEmoji();
-                                              }
+                                              // if (!chattileIndex
+                                              //     .contains(index)) {
+                                              //   setState(() {
+                                              //     chattileIndex.add(index);
+                                              //     copiedText =
+                                              //         msg[index].messageContent;
+                                              //   });
+                                              //   context
+                                              //       .read<ShowEmojiCubit>()
+                                              //       .diaplayEmoji(index);
+                                              // } else {
+                                              //   setState(() {
+                                              //     chattileIndex.remove(index);
+                                              //   });
+                                              //   context
+                                              //       .read<ShowEmojiCubit>()
+                                              //       .removeEmoji();
+                                              // }
                                             },
                                             child: Container(
                                               color: chattileIndex
@@ -724,8 +727,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                           onRightSwipe: () {
                                             context
                                                 .read<ReplyMsgCubit>()
-                                                .replyMsg('You',
-                                                    msg[index].messageContent);
+                                                .replyMsg(
+                                                    'You',
+                                                    state.localmessage[index]
+                                                        .content);
                                           },
                                           child: GestureDetector(
                                             onTap: () {

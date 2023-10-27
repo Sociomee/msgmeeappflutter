@@ -8,6 +8,7 @@ import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
+import 'package:msgmee/helper/list_ext.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../data/model/phonebook_model.dart';
@@ -323,7 +324,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                   physics: NeverScrollableScrollPhysics(),
                                   padding: EdgeInsets.all(0),
                                   shrinkWrap: true,
-                                  itemCount: filterdList.length,
+                                  itemCount: filterdList.customSort().length,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
