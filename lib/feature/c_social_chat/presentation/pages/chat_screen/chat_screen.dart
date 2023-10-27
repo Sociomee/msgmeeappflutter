@@ -243,8 +243,27 @@ class _ChatScreenState extends State<ChatScreen> {
                           ? AppBar(
                               toolbarHeight: 70,
                               elevation: 1,
-                              leadingWidth: 10,
+                              leadingWidth: 30,
                               titleSpacing: 0,
+                              leading: InkWell(
+                                onTap: () {
+                                  context
+                                      .read<SearchModeCubit>()
+                                      .changemsgSearchMode();
+                                  context
+                                      .read<ShowAttachment>()
+                                      .closeAttachment();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5, top: 0, bottom: 8),
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: AppColors.black,
+                                    size: 18,
+                                  ),
+                                ),
+                              ),
                               title: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -252,25 +271,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          context
-                                              .read<SearchModeCubit>()
-                                              .changemsgSearchMode();
-                                          context
-                                              .read<ShowAttachment>()
-                                              .closeAttachment();
-                                        },
-                                        icon: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10, top: 10),
-                                          child: Icon(
-                                            Icons.arrow_back_ios,
-                                            color: AppColors.black,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
                                       SizedBox(
                                         height: 40,
                                         width: 155.w,
@@ -306,6 +306,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
+                                      top: 5,
                                       left: 17.0,
                                       bottom: 10,
                                     ),
