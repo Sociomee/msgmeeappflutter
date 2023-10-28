@@ -143,7 +143,6 @@ class _ChatScreenState extends State<ChatScreen> {
           context.read<SearchModeCubit>().closeMsgSearchMode();
           context.read<ShowAttachment>().closeAttachment();
           context.read<ShowEmojiCubit>().removeEmoji();
-          context.read<SearchModeCubit>().changemsgSearchMode();
           return true;
         },
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
@@ -273,7 +272,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     children: [
                                       SizedBox(
                                         height: 40,
-                                        width: 155.w,
+                                        width: 180.w,
                                         child: TextFormField(
                                           decoration: InputDecoration(
                                             contentPadding:
@@ -340,7 +339,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               actions: [
                                 SizedBox(width: 10),
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
+                                  padding: const EdgeInsets.only(bottom: 15),
                                   child: Icon(
                                     Icons.keyboard_arrow_down,
                                     color: AppColors.black,
@@ -349,7 +348,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ),
                                 SizedBox(width: 10),
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
+                                  padding: const EdgeInsets.only(bottom: 15),
                                   child: Icon(
                                     Icons.keyboard_arrow_up,
                                     color: AppColors.black,

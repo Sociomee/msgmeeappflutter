@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/archived_list_screen.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/my_notes_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/widgets/sync_msg_dialog.dart';
 import 'package:msgmee/helper/string_ext.dart';
 
@@ -198,6 +199,14 @@ class _PopupMenuButtonWidgetState extends State<PopupMenuButtonWidget> {
             if (value == 1) {
               screenNavigator(context, NewMessageScreen());
             } else if (value == 2) {
+              animatedScreenNavigator(
+                  context,
+                  MyNotesScreen(
+                    name: 'You',
+                    imageUrl: 'imageUrl',
+                    senderId: 'senderId',
+                    lastOnline: 'My Notes',
+                  ));
             } else if (value == 3) {
               animatedScreenNavigator(context, CreateGroupPage());
             } else if (value == 4) {

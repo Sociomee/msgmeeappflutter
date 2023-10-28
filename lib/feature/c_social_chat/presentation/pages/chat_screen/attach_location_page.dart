@@ -118,9 +118,9 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                 offset: Offset(0, 0),
                 duration: Duration(milliseconds: 1500),
                 child: Expanded(
-                    child: TextFormField(
-                  autofocus: true,
-                  decoration: InputDecoration(
+                  child: TextFormField(
+                    autofocus: true,
+                    decoration: InputDecoration(
                       hintText: 'Search...',
                       hintStyle: TextStyle(
                         color: Color(0xFF999999),
@@ -128,8 +128,11 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      border: InputBorder.none),
-                )))
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              )
             : Text(
                 'Send Location',
                 style: TextStyle(
@@ -150,10 +153,7 @@ class _AttachLocationPageState extends State<AttachLocationPage> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Icon(
-                      Icons.search,
-                      color: AppColors.black,
-                    ),
+                    child: SvgPicture.asset('assets/icons/search.svg'),
                   ),
                 )
         ],
