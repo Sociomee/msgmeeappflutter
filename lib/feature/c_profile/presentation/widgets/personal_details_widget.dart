@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_profile/presentation/widgets/choose_gender_bottomsheet.dart';
+import 'package:msgmee/helper/context_ext.dart';
 
 import '../../../../common_widgets/shimmer_effect.dart';
 import '../../../../data/api_data_source/repository/sociomee/sync_socimee_repository.dart';
@@ -332,7 +333,16 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
         //     ),
         //   ),
         // ))
-        CustomInterestGridview(),
+        Center(
+          child: Container(
+              width: context.screenWidth - 40,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.grey.withOpacity(.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: CustomInterestGridview()),
+        ),
         // Padding(
         //   padding: const EdgeInsets.symmetric(horizontal: 20),
         //   child: Container(

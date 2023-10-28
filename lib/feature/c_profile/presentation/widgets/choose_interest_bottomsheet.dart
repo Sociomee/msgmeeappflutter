@@ -15,9 +15,20 @@ class ChooseInterestBottomSheet extends StatefulWidget {
 
 class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
   List<String> selectedInterests = [];
+  final List<String> interests = [
+    'Playing',
+    'Gardening',
+    'Music',
+    'Photography',
+    'Reading',
+    'Writing',
+    'Story'
+  ];
+  late List<String> modifiedInterests;
   @override
   void initState() {
     super.initState();
+    modifiedInterests = List.from(interests);
   }
 
   @override
@@ -68,6 +79,51 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
           Text('in-app experience',
               style: TextStyle(fontSize: 14, color: Color(0xB2333333))),
           SizedBox(height: 20.w),
+          Wrap(
+            spacing: 5,
+            runSpacing: 10,
+            children: modifiedInterests.map((interest) {
+              return InkWell(
+                onTap: () {
+                  if (selectedInterests.contains(interest)) {
+                    setState(() {
+                      selectedInterests.remove(interest);
+                    });
+                  } else {
+                    setState(() {
+                      selectedInterests.add(interest);
+                    });
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: selectedInterests.contains(interest)
+                        ? AppColors.primaryColor
+                        : AppColors.lightgrey1,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        interest,
+                        style: TextStyle(
+                          color: selectedInterests.contains(interest)
+                              ? AppColors.white
+                              : Color(0xFF4E4E4E),
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+
           // if (cubit.response.data != null)
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -141,6 +197,7 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
           //     ),
           //   ),
           // ),
+
           SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
