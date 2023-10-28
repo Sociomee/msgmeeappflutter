@@ -10,6 +10,7 @@ import '../../../c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cu
 import 'choose_date_of_birth.dart';
 import 'choose_interest_bottomsheet.dart';
 import '../../../../theme/colors.dart';
+import 'custom_interests_gridview.dart';
 import 'edit_bio_bottomsheet.dart';
 
 class PersonalDetailsWidget extends StatefulWidget {
@@ -330,87 +331,92 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
         //       },
         //     ),
         //   ),
+        // ))
+        CustomInterestGridview(),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   child: Container(
+        //     padding: EdgeInsets.all(10),
+        //     decoration: BoxDecoration(
+        //         color: AppColors.grey.withOpacity(.1),
+        //         borderRadius: BorderRadius.circular(10)),
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         Row(
+        //           children: [
+        //             Container(
+        //               padding:
+        //                   EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        //               decoration: BoxDecoration(
+        //                   borderRadius: BorderRadius.circular(5),
+        //                   color: AppColors.primaryColor),
+        //               child: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.start,
+        //                 children: [
+        //                   Text("Gardening",
+        //                       style: TextStyle(
+        //                         color: AppColors.white,
+        //                         fontSize: 15.sp,
+        //                         fontFamily: 'DM Sans',
+        //                         fontWeight: FontWeight.w700,
+        //                       )),
+        //                   Icon(Icons.close, color: AppColors.white)
+        //                 ],
+        //               ),
+        //             ),
+        //             SizedBox(width: 10),
+        //             Container(
+        //               padding:
+        //                   EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        //               decoration: BoxDecoration(
+        //                   borderRadius: BorderRadius.circular(5),
+        //                   color: AppColors.primaryColor),
+        //               child: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.start,
+        //                 children: [
+        //                   Text(
+        //                     'Photography',
+        //                     style: TextStyle(
+        //                       color: AppColors.white,
+        //                       fontSize: 15.sp,
+        //                       fontFamily: 'DM Sans',
+        //                       fontWeight: FontWeight.w700,
+        //                     ),
+        //                   ),
+        //                   Icon(Icons.close, color: AppColors.white)
+        //                 ],
+        //               ),
+        //             )
+        //           ],
+        //         ),
+        //         SizedBox(height: 10),
+        //         Container(
+        //           width: 102,
+        //           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        //           decoration: BoxDecoration(
+        //               borderRadius: BorderRadius.circular(5),
+        //               color: AppColors.primaryColor),
+        //           child: Row(
+        //             mainAxisAlignment: MainAxisAlignment.start,
+        //             children: [
+        //               Text('Playing',
+        //                   style: TextStyle(
+        //                     color: AppColors.white,
+        //                     fontSize: 15.sp,
+        //                     fontFamily: 'DM Sans',
+        //                     fontWeight: FontWeight.w700,
+        //                   )),
+        //               Icon(Icons.close, color: AppColors.white)
+        //             ],
+        //           ),
+        //         )
+        //       ],
+        //     ),
+
+        //   ),
         // ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.primaryColor),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text("context",
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 15.sp,
-                                fontFamily: 'DM Sans',
-                                fontWeight: FontWeight.w700,
-                              )),
-                          Icon(Icons.close, color: AppColors.white)
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.primaryColor),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('Photography',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 15.sp,
-                                fontFamily: 'DM Sans',
-                                fontWeight: FontWeight.w700,
-                              )),
-                          Icon(Icons.close, color: AppColors.white)
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10),
-                Container(
-                  width: 102,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: AppColors.primaryColor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('Playing',
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 15.sp,
-                            fontFamily: 'DM Sans',
-                            fontWeight: FontWeight.w700,
-                          )),
-                      Icon(Icons.close, color: AppColors.white)
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Divider(

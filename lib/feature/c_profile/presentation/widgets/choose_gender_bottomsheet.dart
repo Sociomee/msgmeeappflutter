@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:msgmee/feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 
-import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_user_details/get_userdetails_cubit.dart';
 
@@ -69,7 +67,6 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () async {
-                      var phone = await Localdata().readData('phone');
                       if (index == 0) {
                         setState(() {
                           genderList[0].isSelected = true;
@@ -123,8 +120,6 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                   activeColor: AppColors.primaryColor,
                                   value: genderList[index].isSelected,
                                   onChanged: (w) async {
-                                    var phone =
-                                        await Localdata().readData('phone');
                                     if (index == 0) {
                                       setState(() {
                                         genderList[0].isSelected = true;
@@ -189,8 +184,6 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                   return GestureDetector(
                                     behavior: HitTestBehavior.opaque,
                                     onTap: () async {
-                                      var phone =
-                                          await Localdata().readData('phone');
                                       if (index == 0) {
                                         setState(() {
                                           specialCase[0].isSelected = true;
@@ -254,9 +247,6 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                   value: specialCase[index]
                                                       .isSelected,
                                                   onChanged: (w) async {
-                                                    var phone =
-                                                        await Localdata()
-                                                            .readData('phone');
                                                     if (index == 0) {
                                                       setState(() {
                                                         specialCase[0]
@@ -303,8 +293,7 @@ class _ChooseGenderBottomSheetState extends State<ChooseGenderBottomSheet> {
                                                     context
                                                         .read<
                                                             GetUserdetailsCubit>()
-                                                        .getUserDetailsCubit(
-                                                          );
+                                                        .getUserDetailsCubit();
                                                     Navigator.pop(context);
                                                   })
                                             ],

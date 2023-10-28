@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
-import 'package:msgmee/feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
-import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_user_details/get_userdetails_cubit.dart';
 
@@ -159,10 +155,8 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
                   // context
                   //     .read<UpdateProfileCubit>()
                   //     .updateInterest(selectedInterests);
-                  var phone = await Localdata().readData('phone');
-                  context
-                      .read<GetUserdetailsCubit>()
-                      .getUserDetailsCubit();
+
+                  context.read<GetUserdetailsCubit>().getUserDetailsCubit();
                   // context.read<InterestCubit>().getInterests();
                   // context
                   //     .read<InterestCubit>()

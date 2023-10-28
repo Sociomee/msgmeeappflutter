@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -81,7 +80,6 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
   ];
 
   void pickGalleryPic() async {
-    // Pick an image
     var status = await Permission.camera.status;
     if (status.isDenied) {
       Permission.camera.request();
@@ -96,7 +94,6 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
   }
 
   void pickCameraPic() async {
-    // Capture a photo
     var status = await Permission.camera.status;
     if (status.isDenied) {
       Permission.camera.request();
@@ -105,8 +102,6 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
       if (photo != null) {
         ChatRepostory()
             .sendImage(filename: photo.name, imageFile: File(photo.path));
-        // animatedScreenNavigator(context,
-        //     ImagePreViewPage(images: [photo], profileImage: widget.imageUrl));
       }
     }
   }
@@ -222,7 +217,7 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                                 ),
                               ),
                               Text(
-                                '14 Feb -  28 Feb',
+                                '14 Feb - 28 Feb',
                                 style: TextStyle(
                                   color: Color(0xFF368C4E),
                                   fontSize: 12,
@@ -309,32 +304,22 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                         screenNavigator(
                           context,
                           OtherPersonProfileDescription(
-                              imageUrl: widget.imageUrl,
-                              name: widget.name,
-                              isOnline: 'Online'
-                              // online.isNotEmpty ? online.first['status'] : 'Offline',
-                              ),
+                            imageUrl: widget.imageUrl,
+                            name: widget.name,
+                            isOnline: 'Online',
+                          ),
                         );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Hero(
-                              tag: widget.imageUrl,
-                              child:
-                                  // widget.imageUrl ==
-                                  // 'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
-                                  // ?
-                                  DefaultProfileImage(
-                                isOnline: 'Online',
-                                hasStory: false,
-                              )
-                              // : ChatProfileWidget(
-                              //     imageUrl: widget.imageUrl,
-                              //     isOnline: 'Online',
-                              //     hasStory: false,
-                              //   ),
-                              ),
+                            tag: widget.imageUrl,
+                            child: DefaultProfileImage(
+                              isOnline: 'Online',
+                              hasStory: false,
+                            ),
+                          ),
                           SizedBox(width: 10.w),
                           Column(
                             mainAxisSize: MainAxisSize.min,
@@ -371,10 +356,11 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                       SizedBox(width: 25.w),
                       SvgPicture.asset('assets/calling.svg'),
                       GestureDetector(
-                          onTap: () {
-                            context.read<ShowAttachment>().closeAttachment();
-                          },
-                          child: MyNotesPopUp())
+                        onTap: () {
+                          context.read<ShowAttachment>().closeAttachment();
+                        },
+                        child: MyNotesPopUp(),
+                      )
                     ],
                   ),
             body: Stack(
@@ -425,7 +411,6 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                     padding: EdgeInsets.only(top: 40, bottom: 100),
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      // log('message ${state.localmessage[index].content}');
                       return SwipeTo(
                         onRightSwipe: () {
                           context
@@ -433,39 +418,8 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                               .replyMsg('You', notes[index]);
                         },
                         child: GestureDetector(
-                          onTap: () {
-                            // if (chattileIndex.contains(index)) {
-                            //   setState(() {
-                            //     chattileIndex.remove(index);
-                            //   });
-                            //   context.read<ShowEmojiCubit>().removeEmoji();
-                            // }
-                            // context.read<ShowAttachment>().closeAttachment();
-                            // msg[index].type == MessageType.multipleImage
-                            //     ? screenNavigator(
-                            //         context,
-                            //         MultipleImagePreviewPage(
-                            //           name: widget.name,
-                            //           images: msg[index].images,
-                            //           date: formattedDate,
-                            //           time: msg[index].time,
-                            //         ))
-                            //     : null;
-                          },
-                          onLongPress: () async {
-                            // if (!chattileIndex.contains(index)) {
-                            //   setState(() {
-                            //     chattileIndex.add(index);
-                            //     copiedText = msg[index].messageContent;
-                            //   });
-                            //   context.read<ShowEmojiCubit>().diaplayEmoji(index);
-                            // } else {
-                            //   setState(() {
-                            //     chattileIndex.remove(index);
-                            //   });
-                            //   context.read<ShowEmojiCubit>().removeEmoji();
-                            // }
-                          },
+                          onTap: () {},
+                          onLongPress: () async {},
                           child: Container(
                             color: chattileIndex.contains(index)
                                 ? AppColors.seconderyColor1

@@ -13,7 +13,6 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({
     super.key,
   });
-  // final String phone;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }

@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
-import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_user_details/get_userdetails_cubit.dart';
-import '../cubit/update_profile/update_profile_cubit.dart';
 
 class ChooseDateOfBirthBottomSheet extends StatefulWidget {
   const ChooseDateOfBirthBottomSheet({super.key});
@@ -53,8 +50,6 @@ class _ChooseDateOfBirthBottomSheetState
                     setState(() {
                       datetime = value;
                     });
-
-                    // context.read<UpdateProfileCubit>().updateDOB(datetime.toString());
                   }),
             ),
             Center(
@@ -67,9 +62,6 @@ class _ChooseDateOfBirthBottomSheetState
                     color: AppColors.primaryColor,
                     ontap: () async {
                       if (datetime.toString().isNotEmpty) {
-                        String dob = DateFormat("d MMMM y").format(datetime);
-                        // context.read<UpdateProfileCubit>().updateDOB(dob);
-
                         context
                             .read<GetUserdetailsCubit>()
                             .getUserDetailsCubit();

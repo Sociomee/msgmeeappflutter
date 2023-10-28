@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/feature/c_profile/presentation/cubit/update_profile/update_profile_cubit.dart';
 
 import '../../../../common_widgets/custom_button_widget.dart';
-import '../../../../helper/local_data.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_user_details/get_userdetails_cubit.dart';
 
