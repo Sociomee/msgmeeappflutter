@@ -271,7 +271,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                     Divider(height: 0, color: AppColors.grey),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 23, vertical: 10),
+                          horizontal: 20, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -287,42 +287,42 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                   baseColor: AppColors.borderColor,
                                   highlightColor: AppColors.grey,
                                   child: ListView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: 5,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 14.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Container(
-                                                height: 40,
-                                                width: 40,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 5,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 14.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              height: 40,
+                                              width: 40,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.grey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100)),
+                                            ),
+                                            SizedBox(width: 12),
+                                            Container(
+                                                height: 20,
+                                                width: context.screenWidth * .7,
                                                 decoration: BoxDecoration(
                                                     color: AppColors.grey,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            100)),
-                                              ),
-                                              SizedBox(width: 12),
-                                              Container(
-                                                  height: 20,
-                                                  width:
-                                                      context.screenWidth * .7,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColors.grey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)))
-                                            ],
-                                          ),
-                                        );
-                                      }))
+                                                            10)))
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
                               : ListView.builder(
                                   physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
                                   shrinkWrap: true,
                                   itemCount: filterdList.customSort().length,
                                   itemBuilder: (context, index) {
@@ -445,6 +445,29 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                   'assets/sociomee.svg',
                                                 ),
                                               ),
+                                            if (filterdList[index].linkedTo !=
+                                                    null &&
+                                                filterdList[index]
+                                                        .linkedTo!
+                                                        .toLowerCase() ==
+                                                    'both')
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/msgmee.svg',
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 5,
+                                                    ),
+                                                    child: SvgPicture.asset(
+                                                      'assets/sociomee.svg',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                           ],
                                         ),
                                       ),
@@ -466,102 +489,152 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                           //               baseColor: AppColors.borderColor,
                           //               highlightColor: AppColors.grey,
                           //               child: ListView.builder(
-                          //                   physics:
-                          //                       NeverScrollableScrollPhysics(),
-                          //                   shrinkWrap: true,
-                          //                   itemCount: 5,
-                          //                   itemBuilder: (context, index) {
-                          //                     return Padding(
-                          //                       padding:
-                          //                           const EdgeInsets.only(
-                          //                               bottom: 14.0),
-                          //                       child: Row(
-                          //                         mainAxisSize:
-                          //                             MainAxisSize.min,
-                          //                         children: [
-                          //                           Container(
-                          //                             height: 40,
-                          //                             width: 40,
-                          //                             decoration: BoxDecoration(
-                          //                                 color:
-                          //                                     AppColors.grey,
-                          //                                 borderRadius:
-                          //                                     BorderRadius
-                          //                                         .circular(
-                          //                                             100)),
+                          //                 physics:
+                          //                     NeverScrollableScrollPhysics(),
+                          //                 shrinkWrap: true,
+                          //                 itemCount: 5,
+                          //                 itemBuilder: (context, index) {
+                          //                   return Padding(
+                          //                     padding: const EdgeInsets.only(
+                          //                         bottom: 14.0),
+                          //                     child: Row(
+                          //                       mainAxisSize: MainAxisSize.min,
+                          //                       children: [
+                          //                         Container(
+                          //                           height: 40,
+                          //                           width: 40,
+                          //                           decoration: BoxDecoration(
+                          //                               color: AppColors.grey,
+                          //                               borderRadius:
+                          //                                   BorderRadius
+                          //                                       .circular(100)),
+                          //                         ),
+                          //                         SizedBox(width: 12),
+                          //                         Container(
+                          //                           height: 20,
+                          //                           width: context.screenWidth *
+                          //                               .7,
+                          //                           decoration: BoxDecoration(
+                          //                             color: AppColors.grey,
+                          //                             borderRadius:
+                          //                                 BorderRadius.circular(
+                          //                               10,
+                          //                             ),
                           //                           ),
-                          //                           SizedBox(width: 12),
-                          //                           Container(
-                          //                               height: 20,
-                          //                               width: context
-                          //                                       .screenWidth *
-                          //                                   .7,
-                          //                               decoration: BoxDecoration(
-                          //                                   color: AppColors
-                          //                                       .grey,
-                          //                                   borderRadius:
-                          //                                       BorderRadius
-                          //                                           .circular(
-                          //                                               10)))
-                          //                         ],
-                          //                       ),
-                          //                     );
-                          //                   }))
+                          //                         ),
+                          //                       ],
+                          //                     ),
+                          //                   );
+                          //                 },
+                          //               ),
+                          //             )
                           //           : ListView.builder(
-                          //               physics:
-                          //                   NeverScrollableScrollPhysics(),
-                          //               padding: EdgeInsets.all(0),
+                          //               physics: NeverScrollableScrollPhysics(),
                           //               shrinkWrap: true,
-                          //               itemCount: filterdList.length,
+                          //               itemCount:
+                          //                   filterdList.customSort().length,
                           //               itemBuilder: (context, index) {
                           //                 return GestureDetector(
                           //                   onTap: () {
-                          //                     screenNavigator(
-                          //                         context,
-                          //                         ChatScreen(
-                          //                           name: filterdList[index]
-                          //                               .fullName!,
-                          //                           imageUrl:
-                          //                               filterdList[index]
-                          //                                   .otherProfileImage
-                          //                                   .toString()
-                          //                                   .toProfileUrl(),
-                          //                           isOnline: true,
-                          //                           hasStory: true,
-                          //                         ));
+                          //                     log('create room initialize..');
+                          //                     BotToast.showLoading();
+                          //                     context
+                          //                         .read<ChatRoomsCubit>()
+                          //                         .createchatRoom(
+                          //                           userid:
+                          //                               filterdList[index].sId!,
+                          //                         )
+                          //                         .then((value) {
+                          //                       animatedScreenNavigator(
+                          //                           context,
+                          //                           ChatScreen(
+                          //                             name: filterdList[index]
+                          //                                     .fullName ??
+                          //                                 '',
+                          //                             imageUrl:
+                          //                                 filterdList[index]
+                          //                                     .otherProfileImage
+                          //                                     .toString()
+                          //                                     .toProfileUrl(),
+                          //                             senderId: '',
+                          //                             lastOnline: '',
+                          //                             id: context
+                          //                                 .read<
+                          //                                     ChatRoomsCubit>()
+                          //                                 .state
+                          //                                 .createroom
+                          //                                 .room!
+                          //                                 .sId,
+                          //                           ));
+                          //                       BotToast.closeAllLoading();
+                          //                     });
                           //                   },
                           //                   child: Padding(
                           //                     padding: const EdgeInsets.only(
-                          //                         bottom: 14.0),
+                          //                       bottom: 14.0,
+                          //                     ),
                           //                     child: Row(
                           //                       crossAxisAlignment:
                           //                           CrossAxisAlignment.center,
                           //                       children: [
-                          //                         ChatProfileWidget(
-                          //                           imageUrl:
-                          //                               filterdList[index]
-                          //                                   .otherProfileImage
-                          //                                   .toString()
-                          //                                   .toProfileUrl(),
-                          //                           isOnline: false,
-                          //                           hasStory: false,
-                          //                           radius: 20,
-                          //                         ),
+                          //                         filterdList[index]
+                          //                                     .otherProfileImage ==
+                          //                                 null
+                          //                             ? Container(
+                          //                                 height: 50,
+                          //                                 width: 50,
+                          //                                 decoration:
+                          //                                     BoxDecoration(
+                          //                                   borderRadius:
+                          //                                       BorderRadius
+                          //                                           .circular(
+                          //                                               100),
+                          //                                   border: Border.all(
+                          //                                       color: AppColors
+                          //                                           .lightgrey,
+                          //                                       width: 1),
+                          //                                 ),
+                          //                                 child: ClipRRect(
+                          //                                   borderRadius:
+                          //                                       BorderRadius
+                          //                                           .circular(
+                          //                                               100),
+                          //                                   child: Image.asset(
+                          //                                     'assets/profile_icon.png',
+                          //                                   ),
+                          //                                 ),
+                          //                               )
+                          //                             : ChatProfileWidget(
+                          //                                 imageUrl: filterdList[
+                          //                                         index]
+                          //                                     .otherProfileImage
+                          //                                     .toString()
+                          //                                     .toProfileUrl(),
+                          //                                 isOnline: 'false',
+                          //                                 hasStory: false,
+                          //                                 radius: 20,
+                          //                               ),
                           //                         SizedBox(width: 12),
                           //                         Column(
                           //                           crossAxisAlignment:
                           //                               CrossAxisAlignment
                           //                                   .start,
                           //                           children: [
+                          //                             SizedBox(
+                          //                               width: context
+                          //                                       .screenWidth *
+                          //                                   .6,
+                          //                               child: Text(
+                          //                                   filterdList[index]
+                          //                                       .fullName!,
+                          //                                   style: TextStyle(
+                          //                                     fontSize: 14.sp,
+                          //                                   )),
+                          //                             ),
                           //                             Text(
                           //                                 filterdList[index]
-                          //                                     .fullName!,
-                          //                                 style: TextStyle(
-                          //                                   fontSize: 14.sp,
-                          //                                 )),
-                          //                             Text(
-                          //                                 filterdList[index]
-                          //                                     .username!,
+                          //                                         .username ??
+                          //                                     '',
                           //                                 style: TextStyle(
                           //                                   fontSize: 10,
                           //                                 ))
@@ -569,23 +642,56 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                           //                         ),
                           //                         Spacer(),
                           //                         if (filterdList[index]
-                          //                                 .linkedTo!
-                          //                                 .toLowerCase() ==
-                          //                             'msgmee')
+                          //                                     .linkedTo !=
+                          //                                 null &&
+                          //                             filterdList[index]
+                          //                                     .linkedTo!
+                          //                                     .toLowerCase() ==
+                          //                                 'msgmee')
                           //                           SvgPicture.asset(
                           //                             'assets/msgmee.svg',
                           //                           ),
                           //                         if (filterdList[index]
-                          //                                 .linkedTo!
-                          //                                 .toLowerCase() ==
-                          //                             'sociomee')
+                          //                                     .linkedTo !=
+                          //                                 null &&
+                          //                             filterdList[index]
+                          //                                     .linkedTo!
+                          //                                     .toLowerCase() ==
+                          //                                 'sociomee')
                           //                           Padding(
                           //                             padding:
-                          //                                 const EdgeInsets
-                          //                                     .only(left: 5),
+                          //                                 const EdgeInsets.only(
+                          //                                     left: 5),
                           //                             child: SvgPicture.asset(
                           //                               'assets/sociomee.svg',
                           //                             ),
+                          //                           ),
+                          //                         if (filterdList[index]
+                          //                                     .linkedTo !=
+                          //                                 null &&
+                          //                             filterdList[index]
+                          //                                     .linkedTo!
+                          //                                     .toLowerCase() ==
+                          //                                 'both')
+                          //                           Row(
+                          //                             mainAxisSize:
+                          //                                 MainAxisSize.min,
+                          //                             children: [
+                          //                               SvgPicture.asset(
+                          //                                 'assets/msgmee.svg',
+                          //                               ),
+                          //                               Padding(
+                          //                                 padding:
+                          //                                     const EdgeInsets
+                          //                                         .only(
+                          //                                   left: 5,
+                          //                                 ),
+                          //                                 child:
+                          //                                     SvgPicture.asset(
+                          //                                   'assets/sociomee.svg',
+                          //                                 ),
+                          //                               ),
+                          //                             ],
                           //                           ),
                           //                       ],
                           //                     ),
@@ -612,9 +718,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                           //                       .where((model) => model
                           //                           .firstName![0]
                           //                           .toLowerCase()
-                          //                           .contains(alphabats[
-                          //                                   currentindex]
-                          //                               .toLowerCase()))
+                          //                           .contains(
+                          //                               alphabats[currentindex]
+                          //                                   .toLowerCase()))
                           //                       .toList();
                           //                 });
                           //                 Timer(Duration(milliseconds: 500),
