@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/exit_alert_dialog.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/pending_group_request_screen.dart';
 
 import 'package:msgmee/theme/colors.dart';
 
@@ -184,30 +185,35 @@ class _GroupChatPageState extends State<GroupChatPage> {
             child: Divider(
                 color: AppColors.lightgrey.withOpacity(.5), thickness: 5),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Pending Request',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+          InkWell(
+            onTap: () {
+              animatedScreenNavigator(context, PendingGroupRequestScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Pending Request',
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Text(
-                  '(3)',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
+                  Text(
+                    '(3)',
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Padding(

@@ -341,11 +341,8 @@ class _MarketPageTabState extends State<MarketPageTab> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(marketlist[index].imageUrl,
-                                  height: 41, width: 41, fit: BoxFit.cover),
-                            ),
+                            child: Image.network(marketlist[index].imageUrl,
+                                height: 41, width: 41, fit: BoxFit.cover),
                           ),
                         ),
                         SizedBox(width: 10.w),

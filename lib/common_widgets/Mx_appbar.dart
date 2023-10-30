@@ -10,6 +10,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.elevation,
     this.centerTitle,
+    this.shadowColor,
   }) : super(key: key);
 
   final Widget? title;
@@ -18,7 +19,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final double? elevation;
   final bool? centerTitle;
-
+  final Color? shadowColor;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -28,6 +29,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       title: title,
       centerTitle: centerTitle,
+      shadowColor: shadowColor,
       leading: leading ??
           IconButton(
             onPressed: () {

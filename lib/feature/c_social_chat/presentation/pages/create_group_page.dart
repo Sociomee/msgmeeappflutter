@@ -10,7 +10,9 @@ import 'package:msgmee/theme/colors.dart';
 import '../../../../common_widgets/custom_bottom_model_sheet.dart';
 import '../../../../data/model/group_participants_model.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
+import '../../../../helper/navigator_function.dart';
 import '../../../c_profile/presentation/widgets/text_field_widget.dart';
+import 'group_chat_screen/pending_group_request_screen.dart';
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({super.key});
@@ -364,7 +366,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 borderColor: AppColors.primaryColor,
                 // : AppColors.primaryColor.withOpacity(.5),
                 ontap: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+                  animatedScreenNavigator(context, PendingGroupRequestScreen());
                 },
                 title: 'CONTINUE',
                 color: AppColors.primaryColor,
