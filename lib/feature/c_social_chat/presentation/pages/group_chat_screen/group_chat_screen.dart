@@ -334,20 +334,12 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                         title: GestureDetector(
                           onTap: () {
                             context.read<ShowAttachment>().closeAttachment();
-                            widget.name == 'Office Group'
-                                ? screenNavigator(
-                                    context,
-                                    GroupChatPage(
-                                      imageUrl: widget.imageUrl,
-                                      name: widget.name,
-                                    ))
-                                : screenNavigator(
-                                    context,
-                                    OtherPersonProfileDescription(
-                                      imageUrl: widget.imageUrl,
-                                      name: widget.name,
-                                      isOnline: widget.isOnline.toString(),
-                                    ));
+                            screenNavigator(
+                                context,
+                                GroupChatPage(
+                                  imageUrl: widget.imageUrl,
+                                  name: widget.name,
+                                ));
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,

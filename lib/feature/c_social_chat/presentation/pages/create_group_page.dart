@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/common_widgets/mx_appbar.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/group_chat_screen/group_chat_screen.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../common_widgets/custom_bottom_model_sheet.dart';
@@ -367,7 +368,15 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 // : AppColors.primaryColor.withOpacity(.5),
                 ontap: () {
                   // Navigator.pop(context);
-                  animatedScreenNavigator(context, PendingGroupRequestScreen());
+                  animatedScreenNavigator(
+                    context,
+                    GroupChatScreen(
+                      name: 'group',
+                      imageUrl:
+                          'https://plus.unsplash.com/premium_photo-1694704421636-b291d5dc7471?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                      isOnline: false,
+                    ),
+                  );
                 },
                 title: 'CONTINUE',
                 color: AppColors.primaryColor,
