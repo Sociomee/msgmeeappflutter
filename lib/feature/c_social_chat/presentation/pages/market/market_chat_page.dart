@@ -913,7 +913,8 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                         height:
                             context.watch<ShowAttachment>().state ? 44 * 6 : 0,
                         width: 150,
-                        child: AttachedIcon(profileImage: widget.imageUrl))),
+                        child: AttachedIcon(
+                            profileImage: widget.imageUrl, name: widget.name))),
 
                 //?showing current date
                 Align(

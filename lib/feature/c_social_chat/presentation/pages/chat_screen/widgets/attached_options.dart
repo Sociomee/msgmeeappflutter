@@ -38,8 +38,10 @@ class CustomIcons {
 }
 
 class AttachedIcon extends StatefulWidget {
-  const AttachedIcon({super.key, required this.profileImage});
+  const AttachedIcon(
+      {super.key, required this.profileImage, required this.name});
   final String profileImage;
+  final String name;
   @override
   State<AttachedIcon> createState() => _AttachedIconState();
 }
@@ -156,7 +158,11 @@ class _AttachedIconState extends State<AttachedIcon> {
                 pickCameraPic();
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 2) {
-                animatedScreenNavigator(context, AttachContactPage());
+                animatedScreenNavigator(
+                    context,
+                    AttachContactPage(
+                      name: widget.name,
+                    ));
                 context.read<ShowAttachment>().toggleValue();
               } else if (index == 3) {
                 pickGalleryPic();

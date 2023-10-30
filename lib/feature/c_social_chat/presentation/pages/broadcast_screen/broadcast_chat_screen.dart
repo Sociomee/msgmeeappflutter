@@ -270,6 +270,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                             width: 150,
                             child: AttachedIcon(
                               profileImage: '',
+                              name: '',
                             )))
                     : Container()
               ],

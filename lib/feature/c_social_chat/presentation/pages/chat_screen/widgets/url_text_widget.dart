@@ -51,6 +51,7 @@
 //   }
 // }
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:msgmee/theme/colors.dart';
@@ -98,11 +99,9 @@ class _UrlTextWidgetState extends State<UrlTextWidget> {
             ..onTap = () async {
               print('clicking link..');
 
-              if (!await canLaunch(url!)) {
-                throw Exception("Could not launch this URL: $url");
+              if (!await launchUrl(Uri.parse(url!))) {
+                throw BotToast.showText(text: "could not launch this url!");
               }
-
-              await launch(url);
             },
         ),
       );

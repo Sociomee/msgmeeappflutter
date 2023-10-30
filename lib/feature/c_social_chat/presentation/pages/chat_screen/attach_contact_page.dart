@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,8 +30,8 @@ List<ContactModel> contacts = [
 ];
 
 class AttachContactPage extends StatefulWidget {
-  const AttachContactPage({super.key});
-
+  const AttachContactPage({super.key, required this.name});
+  final String name;
   @override
   State<AttachContactPage> createState() => _AttachContactPageState();
 }
@@ -82,22 +84,91 @@ class _AttachContactPageState extends State<AttachContactPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              if (selected.isNotEmpty && selected.length == 1) {
-                context.read<ShowContactTextField>().toggleValue();
-                Navigator.pop(context);
-              } else if (selected.length > 1) {
-                for (var i = 0; i < selected.length; i++) {
-                  context.read<AddMessageCubit>().addMessage(ChatMessage(
-                        messageContent: '',
-                        messageType: 'sender',
-                        msgStatus: 'send',
-                        time: getCurrentTime(),
-                        type: MessageType.multiplecontact,
-                        numberofContact: selected.length,
-                      ));
-                }
-                Navigator.pop(context);
-              }
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Sending ${selected.length} files to ${widget.name}?',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(width: 35.w)
+                            ],
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        Row(
+                          children: [
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  color: Color(0xFF368C4E),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 42),
+                            GestureDetector(
+                              onTap: () {
+                                if (selected.isNotEmpty &&
+                                    selected.length == 1) {
+                                  context
+                                      .read<ShowContactTextField>()
+                                      .toggleValue();
+                                  Navigator.pop(context);
+                                } else if (selected.length > 1) {
+                                  for (var i = 0; i < selected.length; i++) {
+                                    context
+                                        .read<AddMessageCubit>()
+                                        .addMessage(ChatMessage(
+                                          messageContent: '',
+                                          messageType: 'sender',
+                                          msgStatus: 'send',
+                                          time: getCurrentTime(),
+                                          type: MessageType.multiplecontact,
+                                          numberofContact: selected.length,
+                                        ));
+                                  }
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                }
+                              },
+                              child: Text(
+                                'Send',
+                                style: TextStyle(
+                                  color: Color(0xFF368C4E),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 15)
+                          ],
+                        )
+                      ],
+                    );
+                  });
             },
             child: Padding(
                 padding: const EdgeInsets.only(top: 20, right: 10),

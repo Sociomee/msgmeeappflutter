@@ -724,6 +724,7 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                         width: 150,
                         child: AttachedIcon(
                           profileImage: widget.imageUrl,
+                          name: widget.name,
                         ),
                       ),
                     ),

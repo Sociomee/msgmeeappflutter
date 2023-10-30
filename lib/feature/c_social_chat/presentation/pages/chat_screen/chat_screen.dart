@@ -1300,6 +1300,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 width: 150,
                                 child: AttachedIcon(
                                   profileImage: widget.imageUrl,
+                                  name: widget.name,
                                 ),
                               ),
                             ),

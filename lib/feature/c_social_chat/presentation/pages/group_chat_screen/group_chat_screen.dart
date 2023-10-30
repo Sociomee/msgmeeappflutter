@@ -1062,8 +1062,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                 ? 44 * 6
                                 : 0,
                             width: 150,
-                            child:
-                                AttachedIcon(profileImage: widget.imageUrl))),
+                            child: AttachedIcon(
+                              profileImage: widget.imageUrl,
+                              name: widget.name,
+                            ))),
 
                     //?showing current date
                     Align(
