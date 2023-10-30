@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/data/model/market_model.dart';
@@ -67,18 +69,21 @@ class _MarketPageTabState extends State<MarketPageTab> {
                             Stack(
                               children: [
                                 Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        border: Border.all(
-                                            color: AppColors.lightgrey),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(image,
-                                            width: 133,
-                                            height: 133,
-                                            fit: BoxFit.cover))),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.white,
+                                      border: Border.all(
+                                          color: AppColors.lightgrey),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      image,
+                                      width: 133,
+                                      height: 133,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                                 Positioned(
                                   bottom: 10,
                                   child: Container(
@@ -221,7 +226,9 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                       },
                                       child: ChatProfileWidget(
                                           imageUrl: dummyData[index].imageUrl,
-                                          isOnline: dummyData[index].isOnline.toString(),
+                                          isOnline: dummyData[index]
+                                              .isOnline
+                                              .toString(),
                                           hasStory: dummyData[index].hasStory),
                                     ),
                                     SizedBox(width: 13),
@@ -315,48 +322,68 @@ class _MarketPageTabState extends State<MarketPageTab> {
                       title = marketlist[index].title;
                       category = marketlist[index].industry;
                     });
-                    // screenNavigator(
-                    //     context,
-                    //     MarketChatScreen(
-                    //         name: dummyData[index].name,
-                    //         imageUrl: dummyData[index].imageUrl,
-                    //         isOnline: dummyData[index].isOnline,
-                    //         hasStory: false,
-                    //         marketplace: true));
                   },
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  child: Container(
+                    color: (marketlist[index].sold ?? false)
+                        ? AppColors.lightgrey1
+                        : AppColors.white,
                     child: Row(
                       children: [
                         Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.lightgrey1,
-                                border: Border.all(color: AppColors.lightgrey),
-                                borderRadius: BorderRadius.circular(8)),
+                          margin: EdgeInsets.only(
+                            top: 10.h,
+                            bottom: 10.h,
+                            left: 18,
+                          ),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightgrey1,
+                              border: Border.all(color: AppColors.lightgrey),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                      marketlist[index].imageUrl,
-                                      height: 41,
-                                      width: 41,
-                                      fit: BoxFit.cover),
-                                ))),
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(marketlist[index].imageUrl,
+                                  height: 41, width: 41, fit: BoxFit.cover),
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 10.w),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(marketlist[index].title,
-                                style: TextStyle(
-                                    color: AppColors.black,
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600)),
+                            Text(
+                              marketlist[index].title,
+                              style: TextStyle(
+                                color: AppColors.black,
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             SizedBox(height: 5),
                             Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
+                                if (marketlist[index].isSelling != null)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: AppColors.yellowColor,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7, vertical: 3),
+                                    child: Text(
+                                      marketlist[index].isSelling ?? '',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                SizedBox(width: 5),
                                 Text(marketlist[index].industry,
                                     style: TextStyle(
                                         color: Color(0xFF333333),
@@ -367,16 +394,35 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                     height: 12,
                                     child: VerticalDivider(
                                         color: AppColors.grey, thickness: 1)),
-                                Text(marketlist[index].price,
-                                    style: TextStyle(
-                                        color: Color(0xFF666666),
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400))
+                                Text(
+                                  marketlist[index].price,
+                                  style: TextStyle(
+                                    color: Color(0xFF666666),
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                               ],
                             )
                           ],
-                        )
+                        ),
+                        Spacer(),
+                        if (marketlist[index].sold ?? false)
+                          Container(
+                            height: 65,
+                            width: 30,
+                            color: AppColors.grey,
+                            child: Center(
+                              child: Transform.rotate(
+                                angle: pi / 2,
+                                child: Text(
+                                  'Sold',
+                                  style: TextStyle(color: AppColors.white),
+                                ),
+                              ),
+                            ),
+                          )
                       ],
                     ),
                   ),

@@ -568,7 +568,6 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                                // log('message ${state.localmessage[index].content}');
                                 return Align(
                                   alignment: (authorId !=
                                           state.localmessage[index].author
@@ -578,7 +577,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                           state.localmessage[index].author
                                       ? SwipeTo(
                                           onRightSwipe: () {
-                                            // log('message ${state.localmessage[index].content}');
                                             context
                                                 .read<ReplyMsgCubit>()
                                                 .replyMsg(
@@ -588,36 +586,35 @@ class _ChatScreenState extends State<ChatScreen> {
                                           },
                                           child: GestureDetector(
                                             onTap: () {
-                                              log('message ${state.localmessage[index].content}');
-                                              // setState(() {
-                                              //   chattileIndex.remove(index);
-                                              // });
-                                              // context
-                                              //     .read<ShowEmojiCubit>()
-                                              //     .removeEmoji();
-                                              // context
-                                              //     .read<ShowAttachment>()
-                                              //     .closeAttachment();
+                                              setState(() {
+                                                chattileIndex.remove(index);
+                                              });
+                                              context
+                                                  .read<ShowEmojiCubit>()
+                                                  .removeEmoji();
+                                              context
+                                                  .read<ShowAttachment>()
+                                                  .closeAttachment();
                                             },
                                             onLongPress: () {
-                                              // if (!chattileIndex
-                                              //     .contains(index)) {
-                                              //   setState(() {
-                                              //     chattileIndex.add(index);
-                                              //     copiedText =
-                                              //         msg[index].messageContent;
-                                              //   });
-                                              //   context
-                                              //       .read<ShowEmojiCubit>()
-                                              //       .diaplayEmoji(index);
-                                              // } else {
-                                              //   setState(() {
-                                              //     chattileIndex.remove(index);
-                                              //   });
-                                              //   context
-                                              //       .read<ShowEmojiCubit>()
-                                              //       .removeEmoji();
-                                              // }
+                                              if (!chattileIndex
+                                                  .contains(index)) {
+                                                setState(() {
+                                                  chattileIndex.add(index);
+                                                  copiedText =
+                                                      msg[index].messageContent;
+                                                });
+                                                context
+                                                    .read<ShowEmojiCubit>()
+                                                    .diaplayEmoji(index);
+                                              } else {
+                                                setState(() {
+                                                  chattileIndex.remove(index);
+                                                });
+                                                context
+                                                    .read<ShowEmojiCubit>()
+                                                    .removeEmoji();
+                                              }
                                             },
                                             child: Container(
                                               color: chattileIndex
@@ -993,7 +990,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 istyping = false;
                                               });
                                             }
-                                            log('roomdata ------>${state.messages.room}');
                                             var room =
                                                 state.messages.room!.toJson();
                                             //* calling typing function
