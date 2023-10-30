@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,6 +19,7 @@ class _BroadCastListState extends State<BroadCastList> {
   List<int> selectedindex = [];
   @override
   Widget build(BuildContext context) {
+    log('selected mode $selectMode');
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -25,7 +28,7 @@ class _BroadCastListState extends State<BroadCastList> {
           },
           child: Padding(
             padding: EdgeInsets.only(left: 20.w),
-            child: Icon(Icons.arrow_back_ios, color: AppColors.black, size: 20),
+            child: Icon(Icons.arrow_back_ios, color: AppColors.black, size: 16),
           ),
         ),
         leadingWidth: 40.w,
@@ -35,7 +38,7 @@ class _BroadCastListState extends State<BroadCastList> {
                 '${selectedindex.length} Selected',
                 style: TextStyle(
                   color: AppColors.black,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
                 ),
@@ -44,7 +47,7 @@ class _BroadCastListState extends State<BroadCastList> {
                 'My Broadcasts',
                 style: TextStyle(
                   color: AppColors.black,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
                 ),
@@ -62,10 +65,10 @@ class _BroadCastListState extends State<BroadCastList> {
                           );
                         });
                   },
-                  child: Icon(Icons.delete, color: AppColors.black, size: 24.h))
+                  child: Icon(Icons.delete, color: AppColors.black, size: 24))
               : Container(),
           PopupMenuButton<int>(
-              icon: Icon(Icons.more_vert, color: Colors.black, size: 24.h),
+              icon: Icon(Icons.more_vert, color: Colors.black, size: 24),
               itemBuilder: (context) {
                 return [
                   PopupMenuItem(
@@ -105,27 +108,34 @@ class _BroadCastListState extends State<BroadCastList> {
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      if (selectedindex.contains(index)) {
-                        setState(() {
-                          selectedindex.remove(index);
-                        });
-                      } else if (selectMode) {
-                        setState(() {
-                          selectedindex.add(index);
-                        });
+                      if (selectMode) {
+                        if (selectedindex.contains(index)) {
+                          setState(() {
+                            selectedindex.remove(index);
+                          });
+                        } else {
+                          setState(() {
+                            selectedindex.add(index);
+                          });
+                        }
+                        if (selectedindex.isEmpty) {
+                          setState(() {
+                            selectMode = false;
+                          });
+                        }
                       }
                     },
                     onLongPress: () {
-                      if (selectedindex.length <= 1
+                      setState(() {
+                        selectMode = true;
+                        selectedindex.add(index);
+                      });
 
-                          // &&
-                          // !selectedindex.contains(index)
-
-                          )
-                        setState(() {
-                          selectMode = !selectMode;
-                          selectedindex.add(index);
-                        });
+                      // if (selectedindex.length <= 1)
+                      //   setState(() {
+                      //     selectMode = !selectMode;
+                      //     selectedindex.add(index);
+                      //   });
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
