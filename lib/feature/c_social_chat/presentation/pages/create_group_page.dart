@@ -13,7 +13,6 @@ import '../../../../data/model/group_participants_model.dart';
 import '../../../../common_widgets/custom_button_widget.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../c_profile/presentation/widgets/text_field_widget.dart';
-import 'group_chat_screen/pending_group_request_screen.dart';
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({super.key});
