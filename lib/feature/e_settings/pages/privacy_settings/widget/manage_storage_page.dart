@@ -7,9 +7,15 @@ import '../../../../c_social_chat/presentation/pages/chat_screen/widgets/message
 import 'forward_msg_page.dart';
 import 'media_preview_widget.dart';
 
-class ManageStoragePage extends StatelessWidget {
+class ManageStoragePage extends StatefulWidget {
   const ManageStoragePage({super.key});
 
+  @override
+  State<ManageStoragePage> createState() => _ManageStoragePageState();
+}
+
+class _ManageStoragePageState extends State<ManageStoragePage> {
+  bool searchMode = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,12 +183,15 @@ class ManageStoragePage extends StatelessWidget {
                       decoration: ShapeDecoration(
                           color: Color(0xFFF8C756), shape: OvalBorder())),
                   SizedBox(width: 5),
-                  Text('App  and Other item',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 11,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400))
+                  Text(
+                    'App  and Other item',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 11,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -196,12 +205,15 @@ class ManageStoragePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                 child: Row(
                   children: [
-                    Text('Forworded media many times',
-                        style: TextStyle(
-                            color: Color(0xFF808080),
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500)),
+                    Text(
+                      'Forworded media many times',
+                      style: TextStyle(
+                        color: Color(0xFF808080),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     Spacer(),
                     Text('9.0 MB',
                         style: TextStyle(
@@ -280,16 +292,40 @@ class ManageStoragePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Chats',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
+                  if (!searchMode)
+                    Text(
+                      'Chats',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
+                  if (searchMode)
+                    Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Search..',
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+                  SizedBox(
+                    width: 10,
                   ),
-                  Icon(Icons.search, color: AppColors.black)
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        searchMode = !searchMode;
+                      });
+                    },
+                    child: Icon(Icons.search, color: AppColors.black),
+                  ),
                 ],
               ),
             ),

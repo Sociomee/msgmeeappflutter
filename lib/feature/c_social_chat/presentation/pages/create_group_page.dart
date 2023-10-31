@@ -311,8 +311,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                   shrinkWrap: true,
                   itemCount: dummyGroupParticipantsData.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(),
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 5),
                       child: Row(
                         children: [
                           Stack(
@@ -363,10 +363,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             SizedBox(height: 50.h),
             Center(
               child: CustomButtonWidget(
+                height: 45,
                 borderColor: AppColors.primaryColor,
-                // : AppColors.primaryColor.withOpacity(.5),
                 ontap: () {
-                  // Navigator.pop(context);
                   animatedScreenNavigator(
                     context,
                     GroupChatScreen(

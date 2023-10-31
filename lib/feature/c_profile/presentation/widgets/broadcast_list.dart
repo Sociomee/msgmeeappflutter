@@ -130,12 +130,6 @@ class _BroadCastListState extends State<BroadCastList> {
                         selectMode = true;
                         selectedindex.add(index);
                       });
-
-                      // if (selectedindex.length <= 1)
-                      //   setState(() {
-                      //     selectMode = !selectMode;
-                      //     selectedindex.add(index);
-                      //   });
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,

@@ -29,7 +29,6 @@ import '../../cubit/search_mode/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
 import '../../cubit/show_attachment.dart';
 import '../../cubit/show_emoji/show_emoji_cubit.dart';
-import '../../widgets/chat_profile_widget.dart';
 import '../chat_screen/forward_msg_page.dart';
 import '../chat_screen/image_preview_page.dart';
 import '../chat_screen/widgets/message_textField.dart';
@@ -211,39 +210,46 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 IconButton(
-                                    onPressed: () {
-                                      context
-                                          .read<SearchModeCubit>()
-                                          .changemsgSearchMode();
-                                    },
-                                    icon: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, top: 10),
-                                        child: Icon(Icons.arrow_back_ios,
-                                            color: AppColors.black, size: 20))),
+                                  onPressed: () {
+                                    context
+                                        .read<SearchModeCubit>()
+                                        .changemsgSearchMode();
+                                  },
+                                  icon: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, top: 10),
+                                    child: Icon(
+                                      Icons.arrow_back_ios,
+                                      color: AppColors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(
-                                    height: 40,
-                                    width: 155.w,
-                                    child: TextFormField(
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 0),
-                                            hintText: 'Search',
-                                            enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color: Color(0XFF255D3A))),
-                                            border: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color: Color(0XFF255D3A))),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color:
-                                                        Color(0XFF255D3A))))))
+                                  height: 40,
+                                  width: 155.w,
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 0),
+                                      hintText: 'Search',
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 2,
+                                              color: Color(0XFF255D3A))),
+                                      border: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 2,
+                                              color: Color(0XFF255D3A))),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: Color(0XFF255D3A),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             Padding(
@@ -287,133 +293,134 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                               child: Icon(Icons.keyboard_arrow_up,
                                   color: AppColors.black, size: 30)),
                           Padding(
-                              padding:
-                                  EdgeInsets.only(top: 20, left: 10, right: 10),
-                              child: Text('10/12',
-                                  style: TextStyle(
-                                      color: AppColors.black,
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500))),
+                            padding:
+                                EdgeInsets.only(top: 20, left: 10, right: 10),
+                            child: Text(
+                              '10/12',
+                              style: TextStyle(
+                                color: AppColors.black,
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                           GestureDetector(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: SelectDuration());
-                                    });
-                              },
-                              child: Padding(
-                                  padding:
-                                      EdgeInsets.only(right: 10.w, bottom: 10),
-                                  child:
-                                      SvgPicture.asset('assets/calender.svg')))
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Dialog(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: SelectDuration());
+                                  });
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10.w, bottom: 10),
+                              child: SvgPicture.asset('assets/calender.svg'),
+                            ),
+                          ),
                         ],
                       )
                     : AppBar(
                         toolbarHeight: 80,
                         elevation: 1,
-                        leadingWidth: widget.name == 'Office Group' ? 35 : 20,
-                        titleSpacing: 11.w,
+                        leadingWidth: 35,
+                        titleSpacing: 11,
                         leading: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
                           child: Padding(
-                              padding: EdgeInsets.only(
-                                  left:
-                                      widget.name == 'Office Group' ? 23 : 10),
-                              child: Icon(Icons.arrow_back_ios,
-                                  color: AppColors.black)),
+                            padding: EdgeInsets.only(left: 23),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColors.black,
+                              size: 20,
+                            ),
+                          ),
                         ),
                         title: GestureDetector(
                           onTap: () {
                             context.read<ShowAttachment>().closeAttachment();
                             screenNavigator(
-                                context,
-                                GroupChatPage(
-                                  imageUrl: widget.imageUrl,
-                                  name: widget.name,
-                                ));
+                              context,
+                              GroupChatPage(
+                                imageUrl: widget.imageUrl,
+                                name: widget.name,
+                              ),
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Hero(
-                                  tag: widget.imageUrl,
-                                  child: widget.name == 'Office Group'
-                                      ? Container(
-                                          padding: EdgeInsets.all(3),
-                                          decoration: BoxDecoration(
-                                              color: AppColors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    offset: Offset(0, 0),
-                                                    spreadRadius: 0,
-                                                    blurRadius: 10,
-                                                    color: AppColors.lightgrey)
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              border: Border.all(
-                                                  color: AppColors.lightgrey,
-                                                  width: .5)),
-                                          child: CircleAvatar(
-                                              radius: 25,
-                                              backgroundColor: AppColors.grey,
-                                              backgroundImage: NetworkImage(
-                                                  widget.imageUrl)),
-                                        )
-                                      : ChatProfileWidget(
-                                          imageUrl: widget.imageUrl,
-                                          isOnline: widget.isOnline.toString(),
-                                          hasStory: widget.hasStory ?? false)),
+                                tag: widget.imageUrl,
+                                child: Container(
+                                  padding: EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            offset: Offset(0, 0),
+                                            spreadRadius: 0,
+                                            blurRadius: 10,
+                                            color: AppColors.lightgrey)
+                                      ],
+                                      borderRadius: BorderRadius.circular(100),
+                                      border: Border.all(
+                                          color: AppColors.lightgrey,
+                                          width: .5)),
+                                  child: CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: AppColors.grey,
+                                    backgroundImage:
+                                        NetworkImage(widget.imageUrl),
+                                  ),
+                                ),
+                              ),
                               SizedBox(width: 10.w),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  widget.name == 'Office Group'
-                                      ? SizedBox(height: 13)
-                                      : Container(),
+                                  SizedBox(height: 13),
                                   Container(
-                                      width: 130.w,
-                                      child: Text(widget.name,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: AppColors.black,
-                                              fontSize: 16,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500))),
-                                  SizedBox(height: 8),
-                                  widget.group != null && widget.group!
-                                      ? Text('Open now',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: AppColors.grey))
-                                      : Container(),
-                                  widget.name == 'Office Group'
-                                      ? SizedBox(
-                                          width: 141,
-                                          child: Text(
-                                            'Rajdar, Harsh and 20\nothers',
-                                            style: TextStyle(
-                                              color: Color(0xFF141414),
-                                              fontSize: 11,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.08,
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
-                                  Text(widget.isOnline ? 'Active Now' : '',
+                                    width: 130.w,
+                                    child: Text(
+                                      widget.name,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey)),
+                                        color: AppColors.black,
+                                        fontSize: 16,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  SizedBox(
+                                    width: 141,
+                                    child: Text(
+                                      'Rajdar, Harsh and 20\nothers',
+                                      style: TextStyle(
+                                        color: Color(0xFF141414),
+                                        fontSize: 11,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.08,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.isOnline ? 'Active Now' : '',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppColors.grey,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -421,21 +428,12 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                         ),
                         actions: [
                           SvgPicture.asset('assets/video.svg'),
-                          SizedBox(width: 25.w),
+                          SizedBox(width: 25),
                           SvgPicture.asset('assets/calling.svg'),
-                          widget.name == 'Office Group'
-                              ? GroupchatPopupMenu(
-                                  imageUrl: widget.name, name: widget.name)
-                              : GestureDetector(
-                                  onTap: () {
-                                    context
-                                        .read<ShowAttachment>()
-                                        .closeAttachment();
-                                  },
-                                  child: SinglechatPopupMenu(
-                                      name: widget.name,
-                                      imageUrl: widget.imageUrl),
-                                )
+                          GroupchatPopupMenu(
+                            imageUrl: widget.name,
+                            name: widget.name,
+                          )
                         ],
                       ),
             body: Stack(

@@ -258,6 +258,94 @@ class _GroupchatPopupMenuState extends State<GroupchatPopupMenu> {
             context.read<SearchModeCubit>().changemsgSearchMode();
           } else if (value == 2) {
           } else if (value == 3) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'You are  going to clear chats!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 37),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Clear chats',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF368C4E),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Divider(
+                            thickness: 1,
+                            color: AppColors.lightgrey1,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                'Cancel',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF368C4E),
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: AppColors.lightgrey1,
+                          ),
+                          SizedBox(height: 5),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Learn More',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF2F80ED),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                });
           } else if (value == 4) {
             showDialog(
                 context: context,
