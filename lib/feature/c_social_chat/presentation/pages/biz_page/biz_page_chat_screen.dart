@@ -13,6 +13,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatro
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/biz_page/widget/view_page_info_dialog.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/multiple_image_perview_page.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -374,11 +375,11 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                         context: context,
                                         builder: (context) {
                                           return Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: SelectDuration());
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: SelectDuration(),
+                                          );
                                         });
                                   },
                                   child: Padding(
@@ -388,7 +389,7 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                       'assets/calender.svg',
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             )
                           : MxChatAppBar(
@@ -639,14 +640,23 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                   ],
                                 ),
                                 SizedBox(height: 15),
-                                Text(
-                                  'View Page info',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF81C14B),
-                                    fontSize: 12,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return ViewPageInfoDialog();
+                                        });
+                                  },
+                                  child: Text(
+                                    'View Page info',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF81C14B),
+                                      fontSize: 12,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 90),
