@@ -4,7 +4,7 @@ import 'package:msgmee/data/model/biz_page_model.dart';
 import 'package:msgmee/theme/colors.dart';
 
 import '../../../../../helper/navigator_function.dart';
-import '../chat_screen/chat_screen.dart';
+import 'biz_page_chat_screen.dart';
 
 class BizPageTab extends StatelessWidget {
   const BizPageTab({super.key});
@@ -23,7 +23,7 @@ class BizPageTab extends StatelessWidget {
                   onTap: () {
                     screenNavigator(
                         context,
-                        ChatScreen(
+                        BizPageChatScreen(
                           name: bizpage[index].title,
                           imageUrl: bizpage[index].imageUrl,
                           senderId: 'false',
