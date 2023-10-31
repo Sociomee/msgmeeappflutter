@@ -578,7 +578,7 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                  'Gong Advertisement',
+                                  widget.name,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22,

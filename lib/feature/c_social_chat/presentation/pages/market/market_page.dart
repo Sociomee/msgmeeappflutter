@@ -95,7 +95,7 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                             bottomRight: Radius.circular(10),
                                             topRight: Radius.circular(10))),
                                     child: Text(
-                                      'Selling ',
+                                      'Selling',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black,
