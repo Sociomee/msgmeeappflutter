@@ -19,7 +19,6 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/select_duration.dart';
-import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
@@ -43,6 +42,7 @@ import '../chat_screen/forward_msg_page.dart';
 import '../chat_screen/image_preview_page.dart';
 import '../chat_screen/widgets/message_textField.dart';
 import '../chat_theme/widget/chat_bg_type.dart';
+import 'widget/biz_page_popup.dart';
 
 class BizPageChatScreen extends StatefulWidget {
   const BizPageChatScreen({
@@ -484,7 +484,7 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                         .read<ShowAttachment>()
                                         .closeAttachment();
                                   },
-                                  child: SinglechatPopupMenu(
+                                  child: BizPagePopupMenu(
                                     name: widget.name,
                                     imageUrl: widget.imageUrl,
                                   ),
