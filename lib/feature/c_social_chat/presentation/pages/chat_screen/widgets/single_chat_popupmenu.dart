@@ -43,7 +43,8 @@ class _SinglechatPopupMenuState extends State<SinglechatPopupMenu> {
       },
       child: PopupMenuButton(
         icon: Icon(Icons.more_vert, color: Colors.black),
-        offset: Offset(0, 30),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        offset: Offset(-25, 30),
         color: Colors.white,
         onOpened: () {
           context.read<ShowAttachment>().closeAttachment();
