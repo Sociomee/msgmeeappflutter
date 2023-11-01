@@ -125,18 +125,17 @@ class _AttachContactPageState extends State<AttachContactPage> {
                                       .toggleValue();
                                   Navigator.pop(context);
                                 } else if (selected.length > 1) {
-                                  for (var i = 0; i < selected.length; i++) {
-                                    context
-                                        .read<AddMessageCubit>()
-                                        .addMessage(ChatMessage(
-                                          messageContent: '',
-                                          messageType: 'sender',
-                                          msgStatus: 'send',
-                                          time: getCurrentTime(),
-                                          type: MessageType.multiplecontact,
-                                          numberofContact: selected.length,
-                                        ));
-                                  }
+                                  context
+                                      .read<AddMessageCubit>()
+                                      .addMessage(ChatMessage(
+                                        messageContent: '',
+                                        messageType: 'sender',
+                                        msgStatus: 'send',
+                                        time: getCurrentTime(),
+                                        type: MessageType.multiplecontact,
+                                        numberofContact: selected.length,
+                                      ));
+
                                   Navigator.pop(context);
                                   Navigator.pop(context);
                                 }

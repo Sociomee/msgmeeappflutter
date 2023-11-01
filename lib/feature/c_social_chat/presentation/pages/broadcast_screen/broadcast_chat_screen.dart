@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/widget/popup_menu.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/broad_cast_desc_screen.dart';
 import '../../../../../data/model/chat_model.dart';
+import '../../../../../helper/get_currenttime.dart';
 import '../../../../../theme/colors.dart';
+import '../../cubit/add_message/add_message_cubit.dart';
+import '../../cubit/show_attachment.dart';
+import '../../cubit/show_emoji/show_emoji_cubit.dart';
+import '../chat_screen/forward_msg_page.dart';
 import '../chat_screen/widgets/attached_options.dart';
 import '../chat_screen/widgets/message_textField.dart';
 import 'widget/broadcast_send_message.dart';
@@ -21,6 +29,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
   final _listViewController = ScrollController();
   bool istyping = false;
   bool tap = false;
+  String copiedText = 'empty';
   List chattileIndex = [];
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
@@ -33,62 +42,138 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 80,
-          elevation: 1,
-          leadingWidth: 20,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.black,
-              )),
-          title: InkWell(
-            onTap: () {
-              animatedScreenNavigator(context, BroadCastDescriptionScreen());
-            },
-            child: Row(
-              children: [
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: AppColors.seconderyColor1,
-                      border: Border.all(color: AppColors.white, width: 1.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.lightgrey,
-                          offset: Offset(0, 0),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                    child: Image.asset('assets/broadcast.png', height: 31)),
-                SizedBox(width: 13),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Alia, Abriella, Mariana,',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w500)),
-                    SizedBox(height: 8),
-                    Text('Broadcast',
-                        style: TextStyle(fontSize: 13, color: AppColors.grey)),
-                  ],
+        appBar: chattileIndex.isNotEmpty
+            ? AppBar(
+                leading: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.read<ShowAttachment>().closeAttachment();
+                    context.read<ShowEmojiCubit>().removeEmoji();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Icon(Icons.arrow_back_ios,
+                        color: AppColors.black, size: 20),
+                  ),
                 ),
-              ],
-            ),
-          ),
-          actions: [
-            PopupMenuWidget(),
-          ],
-        ),
+                elevation: 1,
+                leadingWidth: 30,
+                titleSpacing: 5,
+                title: Text(chattileIndex.length.toString(),
+                    style: TextStyle(color: AppColors.black)),
+                actions: [
+                  GestureDetector(
+                      onTap: () {
+                        // context.read<ReplyMsgCubit>().replyMsg(
+                        //     widget.name, msg[chattileIndex[0]].messageContent);
+                        chattileIndex.clear();
+                      },
+                      child: SvgPicture.asset('assets/Forward.svg')),
+                  SizedBox(width: 19),
+                  GestureDetector(
+                      onTap: () {
+                        context
+                            .read<AddMessageCubit>()
+                            .removeMessage(ChatMessage(
+                              messageContent: copiedText,
+                              messageType: 'sender',
+                              msgStatus: 'send',
+                              time: getCurrentTime(),
+                              type: MessageType.contact,
+                            ));
+                        chattileIndex.clear();
+                      },
+                      child: SvgPicture.asset('assets/trash.svg', height: 18)),
+                  SizedBox(width: 19),
+                  Icon(Icons.error_outline_outlined,
+                      color: AppColors.black, size: 16),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/note.svg', height: 18),
+                  SizedBox(width: 19),
+                  SvgPicture.asset('assets/pencil.svg', height: 18),
+                  SizedBox(width: 19),
+                  GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: copiedText));
+
+                        setState(() {
+                          chattileIndex.clear();
+                        });
+                      },
+                      child: SvgPicture.asset('assets/copy.svg', height: 18)),
+                  SizedBox(width: 19),
+                  GestureDetector(
+                    onTap: () {
+                      animatedScreenNavigator(context, ForwardMessagePage());
+                    },
+                    child: SvgPicture.asset(
+                      'assets/reply.svg',
+                      height: 18,
+                    ),
+                  ),
+                  SizedBox(width: 19),
+                ],
+              )
+            : AppBar(
+                toolbarHeight: 80,
+                elevation: 1,
+                leadingWidth: 20,
+                leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.black,
+                    )),
+                title: InkWell(
+                  onTap: () {
+                    animatedScreenNavigator(
+                        context, BroadCastDescriptionScreen());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.seconderyColor1,
+                            border:
+                                Border.all(color: AppColors.white, width: 1.5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.lightgrey,
+                                offset: Offset(0, 0),
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                          child:
+                              Image.asset('assets/broadcast.png', height: 31)),
+                      SizedBox(width: 13),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Alia, Abriella, Mariana,',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w500)),
+                          SizedBox(height: 8),
+                          Text('Broadcast',
+                              style: TextStyle(
+                                  fontSize: 13, color: AppColors.grey)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                actions: [
+                  PopupMenuWidget(),
+                ],
+              ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -139,7 +224,31 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
               padding: EdgeInsets.only(top: 10, bottom: 50),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return BoradCastSendMessage();
+                return InkWell(
+                    onTap: () {
+                      setState(() {
+                        chattileIndex.remove(index);
+                      });
+                    },
+                    onLongPress: () {
+                      if (!chattileIndex.contains(index)) {
+                        setState(() {
+                          chattileIndex.add(index);
+                          // copiedText = msg[index].messageContent;
+                        });
+                        context.read<ShowEmojiCubit>().diaplayEmoji(index);
+                      } else {
+                        setState(() {
+                          chattileIndex.remove(index);
+                        });
+                        context.read<ShowEmojiCubit>().removeEmoji();
+                      }
+                    },
+                    child: Container(
+                        color: chattileIndex.contains(index)
+                            ? AppColors.seconderyColor1
+                            : AppColors.white,
+                        child: BoradCastSendMessage()));
               },
             ),
             Spacer(),
