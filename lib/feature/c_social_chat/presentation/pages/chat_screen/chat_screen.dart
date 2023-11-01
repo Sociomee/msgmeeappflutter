@@ -374,11 +374,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                         context: context,
                                         builder: (context) {
                                           return Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: SelectDuration());
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                10,
+                                              ),
+                                            ),
+                                            child: SelectDuration(),
+                                          );
                                         });
                                   },
                                   child: Padding(
@@ -469,9 +472,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                           online.isNotEmpty
                                               ? online.first['status']
                                               : 'Last Online ${widget.lastOnline}',
-                                          // widget.senderId == 'true'
-                                          //     ? 'Active Now'
-                                          //     : "Last Online ${widget.lastOnline}",
                                           style: TextStyle(
                                             fontSize: 13,
                                             color: AppColors.grey,

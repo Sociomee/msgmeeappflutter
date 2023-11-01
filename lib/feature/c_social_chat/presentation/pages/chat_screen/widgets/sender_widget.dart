@@ -13,6 +13,8 @@ import '../../../cubit/chat_theme/chat_theme_cubit.dart';
 
 import '../location_preview.dart';
 import 'message_type.dart';
+import 'stacked_images_widget.dart';
+import 'view_all_contacts.dart';
 
 class SentMessageWidget extends StatelessWidget {
   final String message;
@@ -39,6 +41,11 @@ class SentMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var contactimages = [
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
+      'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
+    ];
     final textMessage = Row(
       children: [
         Stack(
@@ -65,11 +72,6 @@ class SentMessageWidget extends StatelessWidget {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300),
                               child: UrlTextWidget(text: message),
-                              // child: Text(
-                              //   message,
-                              //   style: const TextStyle(
-                              //       color: Colors.white, fontSize: 14),
-                              // ),
                             ),
                             SizedBox(height: 2),
                             Row(
@@ -238,156 +240,167 @@ class SentMessageWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                            padding: const EdgeInsets.only(
-                                top: 5, left: 5, right: 5, bottom: 5),
-                            decoration: BoxDecoration(
-                                color: context
-                                    .watch<ChatThemeCubit>()
-                                    .state
-                                    .chatDeepColor,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                message != ''
-                                    ? Container(
-                                        padding: EdgeInsets.all(6),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              child: Image.network(
-                                                'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                                                height: 44,
-                                                width: 44,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            Text(
-                                              'Joy Arthur',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: AppColors.black,
-                                                fontSize: 14,
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(width: 10),
-                                            SvgPicture.asset(
-                                                'assets/video.svg'),
-                                            SizedBox(width: 10),
-                                            SvgPicture.asset('assets/call.svg')
-                                          ],
-                                        ),
-                                      )
-                                    : Container(
-                                        width: 200.w,
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 6),
-                                        decoration: BoxDecoration(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 5, right: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: context
+                                  .watch<ChatThemeCubit>()
+                                  .state
+                                  .chatDeepColor,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              message != ''
+                                  ? Container(
+                                      padding: EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
                                           color: AppColors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(10),
-                                            bottomLeft: Radius.circular(5),
-                                            bottomRight: Radius.circular(5),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Image.network(
+                                              'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+                                              height: 44,
+                                              width: 44,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
+                                          SizedBox(width: 10.w),
+                                          Text(
+                                            'Joy Arthur',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: AppColors.black,
+                                              fontSize: 14,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(width: 10),
+                                          SvgPicture.asset(
+                                            'assets/video.svg',
+                                          ),
+                                          SizedBox(width: 10),
+                                          SvgPicture.asset('assets/call.svg')
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      width: 200.w,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 6),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                          bottomLeft: Radius.circular(5),
+                                          bottomRight: Radius.circular(5),
                                         ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          100),
-                                                  child: Image.network(
-                                                      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                                                      height: 40,
-                                                      width: 40,
-                                                      fit: BoxFit.cover),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  100,
                                                 ),
-                                                SizedBox(width: 10.w),
-                                                SizedBox(
-                                                  width: 80.w,
-                                                  child: Text(
-                                                    'Joy Arthure',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        overflow: TextOverflow
-                                                            .ellipsis),
+                                                child: Image.network(
+                                                  'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+                                                  height: 40,
+                                                  width: 40,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              SizedBox(
+                                                width: 80.w,
+                                                child: Text(
+                                                  'Joy Arthure',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: AppColors.black,
+                                                    fontSize: 14,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w600,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
-                                                SizedBox(width: 10),
-                                                SvgPicture.asset(
-                                                    'assets/contact_video.svg'),
-                                                SizedBox(width: 10),
-                                                SvgPicture.asset(
-                                                    'assets/call.svg')
-                                              ],
-                                            ),
-                                            Divider(
-                                                color: AppColors.lightgrey,
-                                                height: 10,
-                                                thickness: 1),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 7),
-                                              child: Text(
-                                                'Message',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Color(0xFF368C4E),
-                                                  fontSize: 14,
-                                                  fontFamily: 'Nunito Sans',
-                                                  fontWeight: FontWeight.w700,
-                                                ),
                                               ),
-                                            )
-                                          ],
-                                        ),
+                                              SizedBox(width: 10),
+                                              SvgPicture.asset(
+                                                'assets/contact_video.svg',
+                                              ),
+                                              SizedBox(width: 10),
+                                              SvgPicture.asset(
+                                                'assets/call.svg',
+                                              )
+                                            ],
+                                          ),
+                                          Divider(
+                                            color: AppColors.lightgrey,
+                                            height: 10,
+                                            thickness: 1,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 7,
+                                            ),
+                                            child: Text(
+                                              'Message',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Color(0xFF368C4E),
+                                                fontSize: 14,
+                                                fontFamily: 'Nunito Sans',
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                SizedBox(height: 5),
-                                message == ""
-                                    ? Container()
-                                    : ConstrainedBox(
-                                        constraints:
-                                            BoxConstraints(maxWidth: 300),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 4.0, bottom: 3),
-                                          child: Text(message,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14)),
-                                        ),
+                                    ),
+                              SizedBox(height: 5),
+                              message == ""
+                                  ? Container()
+                                  : ConstrainedBox(
+                                      constraints:
+                                          BoxConstraints(maxWidth: 300),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 4.0, bottom: 3),
+                                        child: Text(message,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14)),
                                       ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Text(time,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 10)),
-                                )
-                              ],
-                            )),
+                                    ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  time,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                         SizedBox(height: 5)
                       ],
                     ),
@@ -406,9 +419,10 @@ class SentMessageWidget extends StatelessWidget {
                 Positioned(
                   bottom: 10,
                   right: 20,
-                  child: Text(msgStatus,
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 10)),
+                  child: Text(
+                    msgStatus,
+                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                  ),
                 )
               ],
             ),
@@ -416,7 +430,95 @@ class SentMessageWidget extends StatelessWidget {
         ),
       ),
     );
-
+    final multiplecontactMessage = Stack(
+      children: [
+        Row(
+          children: [
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: context.watch<ChatThemeCubit>().state.chatDeepColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          StackedImageWidget(images: contactimages),
+                          Text(
+                              'Joy Arthur & ${contactimages.length - 1} others',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      SizedBox(
+                        width: 200,
+                        child: Divider(
+                          height: 1,
+                          thickness: .8,
+                          color: AppColors.lightgrey,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      InkWell(
+                        onTap: () {
+                          animatedScreenNavigator(
+                              context,
+                              ViewAllContactsScreen(
+                                images: contactimages,
+                              ));
+                        },
+                        child: SizedBox(
+                          width: 200,
+                          child: Text('View all',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 14)),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          time,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 3)
+              ],
+            ),
+            SizedBox(width: 3)
+          ],
+        ),
+        Positioned(
+          bottom: 2,
+          right: 0,
+          child: msgStatus == 'read'
+              ? MessageStatus.read
+              : msgStatus == 'send'
+                  ? MessageStatus.sent
+                  : MessageStatus.delivered,
+        ),
+        Positioned(
+          bottom: 10,
+          right: 18,
+          child: Text(msgStatus,
+              style: const TextStyle(color: Colors.white, fontSize: 10)),
+        ),
+      ],
+    );
     final imageMessage = Flexible(
       child: Container(
         child: Row(
@@ -1391,7 +1493,7 @@ class SentMessageWidget extends StatelessWidget {
           padding: EdgeInsets.only(right: 18.0, left: 50, top: 0, bottom: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [contactMessage],
+            children: [multiplecontactMessage],
           ),
         );
       case MessageType.text:

@@ -217,25 +217,34 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                                   ),
                                 )),
                             SizedBox(
-                                height: 40,
-                                width: 155.w,
-                                child: TextFormField(
-                                    decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 0),
-                                        hintText: 'Search',
-                                        enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2,
-                                                color: Color(0XFF255D3A))),
-                                        border: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2,
-                                                color: Color(0XFF255D3A))),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2,
-                                                color: Color(0XFF255D3A))))))
+                              height: 40,
+                              width: 155.w,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                  hintText: 'Search',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Color(0XFF255D3A),
+                                    ),
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Color(0XFF255D3A),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Color(0XFF255D3A),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Padding(
@@ -287,14 +296,17 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                         ),
                       ),
                       Padding(
-                          padding:
-                              EdgeInsets.only(top: 20, left: 10, right: 10),
-                          child: Text('10/12',
-                              style: TextStyle(
-                                  color: AppColors.black,
-                                  fontSize: 16,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500))),
+                        padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                        child: Text(
+                          '10/12',
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
                       GestureDetector(
                           onTap: () {
                             showDialog(
