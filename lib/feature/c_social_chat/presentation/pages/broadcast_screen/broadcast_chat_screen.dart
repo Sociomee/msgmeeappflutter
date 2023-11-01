@@ -225,30 +225,31 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return InkWell(
-                    onTap: () {
+                  onTap: () {
+                    setState(() {
+                      chattileIndex.remove(index);
+                    });
+                  },
+                  onLongPress: () {
+                    if (!chattileIndex.contains(index)) {
+                      setState(() {
+                        chattileIndex.add(index);
+                      });
+                      context.read<ShowEmojiCubit>().diaplayEmoji(index);
+                    } else {
                       setState(() {
                         chattileIndex.remove(index);
                       });
-                    },
-                    onLongPress: () {
-                      if (!chattileIndex.contains(index)) {
-                        setState(() {
-                          chattileIndex.add(index);
-                          // copiedText = msg[index].messageContent;
-                        });
-                        context.read<ShowEmojiCubit>().diaplayEmoji(index);
-                      } else {
-                        setState(() {
-                          chattileIndex.remove(index);
-                        });
-                        context.read<ShowEmojiCubit>().removeEmoji();
-                      }
-                    },
-                    child: Container(
-                        color: chattileIndex.contains(index)
-                            ? AppColors.seconderyColor1
-                            : AppColors.white,
-                        child: BoradCastSendMessage()));
+                      context.read<ShowEmojiCubit>().removeEmoji();
+                    }
+                  },
+                  child: Container(
+                    color: chattileIndex.contains(index)
+                        ? AppColors.seconderyColor1
+                        : AppColors.white,
+                    child: BoradCastSendMessage(),
+                  ),
+                );
               },
             ),
             Spacer(),

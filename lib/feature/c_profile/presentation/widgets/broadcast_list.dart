@@ -28,7 +28,11 @@ class _BroadCastListState extends State<BroadCastList> {
           },
           child: Padding(
             padding: EdgeInsets.only(left: 20.w),
-            child: Icon(Icons.arrow_back_ios, color: AppColors.black, size: 16),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.black,
+              size: 16,
+            ),
           ),
         ),
         leadingWidth: 40.w,
