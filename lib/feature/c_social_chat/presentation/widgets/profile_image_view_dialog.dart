@@ -39,7 +39,7 @@ class ProfileViewDialog extends StatelessWidget {
                   ),
           ),
           Positioned(
-            top: 0,
+            top: -1,
             child: Opacity(
               opacity: 0.63,
               child: Container(

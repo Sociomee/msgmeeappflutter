@@ -7,11 +7,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_textField.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
+
 import 'package:msgmee/theme/colors.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
 import '../../../../../data/model/chat_model.dart';
-import 'package:image/image.dart' as imageLib;
+
+import 'package:image/image.dart' as img;
 
 import '../../../../../helper/get_currenttime.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
@@ -31,13 +33,13 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
   final List<File?> imagelist = [];
   int selectedImage = 0;
   String? fileName;
+  File? selectedImageFile;
   List<Filter> filters = presetFiltersList;
 
   Future getImage(context) async {
     fileName = basename(imagelist[selectedImage]!.path);
-    var image =
-        imageLib.decodeImage(imagelist[selectedImage]!.readAsBytesSync());
-    image = imageLib.copyResize(image!, width: 600);
+    var image = img.decodeImage(imagelist[selectedImage]!.readAsBytesSync());
+    image = img.copyResize(image!, width: 600);
 
     Map imagefile = await Navigator.push(
       context,
@@ -126,16 +128,29 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
             backgroundColor: AppColors.grey,
             backgroundImage: NetworkImage(widget.profileImage)),
         actions: [
-          GestureDetector(
-              onTap: () {
+          InkWell(
+            onTap: () {
+              if (imagelist.length == 1) {
                 Navigator.pop(context);
-                imagelist.clear();
-              },
-              child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Center(
-                      child: SvgPicture.asset('assets/trash.svg',
-                          fit: BoxFit.contain)))),
+                setState(() {
+                  imagelist.remove(selectedImageFile);
+                });
+              } else {
+                setState(() {
+                  imagelist.remove(selectedImageFile);
+                });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/trash.svg',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: Center(
@@ -181,7 +196,12 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                 child: GestureDetector(
                   onTap: () {
                     getImage(context);
-                 
+                    // animatedScreenNavigator(
+                    //     context,
+                    //     ImageEditor(
+                    //       imageData:
+                    //           imagelist[selectedImage]!.readAsBytesSync(),
+                    //     ));
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -226,6 +246,7 @@ class _ImagePreViewPageState extends State<ImagePreViewPage> {
                               onTap: () {
                                 setState(() {
                                   selectedImage = index;
+                                  selectedImageFile = imagelist[index];
                                 });
                               },
                               child: Container(

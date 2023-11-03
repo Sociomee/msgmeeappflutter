@@ -22,7 +22,8 @@ class AudioRecordWidget extends StatefulWidget {
 
 class _AudioRecordWidgetState extends State<AudioRecordWidget> {
   final recorder = FlutterSoundRecorder();
-
+  FlutterSound flutterSound = FlutterSound();
+  startRecording() async {}
   @override
   void initState() {
     super.initState();

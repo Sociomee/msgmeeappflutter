@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msgmee/common_widgets/shimmer_effect.dart';
 import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
 import '../../../../theme/colors.dart';
+import '../pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   const ProfilePicWidget({super.key});
@@ -42,7 +43,12 @@ class ProfilePicWidget extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-              // context.read<ShoweditbtnCubit>().showdialog();
+              // animatedScreenNavigator(context, AudioRecord());
+              if (context.read<ShoweditbtnCubit>().state.height == 0) {
+                context.read<ShoweditbtnCubit>().showdialog();
+              } else {
+                context.read<ShoweditbtnCubit>().removeDialog();
+              }
             },
             child: Container(
               height: 19,

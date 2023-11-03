@@ -9,13 +9,20 @@ class MapViewWidget extends StatefulWidget {
 }
 
 class _MapViewWidgetState extends State<MapViewWidget> {
-  // final Map<String, Marker> _markers = {};
   LatLng currentlocation = const LatLng(22.572645, 88.363892);
   LatLng initialLocation = const LatLng(37.422131, -122.084801);
+  Set<Marker> markers = {
+    Marker(
+      markerId: MarkerId("myCustomMarker"),
+      position: LatLng(37.422131, -122.084801),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    ),
+  };
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: GoogleMap(
+        markers: markers,
         zoomGesturesEnabled: false,
         zoomControlsEnabled: false,
         myLocationButtonEnabled: true,

@@ -155,7 +155,6 @@ class _ChatScreenState extends State<ChatScreen> {
             }
           },
           builder: (context, state) {
-            log('imageurl  ${widget.imageUrl}');
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
               child: GestureDetector(
@@ -635,10 +634,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                               //       .read<ShowEmojiCubit>()
                                               //       .removeEmoji();
                                               // }
-                                              setState(() {
-                                                selectMode = true;
-                                                chattileIndex.add(index);
-                                              });
+                                              if (!selectMode) {
+                                                setState(() {
+                                                  selectMode = true;
+                                                  chattileIndex.add(index);
+                                                });
+                                              }
                                             },
                                             child: Container(
                                               color: chattileIndex
@@ -717,17 +718,22 @@ class _ChatScreenState extends State<ChatScreen> {
                                                           child: Row(
                                                             children: [
                                                               Text(
-                                                                  '🤣 ✌️ 👋 ❤️ 😥 👍 '),
+                                                                '🤣 ✌️ 👋 ❤️ 😥 👍 ',
+                                                              ),
                                                               Container(
                                                                 padding:
                                                                     EdgeInsets
                                                                         .all(5),
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            100),
-                                                                    color: AppColors
-                                                                        .lightgrey1),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                    100,
+                                                                  ),
+                                                                  color: AppColors
+                                                                      .lightgrey1,
+                                                                ),
                                                                 child: Icon(
                                                                   Icons.add,
                                                                   size: 15,

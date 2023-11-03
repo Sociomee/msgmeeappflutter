@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/data/api_data_source/repository/socket/msgmee_socket.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record.dart';
 
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
@@ -18,6 +19,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_but
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
+import 'package:stories_editor/stories_editor.dart';
 import '../../../../data/model/dummy_chat_model.dart';
 import '../../../../helper/connectivity_mixin.dart';
 import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
@@ -471,11 +473,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                         )
                       : RefreshIndicator(
                           color: AppColors.primaryColor,
-                          onRefresh: () {
+                          onRefresh: () async {
                             context
                                 .read<ChatRoomsCubit>()
                                 .getLocalChatRoomData();
-                            return Future(() {});
                           },
                           child: SingleChildScrollView(
                             child: typing
@@ -533,19 +534,17 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                               ));
                                                     },
                                                     child: ChatProfileWidget(
-                                                        imageUrl:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .imageUrl,
-                                                        isOnline:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .isOnline
-                                                                .toString(),
-                                                        hasStory:
-                                                            filtedUserList[
-                                                                    index]
-                                                                .hasStory),
+                                                      imageUrl:
+                                                          filtedUserList[index]
+                                                              .imageUrl,
+                                                      isOnline:
+                                                          filtedUserList[index]
+                                                              .isOnline
+                                                              .toString(),
+                                                      hasStory:
+                                                          filtedUserList[index]
+                                                              .hasStory,
+                                                    ),
                                                   ),
                                                   SizedBox(width: 13),
                                                   Column(
@@ -777,11 +776,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         top: 10,
                                         child: AnimatedContainer(
                                           height: context
-                                                  .watch<ShoweditbtnCubit>()
-                                                  .state
-                                                  .show
-                                              ? 130
-                                              : 0,
+                                              .watch<ShoweditbtnCubit>()
+                                              .state
+                                              .height,
+                                          // ? 130
+                                          // : 0,
                                           duration: Duration(milliseconds: 500),
                                           margin: EdgeInsets.symmetric(
                                               horizontal: 5),
@@ -806,22 +805,24 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                           child: SingleChildScrollView(
                                             child: Column(
                                               children: [
+                                                //*story creating button
                                                 GestureDetector(
                                                   onTap: () async {
-                                                    // await Navigator.push(
-                                                    //     context,
-                                                    //     MaterialPageRoute(
-                                                    //         builder: (context) =>
-                                                    //             StoriesEditor(
-                                                    //               giphyKey:
-                                                    //                   'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                    //               galleryThumbnailQuality:
-                                                    //                   300,
-                                                    //               onDone: (uri) {
-                                                    //                 debugPrint(
-                                                    //                     uri);
-                                                    //               },
-                                                    //             )));
+                                                    await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                StoriesEditor(
+                                                                  giphyKey:
+                                                                      'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                                  galleryThumbnailQuality:
+                                                                      300,
+                                                                  onDone:
+                                                                      (uri) {
+                                                                    debugPrint(
+                                                                        uri);
+                                                                  },
+                                                                )));
                                                   },
                                                   child: Container(
                                                     height: 42,
@@ -841,21 +842,28 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                Container(
-                                                  height: 42,
-                                                  width: 42,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 19),
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                      color: AppColors
-                                                          .primaryColor),
-                                                  child: Image.asset(
-                                                    'assets/edit1.png',
+                                                InkWell(
+                                                  onTap: () {
+                                                    animatedScreenNavigator(
+                                                        context, AudioRecord());
+                                                  },
+                                                  child: Container(
+                                                    height: 42,
+                                                    width: 42,
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                            horizontal: 19),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        color: AppColors
+                                                            .primaryColor),
+                                                    child: Image.asset(
+                                                      'assets/edit1.png',
+                                                    ),
                                                   ),
                                                 ),
                                               ],
