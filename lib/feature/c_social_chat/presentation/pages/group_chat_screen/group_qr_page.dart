@@ -82,7 +82,8 @@ class GroupQrPage extends StatelessWidget {
           SizedBox(
             height: 263,
             child: Image.network(
-                'https://www.qrstuff.com/images/default_qrcode.png'),
+              'https://www.qrstuff.com/images/default_qrcode.png',
+            ),
           ),
           SizedBox(height: 54),
           Padding(

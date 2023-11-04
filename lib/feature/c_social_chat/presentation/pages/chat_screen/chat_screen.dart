@@ -959,7 +959,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     padding: EdgeInsets.only(
                                       left: 10,
                                       bottom: 10,
-                                      top: 10,
+                                      top: 18,
                                       right: 10,
                                     ),
                                     width: double.infinity,
@@ -1028,30 +1028,34 @@ class _ChatScreenState extends State<ChatScreen> {
                                           ),
                                         ),
                                         SizedBox(width: 10),
-                                        Expanded(
-                                            child: MessageTextFieldWidget(
-                                          imageTextfield: false,
-                                          messageController: messageController,
-                                          onChanged: (e) {
-                                            if (e.isNotEmpty) {
-                                              setState(() {
-                                                istyping = true;
-                                              });
-                                            } else {
-                                              setState(() {
-                                                istyping = false;
-                                              });
-                                            }
-                                            var room =
-                                                state.messages.room!.toJson();
-                                            //* calling typing function
-                                            context
-                                                .read<ChatRoomsCubit>()
-                                                .typing(
-                                                    typing: istyping,
-                                                    room: room);
-                                          },
-                                        )),
+                                        // Expanded(
+                                        //   child: MessageTextFieldWidget(
+                                        //     imageTextfield: false,
+                                        //     messageController:
+                                        //         messageController,
+                                        //     onChanged: (e) {
+                                        //       if (e.isNotEmpty) {
+                                        //         setState(() {
+                                        //           istyping = true;
+                                        //         });
+                                        //       } else {
+                                        //         setState(() {
+                                        //           istyping = false;
+                                        //         });
+                                        //       }
+                                        //       var room =
+                                        //           state.messages.room!.toJson();
+                                        //       //* calling typing function
+                                        //       context
+                                        //           .read<ChatRoomsCubit>()
+                                        //           .typing(
+                                        //             typing: istyping,
+                                        //             room: room,
+                                        //           );
+                                        //     },
+                                        //   ),
+                                        // ),
+                                        Spacer(),
                                         SizedBox(width: 10),
                                         context.watch<ShowAudioRecorder>().state
                                             ? Container(width: 30)
@@ -1290,6 +1294,34 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ),
                                   ),
                                 ],
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 5,
+                              left: 40.w,
+                              child: SizedBox(
+                                width: 280.w,
+                                child: MessageTextFieldWidget(
+                                  imageTextfield: false,
+                                  messageController: messageController,
+                                  onChanged: (e) {
+                                    if (e.isNotEmpty) {
+                                      setState(() {
+                                        istyping = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        istyping = false;
+                                      });
+                                    }
+                                    var room = state.messages.room!.toJson();
+                                    //* calling typing function
+                                    context.read<ChatRoomsCubit>().typing(
+                                          typing: istyping,
+                                          room: room,
+                                        );
+                                  },
+                                ),
                               ),
                             ),
                             //* showing reply message textfield *//

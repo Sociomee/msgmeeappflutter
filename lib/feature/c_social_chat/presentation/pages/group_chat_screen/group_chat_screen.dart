@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,7 +58,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   final ImagePicker _picker = ImagePicker();
-
+  bool selectMode = false;
   bool istyping = false;
   bool tap = false;
   List chattileIndex = [];
@@ -177,23 +178,31 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                       SvgPicture.asset('assets/pencil.svg', height: 18),
                       SizedBox(width: 19),
                       GestureDetector(
-                          onTap: () {
-                            Clipboard.setData(ClipboardData(text: copiedText));
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: copiedText));
 
-                            setState(() {
-                              chattileIndex.clear();
-                            });
-                          },
-                          child:
-                              SvgPicture.asset('assets/copy.svg', height: 18)),
+                          setState(() {
+                            chattileIndex.clear();
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          'assets/copy.svg',
+                          height: 18,
+                        ),
+                      ),
                       SizedBox(width: 19),
                       GestureDetector(
-                          onTap: () {
-                            animatedScreenNavigator(
-                                context, ForwardMessagePage());
-                          },
-                          child:
-                              SvgPicture.asset('assets/reply.svg', height: 18)),
+                        onTap: () {
+                          animatedScreenNavigator(
+                            context,
+                            ForwardMessagePage(),
+                          );
+                        },
+                        child: SvgPicture.asset(
+                          'assets/reply.svg',
+                          height: 18,
+                        ),
+                      ),
                       SizedBox(width: 19),
                     ],
                   )
@@ -495,9 +504,23 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                 },
                                 child: GestureDetector(
                                   onTap: () {
-                                    setState(() {
-                                      chattileIndex.remove(index);
-                                    });
+                                    if (selectMode) {
+                                      log('selected mode $selectMode');
+                                      if (chattileIndex.contains(index)) {
+                                        setState(() {
+                                          chattileIndex.remove(index);
+                                        });
+                                      } else {
+                                        setState(() {
+                                          chattileIndex.add(index);
+                                        });
+                                      }
+                                      if (chattileIndex.isEmpty) {
+                                        setState(() {
+                                          selectMode = false;
+                                        });
+                                      }
+                                    }
                                     context
                                         .read<ShowEmojiCubit>()
                                         .removeEmoji();
@@ -506,18 +529,16 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                         .closeAttachment();
                                   },
                                   onLongPress: () {
-                                    if (!chattileIndex.contains(index)) {
+                                    if (!selectMode) {
                                       setState(() {
+                                        selectMode = true;
                                         chattileIndex.add(index);
+                                        context
+                                            .read<ShowEmojiCubit>()
+                                            .diaplayEmoji(index);
                                         copiedText = msg[index].messageContent;
                                       });
-                                      context
-                                          .read<ShowEmojiCubit>()
-                                          .diaplayEmoji(index);
                                     } else {
-                                      setState(() {
-                                        chattileIndex.remove(index);
-                                      });
                                       context
                                           .read<ShowEmojiCubit>()
                                           .removeEmoji();
@@ -614,13 +635,30 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                 },
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (chattileIndex.contains(index)) {
-                                      setState(() {
-                                        chattileIndex.remove(index);
-                                      });
-                                      context
-                                          .read<ShowEmojiCubit>()
-                                          .removeEmoji();
+                                    // if (chattileIndex.contains(index)) {
+                                    //   setState(() {
+                                    //     chattileIndex.remove(index);
+                                    //   });
+                                    //   context
+                                    //       .read<ShowEmojiCubit>()
+                                    //       .removeEmoji();
+                                    // }
+                                    if (selectMode) {
+                                      log('selected mode $selectMode');
+                                      if (chattileIndex.contains(index)) {
+                                        setState(() {
+                                          chattileIndex.remove(index);
+                                        });
+                                      } else {
+                                        setState(() {
+                                          chattileIndex.add(index);
+                                        });
+                                      }
+                                      if (chattileIndex.isEmpty) {
+                                        setState(() {
+                                          selectMode = false;
+                                        });
+                                      }
                                     }
                                     context
                                         .read<ShowAttachment>()
@@ -633,22 +671,21 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                               images: msg[index].images,
                                               date: formattedDate,
                                               time: msg[index].time,
-                                            ))
+                                            ),
+                                          )
                                         : null;
                                   },
                                   onLongPress: () async {
-                                    if (!chattileIndex.contains(index)) {
+                                    if (!selectMode) {
                                       setState(() {
+                                        selectMode = true;
                                         chattileIndex.add(index);
+                                        context
+                                            .read<ShowEmojiCubit>()
+                                            .diaplayEmoji(index);
                                         copiedText = msg[index].messageContent;
                                       });
-                                      context
-                                          .read<ShowEmojiCubit>()
-                                          .diaplayEmoji(index);
                                     } else {
-                                      setState(() {
-                                        chattileIndex.remove(index);
-                                      });
                                       context
                                           .read<ShowEmojiCubit>()
                                           .removeEmoji();
@@ -764,32 +801,36 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 GestureDetector(
-                                    onTap: () {
-                                      context
-                                          .read<ShowAttachment>()
-                                          .toggleValue();
-                                    },
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                            color: context
-                                                    .watch<ShowAttachment>()
-                                                    .state
-                                                ? AppColors.primaryDarkColor
-                                                : AppColors.lightgrey1,
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Transform.rotate(
-                                            angle: -15,
-                                            child: Icon(
-                                                Icons.attach_file_outlined,
-                                                size: 19,
-                                                color: context
-                                                        .watch<ShowAttachment>()
-                                                        .state
-                                                    ? AppColors.white
-                                                    : AppColors.black)))),
+                                  onTap: () {
+                                    context
+                                        .read<ShowAttachment>()
+                                        .toggleValue();
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                        color: context
+                                                .watch<ShowAttachment>()
+                                                .state
+                                            ? AppColors.primaryDarkColor
+                                            : AppColors.lightgrey1,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Transform.rotate(
+                                      angle: -15,
+                                      child: Icon(
+                                        Icons.attach_file_outlined,
+                                        size: 19,
+                                        color: context
+                                                .watch<ShowAttachment>()
+                                                .state
+                                            ? AppColors.white
+                                            : AppColors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(width: 8),
                                 GestureDetector(
                                   onTap: () {
