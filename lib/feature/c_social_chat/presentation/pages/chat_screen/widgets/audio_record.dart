@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -31,12 +32,6 @@ class _AudioRecordState extends State<AudioRecord> {
     pathToAudio = '/sdcard/Download/temp.wav';
     _recordingSession = FlutterSoundRecorder();
     await _recordingSession.openRecorder();
-    // openAudioSession(
-    //   focus: AudioFocus.requestFocusAndStopOthers,
-    //   category: SessionCategory.playAndRecord,
-    //   mode: SessionMode.modeDefault,
-    //   device: AudioDevice.speaker,
-    // );
     await _recordingSession.setSubscriptionDuration(Duration(milliseconds: 10));
     await initializeDateFormatting();
     await Permission.microphone.request();
@@ -49,7 +44,9 @@ class _AudioRecordState extends State<AudioRecord> {
     if (!directory.existsSync()) {
       directory.createSync();
     }
-    _recordingSession.openRecorder();
+    _recordingSession
+        .openRecorder()
+        .then((value) => print('value------>$value'));
     await _recordingSession.startRecorder(
       toFile: pathToAudio,
       codec: Codec.pcm16WAV,
@@ -61,6 +58,7 @@ class _AudioRecordState extends State<AudioRecord> {
       var timeText = DateFormat('mm:ss:SS', 'en_GB').format(date);
       setState(() {
         _timerText = timeText.substring(0, 8);
+        log('time $timeText');
       });
     });
     _recorderSubscription.cancel();
