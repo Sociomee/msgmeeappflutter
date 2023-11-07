@@ -267,12 +267,15 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                         return ChooseInterestBottomSheet();
                       });
                 },
-                child: Text('Edit',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'DM Sans',
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryColor)),
+                child: Text(
+                  'Edit',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'DM Sans',
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
               )
             ],
           ),
@@ -280,13 +283,14 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
         SizedBox(height: 8),
         Center(
           child: Container(
-              width: context.screenWidth - 40,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(.1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: CustomInterestGridview()),
+            width: context.screenWidth - 40,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            decoration: BoxDecoration(
+              color: AppColors.grey.withOpacity(.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: CustomInterestGridview(),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),

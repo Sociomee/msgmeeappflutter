@@ -1,3 +1,4 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:msgmee/common_widgets/custom_button_widget.dart';
 import 'package:msgmee/theme/colors.dart';
@@ -8,14 +9,15 @@ class ViewPageInfoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
-              'To view more info. about this BizPage, please visit SocioMee App.',
+              'To view more info. about this BizPage, please visit SocioMee App',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
@@ -30,7 +32,15 @@ class ViewPageInfoDialog extends StatelessWidget {
                 height: 40,
                 title: 'Open Sociomee',
                 color: AppColors.primaryColor,
-                ontap: () {
+                ontap: () async {
+                  await LaunchApp.openApp(
+                    androidPackageName: 'net.pulsesecure.pulsesecure',
+                    iosUrlScheme: 'pulsesecure://',
+                    appStoreLink:
+                        'https://play.google.com/store/apps/details?id=com.sociomee.app',
+                    openStore: true,
+                  );
+
                   Navigator.pop(context);
                 }),
           ),

@@ -411,8 +411,10 @@ class _MarketPageTabState extends State<MarketPageTab> {
                             width: 30,
                             color: AppColors.grey,
                             child: Center(
-                              child: Transform.rotate(
-                                angle: pi / 2,
+                              child: Transform(
+                                alignment: Alignment.center,
+                                transform:
+                                    Matrix4.rotationZ(-90 * 3.14159265 / 180),
                                 child: Text(
                                   'Sold',
                                   style: TextStyle(color: AppColors.white),

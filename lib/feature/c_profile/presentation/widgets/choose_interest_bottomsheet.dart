@@ -32,8 +32,9 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600,
+      // height: 600,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: 4,
@@ -121,7 +122,7 @@ class _ChooseInterestBottomSheetState extends State<ChooseInterestBottomSheet> {
               );
             }).toList(),
           ),
-          Spacer(),
+          SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
             child: CustomButtonWidget(

@@ -215,16 +215,18 @@ class _ChatScreenState extends State<ChatScreen> {
                             SvgPicture.asset('assets/pencil.svg', height: 18),
                             SizedBox(width: 19),
                             GestureDetector(
-                                onTap: () {
-                                  Clipboard.setData(
-                                      ClipboardData(text: copiedText));
-
-                                  setState(() {
-                                    chattileIndex.clear();
-                                  });
-                                },
-                                child: SvgPicture.asset('assets/copy.svg',
-                                    height: 18)),
+                              onTap: () {
+                                Clipboard.setData(
+                                    ClipboardData(text: copiedText));
+                                setState(() {
+                                  chattileIndex.clear();
+                                });
+                              },
+                              child: SvgPicture.asset(
+                                'assets/copy.svg',
+                                height: 18,
+                              ),
+                            ),
                             SizedBox(width: 19),
                             GestureDetector(
                               onTap: () {
@@ -983,9 +985,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     ? AppColors.primaryDarkColor
                                                     : AppColors.lightgrey1,
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                  30,
-                                                ),
+                                                    BorderRadius.circular(30),
                                               ),
                                               child: Transform.rotate(
                                                 angle: -15,
