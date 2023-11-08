@@ -19,6 +19,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/select_duration.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
+import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
@@ -126,6 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
+    _listViewController.dispose();
     super.dispose();
   }
 
@@ -150,8 +152,11 @@ class _ChatScreenState extends State<ChatScreen> {
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
           listener: (context, state) {
             if (state.localmessage.isNotEmpty) {
-              WidgetsBinding.instance
-                  .addPostFrameCallback((_) => _scrollToBottom());
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (_listViewController.hasClients) {
+                  _scrollToBottom();
+                }
+              });
             }
           },
           builder: (context, state) {
@@ -172,47 +177,69 @@ class _ChatScreenState extends State<ChatScreen> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10.0),
-                              child: Icon(Icons.arrow_back_ios,
-                                  color: AppColors.black, size: 20),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: AppColors.black,
+                                size: 20,
+                              ),
                             ),
                           ),
                           elevation: 1,
                           leadingWidth: 30,
                           titleSpacing: 5,
-                          title: Text(chattileIndex.length.toString(),
-                              style: TextStyle(color: AppColors.black)),
+                          title: Text(
+                            chattileIndex.length.toString(),
+                            style: TextStyle(
+                              color: AppColors.black,
+                            ),
+                          ),
                           actions: [
                             GestureDetector(
-                                onTap: () {
-                                  context.read<ReplyMsgCubit>().replyMsg(
-                                      widget.name,
-                                      msg[chattileIndex[0]].messageContent);
-                                  chattileIndex.clear();
-                                },
-                                child: SvgPicture.asset('assets/Forward.svg')),
+                              onTap: () {
+                                context.read<ReplyMsgCubit>().replyMsg(
+                                    widget.name,
+                                    msg[chattileIndex[0]].messageContent);
+                                chattileIndex.clear();
+                              },
+                              child: SvgPicture.asset(
+                                'assets/Forward.svg',
+                              ),
+                            ),
                             SizedBox(width: 19),
                             GestureDetector(
-                                onTap: () {
-                                  context
-                                      .read<AddMessageCubit>()
-                                      .removeMessage(ChatMessage(
+                              onTap: () {
+                                context.read<AddMessageCubit>().removeMessage(
+                                      ChatMessage(
                                         messageContent: copiedText,
                                         messageType: 'sender',
                                         msgStatus: 'send',
                                         time: getCurrentTime(),
                                         type: MessageType.contact,
-                                      ));
-                                  chattileIndex.clear();
-                                },
-                                child: SvgPicture.asset('assets/trash.svg',
-                                    height: 18)),
+                                      ),
+                                    );
+                                chattileIndex.clear();
+                              },
+                              child: SvgPicture.asset(
+                                'assets/trash.svg',
+                                height: 18,
+                              ),
+                            ),
                             SizedBox(width: 19),
-                            Icon(Icons.error_outline_outlined,
-                                color: AppColors.black, size: 16),
+                            Icon(
+                              Icons.error_outline_outlined,
+                              color: AppColors.black,
+                              size: 16,
+                            ),
                             SizedBox(width: 19),
-                            SvgPicture.asset('assets/note.svg', height: 18),
+                            SvgPicture.asset(
+                              'assets/note.svg',
+                              height: 18,
+                            ),
                             SizedBox(width: 19),
-                            SvgPicture.asset('assets/pencil.svg', height: 18),
+                            SvgPicture.asset(
+                              'assets/pencil.svg',
+                              height: 18,
+                            ),
                             SizedBox(width: 19),
                             GestureDetector(
                               onTap: () {
@@ -1296,6 +1323,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ],
                               ),
                             ),
+                            //* showing message textfield *//
                             Positioned(
                               bottom: 5,
                               left: 40.w,

@@ -33,10 +33,7 @@ class _SyncLoadingWidgetState extends State<SyncLoadingWidget>
       duration: const Duration(seconds: 3),
     )..repeat();
     log(' process end ${context.read<SyncSociomeeCubit>().state.processend}');
-    _linearAnimation = Tween(
-            begin: 0.0, end: context.read<SyncSociomeeCubit>().state.processend)
-        .animate(_controller);
-
+    _linearAnimation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     super.initState();
   }
 

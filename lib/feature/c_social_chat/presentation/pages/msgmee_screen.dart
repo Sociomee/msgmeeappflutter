@@ -808,21 +808,25 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                 //*story creating button
                                                 GestureDetector(
                                                   onTap: () async {
-                                                    await Navigator.push(
+                                                    try {
+                                                      await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                StoriesEditor(
-                                                                  giphyKey:
-                                                                      'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                                                                  galleryThumbnailQuality:
-                                                                      300,
-                                                                  onDone:
-                                                                      (uri) {
-                                                                    debugPrint(
-                                                                        uri);
-                                                                  },
-                                                                )));
+                                                          builder: (context) =>
+                                                              StoriesEditor(
+                                                            giphyKey:
+                                                                'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                                                            galleryThumbnailQuality:
+                                                                300,
+                                                            onDone: (uri) {
+                                                              debugPrint(uri);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } catch (e) {
+                                                      log('error $e');
+                                                    }
                                                   },
                                                   child: Container(
                                                     height: 42,

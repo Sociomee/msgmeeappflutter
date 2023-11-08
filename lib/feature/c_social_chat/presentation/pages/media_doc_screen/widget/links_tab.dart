@@ -2,6 +2,7 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/theme/colors.dart';
 
 class LinksTabScreen extends StatefulWidget {
@@ -59,39 +60,217 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
         body: SafeArea(
-            child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 10, bottom: 0),
-                child: Text(
-                  'RECENT',
-                  style: TextStyle(
-                    color: AppColors.grey,
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 16.0, top: 10, bottom: 0),
+                  child: Text(
+                    'RECENT',
+                    style: TextStyle(
+                      color: AppColors.grey,
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ListView.builder(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: urls.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 6, bottom: 6, right: 6),
+                          child: Container(
+                            width: context.screenWidth * .8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: Colors.black.withOpacity(0.2),
+                                width: 1,
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                //! DO Not Delete this code
+                                // AnyLinkPreview(
+                                //   link: urls[index],
+                                //   displayDirection:
+                                //       UIDirection.uiDirectionHorizontal,
+                                //   cache: Duration(hours: 1),
+                                //   backgroundColor: AppColors.lightgrey1,
+                                //   borderRadius: 5,
+                                //   errorWidget:
+                                //       Container(color: AppColors.lightgrey1),
+                                //   placeholderWidget: Center(
+                                //       child: CircularProgressIndicator(
+                                //           color: AppColors.primaryColor)),
+                                //   errorImage: errorImage,
+                                //   errorBody: 'Show my custom error body',
+                                //   errorTitle:
+                                //       'Next one is youtube link, error title',
+                                // ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 89,
+                                      height: 89,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.black.withOpacity(.2),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: index == 2
+                                          ? ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(5),
+                                              ),
+                                              child: Image.network(
+                                                'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                                                height: 89,
+                                                width: 89,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
+                                          : ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(5),
+                                              ),
+                                              child: SvgPicture.asset(
+                                                'assets/link.svg',
+                                                height: 44,
+                                              ),
+                                            ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        height: 89,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.lightgrey1,
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(5),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 6,
+                                                  ),
+                                                  child: SizedBox(
+                                                    width: context.screenWidth *
+                                                        .64,
+                                                    child: Text(
+                                                      content[index],
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 10,
+                                                  ),
+                                                  child: Text(
+                                                    'docs.google.com',
+                                                    style: TextStyle(
+                                                      color: Color(0x7F4E4E4E),
+                                                      fontSize: 12,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width: 300,
+                                        child: Text(
+                                          index == 2
+                                              ? 'View Message'
+                                              : urls[index],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: AppColors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: AppColors.iconColor,
+                                        size: 15,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    top: 5,
+                    bottom: 0,
+                  ),
+                  child: Text(
+                    'LAST WEEK',
+                    style: TextStyle(
+                      color: AppColors.grey,
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: urls.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding:
-                            const EdgeInsets.only(top: 6, bottom: 6, right: 6),
+                        padding: const EdgeInsets.symmetric(vertical: 6),
                         child: Container(
                           width: 391.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(
                               color: Colors.black.withOpacity(0.2),
-                              width: 1,
                             ),
                           ),
                           child: Column(
@@ -123,25 +302,15 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                         color: AppColors.black.withOpacity(.2)),
                                     alignment: Alignment.center,
                                     child: index == 2
-                                        ? ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                            ),
-                                            child: Image.network(
-                                              'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                                              height: 89,
-                                              width: 89,
-                                              fit: BoxFit.cover,
-                                            ),
+                                        ? Image.network(
+                                            'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+                                            height: 89,
+                                            width: 89,
+                                            fit: BoxFit.cover,
                                           )
-                                        : ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/link.svg',
-                                              height: 44,
-                                            ),
+                                        : SvgPicture.asset(
+                                            'assets/link.svg',
+                                            height: 44,
                                           ),
                                   ),
                                   Expanded(
@@ -150,9 +319,11 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10.w),
                                       decoration: BoxDecoration(
-                                          color: AppColors.lightgrey1,
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(5))),
+                                        color: AppColors.lightgrey1,
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(5),
+                                        ),
+                                      ),
                                       child: Row(
                                         children: [
                                           Column(
@@ -161,11 +332,12 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               SizedBox(
-                                                  width: 260,
-                                                  child: Text(
-                                                    content[index],
-                                                    overflow: TextOverflow.clip,
-                                                  )),
+                                                width: 271,
+                                                child: Text(
+                                                  content[index],
+                                                  overflow: TextOverflow.clip,
+                                                ),
+                                              ),
                                               Text(
                                                 'docs.google.com',
                                                 style: TextStyle(
@@ -174,18 +346,20 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                                   fontFamily: 'Poppins',
                                                   fontWeight: FontWeight.w400,
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -206,7 +380,7 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                                       Icons.arrow_forward_ios,
                                       color: AppColors.iconColor,
                                       size: 15,
-                                    )
+                                    ),
                                   ],
                                 ),
                               )
@@ -214,280 +388,153 @@ class _LinksTabScreenState extends State<LinksTabScreen> {
                           ),
                         ),
                       );
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
-                child: Text(
-                  'LAST WEEK',
-                  style: TextStyle(
-                    color: AppColors.grey,
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+                    },
                   ),
                 ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: urls.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Container(
-                            width: 391.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                  color: Colors.black.withOpacity(0.2),
-                                )),
-                            child: Column(
-                              children: [
-                                //? DO Not Delete this code
-                                // AnyLinkPreview(
-                                //   link: urls[index],
-                                //   displayDirection:
-                                //       UIDirection.uiDirectionHorizontal,
-                                //   cache: Duration(hours: 1),
-                                //   backgroundColor: AppColors.lightgrey1,
-                                //   borderRadius: 5,
-                                //   errorWidget:
-                                //       Container(color: AppColors.lightgrey1),
-                                //   placeholderWidget: Center(
-                                //       child: CircularProgressIndicator(
-                                //           color: AppColors.primaryColor)),
-                                //   errorImage: errorImage,
-                                //   errorBody: 'Show my custom error body',
-                                //   errorTitle:
-                                //       'Next one is youtube link, error title',
-                                // ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 89,
-                                      height: 89,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColors.black.withOpacity(.2)),
-                                      alignment: Alignment.center,
-                                      child: index == 2
-                                          ? Image.network(
-                                              'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                                              height: 89,
-                                              width: 89,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : SvgPicture.asset('assets/link.svg',
-                                              height: 44),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 89,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10.w),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.lightgrey1,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(5))),
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                SizedBox(
-                                                    width: 271,
-                                                    child: Text(
-                                                      content[index],
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                    )),
-                                                Text(
-                                                  'docs.google.com',
-                                                  style: TextStyle(
-                                                    color: Color(0x7F4E4E4E),
-                                                    fontSize: 12,
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: 300,
-                                        child: Text(
-                                          index == 2
-                                              ? 'View Message'
-                                              : urls[index],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: AppColors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: AppColors.iconColor,
-                                        size: 15,
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
-                child: Text(
-                  'LAST MONTH',
-                  style: TextStyle(
-                    color: AppColors.grey,
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 5, bottom: 0),
+                  child: Text(
+                    'LAST MONTH',
+                    style: TextStyle(
+                      color: AppColors.grey,
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: urls.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Container(
-                            width: 391.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                  color: Colors.black.withOpacity(0.2),
-                                )),
-                            child: Column(
-                              children: [
-                                //? DO Not Delete this code
-                                // AnyLinkPreview(
-                                //   link: urls[index],
-                                //   displayDirection:
-                                //       UIDirection.uiDirectionHorizontal,
-                                //   cache: Duration(hours: 1),
-                                //   backgroundColor: AppColors.lightgrey1,
-                                //   borderRadius: 5,
-                                //   errorWidget:
-                                //       Container(color: AppColors.lightgrey1),
-                                //   placeholderWidget: Center(
-                                //       child: CircularProgressIndicator(
-                                //           color: AppColors.primaryColor)),
-                                //   errorImage: errorImage,
-                                //   errorBody: 'Show my custom error body',
-                                //   errorTitle:
-                                //       'Next one is youtube link, error title',
-                                // ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 89,
-                                      height: 89,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColors.black.withOpacity(.2)),
-                                      alignment: Alignment.center,
-                                      child: SvgPicture.asset('assets/link.svg',
-                                          height: 44),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 89,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10.w),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.lightgrey1,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(5))),
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                SizedBox(
-                                                    width: 271,
-                                                    child: Text(
-                                                      content[index],
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                    )),
-                                                Text(
-                                                  'docs.google.com',
-                                                  style: TextStyle(
-                                                    color: Color(0x7F4E4E4E),
-                                                    fontSize: 12,
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: 300,
-                                        child: Text(
-                                          urls[index],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: AppColors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: AppColors.iconColor,
-                                        size: 15,
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: urls.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Container(
+                          width: 391.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.black.withOpacity(0.2),
                             ),
                           ),
-                        );
-                      })),
-            ],
+                          child: Column(
+                            children: [
+                              //? DO Not Delete this code
+                              // AnyLinkPreview(
+                              //   link: urls[index],
+                              //   displayDirection:
+                              //       UIDirection.uiDirectionHorizontal,
+                              //   cache: Duration(hours: 1),
+                              //   backgroundColor: AppColors.lightgrey1,
+                              //   borderRadius: 5,
+                              //   errorWidget:
+                              //       Container(color: AppColors.lightgrey1),
+                              //   placeholderWidget: Center(
+                              //       child: CircularProgressIndicator(
+                              //           color: AppColors.primaryColor)),
+                              //   errorImage: errorImage,
+                              //   errorBody: 'Show my custom error body',
+                              //   errorTitle:
+                              //       'Next one is youtube link, error title',
+                              // ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 89,
+                                    height: 89,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.black.withOpacity(.2),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: SvgPicture.asset(
+                                      'assets/link.svg',
+                                      height: 44,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      height: 89,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10.w,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightgrey1,
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(5),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(
+                                                width: 271,
+                                                child: Text(
+                                                  content[index],
+                                                  overflow: TextOverflow.clip,
+                                                ),
+                                              ),
+                                              Text(
+                                                'docs.google.com',
+                                                style: TextStyle(
+                                                  color: Color(0x7F4E4E4E),
+                                                  fontSize: 12,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 300,
+                                      child: Text(
+                                        urls[index],
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: AppColors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: AppColors.iconColor,
+                                      size: 15,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

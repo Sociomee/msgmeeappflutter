@@ -85,23 +85,31 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                       },
                       child: SvgPicture.asset('assets/trash.svg', height: 18)),
                   SizedBox(width: 19),
-                  Icon(Icons.error_outline_outlined,
-                      color: AppColors.black, size: 16),
+                  Icon(
+                    Icons.error_outline_outlined,
+                    color: AppColors.black,
+                    size: 16,
+                  ),
                   SizedBox(width: 19),
                   SvgPicture.asset('assets/note.svg', height: 18),
                   SizedBox(width: 19),
                   SvgPicture.asset('assets/pencil.svg', height: 18),
                   SizedBox(width: 19),
                   GestureDetector(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: copiedText));
-
-                        setState(() {
-                          chattileIndex.clear();
-                        });
-                      },
-                      child: SvgPicture.asset('assets/copy.svg', height: 18)),
-                  SizedBox(width: 19),
+                    onTap: () {
+                      Clipboard.setData(ClipboardData(text: copiedText));
+                      setState(() {
+                        chattileIndex.clear();
+                      });
+                    },
+                    child: SvgPicture.asset(
+                      'assets/copy.svg',
+                      height: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 19,
+                  ),
                   GestureDetector(
                     onTap: () {
                       animatedScreenNavigator(context, ForwardMessagePage());
@@ -111,7 +119,9 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                       height: 18,
                     ),
                   ),
-                  SizedBox(width: 19),
+                  SizedBox(
+                    width: 19,
+                  ),
                 ],
               )
             : AppBar(
@@ -119,52 +129,65 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 elevation: 1,
                 leadingWidth: 20,
                 leading: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.black,
-                    )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.black,
+                  ),
+                ),
                 title: InkWell(
                   onTap: () {
                     animatedScreenNavigator(
-                        context, BroadCastDescriptionScreen());
+                      context,
+                      BroadCastDescriptionScreen(),
+                    );
                   },
                   child: Row(
                     children: [
                       Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.seconderyColor1,
-                            border:
-                                Border.all(color: AppColors.white, width: 1.5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.lightgrey,
-                                offset: Offset(0, 0),
-                                blurRadius: 10,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child:
-                              Image.asset('assets/broadcast.png', height: 31)),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.seconderyColor1,
+                          border:
+                              Border.all(color: AppColors.white, width: 1.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.lightgrey,
+                              offset: Offset(0, 0),
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          'assets/broadcast.png',
+                          height: 31,
+                        ),
+                      ),
                       SizedBox(width: 13),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Alia, Abriella, Mariana,',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: AppColors.black,
-                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            'Alia, Abriella, Mariana,',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                           SizedBox(height: 8),
-                          Text('Broadcast',
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.grey)),
+                          Text(
+                            'Broadcast',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: AppColors.grey,
+                            ),
+                          ),
                         ],
                       ),
                     ],

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/data/model/market_model.dart';
@@ -55,7 +53,7 @@ class _MarketPageTabState extends State<MarketPageTab> {
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
