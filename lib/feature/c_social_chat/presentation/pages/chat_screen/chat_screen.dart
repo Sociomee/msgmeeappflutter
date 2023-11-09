@@ -19,7 +19,6 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/select_duration.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
-import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
@@ -156,6 +155,20 @@ class _ChatScreenState extends State<ChatScreen> {
                 if (_listViewController.hasClients) {
                   _scrollToBottom();
                 }
+                //                 if (_listViewController.hasClients) {
+                //   double totalHeight = 0.0;
+
+                //   for (int i = 0; i < yourList.length; i++) {
+                //     final RenderBox renderBox = context.findRenderObject();
+                //     totalHeight += renderBox.size.height; // Calculate the height of the current item
+                //   }
+
+                //   _listViewController.animateTo(
+                //     totalHeight,
+                //     duration: Duration(milliseconds: 300),
+                //     curve: Curves.easeOut,
+                //   );
+                // }
               });
             }
           },

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../../../../theme/colors.dart';
 import '../../../e_settings/cubit/choose_language_cubit.dart';
 
@@ -204,11 +203,11 @@ class ChooseLanguage extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: const [
-          Icon(
-            Fontisto.world_o,
-            size: 17,
-            color: AppColors.black,
-          ),
+          // Icon(
+          //   Fontisto.world_o,
+          //   size: 17,
+          //   color: AppColors.black,
+          // ),
           SizedBox(
             width: 10,
           ),
