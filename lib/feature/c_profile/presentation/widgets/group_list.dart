@@ -113,23 +113,28 @@ class _GroupListState extends State<GroupList> {
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      if (selectedindex.contains(index)) {
-                        setState(() {
-                          selectedindex.remove(index);
-                        });
-                      } else if (selectMode) {
-                        setState(() {
-                          selectedindex.add(index);
-                        });
+                      if (selectMode) {
+                        if (selectedindex.contains(index)) {
+                          setState(() {
+                            selectedindex.remove(index);
+                          });
+                        } else {
+                          setState(() {
+                            selectedindex.add(index);
+                          });
+                        }
+                        if (selectedindex.isEmpty) {
+                          setState(() {
+                            selectMode = false;
+                          });
+                        }
                       }
                     },
                     onLongPress: () {
-                      if (selectedindex.length < 9 &&
-                          !selectedindex.contains(index))
-                        setState(() {
-                          selectMode = !selectMode;
-                          selectedindex.add(index);
-                        });
+                      setState(() {
+                        selectMode = true;
+                        selectedindex.add(index);
+                      });
                     },
                     child: Container(
                       color: selectedindex.contains(index)
@@ -142,7 +147,6 @@ class _GroupListState extends State<GroupList> {
                             horizontal: 12, vertical: 7),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             selectedindex.contains(index)
                                 ? Container(

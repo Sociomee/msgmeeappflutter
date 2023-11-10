@@ -28,9 +28,10 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   bool istyping = false;
-  bool tap = false;
+
   String copiedText = 'empty';
-  List chattileIndex = [];
+  bool selectMode = false;
+  List<int> selectedindex = [];
   void _scrollToBottom() {
     _listViewController.animateTo(_listViewController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -42,7 +43,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        appBar: chattileIndex.isNotEmpty
+        appBar: selectedindex.isNotEmpty
             ? AppBar(
                 leading: GestureDetector(
                   onTap: () {
@@ -59,14 +60,14 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                 elevation: 1,
                 leadingWidth: 30,
                 titleSpacing: 5,
-                title: Text(chattileIndex.length.toString(),
+                title: Text(selectedindex.length.toString(),
                     style: TextStyle(color: AppColors.black)),
                 actions: [
                   GestureDetector(
                       onTap: () {
                         // context.read<ReplyMsgCubit>().replyMsg(
                         //     widget.name, msg[chattileIndex[0]].messageContent);
-                        chattileIndex.clear();
+                        selectedindex.clear();
                       },
                       child: SvgPicture.asset('assets/Forward.svg')),
                   SizedBox(width: 19),
@@ -81,7 +82,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                               time: getCurrentTime(),
                               type: MessageType.contact,
                             ));
-                        chattileIndex.clear();
+                        selectedindex.clear();
                       },
                       child: SvgPicture.asset('assets/trash.svg', height: 18)),
                   SizedBox(width: 19),
@@ -99,7 +100,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     onTap: () {
                       Clipboard.setData(ClipboardData(text: copiedText));
                       setState(() {
-                        chattileIndex.clear();
+                        selectedindex.clear();
                       });
                     },
                     child: SvgPicture.asset(
@@ -249,25 +250,31 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    setState(() {
-                      chattileIndex.remove(index);
-                    });
-                  },
-                  onLongPress: () {
-                    if (!chattileIndex.contains(index)) {
-                      setState(() {
-                        chattileIndex.add(index);
-                      });
-                      context.read<ShowEmojiCubit>().diaplayEmoji(index);
-                    } else {
-                      setState(() {
-                        chattileIndex.remove(index);
-                      });
-                      context.read<ShowEmojiCubit>().removeEmoji();
+                    if (selectMode) {
+                      if (selectedindex.contains(index)) {
+                        setState(() {
+                          selectedindex.remove(index);
+                        });
+                      } else {
+                        setState(() {
+                          selectedindex.add(index);
+                        });
+                      }
+                      if (selectedindex.isEmpty) {
+                        setState(() {
+                          selectMode = false;
+                        });
+                      }
                     }
                   },
+                  onLongPress: () {
+                    setState(() {
+                      selectMode = true;
+                      selectedindex.add(index);
+                    });
+                  },
                   child: Container(
-                    color: chattileIndex.contains(index)
+                    color: selectedindex.contains(index)
                         ? AppColors.seconderyColor1
                         : AppColors.white,
                     child: BoradCastSendMessage(),
@@ -304,7 +311,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  tap = !tap;
+                                  // tap = !tap;
                                 });
                               },
                               child: Container(
@@ -395,7 +402,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                     ],
                   ),
                 ),
-                tap
+                selectMode
                     ? Positioned(
                         bottom: 60,
                         child: SizedBox(
