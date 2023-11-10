@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/broadcast_screen/widget/popup_menu.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -28,7 +29,7 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   bool istyping = false;
-
+  bool tap = false;
   String copiedText = 'empty';
   bool selectMode = false;
   List<int> selectedindex = [];
@@ -198,223 +199,237 @@ class _BroadCastChatScreenState extends State<BroadCastChatScreen> {
                   PopupMenuWidget(),
                 ],
               ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 42,
-              alignment: Alignment.center,
-              child: Container(
-                height: 32,
-                width: 69,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Color(0xFFF3FFE9),
-                    borderRadius: BorderRadius.circular(6)),
-                child: Text(
-                  'Today',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+        body: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 42,
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 32,
+                    width: 69,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFF3FFE9),
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Text(
+                      'Today',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 42,
-              alignment: Alignment.center,
-              child: Container(
-                height: 32,
-                margin: EdgeInsets.symmetric(horizontal: 50),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: AppColors.seconderyColor1,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  'You created a broadcast list with 10 recipients',
-                  style: TextStyle(fontSize: 10),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 42,
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 32,
+                    margin: EdgeInsets.symmetric(horizontal: 50),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: AppColors.seconderyColor1,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      'You created a broadcast list with 10 recipients',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 10),
-            ListView.builder(
-              controller: _listViewController,
-              itemCount: 2,
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10, bottom: 50),
-              physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    if (selectMode) {
-                      if (selectedindex.contains(index)) {
+                SizedBox(height: 10),
+                ListView.builder(
+                  controller: _listViewController,
+                  itemCount: 2,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.only(top: 10, bottom: 50),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        if (selectMode) {
+                          if (selectedindex.contains(index)) {
+                            setState(() {
+                              selectedindex.remove(index);
+                            });
+                          } else {
+                            setState(() {
+                              selectedindex.add(index);
+                            });
+                          }
+                          if (selectedindex.isEmpty) {
+                            setState(() {
+                              selectMode = false;
+                            });
+                          }
+                        }
+                      },
+                      onLongPress: () {
                         setState(() {
-                          selectedindex.remove(index);
-                        });
-                      } else {
-                        setState(() {
+                          selectMode = true;
                           selectedindex.add(index);
                         });
-                      }
-                      if (selectedindex.isEmpty) {
-                        setState(() {
-                          selectMode = false;
-                        });
-                      }
-                    }
-                  },
-                  onLongPress: () {
-                    setState(() {
-                      selectMode = true;
-                      selectedindex.add(index);
-                    });
-                  },
-                  child: Container(
-                    color: selectedindex.contains(index)
-                        ? AppColors.seconderyColor1
-                        : AppColors.white,
-                    child: BoradCastSendMessage(),
-                  ),
-                );
-              },
-            ),
-            Spacer(),
-            Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Divider(
-                        height: 0,
-                        color: AppColors.grey,
-                        thickness: .5,
+                      },
+                      child: Container(
+                        color: selectedindex.contains(index)
+                            ? AppColors.seconderyColor1
+                            : AppColors.white,
+                        child: BoradCastSendMessage(),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: 10,
-                          bottom: 10,
-                          top: 10,
-                          right: 10,
-                        ),
-                        // height: 60,
-                        width: double.infinity,
-                        color: Colors.white,
-                        child: Row(
-                          children: <Widget>[
-                            // SizedBox(width: 30, child: FlowAnimationWidget()),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  // tap = !tap;
-                                });
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Image.asset('assets/paper_clip.png'),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightgrey1,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Icon(Icons.photo_camera_outlined,
-                                    size: 20, color: AppColors.iconColor),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-
-                            Expanded(
-                                child: MessageTextFieldWidget(
-                              imageTextfield: false,
-                              messageController: messageController,
-                              onChanged: (e) {
-                                if (e.isNotEmpty) {
-                                  setState(() {
-                                    istyping = true;
-                                  });
-                                } else {
-                                  setState(() {
-                                    istyping = false;
-                                  });
-                                }
-                              },
-                            )),
-                            SizedBox(width: 10),
-                            istyping
-                                ? GestureDetector(
-                                    onTap: () {
-                                      _scrollToBottom();
-                                      messages.add(ChatMessage(
-                                        messageContent: messageController.text,
-                                        messageType: 'sender',
-                                        msgStatus: 'send',
-                                        time: '4:28 pm',
-                                        type: MessageType.text,
-                                      ));
-                                      setState(() {});
-                                      messageController.clear();
-                                    },
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightgrey1,
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Image.asset('assets/attach.png'),
-                                    ),
-                                  )
-                                : GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightgrey1,
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Icon(Icons.mic_none,
-                                          size: 20, color: AppColors.iconColor),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-                selectMode
-                    ? Positioned(
-                        bottom: 60,
-                        child: SizedBox(
-                            height: 200,
-                            width: 150,
-                            child: AttachedIcon(
-                              profileImage: '',
-                              name: '',
-                            )))
-                    : Container()
+                Spacer(),
+                Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Divider(
+                            height: 0,
+                            color: AppColors.grey,
+                            thickness: .5,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              bottom: 10,
+                              top: 18,
+                              right: 10,
+                            ),
+                            // height: 60,
+                            width: double.infinity,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                // SizedBox(width: 30, child: FlowAnimationWidget()),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      tap = !tap;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.lightgrey1,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Image.asset('assets/paper_clip.png'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.lightgrey1,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Icon(Icons.photo_camera_outlined,
+                                        size: 20, color: AppColors.iconColor),
+                                  ),
+                                ),
+                                Spacer(),
+                                istyping
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          _scrollToBottom();
+                                          messages.add(ChatMessage(
+                                            messageContent:
+                                                messageController.text,
+                                            messageType: 'sender',
+                                            msgStatus: 'send',
+                                            time: '4:28 pm',
+                                            type: MessageType.text,
+                                          ));
+                                          setState(() {});
+                                          messageController.clear();
+                                        },
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.lightgrey1,
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          child:
+                                              Image.asset('assets/attach.png'),
+                                        ),
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.lightgrey1,
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          child: Icon(Icons.mic_none,
+                                              size: 20,
+                                              color: AppColors.iconColor),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
+            Positioned(
+              bottom: 5,
+              left: 70.w,
+              child: SizedBox(
+                width: 250.w,
+                child: MessageTextFieldWidget(
+                  imageTextfield: false,
+                  messageController: messageController,
+                  onChanged: (e) {
+                    if (e.isNotEmpty) {
+                      setState(() {
+                        istyping = true;
+                      });
+                    } else {
+                      setState(() {
+                        istyping = false;
+                      });
+                    }
+                  },
+                ),
+              ),
+            ),
+            tap
+                ? Positioned(
+                    bottom: 80,
+                    child: SizedBox(
+                        height: 220,
+                        width: 150,
+                        child: AttachedIcon(
+                          profileImage: '',
+                          name: '',
+                        )))
+                : Container()
           ],
         ),
       ),
