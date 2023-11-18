@@ -36,6 +36,7 @@ import '../widgets/profile_pic.dart';
 import 'chat_screen/chat_screen.dart';
 import 'market/market_page.dart';
 
+
 class MsgmeeScreen extends StatefulWidget {
   const MsgmeeScreen({super.key});
 
@@ -45,6 +46,10 @@ class MsgmeeScreen extends StatefulWidget {
 
 class _MsgmeeScreenState extends State<MsgmeeScreen>
     with TickerProviderStateMixin {
+
+
+
+// Access the socket like this
   late TabController _controller;
   late TabController tabsComtroller;
   int _selectedIndex = 0;
@@ -394,6 +399,10 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         fontSize: 22,
                                       ),
                                     ),
+
+                                     ElevatedButton(onPressed: (){
+                                      print("clicked");
+                                     }, child: Text("Start")),
                             ],
                           ),
                           actions: [
@@ -634,11 +643,13 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                               thickness: 1,
                                               color: Color(0xFFE4E4E4)
                                                   .withOpacity(.5)),
+                                                 
                                         ],
                                       );
                                     })
                                 : Stack(
                                     children: [
+                                      
                                       Column(
                                         children: [
                                           context
