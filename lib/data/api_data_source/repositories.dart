@@ -12,7 +12,7 @@ import '../model/image_send_reponse_model.dart';
 import '../model/msgmee_user_model.dart';
 import '../model/sync_model.dart';
 
-final String mainbaseUrl = 'https://api.msgmee.com';
+final String mainbaseUrl = 'https://api.msgmee.com'; //'http://192.168.29.233:4000'
 // 'https://api.sociomessage.com';
 
 abstract class AuthRepository {

@@ -35,3 +35,26 @@ void animatedScreenReplaceNavigator(BuildContext context, Widget widget) {
     ),
   );
 }
+
+void animatedScreenPop(BuildContext context) {
+  Navigator.of(context).pop(
+    PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 500),
+      pageBuilder: (context, animation, secondaryAnimation) => Container(), // Empty container as a placeholder for the popped route
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const Offset enterOffset = Offset(1, 0);
+        const Offset exitOffset = Offset(-1, 0);
+
+        Offset offset = animation.status == AnimationStatus.reverse
+            ? exitOffset
+            : enterOffset;
+
+        return SlideTransition(
+          position: Tween<Offset>(begin: offset, end: Offset.zero)
+              .animate(animation),
+          child: child,
+        );
+      },
+    ),
+  );
+}

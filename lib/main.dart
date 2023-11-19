@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msgmee/connectivity/socket_bloc.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'common_cubits/connectivity_cubit.dart';
 import 'common_cubits/reduce_number_cubit.dart';
+import 'connectivity/socket_service.dart';
 import 'data/sqlite_data_source/sqlite_helper.dart';
 import 'feature/a_onboarding/cubit/onboarding/onboarding_cubit.dart';
 import 'feature/b_auth/presentation/cubit/number_validation/number_validation_cubit.dart';
@@ -59,6 +59,13 @@ class MyApp extends StatelessWidget {
   final botToastBuilder = BotToastInit();
   @override
   Widget build(BuildContext context) {
+
+    SocketService().initSocket(); // Initialize the socket
+    // Set a global listener
+    SocketService().setListener((data) {
+      print('Global Listener: $data');
+      // Handle the data globally
+    });
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
@@ -66,7 +73,6 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => ConnectivityCubit()),
             BlocProvider(create: (context) => OnboardingCubit()),
-            BlocProvider(create: (context) => SocketBloc()..add(InitSocketEvent())), // Initialize socket connection            BlocProvider(create: (context) => NumberValidationCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
             BlocProvider(create: (context) => ShowContactTextField()),
             BlocProvider(create: (context) => ShowLoaderCubit()),

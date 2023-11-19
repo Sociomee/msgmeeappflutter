@@ -17,10 +17,14 @@ import 'package:msgmee/feature/c_social_chat/presentation/widgets/popup_menu_but
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/personal_profile_description.dart';
 import 'package:msgmee/theme/colors.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:stories_editor/stories_editor.dart';
+import '../../../../connectivity/socket_service.dart';
 import '../../../../data/model/dummy_chat_model.dart';
 import '../../../../helper/connectivity_mixin.dart';
+import '../../../../helper/local_data.dart';
 import '../../../c_profile/presentation/cubit/get_user_details/get_userdetails_cubit.dart';
+import '../../../f_call/presentation/pages/single_call_screen.dart';
 import '../cubit/chatrooms/chatrooms_cubit.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
 import '../cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
@@ -36,7 +40,6 @@ import '../widgets/profile_pic.dart';
 import 'chat_screen/chat_screen.dart';
 import 'market/market_page.dart';
 
-
 class MsgmeeScreen extends StatefulWidget {
   const MsgmeeScreen({super.key});
 
@@ -46,8 +49,7 @@ class MsgmeeScreen extends StatefulWidget {
 
 class _MsgmeeScreenState extends State<MsgmeeScreen>
     with TickerProviderStateMixin {
-
-
+  IO.Socket? socket = SocketService().getSocket();
 
 // Access the socket like this
   late TabController _controller;
@@ -135,6 +137,14 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
           ? changetypingState()
           : changetypingStatetofalse();
     });
+
+    socket?.on("call",(data){
+        incommingCallRecieved(data , context);
+    });
+
+    socket?.on("close",(data){
+           animatedScreenPop(context);
+      });
   }
 
   @override
@@ -153,6 +163,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     setState(() {
       typing = false;
     });
+  }
+
+  void incommingCallRecieved(data, context) {
+    animatedScreenNavigator(
+        context, SingleCallScreen(imageUrl: "https://picsum.photos/200/300"));
   }
 
   @override
@@ -399,10 +414,16 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         fontSize: 22,
                                       ),
                                     ),
-
-                                     ElevatedButton(onPressed: (){
-                                      print("clicked");
-                                     }, child: Text("Start")),
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    print("clicked debug");
+                                    animatedScreenNavigator(
+                                        context,
+                                        SingleCallScreen(
+                                            imageUrl:
+                                                "https://picsum.photos/200/300"));
+                                  },
+                                  child: Text("Start")),
                             ],
                           ),
                           actions: [
@@ -643,13 +664,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                               thickness: 1,
                                               color: Color(0xFFE4E4E4)
                                                   .withOpacity(.5)),
-                                                 
                                         ],
                                       );
                                     })
                                 : Stack(
                                     children: [
-                                      
                                       Column(
                                         children: [
                                           context
