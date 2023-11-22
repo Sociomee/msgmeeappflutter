@@ -13,6 +13,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatro
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_contact_textfield.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/multiple_image_perview_page.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record_widget.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/message_type.dart';
@@ -150,6 +151,8 @@ class _ChatScreenState extends State<ChatScreen> {
         },
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
           listener: (context, state) {
+
+            
             if (state.localmessage.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (_listViewController.hasClients) {
@@ -511,14 +514,53 @@ class _ChatScreenState extends State<ChatScreen> {
                                           ),
                                         ),
                                         SizedBox(height: 8),
-                                        Text(
-                                          online.isNotEmpty
-                                              ? online.first['status']
-                                              : 'Last Online ${widget.lastOnline}',
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            color: AppColors.grey,
-                                          ),
+                                        BlocBuilder<TypingCubit, TypingState>(
+                                          builder: (context, tstate) {
+                                            if (tstate is TypingStartState) {
+                                              return widget.id ==
+                                                      tstate.typingStatus.roomID
+                                                  ? Text(
+                                                      "typing...",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: AppColors.grey,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      (online.isNotEmpty
+                                                          ? online
+                                                              .first['status']
+                                                          : 'Last Online ${widget.lastOnline}'),
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: AppColors.grey,
+                                                      ),
+                                                    );
+                                            } else if (tstate
+                                                is TypingEndState) {
+                                              return Text(
+                                                online.isNotEmpty
+                                                    ? online.first['status']
+                                                    : 'Last Online ${widget.lastOnline}',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppColors.grey,
+                                                ),
+                                              );
+                                            } else {
+                                              return Text(
+                                                online.isNotEmpty
+                                                    ? online.first['status']
+                                                    : 'Last Online ${widget.lastOnline}',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppColors.grey,
+                                                ),
+                                              );
+                                            }
+                                          },
                                         ),
                                       ],
                                     ),
@@ -611,6 +653,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
+
+                                print("Rebuilding data");
                                 return Align(
                                   alignment: (authorId !=
                                           state.localmessage[index].author

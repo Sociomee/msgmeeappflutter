@@ -145,6 +145,11 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
     socket?.on("close",(data){
            animatedScreenPop(context);
       });
+
+    socket?.on("message-in",(data){
+           print("message recieve");
+           
+      });
   }
 
   @override
@@ -414,16 +419,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         fontSize: 22,
                                       ),
                                     ),
-                              ElevatedButton(
-                                  onPressed: () async {
-                                    print("clicked debug");
-                                    animatedScreenNavigator(
-                                        context,
-                                        SingleCallScreen(
-                                            imageUrl:
-                                                "https://picsum.photos/200/300"));
-                                  },
-                                  child: Text("Start")),
+                             
                             ],
                           ),
                           actions: [

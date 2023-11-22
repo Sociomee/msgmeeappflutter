@@ -6,7 +6,10 @@ class Tables {
   static const String ALLCONNECTIONS = 'allconnections';
   static const String USER = 'user';
   static const String ROOM = 'room';
+  static const String ROOMPEOPLE = 'roomPeople';
   static const String MESSAGE = 'message';
+  static const String MEETING = 'meeting';
+  static const String CONFIG = 'config';
 }
 
 class SQLiteHelper {
@@ -20,6 +23,15 @@ class SQLiteHelper {
         id INTEGER PRIMARY KEY,
         name TEXT,
         phone TEXT
+      )
+    ''';
+
+  static const configTable = '''
+      CREATE TABLE ${Tables.CONFIG} (
+        userId TEXT NULL,
+        phone TEXT PRIMARY KEY,
+        isSyncEnabled BOOLEAN DEFAULT 0,
+        syncedTill TEXT DEFAULT CURRENT_TIMESTAMP
       )
     ''';
 
@@ -61,27 +73,58 @@ class SQLiteHelper {
   static const roomtable = '''
       CREATE TABLE ${Tables.ROOM} (
         id TEXT PRIMARY KEY,
-        people TEXT,
         title TEXT,
-        picture TEXT,
-        isGroup TEXT,
-        lastUpdate TEXT,
-        lastAuthor TEXT,
-        lastMessage TEXT
+        picture_id TEXT DEFAULT "0",
+        isGroup BOOLEAN DEFAULT 0,
+        isBizPage BOOLEAN DEFAULT 0,
+        isMarketPlace BOOLEAN DEFAULT 0,
+        isBroadCast BOOLEAN DEFAULT 0,
+        description TEXT DEFAULT "",
+        followers INTEGER DEFAULT 0,
+        following INTEGER DEFAULT 0,
+        pageId TEXT DEFAULT "0",
+        ownerId INTEGER DEFAULT NULL,
+        lastUpdate DATETIME,
+        lastAuthorId INTEGER NULL,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
+        lastMessageId INTEGER NULL
+      )
+    ''';
+
+  static const roomPeopletable = '''
+      CREATE TABLE ${Tables.ROOMPEOPLE} (
+        id TEXT PRIMARY KEY,
+        user_id TEXT,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP
       )
     ''';
 
   static const messagetable = '''
       CREATE TABLE ${Tables.MESSAGE} (
-        id TEXT PRIMARY KEY,
-        localId TEXT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        remote_id TEXT,
         author TEXT,
         file TEXT,
         room TEXT,
         date TEXT,
         content TEXT,
         type TEXT,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
         status TEXT
+      )
+    ''';
+
+  static const meetingTable = '''
+      CREATE TABLE ${Tables.MEETING} (
+        id TEXT PRIMARY KEY,
+        socioMeeId TEXT NULL,
+        firstName TEXT NULL,
+        phone TEXT NULL,
+        lastName TEXT NULL,
+        username TEXT NULL,
+        fullName TEXT NULL,
+        otherProfileImage TEXT NULL,
+        linkedTo TEXT NULL
       )
     ''';
 
@@ -97,6 +140,9 @@ class SQLiteHelper {
         await db.execute(usertable);
         await db.execute(phonebooktable);
         await db.execute(allconnectiontable);
+        await db.execute(meetingTable);
+        await db.execute(roomPeopletable);
+        await db.execute(configTable);
       },
     );
   }
@@ -118,6 +164,9 @@ class SQLiteHelper {
         await db.execute(usertable);
         await db.execute(phonebooktable);
         await db.execute(allconnectiontable);
+        await db.execute(meetingTable);
+        await db.execute(roomPeopletable);
+        await db.execute(configTable);
       },
     );
   }

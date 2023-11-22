@@ -5,7 +5,8 @@ enum ChatRoomStatus {
   initial,
   loading,
   loaded,
-  error,
+  error, 
+  refresh,
 }
 
 enum MessageStatus {

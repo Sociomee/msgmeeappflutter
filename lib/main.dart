@@ -5,8 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
+import 'package:msgmee/repos/base_repo.dart';
 import 'package:msgmee/theme/app_theme.dart';
+import 'package:path/path.dart';
 import 'common_cubits/connectivity_cubit.dart';
 import 'common_cubits/reduce_number_cubit.dart';
 import 'connectivity/socket_service.dart';
@@ -41,6 +44,7 @@ import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/sh
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SQLiteHelper().initialize();
+  // await SQLiteHelper().clearAndReinitializeDatabase();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // navigation bar color
     statusBarColor: Colors.white, // status bar color
@@ -51,7 +55,9 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
   ));
 
-  runApp(MyApp());
+  runApp(MultiRepositoryProvider(providers: [
+    RepositoryProvider(create: (context)=> BaseRepo())
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -62,10 +68,12 @@ class MyApp extends StatelessWidget {
 
     SocketService().initSocket(); // Initialize the socket
     // Set a global listener
+    
     SocketService().setListener((data) {
       print('Global Listener: $data');
       // Handle the data globally
     });
+    
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
@@ -78,6 +86,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ShowLoaderCubit()),
             BlocProvider(create: (context) => ShowAudioRecorder()),
             BlocProvider(create: (context) => ShowAttachment()),
+            BlocProvider(create: (context) => TypingCubit()),
             BlocProvider(create: (context) => AddMessageCubit()),
             BlocProvider(create: (context) => SelectedchatCubit()),
             BlocProvider(create: (context) => ChatThemeCubit()),
@@ -85,6 +94,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => ChooseImageWallpaperCubit()),
             BlocProvider(create: (context) => SetChatbgCubit()),
             BlocProvider(create: (context) => ChangeWallPaperView()),
+            BlocProvider(create: (context)=>NumberValidationCubit()),
             BlocProvider(create: (context) => OtpSendCubit()),
             BlocProvider(create: (context) => OtpVerifyCubit()),
             BlocProvider(create: (context) => ReduceNumberCubit()),
@@ -108,6 +118,8 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             home: const SplashScreen(),
             builder: (context, child) {
+              SocketService().setContext(context);
+              context.read<BaseRepo>().init();
               child = botToastBuilder(context, child);
               return child;
             },

@@ -18,6 +18,7 @@ class ChatRepostory extends AbChatReporitory {
   @override
   Future<ChatRoomsModel> getChatRoomList() async {
     var token = await localData.readData('token');
+    print(token);
     var response = await apiService.dio.post(
       '$mainbaseUrl/api/rooms/list',
       options: Options(headers: {
@@ -26,6 +27,7 @@ class ChatRepostory extends AbChatReporitory {
     );
     // log('chat room response: ${response.data}');
     if (response.statusCode == 200) {
+      print(response.data);
       var data = ChatRoomsModel.fromJson(response.data);
 
       return data;

@@ -25,7 +25,6 @@ abstract class AbAllConnectionRepository with SQLiteMixin {
 abstract class AbChatRoomsRepository with SQLiteMixin {
   Future<void> insertRooms(LocalChatRooms room);
   Future<List<LocalChatRooms>> getRooms();
-
   Future<void> deleteTable();
 }
 

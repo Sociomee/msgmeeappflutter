@@ -1,3 +1,6 @@
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -6,7 +9,7 @@ import '../helper/local_data.dart';
 
 class SocketService {
   static final SocketService _instance = SocketService._internal();
-
+  late BuildContext context;
   factory SocketService() {
     return _instance;
   }
@@ -55,12 +58,12 @@ class SocketService {
       });
 
        _socket?.on('onlineUsers', (data) {
-          print(data);
+         // print(data);
       });
 
         _socket?.on('call', (data) {
           print("Incomming call");
-          print(data);
+         // print(data);
       });
 
 
@@ -69,14 +72,19 @@ class SocketService {
       });
 
      _socket?.on('typing', (data) {
-         print('IsTyping');
+         if(context.mounted){
+            context.read<TypingCubit>().startTyping(data);
+         }
+         print("typing start");
+           print(data);
+         print("typing end");
       });
        _socket?.on('authenticated', (data) {
          print('Received data auth: $data');
       });
 
        _socket?.on('message-in', (data) {
-        print('Received data message: $data');
+        //print('Received data message: $data');
       });
 
       
@@ -101,5 +109,9 @@ class SocketService {
 
   IO.Socket? getSocket() {
     return _socket;
+  }
+
+  void setContext(BuildContext context1) {
+    context = context1;
   }
 }

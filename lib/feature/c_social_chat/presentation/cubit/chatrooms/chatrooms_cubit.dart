@@ -40,7 +40,7 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     try {
       var data = await ChatRepostory().getChatRoomList();
       // log('all rooms from remote server ${data.rooms!.length}');
-      insertDataToDB(data.rooms!);
+      //insertDataToDB(data.rooms!);
       emit(state.copyWith(response: data, status: ChatRoomStatus.loaded));
     } catch (e) {
       log('Error:$e');
@@ -149,13 +149,16 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     required String contentType,
     required ConnectivityState connectivityState,
   }) async {
+    
     var sentToServer = await ChatRepostory().sendMessage(
       authorId: authorId,
       roomId: roomId,
       content: content,
       contentType: contentType,
     );
-    log('message send $sentToServer');
+
+    print('message send $sentToServer');
+    emit(state.copyWith(status: ChatRoomStatus.refresh));
     if (connectivityState.result == ConnectivityResult.mobile ||
         connectivityState.result == ConnectivityResult.wifi) {
       log('connection ${connectivityState.isOnline}');
@@ -184,6 +187,8 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
       //   );
       //   await MessagesRepository().insertMessages(message);
       // }
+      // var message = await MessagesRepository().getMessagesById(roomId);
+      print("message send to server");
     }
   }
 
@@ -227,4 +232,6 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
       log('error sending message $e');
     }
   }
+
+  
 }

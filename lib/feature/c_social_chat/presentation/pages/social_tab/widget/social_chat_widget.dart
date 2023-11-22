@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
@@ -189,13 +190,44 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                 SizedBox(height: 8),
                                 SizedBox(
                                   width: context.screenWidth * .6,
-                                  child: Text(
-                                    "${state.chatroom[index].lastMessage!.content}",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: AppColors.grey,
-                                    ),
+                                  child: BlocBuilder<TypingCubit, TypingState>(
+                                    builder: (context, tstate) {
+                                      if(tstate is TypingStartState){
+                                        return localpeopledata.first.sId == tstate.typingStatus.id ? Text("typing...",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppColors.grey,
+                                        ),
+                                      ) : Text(
+                                        "${state.chatroom[index].lastMessage!.content}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppColors.grey,
+                                        ),
+                                      );
+
+                                      }else if (tstate is TypingEndState){
+                                        return Text(
+                                        "${state.chatroom[index].lastMessage!.content}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppColors.grey,
+                                        ),
+                                      );
+                                      }else{
+                                        return Text(
+                                        "${state.chatroom[index].lastMessage!.content}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppColors.grey,
+                                        ),
+                                      );
+                                      }
+                                    },
                                   ),
                                 )
                               ],
