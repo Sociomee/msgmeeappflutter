@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
@@ -352,7 +353,6 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                     .read<ChatRoomsCubit>()
                                                     .state
                                                     .createroom
-                                                    .room!
                                                     .sId,
                                               ));
                                           BotToast.closeAllLoading();

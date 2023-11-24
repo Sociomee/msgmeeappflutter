@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:msgmee/helper/string_ext.dart';

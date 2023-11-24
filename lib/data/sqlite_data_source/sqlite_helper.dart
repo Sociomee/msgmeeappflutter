@@ -7,6 +7,7 @@ class Tables {
   static const String USER = 'user';
   static const String ROOM = 'room';
   static const String ROOMPEOPLE = 'roomPeople';
+  static const String PICTURE = 'picture';
   static const String MESSAGE = 'message';
   static const String MEETING = 'meeting';
   static const String CONFIG = 'config';
@@ -70,10 +71,26 @@ class SQLiteHelper {
       )
 ''';
 
+ static const picturetable = '''
+      CREATE TABLE ${Tables.PICTURE} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        isUrl BOOLEAN DEFAULT 0,
+        sId TEXT,
+        shield TEXT NULL,
+        name TEXT NULL,
+        author TEXT,
+        size INTEGER NULL,
+        location TEXT NULL,
+        shieldedID TEXT NULL,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP
+      )
+    ''';
+
   static const roomtable = '''
       CREATE TABLE ${Tables.ROOM} (
-        id TEXT PRIMARY KEY,
+        sId TEXT PRIMARY KEY,
         title TEXT,
+        people TEXT NULL,
         picture_id TEXT DEFAULT "0",
         isGroup BOOLEAN DEFAULT 0,
         isBizPage BOOLEAN DEFAULT 0,
@@ -83,11 +100,11 @@ class SQLiteHelper {
         followers INTEGER DEFAULT 0,
         following INTEGER DEFAULT 0,
         pageId TEXT DEFAULT "0",
-        ownerId INTEGER DEFAULT NULL,
+        ownerId TEXT DEFAULT NULL,
         lastUpdate DATETIME,
-        lastAuthorId INTEGER NULL,
+        lastAuthorId TEXT NULL,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
-        lastMessageId INTEGER NULL
+        lastMessageId TEXT NULL
       )
     ''';
 
@@ -143,6 +160,7 @@ class SQLiteHelper {
         await db.execute(meetingTable);
         await db.execute(roomPeopletable);
         await db.execute(configTable);
+        await db.execute(picturetable);
       },
     );
   }
@@ -167,6 +185,7 @@ class SQLiteHelper {
         await db.execute(meetingTable);
         await db.execute(roomPeopletable);
         await db.execute(configTable);
+        await db.execute(picturetable);
       },
     );
   }

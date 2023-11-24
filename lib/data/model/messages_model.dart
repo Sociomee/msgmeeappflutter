@@ -1,10 +1,10 @@
 class MessagesModel {
-  Room? room;
+  Roomn? room;
 
   MessagesModel({this.room});
 
   MessagesModel.fromJson(Map<String, dynamic> json) {
-    room = json['room'] != null ? new Room.fromJson(json['room']) : null;
+    room = json['room'] != null ? new Roomn.fromJson(json['room']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -16,7 +16,7 @@ class MessagesModel {
   }
 }
 
-class Room {
+class Roomn {
   String? sId;
   List<People>? people;
   bool? isGroup;
@@ -26,7 +26,7 @@ class Room {
   List<Messages>? messages;
   List<Images>? images;
 
-  Room({
+  Roomn({
     this.sId,
     this.people,
     this.isGroup,
@@ -37,7 +37,7 @@ class Room {
     this.images,
   });
 
-  Room.fromJson(Map<String, dynamic> json) {
+  Roomn.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
 
     if (json['people'] != null) {

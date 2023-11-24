@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
+import 'package:msgmee/repos/base_repo.dart';
 import 'package:msgmee/theme/colors.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_svg/svg.dart';
@@ -55,6 +56,10 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
+                ElevatedButton(onPressed: ()async{
+                   var configData = await context.read<BaseRepo>().getConfig("9140327455");
+                  context.read<BaseRepo>().syncRoomsFromServer("",configData);
+                }, child: Text("TetData"))
               ],
             )
           : SingleChildScrollView(

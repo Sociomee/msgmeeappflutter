@@ -61,7 +61,7 @@ abstract class AbUserRepository {
 abstract class AbChatReporitory {
   Future<ChatRoomsModel> getChatRoomList();
   Future<MessagesModel> getChatRoomMessages({required String id});
-  Future<CreateRoomModel> createRoom({required String userid});
+  Future<Room> createRoom({required String userid});
   Future<MessageSendSuccessModel> sendMessage({
     required String authorId,
     required String roomId,

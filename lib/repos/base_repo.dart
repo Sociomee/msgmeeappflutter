@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:msgmee/data/api_data_source/repository/chat/chat_repository.dart';
 import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/config_model.dart';
+import 'package:msgmee/data/model/create_room_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:path/path.dart';
@@ -11,8 +13,9 @@ import 'package:sqflite_common/sqlite_api.dart';
 class BaseRepo {
 final String baseUrl = 'https://api.msgmee.com'; 
 final SQLiteHelper sqlite = SQLiteHelper();
-late final token;
-late final phone;
+String token = "";
+String phone="";
+bool isNew = false;
 late Config configData ;
 
 BaseRepo(){
@@ -33,11 +36,12 @@ BaseRepo(){
   }
   
   syncRoomsFromServer(token, Config configData) async{
-      ChatRoomsModel data = await ChatRepostory().getChatRoomList();
+    String? timestamp = isNew ? "200-10-10" : configData.syncedTill;
+      ChatRoomsModel data = await ChatRepostory().getChatRoomList(timestamp);
       if(data.rooms != null){
-        List<ChatRooms> myrooms = data.rooms as List<ChatRooms>;
+        List<Room> myrooms = data.rooms as List<Room>;
           for (var room in myrooms) {
-                  print(room.sId);
+                  await checkandinsertroomtodb(room);
                 }
       }
   }
@@ -54,6 +58,7 @@ BaseRepo(){
      final db = await SQLiteHelper().database;
      final results = await db.query('${Tables.CONFIG}' , where: "phone= ? " , whereArgs: [phone]);
      if(results.isEmpty){
+      isNew = true;
       print("Creating new config");
       return await createNewConfig(db);
      }else{
@@ -75,5 +80,42 @@ BaseRepo(){
     ]);
     return getConfig(phone);
   }
+  
+  Future<void> checkandinsertroomtodb(Room room) async{
+    final db = await SQLiteHelper().database;
+     final results = await db.query('${Tables.ROOM}' , where: "sId= ? " , whereArgs: [room.sId]);
+     if(results.isEmpty){
+      print("Creating new room");
+          const sql = "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, people, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+       await db.rawQuery(sql , [room.isBizPage , room.isMarketPlace , room.isBroadCast , room.description, room.followers, room.following , room.pageId , room.ownerId , room.sId,"roompeople" , room.isGroup , room.lastAuthor,room.lastMessage!.sId,room.lastUpdate]);
+     }else{
+      print("Room found");
+      
+      if(room.isGroup ?? false || (room.isBizPage ?? false ) || (room.isBroadCast ?? false) || (room.isMarketPlace ?? false)){
+        await checkAndUpdatePeopleInsideRoom(room);
+        await db.update('${Tables.ROOM}', {"lastMessageId" : room.lastMessage!.sId} , where: "sId=?", whereArgs: [room.sId],conflictAlgorithm: ConflictAlgorithm.replace);
+      }else{
+        await db.update('${Tables.ROOM}', {"lastMessageId" : room.lastMessage!.sId} , where: "sId=?", whereArgs: [room.sId],conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+     }
+  }
+  
+    Future<void> checkAndUpdatePeopleInsideRoom(Room room) async{
+      final db = await SQLiteHelper().database;
+      print("Checking peoples");
+      List<User> userList = room.people as List<User>;
+      for (var people in userList) {
+        final results = await db.query('${Tables.ROOMPEOPLE}' , where: "user_id= ? " , whereArgs: [people.sId]);
+         if(results.isEmpty){
+          print("Already in room");
+         }else{
+          print("Inserting into room");
+          const sql = "INSERT OR REPLACE INTO roomPeople (id, user_id) values(?,?)";
+          await db.rawQuery(sql , [room.sId , people.sId]);
+         }
+      }
+
+    }
 
 }
+

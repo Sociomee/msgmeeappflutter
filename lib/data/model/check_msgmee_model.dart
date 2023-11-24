@@ -1,3 +1,5 @@
+import 'package:msgmee/data/model/user_model.dart';
+
 import 'msgmee_user_model.dart';
 
 class CheckMsgmeeModel {

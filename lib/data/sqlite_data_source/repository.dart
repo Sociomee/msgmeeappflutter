@@ -1,5 +1,6 @@
 import 'package:msgmee/data/model/local_message_model.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../model/local_room_model.dart';

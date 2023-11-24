@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/data/model/chat_roomlist_model.dart';
-import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
 
 import '../../../../helper/local_data.dart';
+import '../../../model/create_room_model.dart';
 import '../../../model/image_send_reponse_model.dart';
 import '../dio_provider.dart';
 
@@ -16,9 +16,8 @@ class ChatRepostory extends AbChatReporitory {
   var apiService = ApiService();
   var localData = Localdata();
   @override
-  Future<ChatRoomsModel> getChatRoomList() async {
+  Future<ChatRoomsModel> getChatRoomList([String? timestamp]) async {
     var token = await localData.readData('token');
-    print(token);
     var response = await apiService.dio.post(
       '$mainbaseUrl/api/rooms/list',
       options: Options(headers: {
@@ -27,9 +26,7 @@ class ChatRepostory extends AbChatReporitory {
     );
     // log('chat room response: ${response.data}');
     if (response.statusCode == 200) {
-      print(response.data);
       var data = ChatRoomsModel.fromJson(response.data);
-
       return data;
     } else {
       throw Exception();
@@ -67,7 +64,7 @@ class ChatRepostory extends AbChatReporitory {
   }
 
   @override
-  Future<CreateRoomModel> createRoom({required String userid}) async {
+  Future<Room> createRoom({required String userid}) async {
     var token = await localData.readData('token');
     var response = await apiService.dio.post(
       '$mainbaseUrl/api/room/create',
@@ -80,7 +77,7 @@ class ChatRepostory extends AbChatReporitory {
     );
     // log('create room response:${response.data}');
     if (response.statusCode == 200) {
-      var data = CreateRoomModel.fromJson(response.data);
+      var data = Room.fromJson(response.data);
       return data;
     } else {
       throw Exception();

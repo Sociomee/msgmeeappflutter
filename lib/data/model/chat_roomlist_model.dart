@@ -1,18 +1,19 @@
-import 'local_room_model.dart';
+import 'package:msgmee/data/model/create_room_model.dart';
+
 import 'messages_model.dart';
 
 class ChatRoomsModel {
   int? limit;
-  List<ChatRooms>? rooms;
+  List<Room>? rooms;
 
   ChatRoomsModel({this.limit, this.rooms});
 
   ChatRoomsModel.fromJson(Map<String, dynamic> json) {
     limit = json['limit'];
     if (json['rooms'] != null) {
-      rooms = <ChatRooms>[];
+      rooms = <Room>[];
       json['rooms'].forEach((v) {
-        rooms!.add(new ChatRooms.fromJson(v));
+        rooms!.add(new Room.fromJson(v));
       });
     }
   }

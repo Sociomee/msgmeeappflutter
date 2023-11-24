@@ -35,7 +35,7 @@ class ChatRoomsState extends Equatable {
   final ChatRoomStatus status;
   final MessagesModel messages;
   final MessageStatus msgStatus;
-  final CreateRoomModel createroom;
+  final Room createroom;
   final CreateRoomStatus createroomstatus;
   final MessageSendStatus messageSendStatus;
   final String? phone;
@@ -50,7 +50,7 @@ class ChatRoomsState extends Equatable {
       messages: MessagesModel(),
       msgStatus: MessageStatus.initial,
       createroomstatus: CreateRoomStatus.initial,
-      createroom: CreateRoomModel(),
+      createroom: Room(),
       messageSendStatus: MessageSendStatus.initial,
       chatroom: [],
       localmessage: [],
@@ -94,7 +94,7 @@ class ChatRoomsState extends Equatable {
     ChatRoomStatus? status,
     MessagesModel? messages,
     MessageStatus? msgStatus,
-    CreateRoomModel? createroom,
+    Room? createroom,
     CreateRoomStatus? createroomstatus,
     MessageSendStatus? messageSendStatus,
     String? phone,

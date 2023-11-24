@@ -56,7 +56,7 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
         isGroup: e.isGroup.toString(),
         lastUpdate: e.lastUpdate,
         lastAuthor: e.lastAuthor,
-        lastMessage: e.lastMessage,
+        //lastMessage: e.lastMessage,
       );
       await ChatRoomsRepository().insertRooms(room);
     }

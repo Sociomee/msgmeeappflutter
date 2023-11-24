@@ -243,7 +243,7 @@ class AnimatedBar extends StatelessWidget {
 
 class UserInfo extends StatelessWidget {
   const UserInfo({super.key, required this.user});
-  final UserModel user;
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -251,12 +251,12 @@ class UserInfo extends StatelessWidget {
         CircleAvatar(
           radius: 20,
           backgroundColor: AppColors.grey,
-          backgroundImage: NetworkImage(user.imageUrl),
+          backgroundImage: NetworkImage("https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600"),
         ),
         SizedBox(width: 10),
         Expanded(
             child: Text(
-          user.user,
+          "John Doe",
           style: TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
         )),

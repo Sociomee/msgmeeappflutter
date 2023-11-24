@@ -1,14 +1,91 @@
-class UserModel {
-  final String user;
-  final String imageUrl;
-  UserModel({
-    required this.user,
-    required this.imageUrl,
-  });
-}
+import 'package:msgmee/data/model/picture_model.dart';
 
-final UserModel user = UserModel(
-  user: 'John Doe',
-  imageUrl:
-      'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1600',
-);
+class User {
+  String? sId;
+  String? socioMeeId;
+  String? firstName;
+  String? level;
+  String? phone;
+  String? countryCode;
+  String? lastName;
+  String? username;
+  String? fullName;
+  String? otherProfileImage;
+  String? role;
+  String? linkedTo;
+  List<String>? favorites;
+  String? tagLine;
+  List<String>? msgMeeContacts;
+  List<Null>? contacts;
+  String? otp;
+  String? lastOnline;
+  Picture? picture;
+
+  User(
+      {this.sId,
+      this.socioMeeId,
+      this.firstName,
+      this.level,
+      this.phone,
+      this.countryCode,
+      this.lastName,
+      this.username,
+      this.fullName,
+      this.otherProfileImage,
+      this.role,
+      this.linkedTo,
+      this.favorites,
+      this.tagLine,
+      this.msgMeeContacts,
+      this.contacts,
+      this.otp,
+      this.lastOnline,
+      this.picture});
+
+  User.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    socioMeeId = json['socioMeeId'];
+    firstName = json['firstName'];
+    level = json['level'];
+    phone = json['phone'];
+    countryCode = json['countryCode'];
+    lastName = json['lastName'];
+    username = json['username'];
+    fullName = json['fullName'];
+    otherProfileImage = json['otherProfileImage'];
+    role = json['role'];
+    linkedTo = json['linkedTo'];
+    favorites = json['favorites'].cast<String>();
+    tagLine = json['tagLine'];
+    msgMeeContacts = json['msgMeeContacts'].cast<String>();
+    otp = json['otp'];
+    lastOnline = json['lastOnline'];
+    picture =
+        json['picture'] != null ? ((json['picture'] is String) ? null : new Picture.fromJson(json['picture'])) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['socioMeeId'] = this.socioMeeId;
+    data['firstName'] = this.firstName;
+    data['level'] = this.level;
+    data['phone'] = this.phone;
+    data['countryCode'] = this.countryCode;
+    data['lastName'] = this.lastName;
+    data['username'] = this.username;
+    data['fullName'] = this.fullName;
+    data['otherProfileImage'] = this.otherProfileImage;
+    data['role'] = this.role;
+    data['linkedTo'] = this.linkedTo;
+    data['favorites'] = this.favorites;
+    data['tagLine'] = this.tagLine;
+    data['msgMeeContacts'] = this.msgMeeContacts;
+    data['otp'] = this.otp;
+    data['lastOnline'] = this.lastOnline;
+    if (this.picture != null) {
+      data['picture'] = this.picture?.sId.toString();
+    }
+    return data;
+  }
+}

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../model/create_room_model.dart';
 import '../../model/local_room_model.dart';
 import '../../model/messages_model.dart';
 import '../repository.dart';

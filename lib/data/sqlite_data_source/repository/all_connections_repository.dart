@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:msgmee/data/model/msgmee_user_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
@@ -32,7 +32,7 @@ class AllConnectionRepository extends AbAllConnectionRepository {
   @override
   Future<void> insertAllconnections(User user) async {
     try {
-      await sqlite.database.insert(Tables.ALLCONNECTIONS, user.toMap(),
+      await sqlite.database.insert(Tables.ALLCONNECTIONS, user.toJson(),
           conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       log('insert connection error $e');

@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:msgmee/data/model/check_msgmee_model.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/api_data_source/repository/user/user_repository.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository/all_connections_repository.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import '../../../../../common_cubits/custom_error.dart';
