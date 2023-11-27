@@ -11,6 +11,9 @@ class Tables {
   static const String MESSAGE = 'message';
   static const String MEETING = 'meeting';
   static const String CONFIG = 'config';
+  static const String MSGMEECONTACTS = "msgMeeContacts";  
+  static const String FAVORITES = "favorites";
+
 }
 
 class SQLiteHelper {
@@ -58,16 +61,14 @@ class SQLiteHelper {
         firstName TEXT,
         lastName TEXT,
         phone TEXT,
-        otp TEXT,
-        linkedTo TEXT
-        role TEXT,
-        favorites TEXT,
-        tagLine TEXT,
-        picture TEXT,
-        email TEXT,
-        socioMeeId TEXT,
-        msgMeeContacts TEXT,
-        otherProfileImage TEXT
+        role TEXT NULL,
+        otp TEXT NULL,
+        linkedTo TEXT NULL,
+        picture TEXT NULL,
+        email TEXT NULL,
+        socioMeeId TEXT NULL,
+        otherProfileImage TEXT NULL,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP
       )
 ''';
 
@@ -105,6 +106,24 @@ class SQLiteHelper {
         lastAuthorId TEXT NULL,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
         lastMessageId TEXT NULL
+      )
+    ''';
+
+    static const userContactsTable = '''
+      CREATE TABLE ${Tables.MSGMEECONTACTS} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        sId TEXT,
+        contactId TEXT,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP
+      )
+    ''';
+
+    static const userFavoriteTable = '''
+      CREATE TABLE ${Tables.FAVORITES} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        sId TEXT,
+        contactId TEXT,
+        timestamp TEXT DEFAULT CURRENT_TIMESTAMP
       )
     ''';
 
@@ -161,6 +180,7 @@ class SQLiteHelper {
         await db.execute(roomPeopletable);
         await db.execute(configTable);
         await db.execute(picturetable);
+        await db.execute(userContactsTable);
       },
     );
   }
@@ -186,6 +206,8 @@ class SQLiteHelper {
         await db.execute(roomPeopletable);
         await db.execute(configTable);
         await db.execute(picturetable);
+        await db.execute(userContactsTable);
+
       },
     );
   }

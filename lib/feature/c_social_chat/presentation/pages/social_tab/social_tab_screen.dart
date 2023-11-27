@@ -9,6 +9,7 @@ import 'package:msgmee/theme/colors.dart';
 // import 'package:flutter_svg/svg.dart';
 // import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/sync_msg/sync_msg_cubit.dart';
 
+import '../../../../../data/sqlite_data_source/sqlite_helper.dart';
 import '../../cubit/chatrooms/chatrooms_cubit.dart';
 import '../../widgets/sync_loading_widget.dart';
 import 'widget/social_chat_widget.dart';
@@ -56,10 +57,28 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                ElevatedButton(onPressed: ()async{
-                   var configData = await context.read<BaseRepo>().getConfig("9140327455");
-                  context.read<BaseRepo>().syncRoomsFromServer("",configData);
-                }, child: Text("TetData"))
+                ElevatedButton(
+                    onPressed: () async {
+                      final SQLiteHelper sqlite = SQLiteHelper();
+
+                      const sql = '''
+SELECT
+      r.*
+    FROM
+      room r LEFT INNER JOIN 
+  ''';
+
+                      final List<Map<String, dynamic>> maps =
+                          await sqlite.database.rawQuery(sql);
+                      print(
+                          "====================================================================================>");
+                      // await context.read<ChatRoomsCubit>().debugData();
+                      print("printing data");
+                      print(maps);
+                      print(
+                          "<====================================================================================");
+                    },
+                    child: Text("TetData"))
               ],
             )
           : SingleChildScrollView(

@@ -70,6 +70,13 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     emit(state.copyWith(chatroom: res, status: ChatRoomStatus.loaded));
   }
 
+  Future<void> debugData() async {
+   
+    print("Querying rooms");
+    var res = await ChatRoomsRepository().getRooms();
+    log('local chat rooms from db res--->$res');
+  }
+
   //***  getting chat room messages from server */
   Future<void> getchatRoomMessages({required String id}) async {
     emit(state.copyWith(msgStatus: MessageStatus.loading));

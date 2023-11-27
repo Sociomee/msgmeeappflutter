@@ -9,6 +9,7 @@ class User {
   String? countryCode;
   String? lastName;
   String? username;
+  String? email;
   String? fullName;
   String? otherProfileImage;
   String? role;
@@ -16,7 +17,7 @@ class User {
   List<String>? favorites;
   String? tagLine;
   List<String>? msgMeeContacts;
-  List<Null>? contacts;
+  List<String>? contacts;
   String? otp;
   String? lastOnline;
   Picture? picture;
@@ -36,6 +37,7 @@ class User {
       this.linkedTo,
       this.favorites,
       this.tagLine,
+      this.email,
       this.msgMeeContacts,
       this.contacts,
       this.otp,
@@ -48,6 +50,7 @@ class User {
     firstName = json['firstName'];
     level = json['level'];
     phone = json['phone'];
+    phone = json['email'];
     countryCode = json['countryCode'];
     lastName = json['lastName'];
     username = json['username'];
@@ -79,6 +82,7 @@ class User {
     data['role'] = this.role;
     data['linkedTo'] = this.linkedTo;
     data['favorites'] = this.favorites;
+        data['email'] = this.email;
     data['tagLine'] = this.tagLine;
     data['msgMeeContacts'] = this.msgMeeContacts;
     data['otp'] = this.otp;
