@@ -91,7 +91,6 @@ class SQLiteHelper {
       CREATE TABLE ${Tables.ROOM} (
         sId TEXT PRIMARY KEY,
         title TEXT,
-        people TEXT NULL,
         picture_id TEXT DEFAULT "0",
         isGroup BOOLEAN DEFAULT 0,
         isBizPage BOOLEAN DEFAULT 0,

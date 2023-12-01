@@ -44,7 +44,7 @@ import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/sh
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SQLiteHelper().initialize();
-   //await SQLiteHelper().clearAndReinitializeDatabase();
+  //await SQLiteHelper().clearAndReinitializeDatabase();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // navigation bar color
     statusBarColor: Colors.white, // status bar color

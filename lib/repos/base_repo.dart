@@ -81,7 +81,7 @@ class BaseRepo {
     if (results.isEmpty) {
       print("Creating new room");
       const sql =
-          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, people, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       await db.rawQuery(sql, [
         room.isBizPage,
         room.isMarketPlace,
@@ -92,7 +92,6 @@ class BaseRepo {
         room.pageId,
         room.ownerId,
         room.sId,
-        "roompeople",
         room.isGroup,
         room.lastAuthor,
         room.lastMessage!.sId,
@@ -202,12 +201,14 @@ INSERT OR REPLACE INTO ${Tables.USER} (
   
   Future<void> updateOrCreateContact(User people) async{
     try {
+          final db = await SQLiteHelper().database;
+
       List<String> msgMeeContacts = people.msgMeeContacts ?? [];
       for (var contact in msgMeeContacts) {
         const sql =
             "INSERT OR REPLACE INTO roomPeople (id, user_id) values(?,?)";
-            print(contact);
-        //await db.rawQuery(sql, [room.sId, people.sId]);
+          //  print(contact);
+           // await db.rawQuery(sql, [room.sId, people.sId]);
       }
     } catch (e) {
       

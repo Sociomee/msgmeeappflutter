@@ -65,7 +65,7 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
 SELECT
       r.*
     FROM
-      room r LEFT INNER JOIN 
+      room r LEFT JOIN roomPeople rp ON rp.id = r.sId
   ''';
 
                       final List<Map<String, dynamic>> maps =
