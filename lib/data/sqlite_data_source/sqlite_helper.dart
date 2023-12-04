@@ -66,8 +66,10 @@ class SQLiteHelper {
         linkedTo TEXT NULL,
         picture TEXT NULL,
         email TEXT NULL,
+        tagLine TEXT NULL,
         socioMeeId TEXT NULL,
         otherProfileImage TEXT NULL,
+        lastOnline TEXT NULL,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP
       )
 ''';
@@ -126,12 +128,13 @@ class SQLiteHelper {
       )
     ''';
 
-  static const roomPeopletable = '''
+ static const roomPeopletable = '''
       CREATE TABLE ${Tables.ROOMPEOPLE} (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id TEXT,
+        roomId TEXT,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP
-      )
+      );
     ''';
 
   static const messagetable = '''

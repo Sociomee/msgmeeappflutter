@@ -59,22 +59,16 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      final SQLiteHelper sqlite = SQLiteHelper();
-
-                      const sql = '''
-SELECT
-      r.*
-    FROM
-      room r LEFT JOIN roomPeople rp ON rp.id = r.sId
-  ''';
-
-                      final List<Map<String, dynamic>> maps =
-                          await sqlite.database.rawQuery(sql);
+                      context.read<ChatRoomsCubit>().getLocalChatRoomData();
+        //               final SQLiteHelper sqlite = SQLiteHelper();
+        //                const rpPeopleSql = '''
+        //                 SELECT * FROM roomPeople rp LEFT JOIN user usr ON rp.user_id = usr.id where rp.roomId =?;
+        //                 ''';
+        // print("Element id ");
+        // var newdata = await sqlite.database.rawQuery(rpPeopleSql,["6555c26d6fc2509518321fc4"]);
                       print(
                           "====================================================================================>");
-                      // await context.read<ChatRoomsCubit>().debugData();
-                      print("printing data");
-                      print(maps);
+                   print("");
                       print(
                           "<====================================================================================");
                     },

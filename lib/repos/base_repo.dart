@@ -130,14 +130,14 @@ class BaseRepo {
       await checkAndUpdateUser(people);
       await updateOrCreateContact(people);
       final results = await db.query('${Tables.ROOMPEOPLE}',
-          where: "user_id= ? ", whereArgs: [people.sId]);
-      if (results.isEmpty) {
+          where: "user_id= ? and roomId=? ", whereArgs: [people.sId, room.sId]);
+      if (!results.isEmpty) {
         print("Already in room");
       } else {
         print("Inserting into room");
         const sql =
-            "INSERT OR REPLACE INTO roomPeople (id, user_id) values(?,?)";
-        await db.rawQuery(sql, [room.sId, people.sId]);
+            "INSERT OR REPLACE INTO roomPeople (user_id , roomId) values(?,?)";
+        await db.rawQuery(sql, [people.sId,room.sId]);
       }
     }
   }
@@ -159,8 +159,10 @@ INSERT OR REPLACE INTO ${Tables.USER} (
     picture,
     email,
     socioMeeId,
-    otherProfileImage
+    otherProfileImage,
+    tagLine
 ) VALUES (
+    ?,
     ?,
     ?,
     ?,
@@ -190,7 +192,8 @@ INSERT OR REPLACE INTO ${Tables.USER} (
       people.picture?.sId ?? "",
       people.email,
       people.socioMeeId,
-      people.otherProfileImage
+      people.otherProfileImage,
+      people.tagLine
     ]); 
     print("User created....");
     
