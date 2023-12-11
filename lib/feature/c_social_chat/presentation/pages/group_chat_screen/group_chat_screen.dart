@@ -552,7 +552,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                       children: [
                                         ReceivedMessageWidget(
                                           message: msg[index].messageContent,
-                                          msgStatus: msg[index].msgStatus,
+                                          msgStatus:  0,
                                           time: msg[index].time,
                                           type: msg[index].messageType,
                                         ),
@@ -700,7 +700,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                                         SentMessageWidget(
                                           doc: msg[index].docName,
                                           message: msg[index].messageContent,
-                                          msgStatus: msg[index].msgStatus,
+                                          msgStatus:0,
                                           time: msg[index].time,
                                           type: msg[index].type,
                                           image: msg[index].image_url,

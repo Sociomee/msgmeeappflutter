@@ -428,7 +428,7 @@ class _MyNotesScreenState extends State<MyNotesScreen> {
                               children: [
                                 SentMessageWidget(
                                   message: notes[index],
-                                  msgStatus: 'seen',
+                                  msgStatus: 0,
                                   time: '4.28 PM',
                                   type: MessageType.text,
                                 ),

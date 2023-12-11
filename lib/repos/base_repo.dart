@@ -5,10 +5,13 @@ import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/data/model/user_model.dart';
+import 'package:msgmee/data/newmodels/message_model.dart';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common/sqlite_api.dart';
+
+import '../data/model/messages_model.dart';
 
 class BaseRepo {
   final String baseUrl = 'https://api.msgmee.com';
@@ -21,10 +24,10 @@ class BaseRepo {
   BaseRepo() {}
 
   void init() async {
-    token = await Localdata().readData('token') ?? false;
-    phone = await Localdata().readData('phone') ?? false;
+    token = await Localdata().readData('token') ?? "";
+    phone = await Localdata().readData('phone') ?? "";
 
-    if (token != null) {
+    if (token != "") {
       configData = await getConfig(phone);
       await getUserInfo(token, configData);
       await syncRoomsFromServer(token, configData);
@@ -38,14 +41,22 @@ class BaseRepo {
     if (data.rooms != null) {
       List<Room> myrooms = data.rooms as List<Room>;
       for (var room in myrooms) {
-        await checkandinsertroomtodb(room);
+        //await checkandinsertroomtodb(room);
       }
     }
   }
 
   getUserInfo(token, Config configData) async {}
 
-  syncMessages(token) {}
+  syncMessages(String id) async{
+    //  MessagesModel data = await ChatRepostory().getChatRoomMessages(id: id);
+    // if (data != null) {
+    //   List<Message> myrooms = data.room?.messages ?? [];
+    //   for (var room in myrooms) {
+    //     print("got it");
+    //   }
+    // }
+  }
 
   Future<Config> getConfig(phone) async {
     final db = await SQLiteHelper().database;
@@ -76,54 +87,55 @@ class BaseRepo {
 
   Future<void> checkandinsertroomtodb(Room room) async {
     final db = await SQLiteHelper().database;
+    print("Last message ---->" + room.lastMessage!.toString());
     final results = await db
         .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [room.sId]);
     if (results.isEmpty) {
-      print("Creating new room");
       const sql =
           "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      await db.rawQuery(sql, [
-        room.isBizPage,
-        room.isMarketPlace,
-        room.isBroadCast,
-        room.description,
-        room.followers,
-        room.following,
-        room.pageId,
-        room.ownerId,
-        room.sId,
-        room.isGroup,
-        room.lastAuthor,
-        room.lastMessage!.sId,
-        room.lastUpdate
-      ]);
+      // await db.rawQuery(sql, [
+      //   room.isBizPage,
+      //   room.isMarketPlace,
+      //   room.isBroadCast,
+      //   room.description,
+      //   room.followers,
+      //   room.following,
+      //   room.pageId,
+      //   room.ownerId,
+      //   room.sId,
+      //   room.isGroup,
+      //   room.lastAuthor,
+      //   room.lastMessageId,
+      //   room.lastUpdate
+      // ]);
+     // await checkAndUpdatePeopleInsideRoom(room);
     } else {
-      print("Room found");
 
-      if (room.isGroup ??
-          false ||
+      if (room.isGroup ?? false ||
               (room.isBizPage ?? false) ||
               (room.isBroadCast ?? false) ||
               (room.isMarketPlace ?? false)) {
         await checkAndUpdatePeopleInsideRoom(room);
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage!.sId},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
       } else {
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage!.sId},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
     }
+
+    print("Checking messages");
+    await checkAndInsertRoomMessages(room,db);
   }
 
   Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
     final db = await SQLiteHelper().database;
-    print("Checking peoples");
     List<User> userList = room.people as List<User>;
 
     for (var people in userList) {
@@ -132,9 +144,7 @@ class BaseRepo {
       final results = await db.query('${Tables.ROOMPEOPLE}',
           where: "user_id= ? and roomId=? ", whereArgs: [people.sId, room.sId]);
       if (!results.isEmpty) {
-        print("Already in room");
       } else {
-        print("Inserting into room");
         const sql =
             "INSERT OR REPLACE INTO roomPeople (user_id , roomId) values(?,?)";
         await db.rawQuery(sql, [people.sId,room.sId]);
@@ -195,8 +205,7 @@ INSERT OR REPLACE INTO ${Tables.USER} (
       people.otherProfileImage,
       people.tagLine
     ]); 
-    print("User created....");
-    
+    return;
     } catch (e) {
       print("Error while creating user record....");
     }
@@ -215,6 +224,14 @@ INSERT OR REPLACE INTO ${Tables.USER} (
       }
     } catch (e) {
       
+    }
+  }
+  
+  Future<void> checkAndInsertRoomMessages(Room room, Database db) async{
+    print("total messages ${room.messages?.length}");
+    List<Message> messages = room.messages ?? [];
+    for (var element in messages) {
+      print(element.content);
     }
   }
 }

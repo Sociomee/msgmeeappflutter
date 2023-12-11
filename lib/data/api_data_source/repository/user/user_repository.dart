@@ -27,7 +27,7 @@ class UserSerivce implements AbUserRepository {
 
     if (response.statusCode == 200) {
       var res = MsgmeeUserModel.fromJson(response.data);
-      log('userId------>${res.user?.sId}');
+     // log('userId------>${res.user?.sId}');
       localData.storedata('socimeeId', res.user?.socioMeeId ?? '');
      // localData.storedata('socimeePassword', res.user!.password ?? '');
       localData.storedata('userId', res.user?.sId ?? '');

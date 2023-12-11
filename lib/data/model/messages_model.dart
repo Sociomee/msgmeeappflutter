@@ -1,10 +1,13 @@
+
+import 'create_room_model.dart';
+
 class MessagesModel {
-  Roomn? room;
+  Room? room;
 
   MessagesModel({this.room});
 
   MessagesModel.fromJson(Map<String, dynamic> json) {
-    room = json['room'] != null ? new Roomn.fromJson(json['room']) : null;
+    room = json['room'] != null ? new Room.fromJson(json['room']) : null;
   }
 
   Map<String, dynamic> toJson() {

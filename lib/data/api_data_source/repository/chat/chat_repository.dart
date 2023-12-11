@@ -24,6 +24,8 @@ class ChatRepostory extends AbChatReporitory {
         "Authorization": "Bearer $token",
       }),
     );
+    print('$mainbaseUrl/api/rooms/list');
+    print(token);
     // log('chat room response: ${response.data}');
     if (response.statusCode == 200) {
       var data = ChatRoomsModel.fromJson(response.data);
@@ -92,7 +94,16 @@ class ChatRepostory extends AbChatReporitory {
     required String contentType,
   }) async {
     var token = await localData.readData('token');
-    log('send message params:\n$authorId\n$roomId\n$content\n$contentType');
+    print('$mainbaseUrl/api/message');
+    print(token);
+    print('send message params:\n$authorId\n$roomId\n$content\n$contentType');
+    var mdata = {
+        "roomID": roomId,
+        "authorID": authorId,
+        "content": content,
+        "contentType": contentType
+      };
+      print(mdata);
     var response = await apiService.dio.post(
       '$mainbaseUrl/api/message',
       options: Options(
@@ -107,7 +118,7 @@ class ChatRepostory extends AbChatReporitory {
         "contentType": contentType
       },
     );
-    log('send message response:${response.statusCode}');
+    print('send message response:${response.statusCode}');
     if (response.statusCode == 200) {
       var data = MessageSendSuccessModel.fromJson(response.data);
       log('send message response:${data}');
@@ -150,6 +161,6 @@ class ChatRepostory extends AbChatReporitory {
       ),
       data: {"isTyping": typing, "room": room},
     );
-    log('is typing response----->${response.statusCode}');
+    //log('is typing response----->${response.statusCode}');
   }
 }

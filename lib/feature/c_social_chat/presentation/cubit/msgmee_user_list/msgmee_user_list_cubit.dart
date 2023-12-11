@@ -47,26 +47,26 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
             }
           } else {
             for (var e in normalizedPhoneNumbers) {
-              log('numbers go to check msgmee api ------------>$e');
-              var res = await SyncSocimeeService().checkMsgmee(e);
-              if (res.status == true) {
-                await SyncSocimeeService().addContact(
-                  firstName: res.user!.firstName,
-                  lastName: res.user!.lastName,
-                  fullName: res.user!.fullName,
-                  msgmeeId: res.user!.sId,
-                  phone: res.user!.phone!,
-                  type: 'msgmee',
-                );
+             // log('numbers go to check msgmee api ------------>$e');
+             // var res = false;//await SyncSocimeeService().checkMsgmee(e);
+              // if (res.status == true) {
+              //   await SyncSocimeeService().addContact(
+              //     firstName: res.user!.firstName,
+              //     lastName: res.user!.lastName,
+              //     fullName: res.user!.fullName,
+              //     msgmeeId: res.user!.sId,
+              //     phone: res.user!.phone!,
+              //     type: 'msgmee',
+              //   );
 
-                newUserList.add(res.user!);
-              } else if (res.status == false) {
-                SyncSocimeeService().addContact(
-                  fullName: res.user!.fullName,
-                  phone: res.user!.phone!,
-                  type: 'contact',
-                );
-              }
+              //   newUserList.add(res.user!);
+              // } else if (res.status == false) {
+              //   SyncSocimeeService().addContact(
+              //     fullName: res.user!.fullName,
+              //     phone: res.user!.phone!,
+              //     type: 'contact',
+              //   );
+              // }
             }
           }
         }
@@ -246,8 +246,8 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
               .add(pb.phone.removeFirstTwoCharsAndNormalize());
         }
       }
-      log('final userlist ---->$finalUserList');
-      log('final notmatching phone numbers ----->$nonMatchingPhoneNumbers');
+     // log('final userlist ---->$finalUserList');
+      //log('final notmatching phone numbers ----->$nonMatchingPhoneNumbers');
       List<CheckMsgmeeModel> addmsgmeecontact = [];
       List<CheckMsgmeeModel> addcontact = [];
       if (nonMatchingPhoneNumbers.isNotEmpty) {
@@ -261,7 +261,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
         }
       }
       for (var e in addmsgmeecontact) {
-        log('addmsgmeecontact------->${e}');
+       // log('addmsgmeecontact------->${e}');
         await SyncSocimeeService()
             .addContact(
           firstName: e.user!.firstName,
@@ -276,14 +276,14 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
         });
       }
       for (var e in addcontact) {
-        log('addcontact------->${e}');
+       // log('addcontact------->${e}');
         await SyncSocimeeService().addContact(
           fullName: e.user!.fullName,
           phone: e.user!.phone!,
           type: 'contact',
         );
       }
-      log('final overRideduser $finalUserList');
+     // log('final overRideduser $finalUserList');
     } on CustomError catch (e) {
       emit(state.copyWith(status: MsgmeeUserListStatus.error, error: e));
     }

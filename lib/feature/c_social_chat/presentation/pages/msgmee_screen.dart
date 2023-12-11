@@ -177,7 +177,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
 
   @override
   Widget build(BuildContext context) {
-    log('string------->$string');
+  //  log('string------->$string');
     return DefaultTabController(
       length:
           context.watch<SyncSociomeeCubit>().state.isSocimeeAcSynced ? 4 : 2,

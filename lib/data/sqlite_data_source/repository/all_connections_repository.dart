@@ -32,8 +32,9 @@ class AllConnectionRepository extends AbAllConnectionRepository {
   @override
   Future<void> insertAllconnections(User user) async {
     try {
-      await sqlite.database.insert(Tables.ALLCONNECTIONS, user.toJson(),
-          conflictAlgorithm: ConflictAlgorithm.replace);
+      // await sqlite.database.insert(Tables.ALLCONNECTIONS, user.toJson(),
+      //     conflictAlgorithm: ConflictAlgorithm.replace);
+      return;
     } catch (e) {
       log('insert connection error $e');
     }
@@ -44,4 +45,7 @@ class AllConnectionRepository extends AbAllConnectionRepository {
     final db = await database;
     await db.delete(tableName);
   }
+
+
+  
 }

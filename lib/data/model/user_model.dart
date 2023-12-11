@@ -58,9 +58,10 @@ class User {
     otherProfileImage = json['otherProfileImage'];
     role = json['role'];
     linkedTo = json['linkedTo'];
-    favorites = json['favorites'].cast<String>();
+    favorites = [];
     tagLine = json['tagLine'];
-    msgMeeContacts = json['msgMeeContacts'].cast<String>();
+    msgMeeContacts = [];
+    contacts = [];
     otp = json['otp'];
     lastOnline = json['lastOnline'];
     picture =

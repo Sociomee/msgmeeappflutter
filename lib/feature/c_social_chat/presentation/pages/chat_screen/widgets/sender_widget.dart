@@ -18,7 +18,7 @@ import 'view_all_contacts.dart';
 
 class SentMessageWidget extends StatelessWidget {
   final String message;
-  final String msgStatus;
+  final int msgStatus;
   final String time;
   final MessageType type;
   final File? image;
@@ -102,7 +102,7 @@ class SentMessageWidget extends StatelessWidget {
             Positioned(
                 bottom: 10,
                 right: 18,
-                child: Text(msgStatus,
+                child: Text(msgStatus.toString(),
                     style: const TextStyle(color: Colors.white, fontSize: 10))),
           ],
         ),
@@ -214,7 +214,7 @@ class SentMessageWidget extends StatelessWidget {
                 Positioned(
                   bottom: 10,
                   right: 18,
-                  child: Text(msgStatus,
+                  child: Text(msgStatus.toString(),
                       style:
                           const TextStyle(color: Colors.white, fontSize: 10)),
                 ),
@@ -420,7 +420,7 @@ class SentMessageWidget extends StatelessWidget {
                   bottom: 10,
                   right: 20,
                   child: Text(
-                    msgStatus,
+                    msgStatus.toString(),
                     style: const TextStyle(color: Colors.white, fontSize: 10),
                   ),
                 )
@@ -514,7 +514,7 @@ class SentMessageWidget extends StatelessWidget {
         Positioned(
           bottom: 10,
           right: 18,
-          child: Text(msgStatus,
+          child: Text(msgStatus.toString(),
               style: const TextStyle(color: Colors.white, fontSize: 10)),
         ),
       ],
@@ -590,7 +590,7 @@ class SentMessageWidget extends StatelessWidget {
                                                     : 200,
                                       ),
                                       SizedBox(height: 2),
-                                      Text(msgStatus,
+                                      Text(msgStatus.toString(),
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 10)),
@@ -794,7 +794,7 @@ class SentMessageWidget extends StatelessWidget {
                                                       ? 80
                                                       : 100,
                                         ),
-                                        Text(msgStatus,
+                                        Text(msgStatus.toString(),
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 10)),
@@ -904,7 +904,7 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               Spacer(),
-                              Text(msgStatus,
+                              Text(msgStatus.toString(),
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],
@@ -1057,7 +1057,7 @@ class SentMessageWidget extends StatelessWidget {
                                                   color: Colors.white,
                                                   fontSize: 10)),
                                           SizedBox(width: 95.w),
-                                          Text(msgStatus,
+                                          Text(msgStatus.toString(),
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10)),
@@ -1214,7 +1214,7 @@ class SentMessageWidget extends StatelessWidget {
                                                   color: Colors.white,
                                                   fontSize: 10)),
                                           SizedBox(width: 110.w),
-                                          Text(msgStatus,
+                                          Text(msgStatus.toString(),
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10)),
@@ -1310,7 +1310,7 @@ class SentMessageWidget extends StatelessWidget {
                   Positioned(
                     bottom: 5,
                     right: 20,
-                    child: Text(msgStatus,
+                    child: Text(msgStatus.toString(),
                         style:
                             const TextStyle(color: Colors.white, fontSize: 10)),
                   )
@@ -1405,7 +1405,7 @@ class SentMessageWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                               Spacer(),
-                              Text(msgStatus,
+                              Text(msgStatus.toString(),
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 10)),
                             ],

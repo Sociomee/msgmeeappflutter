@@ -52,7 +52,7 @@ class _DeleterAccountScreenState extends State<DeleterAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('width----->>${context.screenWidth}');
+   // log('width----->>${context.screenWidth}');
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(

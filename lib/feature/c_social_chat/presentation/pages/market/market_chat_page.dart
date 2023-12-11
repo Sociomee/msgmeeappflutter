@@ -474,7 +474,7 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                                 children: [
                                   ReceivedMessageWidget(
                                     message: msg[index].messageContent,
-                                    msgStatus: msg[index].msgStatus,
+                                    msgStatus: 0,
                                     time: msg[index].time,
                                     type: msg[index].messageType,
                                   ),
@@ -582,7 +582,7 @@ class _MarketChatScreenState extends State<MarketChatScreen> {
                                   SentMessageWidget(
                                     doc: msg[index].docName,
                                     message: msg[index].messageContent,
-                                    msgStatus: msg[index].msgStatus,
+                                    msgStatus: 0,
                                     time: msg[index].time,
                                     type: msg[index].type,
                                     image: msg[index].image_url,

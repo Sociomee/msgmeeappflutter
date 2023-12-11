@@ -1,5 +1,6 @@
-import 'package:msgmee/data/model/msgmee_user_model.dart';
+
 import 'package:msgmee/data/model/user_model.dart';
+import 'package:msgmee/data/newmodels/message_model.dart';
 
 class Room {
   bool? isBizPage;
@@ -15,8 +16,11 @@ class Room {
   bool? isGroup;
   int? iV;
   String? lastAuthor;
-  LastMessage? lastMessage;
+  String? lastMessageId;
+  Message? lastMessage;
+  List<Message>? messages;
   String? lastUpdate;
+  String? timestamp;
 
   Room(
       {this.isBizPage,
@@ -33,6 +37,9 @@ class Room {
       this.iV,
       this.lastAuthor,
       this.lastMessage,
+      this.lastMessageId,
+      this.messages,
+      this.timestamp,
       this.lastUpdate});
 
   Room.fromJson(Map<String, dynamic> json) {
@@ -51,13 +58,20 @@ class Room {
         people!.add(new User.fromJson(v));
       });
     }
+    
+    if (json['messages'] != null) {
+      messages = <Message>[];
+      json['messages'].forEach((v) {
+        messages!.add(new Message.fromJson(v));
+      });
+    }
     isGroup = json['isGroup'];
     iV = json['__v'];
     lastAuthor = json['lastAuthor'];
-    lastMessage = json['lastMessage'] != null
-        ? new LastMessage.fromJson(json['lastMessage'])
-        : null;
+    lastMessageId = json['lastMessage'].isNotEmpty ? json['lastMessage']['_id'] ?? "" : "";
+    lastMessage = json['lastMessage'].isNotEmpty ? Message.fromJson(json['lastMessage']) : null;
     lastUpdate = json['lastUpdate'];
+    timestamp = json['lastUpdate'] ?? json['timestamp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,44 +91,10 @@ class Room {
     data['isGroup'] = this.isGroup;
     data['lastAuthor'] = this.lastAuthor;
     if (this.lastMessage != null) {
-      data['lastMessage'] = this.lastMessage!.toJson();
+      data['lastMessage'] = this.lastMessage;
     }
     data['lastUpdate'] = this.lastUpdate;
     return data;
-  }
-}
 
-
-
-
-class LastMessage {
-  String? sId;
-  String? author;
-  String? content;
-  String? room;
-  String? date;
-  int? iV;
-
-  LastMessage(
-      {this.sId, this.author, this.content, this.room, this.date, this.iV});
-
-  LastMessage.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    author = json['author'];
-    content = json['content'];
-    room = json['room'];
-    date = json['date'];
-    iV = json['__v'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['author'] = this.author;
-    data['content'] = this.content;
-    data['room'] = this.room;
-    data['date'] = this.date;
-    data['__v'] = this.iV;
-    return data;
   }
 }

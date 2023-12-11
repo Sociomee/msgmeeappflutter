@@ -140,15 +140,15 @@ class SQLiteHelper {
   static const messagetable = '''
       CREATE TABLE ${Tables.MESSAGE} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        remote_id TEXT,
-        author TEXT,
-        file TEXT,
+        sId TEXT,
+        authorId TEXT,
         room TEXT,
         date TEXT,
-        content TEXT,
-        type TEXT,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
-        status TEXT
+        sentTime TEXT DEFAULT CURRENT_TIMESTAMP,
+        content TEXT NULL,
+        status INT DEFAULT 0,
+        isDeleted INT DEFAULT 0
       )
     ''';
 

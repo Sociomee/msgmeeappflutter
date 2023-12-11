@@ -16,10 +16,16 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
 
   Future<void> checkConnectivity() async {
     final result = await Connectivity().checkConnectivity();
+    print("connectiviet status ${result}");
     bool isOnline = false;
     try {
-      final lookup = await InternetAddress.lookup('www.google.com');
-      isOnline = lookup.isNotEmpty && lookup[0].rawAddress.isNotEmpty;
+     if(result != ConnectivityResult.none){
+       final lookup = await InternetAddress.lookup('www.google.com');
+        print("lookup result ${lookup.length > 0}");
+        isOnline = lookup.length > 0;
+     }else{
+      isOnline = false;
+     }
     } on SocketException catch (_) {
       isOnline = false;
     }

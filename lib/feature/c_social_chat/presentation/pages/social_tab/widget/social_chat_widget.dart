@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/data/api_data_source/repositories.dart';
+import 'package:msgmee/data/api_data_source/repository/auth/auth_repository.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
@@ -40,11 +42,11 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     var selectcubit = context.watch<SelectedchatCubit>().state;
     final cubit = context.watch<SelectionCubit>();
     var authorId = context.read<ChatRoomsCubit>().state.userId;
-
     return BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
       listener: (context, state) {},
       builder: (context, state) {
         if (state.status == ChatRoomStatus.loaded) {
+          const userId = "652e6674c78cfd56a9c848c0";
           return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -58,8 +60,13 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                 var online = state.onlineUsers.where((e) {
                   return e['id'] == localpeopledata.first.sId;
                 }).toList();
-                print('----->$online');
-                return Column(
+                Iterable<String> userIds = localpeopledata.map((e) => e.sId.toString());
+                return localpeopledata.isEmpty ? Container(child: Column(
+                  children: [
+                    Text("Nodata"),
+                    Text(state.chatroom[index].people!.length.toString())
+                  ],
+                ),): Column(
                   children: [
                     GestureDetector(
                       onLongPress: () {
@@ -193,14 +200,15 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   child: BlocBuilder<TypingCubit, TypingState>(
                                     builder: (context, tstate) {
                                       if(tstate is TypingStartState){
-                                        return localpeopledata.first.sId == tstate.typingStatus.id ? Text("typing...",
+                                        print("typing detected" + tstate.typingStatus.id.toString());
+                                        return (userIds.contains(tstate.typingStatus.id) )? Text("typing...",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
                                           color: AppColors.grey,
                                         ),
                                       ) : Text(
-                                        "${state.chatroom[index].lastMessage!.content}",
+                                        "${localpeopledata.first.sId}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
@@ -210,7 +218,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
 
                                       }else if (tstate is TypingEndState){
                                         return Text(
-                                        "${state.chatroom[index].lastMessage!.content}",
+                                        "${state.chatroom[index].lastMessageId}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
@@ -219,7 +227,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                       );
                                       }else{
                                         return Text(
-                                        "${state.chatroom[index].lastMessage!.content}",
+                                        "${state.chatroom[index].lastMessageId}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
@@ -238,7 +246,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                    state.chatroom[index].lastMessage!.date
+                                    state.chatroom[index].timestamp
                                         .toString()
                                         .formatToCustomDate(),
                                     textAlign: TextAlign.center,

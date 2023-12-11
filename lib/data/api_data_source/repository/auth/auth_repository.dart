@@ -30,6 +30,8 @@ class AuthService implements AuthRepository {
     if (response.statusCode == 200 && response.data['status'] == true) {
       var res = OtpModel.fromJson(response.data);
       localdata.storedata('token', res.data!);
+      print("Current user id id ${res.userId!}" );
+      localdata.storedata('currentuserid', res.userId!);
       localdata.storedata('phone', phone);
       return res;
     } else {

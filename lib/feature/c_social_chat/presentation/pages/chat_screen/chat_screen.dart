@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:msgmee/common_cubits/connectivity_cubit.dart';
 import 'package:msgmee/common_widgets/mx_chatappbar.dart';
+import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
@@ -26,12 +27,14 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/sender_widget.dart';
 import 'package:msgmee/feature/c_profile/presentation/pages/other_person_profile_description.dart';
 import 'package:msgmee/helper/string_ext.dart';
+import 'package:msgmee/repos/base_repo.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
 import '../../../../../data/api_data_source/repository/chat/chat_repository.dart';
 import '../../../../../data/api_data_source/repository/socket/msgmee_socket.dart';
 import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
+import '../../../../../helper/local_data.dart';
 import '../../../../../theme/colors.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/search_mode/search_mode_cubit.dart';
@@ -71,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final _listViewController = ScrollController();
   final ImagePicker _picker = ImagePicker();
-
+  late String currentuserId;
   bool istyping = false;
   bool tap = false;
   bool selectMode = false;
@@ -117,6 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
+    getuserId();
     context.read<ChatRoomsCubit>().getPhoneAndUserid();
     context
         .read<SetChatbgCubit>()
@@ -136,7 +140,6 @@ class _ChatScreenState extends State<ChatScreen> {
     var msg = context.read<AddMessageCubit>().state.messages;
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('d MMMM, y').format(now);
-    var authorId = context.read<ChatRoomsCubit>().state.userId;
 
     var online = context.read<ChatRoomsCubit>().state.onlineUsers.where((e) {
       return e['id'] == widget.senderId;
@@ -151,8 +154,6 @@ class _ChatScreenState extends State<ChatScreen> {
         },
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
           listener: (context, state) {
-
-            
             if (state.localmessage.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (_listViewController.hasClients) {
@@ -520,7 +521,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               return widget.id ==
                                                       tstate.typingStatus.roomID
                                                   ? Text(
-                                                      "typing...",
+                                                      "typing",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -653,15 +654,15 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-
-                                print("Rebuilding data");
+                                print("Rebuilding data s");
+                                var authorId = state.localmessage[index].author?.sId;
                                 return Align(
-                                  alignment: (authorId !=
-                                          state.localmessage[index].author
+                                  alignment: (currentuserId !=
+                                          state.localmessage[index].author?.sId
                                       ? Alignment.topLeft
                                       : Alignment.topRight),
-                                  child: authorId !=
-                                          state.localmessage[index].author
+                                  child: currentuserId !=
+                                          state.localmessage[index].author?.sId
                                       ? SwipeTo(
                                           onRightSwipe: () {
                                             context
@@ -669,13 +670,19 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 .replyMsg(
                                                     widget.name,
                                                     state.localmessage[index]
-                                                        .content);
+                                                            .content ??
+                                                        "");
                                           },
                                           child: GestureDetector(
                                             onTap: () {
+                                              context.read<BaseRepo>().syncMessages(context.read<BaseRepo>().token);
                                               // setState(() {
                                               //   chattileIndex.remove(index);
                                               // });
+                                          //     print(currentuserId !=
+                                          // state.localmessage[index].author?.sId);
+                                          // print(currentuserId);
+                                          // print(state.localmessage[index].author?.sId);
                                               if (selectMode) {
                                                 log('selected mode $selectMode');
                                                 if (chattileIndex
@@ -736,18 +743,21 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 children: [
                                                   ReceivedMessageWidget(
                                                     message: state
-                                                        .localmessage[index]
-                                                        .content,
+                                                            .localmessage[index]
+                                                            .content ??
+                                                        "",
                                                     msgStatus: state
-                                                        .localmessage[index]
-                                                        .status,
+                                                            .localmessage[index]
+                                                            .status ??
+                                                        0,
                                                     time: state
                                                         .localmessage[index]
-                                                        .date
+                                                        .date!
                                                         .iso8601To12HourFormat(),
                                                     type: state
-                                                        .localmessage[index]
-                                                        .type,
+                                                            .localmessage[index]
+                                                            .type ??
+                                                        "text",
                                                   ),
                                                   Align(
                                                     alignment:
@@ -843,7 +853,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 .replyMsg(
                                                     'You',
                                                     state.localmessage[index]
-                                                        .content);
+                                                            .content ??
+                                                        "");
                                           },
                                           child: GestureDetector(
                                             onTap: () {
@@ -924,14 +935,16 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   SentMessageWidget(
                                                     // doc: msg[index].docName,
                                                     message: state
-                                                        .localmessage[index]
-                                                        .content,
+                                                            .localmessage[index]
+                                                            .content ??
+                                                        "",
                                                     msgStatus: state
-                                                        .localmessage[index]
-                                                        .status,
+                                                            .localmessage[index]
+                                                            .status ??
+                                                        0,
                                                     time: state
                                                         .localmessage[index]
-                                                        .date
+                                                        .date!
                                                         .iso8601To12HourFormat(),
                                                     type: state
                                                                 .localmessage[
@@ -1149,7 +1162,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                                             ShowContactTextField>()
                                                         .state
                                                 ? GestureDetector(
-                                                    onTap: () {
+                                                    onTap: () async {
+                                                      context
+                                                          .read<
+                                                              ConnectivityCubit>()
+                                                          .checkConnectivity();
+
                                                       if (messageController
                                                           .text.isNotEmpty) {
                                                         context
@@ -1507,5 +1525,11 @@ class _ChatScreenState extends State<ChatScreen> {
             );
           },
         ));
+  }
+  
+  Future<void> getuserId() async{
+    var localData = Localdata();
+    var authorId = await localData.readData('currentuserid');
+    currentuserId = authorId;
   }
 }

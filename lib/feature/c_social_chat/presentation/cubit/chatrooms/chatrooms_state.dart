@@ -40,8 +40,8 @@ class ChatRoomsState extends Equatable {
   final MessageSendStatus messageSendStatus;
   final String? phone;
   final String? userId;
-  final List<LocalChatRooms> chatroom;
-  final List<LocalMessagesModel> localmessage;
+  final List<Room> chatroom;
+  final List<Message> localmessage;
   final List onlineUsers;
   factory ChatRoomsState.initial() {
     return ChatRoomsState(
@@ -99,8 +99,8 @@ class ChatRoomsState extends Equatable {
     MessageSendStatus? messageSendStatus,
     String? phone,
     String? userId,
-    List<LocalChatRooms>? chatroom,
-    List<LocalMessagesModel>? localmessage,
+    List<Room>? chatroom,
+    List<Message>? localmessage,
     List? onlineUsers,
   }) {
     return ChatRoomsState(

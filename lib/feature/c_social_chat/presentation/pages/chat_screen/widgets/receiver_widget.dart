@@ -6,7 +6,7 @@ import '../../../cubit/chat_theme/chat_theme_cubit.dart';
 
 class ReceivedMessageWidget extends StatelessWidget {
   final String message;
-  final String msgStatus;
+  final int msgStatus;
   final String time;
   final String type;
 

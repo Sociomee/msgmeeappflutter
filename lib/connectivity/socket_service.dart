@@ -1,10 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msgmee/data/newmodels/message_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
 import '../data/api_data_source/repositories.dart';
+import '../data/sqlite_data_source/repository/messages_repository.dart';
+import '../feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import '../helper/local_data.dart';
 
 class SocketService {
@@ -55,6 +61,7 @@ class SocketService {
 
       _socket?.onDisconnect((_) {
         print('Socket disconnected');
+        _socket?.connect();
       });
 
        _socket?.on('onlineUsers', (data) {
@@ -84,7 +91,11 @@ class SocketService {
       });
 
        _socket?.on('message-in', (data) {
-        //print('Received data message: $data');
+          // Get the temporary directory       
+        print('Received data message:${data["message"]}');
+        Message msg = Message.fromJson(data["message"]);
+        tempFunction(msg);
+        print(msg.content);
       });
 
       
@@ -113,5 +124,11 @@ class SocketService {
 
   void setContext(BuildContext context1) {
     context = context1;
+  }
+  
+  void tempFunction(Message msg) async{
+    await MessagesRepository().insertMessages(msg);
+    context.read<ChatRoomsCubit>().getLocalDBMessages();
+
   }
 }

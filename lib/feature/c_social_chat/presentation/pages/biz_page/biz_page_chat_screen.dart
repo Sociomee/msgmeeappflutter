@@ -690,7 +690,7 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                                 .replyMsg(
                                                     widget.name,
                                                     state.localmessage[index]
-                                                        .content);
+                                                        .content ?? "");
                                           },
                                           child: GestureDetector(
                                             onTap: () {
@@ -734,17 +734,17 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                                   ReceivedMessageWidget(
                                                     message: state
                                                         .localmessage[index]
-                                                        .content,
+                                                        .content ?? "",
                                                     msgStatus: state
                                                         .localmessage[index]
-                                                        .status,
+                                                        .status ?? 0,
                                                     time: state
                                                         .localmessage[index]
-                                                        .date
+                                                        .date!
                                                         .iso8601To12HourFormat(),
                                                     type: state
                                                         .localmessage[index]
-                                                        .type,
+                                                        .type ?? "text",
                                                   ),
                                                   Align(
                                                     alignment:
@@ -835,7 +835,7 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                                 .replyMsg(
                                                     'You',
                                                     state.localmessage[index]
-                                                        .content);
+                                                        .content ?? "");
                                           },
                                           child: GestureDetector(
                                             onTap: () {
@@ -895,13 +895,13 @@ class _BizPageChatScreenState extends State<BizPageChatScreen> {
                                                     // doc: msg[index].docName,
                                                     message: state
                                                         .localmessage[index]
-                                                        .content,
+                                                        .content ?? "",
                                                     msgStatus: state
                                                         .localmessage[index]
-                                                        .status,
+                                                        .status ?? 0,
                                                     time: state
                                                         .localmessage[index]
-                                                        .date
+                                                        .date!
                                                         .iso8601To12HourFormat(),
                                                     type: state
                                                                 .localmessage[
