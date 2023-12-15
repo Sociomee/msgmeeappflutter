@@ -43,10 +43,10 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
   void getchatroomsList() async {
     emit(state.copyWith(status: ChatRoomStatus.loading));
     try {
-      var data = await ChatRepostory().getChatRoomList();
+     // var data = await ChatRepostory().getChatRoomList();
       // log('all rooms from remote server ${data.rooms!.length}');
       //insertDataToDB(data.rooms!);
-      emit(state.copyWith(response: data, status: ChatRoomStatus.loaded));
+     // emit(state.copyWith(response: data, status: ChatRoomStatus.loaded));
     } catch (e) {
       log('Error:$e');
     }
@@ -140,6 +140,12 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     emit(state.copyWith(localmessage: message));
   }
 
+
+Future<void> getLocalDBMessagesByIdDebug(String room) async {
+    await MessagesRepository().getDebugMessages(room);
+    //emit(state.copyWith(localmessage: message));
+  }
+
   //** create room function */
   Future<void> createchatRoom({required String userid}) async {
     // emit(state.copyWith(createroomstatus: CreateRoomStatus.loading));
@@ -165,8 +171,9 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     var localData = Localdata();
     var authotCurrent = await localData.readData('currentuserid');
     var status = 0;
-
-   
+    var id = await MessagesRepository().insertSendMessages(Message(authorId: authotCurrent , room: roomId ,sId: "sId", content: content ,status: 0, type: contentType , date: DateTime.now().toString()));
+    getLocalDBMessages();
+    print("saved message id ${id}");
     // emit(state.copyWith(status: ChatRoomStatus.refresh));
 
       if (connectivityState.isOnline) {
@@ -178,15 +185,13 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     );
       print('message send ${sentToServer.message}');
         print('message send');
-        await MessagesRepository().insertMessages(sentToServer.message ?? Message());
+        await MessagesRepository().updateMessage(sentToServer.message , id);
+        print("Updated");
       } else {
         print('waiting');
        // await MessagesRepository().insertMessages(Message());
       }
-
-      
       getLocalDBMessages();
-    
   }
 
   //* sending message that has status "waiting" after connection restore

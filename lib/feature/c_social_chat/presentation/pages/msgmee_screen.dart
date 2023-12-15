@@ -528,6 +528,7 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                                         filtedUserList[index]
                                                             .hasStory,
                                                     lastOnline: '',
+                                                    id: "sadsdad",
                                                   ));
                                             },
                                             child: Container(

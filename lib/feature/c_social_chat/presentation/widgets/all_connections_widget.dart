@@ -34,6 +34,7 @@ class AllconnectionsWidget extends StatelessWidget {
                       senderId: 'false',
                       hasStory: false,
                       lastOnline: '',
+                      id: "sadsa",
                     ));
               },
               child: Padding(

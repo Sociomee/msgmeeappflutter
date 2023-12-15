@@ -1,3 +1,4 @@
+import 'package:background_fetch/background_fetch.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +42,23 @@ import 'feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/s
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/show_loader/show_loader.dart';
 import 'feature/c_social_chat/presentation/pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
+
+@pragma('vm:entry-point')
+void backgroundFetchHeadlessTask(HeadlessTask task) async {
+  String taskId = task.taskId;
+  bool isTimeout = task.timeout;
+  if (isTimeout) {
+    // This task has exceeded its allowed running-time.  
+    // You must stop what you're doing and immediately .finish(taskId)
+    print("[BackgroundFetch] Headless task timed-out: $taskId");
+    // BackgroundFetch.finish(taskId);
+    // return;
+  }  
+  print('[BackgroundFetch] Headless event received.');
+  // Do your work here...
+ // BackgroundFetch.finish(taskId);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SQLiteHelper().initialize();
@@ -58,8 +76,23 @@ void main() async {
   runApp(MultiRepositoryProvider(providers: [
     RepositoryProvider(create: (context)=> BaseRepo())
   ], child: MyApp()));
+
+//configureBackgroundFetch();
 }
 
+Future<void> configureBackgroundFetch() async {
+  await BackgroundFetch.configure(
+    BackgroundFetchConfig(
+      minimumFetchInterval: 1, // Minimum fetch interval in minutes
+      stopOnTerminate: false,
+      enableHeadless: true,
+      requiresBatteryNotLow: false,
+      requiresCharging: false,
+      requiresStorageNotLow: false,
+    ),
+    backgroundFetchHeadlessTask,
+  );
+}
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final botToastBuilder = BotToastInit();

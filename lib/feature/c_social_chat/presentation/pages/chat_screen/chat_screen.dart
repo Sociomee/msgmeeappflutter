@@ -56,7 +56,7 @@ class ChatScreen extends StatefulWidget {
     this.hasStory,
     this.group,
     required this.lastOnline,
-    this.id,
+    required this.id,
   });
   final String name;
   final String imageUrl;
@@ -138,6 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     var msg = context.read<AddMessageCubit>().state.messages;
+    currentuserId = context.read<BaseRepo>().getuserId;
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('d MMMM, y').format(now);
 
@@ -368,7 +369,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                           ),
                                         ),
                                         Text(
-                                          '14 Feb -  28 Feb',
+                                          '14 Feb - 28 Feb',
                                           style: TextStyle(
                                             color: Color(0xFF368C4E),
                                             fontSize: 12,
@@ -654,15 +655,13 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                                print("Rebuilding data s");
-                                var authorId = state.localmessage[index].author?.sId;
+                               // print("Rebuilding data s");
                                 return Align(
                                   alignment: (currentuserId !=
-                                          state.localmessage[index].author?.sId
+                                          state.localmessage[index].authorId
                                       ? Alignment.topLeft
                                       : Alignment.topRight),
-                                  child: currentuserId !=
-                                          state.localmessage[index].author?.sId
+                                  child: currentuserId != state.localmessage[index].authorId
                                       ? SwipeTo(
                                           onRightSwipe: () {
                                             context
@@ -674,15 +673,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         "");
                                           },
                                           child: GestureDetector(
-                                            onTap: () {
-                                              context.read<BaseRepo>().syncMessages(context.read<BaseRepo>().token);
-                                              // setState(() {
-                                              //   chattileIndex.remove(index);
-                                              // });
-                                          //     print(currentuserId !=
-                                          // state.localmessage[index].author?.sId);
-                                          // print(currentuserId);
-                                          // print(state.localmessage[index].author?.sId);
+                                            onTap: () async{
+                                            
+                                              print(state.localmessage[index].authorId);
+                                              print(currentuserId);
                                               if (selectMode) {
                                                 log('selected mode $selectMode');
                                                 if (chattileIndex
@@ -752,7 +746,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         0,
                                                     time: state
                                                         .localmessage[index]
-                                                        .date!
+                                                        .timestamp!
                                                         .iso8601To12HourFormat(),
                                                     type: state
                                                             .localmessage[index]
@@ -1417,11 +1411,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                         istyping = false;
                                       });
                                     }
-                                    var room = state.messages.room!.toJson();
+                                    var room = widget.id.toString();
                                     //* calling typing function
                                     context.read<ChatRoomsCubit>().typing(
                                           typing: istyping,
-                                          room: room,
+                                          room: {"_id":room},
                                         );
                                   },
                                 ),
@@ -1530,6 +1524,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> getuserId() async{
     var localData = Localdata();
     var authorId = await localData.readData('currentuserid');
+    print("User id ${authorId}");
     currentuserId = authorId;
+    print(currentuserId);
   }
 }

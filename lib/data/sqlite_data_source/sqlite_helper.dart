@@ -41,15 +41,14 @@ class SQLiteHelper {
 
   static const allconnectiontable = '''
       CREATE TABLE ${Tables.ALLCONNECTIONS} (
-        id TEXT PRIMARY KEY,
-        socioMeeId TEXT,
-        firstName TEXT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        sId TEXT,
         phone TEXT,
-        lastName TEXT,
-        username TEXT,
-        fullName TEXT,
-        otherProfileImage TEXT,
-        linkedTo TEXT
+        username TEXT NULL,
+        socioMeeId TEXT NULL,
+        fullName TEXT NULL,
+        otherProfileImage TEXT NULL,
+        linkedTo TEXT NULL
       )
     ''';
 
@@ -140,7 +139,7 @@ class SQLiteHelper {
   static const messagetable = '''
       CREATE TABLE ${Tables.MESSAGE} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        sId TEXT,
+        sId TEXT NULL,
         authorId TEXT,
         room TEXT,
         date TEXT,
@@ -151,7 +150,7 @@ class SQLiteHelper {
         isDeleted INT DEFAULT 0
       )
     ''';
-
+  //status -> 0 for pending , 1 for delivered , 2 for read
   static const meetingTable = '''
       CREATE TABLE ${Tables.MEETING} (
         id TEXT PRIMARY KEY,

@@ -1,12 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:msgmee/connectivity/socket_service.dart';
 import 'package:msgmee/data/api_data_source/repository/chat/chat_repository.dart';
 import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
+import 'package:msgmee/data/sqlite_data_source/repository/messages_repository.dart';
 import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
+import 'package:msgmee/helper/connectivity_service.dart';
 import 'package:msgmee/helper/local_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common/sqlite_api.dart';
@@ -18,30 +23,77 @@ class BaseRepo {
   final SQLiteHelper sqlite = SQLiteHelper();
   String token = "";
   String phone = "";
+  String userId = "";
   bool isNew = false;
+  bool isFirst = true;
   late Config configData;
+  late Timer _internetCheckTimer;
+  final _connectivityService = ConnectivityService();
 
-  BaseRepo() {}
+
+  BaseRepo() {
+   
+    _startInternetCheckTimer();
+  }
 
   void init() async {
     token = await Localdata().readData('token') ?? "";
     phone = await Localdata().readData('phone') ?? "";
+    userId = await Localdata().readData("currentuserid") ?? "";
+    if (token != "" && isFirst) {
+       configData = await getConfig(phone);
+       await getUserInfo(token, configData);
+       await syncRoomsFromServer(token, configData);
+      // await syncMessages(token);
+      isFirst=false;
+    }
 
-    if (token != "") {
-      configData = await getConfig(phone);
-      await getUserInfo(token, configData);
-      await syncRoomsFromServer(token, configData);
-      await syncMessages(token);
+  }
+
+   void _startInternetCheckTimer() {
+
+     
+    _internetCheckTimer = Timer.periodic(Duration(seconds: 5), (_) {
+      _processQueueIfConnected();
+    });
+  }
+
+ void _processQueueIfConnected() async {
+    if (await _isConnected()) {
+      var socket =SocketService().getSocket();
+      if(!(socket?.connected ?? false)){
+        socket?.connect();
+      }
+      final results = await sqlite.database.query(Tables.MESSAGE , where: "sId=? order by id asc limit 5" , whereArgs: ["sId"]);
+      if (results.length > 0) {
+        for (var element in results) {
+           Message msg = Message.fromJson(element);
+            var sentToServer = await ChatRepostory().sendMessageRemaining(msg);
+            if(sentToServer.room != null){
+              print("sent");
+              await MessagesRepository().updateMessage(sentToServer.message , msg.id ?? 0);
+            }
+        }
+      }
     }
   }
+
+  Future<bool> _isConnected() async {
+    return await _connectivityService.checkConnection();
+  }
+
+Future<void> scheduleQueue() async{
+
+}
 
   syncRoomsFromServer(token, Config configData) async {
     String? timestamp = isNew ? "200-10-10" : configData.syncedTill;
     ChatRoomsModel data = await ChatRepostory().getChatRoomList(timestamp);
     if (data.rooms != null) {
       List<Room> myrooms = data.rooms as List<Room>;
+      print("Total rooms ${myrooms.length}");
       for (var room in myrooms) {
-        //await checkandinsertroomtodb(room);
+        await checkandinsertroomtodb(room);
       }
     }
   }
@@ -49,6 +101,8 @@ class BaseRepo {
   getUserInfo(token, Config configData) async {}
 
   syncMessages(String id) async{
+     final db = await SQLiteHelper().database;
+    //final results = await db.delete(Tables.MESSAGE,where: "sId=sId");
     //  MessagesModel data = await ChatRepostory().getChatRoomMessages(id: id);
     // if (data != null) {
     //   List<Message> myrooms = data.room?.messages ?? [];
@@ -84,31 +138,52 @@ class BaseRepo {
     ]);
     return getConfig(phone);
   }
-
+  get getuserId => userId;
   Future<void> checkandinsertroomtodb(Room room) async {
     final db = await SQLiteHelper().database;
-    print("Last message ---->" + room.lastMessage!.toString());
+    print("Last message ---->" + room.lastAuthor.toString());
+
+//     var data = {
+//   "isMarketPlace": room.isMarketPlace,
+//   "isBroadCast": room.isBroadCast,
+//   "description": room.description,
+//   "followers": room.followers,
+//   "following": room.following,
+//   "pageId": room.pageId,
+//   "ownerId": room.ownerId,
+//   "sId": room.sId,
+//   "isGroup": room.isGroup,
+//   "lastAuthor": room.lastAuthor.toString(),
+//   "lastMessageId": room.lastMessageId.toString(),
+//   "lastUpdate": room.lastUpdate.toString()
+// };
+
+// print(data);
+    
+
+  
     final results = await db
         .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [room.sId]);
     if (results.isEmpty) {
       const sql =
           "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      // await db.rawQuery(sql, [
-      //   room.isBizPage,
-      //   room.isMarketPlace,
-      //   room.isBroadCast,
-      //   room.description,
-      //   room.followers,
-      //   room.following,
-      //   room.pageId,
-      //   room.ownerId,
-      //   room.sId,
-      //   room.isGroup,
-      //   room.lastAuthor,
-      //   room.lastMessageId,
-      //   room.lastUpdate
-      // ]);
-     // await checkAndUpdatePeopleInsideRoom(room);
+     
+      await db.rawQuery(sql, [
+        (room.isBizPage ?? false) ? 1 : 0,
+        (room.isMarketPlace ?? false) ? 1 : 0,
+        (room.isBroadCast ?? false) ? 1 : 0,
+        room.description,
+        room.followers,
+        room.following,
+        room.pageId,
+        room.ownerId,
+        room.sId,
+        (room.isGroup ?? false) ? 1 : 0,
+        room.lastAuthor,
+        room.lastMessageId.toString(),
+        room.lastUpdate.toString()
+      ]);
+      await checkAndUpdatePeopleInsideRoom(room);
     } else {
 
       if (room.isGroup ?? false ||
@@ -117,13 +192,13 @@ class BaseRepo {
               (room.isMarketPlace ?? false)) {
         await checkAndUpdatePeopleInsideRoom(room);
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
       } else {
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
@@ -228,10 +303,21 @@ INSERT OR REPLACE INTO ${Tables.USER} (
   }
   
   Future<void> checkAndInsertRoomMessages(Room room, Database db) async{
-    print("total messages ${room.messages?.length}");
-    List<Message> messages = room.messages ?? [];
-    for (var element in messages) {
-      print(element.content);
+  
+    var data = await ChatRepostory().getChatRoomMessagesNew(id: room.sId ?? "");
+    print("total messages ${data.length}");
+    for (var element in data) {
+     final results = await db.query('${Tables.MESSAGE}',
+          where: "sId= ? and room=? ", whereArgs: [element.sId, room.sId]);
+      if (results.isEmpty) {
+         print(element.content);
+         await sqlite.database.insert(Tables.MESSAGE, {"sId" : element.sId , "authorId" : element.authorId , "room" : element.room , "date" : element.date , "content":element.content,"status" : element.status },
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      }else{
+       // print("Message already in db");
+      }
+
     }
   }
+  
 }

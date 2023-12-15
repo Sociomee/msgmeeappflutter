@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/data/api_data_source/repository/dio_provider.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 
 import '../../../../helper/local_data.dart';
 
@@ -53,6 +54,27 @@ class UserSerivce implements AbUserRepository {
     // log('search result------------->${response.data}');
     if (response.statusCode == 200) {
       var res = MsgmeeUserList.fromJson(response.data);
+      return res;
+    } else {
+      throw Exception();
+    }
+  }
+
+    @override
+  Future<ContactModel> getContactList(List<String> contacts) async {
+    var token = await localData.readData('token');
+    final response = await apiService.dio.post(
+      '$mainbaseUrl/api/filtercontact',
+      data: {
+        "contacts": contacts
+      },
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    print('contact result------------->${response.data}');
+    if (response.statusCode == 200) {
+      var res = ContactModel.fromJson(response.data);
       return res;
     } else {
       throw Exception();

@@ -9,32 +9,32 @@ enum MsgmeeUserListStatus {
 }
 
 class MsgmeeUserListState extends Equatable {
-  final MsgmeeUserList msgmeeUserList;
+  final ContactModel contactModel;
   final MsgmeeUserListStatus status;
   final CustomError error;
   final double filteredDataPercentage;
   MsgmeeUserListState({
-    required this.msgmeeUserList,
+    required this.contactModel,
     required this.status,
     required this.error,
     required this.filteredDataPercentage,
   });
   factory MsgmeeUserListState.initial() {
     return MsgmeeUserListState(
-      msgmeeUserList: MsgmeeUserList(),
+      contactModel: ContactModel(),
       status: MsgmeeUserListStatus.initial,
       error: CustomError(),
       filteredDataPercentage: 0,
     );
   }
   MsgmeeUserListState copyWith({
-    MsgmeeUserList? msgmeeUserList,
+    ContactModel? contactModel,
     MsgmeeUserListStatus? status,
     CustomError? error,
     double? filteredDataPercentage,
   }) {
     return MsgmeeUserListState(
-      msgmeeUserList: msgmeeUserList ?? this.msgmeeUserList,
+      contactModel: contactModel ?? this.contactModel,
       status: status ?? this.status,
       error: error ?? this.error,
       filteredDataPercentage:
@@ -43,5 +43,5 @@ class MsgmeeUserListState extends Equatable {
   }
 
   @override
-  List<Object> get props => [msgmeeUserList, status, error];
+  List<Object> get props => [ contactModel, status, error];
 }

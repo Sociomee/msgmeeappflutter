@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/sync_sociomee/sync_sociomee_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
 import 'package:msgmee/repos/base_repo.dart';
@@ -59,20 +60,20 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      context.read<ChatRoomsCubit>().getLocalChatRoomData();
-        //               final SQLiteHelper sqlite = SQLiteHelper();
-        //                const rpPeopleSql = '''
-        //                 SELECT * FROM roomPeople rp LEFT JOIN user usr ON rp.user_id = usr.id where rp.roomId =?;
-        //                 ''';
-        // print("Element id ");
-        // var newdata = await sqlite.database.rawQuery(rpPeopleSql,["6555c26d6fc2509518321fc4"]);
+                      final SQLiteHelper sqlite = SQLiteHelper();
+
+                      
+                       const rpPeopleSql = '''
+                        SELECT * FROM room''';
+        print("Element id ");
+        var newdata = await sqlite.database.rawQuery(rpPeopleSql);
                       print(
                           "====================================================================================>");
-                   print("");
+                   print(newdata);
                       print(
                           "<====================================================================================");
                     },
-                    child: Text("TetData"))
+                    child: Text("TestData"))
               ],
             )
           : SingleChildScrollView(

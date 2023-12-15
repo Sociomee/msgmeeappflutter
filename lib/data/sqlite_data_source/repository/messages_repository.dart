@@ -48,6 +48,21 @@ class MessagesRepository extends AbMessagesRepository {
     }
   }
 
+
+    Future<int> insertSendMessages(Message messages) async {
+    try {
+       
+          print('insert messages data to localDb: ${messages.content}');
+
+          return await sqlite.database.insert(Tables.MESSAGE, {"sId" : messages.sId , "authorId" : messages.authorId , "room" : messages.room , "date" : messages.date , "content":messages.content,"status" : messages.status},
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    } catch (e) {
+      print('insert messages data to localDb: $e');
+    }
+    return 0;
+  }
+
+
   @override
   Future<List<Message>> getMessagesById(String room) async {
     try {
@@ -62,6 +77,13 @@ class MessagesRepository extends AbMessagesRepository {
       log('getting messages data from localDB: $e');
       return [];
     }
+  }
+
+  Future<void> getDebugMessages(String room) async {
+        print("Checking in message db");
+        List<Map<String, dynamic>> maps = await sqlite.database.rawQuery("SELECT * FROM message order by id desc limit 5");
+        print(maps);
+        print("====================================================================================================================================>");
   }
 
   @override
@@ -80,6 +102,15 @@ class MessagesRepository extends AbMessagesRepository {
     await sqlite.database.update(
       Tables.MESSAGE,
       {'status': 'Sent'},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> updateMessage(Message? message, int id) async{
+     await sqlite.database.update(
+      Tables.MESSAGE,
+      {'status': 1 , 'sId': message?.sId.toString()},
       where: 'id = ?',
       whereArgs: [id],
     );

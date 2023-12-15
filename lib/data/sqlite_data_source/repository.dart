@@ -1,5 +1,6 @@
 import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/data/model/user_model.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,8 +18,8 @@ abstract class AbPhoneBookUserRepository with SQLiteMixin {
 }
 
 abstract class AbAllConnectionRepository with SQLiteMixin {
-  Future<void> insertAllconnections(User user);
-  Future<List<User>> getAllConnections();
+  Future<void> insertAllconnections(MsgMeeContacts user);
+  Future<List<MsgMeeContacts>> getAllConnections();
   Future<void> deleteTable(Database database, String tableName);
 }
 

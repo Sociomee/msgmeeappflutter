@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/data/api_data_source/repository/auth/auth_repository.dart';
+import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
@@ -13,6 +14,7 @@ import 'package:msgmee/helper/context_ext.dart';
 
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/helper/string_ext.dart';
+import 'package:msgmee/repos/base_repo.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../cubit/chat_selection_cubit.dart';
@@ -74,6 +76,10 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       },
                       onTap: cubit.state.isEmpty
                           ? () {
+                            print(state.chatroom[index].sId);
+                            
+                            context.read<BaseRepo>().syncRoomsFromServer("",Config());
+                           
                               state.chatroom[index].isGroup == 'true'
                                   ? animatedScreenNavigator(
                                       context,

@@ -97,7 +97,7 @@ class SyncSocimeeService extends AbSyncSociomeeRepository {
   Future<CheckMsgmeeModel> checkMsgmee(String phone) async {
     var token = await localData.readData('token');
     // log('sending contact phone for backend check $phone');
-
+     return CheckMsgmeeModel();
     var response = await apiService.dio.post('$mainbaseUrl/api/checkMsgmee',
         options: Options(
           headers: {

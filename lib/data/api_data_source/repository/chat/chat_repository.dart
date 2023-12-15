@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -6,6 +7,7 @@ import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
+import 'package:msgmee/data/newmodels/message_model.dart';
 
 import '../../../../helper/local_data.dart';
 import '../../../model/create_room_model.dart';
@@ -39,7 +41,6 @@ class ChatRepostory extends AbChatReporitory {
   Future<MessagesModel> getChatRoomMessages({required String id}) async {
     try {
       var token = await localData.readData('token');
-      log('token $token');
       // log('id $id');
       var response = await apiService.dio.post(
         '$mainbaseUrl/api/room/join',
@@ -62,6 +63,40 @@ class ChatRepostory extends AbChatReporitory {
     } catch (e) {
       log('Error: $e');
       return MessagesModel();
+    }
+  }
+
+  Future<List<Message>> getChatRoomMessagesNew({required String id}) async {
+    try {
+      var token = await localData.readData('token');
+      // log('id $id');
+      var response = await apiService.dio.post(
+        '$mainbaseUrl/api/room/join',
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+        data: {'id': id},
+      );
+
+      // log('message response:${response.data}');
+      print(response.statusCode);
+      if (response.statusCode == 200) { 
+         final parsedJson = response.data['room'] as Map<String,dynamic>;
+         List<Message> msgLst = [];
+         for (var element in parsedJson['messages']) {
+          Message msg = Message.fromJson(element);
+          msgLst.add(msg);
+         }
+        print(msgLst.length);
+        return msgLst;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log('Error: $e');
+      return [];
     }
   }
 
@@ -125,6 +160,43 @@ class ChatRepostory extends AbChatReporitory {
       return data;
     } else {
       throw Exception();
+    }
+  }
+
+
+  Future<MessageSendSuccessModel> sendMessageRemaining(Message message) async {
+    var token = await localData.readData('token');
+    print('$mainbaseUrl/api/message');
+    print(token);
+    print('send message params:\n${message.authorId}\n${message.room}\n${message.content}\n${message.type}');
+    var mdata = {
+        "roomID": message.room,
+        "authorID": message.authorId,
+        "content": message.content,
+        "contentType": message.type
+      };
+      print(mdata);
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/message',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+      data: {
+         "roomID": message.room,
+        "authorID": message.authorId,
+        "content": message.content,
+        "contentType": message.type
+      },
+    );
+    print('send message response:${response.statusCode}');
+    if (response.statusCode == 200) {
+      var data = MessageSendSuccessModel.fromJson(response.data);
+      log('send message response:${data}');
+      return data;
+    } else {
+      return MessageSendSuccessModel();
     }
   }
 

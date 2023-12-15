@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/local_data.dart';
@@ -37,7 +38,7 @@ class ContactCubit extends Cubit<ContactState> {
     } catch (e) {
       log('Error fetching contacts: $e');
     }
-    phoneBookList = extractPhoneNumbers(contacts!);
+    phoneBookList = await extractPhoneNumbers(contacts!);
     emit(state.copyWith(
       contacts: contacts,
       isLoading: false,
@@ -45,22 +46,30 @@ class ContactCubit extends Cubit<ContactState> {
     ));
     await msgmeecubit.getMsgmeeUsersList(phoneBookList);
     await msgmeecubit.getOverRiddedUsers(phonebookuser: phoneBookList);
-    getOverRidedContacts(msgmeecubit.state.msgmeeUserList.users!);
+    //getOverRidedContacts(msgmeecubit.state.msgmeeUserList.users!);
   }
 
   //*********  converting contact data to custom model class  *************//
-  List<PhoneBookUserModel> extractPhoneNumbers(Iterable<Contact> contacts) {
+  Future<List<PhoneBookUserModel>> extractPhoneNumbers(Iterable<Contact> contacts) async {
     List<PhoneBookUserModel> phoneBookList = [];
 
     for (Contact contact in contacts) {
       for (Item phone in contact.phones ?? []) {
+        String stringWithoutSpaces = phone.value.toString().replaceAll(' ', '');
+      var parsedContact = "skip";
+      try {
+        var parsedContactData = await parse(stringWithoutSpaces);
+        parsedContact = parsedContactData['national_number'];
         phoneBookList.add(
           PhoneBookUserModel(
             name: contact.displayName ?? "N/A",
-            phone: phone.value ?? "N/A",
+            phone: parsedContact ?? "N/A",
           ),
         );
-        log('all phonebook contact${contact.displayName} : ${phone.value}');
+       
+      } catch (e) {}
+        
+       // print('all phonebook contact${contact.displayName} : ${phone.value}');
       }
     }
 

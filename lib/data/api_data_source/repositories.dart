@@ -7,6 +7,7 @@ import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
 import 'package:msgmee/data/model/socimee_user_model.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 
 import '../model/image_send_reponse_model.dart';
 import '../model/msgmee_user_model.dart';
@@ -56,6 +57,7 @@ abstract class AbSyncSociomeeRepository {
 abstract class AbUserRepository {
   Future<MsgmeeUserModel> getUserData();
   Future<MsgmeeUserList> getFriendList(int limit, String search);
+  Future<ContactModel> getContactList(List<String> contacts);
 }
 
 abstract class AbChatReporitory {

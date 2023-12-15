@@ -3,18 +3,17 @@ import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
 
 class Room {
+  String? sId;
   bool? isBizPage;
   bool? isMarketPlace;
   bool? isBroadCast;
+  bool? isGroup;
   String? description;
   String? followers;
   String? following;
   String? pageId;
   String? ownerId;
-  String? sId;
   List<User>? people;
-  bool? isGroup;
-  int? iV;
   String? lastAuthor;
   String? lastMessageId;
   Message? lastMessage;
@@ -34,7 +33,6 @@ class Room {
       this.sId,
       this.people,
       this.isGroup,
-      this.iV,
       this.lastAuthor,
       this.lastMessage,
       this.lastMessageId,
@@ -43,15 +41,17 @@ class Room {
       this.lastUpdate});
 
   Room.fromJson(Map<String, dynamic> json) {
-    isBizPage = json['isBizPage'];
-    isMarketPlace = json['isMarketPlace'];
-    isBroadCast = json['isBroadCast'];
-    description = json['description'];
-    followers = json['followers'];
-    following = json['following'];
+    isBizPage = json['isBizPage'] is int ?  (json['isBizPage'] == 0 ? false : true) : json['isBizPage'];
+    isMarketPlace = json['isMarketPlace'] is int ?  (json['isMarketPlace'] == 0 ? false : true) : json['isMarketPlace'];
+    isBroadCast = json['isBroadCast'] is int ?  (json['isBroadCast'] == 0 ? false : true) : json['isBroadCast'];
+    isGroup = json['isGroup'] is int ?  (json['isGroup'] == 0 ? false : true) : json['isGroup'];
+
+    description = json['description'] == "" ? null : json['description'].toString();
+    followers = json['followers'].toString();
+    following = json['following'].toString();
     pageId = json['pageId'];
     ownerId = json['ownnerId'];
-    sId = json['_id'];
+    sId = json['_id'] ?? json['sId'];
     if (json['people'] != null) {
       people = <User>[];
       json['people'].forEach((v) {
@@ -65,11 +65,9 @@ class Room {
         messages!.add(new Message.fromJson(v));
       });
     }
-    isGroup = json['isGroup'];
-    iV = json['__v'];
     lastAuthor = json['lastAuthor'];
-    lastMessageId = json['lastMessage'].isNotEmpty ? json['lastMessage']['_id'] ?? "" : "";
-    lastMessage = json['lastMessage'].isNotEmpty ? Message.fromJson(json['lastMessage']) : null;
+    lastMessageId = json['lastMessage'] != null ? json['lastMessage']['_id'] ?? "" : "";
+    lastMessage = json['lastMessage'] != null ? Message.fromJson(json['lastMessage']) : null;
     lastUpdate = json['lastUpdate'];
     timestamp = json['lastUpdate'] ?? json['timestamp'];
   }

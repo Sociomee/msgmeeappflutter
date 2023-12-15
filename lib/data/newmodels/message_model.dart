@@ -29,12 +29,12 @@ class Message {
       this.timestamp});
 
   Message.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    sId = json['_id'] ?? json['sId'];
     id = json['id'] ?? 0;
     author =
         json['author'] != null ? (json['author'] is String ? null:  new User.fromJson(json['author']) ) : null;
     authorId =
-        json['author'] != null ? (json['author'] is String ? json['author'] :  json['author']['_id'] )  : null;
+        json['author'] != null ? (json['author'] is String ? json['author'] :  json['author']['_id'] )  : (json['authorId'] ?? null);
     content = json['content'];
     room = json['room'];
     date = json['date'];

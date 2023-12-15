@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/model/user_model.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/helper/context_ext.dart';
@@ -66,7 +67,7 @@ class NewMessageScreen extends StatefulWidget {
 class _NewMessageScreenState extends State<NewMessageScreen> {
   late TextEditingController searchController;
   late ContactCubit _contact;
-  List<User> filterdList = [];
+  List<MsgMeeContacts> filterdList = [];
   String? name;
   String? imageUrl;
   List<PhoneBookUserModel> filterdContactList = [];
@@ -95,7 +96,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     return BlocConsumer<MsgmeeUserListCubit, MsgmeeUserListState>(
       listener: (context, state) {
         if (state.status == MsgmeeUserListStatus.loaded) {
-          filterdList = List.from(state.msgmeeUserList.users!);
+          filterdList = List.from(state.contactModel.msgMeeContacts!);
           filterdContactList = List.from(_contact.state.phonebookUser);
         }
       },
@@ -166,16 +167,16 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                               onChanged: (value) {
                                 setState(() {
                                   if (value.isEmpty) {
-                                    context
-                                        .read<ContactCubit>()
-                                        .getOverRidedContacts(
-                                            state.msgmeeUserList.users!);
+                                    // context
+                                    //     .read<ContactCubit>()
+                                    //     .getOverRidedContacts(
+                                    //         state.msgmeeUserList.users!);
                                     filterdList =
-                                        List.from(state.msgmeeUserList.users!);
+                                        List.from(state.contactModel.msgMeeContacts!);
                                     filterdContactList =
                                         List.from(_contact.state.phonebookUser);
                                   } else {
-                                    filterdList = state.msgmeeUserList.users!
+                                    filterdList = state.contactModel.msgMeeContacts!
                                         .where((model) {
                                       bool hasphone =
                                           model.phone!.toLowerCase().contains(
@@ -245,11 +246,11 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                               if (value == 1) {
                                 setState(() {
                                   filterdList =
-                                      List.from(state.msgmeeUserList.users!);
+                                      List.from(state.contactModel.msgMeeContacts!);
                                 });
                               } else if (value == 2) {
                                 setState(() {
-                                  filterdList = state.msgmeeUserList.users!
+                                  filterdList = state.contactModel.msgMeeContacts!
                                       .where((model) => model.linkedTo!
                                           .toLowerCase()
                                           .contains('msgmee'.toLowerCase()))
@@ -257,7 +258,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                 });
                               } else if (value == 3) {
                                 setState(() {
-                                  filterdList = state.msgmeeUserList.users!
+                                  filterdList = state.contactModel.msgMeeContacts!
                                       .where((model) => model.linkedTo!
                                           .toLowerCase()
                                           .contains('SocioMee'.toLowerCase()))
