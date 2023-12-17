@@ -9,6 +9,7 @@ class Message {
   String? room;
   String? date;
   int? status;
+  int? msgNumber;
   int? isDeleted;
   String? sentTime;
   String? timestamp;
@@ -26,6 +27,7 @@ class Message {
       this.isDeleted,
       this.sentTime,
       this.type,
+      this.msgNumber,
       this.timestamp});
 
   Message.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,7 @@ class Message {
     sentTime = json['sentTime'];
     timestamp = json['timestamp'];
     type = json['type'] ?? "text";
+    msgNumber=json['msgNumber'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +63,7 @@ class Message {
     data['sentTime'] = this.sentTime;
     data['timestamp'] = this.timestamp;
     data['type'] = this.type;
+    data['msgNumber'] = this.msgNumber;
     return data;
   }
 }

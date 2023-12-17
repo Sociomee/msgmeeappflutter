@@ -8,6 +8,7 @@ import 'package:msgmee/data/model/msgmee_user_model.dart';
 import 'package:msgmee/data/api_data_source/repository/user/user_repository.dart';
 import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository/all_connections_repository.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/get_contact/get_contact_cubit.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import '../../../../../common_cubits/custom_error.dart';
 import '../../../../../data/model/phonebook_model.dart';
@@ -22,47 +23,45 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
   Future<void> getMsgmeeUsersList(
     List<PhoneBookUserModel> phonebookuser,
   ) async {
-    log('getting msgmee users..');
+    print('getting msgmee users..');
     try {
       emit(state.copyWith(status: MsgmeeUserListStatus.loading));
-      // var res = await UserSerivce().getFriendList(100, '');
-      // List<User> msgmeeUserList = res.users!;
-      // List<User> newUserList = [];
       
-
-      //* Inserting data to the local sqlite database
-
-      // log('new user $newUserList');
-      // for (var i = 0; i < msgmeeUserList.length; i++) {
-      //   await AllConnectionRepository().insertAllconnections(msgmeeUserList[i]);
-      // }
       List<MsgMeeContacts> users = await AllConnectionRepository().getAllConnections();
-      log('when database is empty${users}');
       emit(
         state.copyWith(
           status: MsgmeeUserListStatus.loaded,
           contactModel: ContactModel(msgMeeContacts: users , filteredContacts: state.contactModel.filteredContacts),
         ),
       );
-      checkAndUpdateLocalContactDb(phonebookuser);
+      await checkAndUpdateLocalContactDb(phonebookuser);
     } on CustomError catch (e) {
       emit(state.copyWith(status: MsgmeeUserListStatus.error, error: e));
     }
   }
 
   Future<void> getdataLoaclData() async {
-    return;
-   // List<User> users = await AllConnectionRepository().getAllConnections();
-    // emit(
-    //   state.copyWith(
-    //     status: MsgmeeUserListStatus.loaded,
-    //     msgmeeUserList: MsgmeeUserList(
-    //       limit: 0,
-    //       search: '',
-    //       users: users,
-    //     ),
-    //   ),
-    // );
+   List<MsgMeeContacts> users = await AllConnectionRepository().getAllConnections();
+   
+   print("got all contacts");
+    emit(
+      state.copyWith(
+        status: MsgmeeUserListStatus.loaded,
+        contactModel: ContactModel(msgMeeContacts: users , filteredContacts: state.contactModel.filteredContacts),
+      ),
+    );
+  }
+
+  String getNameOfContact(String phone)  {
+   MsgMeeContacts? users;
+   state.contactModel.msgMeeContacts?.forEach((element) { 
+    if(element.sId == phone){
+       users = element;
+    }
+   });
+   print("Check phone ${phone}");
+   print(users?.toJson());
+   return users != null ? users!.contactName.toString() : "";
   }
 
   Future<void> getOverRiddedUsers({
@@ -138,32 +137,32 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
 
 
   
-  void checkAndUpdateLocalContactDb(List<PhoneBookUserModel> phonebookuser) async{
+  Future<void> checkAndUpdateLocalContactDb(List<PhoneBookUserModel> phonebookuser) async{
     print("contact length list ${phonebookuser.length}");
-
     var phoneNumbersList = phonebookuser.map((e) => e.phone).toList();
-    print(phoneNumbersList);
     var res = await UserSerivce().getContactList(phoneNumbersList);
       List<MsgMeeContacts> msgmeeUserList = res.msgMeeContacts ?? [];
-      List<User> newUserList = [];
-      
-
-     // * Inserting data to the local sqlite database
-
-      print('new user ${res.msgMeeContacts!.length}');
       for (var map in msgmeeUserList) {
-         await AllConnectionRepository().insertAllconnections(MsgMeeContacts(
+         var contactName = await getContactName(phonebookuser , map);
+        var newMsgMeeContact = MsgMeeContacts(
           sId: map.sId,
           socioMeeId: map.socioMeeId,
           phone: map.phone,
           username: map.username,
+          contactName: contactName,
           fullName: map.fullName,
           otherProfileImage: map.otherProfileImage,
           linkedTo: map.linkedTo,
-        ));
+        );
+         await AllConnectionRepository().insertAllconnections(newMsgMeeContact);
       }
    
 
+  }
+  
+  Future<String> getContactName(List<PhoneBookUserModel> phonebookuser, MsgMeeContacts map) async {
+    PhoneBookUserModel? data = phonebookuser.where((element) => (element.phone.toString().toLowerCase() == map.phone.toString().toLowerCase())).firstOrNull;
+    return data?.name ?? "";
   }
 }
 

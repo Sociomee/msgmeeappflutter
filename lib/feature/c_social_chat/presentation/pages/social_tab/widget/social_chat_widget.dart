@@ -6,7 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/api_data_source/repositories.dart';
 import 'package:msgmee/data/api_data_source/repository/auth/auth_repository.dart';
 import 'package:msgmee/data/model/config_model.dart';
+import 'package:msgmee/data/model/create_room_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
+import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/chat_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
@@ -17,6 +21,7 @@ import 'package:msgmee/helper/string_ext.dart';
 import 'package:msgmee/repos/base_repo.dart';
 import 'package:msgmee/theme/colors.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../../../connectivity/socket_service.dart';
 import '../../../cubit/chat_selection_cubit.dart';
 import '../../../widgets/chat_profile_widget.dart';
 import '../../../widgets/profile_image_view_dialog.dart';
@@ -32,7 +37,6 @@ class SocialchatWidget extends StatefulWidget {
 class _SocialchatWidgetState extends State<SocialchatWidget> {
   var avaterUrl =
       'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
-
   @override
   void initState() {
     super.initState();
@@ -48,7 +52,6 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         if (state.status == ChatRoomStatus.loaded) {
-          const userId = "652e6674c78cfd56a9c848c0";
           return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -60,15 +63,11 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                   return e.sId != authorId;
                 }).toList();
                 var online = state.onlineUsers.where((e) {
-                  return e['id'] == localpeopledata.first.sId;
+                  return e['id'] == authorId;
                 }).toList();
                 Iterable<String> userIds = localpeopledata.map((e) => e.sId.toString());
-                return localpeopledata.isEmpty ? Container(child: Column(
-                  children: [
-                    Text("Nodata"),
-                    Text(state.chatroom[index].people!.length.toString())
-                  ],
-                ),): Column(
+                String counterPartname = getNameOfChatOrAuthor(state.chatroom[index] , authorId);
+                return localpeopledata.length == 0 ? Container() :  Column(
                   children: [
                     GestureDetector(
                       onLongPress: () {
@@ -76,10 +75,9 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                       },
                       onTap: cubit.state.isEmpty
                           ? () {
-                            print(state.chatroom[index].sId);
-                            
-                            context.read<BaseRepo>().syncRoomsFromServer("",Config());
-                           
+                            // state.chatroom[index].people!.forEach((element) {
+                            //   print(element.toJson());
+                            // },);                           
                               state.chatroom[index].isGroup == 'true'
                                   ? animatedScreenNavigator(
                                       context,
@@ -96,7 +94,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   : animatedScreenNavigator(
                                       context,
                                       ChatScreen(
-                                        name: localpeopledata.first.fullName ??
+                                        name: counterPartname ??
                                             '',
                                         imageUrl: localpeopledata
                                             .first.otherProfileImage
@@ -110,7 +108,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                             .toLastOnlineTime(),
                                         id: state.chatroom[index].sId,
                                       ));
-
+ SocketService().setCurrentRoomId(state.chatroom[index].sId!);
                               context
                                   .read<ChatRoomsCubit>()
                                   .getchatRoomMessages(
@@ -176,8 +174,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   children: [
                                     SizedBox(
                                       width: context.screenWidth * .65,
-                                      child: Text(
-                                          localpeopledata.first.fullName ??
+                                      child: Text(counterPartname ??
                                               "No name",
                                           style: TextStyle(
                                             fontSize: 16,
@@ -252,9 +249,9 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                    state.chatroom[index].timestamp
+                                    state.chatroom[index].timestamp != null ? state.chatroom[index].timestamp
                                         .toString()
-                                        .formatToCustomDate(),
+                                        .formatToCustomDate() : "",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 12, color: AppColors.grey)),
@@ -612,5 +609,16 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
     //             ],
     //           );
     //         });
+  }
+
+  String getNameOfChatOrAuthor(Room chatroom, String? authorId)  {
+    if((chatroom.isBizPage ?? false) || (chatroom.isGroup ?? false) || (chatroom.isMarketPlace ?? false) || (chatroom.isBroadCast ?? false) ){
+        return chatroom.title ?? "No Name";
+    }
+    if(chatroom.people?.length == 0){
+      return "";
+    }
+    var counterPart = chatroom.people!.firstWhere((element) => element.sId.toString() != authorId.toString());
+    return counterPart.contactName ?? counterPart.fullName.toString();
   }
 }

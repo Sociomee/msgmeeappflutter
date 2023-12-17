@@ -50,7 +50,7 @@ extension StringExtension on String {
 
       return formattedDate;
     } catch (e) {
-      return 'Invalid Date';
+      return '';
     }
   }
 

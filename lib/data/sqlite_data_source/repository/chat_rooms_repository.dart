@@ -22,14 +22,15 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
       final SQLiteHelper sqlite = SQLiteHelper();
 
       const sql = '''
-                      SELECT * FROM room;
+                      SELECT *,(SELECT GROUP_CONCAT(user_id) 
+        FROM roomPeople rp 
+        WHERE rp.roomId = rm.sId) as peopleIds FROM room rm;
                       ''';
       final List<Map<String, dynamic>> maps =
         await sqlite.database.rawQuery(sql);
         var fdata = [];
         for (var element in maps) {
         var commonData = await getRoomWithPeopleFormatted(element["sId"]);
-        print(commonData);
         fdata.add(commonData);
       }
 
@@ -70,9 +71,8 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
 
 
   List<Map<String, dynamic>> result = await sqlite.database.rawQuery('''
-    SELECT * , usr.id as _id FROM roomPeople rp LEFT JOIN user usr ON rp.user_id = usr.id where rp.roomId = ?
+    SELECT * , usr.id as _id , (Select contactName from allconnections ac where ac.sid = usr.id ) as contactName FROM roomPeople rp LEFT JOIN user usr ON rp.user_id = usr.id where rp.roomId = ?
   ''',[roomId]);
-
   return result;
 }
 

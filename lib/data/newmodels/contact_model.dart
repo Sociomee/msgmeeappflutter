@@ -29,6 +29,7 @@ class MsgMeeContacts {
   String? phone;
   String? sId;
   String? fullName;
+  String? contactName;
   String? otherProfileImage;
   String? socioMeeId;
   String? username;
@@ -38,6 +39,7 @@ class MsgMeeContacts {
       {this.phone,
       this.sId,
       this.fullName,
+      this.contactName,
       this.otherProfileImage,
       this.socioMeeId,
       this.username,
@@ -50,6 +52,7 @@ class MsgMeeContacts {
     otherProfileImage = json['otherProfileImage'];
     socioMeeId = json['socioMeeId'];
     username = json['username'];
+    contactName = json['contactName'] ?? phone.toString();
     linkedTo = json['linkedTo'];
   }
 
@@ -62,6 +65,7 @@ class MsgMeeContacts {
     data['socioMeeId'] = this.socioMeeId;
     data['username'] = this.username;
     data['linkedTo'] = this.linkedTo;
+    data['contactName'] = this.contactName;
     return data;
   }
 }

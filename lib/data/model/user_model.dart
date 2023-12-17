@@ -20,6 +20,7 @@ class User {
   List<String>? contacts;
   String? otp;
   String? lastOnline;
+  String? contactName;
   Picture? picture;
 
   User(
@@ -32,6 +33,7 @@ class User {
       this.lastName,
       this.username,
       this.fullName,
+      this.contactName,
       this.otherProfileImage,
       this.role,
       this.linkedTo,
@@ -61,6 +63,7 @@ class User {
     favorites = [];
     tagLine = json['tagLine'];
     msgMeeContacts = [];
+    contactName = json['contactName'];
     contacts = [];
     otp = json['otp'];
     lastOnline = json['lastOnline'];
@@ -71,6 +74,7 @@ class User {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
+    data['sId'] = this.sId;
     data['socioMeeId'] = this.socioMeeId;
     data['firstName'] = this.firstName;
     data['level'] = this.level;
@@ -85,6 +89,7 @@ class User {
     data['favorites'] = this.favorites;
         data['email'] = this.email;
     data['tagLine'] = this.tagLine;
+    data['contactName'] = this.contactName;
     data['msgMeeContacts'] = this.msgMeeContacts;
     data['otp'] = this.otp;
     data['lastOnline'] = this.lastOnline;

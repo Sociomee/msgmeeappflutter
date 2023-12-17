@@ -8,10 +8,13 @@ import 'package:msgmee/data/model/chat_roomlist_model.dart';
 import 'package:msgmee/data/model/mesage_send_success_model.dart';
 import 'package:msgmee/data/model/messages_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
+import 'package:msgmee/data/sqlite_data_source/sqlite_helper.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../../../helper/local_data.dart';
 import '../../../model/create_room_model.dart';
 import '../../../model/image_send_reponse_model.dart';
+import '../../../model/user_model.dart';
 import '../dio_provider.dart';
 
 class ChatRepostory extends AbChatReporitory {
@@ -56,6 +59,7 @@ class ChatRepostory extends AbChatReporitory {
 
       if (response.statusCode == 200) {
         var data = MessagesModel.fromJson(response.data);
+        checkandStoreRoomInLocalDb(data.room ?? Room());
         return data;
       } else {
         return MessagesModel();
@@ -114,7 +118,11 @@ class ChatRepostory extends AbChatReporitory {
     );
     // log('create room response:${response.data}');
     if (response.statusCode == 200) {
-      var data = Room.fromJson(response.data);
+      print(response.data['room']['lastMessage']);
+      var data = Room.fromJson(response.data['room']);
+      if(data.sId != null){
+        checkandStoreRoomInLocalDb(data);
+      }
       return data;
     } else {
       throw Exception();
@@ -234,5 +242,132 @@ class ChatRepostory extends AbChatReporitory {
       data: {"isTyping": typing, "room": room},
     );
     //log('is typing response----->${response.statusCode}');
+  }
+  
+  void checkandStoreRoomInLocalDb(Room room) async{
+     var db = await SQLiteHelper().database;
+     final results = await SQLiteHelper().database
+        .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [room.sId]);
+    if (results.isEmpty) {
+      print("Cresting new room");
+        const sql =
+          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     
+      await SQLiteHelper().database.rawQuery(sql, [
+        (room.isBizPage ?? false) ? 1 : 0,
+        (room.isMarketPlace ?? false) ? 1 : 0,
+        (room.isBroadCast ?? false) ? 1 : 0,
+        room.description,
+        room.followers,
+        room.following,
+        room.pageId,
+        room.ownerId,
+        room.sId,
+        (room.isGroup ?? false) ? 1 : 0,
+        room.lastAuthor,
+        room.lastMessageId.toString(),
+        room.lastUpdate.toString()
+      ]);
+    }else{
+            print("Updating room");
+       if (room.isGroup ?? false ||
+              (room.isBizPage ?? false) ||
+              (room.isBroadCast ?? false) ||
+              (room.isMarketPlace ?? false)) {
+        await checkAndUpdatePeopleInsideRoom(room);
+        await db.update(
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
+            where: "sId=?",
+            whereArgs: [room.sId],
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      } else {
+        await db.update(
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
+            where: "sId=?",
+            whereArgs: [room.sId],
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+    }
+  }
+
+   Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
+    final db = await SQLiteHelper().database;
+    List<User> userList = room.people as List<User>;
+
+    for (var people in userList) {
+      await checkAndUpdateUser(people);
+      //await updateOrCreateContact(people);
+      final results = await db.query('${Tables.ROOMPEOPLE}',
+          where: "user_id= ? and roomId=? ", whereArgs: [people.sId, room.sId]);
+      if (!results.isEmpty) {
+      } else {
+        const sql =
+            "INSERT OR REPLACE INTO roomPeople (user_id , roomId) values(?,?)";
+        await db.rawQuery(sql, [people.sId,room.sId]);
+      }
+    }
+  }
+
+    Future<void> checkAndUpdateUser(User people) async {
+    final db = await SQLiteHelper().database;
+    try {
+      final String insertQuery = '''
+INSERT OR REPLACE INTO ${Tables.USER} (
+    id,
+    userName,
+    fullName,
+    firstName,
+    lastName,
+    phone,
+    otp,
+    linkedTo,
+    role,
+    picture,
+    email,
+    socioMeeId,
+    otherProfileImage,
+    tagLine
+) VALUES (
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?
+);
+''';
+
+    await db.rawInsert(insertQuery, [
+      people.sId,
+      people.username,
+      people.fullName,
+      people.firstName,
+      people.lastName,
+      people.phone,
+      "123456",
+      people.linkedTo,
+      people.role,
+      people.picture?.sId ?? "",
+      people.email,
+      people.socioMeeId,
+      people.otherProfileImage,
+      people.tagLine
+    ]); 
+    return;
+    } catch (e) {
+      print("Error while creating user record....");
+    }
+  }
+  
+  void updateRoom(MessagesModel data) {
+
   }
 }

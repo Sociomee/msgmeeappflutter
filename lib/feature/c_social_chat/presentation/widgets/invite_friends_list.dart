@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:msgmee/data/newmodels/contact_model.dart';
 
 import '../../../../common_widgets/shimmer_effect.dart';
 import '../../../../data/model/phonebook_model.dart';
@@ -10,8 +11,9 @@ import '../../../../theme/colors.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
 
 class InviteFriendsList extends StatelessWidget {
-  const InviteFriendsList({super.key, required this.contacts});
+   InviteFriendsList({super.key, required this.contacts, this.msgMeeUsers});
   final List<PhoneBookUserModel> contacts;
+  final List<String>? msgMeeUsers;
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<ContactCubit>().state;
@@ -25,7 +27,7 @@ class InviteFriendsList extends StatelessWidget {
                 itemCount: contacts.toSet().toList().length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return Padding(
+                  return msgMeeUsers!.contains(contacts[index].phone) ? Container() : Padding(
                     padding: const EdgeInsets.only(bottom: 14.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

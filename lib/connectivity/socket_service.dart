@@ -16,6 +16,7 @@ import '../helper/local_data.dart';
 class SocketService {
   static final SocketService _instance = SocketService._internal();
   late BuildContext context;
+  String currentRoomId = "" ;
   factory SocketService() {
     return _instance;
   }
@@ -128,7 +129,15 @@ class SocketService {
   
   void tempFunction(Message msg) async{
     await MessagesRepository().insertMessages(msg);
-    context.read<ChatRoomsCubit>().getLocalDBMessages();
+   
+    print("Current Room id is ${currentRoomId}");
+    if(currentRoomId != ""){
+      context.read<ChatRoomsCubit>().getLocalDBMessagesById(currentRoomId);
+    }
+   
+  }
 
+  void setCurrentRoomId(String roomId) {
+    currentRoomId = roomId;
   }
 }

@@ -28,6 +28,8 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
   @override
   void initState() {
     cubit = context.read<SyncSociomeeCubit>();
+    context.read<ChatRoomsCubit>().getPhoneAndUserid();
+    context.read<ChatRoomsCubit>().getLocalChatRoomData();
     super.initState();
   }
 

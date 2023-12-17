@@ -40,7 +40,8 @@ class BaseRepo {
     token = await Localdata().readData('token') ?? "";
     phone = await Localdata().readData('phone') ?? "";
     userId = await Localdata().readData("currentuserid") ?? "";
-    if (token != "" && isFirst) {
+    bool isConnected = await _isConnected();
+    if (token != "" && isConnected && isFirst) {
        configData = await getConfig(phone);
        await getUserInfo(token, configData);
        await syncRoomsFromServer(token, configData);
@@ -68,11 +69,13 @@ class BaseRepo {
       if (results.length > 0) {
         for (var element in results) {
            Message msg = Message.fromJson(element);
-            var sentToServer = await ChatRepostory().sendMessageRemaining(msg);
+           if(msg.room != null && msg.room != ""){
+             var sentToServer = await ChatRepostory().sendMessageRemaining(msg);
             if(sentToServer.room != null){
               print("sent");
               await MessagesRepository().updateMessage(sentToServer.message , msg.id ?? 0);
             }
+           }
         }
       }
     }
@@ -141,37 +144,17 @@ Future<void> scheduleQueue() async{
   get getuserId => userId;
   Future<void> checkandinsertroomtodb(Room room) async {
     final db = await SQLiteHelper().database;
-    print("Last message ---->" + room.lastAuthor.toString());
-
-//     var data = {
-//   "isMarketPlace": room.isMarketPlace,
-//   "isBroadCast": room.isBroadCast,
-//   "description": room.description,
-//   "followers": room.followers,
-//   "following": room.following,
-//   "pageId": room.pageId,
-//   "ownerId": room.ownerId,
-//   "sId": room.sId,
-//   "isGroup": room.isGroup,
-//   "lastAuthor": room.lastAuthor.toString(),
-//   "lastMessageId": room.lastMessageId.toString(),
-//   "lastUpdate": room.lastUpdate.toString()
-// };
-
-// print(data);
-    
-
-  
     final results = await db
         .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [room.sId]);
     if (results.isEmpty) {
       const sql =
-          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast,title, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)";
      
       await db.rawQuery(sql, [
         (room.isBizPage ?? false) ? 1 : 0,
         (room.isMarketPlace ?? false) ? 1 : 0,
         (room.isBroadCast ?? false) ? 1 : 0,
+        room.title,
         room.description,
         room.followers,
         room.following,
@@ -206,7 +189,7 @@ Future<void> scheduleQueue() async{
     }
 
     print("Checking messages");
-    await checkAndInsertRoomMessages(room,db);
+    //await checkAndInsertRoomMessages(room,db);
   }
 
   Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
@@ -214,8 +197,6 @@ Future<void> scheduleQueue() async{
     List<User> userList = room.people as List<User>;
 
     for (var people in userList) {
-      await checkAndUpdateUser(people);
-      await updateOrCreateContact(people);
       final results = await db.query('${Tables.ROOMPEOPLE}',
           where: "user_id= ? and roomId=? ", whereArgs: [people.sId, room.sId]);
       if (!results.isEmpty) {
@@ -305,12 +286,10 @@ INSERT OR REPLACE INTO ${Tables.USER} (
   Future<void> checkAndInsertRoomMessages(Room room, Database db) async{
   
     var data = await ChatRepostory().getChatRoomMessagesNew(id: room.sId ?? "");
-    print("total messages ${data.length}");
     for (var element in data) {
      final results = await db.query('${Tables.MESSAGE}',
           where: "sId= ? and room=? ", whereArgs: [element.sId, room.sId]);
       if (results.isEmpty) {
-         print(element.content);
          await sqlite.database.insert(Tables.MESSAGE, {"sId" : element.sId , "authorId" : element.authorId , "room" : element.room , "date" : element.date , "content":element.content,"status" : element.status },
           conflictAlgorithm: ConflictAlgorithm.replace);
       }else{

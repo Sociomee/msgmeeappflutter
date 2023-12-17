@@ -47,6 +47,7 @@ class SQLiteHelper {
         username TEXT NULL,
         socioMeeId TEXT NULL,
         fullName TEXT NULL,
+        contactName TEXT NULL,
         otherProfileImage TEXT NULL,
         linkedTo TEXT NULL
       )
@@ -97,6 +98,7 @@ class SQLiteHelper {
         isBizPage BOOLEAN DEFAULT 0,
         isMarketPlace BOOLEAN DEFAULT 0,
         isBroadCast BOOLEAN DEFAULT 0,
+        title TEXT DEFAULT "",
         description TEXT DEFAULT "",
         followers INTEGER DEFAULT 0,
         following INTEGER DEFAULT 0,
@@ -147,7 +149,9 @@ class SQLiteHelper {
         sentTime TEXT DEFAULT CURRENT_TIMESTAMP,
         content TEXT NULL,
         status INT DEFAULT 0,
-        isDeleted INT DEFAULT 0
+        isDeleted INT DEFAULT 0,
+        msgNumber INTEGER,
+        UNIQUE(msgNumber) ON CONFLICT REPLACE
       )
     ''';
   //status -> 0 for pending , 1 for delivered , 2 for read

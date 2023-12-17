@@ -14,6 +14,8 @@ import 'package:msgmee/helper/list_ext.dart';
 import 'package:msgmee/helper/string_ext.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../data/model/phonebook_model.dart';
+import '../../../../data/sqlite_data_source/sqlite_helper.dart';
+import '../../../../helper/connectivity_service.dart';
 import '../../../../helper/navigator_function.dart';
 import '../../../../theme/colors.dart';
 import '../cubit/get_contact/get_contact_cubit.dart';
@@ -78,7 +80,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   @override
   void initState() {
     _contact = context.read<ContactCubit>();
-    log('contacts-->${_contact.state.phonebookUser}');
+    //print('contacts-->${_contact.state.phonebookUser}');
     context.read<MsgmeeUserListCubit>().getdataLoaclData();
     _contact.getDatabaseData();
     searchController = TextEditingController();
@@ -102,6 +104,18 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
       },
       builder: (context, state) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(onPressed: ()async {
+              final SQLiteHelper sqlite = SQLiteHelper();
+                       const rpPeopleSql = '''
+                        SELECT * FROM allconnections''';
+        print("Element id ");
+        var newdata = await sqlite.database.rawQuery(rpPeopleSql);
+                      print(
+                          "====================================================================================>");
+                   print(newdata);
+                      print(
+                          "<====================================================================================");
+          }),
           appBar: AppBar(
             elevation: 1,
             leading: IconButton(
@@ -118,6 +132,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                 )),
             centerTitle: false,
             leadingWidth: 30.w,
+            
             titleSpacing: 15.w,
             title: Text(
               'New message',
@@ -182,7 +197,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                           model.phone!.toLowerCase().contains(
                                                 value.toLowerCase(),
                                               );
-                                      bool hasname = model.fullName!
+                                      bool hasname = model.contactName!
                                           .toLowerCase()
                                           .contains(
                                             value.toLowerCase(),
@@ -329,15 +344,34 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                   itemCount: filterdList.customSort().length,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
-                                      onTap: () {
+                                      onTap: () async{
+                                       bool isConnected = await ConnectivityService().checkConnection();
+                                       if(!isConnected){
+                                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Internet not enabled. Please enable to start new chat')));
+                                        return;
+                                       }
                                         log('create room initialize..');
                                         BotToast.showLoading();
-                                        context
+                                      await context
                                             .read<ChatRoomsCubit>()
                                             .createchatRoom(
                                               userid: filterdList[index].sId!,
                                             )
                                             .then((value) {
+                                              var createdRoomId = context
+                                                    .read<ChatRoomsCubit>()
+                                                    .state
+                                                    .createroom
+                                                    .sId;
+                                             if(createdRoomId == "" || createdRoomId == null){
+                                              BotToast.closeAllLoading();
+                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Unable to initiate chat , please check your internet connection and try again.')));
+                                                    return;
+                                                    }
                                           animatedScreenNavigator(
                                               context,
                                               ChatScreen(
@@ -408,8 +442,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                   width:
                                                       context.screenWidth * .65,
                                                   child: Text(
-                                                      filterdList[index]
-                                                          .fullName!,
+                                                      filterdList[index].contactName.toString(),
                                                       style: TextStyle(
                                                         fontSize: 14.sp,
                                                       )),
@@ -774,6 +807,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                           SizedBox(height: 24),
                           InviteFriendsList(
                             contacts: filterdContactList,
+                            msgMeeUsers: filterdList.map((e) => e.phone.toString()).toList(),
                           )
                         ],
                       ),

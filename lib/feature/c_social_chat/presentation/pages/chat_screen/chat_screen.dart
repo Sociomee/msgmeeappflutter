@@ -125,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
     context
         .read<SetChatbgCubit>()
         .chooseType(context.read<SetChatbgCubit>().state.bgType);
-    context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
+        context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
     super.initState();
   }
 

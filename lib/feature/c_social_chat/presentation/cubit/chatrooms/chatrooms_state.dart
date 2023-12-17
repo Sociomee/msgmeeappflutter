@@ -40,6 +40,7 @@ class ChatRoomsState extends Equatable {
   final MessageSendStatus messageSendStatus;
   final String? phone;
   final String? userId;
+  final String? currentRoomId;
   final List<Room> chatroom;
   final List<Message> localmessage;
   final List onlineUsers;
@@ -54,6 +55,7 @@ class ChatRoomsState extends Equatable {
       messageSendStatus: MessageSendStatus.initial,
       chatroom: [],
       localmessage: [],
+      currentRoomId : null,
       onlineUsers: [],
     );
   }
@@ -68,6 +70,7 @@ class ChatRoomsState extends Equatable {
     required this.messageSendStatus,
     this.phone,
     this.userId,
+    this.currentRoomId,
     required this.chatroom,
     required this.localmessage,
     required this.onlineUsers,
@@ -99,6 +102,7 @@ class ChatRoomsState extends Equatable {
     MessageSendStatus? messageSendStatus,
     String? phone,
     String? userId,
+    String? currentRoomId,
     List<Room>? chatroom,
     List<Message>? localmessage,
     List? onlineUsers,
@@ -113,6 +117,7 @@ class ChatRoomsState extends Equatable {
       messageSendStatus: messageSendStatus ?? this.messageSendStatus,
       phone: phone ?? this.phone,
       userId: userId ?? this.userId,
+      currentRoomId: userId ?? this.currentRoomId,
       chatroom: chatroom ?? this.chatroom,
       localmessage: localmessage ?? this.localmessage,
       onlineUsers: onlineUsers ?? this.onlineUsers,

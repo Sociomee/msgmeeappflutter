@@ -72,7 +72,6 @@ class UserSerivce implements AbUserRepository {
         "Authorization": "Bearer $token",
       }),
     );
-    print('contact result------------->${response.data}');
     if (response.statusCode == 200) {
       var res = ContactModel.fromJson(response.data);
       return res;

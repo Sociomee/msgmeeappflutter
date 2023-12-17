@@ -13,6 +13,7 @@ import '../../../../../data/model/create_room_model.dart';
 import '../../../../../data/model/messages_model.dart';
 import '../../../../../data/sqlite_data_source/repository/chat_rooms_repository.dart';
 import '../../../../../data/sqlite_data_source/repository/messages_repository.dart';
+import '../../../../../helper/connectivity_service.dart';
 
 part 'chatrooms_state.dart';
 
@@ -28,14 +29,15 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
   //*** getting phone and userid from secure storage */
   void getPhoneAndUserid() async {
     var phone = await Localdata().readData('phone');
-    var userId = await Localdata().readData('userId');
+    var userId = await Localdata().readData('currentuserid');
     // log('cubit phone $phone\nauthorId $userId');
+    print(userId);
     emit(state.copyWith(phone: phone, userId: userId));
   }
 
   void getUserId() async {
     
-    var userId = await Localdata().readData('userId');
+    var userId = await Localdata().readData('currentuserid');
     emit(state.copyWith(userId: userId));
   }
 
@@ -84,12 +86,16 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
 
   //***  getting chat room messages from server */
   Future<void> getchatRoomMessages({required String id}) async {
-    emit(state.copyWith(msgStatus: MessageStatus.loading));
+   // emit(state.copyWith(msgStatus: MessageStatus.loading ));
     try {
-      var data = await ChatRepostory().getChatRoomMessages(id: id);
+      final _connectivityService = ConnectivityService();
+      bool isConnected = await _connectivityService.checkConnection();
+      if(isConnected){
+         var data = await ChatRepostory().getChatRoomMessages(id: id);
       emit(state.copyWith(messages: data, msgStatus: MessageStatus.loaded));
       //** insert message to localDB with seen status */
       insertMessagesToDB(data, 'seen');
+      }
     } catch (e) {
       log('error while getting message $e');
     }
@@ -137,7 +143,7 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
   //**getting local message from local DB by roomId */
   Future<void> getLocalDBMessagesById(String room) async {
     var message = await MessagesRepository().getMessagesById(room);
-    emit(state.copyWith(localmessage: message));
+    emit(state.copyWith(localmessage: message , currentRoomId : room));
   }
 
 
@@ -148,15 +154,17 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
 
   //** create room function */
   Future<void> createchatRoom({required String userid}) async {
-    // emit(state.copyWith(createroomstatus: CreateRoomStatus.loading));
-    // try {
-    //   var data = await ChatRepostory().createRoom(userid: userid);
-    //   log('create room response: ${data}');
-    //   emit(state.copyWith(
-    //       createroom: data, createroomstatus: CreateRoomStatus.loaded));
-    // } catch (e) {
-    //   log('error while creating room:$e');
-    // }
+    emit(state.copyWith(createroomstatus: CreateRoomStatus.loading));
+    try {
+      print('create room response: ${userid}');
+      var data = await ChatRepostory().createRoom(userid: userid);
+      print('create room response: ${data.sId}');
+      emit(state.copyWith(
+          createroom: data, createroomstatus: CreateRoomStatus.loaded));
+      
+    } catch (e) {
+      print('error while creating room:$e');
+    }
   }
 
   //**send message function */
@@ -172,7 +180,7 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     var authotCurrent = await localData.readData('currentuserid');
     var status = 0;
     var id = await MessagesRepository().insertSendMessages(Message(authorId: authotCurrent , room: roomId ,sId: "sId", content: content ,status: 0, type: contentType , date: DateTime.now().toString()));
-    getLocalDBMessages();
+    getLocalDBMessagesById(roomId);
     print("saved message id ${id}");
     // emit(state.copyWith(status: ChatRoomStatus.refresh));
 
@@ -191,7 +199,7 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
         print('waiting');
        // await MessagesRepository().insertMessages(Message());
       }
-      getLocalDBMessages();
+      getLocalDBMessagesById(roomId);
   }
 
   //* sending message that has status "waiting" after connection restore
@@ -233,6 +241,10 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     } catch (e) {
       log('error sending message $e');
     }
+  }
+
+  String getCurrentRoomId() {
+    return state.currentRoomId ?? "";
   }
 
   

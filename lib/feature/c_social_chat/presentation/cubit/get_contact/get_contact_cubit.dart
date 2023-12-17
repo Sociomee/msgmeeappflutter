@@ -44,8 +44,9 @@ class ContactCubit extends Cubit<ContactState> {
       isLoading: false,
       phonebookUser: phoneBookList,
     ));
+    print("calling messagemee cubut");
     await msgmeecubit.getMsgmeeUsersList(phoneBookList);
-    await msgmeecubit.getOverRiddedUsers(phonebookuser: phoneBookList);
+   // await msgmeecubit.getOverRiddedUsers(phonebookuser: phoneBookList);
     //getOverRidedContacts(msgmeecubit.state.msgmeeUserList.users!);
   }
 
