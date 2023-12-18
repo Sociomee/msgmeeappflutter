@@ -372,11 +372,12 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
               'Unable to initiate chat , please check your internet connection and try again.')));
                                                     return;
                                                     }
+                                                    
                                           animatedScreenNavigator(
                                               context,
                                               ChatScreen(
                                                 name: filterdList[index]
-                                                        .fullName ??
+                                                        .contactName ??
                                                     '',
                                                 imageUrl: filterdList[index]
                                                     .otherProfileImage

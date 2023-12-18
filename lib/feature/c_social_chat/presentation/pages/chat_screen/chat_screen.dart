@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:msgmee/common_cubits/connectivity_cubit.dart';
 import 'package:msgmee/common_widgets/mx_chatappbar.dart';
+import 'package:msgmee/connectivity/socket_service.dart';
 import 'package:msgmee/data/model/config_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
@@ -126,6 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
         .read<SetChatbgCubit>()
         .chooseType(context.read<SetChatbgCubit>().state.bgType);
         context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
+    SocketService().setCurrentRoomId(widget.id ?? '');
     super.initState();
   }
 

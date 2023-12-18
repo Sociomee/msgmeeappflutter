@@ -129,12 +129,12 @@ class SocketService {
   
   void tempFunction(Message msg) async{
     await MessagesRepository().insertMessages(msg);
-   
+    
     print("Current Room id is ${currentRoomId}");
     if(currentRoomId != ""){
       context.read<ChatRoomsCubit>().getLocalDBMessagesById(currentRoomId);
     }
-   
+   await context.read<ChatRoomsCubit>().checkRoomExistbyId(msg);
   }
 
   void setCurrentRoomId(String roomId) {

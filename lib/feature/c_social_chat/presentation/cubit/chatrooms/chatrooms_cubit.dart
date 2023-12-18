@@ -77,6 +77,12 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     emit(state.copyWith(chatroom: res, status: ChatRoomStatus.loaded));
   }
 
+   void getRefreshRoomData() async {
+    var res = await ChatRoomsRepository().getRooms();
+    print('local chat rooms from db res--->${res.length}');
+    emit(state.copyWith(chatroom: res, status: ChatRoomStatus.loaded));
+  }
+
   Future<void> debugData() async {
    
     print("Querying rooms");
@@ -246,6 +252,22 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
   String getCurrentRoomId() {
     return state.currentRoomId ?? "";
   }
+
+  Future<void> checkRoomExistbyId(Message msg) async{
+     var res = await ChatRoomsRepository().checkRoomById(msg.room ?? "");
+     if(!res){
+      print("Room not exists please create room");
+      final _connectivityService = ConnectivityService();
+      bool isConnected = await _connectivityService.checkConnection();
+      if(isConnected){
+       ChatRepostory().getChatRoomMessages(id:msg.room ?? "");
+      }
+       
+     }
+     Future.delayed(Duration(seconds: 5));
+     getRefreshRoomData();
+  }
+
 
   
 }

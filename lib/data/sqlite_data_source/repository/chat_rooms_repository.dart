@@ -81,7 +81,15 @@ Future<Map<String, dynamic>> getRoomById(String roomId) async {
     SELECT * FROM room where sId = ?
   ''',[roomId]);
 
-  return result[0];
+  return result.length > 0 ? result[0] : {};
+}
+
+Future<bool> checkRoomById(String roomId) async {
+  List<Map<String, dynamic>> result = await sqlite.database.rawQuery('''
+    SELECT * FROM room where sId = ?
+  ''',[roomId]);
+
+  return result.length > 0 ?  true : false;
 }
 
   Future<Map<String, dynamic>> getRoomWithPeopleFormatted(String roomId) async {

@@ -117,12 +117,20 @@ class ChatRepostory extends AbChatReporitory {
       data: {'counterpart': userid},
     );
     // log('create room response:${response.data}');
+    var data;
     if (response.statusCode == 200) {
+      print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      try {
       print(response.data['room']['lastMessage']);
-      var data = Room.fromJson(response.data['room']);
+      data = Room.fromJson(response.data['room']);
       if(data.sId != null){
         checkandStoreRoomInLocalDb(data);
       }
+      
+      } catch (e) {
+        print("Error ${e}");
+      }
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
       return data;
     } else {
       throw Exception();
@@ -244,12 +252,12 @@ class ChatRepostory extends AbChatReporitory {
     //log('is typing response----->${response.statusCode}');
   }
   
-  void checkandStoreRoomInLocalDb(Room room) async{
+  Future<void> checkandStoreRoomInLocalDb(Room room) async{
      var db = await SQLiteHelper().database;
      final results = await SQLiteHelper().database
         .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [room.sId]);
     if (results.isEmpty) {
-      print("Cresting new room");
+      print("Creating new room");
         const sql =
           "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      
@@ -274,7 +282,7 @@ class ChatRepostory extends AbChatReporitory {
               (room.isBizPage ?? false) ||
               (room.isBroadCast ?? false) ||
               (room.isMarketPlace ?? false)) {
-        await checkAndUpdatePeopleInsideRoom(room);
+      
         await db.update(
             '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
             where: "sId=?",
@@ -288,12 +296,14 @@ class ChatRepostory extends AbChatReporitory {
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
     }
+
+      await checkAndUpdatePeopleInsideRoom(room);
   }
 
    Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
     final db = await SQLiteHelper().database;
     List<User> userList = room.people as List<User>;
-
+    print("Total people inside room ${userList.length}");
     for (var people in userList) {
       await checkAndUpdateUser(people);
       //await updateOrCreateContact(people);

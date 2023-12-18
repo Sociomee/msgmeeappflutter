@@ -92,7 +92,6 @@ class SQLiteHelper {
   static const roomtable = '''
       CREATE TABLE ${Tables.ROOM} (
         sId TEXT PRIMARY KEY,
-        title TEXT,
         picture_id TEXT DEFAULT "0",
         isGroup BOOLEAN DEFAULT 0,
         isBizPage BOOLEAN DEFAULT 0,

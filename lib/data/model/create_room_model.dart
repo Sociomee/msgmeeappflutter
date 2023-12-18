@@ -71,8 +71,8 @@ class Room {
       });
     }
    lastAuthor = json['lastAuthor'].toString();
-   lastMessageId = json['lastMessage'] != null ? json['lastMessage']['_id'] ?? "" : "";
-    lastMessage = json['lastMessage'] != null ? Message.fromJson(json['lastMessage']) : null;
+    lastMessageId = json['lastMessage'] != null ? ( json['lastMessage'] is String  ? json['lastMessage'] : json['lastMessage']['_id'].toString() ) : "";
+    lastMessage = json['lastMessage'] != null ? ( json['lastMessage'] is String  ? null : Message.fromJson(json['lastMessage']) ): null;
     lastUpdate = json['lastUpdate'];
     timestamp = json['lastUpdate'] ?? json['timestamp'];
     peopleIds = json['peopleIds'] != null ? json['peopleIds'].split(",") : [];
