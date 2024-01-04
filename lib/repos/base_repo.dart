@@ -17,6 +17,7 @@ import 'package:path/path.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 import '../data/model/messages_model.dart';
+import '../feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 
 class BaseRepo {
   final String baseUrl = 'https://api.msgmee.com';
@@ -190,6 +191,7 @@ Future<void> scheduleQueue() async{
 
     print("Checking messages");
     //await checkAndInsertRoomMessages(room,db);
+    ChatRoomsCubit().getLocalChatRoomData();
   }
 
   Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
@@ -205,6 +207,7 @@ Future<void> scheduleQueue() async{
             "INSERT OR REPLACE INTO roomPeople (user_id , roomId) values(?,?)";
         await db.rawQuery(sql, [people.sId,room.sId]);
       }
+      await checkAndUpdateUser(people);
     }
   }
 

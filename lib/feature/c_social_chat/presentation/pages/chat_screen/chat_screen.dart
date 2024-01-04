@@ -22,6 +22,7 @@ import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widg
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/reply_message_textfield.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/select_duration.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/single_chat_popupmenu.dart';
+import 'package:msgmee/feature/f_call/presentation/pages/call_screen.dart';
 import 'package:msgmee/helper/navigator_function.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/attached_options.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/receiver_widget.dart';
@@ -572,7 +573,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ),
                               ),
                               actions: [
-                                SvgPicture.asset('assets/video.svg'),
+                                InkWell(
+                                  onTap: () {
+                                    print("Call initiating....");
+                                    animatedScreenNavigator(context, CallScreen(room: context
+                                                    .read<ChatRoomsCubit>()
+                                                    .state
+                                                    .createroom));
+                                  },
+                                  child: SvgPicture.asset('assets/video.svg')),
                                 SizedBox(width: 25.w),
                                 SvgPicture.asset('assets/calling.svg'),
                                 GestureDetector(

@@ -616,9 +616,12 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
         return chatroom.title ?? "No Name";
     }
     if(chatroom.people?.length == 0){
-      return "";
+      return "No Name";
     }
-    var counterPart = chatroom.people!.firstWhere((element) => element.sId.toString() != authorId.toString());
-    return counterPart.contactName ?? counterPart.fullName.toString();
+    if((chatroom.people?.length ?? 0) < 2){
+      return "No Name";
+    }
+    User counterPart = chatroom.people!.firstWhere((element) => element.sId.toString() != authorId.toString());
+    return counterPart.contactName == null ? (counterPart.firstName ?? "No Name") : counterPart.contactName.toString() ;
   }
 }

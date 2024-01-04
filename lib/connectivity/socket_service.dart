@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -140,4 +141,18 @@ class SocketService {
   void setCurrentRoomId(String roomId) {
     currentRoomId = roomId;
   }
+
+ Future<dynamic> request(String type, [Map<String, dynamic> data = const {}]) {
+    Completer<dynamic> completer = Completer<dynamic>();
+
+    _socket?.emit(type, data); // Corrected line
+
+    // Listen for the response event
+    _socket?.once(type+"Responce", (response) {
+      completer.complete(response);
+    });
+
+    return completer.future;
+  }
+  
 }
