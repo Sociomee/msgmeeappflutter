@@ -9,7 +9,10 @@ import 'package:msgmee/feature/f_call/cubit/call_media_cubit.dart';
 import 'package:msgmee/feature/f_call/cubit/producer_cubit.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import '../connectivity/socket_service.dart';
 import '../connectivity/web_socket.dart';
+import '../feature/f_call/model/peer.dart';
+import '../feature/f_call/model/producer.dart';
 
 
 class CallMediaRepository {
@@ -18,11 +21,8 @@ class CallMediaRepository {
   // final MeBloc meBloc;
   // final RoomBloc roomBloc;
   final CallMediaCubit mediaDevicesBloc;
-
-  final String roomId;
-  final String peerId;
   final String url;
-  final String displayName;
+  final String? displayName = "";
 
   bool _closed = false;
 
@@ -39,6 +39,8 @@ class CallMediaRepository {
   String? audioOutputDeviceId;
   String? videoInputDeviceId;
 
+ List<Peer> peerList = [];
+  List<Producern> producerList = [];
   List<String> comsumersList = [];
 
   CallMediaRepository({
@@ -46,10 +48,7 @@ class CallMediaRepository {
     // required this.peersBloc,
     // required this.meBloc,
     // required this.roomBloc,
-    required this.roomId,
-    required this.peerId,
     required this.url,
-    required this.displayName,
     required this.mediaDevicesBloc,
   }) {
     _mediaDevicesBlocSubscription =
@@ -82,7 +81,7 @@ class CallMediaRepository {
   Future<void> disableMic() async {
     String micId = producersBloc.state.mic!.id;
 
-    producersBloc.add(ProducerRemove(source: 'mic'));
+   // producersBloc.add(ProducerRemove(source: 'mic'));
 
     try {
       await _webSocket!.request('closeProducer', {
@@ -92,10 +91,10 @@ class CallMediaRepository {
   }
 
   Future<void> disableWebcam() async {
-    meBloc.add(MeSetWebcamInProgress(progress: true));
+   // meBloc.add(MeSetWebcamInProgress(progress: true));
     String webcamId = producersBloc.state.webcam!.id;
 
-    producersBloc.add(ProducerRemove(source: 'webcam'));
+   // producersBloc.add(ProducerRemove(source: 'webcam'));
 
     try {
       await _webSocket!.request('closeProducer', {
@@ -103,12 +102,12 @@ class CallMediaRepository {
       });
     } catch (error) {
     } finally {
-      meBloc.add(MeSetWebcamInProgress(progress: false));
+     // meBloc.add(MeSetWebcamInProgress(progress: false));
     }
   }
 
   Future<void> muteMic() async {
-    producersBloc.add(ProducerPaused(source: 'mic'));
+  //  producersBloc.add(ProducerPaused(source: 'mic'));
 
     try {
       await _webSocket!.request('pauseProducer', {
@@ -118,7 +117,7 @@ class CallMediaRepository {
   }
 
   Future<void> unmuteMic() async {
-    producersBloc.add(ProducerResumed(source: 'mic'));
+   // producersBloc.add(ProducerResumed(source: 'mic'));
 
     try {
       await _webSocket!.request('resumeProducer', {
@@ -129,12 +128,12 @@ class CallMediaRepository {
 
   void _producerCallback(Producer producer) {
     if (producer.source == 'webcam') {
-      meBloc.add(MeSetWebcamInProgress(progress: false));
+     // meBloc.add(MeSetWebcamInProgress(progress: false));
     }
     producer.on('trackended', () {
       disableMic().catchError((data) {});
     });
-    producersBloc.add(ProducerAdd(producer: producer));
+    //producersBloc.add(ProducerAdd(producer: producer));
   }
 
   void _consumerCallback(dynamic consumer, [dynamic accept]) {
@@ -207,12 +206,12 @@ class CallMediaRepository {
 
   void enableWebcam() async {
     print("Requestion webcam");
-    if (meBloc.state.webcamInProgress) {
-      print("Requestion webcam is started returning because in progress...");
-      return;
-    }
+    // if (meBloc.state.webcamInProgress) {
+    //   print("Requestion webcam is started returning because in progress...");
+    //   return;
+    // }
     print("In progress false");
-    meBloc.add(MeSetWebcamInProgress(progress: true));
+   // meBloc.add(MeSetWebcamInProgress(progress: true));
     if (_mediasoupDevice!.canProduce(RTCRtpMediaType.RTCRtpMediaTypeVideo) ==
         false) {
       return;
@@ -230,7 +229,7 @@ class CallMediaRepository {
                   throw 'desired vp$videoVPVersion codec+configuration is not supported');
       videoStream = await createVideoStream();
       track = videoStream.getVideoTracks().first;
-      meBloc.add(MeSetWebcamInProgress(progress: true));
+     // meBloc.add(MeSetWebcamInProgress(progress: true));
       // transport!.produce(
       //   track: track,
       //   codecOptions: ProducerCodecOptions(
@@ -422,7 +421,7 @@ class CallMediaRepository {
       });
 
       response['peers'].forEach((value) {
-        peersBloc.add(PeerAdd(newPeer: value));
+       // peersBloc.add(PeerAdd(newPeer: value));
       });
 
       if (_produce) {
@@ -446,7 +445,7 @@ class CallMediaRepository {
   //   print("Added data");
   // }
 
-  void joindd() {
+  void joindd(peerId , roomId) {
     _webSocket = WebSocket(
       peerId: peerId,
       roomId: roomId,
@@ -513,21 +512,21 @@ class CallMediaRepository {
         case 'consumerClosed':
           {
             String consumerId = notification['data']['consumerId'];
-            peersBloc.add(PeerRemoveConsumer(consumerId: consumerId));
+            //peersBloc.add(PeerRemoveConsumer(consumerId: consumerId));
 
             break;
           }
         case 'consumerPaused':
           {
             String consumerId = notification['data']['consumerId'];
-            peersBloc.add(PeerPausedConsumer(consumerId: consumerId));
+           // peersBloc.add(PeerPausedConsumer(consumerId: consumerId));
             break;
           }
 
         case 'consumerResumed':
           {
             String consumerId = notification['data']['consumerId'];
-            peersBloc.add(PeerResumedConsumer(consumerId: consumerId));
+            //peersBloc.add(PeerResumedConsumer(consumerId: consumerId));
             break;
           }
 
@@ -535,14 +534,14 @@ class CallMediaRepository {
           {
             final Map<String, dynamic> newPeer =
                 Map<String, dynamic>.from(notification['data']);
-            peersBloc.add(PeerAdd(newPeer: newPeer));
+            //peersBloc.add(PeerAdd(newPeer: newPeer));
             break;
           }
 
         case 'peerClosed':
           {
             String peerId = notification['data']['peerId'];
-            peersBloc.add(PeerRemove(peerId: peerId));
+            //peersBloc.add(PeerRemove(peerId: peerId));
             break;
           }
 
@@ -612,7 +611,7 @@ class CallMediaRepository {
     _transport_g = transportConsumer;
   }
 
-  void join() async {
+  void join(peerId, roomId) async {
     _webSocket = WebSocket(
       peerId: peerId,
       roomId: roomId,
@@ -635,7 +634,7 @@ class CallMediaRepository {
         
     response['peers'].forEach((key, value) {
       print("addig peers");
-      np.Peer newPeer = np.Peer.fromJson(value);
+      Peer newPeer = Peer.fromJson(value);
       peerList.add(newPeer);
     });
     response['producers'].forEach((value) {
@@ -729,7 +728,7 @@ class CallMediaRepository {
       //await produceVideo();
       print("Enabling medias");
        if (producerList.length > 0) {
-        await initConsume();
+        await initConsume(roomId);
       }
 return;
       enableMic();
@@ -737,12 +736,12 @@ return;
 
 
       if (producerList.length > 0) {
-        await initConsume();
+        await initConsume(roomId);
       }
     } catch (e) {}
   }
   
-  FutureOr<void> initConsume() async{
+  FutureOr<void> initConsume(String roomId) async{
         print("Starting consuming");
 
  if (comsumersList.isEmpty) {
@@ -758,7 +757,7 @@ return;
           comsumersList.add(producer.producerID.toString());
     print("got a consumer");
 
-          var stream = await consumeNow(_transport_g, producer);
+          var stream = await consumeNow(_transport_g, producer , roomId);
 
           stream.producerID = producer.producerID;
           stream.socketID = producer.socketID;
@@ -772,7 +771,7 @@ return;
 
   }
   
-  consumeNow(Transport? tansporterConsumer2, Producern producer) async{
+  consumeNow(Transport? tansporterConsumer2, Producern producer , String roomId) async{
 
     print("Inside consumer consuming");
     var rtpCapabilities = _mediasoupDevice!.rtpCapabilities.toMap();

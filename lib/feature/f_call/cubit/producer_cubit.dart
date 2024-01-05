@@ -14,75 +14,75 @@ class ProducerCubit extends Cubit<ProducerState> {
 
 
 
-  FutureOr<void> handleProducerAdd(String source) async{
+  FutureOr<void> handleProducerAdd(String source , value) async{
      switch (source) {
       case 'mic': {
-         emit(ProducersState.copy(state, mic: event.producer));
+         emit(ProducerState.copy(state, mic: value));
         break;
       }
       case 'webcam': {
-        emit(ProducersState.copy(state, webcam: event.producer));
+        emit(ProducerState.copy(state, webcam: value));
         break;
       }
       case 'screen': {
-        emit(ProducersState.copy(state, screen: event.producer));
+        emit(ProducerState.copy(state, screen: value));
         break;
       }
       default: break;
     }
   }
 
-  FutureOr<void> handleProducerRemove() async{
-    switch (event.source) {
+  FutureOr<void> handleProducerRemove(String source) async{
+    switch (source) {
       case 'mic': {
         state.mic?.close();
-        emit(ProducersState.removeMic(state));
+        emit(ProducerState.removeMic(state));
         break;
       }
       case 'webcam': {
         state.webcam?.close();
-        emit(ProducersState.removeWebcam(state));
+        emit(ProducerState.removeWebcam(state));
         break;
       }
       case 'screen': {
         state.screen?.close();
-        emit(ProducersState.removeScreen(state));
+        emit(ProducerState.removeScreen(state));
         break;
       }
       default: break;
     }
   }
 
-  FutureOr<void> handleProducerResumed(ProducerResumed event, Emitter<ProducersState> emit) async{
-     switch (event.source) {
+  FutureOr<void> handleProducerResumed(String source) async{
+     switch (source) {
       case 'mic': {
-        emit(ProducersState.copy(state, mic: state.mic!.resumeCopy()));
+        emit(ProducerState.copy(state, mic: state.mic!.resumeCopy()));
         break;
       }
       case 'webcam': {
-        emit(ProducersState.copy(state, webcam: state.webcam!.resumeCopy()));
+        emit(ProducerState.copy(state, webcam: state.webcam!.resumeCopy()));
         break;
       }
       case 'screen': {
-        emit(ProducersState.copy(state, screen: state.screen?.resumeCopy()));
+        emit(ProducerState.copy(state, screen: state.screen?.resumeCopy()));
         break;
       }
       default: break;
     }
   }
 
-  FutureOr<void> handleProducerPaused(ProducerPaused event, Emitter<ProducersState> emit) async{
-    switch (event.source) {
+  FutureOr<void> handleProducerPaused(String source) async{
+    switch (source) {
       case 'mic': {
-        emit(ProducersState.copy(state, mic: state.mic!.pauseCopy()));
+        emit(ProducerState.copy(state, mic: state.mic!.pauseCopy()));
         break;
       }
       case 'webcam': {
-        emit(ProducersState.copy(state, webcam: state.webcam!.pauseCopy()));
+        emit(ProducerState.copy(state, webcam: state.webcam!.pauseCopy()));
         break;
       }
       case 'screen': {
-        emit(ProducersState.copy(state, screen: state.screen!.pauseCopy()));
+        emit(ProducerState.copy(state, screen: state.screen!.pauseCopy()));
         break;
       }
       default: break;

@@ -9,7 +9,9 @@ import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatro
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/feature/f_call/cubit/call_media_cubit.dart';
+import 'package:msgmee/feature/f_call/cubit/producer_cubit.dart';
 import 'package:msgmee/repos/base_repo.dart';
+import 'package:msgmee/repos/call_media_repository.dart';
 import 'package:msgmee/theme/app_theme.dart';
 import 'package:path/path.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -77,6 +79,7 @@ void main() async {
 
   runApp(MultiRepositoryProvider(providers: [
     RepositoryProvider(create: (context)=> BaseRepo()),
+     
   ], child: MyApp()));
 
 //configureBackgroundFetch();
@@ -199,6 +202,7 @@ Future<void> _checkPermissions() async {
               context.read<CallMediaCubit>().handleMediaDeviceLoadEvent();
               SocketService().setContext(context);
               context.read<BaseRepo>().init();
+              RepositoryProvider(create: (context)=> CallMediaRepository(producersBloc: context.read<ProducerCubit>(),url: "https://api.msgmee.com",mediaDevicesBloc: context.read<CallMediaCubit>()));
               child = botToastBuilder(context, child);
               return child;
             },
