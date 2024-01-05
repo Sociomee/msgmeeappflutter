@@ -16,16 +16,12 @@ import '../feature/f_call/model/producer.dart';
 
 
 class CallMediaRepository {
-   final ProducerCubit producersBloc;
-  // final PeersBloc peersBloc;
-  // final MeBloc meBloc;
-  // final RoomBloc roomBloc;
+    final ProducerCubit producersBloc;
   final CallMediaCubit mediaDevicesBloc;
   final String url;
   final String? displayName = "";
 
   bool _closed = false;
-
   WebSocket? _webSocket;
   Device? _mediasoupDevice;
   Transport? _sendTransport;
@@ -39,15 +35,12 @@ class CallMediaRepository {
   String? audioOutputDeviceId;
   String? videoInputDeviceId;
 
- List<Peer> peerList = [];
+  List<Peer> peerList = [];
   List<Producern> producerList = [];
   List<String> comsumersList = [];
 
-  CallMediaRepository({
-     required this.producersBloc,
-    // required this.peersBloc,
-    // required this.meBloc,
-    // required this.roomBloc,
+  CallMediaRepository._internal({
+    required this.producersBloc,
     required this.url,
     required this.mediaDevicesBloc,
   }) {
@@ -67,17 +60,26 @@ class CallMediaRepository {
     });
   }
 
+  static final CallMediaRepository _instance = CallMediaRepository._internal(
+    producersBloc: ProducerCubit(),
+    url: "", // Provide the default URL
+    mediaDevicesBloc: CallMediaCubit(),
+  );
+
+  factory CallMediaRepository() {
+    return _instance;
+  }
+
   void close() {
     if (_closed) {
       return;
     }
-
+ //   CallMediaRepository repository = CallMediaRepository();
     _webSocket?.close();
     _sendTransport?.close();
     _recvTransport?.close();
     _mediaDevicesBlocSubscription?.cancel();
   }
-
   Future<void> disableMic() async {
     String micId = producersBloc.state.mic!.id;
 
