@@ -7,6 +7,7 @@ part of 'call_media_cubit.dart';
   final MediaDeviceInfo? selectedAudioInput;
   final MediaDeviceInfo? selectedAudioOutput;
   final MediaDeviceInfo? selectedVideoInput;
+  final bool webcamInProgress;
   
   CallMediaState(
     {
@@ -16,6 +17,7 @@ part of 'call_media_cubit.dart';
     this.selectedAudioInput,
     this.selectedAudioOutput,
     this.selectedVideoInput,
+    this.webcamInProgress = false,
   }
   );
 
@@ -27,6 +29,7 @@ part of 'call_media_cubit.dart';
         selectedAudioInput,
         selectedAudioOutput,
         selectedVideoInput,
+        webcamInProgress,
       ];
 
       CallMediaState copyWith({
@@ -36,6 +39,7 @@ part of 'call_media_cubit.dart';
     MediaDeviceInfo? selectedAudioInput,
     MediaDeviceInfo? selectedAudioOutput,
     MediaDeviceInfo? selectedVideoInput,
+    bool? webcamInProgress,
   }) {
     return CallMediaState(
       audioInputs: audioInputs != null ? audioInputs : List<MediaDeviceInfo>.of(this.audioInputs),
@@ -44,6 +48,7 @@ part of 'call_media_cubit.dart';
       selectedAudioInput: selectedAudioInput != null ? selectedAudioInput : this.selectedAudioInput,
       selectedAudioOutput: selectedAudioOutput != null ? selectedAudioOutput : this.selectedAudioOutput,
       selectedVideoInput: selectedVideoInput != null ? selectedVideoInput : this.selectedVideoInput,
+      webcamInProgress: webcamInProgress !=null ? webcamInProgress : this.webcamInProgress
     );
   }
 }

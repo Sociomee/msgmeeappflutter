@@ -393,6 +393,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  expandable_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: expandable_bottom_sheet
+      sha256: d62455231ccd53bf7a153c87e2cdecd2c8e7d737cb5262a5fc9481c5e3aed7d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1+1"
   external_app_launcher:
     dependency: "direct main"
     description:

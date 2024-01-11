@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:msgmee/connectivity/call_service.dart';
 import 'package:msgmee/feature/a_onboarding/presentation/pages/splash_screen.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/typing/cubit/typing_cubit.dart';
 import 'package:msgmee/feature/e_settings/cubit/choose_language_cubit.dart';
 import 'package:msgmee/feature/f_call/cubit/call_media_cubit.dart';
+import 'package:msgmee/feature/f_call/cubit/consumer_cubit.dart';
 import 'package:msgmee/feature/f_call/cubit/producer_cubit.dart';
 import 'package:msgmee/repos/base_repo.dart';
 import 'package:msgmee/repos/call_media_repository.dart';
@@ -162,6 +164,8 @@ Future<void> _checkPermissions() async {
             BlocProvider(create: (context) => OnboardingCubit()),
             BlocProvider(create: (context) => ShoweditbtnCubit()),
             BlocProvider(create: (context) => CallMediaCubit()),
+            BlocProvider(create: (context) => ProducerCubit()),
+            BlocProvider(create: (context) => ConsumerCubit()),
             BlocProvider(create: (context) => ShowContactTextField()),
             BlocProvider(create: (context) => ShowLoaderCubit()),
             BlocProvider(create: (context) => ShowAudioRecorder()),
@@ -202,7 +206,9 @@ Future<void> _checkPermissions() async {
               context.read<CallMediaCubit>().handleMediaDeviceLoadEvent();
               SocketService().setContext(context);
               context.read<BaseRepo>().init();
-              RepositoryProvider(create: (context)=> CallMediaRepository(producersBloc: context.read<ProducerCubit>(),url: "https://api.msgmee.com",mediaDevicesBloc: context.read<CallMediaCubit>()));
+              CallService().setContext(context);
+               CallService().setProducerbloc();
+              CallService().setMediaDevices(context.read<CallMediaCubit>());
               child = botToastBuilder(context, child);
               return child;
             },
