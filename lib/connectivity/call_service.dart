@@ -8,6 +8,7 @@ import 'package:msgmee/connectivity/socket_service.dart';
 import 'package:msgmee/connectivity/web_socket.dart';
 import 'package:msgmee/feature/f_call/cubit/call_media_cubit.dart';
 import 'package:msgmee/feature/f_call/cubit/consumer_cubit.dart';
+import 'package:msgmee/feature/f_call/enitity/peer_device.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import '../feature/f_call/cubit/producer_cubit.dart';
 import '../feature/f_call/model/peer.dart';
@@ -24,6 +25,8 @@ class CallService {
   String url = "https://api.msgmee.com";
   String? displayName = "";
   bool webcamProgress = false;
+  bool isVideo = false;
+  bool isJoined = false;
   bool _closed = false;
   WebSocket? _webSocket;
   Device? _mediasoupDevice;
@@ -58,6 +61,7 @@ class CallService {
     _sendTransport?.close();
     _recvTransport?.close();
     _mediaDevicesBlocSubscription?.cancel();
+    context.read<ConsumerCubit>().removeAllPeers();
   }
 
   void setContext(BuildContext context1) {
@@ -83,7 +87,10 @@ class CallService {
 
   Future<void> disableWebcam() async {
     // meBloc.add(MeSetWebcamInProgress(progress: true));
-    String webcamId = producersBloc.state.webcam!.id;
+    if(producersBloc.state.webcam == null){
+      return;
+    }
+    String webcamId =  producersBloc.state.webcam!.id;
 
     // producersBloc.add(ProducerRemove(source: 'webcam'));
 
@@ -148,7 +155,8 @@ class CallService {
       disableMic().catchError((data) {});
     });
 
-    context.read<ProducerCubit>().handleProducerAdd("webcam", producer);
+
+    context.read<ProducerCubit>().handleProducerAdd( producer.source, producer);
   }
 
   void _consumerCallback(Consumer consumer, [dynamic accept]) {
@@ -158,11 +166,13 @@ class CallService {
     print("Peer id" + consumer.peerId.toString());
     print(
         '>>>>>>>>>>>>>>>>>>>>>>>>>>>consumer callback end>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-   // accept({});
+    // accept();
     context.read<ConsumerCubit>().addPeerConsumer(consumer);
   }
+
   void _consumerDataCallback(Consumer consumer, [dynamic accept]) {
-    print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<consumer callback recieved<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    print(
+        "<<<<<<<<<<<<<<<<<<<<<<<<<<<<consumer callback recieved<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
   }
 
   Future<MediaStream> createAudioStream() async {
@@ -312,10 +322,6 @@ class CallService {
       }
     }
   }
-//newlogic implementaion
- Future<void> subscribeNowd({socketID}) async {
-
- }
 
   Future<void> subscribeNow({socketID}) async {
     print("Statred subscription");
@@ -359,8 +365,7 @@ class CallService {
         iceCandidates: iceCandidates,
         dtlsParameters: dtlsParameters,
         consumerCallback: _consumerCallback,
-        dataConsumerCallback: _consumerDataCallback
-        );
+        dataConsumerCallback: _consumerDataCallback);
 
     _transport_g?.on(
       'connect',
@@ -379,7 +384,8 @@ class CallService {
     );
 
     _transport_g?.on('connectionstatechange', (connectionState) async {
-      print("cscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscsccscscsccscscscscscscsccscscsccs");
+      print(
+          "cscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscsccscscsccscscscscscscsccscscsccs");
       if (connectionState == 'connecting') {
         print("Connecting to consumer transport");
       }
@@ -395,19 +401,13 @@ class CallService {
         print("Failed to connect consumer");
       }
       print(connectionState);
-      print("cscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscsccscscsccscscscscscscsccscscsccs");
+      print(
+          "cscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscscsccscscsccscscscscscscsccscscsccs");
     });
-
-
   }
 
-  void join(peerId, roomId) async {
-    _webSocket = WebSocket(
-      peerId: peerId,
-      roomId: roomId,
-      url: url,
-      socket: SocketService().getSocket() as Socket,
-    );
+void _joinNow(peerId , roomId) async {
+
     var currentuserId = context.read<BaseRepo>().getuserId;
     Map response = await _webSocket!.request('join', {
       "roomID": _webSocket?.roomId,
@@ -420,21 +420,23 @@ class CallService {
     } catch (e) {
       comsumersList.clear();
     }
-    
+    var filterPeer = [];
     response['peers'].forEach((key, value) {
       print("addig peers");
       Peer newPeer = Peer.fromJson(value);
-      if(newPeer.userID != currentuserId){
-        
-       
-        peerList.add(newPeer);
-         
-        
+      if (newPeer.userID != currentuserId) {
+        if (!filterPeer.contains(newPeer.userID)) {
+          peerList.add(newPeer);
+          filterPeer.add(newPeer.userID);
+          String displayName =
+              newPeer.user?.fullName.toString() ?? "Anonymous User";
+          context.read<ConsumerCubit>().addPeer(RP.Peer(
+              id: newPeer.userID.toString(),
+              displayName: displayName,
+              device: PeerDevice()));
+        }
       }
-      
     });
-   
-    
 
     response['producers'].forEach((value) {
       print("Adding producers");
@@ -454,7 +456,7 @@ class CallService {
       print("Loading rtpCapabilities");
       await _mediasoupDevice!.load(routerRtpCapabilities: rtpCapabilities);
       print("Loaded rtpCapabilities");
-
+      await subscribeNow();
       print("After subscription");
       //create OWN transport
 
@@ -525,14 +527,15 @@ class CallService {
 
       //await produceVideo();
       print("Enabling medias");
-     
-      // enableMic();
-      // enableWebcam();
-      await subscribeNow( );
+
+       enableMic();
+       if(isVideo){
+        enableWebcam();
+       }
+
       if (producerList.length > 0) {
         await initConsume(roomId);
       }
-      
     } catch (e) {
       print(
           "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
@@ -540,6 +543,29 @@ class CallService {
       print(
           "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
     }
+}
+
+  void join(peerId, roomId) async {
+    _webSocket = WebSocket(
+      peerId: peerId,
+      roomId: roomId,
+      url: url,
+      socket: SocketService().getSocket() as Socket,
+    );
+
+    _joinNow(peerId,roomId);
+    
+    //webNotification Event Register
+
+    _webSocket!.onNewProducer = (newProducer) async {
+      print("recieved new producer data ${newProducer}");
+      print(newProducer);
+      consumeNow(Producern(
+          userID: newProducer['userID'],
+          roomID: newProducer['roomID'],
+          socketID: newProducer['socketID'],
+          producerID: newProducer['producerID']));
+    };
   }
 
   FutureOr<void> initConsume(String roomId) async {
@@ -549,58 +575,74 @@ class CallService {
       comsumersList = [];
     }
 
-
     for (var producer in producerList) {
       print("producer found in list");
 
       if (!comsumersList.contains(producer.producerID) &&
           producer.roomID == roomId) {
-       print("producer found for consume ${producer.toJson()}");
+        print("producer found for consume ${producer.toJson()}");
       }
     }
 
     print("All done now play " + producerList.length.toString());
   }
 
-
   void testData() async {
-     print(peerList.length);
-     for (var element in peerList) {
-      print("kjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjj");
-       print(element.toJson());
-       print("llllllllllllllllllllllllllllllllllllllllllllllllllllll");
-     }
+    print(peerList.length);
+    for (var element in peerList) {
+      print(
+          "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      print(element.userID);
+      print(element.user?.firstName);
+      print(
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    }
   }
 
-  void testDataw() async {
-    Producern pro = producerList.first;
-//consumeNow(producerList.last, "659e9ae911528814d56125d3");
-const roomId = "659fdf9411528814d5612a99";
-var rtpCapabilities = _mediasoupDevice!.rtpCapabilities.toMap();
-print("started consumer request");
+  void consumeNow(Producern pro) async {
+    var rtpCapabilities = _mediasoupDevice!.rtpCapabilities.toMap();
+    print("started consumer request");
 
     var datac = {
       "rtpCapabilities": rtpCapabilities,
       "socketID": pro.socketID,
-      "roomID": roomId,
+      "roomID": pro.roomID,
       "producerID": pro.producerID,
     };
-    _webSocket?.socket.emitWithAck("consume" ,datac , ack: consumeCallback);
-print("printing consumer response");
-   // print(data);
-  
+    _webSocket?.socket.emitWithAck("consume", datac, ack: consumeCallback);
+    print("printing consumer response");
+    // print(data);
   }
-  
 
-  void consumeCallback(data){
-    print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdaaaaaaaaaaaaaaaaaaaaaaaataaaaaaaaaaaaaaaaaaa");
+  void consumeCallback(data) {
+    print(
+        "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdaaaaaaaaaaaaaaaaaaaaaaaataaaaaaaaaaaaaaaaaaa");
     var id = data['id'];
     var producerId = data['producerId'];
-    var kind =  RTCRtpMediaTypeExtension.fromString(data['kind']);
+    var kind = RTCRtpMediaTypeExtension.fromString(data['kind']);
     var rtpParameters = RtpParameters.fromMap(data['rtpParameters']);
-    
-    _transport_g?.consume(id: id , producerId: producerId , kind: kind , rtpParameters: rtpParameters , peerId: producerId);
-    print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiisdddddddddddddddddddnbbbbbbsadklfmdklsfmkdfmk");
 
+    _transport_g?.consume(
+        id: id,
+        producerId: producerId,
+        kind: kind,
+        rtpParameters: rtpParameters,
+        peerId: producerId);
+    print(
+        "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiisdddddddddddddddddddnbbbbbbsadklfmdklsfmkdfmk");
   }
+
+  void onNewProducer(data) async {
+    print("producer data");
+    print(data);
+  }
+
+  void setVideoEnabled(bool isVideo) {
+     isVideo = isVideo;
+  }
+  void setCallJoined(bool joined) {
+     isJoined = joined;
+  }
+  get iscallJoined => isJoined;
+  
 }

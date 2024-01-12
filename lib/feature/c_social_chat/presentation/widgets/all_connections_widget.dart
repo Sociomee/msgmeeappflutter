@@ -27,6 +27,7 @@ class AllconnectionsWidget extends StatelessWidget {
                     context,
                     ChatScreen(
                       name: list[index].fullName!,
+                      userId: list[index].sId!,
                       imageUrl: list[index]
                           .otherProfileImage
                           .toString()

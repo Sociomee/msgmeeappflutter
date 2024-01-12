@@ -88,11 +88,11 @@ class CallWidget extends StatelessWidget {
                               InkWell(
                                 splashColor: AppColors.seconderyColor,
                                 onTap: () {
-                                  animatedScreenNavigator(
-                                      context,
-                                      SingleCallScreen(
-                                          imageUrl:
-                                              dummyPhoneData[index].imageUrl));
+                                  // animatedScreenNavigator(
+                                  //     context,
+                                  //     SingleCallScreen(
+                                  //         imageUrl:
+                                  //             dummyPhoneData[index].imageUrl));
                                 },
                                 child:
                                     SvgPicture.asset('assets/icons/phone.svg'),

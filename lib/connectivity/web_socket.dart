@@ -13,6 +13,9 @@ class WebSocket {
   Function()? onClose;
   Function(dynamic request, dynamic accept, dynamic reject)? onRequest;
   Function(dynamic notification)? onNotification;
+  Function(dynamic notification)? onNewProducer;
+  Function(dynamic notification)? onConsumers;
+  Function(dynamic notification)? onNewPeer;
 
   IO.Socket get msocket => socket;
 
@@ -40,10 +43,22 @@ class WebSocket {
       (data) => this.onNotification?.call(data),
     );
 
-     socket.on(
-      'request',
-      (data) => {print("recieved request")},
+    socket.on(
+      'consumers',
+      (data) => this.onConsumers?.call(data),
     );
+
+    socket.on(
+      'newPeer',
+      (data) => this.onNewPeer?.call(data),
+    );
+
+    socket.on(
+      'newProducer',
+      (data) => this.onNewProducer?.call(data),
+    );
+
+   
   }
 
   Future<dynamic> request(String type, [Map<String, dynamic> data = const {}]) {

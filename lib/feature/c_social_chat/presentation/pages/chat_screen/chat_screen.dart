@@ -38,6 +38,7 @@ import '../../../../../data/model/chat_model.dart';
 import '../../../../../helper/get_currenttime.dart';
 import '../../../../../helper/local_data.dart';
 import '../../../../../theme/colors.dart';
+import '../../../../f_call/presentation/pages/single_call_screen.dart';
 import '../../cubit/add_message/add_message_cubit.dart';
 import '../../cubit/search_mode/search_mode_cubit.dart';
 import '../../cubit/set_chatbg/set_chatbg_cubit.dart';
@@ -59,10 +60,12 @@ class ChatScreen extends StatefulWidget {
     this.group,
     required this.lastOnline,
     required this.id,
+    required this.userId,
   });
   final String name;
   final String imageUrl;
   final String senderId;
+  final String userId;
   final String lastOnline;
   final bool? hasStory;
   final bool? group;
@@ -127,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
     context
         .read<SetChatbgCubit>()
         .chooseType(context.read<SetChatbgCubit>().state.bgType);
-        context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
+    context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
     SocketService().setCurrentRoomId(widget.id ?? '');
     super.initState();
   }
@@ -574,16 +577,56 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                               actions: [
                                 InkWell(
-                                  onTap: () {
-                                    print("Call initiating....");
-                                    animatedScreenNavigator(context, CallScreen(room: context
-                                                    .read<ChatRoomsCubit>()
-                                                    .state
-                                                    .createroom));
-                                  },
-                                  child: SvgPicture.asset('assets/video.svg')),
+                                    onTap: () async{
+                                     print("Starting call");
+                                      String meetingId = await ChatRepostory()
+                                          .startNewCall(widget.id ?? "", false,
+                                              currentuserId, widget.userId);
+                                      if (meetingId == "failed") {
+                                        print("failed");
+                                        return;
+                                      }
+                                      animatedScreenNavigator(
+                                          context,
+                                          SingleCallScreen(
+                                            imageUrl:
+                                                "https://picsum.photos/200/300",
+                                             name: widget.name,
+                                             counterPartId: widget.userId,
+                                            isOutGoing: true,
+                                            roomId: widget.id.toString(),
+                                            meetingId: meetingId,
+                                            isVideo : true,
+                                          ));
+                                    },
+                                    child:
+                                        SvgPicture.asset('assets/video.svg')),
                                 SizedBox(width: 25.w),
-                                SvgPicture.asset('assets/calling.svg'),
+                                InkWell(
+                                    onTap: () async {
+                                      print("Starting call");
+                                      String meetingId = await ChatRepostory()
+                                          .startNewCall(widget.id ?? "", false,
+                                              currentuserId, widget.userId);
+                                      if (meetingId == "failed") {
+                                        print("failed");
+                                        return;
+                                      }
+                                      animatedScreenNavigator(
+                                          context,
+                                          SingleCallScreen(
+                                            imageUrl:
+                                                "https://picsum.photos/200/300",
+                                             name: widget.name,
+                                             counterPartId: widget.userId,
+                                            isOutGoing: true,
+                                            roomId: widget.id.toString(),
+                                            meetingId: meetingId,
+                                            isVideo: false,
+                                          ));
+                                    },
+                                    child:
+                                        SvgPicture.asset('assets/calling.svg')),
                                 GestureDetector(
                                   onTap: () {
                                     context
@@ -666,13 +709,14 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.only(top: 10, bottom: 100),
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                               // print("Rebuilding data s");
+                                // print("Rebuilding data s");
                                 return Align(
                                   alignment: (currentuserId !=
                                           state.localmessage[index].authorId
                                       ? Alignment.topLeft
                                       : Alignment.topRight),
-                                  child: currentuserId != state.localmessage[index].authorId
+                                  child: currentuserId !=
+                                          state.localmessage[index].authorId
                                       ? SwipeTo(
                                           onRightSwipe: () {
                                             context
@@ -684,9 +728,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         "");
                                           },
                                           child: GestureDetector(
-                                            onTap: () async{
-                                            
-                                              print(state.localmessage[index].authorId);
+                                            onTap: () async {
+                                              print(state.localmessage[index]
+                                                  .authorId);
                                               print(currentuserId);
                                               if (selectMode) {
                                                 log('selected mode $selectMode');
@@ -1425,9 +1469,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                     var room = widget.id.toString();
                                     //* calling typing function
                                     context.read<ChatRoomsCubit>().typing(
-                                          typing: istyping,
-                                          room: {"_id":room},
-                                        );
+                                      typing: istyping,
+                                      room: {"_id": room},
+                                    );
                                   },
                                 ),
                               ),
@@ -1531,8 +1575,8 @@ class _ChatScreenState extends State<ChatScreen> {
           },
         ));
   }
-  
-  Future<void> getuserId() async{
+
+  Future<void> getuserId() async {
     var localData = Localdata();
     var authorId = await localData.readData('currentuserid');
     print("User id ${authorId}");

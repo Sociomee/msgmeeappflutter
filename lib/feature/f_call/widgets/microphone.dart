@@ -40,9 +40,9 @@ class Microphone extends StatelessWidget {
         CallService().testData();
         print("Subscribing");
         if (microphone?.paused == true) {
-         // context.read<RoomClientRepository>().unmuteMic();
+         CallService().unmuteMic();
         } else {
-         // context.read<RoomClientRepository>().muteMic();
+         CallService().muteMic();
         }
       },
       child: Icon(

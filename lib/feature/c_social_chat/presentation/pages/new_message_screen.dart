@@ -379,6 +379,8 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                                 name: filterdList[index]
                                                         .contactName ??
                                                     '',
+                                                  userId: "sss" ??
+                                                    '',
                                                 imageUrl: filterdList[index]
                                                     .otherProfileImage
                                                     .toString()

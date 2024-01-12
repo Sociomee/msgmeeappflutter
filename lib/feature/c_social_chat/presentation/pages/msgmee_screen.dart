@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:msgmee/data/api_data_source/repository/socket/msgmee_socket.dart';
+import 'package:msgmee/data/model/create_room_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chat_selection_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/chat_screen/widgets/audio_record.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/pages/social_tab/cubit/selectedchat/selectedchat_cubit.dart';
@@ -171,8 +172,19 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
   }
 
   void incommingCallRecieved(data, context) {
-    animatedScreenNavigator(
-        context, SingleCallScreen(imageUrl: "https://picsum.photos/200/300"));
+    try {
+      print(data);
+      String roomId = data['roomID'];
+      String meetingId = data['meetingID'];
+      String counterPartname = data['counterpart']['fullName'];
+      String counterPartId = data['caller'];
+      Room room = Room.fromJson(data['room']);
+       animatedScreenNavigator(
+        context, SingleCallScreen(imageUrl: "https://picsum.photos/200/300" , counterPartId:counterPartId, name:counterPartname , isOutGoing: false, roomId: roomId, meetingId: meetingId,isVideo: false,));
+    } catch (e) {
+      print(e);
+    }
+   
   }
 
   @override
@@ -512,24 +524,24 @@ class _MsgmeeScreenState extends State<MsgmeeScreen>
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              screenNavigator(
-                                                  context,
-                                                  ChatScreen(
-                                                    name: filtedUserList[index]
-                                                        .name,
-                                                    imageUrl:
-                                                        filtedUserList[index]
-                                                            .imageUrl,
-                                                    senderId:
-                                                        filtedUserList[index]
-                                                            .isOnline
-                                                            .toString(),
-                                                    hasStory:
-                                                        filtedUserList[index]
-                                                            .hasStory,
-                                                    lastOnline: '',
-                                                    id: "sadsdad",
-                                                  ));
+                                              // screenNavigator(
+                                              //     context,
+                                              //     ChatScreen(
+                                              //       name: filtedUserList[index]
+                                              //           .name,
+                                              //       imageUrl:
+                                              //           filtedUserList[index]
+                                              //               .imageUrl,
+                                              //       senderId:
+                                              //           filtedUserList[index]
+                                              //               .isOnline
+                                              //               .toString(),
+                                              //       hasStory:
+                                              //           filtedUserList[index]
+                                              //               .hasStory,
+                                              //       lastOnline: '',
+                                              //       id: "sadsdad",
+                                              //     ));
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(

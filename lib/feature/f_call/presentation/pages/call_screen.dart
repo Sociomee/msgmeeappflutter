@@ -25,8 +25,11 @@ import '../../widgets/microphone.dart';
 import '../../widgets/webcam.dart';
 
 class CallScreen extends StatefulWidget {
-  Room room;
-  CallScreen({super.key, required this.room});
+  bool isVideo = false;
+  final String roomId;
+  final String meetingId;
+
+  CallScreen({super.key, required bool isVideo, required this.meetingId, required this.roomId});
   
   @override
   State<CallScreen> createState() => _CallScreenState();
@@ -52,21 +55,24 @@ class _CallScreenState extends State<CallScreen> {
 
   void joinCall(){
     var currentuserId = context.read<BaseRepo>().getuserId;
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    const roomId = "659fdf9411528814d5612a99";
     print(currentuserId);
-  CallService().join(currentuserId, roomId);
+    CallService().setVideoEnabled(widget.isVideo);
+    CallService().join(currentuserId, widget.meetingId);
     print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    if(!(CallService().isJoined)){
+      var currentuserId = context.read<BaseRepo>().getuserId;
+      CallService().setVideoEnabled(widget.isVideo);
+      CallService().join(currentuserId, widget.meetingId);
+    }
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        joinCall();
-      }),
+      // floatingActionButton: FloatingActionButton(onPressed: (){
+      //   joinCall();
+      // }),
       
       body: ExpandableBottomSheet(
         persistentContentHeight: kToolbarHeight + 16,

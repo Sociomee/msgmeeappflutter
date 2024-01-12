@@ -100,7 +100,9 @@ class SocketService {
         print(msg.content);
       });
 
-      
+      _socket?.on("newProducer", (data) {
+        print("New producer recieved");
+      });
 
       _socket?.on('customEvent', (data) {
         print('Received data: $data');

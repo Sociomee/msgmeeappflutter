@@ -380,4 +380,99 @@ INSERT OR REPLACE INTO ${Tables.USER} (
   void updateRoom(MessagesModel data) {
 
   }
+
+
+  Future<bool> postCallAccept(data) async {
+    var token = await localData.readData('token');
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/meeting/answer',
+      data: data,
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    print('$mainbaseUrl/api/meeting/answer');
+    // log('chat room response: ${response.data}');
+    if (response.statusCode == 200) {
+      print(response.data);
+      return true;
+    } else {
+      print(response.data);
+      return false;
+    }
+  }
+
+  Future<String> startNewCall(String roomId, bool isGroup , String userId , String callee) async {
+    Map<String,dynamic> data = {
+      "startedAsCall":true,
+      "caller":userId,
+      "callee":callee,
+      "callToGroup": isGroup,
+      "group": roomId
+      };
+     print(data);
+    var token = await localData.readData('token');
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/meeting/get',
+      data: data,
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    // log('chat room response: ${response.data}');
+    if (response.statusCode == 200) {
+      print(response.data);
+      return response.data['_id'];
+    } else {
+      print(response.data);
+      return "failed";
+    }
+  }
+
+    Future<bool> postNewCall(roomId , meetingId) async {
+       Map<String,dynamic> data = {
+         "roomID": roomId, "meetingID": meetingId 
+      };
+    var token = await localData.readData('token');
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/meeting/call',
+      data: data,
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    
+    // log('chat room response: ${response.data}');
+    if (response.statusCode == 200) {
+      print(response.data);
+      return true;
+    } else {
+      print(response.data);
+      return false;
+    }
+  }
+
+
+  Future<bool> postCancelCall(userId , meetingId) async {
+       Map<String,dynamic> data = {
+         "userID": userId, "meetingID": meetingId 
+      };
+    var token = await localData.readData('token');
+    var response = await apiService.dio.post(
+      '$mainbaseUrl/api/meeting/close',
+      data: data,
+      options: Options(headers: {
+        "Authorization": "Bearer $token",
+      }),
+    );
+    
+    // log('chat room response: ${response.data}');
+    if (response.statusCode == 200) {
+      print(response.data);
+      return true;
+    } else {
+      print(response.data);
+      return false;
+    }
+  }
 }

@@ -67,6 +67,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                 }).toList();
                 Iterable<String> userIds = localpeopledata.map((e) => e.sId.toString());
                 String counterPartname = getNameOfChatOrAuthor(state.chatroom[index] , authorId);
+                String callee = getOtherAuthor(state.chatroom[index] , authorId);
                 return localpeopledata.length == 0 ? Container() :  Column(
                   children: [
                     GestureDetector(
@@ -95,6 +96,8 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                       context,
                                       ChatScreen(
                                         name: counterPartname ??
+                                            '',
+                                        userId: callee ??
                                             '',
                                         imageUrl: localpeopledata
                                             .first.otherProfileImage
@@ -622,6 +625,17 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
       return "No Name";
     }
     User counterPart = chatroom.people!.firstWhere((element) => element.sId.toString() != authorId.toString());
+
     return counterPart.contactName == null ? (counterPart.firstName ?? "No Name") : counterPart.contactName.toString() ;
+  }
+
+  String getOtherAuthor(Room chatroom, String? authorId)  {
+    if((chatroom.isBizPage ?? false) || (chatroom.isGroup ?? false) || (chatroom.isMarketPlace ?? false) || (chatroom.isBroadCast ?? false) ){
+        return  authorId.toString();
+    }
+    
+    User counterPart = chatroom.people!.firstWhere((element) => element.sId.toString() != authorId.toString());
+    
+    return (counterPart.sId ?? authorId).toString();
   }
 }

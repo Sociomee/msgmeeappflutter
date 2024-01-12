@@ -70,4 +70,5 @@ print("Loading devices");
   FutureOr<void> handleMediaDeviceSelectVideoInput(MediaDeviceInfo? selectedVideoInput) async{
     emit(state.copyWith(selectedVideoInput: selectedVideoInput));
   }
+
 }

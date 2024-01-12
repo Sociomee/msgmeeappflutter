@@ -33,4 +33,16 @@ class ConsumerCubit extends Cubit<ConsumerState> {
 
       emit(ConsumerState.copy(state,peers: newPeers));
   }
+
+  void addPeer(Peer newPeer) async{
+    final Map<String, Peer> newPeers = Map<String, Peer>.of(state.peers ?? {});
+     newPeers[newPeer.id] = (newPeers[newPeer.id] != null ? newPeers[newPeer.id] : newPeer)!;
+     emit(ConsumerState.copy(state,peers: newPeers));
+  }
+void removeAllPeers() async{
+    final Map<String, Peer> newPeers =  {};
+     emit(ConsumerState.copy(state,peers: newPeers));
+  }
+
+
 }
