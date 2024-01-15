@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:msgmee/data/model/msgmee_user_model.dart';
@@ -93,6 +94,18 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     super.dispose();
   }
 
+   Future _fetchContacts() async {
+    if (!await FlutterContacts.requestPermission(readonly: true)) {
+     
+    } else {
+      final contacts = await FlutterContacts.getContacts(withProperties: true);
+      print(contacts);
+       print(contacts.length);
+       print(contacts.first.phones.first.number);
+       print(contacts.first.displayName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MsgmeeUserListCubit, MsgmeeUserListState>(
@@ -105,17 +118,17 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(onPressed: ()async {
-              final SQLiteHelper sqlite = SQLiteHelper();
-                       const rpPeopleSql = '''
-                        SELECT * FROM allconnections''';
-        print("Element id ");
-        var newdata = await sqlite.database.rawQuery(rpPeopleSql);
+              
+               //context.read<ContactCubit>().fetchContacts(context.read<MsgmeeUserListCubit>());
+
                       print(
                           "====================================================================================>");
-                   print(newdata);
+                 context
+                    .read<ContactCubit>()
+                    .fetchContacts(context.read<MsgmeeUserListCubit>());
                       print(
                           "<====================================================================================");
-          }),
+          } , child: Icon(Icons.refresh),backgroundColor: Theme.of(context).primaryColor,),
           appBar: AppBar(
             elevation: 1,
             leading: IconButton(

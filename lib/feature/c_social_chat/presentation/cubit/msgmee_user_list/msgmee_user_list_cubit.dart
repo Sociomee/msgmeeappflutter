@@ -10,6 +10,7 @@ import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository/all_connections_repository.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/get_contact/get_contact_cubit.dart';
 import 'package:msgmee/helper/string_ext.dart';
+import 'package:pinput/pinput.dart';
 import '../../../../../common_cubits/custom_error.dart';
 import '../../../../../data/model/phonebook_model.dart';
 import '../../../../../data/api_data_source/repository/sociomee/sync_socimee_repository.dart';
@@ -43,7 +44,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
   Future<void> getdataLoaclData() async {
    List<MsgMeeContacts> users = await AllConnectionRepository().getAllConnections();
    
-   print("got all contacts");
+   print("got all contacts ${users.length}");
     emit(
       state.copyWith(
         status: MsgmeeUserListStatus.loaded,
@@ -249,7 +250,8 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
 
 //     while (left <= right) {
 //       int mid = left + ((right - left) ~/ 2);
-//       String midPhone = list[mid].phone.toStandardFormat();
+//       String midPh
+//one = list[mid].phone.toStandardFormat();
 
 //       if (midPhone == targetPhone) {
 //         return mid; // Phone number found at index 'mid'

@@ -149,6 +149,7 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
   //**getting local message from local DB by roomId */
   Future<void> getLocalDBMessagesById(String room) async {
     var message = await MessagesRepository().getMessagesById(room);
+    print("Total message in db of ${room} is ${message.length}");
     emit(state.copyWith(localmessage: message , currentRoomId : room));
   }
 
@@ -179,6 +180,9 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     required String roomId,
     required dynamic content,
     required String contentType,
+    bool? isReply,
+    String? replyContent,
+    String? replyMsgType,
     required ConnectivityState connectivityState,
   }) async {
     
@@ -267,6 +271,17 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
      Future.delayed(Duration(seconds: 5));
      getRefreshRoomData();
   }
+
+   Future<void>  getDebugFunction() async{
+    var data = await ChatRepostory().getDebugMessages();
+    try {
+     var gd = data.map((e) => Message.fromJson(e)).toList();
+     print(gd.length);
+    } catch (e) {
+      
+    }
+    print(data.length);
+   }
 
 
   

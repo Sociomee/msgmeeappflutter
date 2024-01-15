@@ -60,22 +60,7 @@ class _SocialTabScreenState extends State<SocialTabScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () async {
-                      final SQLiteHelper sqlite = SQLiteHelper();
-
-                      
-                       const rpPeopleSql = '''
-                        SELECT * FROM room''';
-        print("Element id ");
-        var newdata = await sqlite.database.rawQuery(rpPeopleSql);
-                      print(
-                          "====================================================================================>");
-                   print(newdata);
-                      print(
-                          "<====================================================================================");
-                    },
-                    child: Text("TestData"))
+               
               ],
             )
           : SingleChildScrollView(

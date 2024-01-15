@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as fc;
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/msgmee_user_list/msgmee_user_list_cubit.dart';
@@ -35,10 +36,29 @@ class ContactCubit extends Cubit<ContactState> {
     List<Contact>? contacts;
     try {
       contacts = await ContactsService.getContacts();
+
+      if (!await fc.FlutterContacts.requestPermission(readonly: true)) {
+        
+      }else{
+          final contactsfc = await fc.FlutterContacts.getContacts(withProperties: true);
+          if(contactsfc.length > 0){
+            for (var element in contactsfc) {
+              if(element.phones.length > 0){
+                 String name = element.displayName;
+                 String numbr = element.phones.first.number;
+                 phoneBookList.add( PhoneBookUserModel(
+                  name: name ?? "N/A",
+                  phone: numbr ?? "N/A",
+          ),);
+              }
+            }
+          }
+      }
+      
     } catch (e) {
       log('Error fetching contacts: $e');
     }
-    phoneBookList = await extractPhoneNumbers(contacts!);
+    //phoneBookList = await extractPhoneNumbers(contacts!);
     emit(state.copyWith(
       contacts: contacts,
       isLoading: false,

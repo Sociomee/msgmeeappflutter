@@ -52,9 +52,9 @@ class MessagesRepository extends AbMessagesRepository {
     Future<int> insertSendMessages(Message messages) async {
     try {
        
-          print('insert messages data to localDb: ${messages.content}');
+          print('insert messages data to localDb content: ${messages.content}');
 
-          return await sqlite.database.insert(Tables.MESSAGE, {"sId" : messages.sId , "authorId" : messages.authorId , "room" : messages.room , "date" : messages.date , "content":messages.content,"status" : messages.status},
+          return await sqlite.database.insert(Tables.MESSAGE, {"sId" : messages.sId , "authorId" : messages.authorId , "room" : messages.room , "date" : messages.date , "content":messages.content,"status" : messages.status , "isReply" : messages.isReply , "replyContent" : messages.replyContent , "replyType" : messages.replyType,"replyMsgId" : messages.replyMsgId},
           conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       print('insert messages data to localDb: $e');
@@ -74,7 +74,7 @@ class MessagesRepository extends AbMessagesRepository {
       return List.generate(
           maps.length, (i) => Message.fromJson(maps[i]));
     } catch (e) {
-      log('getting messages data from localDB: $e');
+      print('getting messages data from localDB: $e');
       return [];
     }
   }

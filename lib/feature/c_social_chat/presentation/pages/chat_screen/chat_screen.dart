@@ -191,6 +191,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   context.read<ShowAttachment>().closeAttachment();
                 },
                 child: Scaffold(
+                  floatingActionButton: FloatingActionButton(onPressed: (){
+                     //context.read<ChatRoomsCubit>().getDebugFunction();
+                     context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
+
+                  }, child: Text("Happy"),),
+                  floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
                   appBar: chattileIndex.isNotEmpty
                       ? AppBar(
                           leading: GestureDetector(

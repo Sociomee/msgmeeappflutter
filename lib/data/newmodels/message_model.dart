@@ -9,6 +9,10 @@ class Message {
   String? room;
   String? date;
   int? status;
+  int? isReply;
+  String? replyContent;
+  String? replyType;
+  String? replyMsgId;
   int? msgNumber;
   int? isDeleted;
   String? sentTime;
@@ -21,6 +25,10 @@ class Message {
       this.author,
       this.authorId,
       this.content,
+      this.isReply,
+      this.replyContent,
+      this.replyType,
+      this.replyMsgId,
       this.room,
       this.date,
       this.status,
@@ -42,6 +50,12 @@ class Message {
     date = json['date'];
     status = json['status'] ?? 0;
     isDeleted = json['isDeleted'] ?? 0;
+
+    isReply = json['isReply'] ?? 0;
+    replyContent = json['replyContent'];
+    replyType = json['replyType'];
+    replyMsgId =  json['replyMsgId'];
+
     sentTime = json['sentTime'];
     timestamp = json['timestamp'];
     type = json['type'] ?? "text";

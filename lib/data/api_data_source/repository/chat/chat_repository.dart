@@ -475,4 +475,9 @@ INSERT OR REPLACE INTO ${Tables.USER} (
       return false;
     }
   }
+
+  Future<List<Map<String, Object?>>> getDebugMessages() async {
+     final db = await SQLiteHelper().database;
+     return await db.rawQuery("select * from message order by id desc");
+  }
 }

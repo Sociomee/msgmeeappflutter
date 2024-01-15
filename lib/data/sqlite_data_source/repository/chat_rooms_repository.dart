@@ -39,7 +39,6 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
 
       if (fdata.length > 0) {
        try {
-        print("issue in local room");
          roomData = fdata.map((e) => Room.fromJson(e)).toList();
        } catch (e) {
           print("error ${e}");

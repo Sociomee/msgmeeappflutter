@@ -13,7 +13,7 @@ class Tables {
   static const String CONFIG = 'config';
   static const String MSGMEECONTACTS = "msgMeeContacts";  
   static const String FAVORITES = "favorites";
-
+  
 }
 
 class SQLiteHelper {
@@ -148,6 +148,10 @@ class SQLiteHelper {
         sentTime TEXT DEFAULT CURRENT_TIMESTAMP,
         content TEXT NULL,
         status INT DEFAULT 0,
+        isReply INT DEFAULT 0,
+        replyContent TEXT NULL,
+        replyType TEXT NULL,
+        replyMsgId TEXT NULL,
         isDeleted INT DEFAULT 0,
         msgNumber INTEGER,
         UNIQUE(msgNumber) ON CONFLICT REPLACE
