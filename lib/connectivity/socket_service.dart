@@ -84,9 +84,9 @@ class SocketService {
          if(context.mounted){
             context.read<TypingCubit>().startTyping(data);
          }
-         print("typing start");
-           print(data);
-         print("typing end");
+        //  print("typing start");
+        //    print(data);
+        //  print("typing end");
       });
        _socket?.on('authenticated', (data) {
          print('Received data auth: $data');
@@ -94,10 +94,9 @@ class SocketService {
 
        _socket?.on('message-in', (data) {
           // Get the temporary directory       
-        print('Received data message:${data["message"]}');
+        print('Received data message is :${data["room"]}');
         Message msg = Message.fromJson(data["message"]);
         tempFunction(msg);
-        print(msg.content);
       });
 
       _socket?.on("newProducer", (data) {
@@ -136,6 +135,8 @@ class SocketService {
     print("Current Room id is ${currentRoomId}");
     if(currentRoomId != ""){
       context.read<ChatRoomsCubit>().getLocalDBMessagesById(currentRoomId);
+    }else{
+      //increase message count for other rooms
     }
    await context.read<ChatRoomsCubit>().checkRoomExistbyId(msg);
   }

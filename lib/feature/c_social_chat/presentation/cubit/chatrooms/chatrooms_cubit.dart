@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:msgmee/data/api_data_source/repository/chat/chat_repository.dart';
+import 'package:msgmee/data/api_data_source/repository/user/user_repository.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
 import 'package:msgmee/helper/local_data.dart';
 
@@ -31,12 +33,10 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
     var phone = await Localdata().readData('phone');
     var userId = await Localdata().readData('currentuserid');
     // log('cubit phone $phone\nauthorId $userId');
-    print(userId);
     emit(state.copyWith(phone: phone, userId: userId));
   }
 
   void getUserId() async {
-    
     var userId = await Localdata().readData('currentuserid');
     emit(state.copyWith(userId: userId));
   }
@@ -252,7 +252,6 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
       log('error sending message $e');
     }
   }
-
   String getCurrentRoomId() {
     return state.currentRoomId ?? "";
   }
@@ -260,7 +259,6 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
   Future<void> checkRoomExistbyId(Message msg) async{
      var res = await ChatRoomsRepository().checkRoomById(msg.room ?? "");
      if(!res){
-      print("Room not exists please create room");
       final _connectivityService = ConnectivityService();
       bool isConnected = await _connectivityService.checkConnection();
       if(isConnected){
@@ -276,13 +274,17 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     var data = await ChatRepostory().getDebugMessages();
     try {
      var gd = data.map((e) => Message.fromJson(e)).toList();
-     print(gd.length);
     } catch (e) {
-      
     }
-    print(data.length);
    }
 
-
+  Future<bool>setChatRoomWithRoomAndUser(String roomId , String userId) async{
+    var rawRoom = await ChatRoomsRepository().getRoomWithPeopleFormatted(roomId);
+   Room room = Room.fromJson(rawRoom);
+   User user = await UserSerivce().getCounterPartData(userId);
+   
+   emit(state.copyWith(counterPartUser: user));
+   return true;
+  }
   
 }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "678068763166",
+    "project_id": "messagemee-dc3bd",
+    "storage_bucket": "messagemee-dc3bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678068763166:android:d8d7526bebb05a859f0c0f",
+        "android_client_info": {
+          "package_name": "com.sociomee.msgmee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678068763166-j5cm6mi25f63iq8o4kteenv5alrfjmhv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sociomee.msgmee",
+            "certificate_hash": "997c3969c54d707b5d106c50c356d252b9870acf"
+          }
+        },
+        {
+          "client_id": "678068763166-5sor0elpme3nqfombhc735rjc0ef9c0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdBH43Q16dCMGavYmeYBE5tA2aGgTors0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678068763166-5sor0elpme3nqfombhc735rjc0ef9c0i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

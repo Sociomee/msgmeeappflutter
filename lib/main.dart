@@ -1,5 +1,6 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ import 'package:path/path.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'common_cubits/connectivity_cubit.dart';
 import 'common_cubits/reduce_number_cubit.dart';
+import 'connectivity/FirebaseMessagingService.dart';
 import 'connectivity/socket_service.dart';
 import 'data/sqlite_data_source/sqlite_helper.dart';
 import 'feature/a_onboarding/cubit/onboarding/onboarding_cubit.dart';
@@ -67,6 +69,15 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: FirebaseOptions(
+        apiKey: "AIzaSyAZXEzUIywgpSpmyonaLChiT5OJn-HfTtA",
+        authDomain: "messagemee-dc3bd.firebaseapp.com",
+        projectId: "messagemee-dc3bd",
+        storageBucket: "messagemee-dc3bd.appspot.com",
+        messagingSenderId: "678068763166",
+        appId: "1:678068763166:web:b65a7ea41ce13caf9f0c0f",
+        measurementId: "G-YQRLBBQ3QM",
+      ),);
   await SQLiteHelper().initialize();
   //await SQLiteHelper().clearAndReinitializeDatabase();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -109,6 +120,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final botToastBuilder = BotToastInit();
+  final FirebaseMessagingService _firebaseMessagingService = FirebaseMessagingService();
 
 Future<void> _checkPermissions() async {
     // Check if audio and video permissions are granted
@@ -142,6 +154,7 @@ Future<void> _checkPermissions() async {
   void initState() {
     // TODO: implement initState
      _checkPermissions();
+      _firebaseMessagingService.setupFirebase();
     super.initState();
   }
   @override

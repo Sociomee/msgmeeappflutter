@@ -480,4 +480,62 @@ INSERT OR REPLACE INTO ${Tables.USER} (
      final db = await SQLiteHelper().database;
      return await db.rawQuery("select * from message order by id desc");
   }
+
+  void createRoomOrAddremoteMessage(rawData) async{
+     print("Printing remote message");
+      Map<String, dynamic> jsonMap = json.decode(rawData);
+      checkAndInsertRemoteRoom(jsonMap["room"]);
+      checkAndInsertMessage(jsonMap["message"]);
+  }
+  
+  void checkAndInsertRemoteRoom(data) async{
+    var isBizPage = data['isBizPage'];
+    var isMarketPlace =data['isMarketPlace'] ;
+    var isBroadCast =  data['isBroadCast'] ;
+    var title = data['title'] ;
+    var description = data['description'] ;
+    var followers=data['followers'] ;
+    var following = data['following'] ;
+    var pageId = data['pageId'] ;
+    var ownerId = data['ownnerId'] ;
+    var sId = data['_id'] ;
+    var isGroup = data['isGroup'] ;
+    var lastAuthor = data['lastAuthor'] ;
+    var lastUpdate = data['lastUpdate'] ;
+
+     await SQLiteHelper().initialize();
+     final results = await SQLiteHelper().database
+        .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [sId]);
+    if (results.isEmpty) {
+      print("room not exist");
+
+    }else{
+      print("room exist");
+    }
+
+  }
+  
+  void checkAndInsertMessage(message) async{
+     var sId = message["_id"];
+     var content = message["content"];
+     Message msg = Message.fromJson(message);
+     print(msg.content);
+     try {
+      await SQLiteHelper().initialize();
+      final db = await SQLiteHelper().database;
+       final List<Map<String, dynamic>> maps = await db.query(Tables.MESSAGE , where: "sId=?" , whereArgs: [msg.sId]);
+      if(maps.isEmpty){
+          await db.insert(Tables.MESSAGE, {"sId" : msg.sId , "authorId" : msg.author?.sId , "room" : msg.room , "date" : msg.date , "content":msg.content,"status" : 1},
+          conflictAlgorithm: ConflictAlgorithm.replace);
+                print('insert messages data to localDb: ${msg.content}');
+
+      }else{
+        print('Already in db: ${msg.sId}');
+      }
+      
+
+    } catch (e) {
+      print('insert messages data to localDb: $e');
+    }
+  } 
 }

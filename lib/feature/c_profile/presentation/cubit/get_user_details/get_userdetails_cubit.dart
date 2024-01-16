@@ -19,4 +19,13 @@ class GetUserdetailsCubit extends Cubit<GetUserDetailsState> {
       emit(state.copyWith(status: GetUserDetailsStatus.error, error: e));
     }
   }
+
+  void updateDeviceTokenToserver(String deviceToken) async {
+    print(deviceToken);
+    var data = await UserSerivce().updateTokenToServer(deviceToken);
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>isForebaseTokenUpdated>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    print(data);
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>isForebaseTokenUpdated>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+  }
 }

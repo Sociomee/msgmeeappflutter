@@ -10,7 +10,9 @@ import 'package:intl/intl.dart';
 import 'package:msgmee/common_cubits/connectivity_cubit.dart';
 import 'package:msgmee/common_widgets/mx_chatappbar.dart';
 import 'package:msgmee/connectivity/socket_service.dart';
+import 'package:msgmee/data/api_data_source/repository/user/user_repository.dart';
 import 'package:msgmee/data/model/config_model.dart';
+import 'package:msgmee/data/model/user_model.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/chatrooms/chatrooms_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/reply_msg/reply_msg_cubit.dart';
 import 'package:msgmee/feature/c_social_chat/presentation/cubit/show_audio_recorder.dart';
@@ -53,23 +55,11 @@ import 'widgets/message_textField.dart';
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
     super.key,
-    required this.name,
-    required this.imageUrl,
-    required this.senderId,
-    this.hasStory,
-    this.group,
-    required this.lastOnline,
     required this.id,
     required this.userId,
   });
-  final String name;
-  final String imageUrl;
-  final String senderId;
-  final String userId;
-  final String lastOnline;
-  final bool? hasStory;
-  final bool? group;
   final String? id;
+  final String? userId;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -84,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool tap = false;
   bool selectMode = false;
   List chattileIndex = [];
-
+  User counterPartUser = User();
   String copiedText = 'empty';
   MsgmeeSocket msgmeeSocket = MsgmeeSocket();
   void _scrollToBottom() {
@@ -102,7 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       if (image != null) {
         animatedScreenNavigator(context,
-            ImagePreViewPage(images: [image], profileImage: widget.imageUrl));
+            ImagePreViewPage(images: [image], profileImage: counterPartUser.otherProfileImage.toString()));
       }
     }
   }
@@ -149,7 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
     String formattedDate = DateFormat('d MMMM, y').format(now);
 
     var online = context.read<ChatRoomsCubit>().state.onlineUsers.where((e) {
-      return e['id'] == widget.senderId;
+      return e['id'] == widget.userId;
     }).toList();
     log('calling ...');
     return WillPopScope(
@@ -161,6 +151,7 @@ class _ChatScreenState extends State<ChatScreen> {
         },
         child: BlocConsumer<ChatRoomsCubit, ChatRoomsState>(
           listener: (context, state) {
+            counterPartUser = state.counterPartUser;
             if (state.localmessage.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (_listViewController.hasClients) {
@@ -227,7 +218,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             GestureDetector(
                               onTap: () {
                                 context.read<ReplyMsgCubit>().replyMsg(
-                                    widget.name,
+                                    counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                     msg[chattileIndex[0]].messageContent);
                                 chattileIndex.clear();
                               },
@@ -479,8 +470,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                   screenNavigator(
                                     context,
                                     OtherPersonProfileDescription(
-                                      imageUrl: widget.imageUrl,
-                                      name: widget.name,
+                                      imageUrl: counterPartUser.picture?.name.toString() ?? counterPartUser.otherProfileImage.toString() ,
+                                      name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                       isOnline: online.isNotEmpty
                                           ? online.first['status']
                                           : 'Offline',
@@ -491,9 +482,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Hero(
-                                      tag: widget.imageUrl,
-                                      child: widget.imageUrl ==
-                                              'https://sociomee-dev.s3.ap-south-1.amazonaws.com/null'
+                                      tag: counterPartUser.otherProfileImage ?? "",
+                                      child: counterPartUser.otherProfileImage ==
+                                              null
                                           ? DefaultProfileImage(
                                               isOnline: online.isNotEmpty
                                                   ? online.first['status']
@@ -501,7 +492,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               hasStory: true,
                                             )
                                           : ChatProfileWidget(
-                                              imageUrl: widget.imageUrl,
+                                              imageUrl: counterPartUser.otherProfileImage ?? "",
                                               isOnline: online.isNotEmpty
                                                   ? online.first['status']
                                                   : 'Offline',
@@ -517,7 +508,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         Container(
                                           width: 130.w,
                                           child: Text(
-                                            widget.name,
+                                            counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               color: AppColors.black,
@@ -546,7 +537,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                       (online.isNotEmpty
                                                           ? online
                                                               .first['status']
-                                                          : 'Last Online ${widget.lastOnline}'),
+                                                          : 'Last Online ${ 2}: min ago'),
                                                       style: TextStyle(
                                                         fontSize: 13,
                                                         color: AppColors.grey,
@@ -557,7 +548,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               return Text(
                                                 online.isNotEmpty
                                                     ? online.first['status']
-                                                    : 'Last Online ${widget.lastOnline}',
+                                                    : 'Last Online ${2} min ago',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   color: AppColors.grey,
@@ -567,7 +558,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               return Text(
                                                 online.isNotEmpty
                                                     ? online.first['status']
-                                                    : 'Last Online ${widget.lastOnline}',
+                                                    : 'Last Online ${2} min ago',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   color: AppColors.grey,
@@ -587,7 +578,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                      print("Starting call");
                                       String meetingId = await ChatRepostory()
                                           .startNewCall(widget.id ?? "", false,
-                                              currentuserId, widget.userId);
+                                              currentuserId, widget.userId.toString());
                                       if (meetingId == "failed") {
                                         print("failed");
                                         return;
@@ -597,8 +588,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                           SingleCallScreen(
                                             imageUrl:
                                                 "https://picsum.photos/200/300",
-                                             name: widget.name,
-                                             counterPartId: widget.userId,
+                                             name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
+                                             counterPartId: widget.userId ?? "",
                                             isOutGoing: true,
                                             roomId: widget.id.toString(),
                                             meetingId: meetingId,
@@ -613,7 +604,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       print("Starting call");
                                       String meetingId = await ChatRepostory()
                                           .startNewCall(widget.id ?? "", false,
-                                              currentuserId, widget.userId);
+                                              currentuserId, widget.userId ?? "");
                                       if (meetingId == "failed") {
                                         print("failed");
                                         return;
@@ -623,8 +614,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                           SingleCallScreen(
                                             imageUrl:
                                                 "https://picsum.photos/200/300",
-                                             name: widget.name,
-                                             counterPartId: widget.userId,
+                                             name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
+                                             counterPartId: widget.userId ?? "",
                                             isOutGoing: true,
                                             roomId: widget.id.toString(),
                                             meetingId: meetingId,
@@ -640,8 +631,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                         .closeAttachment();
                                   },
                                   child: SinglechatPopupMenu(
-                                    name: widget.name,
-                                    imageUrl: widget.imageUrl,
+                                    name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
+                                    imageUrl: counterPartUser.otherProfileImage.toString(),
                                   ),
                                 )
                               ],
@@ -728,7 +719,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                             context
                                                 .read<ReplyMsgCubit>()
                                                 .replyMsg(
-                                                    widget.name,
+                                                    counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                                     state.localmessage[index]
                                                             .content ??
                                                         "");
@@ -948,7 +939,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   ? screenNavigator(
                                                       context,
                                                       MultipleImagePreviewPage(
-                                                        name: widget.name,
+                                                        name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                                         images:
                                                             msg[index].images,
                                                         date: formattedDate,
@@ -1541,8 +1532,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                     : 0,
                                 width: 150,
                                 child: AttachedIcon(
-                                  profileImage: widget.imageUrl,
-                                  name: widget.name,
+                                  profileImage: counterPartUser.otherProfileImage.toString(),
+                                  name: counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                 ),
                               ),
                             ),
@@ -1588,5 +1579,9 @@ class _ChatScreenState extends State<ChatScreen> {
     print("User id ${authorId}");
     currentuserId = authorId;
     print(currentuserId);
+  }
+  
+  void getCounterPartUserData() async{
+    counterPartUser =  await context.read<UserSerivce>().getCounterPartData(widget.userId);
   }
 }

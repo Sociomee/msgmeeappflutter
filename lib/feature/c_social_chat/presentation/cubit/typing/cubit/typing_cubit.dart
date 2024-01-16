@@ -11,8 +11,7 @@ class TypingCubit extends Cubit<TypingState> {
 
   startTyping(data){
     TypingStatus ts = TypingStatus.fromJson(data as Map<String, dynamic>);
-    print(data);
-    print(ts.isTyping);
+  
     if (ts.isTyping as bool) {
       emit(TypingStartState(typingStatus: ts));
     } else {

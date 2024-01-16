@@ -51,7 +51,7 @@ class Message {
     status = json['status'] ?? 0;
     isDeleted = json['isDeleted'] ?? 0;
 
-    isReply = json['isReply'] ?? 0;
+    isReply = (json['isReply'] is bool ? (json['isReply'] ? 1 : 0)  : json['isReply']) ?? 0;
     replyContent = json['replyContent'];
     replyType = json['replyType'];
     replyMsgId =  json['replyMsgId'];

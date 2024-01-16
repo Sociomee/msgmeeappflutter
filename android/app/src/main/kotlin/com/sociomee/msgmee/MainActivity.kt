@@ -1,4 +1,4 @@
-package com.example.msgmee
+package com.sociomee.msgmee
 
 import io.flutter.embedding.android.FlutterActivity
 import android.content.BroadcastReceiver

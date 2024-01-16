@@ -75,7 +75,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                         cubit.toggleSelection(index);
                       },
                       onTap: cubit.state.isEmpty
-                          ? () {
+                          ? () async {
                             // state.chatroom[index].people!.forEach((element) {
                             //   print(element.toJson());
                             // },);                           
@@ -95,23 +95,14 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   : animatedScreenNavigator(
                                       context,
                                       ChatScreen(
-                                        name: counterPartname ??
-                                            '',
+                                        
                                         userId: callee ??
                                             '',
-                                        imageUrl: localpeopledata
-                                            .first.otherProfileImage
-                                            .toString()
-                                            .toProfileUrl(),
-                                        senderId:
-                                            localpeopledata.first.sId ?? '',
-                                        lastOnline: localpeopledata
-                                            .first.lastOnline
-                                            .toString()
-                                            .toLastOnlineTime(),
+                                       
                                         id: state.chatroom[index].sId,
                                       ));
  SocketService().setCurrentRoomId(state.chatroom[index].sId!);
+ await context.read<ChatRoomsCubit>().setChatRoomWithRoomAndUser(state.chatroom[index].sId!, callee);
                               context
                                   .read<ChatRoomsCubit>()
                                   .getchatRoomMessages(

@@ -34,8 +34,6 @@ class ChatRoomsRepository extends AbChatRoomsRepository {
         fdata.add(commonData);
       }
 
-      print(fdata.length);
-      print(fdata.length > 0);
 
       if (fdata.length > 0) {
        try {

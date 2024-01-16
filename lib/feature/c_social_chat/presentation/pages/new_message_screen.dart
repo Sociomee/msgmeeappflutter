@@ -389,17 +389,9 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
                                           animatedScreenNavigator(
                                               context,
                                               ChatScreen(
-                                                name: filterdList[index]
-                                                        .contactName ??
-                                                    '',
+                                               
                                                   userId: "sss" ??
                                                     '',
-                                                imageUrl: filterdList[index]
-                                                    .otherProfileImage
-                                                    .toString()
-                                                    .toProfileUrl(),
-                                                senderId: '',
-                                                lastOnline: '',
                                                 id: context
                                                     .read<ChatRoomsCubit>()
                                                     .state

@@ -36,6 +36,7 @@ class ChatRoomsState extends Equatable {
   final MessagesModel messages;
   final MessageStatus msgStatus;
   final Room createroom;
+  final User counterPartUser;
   final CreateRoomStatus createroomstatus;
   final MessageSendStatus messageSendStatus;
   final String? phone;
@@ -54,6 +55,7 @@ class ChatRoomsState extends Equatable {
       createroom: Room(),
       messageSendStatus: MessageSendStatus.initial,
       chatroom: [],
+      counterPartUser : User(),
       localmessage: [],
       currentRoomId : null,
       onlineUsers: [],
@@ -71,6 +73,7 @@ class ChatRoomsState extends Equatable {
     this.phone,
     this.userId,
     this.currentRoomId,
+    required this.counterPartUser,
     required this.chatroom,
     required this.localmessage,
     required this.onlineUsers,
@@ -84,6 +87,7 @@ class ChatRoomsState extends Equatable {
         msgStatus,
         createroomstatus,
         createroom,
+        counterPartUser,
         messageSendStatus,
         phone ?? '',
         userId ?? "",
@@ -98,6 +102,7 @@ class ChatRoomsState extends Equatable {
     MessagesModel? messages,
     MessageStatus? msgStatus,
     Room? createroom,
+    User? counterPartUser,
     CreateRoomStatus? createroomstatus,
     MessageSendStatus? messageSendStatus,
     String? phone,
@@ -120,6 +125,7 @@ class ChatRoomsState extends Equatable {
       currentRoomId: userId ?? this.currentRoomId,
       chatroom: chatroom ?? this.chatroom,
       localmessage: localmessage ?? this.localmessage,
+      counterPartUser: counterPartUser ?? this.counterPartUser,
       onlineUsers: onlineUsers ?? this.onlineUsers,
     );
   }
