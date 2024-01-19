@@ -69,70 +69,7 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
     required List<PhoneBookUserModel> phonebookuser,
   }) async {
     return;
-    // emit(state.copyWith(status: MsgmeeUserListStatus.loading));
-    // try {
-    //   var res = await UserSerivce().getFriendList(100, '');
-
-    //   List<User> msgmeeUserList = res.users!;
-    //   Set<User> msgmeeUserSet = Set.from(msgmeeUserList);
-    //   List<User> finalUserList = [];
-    //   List<String> nonMatchingPhoneNumbers = [];
-    //   log('msgmee user set ---->$msgmeeUserSet');
-    //   for (var pb in phonebookuser) {
-    //     if (msgmeeUserSet.any((user) =>
-    //         user.phone == pb.phone.removeFirstTwoCharsAndNormalize())) {
-    //       User matchingUser = User(
-    //         firstName: pb.name,
-    //         phone: pb.phone,
-    //       );
-
-    //       finalUserList.add(matchingUser);
-    //     } else {
-    //       nonMatchingPhoneNumbers
-    //           .add(pb.phone.removeFirstTwoCharsAndNormalize());
-    //     }
-    //   }
-    //  // log('final userlist ---->$finalUserList');
-    //   //log('final notmatching phone numbers ----->$nonMatchingPhoneNumbers');
-    //   List<CheckMsgmeeModel> addmsgmeecontact = [];
-    //   List<CheckMsgmeeModel> addcontact = [];
-    //   if (nonMatchingPhoneNumbers.isNotEmpty) {
-    //     for (var phone in nonMatchingPhoneNumbers) {
-    //       var res = await SyncSocimeeService().checkMsgmee(phone);
-    //       if (res.status == true) {
-    //         addmsgmeecontact.add(res);
-    //       } else if (res.status == false) {
-    //         addcontact.add(res);
-    //       }
-    //     }
-    //   }
-    //   for (var e in addmsgmeecontact) {
-    //    // log('addmsgmeecontact------->${e}');
-    //     await SyncSocimeeService()
-    //         .addContact(
-    //       firstName: e.user!.firstName,
-    //       lastName: e.user!.lastName,
-    //       fullName: e.user!.fullName,
-    //       msgmeeId: e.user!.sId,
-    //       phone: e.user!.phone!,
-    //       type: 'msgmee',
-    //     )
-    //         .then((value) {
-    //       finalUserList.add(e.user!);
-    //     });
-    //   }
-    //   for (var e in addcontact) {
-    //    // log('addcontact------->${e}');
-    //     await SyncSocimeeService().addContact(
-    //       fullName: e.user!.fullName,
-    //       phone: e.user!.phone!,
-    //       type: 'contact',
-    //     );
-    //   }
-    //  // log('final overRideduser $finalUserList');
-    // } on CustomError catch (e) {
-    //   emit(state.copyWith(status: MsgmeeUserListStatus.error, error: e));
-    // }
+    
   }
 
 
@@ -164,6 +101,21 @@ class MsgmeeUserListCubit extends Cubit<MsgmeeUserListState> {
   Future<String> getContactName(List<PhoneBookUserModel> phonebookuser, MsgMeeContacts map) async {
     PhoneBookUserModel? data = phonebookuser.where((element) => (element.phone.toString().toLowerCase() == map.phone.toString().toLowerCase())).firstOrNull;
     return data?.name ?? "";
+  }
+
+  void getSyncedSocioMeeConnections() async{
+    var res = await UserSerivce().getFriendList(100, '');
+    List<PhoneBookUserModel> phonebookuser = [];
+    if((res.users?.length ?? 0) > 0){
+          for (var sociomates in res.users ?? []) {
+             print(sociomates.phone);
+             phonebookuser.add(PhoneBookUserModel(name: sociomates.fullName, phone: sociomates.phone));
+          }
+    }
+    if (phonebookuser.length > 0) {
+      await checkAndUpdateLocalContactDb(phonebookuser);
+    }
+    print(res.users?.length);
   }
 }
 

@@ -44,7 +44,7 @@ class ReplyMessageTextField extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 110.w,
+                            width: 100.w,
                             child: Text(cubit.owner,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -54,7 +54,7 @@ class ReplyMessageTextField extends StatelessWidget {
                                     fontWeight: FontWeight.w500)),
                           ),
                           SizedBox(
-                            width: 110.w,
+                            width: 100.w,
                             height: 15,
                             child: Text(cubit.msg,
                                 overflow: TextOverflow.ellipsis,
@@ -83,7 +83,7 @@ class ReplyMessageTextField extends StatelessWidget {
           ),
           SizedBox(height: 10),
           SizedBox(
-            width: 270.w,
+            width: 260.w,
             child: TextFormField(
               autofocus: true,
               onChanged: onChanged,

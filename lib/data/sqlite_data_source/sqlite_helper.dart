@@ -105,6 +105,7 @@ class SQLiteHelper {
         ownerId TEXT DEFAULT NULL,
         lastUpdate DATETIME,
         lastAuthorId TEXT NULL,
+        content TEXT NULL,
         timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
         lastMessageId TEXT NULL
       )

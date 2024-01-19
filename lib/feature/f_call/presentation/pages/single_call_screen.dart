@@ -68,7 +68,7 @@ class SingleCallScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
+              isOutGoing ? SizedBox(): Positioned(
                   bottom: 86,
                   left: (width / 2).w - ( isOutGoing ? 0.w  : 75.w ),
                   // right: width / 2,

@@ -24,6 +24,7 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
       int totalCount = 100;
       while (apiresponse) {
         var data = await SyncSocimeeService().syncSocimee(index);
+        print("data recieved");
         index++;
         apiresponse = data.next!;
         if (data.next == true) {
@@ -39,7 +40,7 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
       }
       DateTime endTime = DateTime.now();
       Duration duration = endTime.difference(startTime);
-
+      
       log('Loading took ${duration.inSeconds} seconds');
     } catch (e) {
       throw Exception(e);
@@ -65,5 +66,9 @@ class SyncSociomeeCubit extends Cubit<SyncSociomeeState> {
     } catch (e) {
       log('getting error while syncing with sociomee $e');
     }
+  }
+
+  void checkAndAddContact() {
+    
   }
 }

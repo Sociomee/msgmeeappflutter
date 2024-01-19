@@ -156,6 +156,8 @@ var localData = Localdata();
            print("message recieve");
            
       });
+
+     
   }
 
   @override
@@ -194,6 +196,7 @@ var localData = Localdata();
 
   @override
   Widget build(BuildContext context) {
+    //checkForNotificationClick();
   //  log('string------->$string');
     return DefaultTabController(
       length:
@@ -341,24 +344,7 @@ var localData = Localdata();
                   ),
                 )
               : Scaffold(
-                floatingActionButton: FloatingActionButton(onPressed: () async{
-                   var isTappedNotification = await localData.readData('isNotificationTapped');
-                   var userId = await localData.readData('n_user');
-                   var roomId = await localData.readData('n_room');
-                   if(isTappedNotification == "1"){
-                    await context.read<ChatRoomsCubit>().setChatRoomWithRoomAndUser(roomId,userId);
-                    screenNavigator(context,
-                                                  ChatScreen(
-                                                   id: roomId,
-                                                   userId: userId,
-                                                  ));
-                    localData.deleteData("isNotificationTapped");
-                    print("Navigate to chat screen");
-                   }
-
-                   print(isTappedNotification);
-
-                }, child: Text("Hello"),),
+                
                   appBar: context
                           .watch<SearchModeCubit>()
                           .state
@@ -954,4 +940,23 @@ var localData = Localdata();
     
 
   }
-}
+  
+  void checkForNotificationClick() async{
+                   var isTappedNotification = await localData.readData('isNotificationTapped');
+                   var userId = await localData.readData('n_user');
+                   var roomId = await localData.readData('n_room');
+                   if(isTappedNotification == "1"){
+                    await context.read<ChatRoomsCubit>().setChatRoomWithRoomAndUser(roomId,userId);
+                    screenNavigator(context,
+                                                  ChatScreen(
+                                                   id: roomId,
+                                                   userId: userId,
+                                                  ));
+                    localData.deleteData("isNotificationTapped");
+                    print("Navigate to chat screen");
+                   }
+
+                   print(isTappedNotification);
+
+                }
+    }

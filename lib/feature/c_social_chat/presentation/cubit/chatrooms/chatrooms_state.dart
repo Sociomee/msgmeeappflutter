@@ -41,6 +41,7 @@ class ChatRoomsState extends Equatable {
   final MessageSendStatus messageSendStatus;
   final String? phone;
   final String? userId;
+  final String? counterPartUserId;
   final String? currentRoomId;
   final List<Room> chatroom;
   final List<Message> localmessage;
@@ -54,6 +55,7 @@ class ChatRoomsState extends Equatable {
       createroomstatus: CreateRoomStatus.initial,
       createroom: Room(),
       messageSendStatus: MessageSendStatus.initial,
+      counterPartUserId : null,
       chatroom: [],
       counterPartUser : User(),
       localmessage: [],
@@ -73,6 +75,7 @@ class ChatRoomsState extends Equatable {
     this.phone,
     this.userId,
     this.currentRoomId,
+    this.counterPartUserId,
     required this.counterPartUser,
     required this.chatroom,
     required this.localmessage,
@@ -88,6 +91,7 @@ class ChatRoomsState extends Equatable {
         createroomstatus,
         createroom,
         counterPartUser,
+        counterPartUserId ?? "",
         messageSendStatus,
         phone ?? '',
         userId ?? "",
@@ -107,6 +111,7 @@ class ChatRoomsState extends Equatable {
     MessageSendStatus? messageSendStatus,
     String? phone,
     String? userId,
+    String? counterPartUserId,
     String? currentRoomId,
     List<Room>? chatroom,
     List<Message>? localmessage,
@@ -122,6 +127,7 @@ class ChatRoomsState extends Equatable {
       messageSendStatus: messageSendStatus ?? this.messageSendStatus,
       phone: phone ?? this.phone,
       userId: userId ?? this.userId,
+      counterPartUserId: counterPartUserId ?? this.counterPartUserId,
       currentRoomId: userId ?? this.currentRoomId,
       chatroom: chatroom ?? this.chatroom,
       localmessage: localmessage ?? this.localmessage,

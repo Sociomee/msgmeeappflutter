@@ -26,6 +26,10 @@ class SentMessageWidget extends StatelessWidget {
   final List<File?>? images;
   final List<String>? docs;
   final int? numberofContact;
+  final bool? isReply;
+  final String? replyContent;
+  final String? replyOwner;
+  final String? replyOwnerId;
   const SentMessageWidget({
     Key? key,
     required this.message,
@@ -37,6 +41,10 @@ class SentMessageWidget extends StatelessWidget {
     this.images,
     this.docs,
     this.numberofContact,
+    this.isReply,
+    this.replyContent,
+    this.replyOwnerId,
+    this.replyOwner
   }) : super(key: key);
 
   @override

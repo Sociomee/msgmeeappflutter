@@ -11,6 +11,7 @@ class Room {
   String? title;
   String? description;
   String? followers;
+  String? content;
   String? following;
   String? pageId;
   String? ownerId;
@@ -37,6 +38,7 @@ class Room {
       this.sId,
       this.people,
       this.isGroup,
+      this.content,
       this.lastAuthor,
       this.lastMessage,
       this.lastMessageId,
@@ -63,7 +65,7 @@ class Room {
         people!.add(new User.fromJson(v));
       });
     }
-    
+    content = json['content'] ?? "";//(json['lastMessage'] is String  ? null : (json['lastMessage'] is List ? (json['lastMessage'].length > 0 ? json['lastMessage'][0]['content'] : "") : json['lastMessage']['content']));
     if (json['messages'] != null) {
       messages = <Message>[];
       json['messages'].forEach((v) {

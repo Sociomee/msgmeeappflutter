@@ -52,7 +52,6 @@ class User {
     firstName = json['firstName'];
     level = json['level'];
     phone = json['phone'];
-    phone = json['email'];
     countryCode = json['countryCode'];
     lastName = json['lastName'];
     username = json['username'];

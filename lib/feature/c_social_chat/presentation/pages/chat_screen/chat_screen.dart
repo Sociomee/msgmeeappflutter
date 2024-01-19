@@ -182,11 +182,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   context.read<ShowAttachment>().closeAttachment();
                 },
                 child: Scaffold(
-                  floatingActionButton: FloatingActionButton(onPressed: (){
-                     //context.read<ChatRoomsCubit>().getDebugFunction();
-                     context.read<ChatRoomsCubit>().getLocalDBMessagesById(widget.id ?? '');
-
-                  }, child: Text("Happy"),),
+                  
                   floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
                   appBar: chattileIndex.isNotEmpty
                       ? AppBar(
@@ -575,6 +571,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               actions: [
                                 InkWell(
                                     onTap: () async{
+                                      return;
                                      print("Starting call");
                                       String meetingId = await ChatRepostory()
                                           .startNewCall(widget.id ?? "", false,
@@ -722,7 +719,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     counterPartUser.contactName ?? (counterPartUser.fullName ?? counterPartUser.phone.toString()),
                                                     state.localmessage[index]
                                                             .content ??
-                                                        "");
+                                                        "",sId :state.localmessage[index].sId ?? "");
                                           },
                                           child: GestureDetector(
                                             onTap: () async {
@@ -900,7 +897,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                                     'You',
                                                     state.localmessage[index]
                                                             .content ??
-                                                        "");
+                                                        "" , sId :state.localmessage[index].sId ?? "");
+                                          
                                           },
                                           child: GestureDetector(
                                             onTap: () {
@@ -992,17 +990,19 @@ class _ChatScreenState extends State<ChatScreen> {
                                                         .localmessage[index]
                                                         .date!
                                                         .iso8601To12HourFormat(),
-                                                    type: state
+                                                    isReply: (state.localmessage[index].isReply == 1 ? true : false),
+                                                    type: state.localmessage[index].isReply == 1 ? MessageType.replyMessage : (state
                                                                 .localmessage[
                                                                     index]
                                                                 .type ==
                                                             'text'
                                                         ? MessageType.text
-                                                        : MessageType.none,
+                                                        : MessageType.none),
                                                     // image: msg[index].image_url,
                                                     // images: msg[index].images,
                                                     // numberofContact:
                                                     // msg[index].numberofContact,
+                                                    
                                                   ),
                                                   Align(
                                                     alignment:
@@ -1298,6 +1298,16 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                       .read<
                                                                           ConnectivityCubit>()
                                                                       .state,
+                                                               isReply: context
+                                                                    .read<
+                                                                        ReplyMsgCubit>()
+                                                                    .state
+                                                                    .reply,
+                                                              replyModel: context
+                                                                    .read<
+                                                                        ReplyMsgCubit>()
+                                                                    .state
+                                                                    .replymodel
                                                             );
 
                                                         messageController

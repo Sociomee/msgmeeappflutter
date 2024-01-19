@@ -81,6 +81,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   @override
   void initState() {
     _contact = context.read<ContactCubit>();
+    context.read<MsgmeeUserListCubit>().getSyncedSocioMeeConnections();
     //print('contacts-->${_contact.state.phonebookUser}');
     context.read<MsgmeeUserListCubit>().getdataLoaclData();
     _contact.getDatabaseData();
@@ -113,6 +114,7 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
         if (state.status == MsgmeeUserListStatus.loaded) {
           filterdList = List.from(state.contactModel.msgMeeContacts!);
           filterdContactList = List.from(_contact.state.phonebookUser);
+          
         }
       },
       builder: (context, state) {
@@ -385,13 +387,11 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
               'Unable to initiate chat , please check your internet connection and try again.')));
                                                     return;
                                                     }
-                                                    
+                                                    print("Navigating to chat screen");
                                           animatedScreenNavigator(
                                               context,
                                               ChatScreen(
-                                               
-                                                  userId: "sss" ??
-                                                    '',
+                                                  userId: filterdList[index].sId!,
                                                 id: context
                                                     .read<ChatRoomsCubit>()
                                                     .state

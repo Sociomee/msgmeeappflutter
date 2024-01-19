@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:msgmee/data/api_data_source/repository/chat/chat_repository.dart';
 import 'package:msgmee/data/model/local_message_model.dart';
 import 'package:msgmee/data/newmodels/message_model.dart';
 import 'package:msgmee/data/sqlite_data_source/repository.dart';
@@ -42,7 +43,7 @@ class MessagesRepository extends AbMessagesRepository {
         print('Already in db: ${messages.content}');
       }
       
-
+      await ChatRepostory().updateRoomLastMessage(messages.room ?? "", messages.content ?? "");
     } catch (e) {
       print('insert messages data to localDb: $e');
     }

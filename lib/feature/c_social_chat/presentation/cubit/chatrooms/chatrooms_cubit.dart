@@ -13,6 +13,7 @@ import '../../../../../common_cubits/connectivity_cubit.dart';
 import '../../../../../data/model/chat_roomlist_model.dart';
 import '../../../../../data/model/create_room_model.dart';
 import '../../../../../data/model/messages_model.dart';
+import '../../../../../data/model/reply_msg_model.dart';
 import '../../../../../data/sqlite_data_source/repository/chat_rooms_repository.dart';
 import '../../../../../data/sqlite_data_source/repository/messages_repository.dart';
 import '../../../../../helper/connectivity_service.dart';
@@ -56,43 +57,28 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
 
   //***  inserting room data to local DB */
   void insertDataToDB(List<Room> rooms) async {
-    // for (var e in rooms) {
-    //   var room = Room(
-    //     sId: e.sId,
-    //     people: e.people,
-    //     isGroup: e.isGroup.toString(),
-    //     lastUpdate: e.lastUpdate,
-    //     lastAuthor: e.lastAuthor,
-    //     //lastMessage: e.lastMessage,
-    //   );
-    //   await ChatRoomsRepository().insertRooms(room);
-    // }
+  
   }
 
   //*** getting chat room data from localDB */
   void getLocalChatRoomData() async {
     emit(state.copyWith(status: ChatRoomStatus.loading));
     var res = await ChatRoomsRepository().getRooms();
-    print('local chat rooms from db res--->${res.length}');
     emit(state.copyWith(chatroom: res, status: ChatRoomStatus.loaded));
   }
 
    void getRefreshRoomData() async {
     var res = await ChatRoomsRepository().getRooms();
-    print('local chat rooms from db res--->${res.length}');
     emit(state.copyWith(chatroom: res, status: ChatRoomStatus.loaded));
   }
 
   Future<void> debugData() async {
    
-    print("Querying rooms");
     var res = await ChatRoomsRepository().getRooms();
-    log('local chat rooms from db res--->$res');
   }
 
   //***  getting chat room messages from server */
   Future<void> getchatRoomMessages({required String id}) async {
-   // emit(state.copyWith(msgStatus: MessageStatus.loading ));
     try {
       final _connectivityService = ConnectivityService();
       bool isConnected = await _connectivityService.checkConnection();
@@ -149,7 +135,6 @@ class ChatRoomsCubit extends Cubit<ChatRoomsState> {
   //**getting local message from local DB by roomId */
   Future<void> getLocalDBMessagesById(String room) async {
     var message = await MessagesRepository().getMessagesById(room);
-    print("Total message in db of ${room} is ${message.length}");
     emit(state.copyWith(localmessage: message , currentRoomId : room));
   }
 
@@ -165,10 +150,9 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     try {
       print('create room response: ${userid}');
       var data = await ChatRepostory().createRoom(userid: userid);
-      print('create room response: ${data.sId}');
-      emit(state.copyWith(
-          createroom: data, createroomstatus: CreateRoomStatus.loaded));
-      
+      print('create room response: ${data}');
+     emit(state.copyWith(createroom: data,counterPartUserId: userid, createroomstatus: CreateRoomStatus.loaded));
+     setChatRoomWithRoomAndUser(data.sId ?? "", userid ?? "");
     } catch (e) {
       print('error while creating room:$e');
     }
@@ -181,15 +165,23 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
     required dynamic content,
     required String contentType,
     bool? isReply,
-    String? replyContent,
-    String? replyMsgType,
+    ReplyMsgModel? replyModel,
     required ConnectivityState connectivityState,
   }) async {
-    
+    String? replyContent = "";
+    String? replyMsgType = "";
+    String? replyMsgId = "";
+    if(isReply ?? false){
+      replyContent = replyModel?.msg;
+      replyMsgType = replyModel?.owner;
+      replyMsgId = replyModel?.sId;
+    }
+
     var localData = Localdata();
     var authotCurrent = await localData.readData('currentuserid');
     var status = 0;
-    var id = await MessagesRepository().insertSendMessages(Message(authorId: authotCurrent , room: roomId ,sId: "sId", content: content ,status: 0, type: contentType , date: DateTime.now().toString()));
+    var id = await MessagesRepository().insertSendMessages(Message(authorId: authotCurrent , room: roomId ,sId: "sId", content: content ,status: 0, type: contentType , date: DateTime.now().toString(),isReply : (isReply ?? false) ? 1:0 , replyContent: replyContent , replyMsgId: replyMsgId) , );
+    await ChatRepostory().updateRoomLastMessage(roomId , contentType == "text" ? content : "media");
     getLocalDBMessagesById(roomId);
     print("saved message id ${id}");
     // emit(state.copyWith(status: ChatRoomStatus.refresh));
@@ -262,6 +254,7 @@ Future<void> getLocalDBMessagesByIdDebug(String room) async {
       final _connectivityService = ConnectivityService();
       bool isConnected = await _connectivityService.checkConnection();
       if(isConnected){
+        print("room not found creating new room");
        ChatRepostory().getChatRoomMessages(id:msg.room ?? "");
       }
        

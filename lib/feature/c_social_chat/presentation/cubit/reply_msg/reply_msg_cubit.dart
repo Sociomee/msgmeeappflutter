@@ -7,9 +7,9 @@ part 'reply_msg_state.dart';
 class ReplyMsgCubit extends Cubit<ReplyMsgState> {
   ReplyMsgCubit() : super(ReplyMsgState.initial());
 
-  replyMsg(String owner, String msg) {
+  replyMsg(String owner, String msg , {String? sId}) {
     emit(state.copyWith(
-        reply: true, replymodel: ReplyMsgModel(owner: owner, msg: msg)));
+        reply: true, replymodel: ReplyMsgModel(owner: owner, msg: msg , sId: sId)));
   }
 
   closeReplyMsg() {

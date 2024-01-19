@@ -124,7 +124,7 @@ class ChatRepostory extends AbChatReporitory {
       print(response.data['room']['lastMessage']);
       data = Room.fromJson(response.data['room']);
       if(data.sId != null){
-        checkandStoreRoomInLocalDb(data);
+        await checkandStoreRoomInLocalDb(data);
       }
       
       } catch (e) {
@@ -284,13 +284,13 @@ class ChatRepostory extends AbChatReporitory {
               (room.isMarketPlace ?? false)) {
       
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString() , "content": room.lastMessage?.content.toString()},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
       } else {
         await db.update(
-            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString()},
+            '${Tables.ROOM}', {"lastMessageId": room.lastMessage?.sId.toString() , "content": room.lastMessage?.content.toString()},
             where: "sId=?",
             whereArgs: [room.sId],
             conflictAlgorithm: ConflictAlgorithm.replace);
@@ -303,10 +303,8 @@ class ChatRepostory extends AbChatReporitory {
    Future<void> checkAndUpdatePeopleInsideRoom(Room room) async {
     final db = await SQLiteHelper().database;
     List<User> userList = room.people as List<User>;
-    print("Total people inside room ${userList.length}");
     for (var people in userList) {
       await checkAndUpdateUser(people);
-      //await updateOrCreateContact(people);
       final results = await db.query('${Tables.ROOMPEOPLE}',
           where: "user_id= ? and roomId=? ", whereArgs: [people.sId, room.sId]);
       if (!results.isEmpty) {
@@ -377,7 +375,14 @@ INSERT OR REPLACE INTO ${Tables.USER} (
     }
   }
   
-  void updateRoom(MessagesModel data) {
+  void updateRoom() {
+
+  }
+
+  Future<bool> updateRoomLastMessage(String id , String content) async{
+         final db = await SQLiteHelper().database;
+         await db.update(Tables.ROOM, {"content" : content} , where: "sId=?" , whereArgs: [id]);
+         return true;
 
   }
 
@@ -484,11 +489,11 @@ INSERT OR REPLACE INTO ${Tables.USER} (
   void createRoomOrAddremoteMessage(rawData) async{
      print("Printing remote message");
       Map<String, dynamic> jsonMap = json.decode(rawData);
-      checkAndInsertRemoteRoom(jsonMap["room"]);
+      checkAndInsertRemoteRoom(jsonMap["room"] , jsonMap["message"]["content"]);
       checkAndInsertMessage(jsonMap["message"]);
   }
   
-  void checkAndInsertRemoteRoom(data) async{
+  void checkAndInsertRemoteRoom(data , String msg) async{
     var isBizPage = data['isBizPage'];
     var isMarketPlace =data['isMarketPlace'] ;
     var isBroadCast =  data['isBroadCast'] ;
@@ -507,7 +512,26 @@ INSERT OR REPLACE INTO ${Tables.USER} (
      final results = await SQLiteHelper().database
         .query('${Tables.ROOM}', where: "sId= ? ", whereArgs: [sId]);
     if (results.isEmpty) {
-      print("room not exist");
+      const sql =
+          "INSERT OR REPLACE INTO room (isBizPage, isMarketPlace, isBroadCast, description, followers, following, pageId, ownerId, sId, isGroup, lastAuthorId, lastMessageId, lastUpdate, content , title) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     
+      // await SQLiteHelper().database.rawQuery(sql, [
+      //   (isBizPage ?? false) ? 1 : 0,
+      //   (isMarketPlace ?? false) ? 1 : 0,
+      //   (isBroadCast ?? false) ? 1 : 0,
+      //   description,
+      //   followers,
+      //   following,
+      //   pageId,
+      //   ownerId,
+      //   sId,
+      //   (isGroup ?? false) ? 1 : 0,
+      //   lastAuthor,
+      //   "",
+      //   lastUpdate.toString(),
+      //   msg,
+      //   title
+      // ]);
 
     }else{
       print("room exist");

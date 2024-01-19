@@ -26,15 +26,7 @@ class AllconnectionsWidget extends StatelessWidget {
                 screenNavigator(
                     context,
                     ChatScreen(
-                      name: list[index].fullName!,
                       userId: list[index].sId!,
-                      imageUrl: list[index]
-                          .otherProfileImage
-                          .toString()
-                          .toProfileUrl(),
-                      senderId: 'false',
-                      hasStory: false,
-                      lastOnline: '',
                       id: "sadsa",
                     ));
               },

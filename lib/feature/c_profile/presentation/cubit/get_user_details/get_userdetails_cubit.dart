@@ -28,4 +28,8 @@ class GetUserdetailsCubit extends Cubit<GetUserDetailsState> {
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>isForebaseTokenUpdated>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
   }
+
+  void getCurrentUserDetails() {
+       print("Ya its working");
+  } 
 }

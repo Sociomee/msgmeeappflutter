@@ -45,7 +45,7 @@ class BaseRepo {
     if (token != "" && isConnected && isFirst) {
        configData = await getConfig(phone);
        await getUserInfo(token, configData);
-       await syncRoomsFromServer(token, configData);
+      // await syncRoomsFromServer(token, configData);
       // await syncMessages(token);
       isFirst=false;
     }

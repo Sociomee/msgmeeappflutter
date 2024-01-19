@@ -18,7 +18,7 @@ class BuildPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 40.h),
+        SizedBox(height: 35.h),
         Text(title,
             textAlign: TextAlign.center,
             style: TextStyle(

@@ -197,7 +197,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                   child: BlocBuilder<TypingCubit, TypingState>(
                                     builder: (context, tstate) {
                                       if(tstate is TypingStartState){
-                                        print("typing detected" + tstate.typingStatus.id.toString());
+                                       
                                         return (userIds.contains(tstate.typingStatus.id) )? Text("typing...",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -205,7 +205,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                           color: AppColors.grey,
                                         ),
                                       ) : Text(
-                                        "${localpeopledata.first.sId}",
+                                        "${state.chatroom[index].content}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
@@ -215,7 +215,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
 
                                       }else if (tstate is TypingEndState){
                                         return Text(
-                                        "${state.chatroom[index].lastMessageId}",
+                                        "${state.chatroom[index].content}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,
@@ -224,7 +224,7 @@ class _SocialchatWidgetState extends State<SocialchatWidget> {
                                       );
                                       }else{
                                         return Text(
-                                        "${state.chatroom[index].lastMessageId}",
+                                        "${state.chatroom[index].content}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 13,

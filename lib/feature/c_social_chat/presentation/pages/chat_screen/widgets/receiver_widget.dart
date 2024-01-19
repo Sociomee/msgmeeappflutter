@@ -9,13 +9,14 @@ class ReceivedMessageWidget extends StatelessWidget {
   final int msgStatus;
   final String time;
   final String type;
-
+  final bool? isReply;
   const ReceivedMessageWidget({
     Key? key,
     required this.message,
     required this.msgStatus,
     required this.time,
     required this.type,
+    this.isReply
   }) : super(key: key);
 
   @override

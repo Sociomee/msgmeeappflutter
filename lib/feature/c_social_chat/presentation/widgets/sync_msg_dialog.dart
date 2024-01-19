@@ -57,8 +57,12 @@ class _SyncDialogWidgetState extends State<SyncDialogWidget> {
       listener: (context, state) {
         if (state.status == SyncSociomeeStatus.loaded &&
             state.isSocimeeAcSynced) {
-          context.read<SyncSociomeeCubit>().checkSocimeeCubit();
-          Navigator.pop(context);
+            context.read<SyncSociomeeCubit>().checkAndAddContact();
+          //Navigator.pop(context);
+        }else{
+          if(state.status == SyncSociomeeStatus.initial){
+            context.read<SyncSociomeeCubit>().checkSocimeeCubit();
+          }
         }
       },
       builder: (context, state) {

@@ -5,13 +5,24 @@ import 'package:msgmee/feature/c_profile/presentation/cubit/get_user_details/get
 import '../../../../theme/colors.dart';
 import '../pages/social_tab/cubit/showeditbtn/showeditbtn_cubit.dart';
 
-class ProfilePicWidget extends StatelessWidget {
+class ProfilePicWidget extends StatefulWidget {
   const ProfilePicWidget({super.key});
 
   @override
+  State<ProfilePicWidget> createState() => _ProfilePicWidgetState();
+}
+
+class _ProfilePicWidgetState extends State<ProfilePicWidget> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    //context.watch<GetUserdetailsCubit>()
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     var cubit = context.watch<GetUserdetailsCubit>().state;
-
     return Stack(
       children: [
         cubit.status == GetUserDetailsStatus.loading
@@ -30,14 +41,19 @@ class ProfilePicWidget extends StatelessWidget {
             //             NetworkImage(cubit.response.user!.otherProfileImage!),
             //       )
             //     :
-            ClipRRect(
+            (cubit.response.user != null ? CircleAvatar(
+                     radius: 30,
+                     backgroundColor: AppColors.grey,
+                     backgroundImage:
+                         NetworkImage(cubit.response.user!.otherProfileImage!),
+                   ) : ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: Image.asset(
                   'assets/profile_icon.png',
                   height: 60,
                   fit: BoxFit.cover,
                 ),
-              ),
+              )),
         Positioned(
           top: 40,
           right: 0,
